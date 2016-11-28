@@ -1,0 +1,49 @@
+---
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: pdflatex
+    template: ~/Development/svm-r-markdown-templates/svm-latex-ms.tex
+title: "Effects of Alternate Wetting and Drying Irrigation and Nitrogen Fertilization on Sheath Blight of Rice"
+thanks: "Replication files are available on the author's Github account (http://github.com/adamhsparks/AWD_N_SB). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Adam.Sparks@usq.edu.au"
+author:
+- name: Adam H. Sparks
+  affiliation: Centre for Crop Health, University of Southern Queensland, West St., Toowoomba, QLD 4350, Australia
+- name: Nancy P. Castilla
+  affiliation: Crop and Environmental Sciences Division, International Rice Research Institute, Los Baños, Laguna 4031, Philippines
+abstract: "Abstract limited to 200 words in one paragraph."
+keywords: "*Rhizoctonia solani*"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+geometry: margin=1in
+fontfamily: mathpazo
+fontsize: 12pt
+
+# spacing: double
+bibliography: ~/Dropbox/master.bib
+biblio-style: apsr
+---
+
+Introduction goes here with no heading
+
+# Materials and Methods
+
+# Results
+
+## Data analysis
+
+\pagebreak
+
+# Discussion
+
+# Acknowledgements
+
+<!--
+# Literature Cited
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
