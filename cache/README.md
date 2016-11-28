@@ -2,6 +2,7 @@
 
 ## File list
 
+AWD_2015_Data.csv - 2015 data for all five assessments
 AWD_2016_Data.csv - 2016 data for all four assessments  
 
 ******
@@ -17,16 +18,16 @@ AWD_2016_Data.csv - 2016 data for all four assessments
   * NTIL - number of tillers  
   * NTShB - number of tillers with sheath blight  
   * NSHShB - number of ?
-  * TIL1...TIL4 - tiller number 1...tiller number 4  
-  * SHB1...SHB4 - sheath blight severity rating for tiller number 1...tiller number 4  
-  * GL1...GL4 - number of green leaves in tiller number 1...tiller number 4  
-  * DL1...DL4 - number of dead leaves in tiller number 1...tiller number 4  
-  * SLA1...SLA4 - sheath blight severity rating in leaf 1 of tiller number 1...tiller number 4  
-  * SLB1...SLB4 - sheath blight severity rating in leaf 2 of tiller number 1...tiller number 4  
-  * SLC1...SLC4 - sheath blight severity rating in leaf 3 of tiller number 1...tiller number 4  
-  * SLD1...SLD4 - sheath blight severity rating in leaf 4 of tiller number 1...tiller number 4  
-  * SLE1...SLE4 - sheath blight severity rating in leaf 5 of tiller number 1...tiller number 4  
-  * SLF1...SLF4 - sheath blight severity rating in leaf 6 of tiller number 1...tiller number 4  
+  * TIL - tiller number 1...tiller number 4  
+  * SHB - sheath blight severity rating for tiller number 1...tiller number 4  
+  * GL - number of green leaves in tiller number 1...tiller number 4  
+  * DL - number of dead leaves in tiller number 1...tiller number 4  
+  * SLA - sheath blight severity rating in leaf 1 of tiller number 1...tiller number 4  
+  * SLB - sheath blight severity rating in leaf 2 of tiller number 1...tiller number 4  
+  * SLC - sheath blight severity rating in leaf 3 of tiller number 1...tiller number 4  
+  * SLD - sheath blight severity rating in leaf 4 of tiller number 1...tiller number 4  
+  * SLE - sheath blight severity rating in leaf 5 of tiller number 1...tiller number 4  
+  * SLF - sheath blight severity rating in leaf 6 of tiller number 1...tiller number 4  
 
 ## Measurements:
 
