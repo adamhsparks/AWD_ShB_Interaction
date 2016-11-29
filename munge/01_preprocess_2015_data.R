@@ -41,7 +41,7 @@ reformat <- function(files) {
                 times = nrow(x_TIL))
     ASMT <- rep(4, times = nrow(x_TIL))
     visit <- data.frame(DATE, ASMT)
-  } else if (files = "data/DS2015_Raw_83DAI.csv") {
+  } else if (files == "data/DS2015_Raw_83DAI.csv") {
     DATE <- rep(as.Date("2015-04-01", origin = "1970-01-01"),
                 times = nrow(x_TIL))
     ASMT <- rep(5, times = nrow(x_TIL))
