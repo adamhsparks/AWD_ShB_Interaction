@@ -5,10 +5,10 @@ library(readr)
 library(tidyr)
 library(plyr)
 
-w <- list.files("data/", pattern = "^DS2015_Raw")
+files <- list.files("data/", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
-  x <- read_csv("data/DS2015_Raw_22DAI.csv")
+  x <- read_csv(files)
 
   x_TIL <- gather(x, DISCARD, TIL, TIL1, TIL2, TIL3, TIL4)
   x_SHB <- gather(x, DISCARD, SHB, SHB1, SHB2, SHB3, SHB4)
@@ -34,6 +34,6 @@ reformat <- function(files) {
   )
 }
 
-DS2015 <- ldply(w, reformat)
+DS2015 <- ldply(.data = files, .fun = reformat)
 
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")
