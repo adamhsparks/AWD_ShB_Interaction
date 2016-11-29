@@ -8,6 +8,8 @@ AWD_2016_Data.csv - 2016 data for all four assessments
 ******
 
 ## Variables in the files:
+  * DATE - Date of disease assessment
+  * ASMT - Assesment number
   * TRT - treatment  
   * REP - replication  
   * WMGT - water management  

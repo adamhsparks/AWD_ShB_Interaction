@@ -5,7 +5,7 @@ library(readr)
 library(tidyr)
 library(plyr)
 
-files <- list.files("data/", pattern = "^DS2015_Raw", full.names = TRUE)
+files <- list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
   x <- read_csv(files)
@@ -21,7 +21,35 @@ reformat <- function(files) {
   x_SLE <- gather(x, DISCARD, SLE, SLE1, SLE2, SLE3, SLE4)
   x_SLF <- gather(x, DISCARD, SLF, SLF1, SLF2, SLF3, SLF4)
 
-  x <- cbind(x_TIL[, c(1:9, 47)],
+  if (files == "data/DS2015_Raw_22DAI.csv") {
+    DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
+                times = nrow(x_TIL))
+    ASMT <- rep(1, times = nrow(x_TIL))
+    visit <- data.frame(DATE, ASMT)
+  } else if (files == "data/DS2015_Raw_35DAI.csv") {
+    DATE <- rep(as.Date("2015-02-20", origin = "1970-01-01"),
+                times = nrow(x_TIL))
+    ASMT <- rep(2, times = nrow(x_TIL))
+    visit <- data.frame(DATE, ASMT)
+  } else if (files == "data/DS2015_Raw_49DAI.csv") {
+    DATE <- rep(as.Date("2015-03-05", origin = "1970-01-01"),
+                times = nrow(x_TIL))
+    ASMT <- rep(3, times = nrow(x_TIL))
+    visit <- data.frame(DATE, ASMT)
+  } else if (files == "data/DS2015_Raw_62DAI.csv") {
+    DATE <- rep(as.Date("2015-03-19", origin = "1970-01-01"),
+                times = nrow(x_TIL))
+    ASMT <- rep(4, times = nrow(x_TIL))
+    visit <- data.frame(DATE, ASMT)
+  } else if (files = "data/DS2015_Raw_83DAI.csv") {
+    DATE <- rep(as.Date("2015-04-01", origin = "1970-01-01"),
+                times = nrow(x_TIL))
+    ASMT <- rep(5, times = nrow(x_TIL))
+    visit <- data.frame(DATE, ASMT)
+  }
+
+  x <- cbind(visit,
+             x_TIL[, c(1:9, 47)],
              x_SHB[, 47],
              x_GL[, 47],
              x_DL[, 47],
