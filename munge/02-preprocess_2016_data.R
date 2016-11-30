@@ -72,6 +72,39 @@ DS2016 <- rbind(as.data.frame(DS2016_A1),
                 as.data.frame(DS2016_A3),
                 as.data.frame(DS2016_A4))
 
+
+if (DS2016$WMGT == "FLD" && DS2016$NRTE == "N1") {
+  DS2016$TRT <- "T2"
+}
+
+if (DS2016$WMGT == "FLD" && DS2016$NRTE == "N2") {
+  DS2016$TRT <- "T3"
+}
+
+
+if (DS2016$WMGT == "AWD" && DS2016$NRTE == "N1") {
+  DS2016$TRT <- "T5"
+}
+
+if (DS2016$WMGT == "AWD" && DS2016$NRTE == "N2") {
+  DS2016$TRT <- "T6"
+}
+
+DS2016$HGHT <- NA
+DS2016$SHB <- NA
+
+DS2016 <- rename(DS2016, NSHB = NSHShB)
+DS2016 <- rename(DS2016, SLA = ShBL1)
+DS2016 <- rename(DS2016, SLB = ShBL2)
+DS2016 <- rename(DS2016, SLC = ShBL3)
+DS2016 <- rename(DS2016, SLD = ShBL4)
+DS2016 <- rename(DS2016, SLE = ShBL5)
+DS2016 <- rename(DS2016, SLF = ShBL6)
+
+DS2016 <-
+  DS2016 %>% select(DATE, ASMT, TRT, REP, WMGT, NRTE, SMPL, HILL, HGHT, NTIL,
+                    NTShB, NSHB, TIL, SHB, everything())
+
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")
 

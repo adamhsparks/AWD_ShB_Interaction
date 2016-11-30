@@ -4,6 +4,7 @@
 library(readr)
 library(tidyr)
 library(plyr)
+library(dplyr)
 
 files <- list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
@@ -63,5 +64,8 @@ reformat <- function(files) {
 }
 
 DS2015 <- ldply(.data = files, .fun = reformat)
+
+DS2015 <- DS2015 %>% select(DATE, ASMT, TRT, REP, WMGT, NRTE, SMPL, HILL, HGHT,
+                            NTIL, NTShB, NSHB, everything())
 
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")

@@ -19,7 +19,7 @@ AWD_2016_Data.csv - 2016 data for all four assessments
   * HGHT - plant height  
   * NTIL - number of tillers  
   * NTShB - number of tillers with sheath blight  
-  * NSHShB - number of ?
+  * NSHB - sheath blight severity on the sheath or stem  
   * TIL - tiller number 1...tiller number 4  
   * SHB - sheath blight severity rating for tiller number 1...tiller number 4  
   * GL - number of green leaves in tiller number 1...tiller number 4  
