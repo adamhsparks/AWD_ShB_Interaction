@@ -4,10 +4,6 @@
 # 2. Fill empty NTIL (for same hill, not missing values)
 # 3. Fill empty NTShB (for same hill, not missing values)
 
-library(tidyr)
-library(readr)
-library(dplyr)
-
 # First assessment -------------------------------------------------------------
 DS2016_A1 <- read_csv("data/DS2016_1.csv")
 # Fill missing values in NTIL and NTShB
@@ -102,8 +98,10 @@ DS2016 <- rename(DS2016, SLE = ShBL5)
 DS2016 <- rename(DS2016, SLF = ShBL6)
 
 DS2016 <-
-  DS2016 %>% select(DATE, ASMT, TRT, REP, WMGT, NRTE, SMPL, HILL, HGHT, NTIL,
+  DS2016 %>% select(DATE, ASMT, REP,  TRT, WMGT, NRTE, SMPL, HILL, HGHT, NTIL,
                     NTShB, NSHB, TIL, SHB, everything())
+
+DS2016[is.na(DS2016)] <- 0
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

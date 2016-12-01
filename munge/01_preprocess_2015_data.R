@@ -1,11 +1,6 @@
 # Preprocess 2015 data for all assessments
 #
 
-library(readr)
-library(tidyr)
-library(plyr)
-library(dplyr)
-
 files <- list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
@@ -13,8 +8,8 @@ reformat <- function(files) {
 
   x_TIL <- gather(x, DISCARD, TIL, TIL1, TIL2, TIL3, TIL4)
   x_SHB <- gather(x, DISCARD, SHB, SHB1, SHB2, SHB3, SHB4)
-  x_GL <- gather(x, DISCARD, GL, GL1, GL2, GL3, GL4)
-  x_DL <- gather(x, DISCARD, DL, DL1, DL2, DL3, DL4)
+  x_GL  <- gather(x, DISCARD, GL, GL1, GL2, GL3, GL4)
+  x_DL  <- gather(x, DISCARD, DL, DL1, DL2, DL3, DL4)
   x_SLA <- gather(x, DISCARD, SLA, SLA1, SLA2, SLA3, SLA4)
   x_SLB <- gather(x, DISCARD, SLB, SLB1, SLB2, SLB3, SLB4)
   x_SLC <- gather(x, DISCARD, SLC, SLC1, SLC2, SLC3, SLC4)
@@ -65,7 +60,10 @@ reformat <- function(files) {
 
 DS2015 <- ldply(.data = files, .fun = reformat)
 
-DS2015 <- DS2015 %>% select(DATE, ASMT, TRT, REP, WMGT, NRTE, SMPL, HILL, HGHT,
+DS2015 <- DS2015 %>% select(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL, HGHT,
                             NTIL, NTShB, NSHB, everything())
 
+DS2015[is.na(DS2015)] <- 0
+
+# write CSV to cache -----------------------------------------------------------
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")
