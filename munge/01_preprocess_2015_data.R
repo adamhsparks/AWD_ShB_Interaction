@@ -14,12 +14,13 @@ reformat <- function(files) {
 
   x <-
     x %>%
-    group_by(TRT, REP, SMPL) %>%
+    group_by(TRT, REP) %>%
     gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
     gather(DL, DL_value, starts_with("DL")) %>%
     summarise_each(funs(mean),
+                   HGHT,
                    NTIL,
                    NTShB,
                    LShB_rating,
@@ -27,33 +28,33 @@ reformat <- function(files) {
                    GL_value,
                    DL_value)
 
-  x[, 3:8] <- round(x[, 3:8], 2)
+  x[, 2:9] <- round(x[, 2:9], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
                 times = nrow(x))
     ASMT <- rep(1, times = nrow(x))
-    visit <- data.frame(DATE, ASMT)
+    visit <- data.frame(DATE, ASMT, x)
   } else if (files == "data/DS2015_Raw_35DAI.csv") {
     DATE <- rep(as.Date("2015-02-20", origin = "1970-01-01"),
                 times = nrow(x))
     ASMT <- rep(2, times = nrow(x))
-    visit <- data.frame(DATE, ASMT)
+    visit <- data.frame(DATE, ASMT, x)
   } else if (files == "data/DS2015_Raw_49DAI.csv") {
     DATE <- rep(as.Date("2015-03-05", origin = "1970-01-01"),
                 times = nrow(x))
     ASMT <- rep(3, times = nrow(x))
-    visit <- data.frame(DATE, ASMT)
+    visit <- data.frame(DATE, ASMT, x)
   } else if (files == "data/DS2015_Raw_62DAI.csv") {
     DATE <- rep(as.Date("2015-03-19", origin = "1970-01-01"),
                 times = nrow(x))
     ASMT <- rep(4, times = nrow(x))
-    visit <- data.frame(DATE, ASMT)
+    visit <- data.frame(DATE, ASMT, x)
   } else if (files == "data/DS2015_Raw_83DAI.csv") {
     DATE <- rep(as.Date("2015-04-01", origin = "1970-01-01"),
                 times = nrow(x))
     ASMT <- rep(5, times = nrow(x))
-    visit <- data.frame(DATE, ASMT)
+    visit <- data.frame(DATE, ASMT, x)
   }
 }
 
@@ -64,14 +65,9 @@ DS2015 <-
                     ASMT,
                     REP,
                     TRT,
-                    WMGT,
-                    NRTE,
-                    SMPL,
-                    HILL,
                     HGHT,
                     NTIL,
                     NTShB,
-                    NSHB,
                     everything())
 
 # write CSV to cache -----------------------------------------------------------

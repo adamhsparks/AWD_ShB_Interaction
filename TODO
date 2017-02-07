@@ -1,0 +1,4 @@
+convert DS2016[, 17:19] to numeric
+
+gather DS2016 by rep/trt
+
