@@ -71,66 +71,68 @@ DS2016 <- rbind(
 )
 
 
-if (DS2016$WMGT == "FLD" && DS2016$NRTE == "N1") {
-  DS2016$TRT <- "T2"
-}
+T2 <- DS2016$WMGT == "Flooded" & DS2016$NRTE == "N1"
+DS2016[T2, "TRT"] <- "T2"
 
-if (DS2016$WMGT == "FLD" && DS2016$NRTE == "N2") {
-  DS2016$TRT <- "T3"
-}
+T3 <- DS2016$WMGT == "Flooded" & DS2016$NRTE == "N2"
+DS2016[T3, "TRT"] <- "T3"
 
 
-if (DS2016$WMGT == "AWD" && DS2016$NRTE == "N1") {
-  DS2016$TRT <- "T5"
-}
+T5 <- DS2016$WMGT == "AWD" & DS2016$NRTE == "N1"
+DS2016[T5, "TRT"] <- "T5"
 
-if (DS2016$WMGT == "AWD" && DS2016$NRTE == "N2") {
-  DS2016$TRT <- "T6"
-}
+T6 <- DS2016$WMGT == "AWD" & DS2016$NRTE == "N2"
+DS2016[T6, "TRT"] <- "T6"
 
-DS2016 <- rename(DS2016, NSHB = NSHShB)
-DS2016 <- rename(DS2016, SLA = ShBL1)
-DS2016 <- rename(DS2016, SLB = ShBL2)
-DS2016 <- rename(DS2016, SLC = ShBL3)
-DS2016 <- rename(DS2016, SLD = ShBL4)
-DS2016 <- rename(DS2016, SLE = ShBL5)
-DS2016 <- rename(DS2016, SLF = ShBL6)
+# Rename columns for consistency with 2015
+DS2016 <- dplyr::rename(DS2016, NSHB = NSHShB)
+DS2016 <- dplyr::rename(DS2016, SLA = ShBL1)
+DS2016 <- dplyr::rename(DS2016, SLB = ShBL2)
+DS2016 <- dplyr::rename(DS2016, SLC = ShBL3)
+DS2016 <- dplyr::rename(DS2016, SLD = ShBL4)
+DS2016 <- dplyr::rename(DS2016, SLE = ShBL5)
+DS2016 <- dplyr::rename(DS2016, SLF = ShBL6)
 
-DS2016[, 17:19] <- as.numeric(DS2016[, 17:19])
+# convert columns 17:19 to numeric from character and change NA to 0
+cols <- c(17:19)
+DS2016[,cols] = apply(DS2016[,cols], 2, function(x) as.numeric(as.character(x)))
 
 DS2016[is.na(DS2016)] <- 0
-DS2016$HGHT <- NA
-DS2016$SHB <- NA
 
 DS2016 <-
   DS2016 %>%
-  group_by(TRT, REP) %>%
+  group_by(DATE, ASMT, TRT, REP) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(TShB, TShB_rating, starts_with("SHB")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
   summarise_each(funs(mean),
-                 HGHT,
                  NTIL,
                  NTShB,
                  LShB_rating,
-                 TShB_rating,
                  GL_value,
                  DL_value)
 
+# add columns that exist in 2015 but not 2016 data
+DS2016$HGHT <- NA
+DS2016$TShB_rating <- NA
+
+# arrange columns to be in same order in both data frames
 DS2016 <-
   DS2016 %>% select(DATE,
                     ASMT,
                     REP,
                     TRT,
-                    SMPL,
                     HGHT,
                     NTIL,
                     NTShB,
-                    everything())
+                    LShB_rating,
+                    TShB_rating,
+                    GL_value,
+                    DL_value)
 
-DS2016 <- rename(DS2016, GL_value = GL)
-DS2016 <- rename(DS2016, DL_value = DL)
+cols <- c(6:8, 10:11)
+DS2016[,cols] = apply(DS2016[,cols], 2, function(x) round(x, 2))
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")
