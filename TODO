@@ -1,4 +1,9 @@
-convert DS2016[, 17:19] to numeric
+Is year a fixed or random effect?
 
-gather DS2016 by rep/trt
+Read:
+https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
 
+Check NTShB/LShB/TShB ratings in both years, make sure that they are both reporting the same values
+
+library(nlme)
+AWD_model <- lme(LShB_rating ~ WMGT*NRTE, random = ~ 1|REP/WMGT, data = AWD)

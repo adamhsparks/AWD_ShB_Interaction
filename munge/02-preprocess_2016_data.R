@@ -17,7 +17,7 @@ DS2016_A1[, 1] <- as.Date("2016-03-15", origin = "1970-01-01")
 ASMT <- rep(1, nrow(DS2016_A1))
 DS2016_A1 <- cbind(ASMT, DS2016_A1)
 
-DS2016_A1 <- select(DS2016_A1, DATE, everything())
+DS2016_A1 <- dplyr::select(DS2016_A1, DATE, everything())
 
 # Second assessement -----------------------------------------------------------
 DS2016_A2 <- read_csv("data/DS2016_2.csv")
@@ -31,7 +31,7 @@ DS2016_A2[, 1] <- as.Date("2016-03-29", origin = "1970-01-01")
 ASMT <- rep(2, nrow(DS2016_A2))
 DS2016_A2 <- cbind(ASMT, DS2016_A2)
 
-DS2016_A2 <- select(DS2016_A2, DATE, everything())
+DS2016_A2 <- dplyr::select(DS2016_A2, DATE, everything())
 
 
 # Third assessement ------------------------------------------------------------
@@ -46,7 +46,7 @@ DS2016_A3[, 1] <- as.Date("2016-04-12", origin = "1970-01-01")
 ASMT <- rep(3, nrow(DS2016_A3))
 DS2016_A3 <- cbind(ASMT, DS2016_A3)
 
-DS2016_A3 <- select(DS2016_A3, DATE, everything())
+DS2016_A3 <- dplyr::select(DS2016_A3, DATE, everything())
 
 # Fourth assessment ------------------------------------------------------------
 DS2016_A4 <- read_csv("data/DS2016_4.csv")
@@ -60,7 +60,7 @@ DS2016_A4[, 1] <- as.Date("2016-04-26", origin = "1970-01-01")
 ASMT <- rep(4, nrow(DS2016_A4))
 DS2016_A4 <- cbind(ASMT, DS2016_A4)
 
-DS2016_A4 <- select(DS2016_A4, DATE, everything())
+DS2016_A4 <- dplyr::select(DS2016_A4, DATE, everything())
 
 # Combine all assessments ------------------------------------------------------
 DS2016 <- rbind(
@@ -70,19 +70,8 @@ DS2016 <- rbind(
   as.data.frame(DS2016_A4)
 )
 
-
-T2 <- DS2016$WMGT == "Flooded" & DS2016$NRTE == "N1"
-DS2016[T2, "TRT"] <- "T2"
-
-T3 <- DS2016$WMGT == "Flooded" & DS2016$NRTE == "N2"
-DS2016[T3, "TRT"] <- "T3"
-
-
-T5 <- DS2016$WMGT == "AWD" & DS2016$NRTE == "N1"
-DS2016[T5, "TRT"] <- "T5"
-
-T6 <- DS2016$WMGT == "AWD" & DS2016$NRTE == "N2"
-DS2016[T6, "TRT"] <- "T6"
+# Replace "Flooded" with "FLD"
+DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 
 # Rename columns for consistency with 2015
 DS2016 <- dplyr::rename(DS2016, NSHB = NSHShB)
@@ -95,13 +84,14 @@ DS2016 <- dplyr::rename(DS2016, SLF = ShBL6)
 
 # convert columns 17:19 to numeric from character and change NA to 0
 cols <- c(17:19)
-DS2016[,cols] = apply(DS2016[,cols], 2, function(x) as.numeric(as.character(x)))
+DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
+  as.numeric(as.character(x)))
 
 DS2016[is.na(DS2016)] <- 0
 
 DS2016 <-
   DS2016 %>%
-  group_by(DATE, ASMT, TRT, REP) %>%
+  group_by(DATE, ASMT, REP, WMGT, NRTE) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(TShB, TShB_rating, starts_with("SHB")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
@@ -119,20 +109,24 @@ DS2016$TShB_rating <- NA
 
 # arrange columns to be in same order in both data frames
 DS2016 <-
-  DS2016 %>% select(DATE,
-                    ASMT,
-                    REP,
-                    TRT,
-                    HGHT,
-                    NTIL,
-                    NTShB,
-                    LShB_rating,
-                    TShB_rating,
-                    GL_value,
-                    DL_value)
+  DS2016 %>% dplyr::select(DATE,
+                           ASMT,
+                           WMGT,
+                           NRTE,
+                           REP,
+                           HGHT,
+                           NTIL,
+                           NTShB,
+                           LShB_rating,
+                           TShB_rating,
+                           GL_value,
+                           DL_value)
 
-cols <- c(6:8, 10:11)
-DS2016[,cols] = apply(DS2016[,cols], 2, function(x) round(x, 2))
+cols <- c(7:9, 11:12)
+DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
+  round(x, 2))
+
+DS2016$YEAR <- year(DS2016$DATE)
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

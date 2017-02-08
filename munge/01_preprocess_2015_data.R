@@ -13,7 +13,7 @@ reformat <- function(files) {
 
   x <-
     x %>%
-    group_by(TRT, REP) %>%
+    group_by(REP, WMGT, NRTE) %>%
     gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
@@ -27,7 +27,7 @@ reformat <- function(files) {
                    GL_value,
                    DL_value)
 
-  x[, 2:9] <- round(x[, 2:9], 2)
+  x[, 4:10] <- round(x[, 4:10], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -60,14 +60,17 @@ reformat <- function(files) {
 DS2015 <- ldply(.data = files, .fun = reformat)
 
 DS2015 <-
-  as_tibble(DS2015) %>% select(DATE,
-                               ASMT,
-                               REP,
-                               TRT,
-                               HGHT,
-                               NTIL,
-                               NTShB,
-                               everything())
+  as_tibble(DS2015) %>% dplyr::select(DATE,
+                                      ASMT,
+                                      WMGT,
+                                      NRTE,
+                                      REP,
+                                      HGHT,
+                                      NTIL,
+                                      NTShB,
+                                      everything())
+
+DS2015$YEAR <- year(DS2015$DATE)
 
 
 # write CSV to cache -----------------------------------------------------------
