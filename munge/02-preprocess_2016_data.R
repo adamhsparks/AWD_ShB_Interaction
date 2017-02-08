@@ -91,10 +91,21 @@ DS2016[is.na(DS2016)] <- 0
 
 DS2016 <-
   DS2016 %>%
-  group_by(DATE, ASMT, REP, WMGT, NRTE) %>%
+  group_by(DATE, ASMT, REP, WMGT, NRTE, SMPL, HILL) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
+  summarise_each(funs(mean),
+                 NTIL,
+                 NTShB,
+                 LShB_rating,
+                 TShB_rating,
+                 GL_value,
+                 DL_value)
+
+DS2016 <-
+  DS2016 %>%
+  group_by(DATE, ASMT, REP, WMGT, NRTE) %>%
   summarise_each(funs(mean),
                  NTIL,
                  NTShB,

@@ -11,13 +11,24 @@ reformat <- function(files) {
   x <-
     x %>% mutate_each(funs(as.numeric), starts_with("SL"))
 
+
   x <-
     x %>%
-    group_by(REP, WMGT, NRTE) %>%
+    group_by(REP, WMGT, NRTE, HILL, SMPL) %>%
     gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
     gather(DL, DL_value, starts_with("DL")) %>%
+    summarise_each(funs(mean),
+                   NTIL,
+                   NTShB,
+                   LShB_rating,
+                   TShB_rating,
+                   GL_value,
+                   DL_value)
+  x <-
+    x %>%
+    group_by(REP, WMGT, NRTE) %>%
     summarise_each(funs(mean),
                    NTIL,
                    NTShB,
