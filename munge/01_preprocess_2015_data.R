@@ -19,7 +19,6 @@ reformat <- function(files) {
     gather(GL, GL_value, starts_with("GL")) %>%
     gather(DL, DL_value, starts_with("DL")) %>%
     summarise_each(funs(mean),
-                   HGHT,
                    NTIL,
                    NTShB,
                    LShB_rating,
@@ -27,7 +26,7 @@ reformat <- function(files) {
                    GL_value,
                    DL_value)
 
-  x[, 4:10] <- round(x[, 4:10], 2)
+  x[, 4:9] <- round(x[, 4:9], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -65,10 +64,12 @@ DS2015 <-
                                       WMGT,
                                       NRTE,
                                       REP,
-                                      HGHT,
                                       NTIL,
                                       NTShB,
-                                      everything())
+                                      LShB_rating,
+                                      TShB_rating,
+                                      GL_value,
+                                      DL_value)
 
 DS2015$YEAR <- year(DS2015$DATE)
 

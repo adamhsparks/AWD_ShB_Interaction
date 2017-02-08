@@ -74,7 +74,7 @@ DS2016 <- rbind(
 DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 
 # Rename columns for consistency with 2015
-DS2016 <- dplyr::rename(DS2016, NSHB = NSHShB)
+DS2016 <- dplyr::rename(DS2016, TShB_rating = NSHShB)
 DS2016 <- dplyr::rename(DS2016, SLA = ShBL1)
 DS2016 <- dplyr::rename(DS2016, SLB = ShBL2)
 DS2016 <- dplyr::rename(DS2016, SLC = ShBL3)
@@ -93,19 +93,15 @@ DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, REP, WMGT, NRTE) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
-  gather(TShB, TShB_rating, starts_with("SHB")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
   summarise_each(funs(mean),
                  NTIL,
                  NTShB,
                  LShB_rating,
+                 TShB_rating,
                  GL_value,
                  DL_value)
-
-# add columns that exist in 2015 but not 2016 data
-DS2016$HGHT <- NA
-DS2016$TShB_rating <- NA
 
 # arrange columns to be in same order in both data frames
 DS2016 <-
@@ -114,7 +110,6 @@ DS2016 <-
                            WMGT,
                            NRTE,
                            REP,
-                           HGHT,
                            NTIL,
                            NTShB,
                            LShB_rating,
@@ -122,7 +117,7 @@ DS2016 <-
                            GL_value,
                            DL_value)
 
-cols <- c(7:9, 11:12)
+cols <- c(6:11)
 DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
   round(x, 2))
 
