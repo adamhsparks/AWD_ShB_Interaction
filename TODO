@@ -1,13 +1,10 @@
 Is year a fixed or random effect?
 
-Calculate AUDPC
-
-What is NTShB? Number of tillers with ShB?
-
 Read:
 https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
 
 Check NTShB/LShB/TShB ratings in both years, make sure that they are both reporting the same values
 
 library(nlme)
-AWD_model <- lme(LShB_rating ~ WMGT*NRTE, random = ~ 1|REP/WMGT, data = AWD)
+LShB_model <- lme(LShB_rating ~ WMGT*NRTE + as.factor(YEAR), random = ~ 1|REP/WMGT, data = AUDPS)
+TShB_model <- lme(TShB_rating ~ WMGT*NRTE + as.factor(YEAR), random = ~ 1|REP/WMGT, data = AUDPS)
