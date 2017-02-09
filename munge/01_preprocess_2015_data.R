@@ -11,7 +11,6 @@ reformat <- function(files) {
   x <-
     x %>% mutate_each(funs(as.numeric), starts_with("SL"))
 
-
   x <-
     x %>%
     group_by(REP, WMGT, NRTE, HILL, SMPL) %>%
@@ -69,12 +68,21 @@ reformat <- function(files) {
 
 DS2015 <- ldply(.data = files, .fun = reformat)
 
+DS2015$TRT <- NA
+DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == "N0")] = "FLD_N0"
+DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == "N1")] = "FLD_N1"
+DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == "N2")] = "FLD_N2"
+DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == "N0")] = "AWD_N0"
+DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == "N1")] = "AWD_N1"
+DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == "N2")] = "AWD_N2"
+
 DS2015 <-
   as_tibble(DS2015) %>% dplyr::select(DATE,
                                       ASMT,
                                       WMGT,
                                       NRTE,
                                       REP,
+                                      TRT,
                                       NTIL,
                                       NTShB,
                                       LShB_rating,

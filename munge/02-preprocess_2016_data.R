@@ -70,10 +70,17 @@ DS2016 <- rbind(
   as.data.frame(DS2016_A4)
 )
 
-# Replace "Flooded" with "FLD"
+# Replace "Flooded" with "FLD" -------------------------------------------------
 DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 
-# Rename columns for consistency with 2015
+# Add treatment numbers --------------------------------------------------------
+DS2016$TRT <- NA
+DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N1")] = "FLD_N1"
+DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N2")] = "FLD_N2"
+DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N1")] = "AWD_N1"
+DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N2")] = "AWD_N2"
+
+# Rename columns for consistency with 2015 -------------------------------------
 DS2016 <- dplyr::rename(DS2016, TShB_rating = NSHShB)
 DS2016 <- dplyr::rename(DS2016, SLA = ShBL1)
 DS2016 <- dplyr::rename(DS2016, SLB = ShBL2)
@@ -82,7 +89,7 @@ DS2016 <- dplyr::rename(DS2016, SLD = ShBL4)
 DS2016 <- dplyr::rename(DS2016, SLE = ShBL5)
 DS2016 <- dplyr::rename(DS2016, SLF = ShBL6)
 
-# convert columns 17:19 to numeric from character and change NA to 0
+# convert columns 17:19 to numeric from character and change NA to 0 -----------
 cols <- c(17:19)
 DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
   as.numeric(as.character(x)))
@@ -91,7 +98,7 @@ DS2016[is.na(DS2016)] <- 0
 
 DS2016 <-
   DS2016 %>%
-  group_by(DATE, ASMT, REP, WMGT, NRTE, SMPL, HILL) %>%
+  group_by(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
@@ -105,7 +112,7 @@ DS2016 <-
 
 DS2016 <-
   DS2016 %>%
-  group_by(DATE, ASMT, REP, WMGT, NRTE) %>%
+  group_by(DATE, ASMT, REP, TRT, WMGT, NRTE) %>%
   summarise_each(funs(mean),
                  NTIL,
                  NTShB,
@@ -121,6 +128,7 @@ DS2016 <-
                            WMGT,
                            NRTE,
                            REP,
+                           TRT,
                            NTIL,
                            NTShB,
                            LShB_rating,
@@ -128,7 +136,7 @@ DS2016 <-
                            GL_value,
                            DL_value)
 
-cols <- c(6:11)
+cols <- c(7:12)
 DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
   round(x, 2))
 
