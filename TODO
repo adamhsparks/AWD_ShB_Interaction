@@ -1,10 +1,27 @@
-Is year a fixed or random effect?
+http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html
 
-Read:
-https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
+http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf
 
-Check NTShB/LShB/TShB ratings in both years, make sure that they are both reporting the same values
+http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html
 
-library(nlme)
-LShB_model <- lme(LShB_rating ~ WMGT*NRTE + as.factor(YEAR), random = ~ 1|REP/WMGT, data = AUDPS)
-TShB_model <- lme(TShB_rating ~ WMGT*NRTE + as.factor(YEAR), random = ~ 1|REP/WMGT, data = AUDPS)
+require(car)
+require(MASS)
+
+qqp(AUDPS$LShB_rating, "norm")
+
+qqp(AUDPS$LShB_rating, "lnorm")
+
+poisson <- fitdistr(AUDPS$LShB_rating, "Poisson")
+qqp(AUDPS$LShB_rating, "pois", poisson$estimate)
+
+gamma <- fitdistr(AUDPS$LShB_rating, "gamma")
+qqp(AUDPS$LShB_rating, "gamma", shape = gamma$estimate[[1]], rate = gamma$estimate[[2]])
+
+
+lmm <- lmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
+REML = FALSE)
+summary(lmm)
+
+lmm <- lmer(TShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
+REML = FALSE)
+summary(lmm)
