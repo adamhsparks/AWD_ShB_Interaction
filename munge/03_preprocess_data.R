@@ -56,7 +56,7 @@ AUDPS$NRTE <- as.factor(AUDPS$NRTE)
 AUDPS$REP <- as.factor(AUDPS$REP)
 
 # Drop N0 rate
-AUDPS <- AUDPS[AUDPS$NRTE != "N0"]
+AUDPS <- AUDPS[AUDPS$NRTE != "N0", ]
 
 AWD <- as_tibble(rbind(as.data.frame(DS2015),
                        as.data.frame(DS2016)))

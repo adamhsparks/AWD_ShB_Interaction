@@ -18,10 +18,10 @@ gamma <- fitdistr(AUDPS$LShB_rating, "gamma")
 qqp(AUDPS$LShB_rating, "gamma", shape = gamma$estimate[[1]], rate = gamma$estimate[[2]])
 
 
-lmm <- lmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
+LShB_lmm <- lmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
 REML = FALSE)
 summary(lmm)
 
-lmm <- lmer(TShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
+TShB_lmm <- lmer(TShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR), data = AUDPS,
 REML = FALSE)
 summary(lmm)
