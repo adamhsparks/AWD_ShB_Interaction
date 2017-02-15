@@ -1,6 +1,18 @@
 
 # Alternate Wetting and Drying (AWD) and Nitrogen Interaction Effects on Rice Sheath Blight
 
+## Quick start with this repository
+
+Install `ProjectTemplate` and load the project in your R session.
+
+```{r project_template}
+install.packages("ProjectTemplate")
+library(ProjectTemplate)
+load.project()
+```
+
+## Study
+
 **Objective:** Study the effects of different water and nitrogen managements on sheath blight of rice  
 **Project PI:** Dr. Adam H Sparks  
 **Staff:**  
@@ -9,14 +21,14 @@
 
 ******
 
-## 1. SCHEDULE
+### 1. SCHEDULE
 
 IRRI Dry Season (2)  
 
  * 2015 (December 2014 – April 2015)  
- * 2016 (January 2016 - 2016)  
+ * 2016 (January 2016 - May 2016)  
 
-## 2. METHODOLOGY
+### 2. METHODOLOGY
 
 **Experimental Design: Split-plot**
 

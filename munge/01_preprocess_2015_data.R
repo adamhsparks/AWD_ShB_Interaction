@@ -41,12 +41,17 @@ reformat <- function(files) {
     summarise_each(funs(mean),
                    NTIL,
                    NTShB,
-                   LShB_rating,
+                   LShB_rating_A,
+                   LShB_rating_B,
+                   LShB_rating_C,
+                   LShB_rating_D,
+                   LShB_rating_E,
+                   LShB_rating_F,
                    TShB_rating,
                    GL_value,
                    DL_value)
 
-  x[, 4:9] <- round(x[, 4:9], 2)
+  x[, 4:14] <- round(x[, 4:14], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -95,7 +100,12 @@ DS2015 <-
                                       TRT,
                                       NTIL,
                                       NTShB,
-                                      LShB_rating,
+                                      LShB_rating_A,
+                                      LShB_rating_B,
+                                      LShB_rating_C,
+                                      LShB_rating_D,
+                                      LShB_rating_E,
+                                      LShB_rating_F,
                                       TShB_rating,
                                       GL_value,
                                       DL_value)
