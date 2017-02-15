@@ -1,8 +1,11 @@
 # Drop the 0 N rate from 2015, no corresponding data in 2016 -------------------
-#DS2015 <- DS2015[DS2015$NRTE != "N0", ]
+DS2015 <- DS2015[DS2015$NRTE != "N0", ]
+
+# Drop the fifth assessment, too many dead leaves and too much varability in these observations
+DS2015 <- DS2015[DS2015$ASMT != 5, ]
 
 # Add plot numbers just to keep track of the data for calculations -------------
-DS2015$PLOT <- rep(1:24, 5)
+DS2015$PLOT <- rep(1:24, 4)
 DS2016$PLOT <- rep(1:16, 4)
 
 # Add treatment numbers for analysis and plotting ------------------------------
@@ -54,9 +57,6 @@ AUDPS$YEAR <- as.factor(AUDPS$YEAR)
 AUDPS$WMGT <- as.factor(AUDPS$WMGT)
 AUDPS$NRTE <- as.factor(AUDPS$NRTE)
 AUDPS$REP <- as.factor(AUDPS$REP)
-
-# Drop N0 rate
-AUDPS <- AUDPS[AUDPS$NRTE != "N0", ]
 
 AWD <- as_tibble(rbind(as.data.frame(DS2015),
                        as.data.frame(DS2016)))
