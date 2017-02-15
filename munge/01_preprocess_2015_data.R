@@ -26,7 +26,12 @@ reformat <- function(files) {
     summarise_each(funs(mean),
                    NTIL,
                    NTShB,
-                   LShB_rating,
+                   LShB_rating_A,
+                   LShB_rating_B,
+                   LShB_rating_C,
+                   LShB_rating_D,
+                   LShB_rating_E,
+                   LShB_rating_F,
                    TShB_rating,
                    GL_value,
                    DL_value)
