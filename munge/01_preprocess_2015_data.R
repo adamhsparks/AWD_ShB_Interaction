@@ -14,7 +14,12 @@ reformat <- function(files) {
   x <-
     x %>%
     group_by(REP, WMGT, NRTE, HILL, SMPL) %>%
-    gather(LShB, LShB_rating, starts_with("SL")) %>%
+    gather(LShB_A, LShB_rating_A, starts_with("SLA")) %>%
+    gather(LShB_B, LShB_rating_B, starts_with("SLB")) %>%
+    gather(LShB_C, LShB_rating_C, starts_with("SLC")) %>%
+    gather(LShB_D, LShB_rating_D, starts_with("SLD")) %>%
+    gather(LShB_E, LShB_rating_E, starts_with("SLE")) %>%
+    gather(LShB_F, LShB_rating_F, starts_with("SLF")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
     gather(DL, DL_value, starts_with("DL")) %>%

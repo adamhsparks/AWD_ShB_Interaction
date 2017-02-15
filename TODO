@@ -11,11 +11,9 @@ qqp(AUDPS$LShB_rating, "norm")
 
 qqp(AUDPS$LShB_rating, "lnorm")
 
-LShB_lmm <- lmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR),
-data = AUDPS)
+LShB_lmm <- lmer(LShB_rating ~ WMGT * NRTE + (1 | YEAR/REP/WMGT), data = AUDPS)
 summary(LShB_lmm)
 
-TShB_lmm <- lmer(TShB_rating ~ WMGT * NRTE + (1 | REP/WMGT) + (1 | YEAR),
-data = AUDPS)
+TShB_lmm <- lmer(TShB_rating ~ WMGT * NRTE + (1 | YEAR/REP/WMGT), data = AUDPS)
 summary(TShB_lmm)
 

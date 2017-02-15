@@ -1,8 +1,8 @@
 # Drop the 0 N rate from 2015, no corresponding data in 2016 -------------------
-DS2015 <- DS2015[DS2015$NRTE != "N0", ]
+# DS2015 <- DS2015[DS2015$NRTE != "N0", ]
 
-# Drop the fifth assessment, too many dead leaves and too much varability in these observations
-DS2015 <- DS2015[DS2015$ASMT != 5, ]
+# Drop the fifth assessment
+# DS2015 <- DS2015[DS2015$ASMT != 5, ]
 
 # Add plot numbers just to keep track of the data for calculations -------------
 DS2015$PLOT <- rep(1:24, 4)
