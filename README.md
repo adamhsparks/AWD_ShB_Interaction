@@ -73,7 +73,7 @@ IRRI Dry Season (2)
   <th rowspan = "2">Nitrogen<br>treatment</th>
   <th rowspan = "2">Year</th>
   <th rowspan = "2">Total N<br>(kg/ha)</th>
-  <th colspan = "4">Ratio to total N application (%)</th>
+  <th colspan = "4">Application Amount (kg/ha)</th>
 </tr>
 <tr>
   <th>Basal</th>
