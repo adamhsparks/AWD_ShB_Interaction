@@ -85,9 +85,9 @@ DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 # Add treatment numbers --------------------------------------------------------
 DS2016$TRT <- NA
 DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N1")] = "FLD_N1"
-DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N2")] = "FLD_N2"
+DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N2")] = "FLD_N5"
 DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N1")] = "AWD_N1"
-DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N2")] = "AWD_N2"
+DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N2")] = "AWD_N5"
 
 # Rename columns for consistency with 2015 -------------------------------------
 DS2016 <- dplyr::rename(DS2016, TShB_rating = NSHShB)
@@ -102,8 +102,6 @@ DS2016 <- dplyr::rename(DS2016, SLF = ShBL6)
 cols <- c(17:19)
 DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
   as.numeric(as.character(x)))
-
-DS2016[is.na(DS2016)] <- 0
 
 DS2016 <-
   DS2016 %>%

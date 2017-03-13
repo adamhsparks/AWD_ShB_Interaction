@@ -36,26 +36,33 @@ IRRI Dry Season (2)
     * W1 – Alternate Wetting and Drying (AWD)  
     * W2 – Flooded/Farmer’s Practice  
   
-  * Sub-plot : Nitrogen management (4)
+  * Sub-plot : Nitrogen management (5)
     * N0 – 0 kg/ha
     * N1 – 100 kg/ha (farmer’s practice – based from J. Bigornia research) 
     * N2 – 120 kg/ha (IRRI practice – based from L. Willocquet research) 
     * N3 – 100 kg/ha (with early heading stage)
+    * N4 - 150 kg/ha (2016 only)
 
   * Replication: Four (4)  
   * Plot Sizes (2015)  
-    * Main plot size: 5m x 5m (25 sq m)
-    * Sub-plot size: 12m x 12m (144 sq m)
+    * Main plot size: 12m x 12m (144 sq m)
+    * Sub-plot size: 5m x 5m (25 sq m)
     * Replication size: 12m x 24m (288 sq m)
     * Buffer: 1m per sub plot
     * Experiment size: 1,152 sq m
 
   * Plot Sizes (2016)  
-    * Main plot size: 
-    * Sub-plot size: 
-    * Replication size: 
-    * Buffer: 
-    * Experiment size: 
+    * Main plot size
+      * Block 2007: 21m x 20.5m (412.5 sq m)
+      * Block 2008: 20.25m x 21.6m (437.4 sq m)
+    * Sub-plot size
+      * Block 2007: 21m x 10.25m (215.25 sq m)
+      * Block 2008: 20.25m x 10.8m (218.7 sq m)
+    * Replication size:
+      * Block 2007: 42m x 20.5m (861 sq m)
+      * Block 2008: 40.5m x 21.6m (874.8 sq m)
+    * Buffer: .5m per sub plot
+    * Experiment size: 3471.6 sq m
     
 ******
 
