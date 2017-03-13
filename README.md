@@ -71,6 +71,7 @@ IRRI Dry Season (2)
 <table width = "500">
 <tr>
   <th rowspan = "2">Nitrogen<br>treatment</th>
+  <th rowspan = "2">Year</th>
   <th rowspan = "2">Total N<br>(kg/ha)</th>
   <th colspan = "4">Ratio to total N application (%)</th>
 </tr>
@@ -80,35 +81,40 @@ IRRI Dry Season (2)
   <th>Panicle<br>Intitiation</th>
 </tr>
 <tr>
-  <td>N0 (2015)</td>
+  <td>N0</td>
+  <td>2015</td>
   <td>0</td>
   <td>0</td>
   <td>0</td>
   <td>0</td>
 </tr>
 <tr>
-  <td>N1 (2015)</td>
+  <td>N1</td>
+  <td>2015</td>
   <td>100</td>
   <td>60</td>
   <td>20</td>
   <td>20</td>
 </tr>
 <tr>
-  <td>N2 (2015)</td>
+  <td>N2</td>
+  <td>2015</td>
   <td>120</td>
   <td>60</td>
   <td>30</td>
   <td>30</td>
 </tr>
 <tr>
-  <td>N3 (2016)</td>
+  <td>N3</td>
+  <td>2016</td>
   <td>60</td>
   <td>30</td>
   <td>30</td>
   <td>0</td>
 </tr>
 <tr>
-  <td>N4 (2016)</td>
+  <td>N4</td>
+  <td>2016</td>
   <td>180</td>
   <td>60</td>
   <td>60</td>
