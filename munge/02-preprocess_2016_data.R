@@ -70,6 +70,15 @@ DS2016 <- rbind(
   as.data.frame(DS2016_A4)
 )
 
+# Set any NA values to 0, per Dr. Castilla on 060317 ---------------------------
+# "We used to put zeroes on the data sheets, but Dr. Savary later suggested that
+# we leave the cells blank because it has caused difficulties in proof reading
+# the data. We also found more mistakes in data encoding when there are a lot
+# of zeroes."
+# Set any NA values to 0, per Dr. Castilla on 060317 ---------------------------
+
+DS2016[is.na(DS2016)] <- 0
+
 # Replace "Flooded" with "FLD" -------------------------------------------------
 DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 
