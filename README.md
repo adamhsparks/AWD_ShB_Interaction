@@ -37,11 +37,13 @@ IRRI Dry Season (2)
     * W2 – Flooded/Farmer’s Practice  
   
   * Sub-plot : Nitrogen management (5)
-    * N0 – 0 kg/ha
-    * N1 – 100 kg/ha (farmer’s practice – based from J. Bigornia research) 
-    * N2 – 120 kg/ha (IRRI practice – based from L. Willocquet research) 
-    * N3 – 100 kg/ha (with early heading stage)
-    * N4 - 150 kg/ha (2016 only)
+    * 2015  
+      * N0 – 0 kg/ha  
+      * N1 – 100 kg/ha (farmer’s practice – based from J. Bigornia research)  
+      * N2 – 120 kg/ha (IRRI practice – based from L. Willocquet research)  
+    * 2016  
+      * N3 – 60 kg/ha  
+      * N4 - 180 kg/ha  
 
   * Replication: Four (4)  
   * Plot Sizes (2015)  
