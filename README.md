@@ -105,5 +105,13 @@ IRRI Dry Season (2)
   <td>30</td>
   <td>20</td>
 </tr>
+<tr>
+  <td>N5</td>
+  <td>150</td>
+  <td>?</td>
+  <td>?</td>
+  <td>?</td>
+  <td>?</td>
+</tr>
 </table>
 
