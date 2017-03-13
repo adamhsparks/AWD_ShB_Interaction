@@ -61,12 +61,12 @@ IRRI Dry Season (2)
     * Replication size:
       * Block 2007: 42m x 20.5m (861 sq m)
       * Block 2008: 40.5m x 21.6m (874.8 sq m)
-    * Buffer: .5m per sub plot
+    * Buffer: 0.5m per sub plot
     * Experiment size: 3471.6 sq m
     
 ******
 
-**Nitrogen Management: Rates**  
+**Nitrogen Management Rates**  
 
 <table width = "500">
 <tr>
@@ -78,47 +78,41 @@ IRRI Dry Season (2)
   <th>Basal</th>
   <th>Tillering</th>
   <th>Panicle<br>Intitiation</th>
-  <th>Early<br>Heading</th>
 </tr>
 <tr>
-  <td>N0</td>
+  <td>N0 (2015)</td>
   <td>0</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>0</td>
+  <td>0</td>
+  <td>0</td>
 </tr>
 <tr>
-  <td>N1</td>
+  <td>N1 (2015)</td>
   <td>100</td>
   <td>60</td>
   <td>20</td>
   <td>20</td>
-  <td></td>
 </tr>
 <tr>
-  <td>N2</td>
+  <td>N2 (2015)</td>
   <td>120</td>
   <td>60</td>
   <td>30</td>
   <td>30</td>
-  <td></td>
 </tr>
 <tr>
-  <td>N3</td>
-  <td>100</td>
+  <td>N3 (2016)</td>
+  <td>60</td>
   <td>30</td>
-  <td>20</td>
   <td>30</td>
-  <td>20</td>
+  <td>0</td>
 </tr>
 <tr>
-  <td>N5</td>
-  <td>150</td>
-  <td>?</td>
-  <td>?</td>
-  <td>?</td>
-  <td>?</td>
+  <td>N4 (2016)</td>
+  <td>180</td>
+  <td>60</td>
+  <td>60</td>
+  <td>60</td>
 </tr>
 </table>
 
