@@ -1,14 +1,7 @@
-# Drop the 0 N rate from 2015, no corresponding data in 2016 -------------------
-# DS2015 <- DS2015[DS2015$NRTE != "N0", ]
-
-# Drop the fifth assessment
-# DS2015 <- DS2015[DS2015$ASMT != 5, ]
 
 # Add plot numbers just to keep track of the data for calculations -------------
 DS2015$PLOT <- rep(1:24, 5)
 DS2016$PLOT <- rep(1:16, 4)
-
-# Add treatment numbers for analysis and plotting ------------------------------
 
 # Create new columns of dates to calcluate AUDPS -------------------------------
 #2015

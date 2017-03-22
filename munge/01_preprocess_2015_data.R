@@ -14,24 +14,14 @@ reformat <- function(files) {
   x <-
     x %>%
     group_by(REP, WMGT, NRTE, HILL, SMPL) %>%
-    gather(LShB_A, LShB_rating_A, starts_with("SLA")) %>%
-    gather(LShB_B, LShB_rating_B, starts_with("SLB")) %>%
-    gather(LShB_C, LShB_rating_C, starts_with("SLC")) %>%
-    gather(LShB_D, LShB_rating_D, starts_with("SLD")) %>%
-    gather(LShB_E, LShB_rating_E, starts_with("SLE")) %>%
-    gather(LShB_F, LShB_rating_F, starts_with("SLF")) %>%
+    gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
     gather(DL, DL_value, starts_with("DL")) %>%
     summarise_each(funs(mean),
                    NTIL,
                    NTShB,
-                   LShB_rating_A,
-                   LShB_rating_B,
-                   LShB_rating_C,
-                   LShB_rating_D,
-                   LShB_rating_E,
-                   LShB_rating_F,
+                   LShB_rating,
                    TShB_rating,
                    GL_value,
                    DL_value)
@@ -41,17 +31,12 @@ reformat <- function(files) {
     summarise_each(funs(mean),
                    NTIL,
                    NTShB,
-                   LShB_rating_A,
-                   LShB_rating_B,
-                   LShB_rating_C,
-                   LShB_rating_D,
-                   LShB_rating_E,
-                   LShB_rating_F,
+                   LShB_rating,
                    TShB_rating,
                    GL_value,
                    DL_value)
 
-  x[, 4:14] <- round(x[, 4:14], 2)
+  x[, 4:14] <- round(x[, 4:9], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -100,18 +85,12 @@ DS2015 <-
                                       TRT,
                                       NTIL,
                                       NTShB,
-                                      LShB_rating_A,
-                                      LShB_rating_B,
-                                      LShB_rating_C,
-                                      LShB_rating_D,
-                                      LShB_rating_E,
-                                      LShB_rating_F,
+                                      LShB_rating,
                                       TShB_rating,
                                       GL_value,
                                       DL_value)
 
 DS2015$YEAR <- year(DS2015$DATE)
-
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")

@@ -13,7 +13,6 @@ Raw data for green leaves and dead leaves
 ## Tiller sheath blight ratings
 
 Data for tiller related observations
-
 <img src="TShB_rating.png" width="50%" style="display: block; margin: auto;" />
 
 ### Tiller ShB AUDPS
