@@ -183,8 +183,8 @@ ggplot(AUDPS, aes(x = TRT, y = LShB_rating)) +
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("Leaf Sheath Blight Rating")
-ggsave("graphs/LShB_AUDPS.png", width = 4, height = 4)
-
+  geom_boxplot() +
+  theme_tufte()
 
 ggplot(AUDPS, aes(x = TRT, y = TShB_rating)) +
   geom_boxplot(aes(fill = YEAR, colour = YEAR)) +
@@ -198,6 +198,8 @@ ggplot(AUDPS, aes(x = TRT, y = TShB_rating)) +
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("Tiller Sheath Blight Rating")
+  geom_boxplot() +
+  theme_tufte()
 ggsave("graphs/TShB_AUDPS.png", width = 4, height = 4)
 
 
@@ -214,7 +216,7 @@ gg_qq <- function(x, distribution = "norm", ..., line.estimate = NULL, conf = 0.
   P <- ppoints(length(x))
   df <- data.frame(ord.x = x[ord], z = q.function(P, ...))
 
-  if(is.null(line.estimate)) {
+  if (is.null(line.estimate)) {
     Q.x <- quantile(df$ord.x, c(0.25, 0.75))
     Q.z <- q.function(c(0.25, 0.75), ...)
     b <- diff(Q.x)/diff(Q.z)
