@@ -5,7 +5,7 @@ recursive_loading: FALSE
 munging: TRUE
 logging: FALSE
 load_libraries: TRUE
-libraries: reshape, plyr, dplyr, ggplot2, ggthemes, stringr, lubridate, tidyr, readr, lubridate, tibble, agricolae, lme4, viridis
+libraries: reshape, plyr, dplyr, ggplot2, ggthemes, stringr, lubridate, tidyr, readr, lubridate, tibble, agricolae, lme4, viridis, mass
 as_factors: FALSE
 data_tables: FALSE
 attach_internal_libraries: FALSE

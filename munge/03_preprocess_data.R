@@ -42,14 +42,22 @@ AUDPS_2016 <-
                  LShB_rating,
                  TShB_rating)
 
-# Join 2015 and 2016 data ------------------------------------------------------
+# Join 2015 and 2016 AUDPS data to make next few steps quicker -----------------
 
 AUDPS <- as_tibble(rbind(as.data.frame(AUDPS_2015),
                          as.data.frame(AUDPS_2016)))
+
+AUDPS$LShB_rating <- round(AUDPS$LShB_rating, 2)
+
 AUDPS$YEAR <- as.factor(AUDPS$YEAR)
 AUDPS$WMGT <- as.factor(AUDPS$WMGT)
 AUDPS$NRTE <- as.factor(AUDPS$NRTE)
 AUDPS$REP <- as.factor(AUDPS$REP)
+
+# Split the 2015 and 2016 AUDPS data for easier analysis -----------------------
+
+AUDPS_2015 <- AUDPS[which(AUDPS$YEAR == "2015"), ]
+AUDPS_2016 <- AUDPS[which(AUDPS$YEAR == "2016"), ]
 
 AWD <- as_tibble(rbind(as.data.frame(DS2015),
                        as.data.frame(DS2016)))
