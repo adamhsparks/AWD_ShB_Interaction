@@ -7,13 +7,13 @@ Here we check the probability distribution that best fits these data. I'm follow
 --------------------------------------------------------------
 
 ``` r
-qqp(AUDPS_2015$LShB_rating, "norm")
+qqp(AUDPS_2015$LShB_AUDPS, "norm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 ``` r
-qqp(AUDPS_2015$LShB_rating, "lnorm")
+qqp(AUDPS_2015$LShB_AUDPS, "lnorm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-2.png)
@@ -22,15 +22,13 @@ qqp(AUDPS_2015$LShB_rating, "lnorm")
 ----------------------------------------------------------------
 
 ``` r
-AUDPS_2015$TShB_rating <- AUDPS_2015$TShB_rating + 1
-
-qqp(AUDPS_2015$TShB_rating, "norm")
+qqp(AUDPS_2015$TShB_AUDPS, "norm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
-qqp(AUDPS_2015$TShB_rating, "lnorm")
+qqp(AUDPS_2015$TShB_AUDPS, "lnorm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-2-2.png)
@@ -41,13 +39,13 @@ qqp(AUDPS_2015$TShB_rating, "lnorm")
 --------------------------------------------------------------
 
 ``` r
-qqp(AUDPS_2016$LShB_rating, "norm")
+qqp(AUDPS_2016$LShB_AUDPS, "norm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
-qqp(AUDPS_2016$LShB_rating, "lnorm")
+qqp(AUDPS_2016$LShB_AUDPS, "lnorm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-3-2.png)
@@ -56,13 +54,13 @@ qqp(AUDPS_2016$LShB_rating, "lnorm")
 ----------------------------------------------------------------
 
 ``` r
-qqp(AUDPS_2016$TShB_rating, "norm")
+qqp(AUDPS_2016$TShB_AUDPS, "norm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
-qqp(AUDPS_2016$TShB_rating, "lnorm")
+qqp(AUDPS_2016$TShB_AUDPS, "lnorm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-4-2.png)

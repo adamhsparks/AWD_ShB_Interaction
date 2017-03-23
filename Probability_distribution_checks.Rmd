@@ -15,9 +15,9 @@ Here we check the probability distribution that best fits these data. I'm follow
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
-qqp(AUDPS_2015$LShB_rating, "norm")
+qqp(AUDPS_2015$LShB_AUDPS, "norm")
 
-qqp(AUDPS_2015$LShB_rating, "lnorm")
+qqp(AUDPS_2015$LShB_AUDPS, "lnorm")
 
 ```
 
@@ -25,11 +25,9 @@ qqp(AUDPS_2015$LShB_rating, "lnorm")
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
-AUDPS_2015$TShB_rating <- AUDPS_2015$TShB_rating + 1
+qqp(AUDPS_2015$TShB_AUDPS, "norm")
 
-qqp(AUDPS_2015$TShB_rating, "norm")
-
-qqp(AUDPS_2015$TShB_rating, "lnorm")
+qqp(AUDPS_2015$TShB_AUDPS, "lnorm")
 
 ```
 
@@ -39,9 +37,9 @@ qqp(AUDPS_2015$TShB_rating, "lnorm")
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
-qqp(AUDPS_2016$LShB_rating, "norm")
+qqp(AUDPS_2016$LShB_AUDPS, "norm")
 
-qqp(AUDPS_2016$LShB_rating, "lnorm")
+qqp(AUDPS_2016$LShB_AUDPS, "lnorm")
 
 ```
 
@@ -49,9 +47,9 @@ qqp(AUDPS_2016$LShB_rating, "lnorm")
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
-qqp(AUDPS_2016$TShB_rating, "norm")
+qqp(AUDPS_2016$TShB_AUDPS, "norm")
 
-qqp(AUDPS_2016$TShB_rating, "lnorm")
+qqp(AUDPS_2016$TShB_AUDPS, "lnorm")
 
 ```
 
