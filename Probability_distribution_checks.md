@@ -1,9 +1,6 @@
 Probability Distribution Checks
 ================
 
-2015
-====
-
 2015 Check probability distribution fit for leaf sheath blight
 --------------------------------------------------------------
 
@@ -71,9 +68,6 @@ qqp(AUDPS_2015$TShB_rating_t, "gamma",
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-2-4.png)
 
 ------------------------------------------------------------------------
-
-2016
-====
 
 2016 Check probability distribution fit for leaf sheath blight
 --------------------------------------------------------------
