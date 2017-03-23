@@ -12,5 +12,5 @@ only has the first observation for each hill filled.
 *03-preprocess_data.R* - this R script calculates AUDPS for leaves and tillers
 and merges 2015 and 2016 data.
 
-*visualise_data.R* - this R script generates graphs of the raw data and
+*04_visualise_data.R* - this R script generates graphs of the raw data and
 boxplots of the AUDPS data and puts them in the "graphs" folder.
