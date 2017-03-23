@@ -15,7 +15,7 @@ The [graphs](graphs) folder contains graphs from munging and the [README.md](gra
 
 The [`Probability_distribution_checks.Rmd`](Probability_distribution_checks.md) file generates/displays the normal and log distribution checks for the analyses.
 
-The [`Analysis.Rmd`](Analyis.md) file contains the models used for data analysis.
+The [`Analysis.Rmd`](Analysis.md) file contains the models used for data analysis.
 
 ## Study
 
