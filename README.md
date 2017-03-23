@@ -3,7 +3,7 @@
 
 ## Quick start with this repository
 
-Install `ProjectTemplate` and load the project in your R session.
+Install [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) and load the project in your R session.
 
 ```{r project_template}
 install.packages("ProjectTemplate")
