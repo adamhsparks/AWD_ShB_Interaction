@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ProjectTemplate)
 load.project()
 ```
-# 2015
+
 ## 2015 Check probability distribution fit for leaf sheath blight
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
@@ -48,8 +48,6 @@ qqp(AUDPS_2015$TShB_rating_t, "gamma",
 ```
 
 *******
-
-# 2016
 
 ## 2016 Check probability distribution fit for leaf sheath blight
 
