@@ -1,0 +1,90 @@
+---
+title: "Probability Distribution Checks"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ProjectTemplate)
+load.project()
+```
+# 2015
+## Check probability distribution fit for leaf sheath blight
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+
+AUDPS_2015$LShB_rating_t <- AUDPS_2015$LShB_rating + 1
+
+qqp(AUDPS_2015$LShB_rating_t, "norm")
+
+qqp(AUDPS_2015$LShB_rating_t, "lnorm")
+
+poisson <- fitdistr(AUDPS_2015$LShB_rating_t, "Poisson")
+qqp(AUDPS_2015$LShB_rating_t, "pois", poisson$estimate)
+
+gamma <- fitdistr(AUDPS_2015$LShB_rating_t, "gamma")
+qqp(AUDPS_2015$LShB_rating_t, "gamma",
+    shape = gamma$estimate[[1]], 
+    rate = gamma$estimate[[2]])
+```
+
+## Check probability distribution fit for tiller sheath blight
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+
+AUDPS_2015$TShB_rating_t <- AUDPS_2015$TShB_rating + 1
+
+qqp(AUDPS_2015$TShB_rating_t, "norm")
+
+qqp(AUDPS_2015$TShB_rating_t, "lnorm")
+
+poisson <- fitdistr(AUDPS_2015$TShB_rating_t, "Poisson")
+qqp(AUDPS_2015$TShB_rating_t, "pois", poisson$estimate)
+
+gamma <- fitdistr(AUDPS_2015$TShB_rating_t, "gamma")
+qqp(AUDPS_2015$TShB_rating_t, "gamma",
+    shape = gamma$estimate[[1]], 
+    rate = gamma$estimate[[2]])
+```
+
+*******
+
+# 2016
+
+## Check probability distribution fit for leaf sheath blight
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+
+AUDPS_2016$LShB_rating_t <- AUDPS_2016$LShB_rating + 1
+
+qqp(AUDPS_2016$LShB_rating_t, "norm")
+
+qqp(AUDPS_2016$LShB_rating_t, "lnorm")
+
+poisson <- fitdistr(AUDPS_2016$LShB_rating_t, "Poisson")
+qqp(AUDPS_2016$LShB_rating_t, "pois", poisson$estimate)
+
+gamma <- fitdistr(AUDPS_2016$LShB_rating_t, "gamma")
+qqp(AUDPS_2016$LShB_rating_t, "gamma",
+    shape = gamma$estimate[[1]], 
+    rate = gamma$estimate[[2]])
+```
+
+## Check probability distribution fit for tiller sheath blight
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+
+AUDPS_2016$TShB_rating_t <- AUDPS_2016$TShB_rating + 1
+
+qqp(AUDPS_2016$TShB_rating_t, "norm")
+
+qqp(AUDPS_2016$TShB_rating_t, "lnorm")
+
+poisson <- fitdistr(AUDPS_2016$TShB_rating_t, "Poisson")
+qqp(AUDPS_2016$TShB_rating_t, "pois", poisson$estimate)
+
+gamma <- fitdistr(AUDPS_2016$TShB_rating_t, "gamma")
+qqp(AUDPS_2016$TShB_rating_t, "gamma",
+    shape = gamma$estimate[[1]], 
+    rate = gamma$estimate[[2]])
+```

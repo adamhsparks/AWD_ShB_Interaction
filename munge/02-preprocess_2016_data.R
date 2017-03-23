@@ -82,12 +82,16 @@ DS2016[is.na(DS2016)] <- 0
 # Replace "Flooded" with "FLD" -------------------------------------------------
 DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
 
+# Replace "N*" with a number for NRTE ------------------------------------------
+DS2016$NRTE[which(DS2016$NRTE == "N1")] = 60
+DS2016$NRTE[which(DS2016$NRTE == "N2")] = 180
+
 # Add treatment numbers --------------------------------------------------------
 DS2016$TRT <- NA
-DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N1")] = "FLD_N3"
-DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == "N2")] = "FLD_N4"
-DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N1")] = "AWD_N3"
-DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == "N2")] = "AWD_N4"
+DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == 60)] = "FLD_N60"
+DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == 180)] = "FLD_N180"
+DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == 60)] = "AWD_N60"
+DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == 180)] = "AWD_N180"
 
 # Rename columns for consistency with 2015 -------------------------------------
 DS2016 <- dplyr::rename(DS2016, TShB_rating = NSHShB)
