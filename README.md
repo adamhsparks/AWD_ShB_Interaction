@@ -7,9 +7,15 @@ Install `ProjectTemplate` and load the project in your R session.
 
 ```{r project_template}
 install.packages("ProjectTemplate")
-library(ProjectTemplate)
-load.project()
 ```
+
+The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts.
+
+The [graphs](graphs) folder contains graphs from munging and the [README.md](graphs/README.md) file displays them in an ordered fashion.
+
+The [`Probability_distribution_checks.Rmd`](Probability_distribution_checks.md) file generates/displays the normal and log distribution checks for the analyses.
+
+The [`Analysis.Rmd`](Analyis.md) file contains the models used for data analysis.
 
 ## Study
 
