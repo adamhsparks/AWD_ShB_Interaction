@@ -4,8 +4,8 @@ Probability Distribution Checks
 2015
 ====
 
-Check probability distribution fit for leaf sheath blight
----------------------------------------------------------
+2015 Check probability distribution fit for leaf sheath blight
+--------------------------------------------------------------
 
 ``` r
 AUDPS_2015$LShB_rating_t <- AUDPS_2015$LShB_rating + 1
@@ -37,8 +37,8 @@ qqp(AUDPS_2015$LShB_rating_t, "gamma",
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-4.png)
 
-Check probability distribution fit for tiller sheath blight
------------------------------------------------------------
+2015 Check probability distribution fit for tiller sheath blight
+----------------------------------------------------------------
 
 ``` r
 AUDPS_2015$TShB_rating_t <- AUDPS_2015$TShB_rating + 1
@@ -75,8 +75,8 @@ qqp(AUDPS_2015$TShB_rating_t, "gamma",
 2016
 ====
 
-Check probability distribution fit for leaf sheath blight
----------------------------------------------------------
+2016 Check probability distribution fit for leaf sheath blight
+--------------------------------------------------------------
 
 ``` r
 AUDPS_2016$LShB_rating_t <- AUDPS_2016$LShB_rating + 1
@@ -108,8 +108,8 @@ qqp(AUDPS_2016$LShB_rating_t, "gamma",
 
 ![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-3-4.png)
 
-Check probability distribution fit for tiller sheath blight
------------------------------------------------------------
+2016 Check probability distribution fit for tiller sheath blight
+----------------------------------------------------------------
 
 ``` r
 AUDPS_2016$TShB_rating_t <- AUDPS_2016$TShB_rating + 1

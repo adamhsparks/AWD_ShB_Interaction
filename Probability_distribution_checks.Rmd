@@ -9,7 +9,7 @@ library(ProjectTemplate)
 load.project()
 ```
 # 2015
-## Check probability distribution fit for leaf sheath blight
+## 2015 Check probability distribution fit for leaf sheath blight
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
@@ -28,7 +28,7 @@ qqp(AUDPS_2015$LShB_rating_t, "gamma",
     rate = gamma$estimate[[2]])
 ```
 
-## Check probability distribution fit for tiller sheath blight
+## 2015 Check probability distribution fit for tiller sheath blight
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
@@ -51,7 +51,7 @@ qqp(AUDPS_2015$TShB_rating_t, "gamma",
 
 # 2016
 
-## Check probability distribution fit for leaf sheath blight
+## 2016 Check probability distribution fit for leaf sheath blight
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
@@ -70,7 +70,7 @@ qqp(AUDPS_2016$LShB_rating_t, "gamma",
     rate = gamma$estimate[[2]])
 ```
 
-## Check probability distribution fit for tiller sheath blight
+## 2016 Check probability distribution fit for tiller sheath blight
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 
