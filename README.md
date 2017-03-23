@@ -8,6 +8,7 @@ Install [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) 
 ```{r project_template}
 install.packages("ProjectTemplate")
 ```
+Clone the repository to your local hard drive.
 
 The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts.
 
