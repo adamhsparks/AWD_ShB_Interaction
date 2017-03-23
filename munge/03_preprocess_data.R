@@ -26,26 +26,19 @@ DATE_2 <- na.omit(DATE_2_2016)
 DAYS_2016 <- difftime(DATE_1, DATE_2)
 DS2016$DAYS <- c(rep(0, 16), DAYS_2016)
 
-# Calculate AUDPS (Simco and Piepho 2012, DOI: 10.1094/PHYTO-07-11-0216) -------
-
-AUDPS_2015 <-
-  DS2015 %>%
-  group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
-  summarise_each(funs(audps(., dates = DAYS)),
-                 LShB_rating,
-                 TShB_rating)
-
-AUDPS_2016 <-
-  DS2016 %>%
-  group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
-  summarise_each(funs(audps(., dates = DAYS)),
-                 LShB_rating,
-                 TShB_rating)
-
 # Join 2015 and 2016 AUDPS data to make next few steps quicker -----------------
 
-AUDPS <- as_tibble(rbind(as.data.frame(AUDPS_2015),
-                         as.data.frame(AUDPS_2016)))
+RAW_data <- AUDPS <- as_tibble(rbind(as.data.frame(DS2015),
+                                     as.data.frame(DS2016)))
+
+# Calculate AUDPS (Simco and Piepho 2012, DOI: 10.1094/PHYTO-07-11-0216) -------
+
+AUDPS <-
+  AUDPS %>%
+  group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
+  summarise_each(funs(audps(., dates = DAYS)),
+                 LShB_rating,
+                 TShB_rating)
 
 AUDPS$LShB_rating <- round(AUDPS$LShB_rating, 2)
 
@@ -54,11 +47,10 @@ AUDPS$WMGT <- as.factor(AUDPS$WMGT)
 AUDPS$NRTE <- as.factor(AUDPS$NRTE)
 AUDPS$REP <- as.factor(AUDPS$REP)
 
+AUDPS <- plyr::rename(AUDPS, c("LShB_rating" = "LShB_AUDPS",
+                               "TShB_rating" = "TShB_AUDPS"))
+
 # Split the 2015 and 2016 AUDPS data for easier analysis -----------------------
 
 AUDPS_2015 <- AUDPS[which(AUDPS$YEAR == "2015"), ]
 AUDPS_2016 <- AUDPS[which(AUDPS$YEAR == "2016"), ]
-
-AWD <- as_tibble(rbind(as.data.frame(DS2015),
-                       as.data.frame(DS2016)))
-

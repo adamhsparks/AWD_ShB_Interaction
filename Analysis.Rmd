@@ -12,8 +12,8 @@ load.project()
 
 ## Leaf Sheath Blight Severity Model
 ```{r}
-(LShB_lmm_2015 <- lmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT),
-                       data = AUDPS_2015))
+(LShB_lmm_2015 <- glmer(LShB_rating ~ WMGT * NRTE + (1 | REP/WMGT),
+                          family = binomial(link = "logit"), data = AUDPS_2015))
 summary(LShB_lmm_2015)
 
 plot(LShB_lmm_2015)

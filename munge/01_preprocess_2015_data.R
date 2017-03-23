@@ -13,7 +13,7 @@ reformat <- function(files) {
 
   x <-
     x %>%
-    group_by(REP, WMGT, NRTE, HILL, SMPL) %>%
+    group_by(REP, WMGT, NRTE) %>%
     gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
@@ -25,18 +25,8 @@ reformat <- function(files) {
                    TShB_rating,
                    GL_value,
                    DL_value)
-  x <-
-    x %>%
-    group_by(REP, WMGT, NRTE) %>%
-    summarise_each(funs(mean),
-                   NTIL,
-                   NTShB,
-                   LShB_rating,
-                   TShB_rating,
-                   GL_value,
-                   DL_value)
 
-  x[, 4:14] <- round(x[, 4:9], 2)
+  x[, 4:9] <- round(x[, 4:9], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
