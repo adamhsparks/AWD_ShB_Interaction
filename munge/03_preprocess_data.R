@@ -45,10 +45,17 @@ AUDPS$LShB_rating <- round(AUDPS$LShB_rating, 2)
 AUDPS$YEAR <- as.factor(AUDPS$YEAR)
 AUDPS$WMGT <- as.factor(AUDPS$WMGT)
 AUDPS$NRTE <- as.factor(AUDPS$NRTE)
+AUDPS$TRT <- as.factor(AUDPS$TRT)
 AUDPS$REP <- as.factor(AUDPS$REP)
 
 AUDPS <- plyr::rename(AUDPS, c("LShB_rating" = "LShB_AUDPS",
                                "TShB_rating" = "TShB_AUDPS"))
+
+AUDPS$NRTE <- factor(AUDPS$NRTE, levels = c(0, 100, 120, 60, 180))
+AUDPS$TRT <- factor(AUDPS$TRT, levels = c("AWD_N0", "AWD_N100", "AWD_N120",
+                                          "AWD_N60", "AWD_N180", "FLD_N0",
+                                          "FLD_N100", "FLD_N120", "FLD_N60",
+                                          "FLD_N180"))
 
 # Split the 2015 and 2016 AUDPS data for easier analysis -----------------------
 

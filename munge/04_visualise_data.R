@@ -5,6 +5,7 @@ ggplot(RAW_data, aes(x = LShB_rating, linetype = as.factor(YEAR))) +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
   ggtitle("Leaf Sheath Blight Severity Rating") +
   theme_tufte()
 ggsave("graphs/LShB_rating.png", width = 4, height = 4)
@@ -16,6 +17,7 @@ ggplot(RAW_data, aes(x = TShB_rating, linetype = as.factor(YEAR))) +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Severity Rating") +
   theme_tufte()
 ggsave("graphs/TShB_rating.png", width = 4, height = 4)
@@ -73,23 +75,31 @@ ggplot(RAW_data, aes(x = ASMT, y = GL_value, group = GL_value)) +
   theme_tufte()
 ggsave("graphs/TShB_over_time.png", width = 4, height = 4)
 
-ggplot(RAW_data, aes(x = ASMT, y = DL_value, group = DL_value)) +
-  stat_summary(fun.y = "mean", geom = "line",
-               aes(group = factor(TRT),
-                   colour = TRT,
-                   linetype = TRT),
-               size = .5) +
-  stat_summary(fun.y = "mean", geom = "point",
-               aes(group = factor(TRT),
-                   colour = TRT),
-               size = 1) +
-  ylab("Dead Leaves (count)") +
-  xlab("Assessment") +
-  facet_grid(. ~ YEAR) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Treatment") +
-  scale_linetype(name = "Treatment") +
+# density plot of leaf sheath blight AUDPS data --------------------------------
+ggplot(AUDPS, aes(x = LShB_AUDPS, linetype = as.factor(YEAR))) +
+  geom_density(aes(fill = as.factor(YEAR)),
+               alpha = 0.5) +
+  viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
+  xlab("Area Under Disease Progress Stairs") +
+  ggtitle("Leaf Sheath Blight AUDPS") +
   theme_tufte()
+ggsave("graphs/LShB_AUDPS_density.png", width = 4, height = 4)
+
+# density plot of tiller sheath blight AUDPS data ------------------------------
+ggplot(AUDPS, aes(x = TShB_AUDPS, linetype = as.factor(YEAR))) +
+  geom_density(aes(fill = as.factor(YEAR)),
+               alpha = 0.5) +
+  viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
+  xlab("Area Under Disease Progress Stairs") +
+  ggtitle("Tiller Sheath Blight AUDPS") +
+  theme_tufte()
+ggsave("graphs/TShB_AUDPS_density.png", width = 4, height = 4)
 
 # boxplots of leaf sheath blight AUDPS data ------------------------------------
 ggplot(AUDPS, aes(x = TRT, y = LShB_AUDPS)) +
