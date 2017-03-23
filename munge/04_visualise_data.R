@@ -59,24 +59,19 @@ ggplot(RAW_data, aes(x = ASMT, y = LShB_rating, group = LShB_rating)) +
   theme_tufte()
 ggsave("graphs/LShB_over_time.png", width = 4, height = 4)
 
-
+# line plot of tiller sheath blight AUDPS data ---------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = GL_value, group = GL_value)) +
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,
-                   linetype = TRT),
-               size = .5) +
-  stat_summary(fun.y = "mean", geom = "point",
-               aes(group = factor(TRT),
-                   colour = TRT),
+                   linetype = as.factor(YEAR)),
                size = 1) +
-  ylab("Green Leaves (count)") +
-  xlab("Assessment") +
-  facet_grid(. ~ YEAR) +
   viridis::scale_color_viridis(discrete = TRUE,
                                name = "Treatment") +
-  scale_linetype(name = "Treatment") +
+  scale_linetype(name = "Year") +
+  xlab("Assessment") +
   theme_tufte()
+ggsave("graphs/TShB_over_time.png", width = 4, height = 4)
 
 ggplot(RAW_data, aes(x = ASMT, y = DL_value, group = DL_value)) +
   stat_summary(fun.y = "mean", geom = "line",

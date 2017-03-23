@@ -16,6 +16,8 @@ Raw data for green leaves and dead leaves
 
 <img src="TShB_rating.png" width="50%" style="display: block; margin: auto;" />
 
+<img src="TShB_over_time.png" width="50%" style="display: block; margin: auto;" />
+
 <img src="TShB_AUDPS_boxplot.png" width="50%" style="display: block; margin: auto;" />
 
 ******
@@ -23,5 +25,7 @@ Raw data for green leaves and dead leaves
 ## Leaf sheath blight data
 
 <img src="LShB_rating.png" width="50%" style="display: block; margin: auto;" />
+
+<img src="LShB_over_time.png" width="50%" style="display: block; margin: auto;" />
 
 <img src="LShB_AUDPS_boxplot.png" width="50%" style="display: block; margin: auto;" />

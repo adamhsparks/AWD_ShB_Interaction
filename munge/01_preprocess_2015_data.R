@@ -60,17 +60,17 @@ DS2015 <- ldply(.data = files, .fun = reformat)
 
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] = 0
-DS2015$NRTE[which(DS2015$NRTE == "N1")] = 120
-DS2015$NRTE[which(DS2015$NRTE == "N2")] = 150
+DS2015$NRTE[which(DS2015$NRTE == "N1")] = 100
+DS2015$NRTE[which(DS2015$NRTE == "N2")] = 120
 
 # Add treatment numbers --------------------------------------------------------
 DS2015$TRT <- NA
 DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 0)] = "FLD_N0"
+DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 100)] = "FLD_N100"
 DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 120)] = "FLD_N120"
-DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 150)] = "FLD_N150"
 DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 0)] = "AWD_N0"
+DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 100)] = "AWD_N100"
 DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 120)] = "AWD_N120"
-DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 150)] = "AWD_N150"
 
 DS2015 <-
   as_tibble(DS2015) %>% dplyr::select(DATE,
