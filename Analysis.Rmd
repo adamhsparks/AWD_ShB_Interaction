@@ -22,7 +22,7 @@ load.project()
 TShB_lmm_2015 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2015,
                       REML = FALSE)
-summary(TShB_lmm_2015)
+summary(TShB_lmm_2015, correlation = FALSE)
 
 plot(TShB_lmm_2015)
 qqnorm(resid(TShB_lmm_2015))
@@ -38,7 +38,7 @@ qqnorm(resid(TShB_lmm_2015))
 LShB_lmm_2016 <- lmer(LShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2016,
                       REML = FALSE)
-summary(LShB_lmm_2016)
+summary(LShB_lmm_2016, correlation = FALSE)
 
 plot(LShB_lmm_2016)
 qqnorm(resid(LShB_lmm_2016))
@@ -51,7 +51,7 @@ qqnorm(resid(LShB_lmm_2016))
 TShB_lmm_2016 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2016,
                       REML = FALSE)
-summary(TShB_lmm_2016)
+summary(TShB_lmm_2016, correlation = FALSE)
 
 plot(TShB_lmm_2016)
 qqnorm(resid(TShB_lmm_2016))

@@ -18,7 +18,7 @@ Tiller Sheath Blight Severity Model
 TShB_lmm_2015 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2015,
                       REML = FALSE)
-summary(TShB_lmm_2015)
+summary(TShB_lmm_2015, correlation = FALSE)
 ```
 
     ## Linear mixed model fit by maximum likelihood  ['lmerMod']
@@ -47,14 +47,6 @@ summary(TShB_lmm_2015)
     ## NRTE120           1.9625     1.5402   1.274
     ## WMGTFLD:NRTE100  -0.8425     2.1782  -0.387
     ## WMGTFLD:NRTE120   0.2975     2.1782   0.137
-    ## 
-    ## Correlation of Fixed Effects:
-    ##                (Intr) WMGTFLD NRTE10 NRTE12 WMGTFLD:NRTE10
-    ## WMGTFLD        -0.707                                     
-    ## NRTE100        -0.707  0.500                              
-    ## NRTE120        -0.707  0.500   0.500                      
-    ## WMGTFLD:NRTE10  0.500 -0.707  -0.707 -0.354               
-    ## WMGTFLD:NRTE12  0.500 -0.707  -0.354 -0.707  0.500
 
 ``` r
 plot(TShB_lmm_2015)
@@ -80,7 +72,7 @@ Leaf Sheath Blight Severity Model
 LShB_lmm_2016 <- lmer(LShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2016,
                       REML = FALSE)
-summary(LShB_lmm_2016)
+summary(LShB_lmm_2016, correlation = FALSE)
 ```
 
     ## Linear mixed model fit by maximum likelihood  ['lmerMod']
@@ -102,17 +94,11 @@ summary(LShB_lmm_2016)
     ## Number of obs: 16, groups:  WMGT:REP, 8; REP, 4
     ## 
     ## Fixed effects:
-    ##                Estimate Std. Error t value
-    ## (Intercept)      1.2950     0.2452   5.282
-    ## WMGTFLD          0.2450     0.3190   0.768
-    ## NRTE60          -0.0700     0.3190  -0.219
-    ## WMGTFLD:NRTE60  -0.4550     0.4511  -1.009
-    ## 
-    ## Correlation of Fixed Effects:
-    ##             (Intr) WMGTFLD NRTE60
-    ## WMGTFLD     -0.650               
-    ## NRTE60      -0.650  0.500        
-    ## WMGTFLD:NRT  0.460 -0.707  -0.707
+    ##                 Estimate Std. Error t value
+    ## (Intercept)       1.2250     0.2452   4.997
+    ## WMGTFLD          -0.2100     0.3190  -0.658
+    ## NRTE180           0.0700     0.3190   0.219
+    ## WMGTFLD:NRTE180   0.4550     0.4511   1.009
 
 ``` r
 plot(LShB_lmm_2016)
@@ -133,7 +119,7 @@ Tiller Sheath Blight Severity Model
 TShB_lmm_2016 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
                       data = AUDPS_2016,
                       REML = FALSE)
-summary(TShB_lmm_2016)
+summary(TShB_lmm_2016, correlation = FALSE)
 ```
 
     ## Linear mixed model fit by maximum likelihood  ['lmerMod']
@@ -155,17 +141,11 @@ summary(TShB_lmm_2016)
     ## Number of obs: 16, groups:  WMGT:REP, 8; REP, 4
     ## 
     ## Fixed effects:
-    ##                Estimate Std. Error t value
-    ## (Intercept)      19.845      2.266   8.757
-    ## WMGTFLD           4.410      2.536   1.739
-    ## NRTE60           -0.035      1.667  -0.021
-    ## WMGTFLD:NRTE60   -3.710      2.358  -1.574
-    ## 
-    ## Correlation of Fixed Effects:
-    ##             (Intr) WMGTFLD NRTE60
-    ## WMGTFLD     -0.560               
-    ## NRTE60      -0.368  0.329        
-    ## WMGTFLD:NRT  0.260 -0.465  -0.707
+    ##                 Estimate Std. Error t value
+    ## (Intercept)       19.810      2.266   8.742
+    ## WMGTFLD            0.700      2.536   0.276
+    ## NRTE180            0.035      1.667   0.021
+    ## WMGTFLD:NRTE180    3.710      2.358   1.574
 
 ``` r
 plot(TShB_lmm_2016)

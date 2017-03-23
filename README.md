@@ -124,3 +124,10 @@ IRRI Dry Season (2)
 </tr>
 </table>
 
+## Resources
+http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html
+
+http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf
+
+http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html
+
