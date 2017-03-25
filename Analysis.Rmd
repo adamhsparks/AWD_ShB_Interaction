@@ -8,52 +8,239 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ProjectTemplate)
 load.project()
 ```
-# 2015
 
-## Leaf Sheath Blight Severity Model
+## 2015 Leaf Sheath Blight Severity Model
 ```{r}
 
-# 2015 model goes here
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
+                 data = as.data.frame(AUDPS_2015),
+                 verbose = FALSE,
+                 prior = eprior,
+                 pr = TRUE)
 
+summary(LShB_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2015$Sol)
+
+# Diagnostic line plots for replicate
+ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for replicate
+ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# Diagnostic line plots for treatements
+ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for treatment
+ggplot(trts, aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# joint distibution of error
+rdf <- data.frame(LShB_lmm_2015$VCV)
+ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
+  geom_density2d() + 
+  geom_abline(intercept = 0, slope = 1)
 ```
 
-## Tiller Sheath Blight Severity Model
+## 2015 Tiller Sheath Blight Severity Model
 ```{r}
-TShB_lmm_2015 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
-                      data = AUDPS_2015,
-                      REML = FALSE)
-summary(TShB_lmm_2015, correlation = FALSE)
 
-plot(TShB_lmm_2015)
-qqnorm(resid(TShB_lmm_2015))
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+                 data = as.data.frame(AUDPS_2015),
+                 verbose = FALSE,
+                 prior = eprior,
+                 pr = TRUE)
 
+summary(TShB_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_lmm_2015$Sol)
+
+# Diagnostic line plots for replicate
+ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for replicate
+ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# Diagnostic line plots for treatments
+ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for treatment
+ggplot(trts, aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# joint distibution of error
+rdf <- data.frame(TShB_lmm_2015$VCV)
+ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
+  geom_density2d() + 
+  geom_abline(intercept = 0, slope = 1)
 ```
 
 *******
 
-# 2016
-
-## Leaf Sheath Blight Severity Model
+## 2016 Leaf Sheath Blight Severity Model
 ```{r}
-LShB_lmm_2016 <- lmer(LShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
-                      data = AUDPS_2016,
-                      REML = FALSE)
-summary(LShB_lmm_2016, correlation = FALSE)
 
-plot(LShB_lmm_2016)
-qqnorm(resid(LShB_lmm_2016))
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
+                 data = as.data.frame(AUDPS_2016),
+                 verbose = FALSE,
+                 prior = eprior,
+                 pr = TRUE)
+
+summary(LShB_lmm_2016)
+
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2016$Sol)
+
+# Diagnostic line plots for replicate
+ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for replicate
+ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# Diagnostic line plots for treatments
+ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for treatment
+ggplot(trts, aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# joint distibution of error
+rdf <- data.frame(TShB_lmm_2015$VCV)
+ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
+  geom_density2d() + 
+  geom_abline(intercept = 0, slope = 1)
 
 ```
 
 
 ## Tiller Sheath Blight Severity Model
 ```{r}
-TShB_lmm_2016 <- lmer(TShB_AUDPS ~ WMGT * NRTE + (1 | REP/WMGT),
-                      data = AUDPS_2016,
-                      REML = FALSE)
-summary(TShB_lmm_2016, correlation = FALSE)
 
-plot(TShB_lmm_2016)
-qqnorm(resid(TShB_lmm_2016))
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+                 data = as.data.frame(AUDPS_2016),
+                 verbose = FALSE,
+                 prior = eprior,
+                 pr = TRUE)
 
+summary(TShB_lmm_2016)
+
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_lmm_2016$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_lmm_2016$Sol)
+
+# Diagnostic line plots for replicate
+ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for replicate
+ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# Diagnostic line plots for treatments
+ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
+  geom_line() +
+  theme_tufte() +
+  xlab("Iteration Number") +
+  ylab(NULL) +
+  facet_grid(variable ~ .)
+
+# Posterior distributions for treatment
+ggplot(trts, aes(x = value, color = variable)) + 
+  geom_density() +
+  theme_tufte()
+
+# joint distibution of error
+rdf <- data.frame(TShB_lmm_2015$VCV)
+ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
+  geom_density2d() + 
+  geom_abline(intercept = 0, slope = 1)
 ```

@@ -59,5 +59,5 @@ AUDPS$TRT <- factor(AUDPS$TRT, levels = c("AWD_N0", "AWD_N100", "AWD_N120",
 
 # Split the 2015 and 2016 AUDPS data for easier analysis -----------------------
 
-AUDPS_2015 <- AUDPS[which(AUDPS$YEAR == "2015"), ]
-AUDPS_2016 <- AUDPS[which(AUDPS$YEAR == "2016"), ]
+AUDPS_2015 <- droplevels(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2016 <- droplevels(AUDPS[AUDPS$YEAR == 2016, ])

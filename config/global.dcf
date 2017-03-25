@@ -5,7 +5,7 @@ recursive_loading: FALSE
 munging: TRUE
 logging: FALSE
 load_libraries: TRUE
-libraries: reshape, plyr, ggthemes, stringr, lubridate, lubridate, agricolae, lme4, viridis, car, MASS, tidyverse
+libraries: reshape2, plyr, ggthemes, lubridate, lubridate, agricolae, viridis, tidyverse, MASS, car, MCMCglmm, lattice, fitdistrplus
 as_factors: FALSE
 data_tables: FALSE
 attach_internal_libraries: FALSE
