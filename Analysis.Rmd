@@ -40,31 +40,37 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Replicates")
 
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Replicate Posteriors for Leaf Sheath Blight")
 
-# Diagnostic line plots for treatements
+# Diagnostic line plots for treatments
 ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
   geom_line() +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Treatments")
 
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Treatment Posteriors for Leaf Sheath Blight")
 
 # joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2015 Leaf Blight Error") +
+  theme_tufte()
 ```
 
 ## 2015 Tiller Sheath Blight Severity Model
@@ -98,12 +104,14 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Replicates")
 
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Replicate Posteriors for Tiller Sheath Blight")
 
 # Diagnostic line plots for treatments
 ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
@@ -111,18 +119,22 @@ ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Treatments")
 
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Treatment Posteriors for Tiller Sheath Blight")
 
 # joint distibution of error
 rdf <- data.frame(TShB_lmm_2015$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2015 Tiller Blight Error") +
+  theme_tufte()
 ```
 
 *******
@@ -158,12 +170,14 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Replicates")
 
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Replicate Posteriors for Leaf Sheath Blight")
 
 # Diagnostic line plots for treatments
 ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
@@ -171,18 +185,22 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Treatments")
 
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Treatment Posteriors for Leaf Sheath Blight")
 
 # joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(LShB_lmm_2016$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2016 Leaf Blight Error") +
+  theme_tufte()
 
 ```
 
@@ -218,12 +236,14 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Replicates")
 
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Replicate Posteriors for Tiller Sheath Blight")
 
 # Diagnostic line plots for treatments
 ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
@@ -231,16 +251,20 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Treatments")
 
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Treatement Posteriors")
 
 # joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(TShB_lmm_2016$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2016 Tiller Sheath Blight Error") +
+  theme_tufte()
 ```

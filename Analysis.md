@@ -21,27 +21,27 @@ summary(LShB_lmm_2015)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 32.60179 
+    ##  DIC: 32.54248 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP    0.2121 1.39e-06   0.6034    883.4
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP    0.2733 1.368e-09    1.004    545.1
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.1728  0.07084    0.311     1000
+    ## units     0.174  0.06752   0.3026     1013
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.17420 -0.34072  0.67898   1000.0 0.444
-    ## WMGTFLD           0.01727 -0.53164  0.62042   1000.0 0.956
-    ## NRTE100           0.36342 -0.25784  0.94804   1000.0 0.228
-    ## NRTE120           0.28231 -0.33739  0.81664   1000.0 0.312
-    ## WMGTFLD:NRTE100  -0.35745 -1.11946  0.40758   1504.6 0.372
-    ## WMGTFLD:NRTE120  -0.17774 -0.95485  0.61361    733.6 0.644
+    ## (Intercept)       0.16834 -0.40326  0.68565     1000 0.476
+    ## WMGTFLD           0.02751 -0.59286  0.56379     1150 0.904
+    ## NRTE100           0.37183 -0.19490  0.92038     1000 0.192
+    ## NRTE120           0.30907 -0.32627  0.85318     1000 0.292
+    ## WMGTFLD:NRTE100  -0.35424 -1.11224  0.47087     1000 0.366
+    ## WMGTFLD:NRTE120  -0.20344 -1.00988  0.64927     1103 0.644
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -70,7 +70,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Replicates")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-1.png)
@@ -79,19 +80,21 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Replicate Posteriors for Leaf Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-2.png)
 
 ``` r
-# Diagnostic line plots for treatements
+# Diagnostic line plots for treatments
 ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
   geom_line() +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Treatments")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-3.png)
@@ -100,7 +103,8 @@ ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Treatment Posteriors for Leaf Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-4.png)
@@ -110,7 +114,9 @@ ggplot(trts, aes(x = value, color = variable)) +
 rdf <- data.frame(LShB_lmm_2015$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2015 Leaf Blight Error") +
+  theme_tufte()
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-5.png)
@@ -135,27 +141,27 @@ summary(TShB_lmm_2015)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 121.2453 
+    ##  DIC: 121.2405 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     4.391 4.49e-09    14.81     1000
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP     3.872 3.239e-06    13.64    817.1
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units         7    2.998    12.03     1000
+    ## units       7.1    3.051    13.17     1000
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.4941  -1.5024   4.6955     1000 0.280
-    ## WMGTFLD           -0.5128  -4.0409   2.9314     1000 0.768
-    ## NRTE100            1.7575  -1.8255   5.1167     1000 0.310
-    ## NRTE120            1.9038  -2.0309   5.2894     1000 0.284
-    ## WMGTFLD:NRTE100   -0.9220  -6.0413   4.1205     1000 0.710
-    ## WMGTFLD:NRTE120    0.4259  -4.4139   5.8227     1000 0.868
+    ## (Intercept)        1.5444  -1.5212   4.4755     1000 0.300
+    ## WMGTFLD           -0.4810  -4.3596   3.0736     1000 0.770
+    ## NRTE100            1.7017  -1.8719   5.4948     1000 0.350
+    ## NRTE120            1.9810  -1.6392   5.8819     1000 0.250
+    ## WMGTFLD:NRTE100   -0.8841  -6.0206   4.7278     1000 0.716
+    ## WMGTFLD:NRTE120    0.2912  -4.5290   5.9703     1143 0.880
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -184,7 +190,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Replicates")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -193,7 +200,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Replicate Posteriors for Tiller Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-2.png)
@@ -205,7 +213,8 @@ ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Treatments")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-3.png)
@@ -214,7 +223,8 @@ ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2015 Treatment Posteriors for Tiller Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-4.png)
@@ -224,7 +234,9 @@ ggplot(trts, aes(x = value, color = variable)) +
 rdf <- data.frame(TShB_lmm_2015$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2015 Tiller Blight Error") +
+  theme_tufte()
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-5.png)
@@ -251,25 +263,25 @@ summary(LShB_lmm_2016)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 32.28413 
+    ##  DIC: 32.37719 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.7934 4.732e-08    2.692     1000
+    ## REP    0.5783 1.141e-05    2.158    780.4
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.3295   0.1068   0.6648     1000
+    ## units    0.3387  0.09829    0.687     1000
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC  
-    ## (Intercept)       1.19681  0.35586  2.28501   1000.0 0.032 *
-    ## WMGTFLD          -0.21435 -1.01302  0.60959    911.4 0.566  
-    ## NRTE180           0.07098 -0.69349  0.86485   1000.0 0.848  
-    ## WMGTFLD:NRTE180   0.44304 -0.66139  1.53911    948.1 0.420  
+    ## (Intercept)       1.20857  0.33030  2.05129   1000.0 0.016 *
+    ## WMGTFLD          -0.18576 -1.02857  0.66786    951.4 0.608  
+    ## NRTE180           0.08493 -0.72961  0.96980   1000.0 0.828  
+    ## WMGTFLD:NRTE180   0.42669 -0.70388  1.60778   1000.0 0.418  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -299,7 +311,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Replicates")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
@@ -308,7 +321,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Replicate Posteriors for Leaf Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-2.png)
@@ -320,7 +334,8 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Treatments")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-3.png)
@@ -329,17 +344,20 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Treatment Posteriors for Leaf Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-4.png)
 
 ``` r
 # joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(LShB_lmm_2016$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2016 Leaf Blight Error") +
+  theme_tufte()
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
@@ -364,25 +382,25 @@ summary(TShB_lmm_2016)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 96.58054 
+    ##  DIC: 96.61105 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     43.77 0.005528    145.5     1000
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP      48.7 0.0007283    141.6    941.4
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     19.06    5.545    39.93     1319
+    ## units     18.76    4.826    39.91     1000
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC   
-    ## (Intercept)       19.7653  12.3452  27.6237     1000 0.002 **
-    ## WMGTFLD            0.7624  -5.6605   6.1509     1000 0.786   
-    ## NRTE180            0.1310  -6.6563   6.0767     1000 0.994   
-    ## WMGTFLD:NRTE180    3.4876  -6.5469  11.8206     1000 0.386   
+    ## (Intercept)      19.89955 11.96186 26.99250     1000 0.002 **
+    ## WMGTFLD           0.50587 -6.08896  6.36393     1183 0.834   
+    ## NRTE180           0.03775 -6.60349  6.62246     1000 0.994   
+    ## WMGTFLD:NRTE180   3.70119 -5.49885 12.80546     1000 0.360   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -412,7 +430,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Replicates")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -421,7 +440,8 @@ ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
 # Posterior distributions for replicate
 ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Replicate Posteriors for Tiller Sheath Blight")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-2.png)
@@ -433,7 +453,8 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
   theme_tufte() +
   xlab("Iteration Number") +
   ylab(NULL) +
-  facet_grid(variable ~ .)
+  facet_grid(variable ~ .) +
+  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Treatments")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-3.png)
@@ -442,17 +463,20 @@ ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
 # Posterior distributions for treatment
 ggplot(trts, aes(x = value, color = variable)) + 
   geom_density() +
-  theme_tufte()
+  theme_tufte() +
+  ggtitle("2016 Treatement Posteriors")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-4.png)
 
 ``` r
 # joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(TShB_lmm_2016$VCV)
 ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
   geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1)
+  geom_abline(intercept = 0, slope = 1) +
+  ggtitle("2016 Tiller Sheath Blight Error") +
+  theme_tufte()
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-5.png)
