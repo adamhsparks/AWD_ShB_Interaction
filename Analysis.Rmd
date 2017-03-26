@@ -8,29 +8,43 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ProjectTemplate)
 load.project()
 ```
+## Notes on this analysis before starting
+
+#### Changes between 2015 and 2016
 
 Before the analysis, note that due to changes between the years, the analysis
 must be carried out on each year separately. The 2015 data and 2016 data cannot
 be combined due to changes in inoculation methods; there are other changes too,
 but the main one is this. Therefore, the analyses will be conducted separately for
-leaf severity and tiller severity for 2015 dry season and 2016 dry season.
+leaf severity and Leaf severity for 2015 dry season and 2016 dry season.
 Comparisons will only be observational and cannot be statistically compared.
 
-## 2015 Leaf Sheath Blight Severity Model
+#### Random effects
+Fitting the models with the default iterations resulted in some less than
+acceptable models. Because of this, the number of iterations has been increased,
+`nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
+smaller errors for random effects and better models.
+
+## 2015
+### 2015 Leaf Sheath Blight Severity Model
 ```{r}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
-                 data = as.data.frame(AUDPS_2015),
-                 verbose = FALSE,
-                 prior = eprior,
-                 pr = TRUE)
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
 
 summary(LShB_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:10)])
+x <- 1:nrow(reps)
 reps <- melt(reps)
 
 trts <-  data.frame(LShB_lmm_2015$Sol[, 2:6])
@@ -38,58 +52,46 @@ names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
 names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(LShB_lmm_2015$Sol)
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Leaf ShB Reps")
 
-# Diagnostic line plots for replicate
-ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Replicates")
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Replicate Posteriors for Leaf ShB Reps")
 
-# Posterior distributions for replicate
-ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2015 Replicate Posteriors for Leaf Sheath Blight")
-
-# Diagnostic line plots for treatments
-ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2015 Leaf Sheath Blight Treatments")
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Leaf ShB Treatments")
 
 # Posterior distributions for treatment
-ggplot(trts, aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2015 Treatment Posteriors for Leaf Sheath Blight")
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Treatment Posteriors for Leaf ShB Treatments")
 
-# joint distibution of error
+# check random effects
+plotTrace(LShB_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
-ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
-  geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1) +
-  ggtitle("2015 Leaf Blight Error") +
-  theme_tufte()
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Leaf ShB Random Error Distribution"))
 ```
 
-## 2015 Tiller Sheath Blight Severity Model
+### 2015 Tiller Sheath Blight Severity Model
 ```{r}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
-                 data = as.data.frame(AUDPS_2015),
-                 verbose = FALSE,
-                 prior = eprior,
-                 pr = TRUE)
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
 
 summary(TShB_lmm_2015)
 
@@ -105,60 +107,52 @@ trts <- melt(trts)
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_lmm_2015$Sol)
 
-# Diagnostic line plots for replicate
-ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Replicates")
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Leaf ShB Reps")
 
-# Posterior distributions for replicate
-ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2015 Replicate Posteriors for Tiller Sheath Blight")
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Replicate Posteriors for Leaf ShB Reps")
 
-# Diagnostic line plots for treatments
-ggplot(data = trts, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2015 Tiller Sheath Blight Treatments")
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Leaf ShB Treatments")
 
 # Posterior distributions for treatment
-ggplot(trts, aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2015 Treatment Posteriors for Tiller Sheath Blight")
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Treatment Posteriors for Leaf ShB Treatments")
 
-# joint distibution of error
+# check random effects
+plotTrace(TShB_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
 rdf <- data.frame(TShB_lmm_2015$VCV)
-ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
-  geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1) +
-  ggtitle("2015 Tiller Blight Error") +
-  theme_tufte()
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Leaf ShB Random Error Distribution"))
 ```
 
 *******
 
-## 2016 Leaf Sheath Blight Severity Model
+## 2016
+
+### 2016 Leaf Sheath Blight Severity Model
 ```{r}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
-                 data = as.data.frame(AUDPS_2016),
-                 verbose = FALSE,
-                 prior = eprior,
-                 pr = TRUE)
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          prior = eprior,
+                          pr = TRUE)
 
 summary(LShB_lmm_2016)
-
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:8)])
@@ -171,57 +165,47 @@ trts <- melt(trts)
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(LShB_lmm_2016$Sol)
 
-# Diagnostic line plots for replicate
-ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Replicates")
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Leaf ShB Reps")
 
-# Posterior distributions for replicate
-ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2016 Replicate Posteriors for Leaf Sheath Blight")
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Replicate Posteriors for Leaf ShB Reps")
 
-# Diagnostic line plots for treatments
-ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2016 Leaf Sheath Blight Treatments")
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Leaf ShB Treatments")
 
 # Posterior distributions for treatment
-ggplot(trts, aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2016 Treatment Posteriors for Leaf Sheath Blight")
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Treatment Posteriors for Leaf ShB Treatments")
 
-# joint distibution of error
-rdf <- data.frame(LShB_lmm_2016$VCV)
-ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
-  geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1) +
-  ggtitle("2016 Leaf Blight Error") +
-  theme_tufte()
+# check random effects
+plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 
+# plot joint distibution of error
+rdf <- data.frame(LShB_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Leaf ShB Random Error Distribution"))
 ```
 
 
-## 2016 Tiller Sheath Blight Severity Model
+### 2016 Tiller Sheath Blight Severity Model
 ```{r}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
-                 data = as.data.frame(AUDPS_2016),
-                 verbose = FALSE,
-                 prior = eprior,
-                 pr = TRUE)
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          prior = eprior,
+                          pr = TRUE)
 
 summary(TShB_lmm_2016)
 
@@ -237,41 +221,37 @@ trts <- melt(trts)
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_lmm_2016$Sol)
 
-# Diagnostic line plots for replicate
-ggplot(data = reps, aes(x = rep(x, 5), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Replicates")
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Leaf ShB Reps")
 
-# Posterior distributions for replicate
-ggplot(reps[reps$variable != "X.Intercept.", ], aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2016 Replicate Posteriors for Tiller Sheath Blight")
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Replicate Posteriors for Leaf ShB Reps")
 
-# Diagnostic line plots for treatments
-ggplot(data = trts, aes(x = rep(x, 3), y = value, group = variable)) +
-  geom_line() +
-  theme_tufte() +
-  xlab("Iteration Number") +
-  ylab(NULL) +
-  facet_grid(variable ~ .) +
-  ggtitle("Diagnostic Plots for 2016 Tiller Sheath Blight Treatments")
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2106 Diagnostic Plots for Leaf ShB Treatments")
 
 # Posterior distributions for treatment
-ggplot(trts, aes(x = value, color = variable)) + 
-  geom_density() +
-  theme_tufte() +
-  ggtitle("2016 Treatement Posteriors")
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Treatment Posteriors for Leaf ShB Treatments")
 
-# joint distibution of error
+# check random effects
+plotTrace(TShB_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
 rdf <- data.frame(TShB_lmm_2016$VCV)
-ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) + 
-  geom_density2d() + 
-  geom_abline(intercept = 0, slope = 1) +
-  ggtitle("2016 Tiller Sheath Blight Error") +
-  theme_tufte()
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Leaf ShB Random Error Distribution"))
 ```
+
+# Conclusions
+
+The models all appear to be good fits after increasing the number of iterations.
+None of the treatments in either year, 2015 or 2016, were significant. The
+see `pMCMC` values and also posterior graphs. There is a large amount of overlap
+in all of the posterior graphs.
+
