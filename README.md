@@ -146,4 +146,5 @@ http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm
 
 https://github.com/tmalsburg/MCMCglmm-intro
 
-
+### General GLMM in R
+http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
