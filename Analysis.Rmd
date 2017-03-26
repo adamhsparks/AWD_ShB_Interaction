@@ -9,6 +9,13 @@ library(ProjectTemplate)
 load.project()
 ```
 
+Before the analysis, note that due to changes between the years, the analysis
+must be carried out on each year separately. The 2015 data and 2016 data cannot
+be combined due to changes in inoculation methods; there are other changes too,
+but the main one is this. Therefore, the analyses will be conducted separately for
+leaf severity and tiller severity for 2015 dry season and 2016 dry season.
+Comparisons will only be observational and cannot be statistically compared.
+
 ## 2015 Leaf Sheath Blight Severity Model
 ```{r}
 
@@ -205,7 +212,7 @@ ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) +
 ```
 
 
-## Tiller Sheath Blight Severity Model
+## 2016 Tiller Sheath Blight Severity Model
 ```{r}
 
 eprior <- list(R = list(V = 1, nu = 0.02),

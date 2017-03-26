@@ -1,6 +1,8 @@
 Analysis
 ================
 
+Before the analysis, note that due to changes between the years, the analysis must be carried out on each year separately. The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this. Therefore, the analyses will be conducted separately for leaf severity and tiller severity for 2015 dry season and 2016 dry season. Comparisons will only be observational and cannot be statistically compared.
+
 2015 Leaf Sheath Blight Severity Model
 --------------------------------------
 
@@ -21,27 +23,27 @@ summary(LShB_lmm_2015)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 32.47386 
+    ##  DIC: 32.48425 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.3343 5.598e-08   0.6265     1000
+    ## REP    0.1863 2.434e-07    0.578    858.8
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.173  0.07333   0.3078    834.9
+    ## units    0.1684  0.06626   0.2874     1000
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.17701 -0.47341  0.65769     1000 0.456
-    ## WMGTFLD           0.02364 -0.53286  0.64310     1000 0.942
-    ## NRTE100           0.34997 -0.23490  0.92657     1111 0.216
-    ## NRTE120           0.30448 -0.21590  0.88197     1000 0.290
-    ## WMGTFLD:NRTE100  -0.34807 -1.10277  0.47017     1000 0.388
-    ## WMGTFLD:NRTE120  -0.22242 -0.96722  0.65383     1000 0.614
+    ## (Intercept)       0.17978 -0.35671  0.71886    911.5 0.484
+    ## WMGTFLD           0.01793 -0.54677  0.55549    911.0 0.924
+    ## NRTE100           0.36604 -0.20925  0.93137   1000.0 0.184
+    ## NRTE120           0.28348 -0.30871  0.80277   1149.5 0.318
+    ## WMGTFLD:NRTE100  -0.35264 -1.17528  0.45638   1000.0 0.378
+    ## WMGTFLD:NRTE120  -0.18740 -0.95351  0.61132   1252.8 0.620
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -141,27 +143,27 @@ summary(TShB_lmm_2015)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 121.3136 
+    ##  DIC: 121.3833 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     3.265 2.509e-05    11.32    593.7
+    ## REP     3.537 1.501e-06    14.12    828.2
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     7.111    3.076    12.71    875.2
+    ## units     7.141    2.796    12.66     1000
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.5535  -1.5489   4.3614     1000 0.310
-    ## WMGTFLD           -0.4865  -4.1982   3.2363     1000 0.778
-    ## NRTE100            1.6807  -1.7354   5.3427     1000 0.332
-    ## NRTE120            2.0413  -1.6816   5.4392     1094 0.260
-    ## WMGTFLD:NRTE100   -0.9006  -6.1528   4.3188     1000 0.768
-    ## WMGTFLD:NRTE120    0.2237  -5.1232   4.9635     1000 0.934
+    ## (Intercept)        1.6055  -1.3570   4.7509     1000 0.242
+    ## WMGTFLD           -0.6278  -4.2519   3.0447     1273 0.740
+    ## NRTE100            1.5753  -2.0746   5.1220     1000 0.370
+    ## NRTE120            1.9573  -1.7137   5.5836     1000 0.272
+    ## WMGTFLD:NRTE100   -0.7569  -6.3022   4.1761     1000 0.750
+    ## WMGTFLD:NRTE120    0.3639  -5.2348   5.1283     1000 0.872
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -263,25 +265,25 @@ summary(LShB_lmm_2016)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 32.19748 
+    ##  DIC: 32.33241 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.8855 5.267e-07     2.51     1000
+    ## REP     2.327 2.912e-06    2.647     1000
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.3343   0.1104   0.6794     1000
+    ## units    0.3389   0.0895   0.6928     1000
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC  
-    ## (Intercept)       1.25156  0.41892  2.06092     1000 0.020 *
-    ## WMGTFLD          -0.22189 -1.00596  0.59780     1000 0.570  
-    ## NRTE180           0.04217 -0.80450  0.77884     1205 0.872  
-    ## WMGTFLD:NRTE180   0.48932 -0.57419  1.77417     1000 0.412  
+    ## (Intercept)        1.2350   0.3635   2.1238     1010 0.026 *
+    ## WMGTFLD           -0.2104  -0.9690   0.4998     1277 0.524  
+    ## NRTE180            0.0671  -0.6717   0.8075     1000 0.826  
+    ## WMGTFLD:NRTE180    0.4510  -0.6174   1.5429     1000 0.372  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -362,8 +364,8 @@ ggplot(rdf, aes(x = sqrt(REP), y = sqrt(units))) +
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
 
-Tiller Sheath Blight Severity Model
------------------------------------
+2016 Tiller Sheath Blight Severity Model
+----------------------------------------
 
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
@@ -382,25 +384,25 @@ summary(TShB_lmm_2016)
     ##  Thinning interval  = 10
     ##  Sample size  = 1000 
     ## 
-    ##  DIC: 96.5886 
+    ##  DIC: 96.70196 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     49.58 0.0003463    171.6     1000
+    ## REP     54.64 0.0005162    151.5     1000
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     19.55    5.296    42.93     1000
+    ## units     18.84    4.524     39.9     1000
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC   
-    ## (Intercept)      19.81617 12.28910 28.04975     1000 0.004 **
-    ## WMGTFLD           0.64530 -5.55225  6.14605     1000 0.784   
-    ## NRTE180           0.02834 -5.79429  6.37829     1000 0.992   
-    ## WMGTFLD:NRTE180   3.63555 -4.91068 13.19824     1000 0.394   
+    ##                 post.mean  l-95% CI  u-95% CI eff.samp pMCMC   
+    ## (Intercept)     19.651411 10.718371 26.906323     1000 0.004 **
+    ## WMGTFLD          0.757718 -5.747448  7.148240     1000 0.802   
+    ## NRTE180          0.005225 -5.547854  6.155133     1000 0.994   
+    ## WMGTFLD:NRTE180  3.534241 -5.670048 11.922383     1000 0.394   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
