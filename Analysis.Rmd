@@ -19,7 +19,7 @@ but the main one is this. Therefore, the analyses will be conducted separately f
 leaf severity and Leaf severity for 2015 dry season and 2016 dry season.
 Comparisons will only be observational and cannot be statistically compared.
 
-#### Random effects
+#### Iterations
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
 `nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much

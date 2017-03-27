@@ -3,16 +3,20 @@
 
 ## Quick start with this repository
 
-Install [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) and load the project in your R session.
+Install the [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) package. 
 
 ```{r project_template}
 install.packages("ProjectTemplate")
 ```
 Clone the repository to your local hard drive.
 
-The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts.
+The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts. It is worth looking at these to see how the raw data are handled prior to analysis.
 
 The [graphs](graphs) folder contains graphs from munging and the [README.md](graphs/README.md) file displays them in an ordered fashion.
+
+### Rmd files
+
+Knitting the Rmd files will automatically run the scripts in the [munge](munge) and generate the outputs linked to below in the GitHub `.md` files.
 
 The [`Probability_distribution_checks.Rmd`](Probability_distribution_checks.md) file generates/displays the normal and log distribution checks for the analyses.
 
