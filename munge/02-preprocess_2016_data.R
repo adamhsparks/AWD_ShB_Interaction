@@ -113,7 +113,7 @@ DS2016 <-
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
-  summarise_each(funs(mean),
+  summarise_each(funs(mean, sd),
                  NTIL,
                  NTShB,
                  LShB_rating,
@@ -125,12 +125,14 @@ DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, REP, TRT, WMGT, NRTE) %>%
   summarise_each(funs(mean),
-                 NTIL,
-                 NTShB,
-                 LShB_rating,
-                 TShB_rating,
-                 GL_value,
-                 DL_value)
+                 NTIL_mean,
+                 NTShB_mean,
+                 LShB_rating_mean,
+                 LShB_rating_sd,
+                 TShB_rating_mean,
+                 TShB_rating_sd,
+                 GL_value_mean,
+                 DL_value_mean)
 
 # arrange columns to be in same order in both data frames
 DS2016 <-
@@ -140,15 +142,17 @@ DS2016 <-
                            NRTE,
                            REP,
                            TRT,
-                           NTIL,
-                           NTShB,
-                           LShB_rating,
-                           TShB_rating,
-                           GL_value,
-                           DL_value)
+                           NTIL_mean,
+                           NTShB_mean,
+                           LShB_rating_mean,
+                           LShB_rating_sd,
+                           TShB_rating_mean,
+                           TShB_rating_sd,
+                           GL_value_mean,
+                           DL_value_mean)
 
-cols <- c(7:12)
-DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
+cols <- c(7:14)
+DS2016[, cols] <- apply(DS2016[, cols], 2, function(x)
   round(x, 2))
 
 DS2016$YEAR <- year(DS2016$DATE)

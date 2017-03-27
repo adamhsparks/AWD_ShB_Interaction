@@ -1,5 +1,5 @@
-# density plot of LShB_rating data ---------------------------------------------
-ggplot(RAW_data, aes(x = LShB_rating, linetype = as.factor(YEAR))) +
+# density plot of LShB_rating_mean data ----------------------------------------
+ggplot(RAW_data, aes(x = LShB_rating_mean, linetype = as.factor(YEAR))) +
   geom_density(aes(fill = as.factor(YEAR)),
                    alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
@@ -8,10 +8,26 @@ ggplot(RAW_data, aes(x = LShB_rating, linetype = as.factor(YEAR))) +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Leaf Sheath Blight Severity Rating") +
   theme_tufte()
-ggsave("graphs/LShB_rating.png", width = 4, height = 4)
+ggsave("graphs/LShB_rating_mean.png", width = 4, height = 4)
 
-# density plot of TShB_rating data ---------------------------------------------
-ggplot(RAW_data, aes(x = TShB_rating, linetype = as.factor(YEAR))) +
+# density plot of LShB_rating_sd data ------------------------------------------
+
+ggplot(RAW_data, aes(x = LShB_rating_sd, linetype = as.factor(YEAR))) +
+  geom_density(aes(fill = as.factor(YEAR)),
+               alpha = 0.5) +
+  viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
+  ggtitle("Leaf Sheath Blight Severity Rating Std Dev.") +
+  theme_tufte() +
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45,
+                                   hjust = 1))
+ggsave("graphs/LShB_rating_sd.png", width = 4, height = 4)
+
+# density plot of TShB_rating_mean data ----------------------------------------
+ggplot(RAW_data, aes(x = TShB_rating_mean, linetype = as.factor(YEAR))) +
   geom_density(aes(fill = as.factor(YEAR)),
                alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
@@ -20,10 +36,22 @@ ggplot(RAW_data, aes(x = TShB_rating, linetype = as.factor(YEAR))) +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Severity Rating") +
   theme_tufte()
-ggsave("graphs/TShB_rating.png", width = 4, height = 4)
+ggsave("graphs/TShB_rating_mean.png", width = 4, height = 4)
+
+# density plot of TShB_rating_sd data ------------------------------------------
+ggplot(RAW_data, aes(x = TShB_rating_sd, linetype = as.factor(YEAR))) +
+  geom_density(aes(fill = as.factor(YEAR)),
+               alpha = 0.5) +
+  viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  scale_linetype(name = "Year") +
+  facet_grid(WMGT ~ NRTE) +
+  ggtitle("Tiller Sheath Blight Severity Rating Std Dev.") +
+  theme_tufte()
+ggsave("graphs/TShB_rating_sd.png", width = 4, height = 4)
 
 # density plot of green leaf data ----------------------------------------------
-ggplot(RAW_data, aes(x = GL_value, linetype = as.factor(YEAR))) +
+ggplot(RAW_data, aes(x = GL_value_mean, linetype = as.factor(YEAR))) +
   geom_density(aes(fill = as.factor(YEAR)),
                alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
@@ -35,7 +63,7 @@ ggplot(RAW_data, aes(x = GL_value, linetype = as.factor(YEAR))) +
 ggsave("graphs/GL_value.png", width = 4, height = 4)
 
 # density plot of dead leaf data -----------------------------------------------
-ggplot(RAW_data, aes(x = DL_value, linetype = as.factor(YEAR))) +
+ggplot(RAW_data, aes(x = DL_value_mean, linetype = as.factor(YEAR))) +
   geom_density(aes(fill = as.factor(YEAR)),
                alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
@@ -46,7 +74,7 @@ ggplot(RAW_data, aes(x = DL_value, linetype = as.factor(YEAR))) +
 ggsave("graphs/DL_value.png", width = 4, height = 4)
 
 # line plot of leaf sheath blight AUDPS data -----------------------------------
-ggplot(RAW_data, aes(x = ASMT, y = LShB_rating, group = LShB_rating)) +
+ggplot(RAW_data, aes(x = ASMT, y = LShB_rating_mean, group = LShB_rating_mean)) +
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,
@@ -62,7 +90,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LShB_rating, group = LShB_rating)) +
 ggsave("graphs/LShB_over_time.png", width = 4, height = 4)
 
 # line plot of tiller sheath blight AUDPS data ---------------------------------
-ggplot(RAW_data, aes(x = ASMT, y = GL_value, group = GL_value)) +
+ggplot(RAW_data, aes(x = ASMT, y = GL_value_mean, group = GL_value_mean)) +
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,

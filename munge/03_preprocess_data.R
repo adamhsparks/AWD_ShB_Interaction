@@ -33,14 +33,27 @@ RAW_data <- AUDPS <- as_tibble(rbind(as.data.frame(DS2015),
 
 # Calculate AUDPS (Simco and Piepho 2012, DOI: 10.1094/PHYTO-07-11-0216) -------
 
+mean_sd <-
+  AUDPS %>%
+  group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
+  summarise_each(funs(mean),
+                 LShB_rating_sd,
+                 TShB_rating_sd)
+
+cols <- c(7:8)
+mean_sd[, cols] <- apply(mean_sd[, cols], 2, function(x)
+  round(x, 2))
+
 AUDPS <-
   AUDPS %>%
   group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
   summarise_each(funs(audps(., dates = DAYS)),
-                 LShB_rating,
-                 TShB_rating)
+                 LShB_rating_mean,
+                 TShB_rating_mean)
 
-AUDPS$LShB_rating <- round(AUDPS$LShB_rating, 2)
+AUDPS$LShB_rating_mean <- round(AUDPS$LShB_rating_mean, 2)
+
+AUDPS <- left_join(AUDPS, mean_sd)
 
 AUDPS$YEAR <- as.factor(AUDPS$YEAR)
 AUDPS$WMGT <- as.factor(AUDPS$WMGT)
@@ -48,8 +61,8 @@ AUDPS$NRTE <- as.factor(AUDPS$NRTE)
 AUDPS$TRT <- as.factor(AUDPS$TRT)
 AUDPS$REP <- as.factor(AUDPS$REP)
 
-AUDPS <- plyr::rename(AUDPS, c("LShB_rating" = "LShB_AUDPS",
-                               "TShB_rating" = "TShB_AUDPS"))
+AUDPS <- plyr::rename(AUDPS, c("LShB_rating_mean" = "LShB_AUDPS",
+                               "TShB_rating_mean" = "TShB_AUDPS"))
 
 AUDPS$NRTE <- factor(AUDPS$NRTE, levels = c(0, 100, 120, 60, 180))
 AUDPS$TRT <- factor(AUDPS$TRT, levels = c("AWD_N0", "AWD_N100", "AWD_N120",

@@ -110,20 +110,20 @@ x <- 1:nrow(TShB_lmm_2015$Sol)
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Reps")
+                      title = "2015 Diagnostic Plots for Tiller ShB Reps")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2015 Replicate Posteriors for Leaf ShB Reps")
+                          title = "2015 Replicate Posteriors for Tiller ShB Reps")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Treatments")
+                      title = "2015 Diagnostic Plots for Tiller ShB Treatments")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2015 Treatment Posteriors for Leaf ShB Treatments")
+                          title = "2015 Treatment Posteriors for Tiller ShB Treatments")
 
 # check random effects
 plotTrace(TShB_lmm_2015$VCV, log = TRUE)
@@ -131,7 +131,7 @@ plotTrace(TShB_lmm_2015$VCV, log = TRUE)
 # plot joint distibution of error
 rdf <- data.frame(TShB_lmm_2015$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Leaf ShB Random Error Distribution"))
+                             title = ("2015 Tiller ShB Random Error Distribution"))
 ```
 
 *******
@@ -224,20 +224,20 @@ x <- 1:nrow(TShB_lmm_2016$Sol)
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2016 Diagnostic Plots for Leaf ShB Reps")
+                      title = "2016 Diagnostic Plots for Tiller ShB Reps")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2016 Replicate Posteriors for Leaf ShB Reps")
+                          title = "2016 Replicate Posteriors for Tiller ShB Reps")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2106 Diagnostic Plots for Leaf ShB Treatments")
+                      title = "2106 Diagnostic Plots for Tiller ShB Treatments")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2016 Treatment Posteriors for Leaf ShB Treatments")
+                          title = "2016 Treatment Posteriors for Tiller ShB Treatments")
 
 # check random effects
 plotTrace(TShB_lmm_2016$VCV, log = TRUE)
@@ -245,7 +245,7 @@ plotTrace(TShB_lmm_2016$VCV, log = TRUE)
 # plot joint distibution of error
 rdf <- data.frame(TShB_lmm_2016$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Leaf ShB Random Error Distribution"))
+                             title = ("2016 Tiller ShB Random Error Distribution"))
 ```
 
 # Conclusions
