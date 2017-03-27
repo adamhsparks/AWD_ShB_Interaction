@@ -11,7 +11,6 @@ ggplot(RAW_data, aes(x = LShB_rating_mean, linetype = as.factor(YEAR))) +
 ggsave("graphs/LShB_rating_mean.png", width = 4, height = 4)
 
 # density plot of LShB_rating_sd data ------------------------------------------
-
 ggplot(RAW_data, aes(x = LShB_rating_sd, linetype = as.factor(YEAR))) +
   geom_density(aes(fill = as.factor(YEAR)),
                alpha = 0.5) +

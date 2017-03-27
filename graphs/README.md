@@ -14,7 +14,7 @@ Raw data for green leaves and dead leaves
 
 ## Tiller sheath blight data
 
-<img src="TShB_rating.png" width="50%" style="display: block; margin: auto;" />
+<img src="TShB_rating_mean.png" width="50%" style="display: block; margin: auto;" />
 
 <img src="TShB_rating_sd.png" width="50%" style="display: block; margin: auto;" />
 
@@ -26,7 +26,7 @@ Raw data for green leaves and dead leaves
 
 ## Leaf sheath blight data
 
-<img src="LShB_rating.png" width="50%" style="display: block; margin: auto;" />
+<img src="LShB_rating_mean.png" width="50%" style="display: block; margin: auto;" />
 
 <img src="LShB_rating_sd.png" width="50%" style="display: block; margin: auto;" />
 
