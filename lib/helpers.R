@@ -20,16 +20,28 @@ plot_diagnostic_lines <- function(d, x, title) {
 }
 
 plot_replicate_posteriors <- function(d, title) {
-  ggplot(d[d$variable != "X.Intercept.",], aes(x = value, color = variable)) +
-    geom_density() +
+  ggplot(d[d$variable != "X.Intercept.",], aes(x = value,
+                                               color = variable,
+                                               fill = variable)) +
+    geom_density(alpha = 0.25) +
+    viridis::scale_fill_viridis(discrete = TRUE,
+                                name = "Variable") +
+    viridis::scale_color_viridis(discrete = TRUE,
+                                name = "Variable") +
     theme_tufte() +
     ggtitle(paste(title))
 }
 
 
 plot_treatment_posteriors <- function(d, title) {
-  ggplot(data = d, aes(x = value, color = variable)) +
-    geom_density() +
+  ggplot(data = d, aes(x = value,
+                       color = variable,
+                       fill = variable)) +
+    geom_density(alpha = 0.25) +
+    viridis::scale_fill_viridis(discrete = TRUE,
+                                name = "Variable") +
+    viridis::scale_color_viridis(discrete = TRUE,
+                                  name = "Variable") +
     theme_tufte() +
     ggtitle(paste(title))
 }
