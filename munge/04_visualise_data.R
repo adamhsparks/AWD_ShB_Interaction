@@ -212,7 +212,7 @@ ggplot(AUDPS, aes(x = TRT, y = TShB_AUDPS)) +
 ggsave("graphs/TShB_AUDPS_boxplot.png", width = 6, height = 4)
 
 
-# boxplots of tiller sheath blight AUDPS data ----------------------------------
+# boxplots of tiller sheath blight incidence data ------------------------------
 ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_incidence_mean)) +
   geom_boxplot(aes(fill = YEAR, colour = YEAR)) +
   viridis::scale_color_viridis(discrete = TRUE,
