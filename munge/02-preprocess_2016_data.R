@@ -110,6 +110,7 @@ DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
 DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL) %>%
+  mutate(TShB_incidence = NTShB/NTIL) %>%
   gather(LShB, LShB_rating, starts_with("SL")) %>%
   gather(GL, GL_value, starts_with("GL")) %>%
   gather(DL, DL_value, starts_with("DL")) %>%
@@ -118,6 +119,7 @@ DS2016 <-
                  NTShB,
                  LShB_rating,
                  TShB_rating,
+                 TShB_incidence,
                  GL_value,
                  DL_value)
 
@@ -131,6 +133,8 @@ DS2016 <-
                  LShB_rating_sd,
                  TShB_rating_mean,
                  TShB_rating_sd,
+                 TShB_incidence_mean,
+                 TShB_incidence_sd,
                  GL_value_mean,
                  DL_value_mean)
 
@@ -148,8 +152,11 @@ DS2016 <-
                            LShB_rating_sd,
                            TShB_rating_mean,
                            TShB_rating_sd,
+                           TShB_incidence_mean,
+                           TShB_incidence_sd,
                            GL_value_mean,
                            DL_value_mean)
+
 
 cols <- c(7:14)
 DS2016[, cols] <- apply(DS2016[, cols], 2, function(x)

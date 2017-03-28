@@ -4,7 +4,7 @@ files <-
   list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
-  x <- read_csv(files)
+  x <- read_csv(files[1])
   x[is.na(x)] <- 0
 
   # ensure that all leaf sheath blight observations are numeric, not character
@@ -14,6 +14,7 @@ reformat <- function(files) {
   x <-
     x %>%
     group_by(REP, WMGT, NRTE) %>%
+    mutate(TShB_incidence = NTShB/NTIL) %>%
     gather(LShB, LShB_rating, starts_with("SL")) %>%
     gather(TShB, TShB_rating, starts_with("SHB")) %>%
     gather(GL, GL_value, starts_with("GL")) %>%
@@ -23,10 +24,11 @@ reformat <- function(files) {
                    NTShB,
                    LShB_rating,
                    TShB_rating,
+                   TShB_incidence,
                    GL_value,
                    DL_value)
 
-  x[, 4:9] <- round(x[, 4:15], 2)
+  x[, 4:17] <- round(x[, 4:17], 2)
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -85,6 +87,8 @@ DS2015 <-
                                       LShB_rating_sd,
                                       TShB_rating_mean,
                                       TShB_rating_sd,
+                                      TShB_incidence_mean,
+                                      TShB_incidence_sd,
                                       GL_value_mean,
                                       DL_value_mean)
 

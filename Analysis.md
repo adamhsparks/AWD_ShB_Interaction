@@ -37,27 +37,27 @@ summary(LShB_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.52521 
+    ##  DIC: 32.5214 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.1956 3.363e-10   0.7373     5176
+    ## REP    0.2501 3.106e-09   0.7461     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.171  0.07184   0.3017     4950
+    ## units     0.172  0.07361    0.314     4950
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.18382 -0.36679  0.75306     4950 0.453
-    ## WMGTFLD           0.01063 -0.57262  0.57710     4950 0.978
-    ## NRTE100           0.35696 -0.22224  0.93064     4950 0.213
-    ## NRTE120           0.29239 -0.31903  0.85060     4950 0.300
-    ## WMGTFLD:NRTE100  -0.33973 -1.20118  0.44533     4950 0.408
-    ## WMGTFLD:NRTE120  -0.18719 -0.98502  0.64621     4950 0.629
+    ## (Intercept)       0.18270 -0.38927  0.71313     5067 0.450
+    ## WMGTFLD           0.01114 -0.62317  0.54859     4950 0.972
+    ## NRTE100           0.35367 -0.21892  0.94206     4950 0.223
+    ## NRTE120           0.29532 -0.25425  0.89746     4697 0.278
+    ## WMGTFLD:NRTE100  -0.33272 -1.13657  0.48842     4474 0.411
+    ## WMGTFLD:NRTE120  -0.19067 -1.01728  0.59231     4976 0.625
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -78,10 +78,13 @@ trts <- melt(trts)
     ## No id variables; using all as measure variables
 
 ``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2015$Sol)
+
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Reps")
+                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-1.png)
@@ -89,7 +92,7 @@ plot_diagnostic_lines(d = reps,
 ``` r
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2015 Replicate Posteriors for Leaf ShB Reps")
+                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-2.png)
@@ -98,7 +101,7 @@ plot_replicate_posteriors(d = reps,
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Treatments")
+                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-3.png)
@@ -106,7 +109,7 @@ plot_diagnostic_lines(d = trts,
 ``` r
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2015 Treatment Posteriors for Leaf ShB Treatments")
+                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-4.png)
@@ -122,7 +125,7 @@ plotTrace(LShB_lmm_2015$VCV, log = TRUE)
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Leaf ShB Random Error Distribution"))
+                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-1-6.png)
@@ -132,7 +135,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -141,7 +144,7 @@ TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP,
                           thin = 100,
                           pr = TRUE)
 
-summary(TShB_lmm_2015)
+summary(TShB_severity_lmm_2015)
 ```
 
     ## 
@@ -149,38 +152,38 @@ summary(TShB_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 121.3798 
+    ##  DIC: 121.3581 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     3.861 1.92e-07    14.06     4950
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP     4.493 6.083e-08    13.21     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     7.169    2.994    12.62     4950
+    ## units     7.046    2.805    12.26     4638
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.4638  -1.9488   4.6100     4950 0.329
-    ## WMGTFLD           -0.4813  -4.3349   3.1090     4950 0.793
-    ## NRTE100            1.7408  -1.9375   5.5206     4950 0.340
-    ## NRTE120            2.0140  -1.5632   5.8604     4950 0.275
-    ## WMGTFLD:NRTE100   -0.9357  -6.3886   4.1597     5171 0.722
-    ## WMGTFLD:NRTE120    0.2925  -5.0789   5.5999     4950 0.906
+    ## (Intercept)        1.6145  -1.3579   4.9950     4870 0.280
+    ## WMGTFLD           -0.5446  -4.3053   3.3347     4950 0.759
+    ## NRTE100            1.6526  -1.9702   5.3332     4950 0.361
+    ## NRTE120            1.9521  -1.8188   5.6698     4950 0.287
+    ## WMGTFLD:NRTE100   -0.8745  -6.1989   4.3850     5523 0.712
+    ## WMGTFLD:NRTE120    0.2933  -4.9858   5.6870     4950 0.896
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_lmm_2015$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
 reps <- melt(reps)
 ```
 
     ## No id variables; using all as measure variables
 
 ``` r
-trts <-  data.frame(TShB_lmm_2015$Sol[, 2:6])
+trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
 names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
 names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
@@ -190,12 +193,12 @@ trts <- melt(trts)
 
 ``` r
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_lmm_2015$Sol)
+x <- 1:nrow(TShB_severity_lmm_2015$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2015 Diagnostic Plots for Tiller ShB Reps")
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -203,7 +206,7 @@ plot_diagnostic_lines(d = reps,
 ``` r
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2015 Replicate Posteriors for Tiller ShB Reps")
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-2.png)
@@ -212,7 +215,7 @@ plot_replicate_posteriors(d = reps,
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2015 Diagnostic Plots for Tiller ShB Treatments")
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-3.png)
@@ -220,26 +223,140 @@ plot_diagnostic_lines(d = trts,
 ``` r
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2015 Treatment Posteriors for Tiller ShB Treatments")
+                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-4.png)
 
 ``` r
 # check random effects
-plotTrace(TShB_lmm_2015$VCV, log = TRUE)
+plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-5.png)
 
 ``` r
 # plot joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(TShB_severity_lmm_2015$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Tiller ShB Random Error Distribution"))
+                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-2-6.png)
+
+### 2015 Tiller Sheath Blight Incidence Model
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2015)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 52.92013 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP    0.8134 3.072e-08     1.77     4950
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units    0.4075   0.1653   0.7296     4950
+    ## 
+    ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
+    ## 
+    ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
+    ## (Intercept)       0.31194 -0.51482  1.17847     4950 0.415
+    ## WMGTFLD           0.18617 -0.68202  1.08563     4566 0.661
+    ## NRTE100           0.22261 -0.69364  1.10331     4950 0.601
+    ## NRTE120           0.58368 -0.25278  1.52306     4950 0.193
+    ## WMGTFLD:NRTE100  -0.07574 -1.35919  1.22180     4950 0.897
+    ## WMGTFLD:NRTE120  -0.40008 -1.66063  0.86468     4950 0.513
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-4.png)
+
+``` r
+# check random effects
+plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-6.png)
 
 ------------------------------------------------------------------------
 
@@ -268,25 +385,25 @@ summary(LShB_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.26164 
+    ##  DIC: 32.24567 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.7777 5.795e-09     2.25     4950
+    ## REP    0.6856 7.942e-08     2.11     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.3388  0.09746   0.7023     4692
+    ## units    0.3385   0.1025   0.6914     4950
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)       1.22125  0.30433  2.11692     4950 0.0198 *
-    ## WMGTFLD          -0.20353 -0.94646  0.63853     4950 0.5935  
-    ## NRTE180           0.07318 -0.73868  0.83953     4950 0.8392  
-    ## WMGTFLD:NRTE180   0.44957 -0.67911  1.57928     4950 0.3996  
+    ## (Intercept)       1.22180  0.31532  2.08035     4950 0.0238 *
+    ## WMGTFLD          -0.20566 -1.04494  0.58914     4950 0.5903  
+    ## NRTE180           0.07305 -0.70973  0.93650     4950 0.8444  
+    ## WMGTFLD:NRTE180   0.44930 -0.74274  1.58902     4950 0.4121  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -313,120 +430,7 @@ x <- 1:nrow(LShB_lmm_2016$Sol)
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2016 Diagnostic Plots for Leaf ShB Reps")
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
-
-``` r
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Replicate Posteriors for Leaf ShB Reps")
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-2.png)
-
-``` r
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Leaf ShB Treatments")
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-3.png)
-
-``` r
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Treatment Posteriors for Leaf ShB Treatments")
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-4.png)
-
-``` r
-# check random effects
-plotTrace(LShB_lmm_2016$VCV, log = TRUE)
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
-
-``` r
-# plot joint distibution of error
-rdf <- data.frame(LShB_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Leaf ShB Random Error Distribution"))
-```
-
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-6.png)
-
-### 2016 Tiller Sheath Blight Severity Model
-
-``` r
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
-                          data = as.data.frame(AUDPS_2016),
-                          verbose = FALSE,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          prior = eprior,
-                          pr = TRUE)
-
-summary(TShB_lmm_2016)
-```
-
-    ## 
-    ##  Iterations = 5001:499901
-    ##  Thinning interval  = 100
-    ##  Sample size  = 4950 
-    ## 
-    ##  DIC: 96.58996 
-    ## 
-    ##  G-structure:  ~REP
-    ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     49.66 2.955e-07    146.8     4950
-    ## 
-    ##  R-structure:  ~units
-    ## 
-    ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     19.35     4.75    41.75     5024
-    ## 
-    ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
-    ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
-    ## (Intercept)      19.77426 12.16098 27.20521     4950 0.00242 **
-    ## WMGTFLD           0.74779 -5.31615  7.07928     4950 0.79273   
-    ## NRTE180           0.06543 -5.94398  6.19114     4950 0.98263   
-    ## WMGTFLD:NRTE180   3.67027 -5.00022 12.06323     4950 0.36202   
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-``` r
-# create data frames for generating diagnostic plots
-reps <- data.frame(TShB_lmm_2016$Sol[, c(1, 5:8)])
-reps <- melt(reps)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-trts <-  data.frame(TShB_lmm_2016$Sol[, 2:4])
-names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
-trts <- melt(trts)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_lmm_2016$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Tiller ShB Reps")
+                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -434,7 +438,7 @@ plot_diagnostic_lines(d = reps,
 ``` r
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2016 Replicate Posteriors for Tiller ShB Reps")
+                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-2.png)
@@ -443,7 +447,7 @@ plot_replicate_posteriors(d = reps,
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2106 Diagnostic Plots for Tiller ShB Treatments")
+                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-3.png)
@@ -451,26 +455,252 @@ plot_diagnostic_lines(d = trts,
 ``` r
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2016 Treatment Posteriors for Tiller ShB Treatments")
+                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-4.png)
 
 ``` r
 # check random effects
-plotTrace(TShB_lmm_2016$VCV, log = TRUE)
+plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-5.png)
 
 ``` r
 # plot joint distibution of error
-rdf <- data.frame(TShB_lmm_2016$VCV)
+rdf <- data.frame(LShB_lmm_2016$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Tiller ShB Random Error Distribution"))
+                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
 ![](Analysis_files/figure-markdown_github/unnamed-chunk-4-6.png)
+
+### 2016 Tiller Sheath Blight Severity Model
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          prior = eprior,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2016)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 96.56589 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP     55.97 1.025e-06    157.9     4950
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units     18.68    5.059    40.78     4788
+    ## 
+    ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
+    ## 
+    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
+    ## (Intercept)      19.74455 12.12769 27.84923     4539 0.00444 **
+    ## WMGTFLD           0.72585 -5.38699  6.89249     5267 0.79636   
+    ## NRTE180           0.05777 -5.82309  6.34068     5539 0.99879   
+    ## WMGTFLD:NRTE180   3.65530 -5.10407 12.13925     5152 0.35677   
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2016$Sol)
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-4.png)
+
+``` r
+# check random effects
+plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-6.png)
+
+### 2016 Tiller Sheath Blight Incidence Model
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2016)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 60.15824 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP      3.91 2.36e-08    14.56     4950
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units     1.913   0.5575    4.083     4950
+    ## 
+    ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
+    ## 
+    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)       11.1382   8.9067  13.3053     4950 <2e-04 ***
+    ## WMGTFLD           -0.7842  -2.6622   1.1958     4950  0.401    
+    ## NRTE180            1.5338  -0.2897   3.5349     4950  0.101    
+    ## WMGTFLD:NRTE180    0.7918  -2.0035   3.4401     4950  0.541    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-4.png)
+
+``` r
+# check random effects
+plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-6.png)
 
 Conclusions
 ===========

@@ -38,7 +38,8 @@ mean_sd <-
   group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
   summarise_each(funs(mean),
                  LShB_rating_sd,
-                 TShB_rating_sd)
+                 TShB_rating_sd,
+                 TShB_incidence_sd)
 
 cols <- c(7:8)
 mean_sd[, cols] <- apply(mean_sd[, cols], 2, function(x)
@@ -49,9 +50,8 @@ AUDPS <-
   group_by(YEAR, REP, TRT, WMGT, NRTE, PLOT) %>%
   summarise_each(funs(audps(., dates = DAYS)),
                  LShB_rating_mean,
-                 TShB_rating_mean)
-
-AUDPS$LShB_rating_mean <- round(AUDPS$LShB_rating_mean, 2)
+                 TShB_rating_mean,
+                 TShB_incidence_mean)
 
 AUDPS <- left_join(AUDPS, mean_sd)
 

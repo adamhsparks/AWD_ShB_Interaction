@@ -52,23 +52,26 @@ names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
 names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2015$Sol)
+
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Reps")
+                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2015 Replicate Posteriors for Leaf ShB Reps")
+                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2015 Diagnostic Plots for Leaf ShB Treatments")
+                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2015 Treatment Posteriors for Leaf ShB Treatments")
+                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 
 # check random effects
 plotTrace(LShB_lmm_2015$VCV, log = TRUE)
@@ -76,7 +79,7 @@ plotTrace(LShB_lmm_2015$VCV, log = TRUE)
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Leaf ShB Random Error Distribution"))
+                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
 ### 2015 Tiller Sheath Blight Severity Model
@@ -84,7 +87,7 @@ plot_joint_random_error_dist(d = rdf,
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -93,46 +96,103 @@ TShB_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP,
                           thin = 100,
                           pr = TRUE)
 
-summary(TShB_lmm_2015)
+summary(TShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_lmm_2015$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_lmm_2015$Sol[, 2:6])
+trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
 names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
 names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_lmm_2015$Sol)
+x <- 1:nrow(TShB_severity_lmm_2015$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2015 Diagnostic Plots for Tiller ShB Reps")
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2015 Replicate Posteriors for Tiller ShB Reps")
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2015 Diagnostic Plots for Tiller ShB Treatments")
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2015 Treatment Posteriors for Tiller ShB Treatments")
+                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 
 # check random effects
-plotTrace(TShB_lmm_2015$VCV, log = TRUE)
+plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_lmm_2015$VCV)
+rdf <- data.frame(TShB_severity_lmm_2015$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Tiller ShB Random Error Distribution"))
+                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
+
+### 2015 Tiller Sheath Blight Incidence Model
+```{r}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+
 
 *******
 
@@ -168,28 +228,28 @@ x <- 1:nrow(LShB_lmm_2016$Sol)
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2016 Diagnostic Plots for Leaf ShB Reps")
+                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2016 Replicate Posteriors for Leaf ShB Reps")
+                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2016 Diagnostic Plots for Leaf ShB Treatments")
+                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2016 Treatment Posteriors for Leaf ShB Treatments")
+                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 
 # check random effects
 plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(LShB_lmm_2015$VCV)
+rdf <- data.frame(LShB_lmm_2016$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Leaf ShB Random Error Distribution"))
+                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
 
@@ -198,7 +258,7 @@ plot_joint_random_error_dist(d = rdf,
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -207,45 +267,99 @@ TShB_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP,
                           prior = eprior,
                           pr = TRUE)
 
-summary(TShB_lmm_2016)
+summary(TShB_severity_lmm_2016)
 
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_lmm_2016$Sol[, c(1, 5:8)])
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_lmm_2016$Sol[, 2:4])
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
 names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_lmm_2016$Sol)
-
+x <- 1:nrow(TShB_severity_lmm_2016$Sol)
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
                       x = x,
-                      title = "2016 Diagnostic Plots for Tiller ShB Reps")
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
 
 # posterior distributions for replicate
 plot_replicate_posteriors(d = reps,
-                          title = "2016 Replicate Posteriors for Tiller ShB Reps")
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 
 # diagnostic line plots for treatments
 plot_diagnostic_lines(d = trts,
                       x = x,
-                      title = "2106 Diagnostic Plots for Tiller ShB Treatments")
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
 
 # Posterior distributions for treatment
 plot_treatment_posteriors(d = trts,
-                          title = "2016 Treatment Posteriors for Tiller ShB Treatments")
+                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
 
 # check random effects
-plotTrace(TShB_lmm_2016$VCV, log = TRUE)
+plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_lmm_2016$VCV)
+rdf <- data.frame(TShB_severity_lmm_2016$VCV)
 plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Tiller ShB Random Error Distribution"))
+                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+```
+
+### 2016 Tiller Sheath Blight Incidence Model
+```{r}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
 # Conclusions
