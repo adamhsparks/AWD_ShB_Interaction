@@ -21,7 +21,7 @@ Two experiments were conducted at the International Rice Research Institute's (I
 Split plot design with irrigation as the main plot treatment and N rate as the split plot treatment. The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m.
 
 ### 2016 Dry Season
-The plot design again was a split plot design with irrigation as the main plot treatment and N rate as the split treatment. However, the plot size increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
+A split plot design was used again with irrigation as the main plot treatment and N rate as the split treatment. However, the plot size increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
 
 ## Data collection and analysis
 
