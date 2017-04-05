@@ -1,18 +1,5 @@
----
-title: "Effects of Alternate Wetting and Drying Irrigation and Nitrogen Fertilization on Sheath Blight of Rice"
-thanks: "Replication files are available on the author's Github account (http://github.com/adamhsparks/AWD_N_SB). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Adam.Sparks@usq.edu.au"
-author:
-  - A.H. Sparks and N.P. Castilla
-keywords: "_Rhizoctonia solani_, Irrigation"
-abstract: "First author: University of Southern Queensland, Centre for Crop Health, West St., Toowoomba, Queensland 4350, Australia; and second author: International Rice Research Institute, Crop and Environmental Sciences Division, Los Baños, Laguna 4031, Philippines. \\ Corresponding author: Adam H. Sparks; E-mail address: Adam.Sparks@usq.edu.au"
-output:
-  word_document:
-    keep_md: yes
-    reference_docx: Phytopathology_Style_Reference.docx
-  html_document: default
-csl: phytopathology.csl
-bibliography: AWD_N_ShB.bib
----
+# Effects of Alternate Wetting and Drying Irrigation and Nitrogen Fertilization on Sheath Blight of Rice
+A.H. Sparks and N.P. Castilla  
 
 
 
