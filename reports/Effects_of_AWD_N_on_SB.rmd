@@ -28,7 +28,7 @@ ______
 
 # Materials and Methods
 ## Experimental design
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14.14˚, longitude 121.27˚) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14°11' N, , longitude 121°15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
 
 ### 2015 Dry Season
 The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m. The main plot treatments were alternate wetting and drying (AWD) and flooded or farmers' practice.
