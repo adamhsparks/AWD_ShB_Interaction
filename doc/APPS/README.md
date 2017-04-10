@@ -2,7 +2,7 @@
 
 Adam H Sparks <sup>1</sup> , Nancy P Castilla <sup>2</sup> , Bjoern O Sander <sup>2</sup>
 
-_1.	University of Southern Queensland, Toowoomba, QLD, Australia_
+_1.	University of Southern Queensland, Toowoomba, QLD, Australia_  
 _2.	Crop and Environmental Sciences Division, International Rice Research Institute, Los Baños, Laguna, Philippines_
 
 
