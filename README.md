@@ -5,10 +5,13 @@
 
 Install the [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) package. 
 
-```{r project_template}
+```r
 install.packages("ProjectTemplate")
+library(ProjectTemplate)
 ```
 Clone the repository to your local hard drive.
+
+This repository uses the [Packrat](https://cran.r-project.org/package=packrat) package for reproducibility so the initial start up may be slowed with package installations. This will automatically be handled so that all the versions of R packages used for this analysis are the same across computers.
 
 The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts. It is worth looking at these to see how the raw data are handled prior to analysis.
 
@@ -16,17 +19,19 @@ The [graphs](graphs) folder contains graphs from munging and the [README.md](gra
 
 ### Rmd files
 
-Knitting the Rmd files will automatically run the scripts in the [munge](munge) and generate the outputs linked to below in the GitHub `.md` files.
+Knitting the Rmd files will automatically run the scripts in the [munge](munge) and generate the outputs linked to below in the GitHub `.md` files. This folder has the steps used to create the AUDPS values used in analysis and other summaries and cleaning of the data.
 
 The [`Probability_distribution_checks.Rmd`](Probability_distribution_checks.md) file generates/displays the normal and log distribution checks for the analyses.
 
-The [`Analysis.Rmd`](Analysis.md) file contains the models used for data analysis.
+The [`Analysis.Rmd`](Analysis.md) file contains the models used for data analysis and shows the analysis carried out.
 
 ## Study
 
 **Objective:** Study the effects of different water and nitrogen managements on sheath blight of rice  
 **Project PI:** Dr. Adam H Sparks  
+
 **Staff:**  
+
   * Dr. Nancy P. Castilla (2016)
   * Mr. Michael Noel (2015)
 
