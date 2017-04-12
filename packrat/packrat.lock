@@ -23,6 +23,17 @@ Source: CRAN
 Version: 2.15
 Hash: 30b82af4dd303c0161271b2ff97caa4b
 
+Package: MCMCglmm
+Source: CRAN
+Version: 2.24
+Hash: 82fca7200fc431e6bce25132c87b2a2c
+Requires: ape, coda, corpcor, cubature, tensorA
+
+Package: MatrixModels
+Source: CRAN
+Version: 0.4-1
+Hash: 60a5c75e57aae4a0ce76cb7422939aaf
+
 Package: ProjectTemplate
 Source: CRAN
 Version: 0.7
@@ -43,11 +54,27 @@ Source: CRAN
 Version: 0.12.10
 Hash: 6cf65d0dd6a92f2d43c8d4805d33efe9
 
+Package: RcppEigen
+Source: CRAN
+Version: 0.3.2.9.1
+Hash: 78c99b40f3d8b1f432348916cc1c22c7
+Requires: Rcpp
+
+Package: SparseM
+Source: CRAN
+Version: 1.76
+Hash: 806cd94a667a8a17fc253fe2efd788f9
+
 Package: agricolae
 Source: CRAN
 Version: 1.2-4
 Hash: e879e5353c14e4022c0104d0b141b02c
 Requires: AlgDesign, klaR, spdep
+
+Package: ape
+Source: CRAN
+Version: 4.1
+Hash: 69cde77c7421c64fc49a2c610cb486be
 
 Package: assertthat
 Source: CRAN
@@ -81,6 +108,12 @@ Version: 1.17.1
 Hash: 97cb6f6293cd18d17df77a6383cc6763
 Requires: bitops
 
+Package: car
+Source: CRAN
+Version: 2.1-4
+Hash: d8cc2f66d4ba0c91312f1c1c5773d502
+Requires: pbkrtest, quantreg
+
 Package: coda
 Source: CRAN
 Version: 0.19-1
@@ -95,6 +128,17 @@ Package: combinat
 Source: CRAN
 Version: 0.0-8
 Hash: 1ddebf0315ec8a5c255adc4da9143b81
+
+Package: corpcor
+Source: CRAN
+Version: 1.6.9
+Hash: f641167f85158bfc7cd4b97ac1c26701
+
+Package: cubature
+Source: CRAN
+Version: 1.3-6
+Hash: 5faea2b6585f864ac70a65ba20bdc6ed
+Requires: Rcpp
 
 Package: curl
 Source: CRAN
@@ -133,6 +177,11 @@ Source: CRAN
 Version: 0.999-2
 Hash: e8f4ac7e9f15ec8b84b4f7ee5ab3104f
 
+Package: fitdistrplus
+Source: CRAN
+Version: 1.0-9
+Hash: d1e1fb479d41b9a934b8991b1f5e7ad6
+
 Package: forcats
 Source: CRAN
 Version: 0.2.0
@@ -167,6 +216,12 @@ Source: CRAN
 Version: 2.16.2
 Hash: b8193ebba674bdcf164917241b26c9ae
 Requires: gdata
+
+Package: gplots
+Source: CRAN
+Version: 3.0.1
+Hash: b7abe122479c203aa236499b7fc4b816
+Requires: caTools, gdata, gtools
 
 Package: gridExtra
 Source: CRAN
@@ -239,6 +294,12 @@ Source: CRAN
 Version: 0.2.0
 Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
 
+Package: lme4
+Source: CRAN
+Version: 1.1-12
+Hash: b60990b5cff50044a9648e971f84ee2d
+Requires: Rcpp, RcppEigen, minqa, nloptr
+
 Package: lubridate
 Source: CRAN
 Version: 1.6.0
@@ -261,6 +322,12 @@ Source: CRAN
 Version: 0.5
 Hash: 463550cf44fb6f0a2359368f42eebe62
 
+Package: minqa
+Source: CRAN
+Version: 1.2.4
+Hash: 6e61ec948327e6dd044ccb09cf12db8d
+Requires: Rcpp
+
 Package: mnormt
 Source: CRAN
 Version: 1.5-5
@@ -278,6 +345,11 @@ Version: 0.4.3
 Hash: f96d896947fcaf9b6d0074002e9f4f9d
 Requires: colorspace
 
+Package: nloptr
+Source: CRAN
+Version: 1.0.4
+Hash: 8053df240a4635aeb54fc68c6de67709
+
 Package: openssl
 Source: CRAN
 Version: 0.9.6
@@ -287,6 +359,18 @@ Package: packrat
 Source: CRAN
 Version: 0.4.8-1
 Hash: 6ad605ba7b4b476d84be6632393f5765
+
+Package: pbkrtest
+Source: CRAN
+Version: 0.4-7
+Hash: f195c3a0f527f69c491569c5cbaaf1db
+Requires: lme4
+
+Package: plotMCMC
+Source: CRAN
+Version: 2.0-0
+Hash: 59748033de97a54b9766209dcf25dab3
+Requires: coda, gplots
 
 Package: plyr
 Source: CRAN
@@ -305,6 +389,12 @@ Source: CRAN
 Version: 0.2.2
 Hash: 9f218b40dee7fe7f942039f974bd98b8
 Requires: BH, Rcpp, dplyr, lazyeval, magrittr
+
+Package: quantreg
+Source: CRAN
+Version: 5.29
+Hash: a06b5a1adfd5068a49e8e960b884d08e
+Requires: MatrixModels, SparseM
 
 Package: readr
 Source: CRAN
@@ -380,6 +470,11 @@ Source: CRAN
 Version: 1.2.0
 Hash: 25a86d7f410513ebb7c0bc6a5e16bdc3
 Requires: magrittr, stringi
+
+Package: tensorA
+Source: CRAN
+Version: 0.36
+Hash: 2faf6192c6d866485b439fc043187250
 
 Package: tibble
 Source: CRAN
