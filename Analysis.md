@@ -4,6 +4,18 @@ Analysis
 Notes on this analysis before starting
 --------------------------------------
 
+#### How to interpret these analyses
+
+For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`, which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
+
+The MCMCglmm documentation is more in-depth but should still be referenced.
+
+``` r
+library(MCMCglmm)
+vignette("Overview")
+vignette("CourseNotes")
+```
+
 #### Changes between 2015 and 2016
 
 Before the analysis, note that due to changes between the years, the analysis must be carried out on each year separately. The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this. Therefore, the analyses will be conducted separately for leaf severity and Leaf severity for 2015 dry season and 2016 dry season. Comparisons will only be observational and cannot be statistically compared.
@@ -37,27 +49,27 @@ summary(LShB_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.5214 
+    ##  DIC: 32.52142 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.2501 3.106e-09   0.7461     4950
+    ## REP    0.2505 2.082e-09   0.6627     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.172  0.07361    0.314     4950
+    ## units    0.1727  0.06739    0.305     4950
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.18270 -0.38927  0.71313     5067 0.450
-    ## WMGTFLD           0.01114 -0.62317  0.54859     4950 0.972
-    ## NRTE100           0.35367 -0.21892  0.94206     4950 0.223
-    ## NRTE120           0.29532 -0.25425  0.89746     4697 0.278
-    ## WMGTFLD:NRTE100  -0.33272 -1.13657  0.48842     4474 0.411
-    ## WMGTFLD:NRTE120  -0.19067 -1.01728  0.59231     4976 0.625
+    ## (Intercept)       0.18378 -0.38279  0.72144     4715 0.446
+    ## WMGTFLD           0.01186 -0.59805  0.59815     4950 0.973
+    ## NRTE100           0.35832 -0.21182  0.94091     4950 0.219
+    ## NRTE120           0.29471 -0.26917  0.92038     4683 0.301
+    ## WMGTFLD:NRTE100  -0.33872 -1.11560  0.52907     4950 0.415
+    ## WMGTFLD:NRTE120  -0.19259 -1.02264  0.66138     4950 0.623
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -87,7 +99,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -95,7 +107,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -104,7 +116,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -112,14 +124,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -128,7 +140,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-1-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-2-6.png)
 
 ### 2015 Tiller Sheath Blight Severity Model
 
@@ -152,27 +164,27 @@ summary(TShB_severity_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 121.3581 
+    ##  DIC: 121.3566 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     4.493 6.083e-08    13.21     4950
+    ## REP     3.555 1.543e-08    13.24     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     7.046    2.805    12.26     4638
+    ## units     7.012    2.763    12.16     4950
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.6145  -1.3579   4.9950     4870 0.280
-    ## WMGTFLD           -0.5446  -4.3053   3.3347     4950 0.759
-    ## NRTE100            1.6526  -1.9702   5.3332     4950 0.361
-    ## NRTE120            1.9521  -1.8188   5.6698     4950 0.287
-    ## WMGTFLD:NRTE100   -0.8745  -6.1989   4.3850     5523 0.712
-    ## WMGTFLD:NRTE120    0.2933  -4.9858   5.6870     4950 0.896
+    ## (Intercept)        1.5892  -1.5797   4.5794     4950 0.272
+    ## WMGTFLD           -0.5590  -4.2390   2.9891     4852 0.737
+    ## NRTE100            1.6501  -2.0089   5.3403     4864 0.355
+    ## NRTE120            1.9695  -1.6405   5.5595     4875 0.266
+    ## WMGTFLD:NRTE100   -0.8149  -6.1382   4.3489     5225 0.752
+    ## WMGTFLD:NRTE120    0.3464  -4.6088   5.7516     4950 0.882
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -201,7 +213,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -209,7 +221,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -218,7 +230,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -226,14 +238,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -242,7 +254,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-2-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-3-6.png)
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
@@ -266,27 +278,27 @@ summary(TShB_incidence_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 52.92013 
+    ##  DIC: 52.94686 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.8134 3.072e-08     1.77     4950
+    ## REP    0.5167 8.512e-12    1.681     4659
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.4075   0.1653   0.7296     4950
+    ## units    0.4055   0.1668   0.7351     4950
     ## 
     ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.31194 -0.51482  1.17847     4950 0.415
-    ## WMGTFLD           0.18617 -0.68202  1.08563     4566 0.661
-    ## NRTE100           0.22261 -0.69364  1.10331     4950 0.601
-    ## NRTE120           0.58368 -0.25278  1.52306     4950 0.193
-    ## WMGTFLD:NRTE100  -0.07574 -1.35919  1.22180     4950 0.897
-    ## WMGTFLD:NRTE120  -0.40008 -1.66063  0.86468     4950 0.513
+    ## (Intercept)       0.29426 -0.57690  1.13556     4950 0.447
+    ## WMGTFLD           0.18634 -0.69717  1.05519     5384 0.667
+    ## NRTE100           0.23552 -0.67152  1.11803     4950 0.605
+    ## NRTE120           0.58260 -0.28845  1.47090     4950 0.181
+    ## WMGTFLD:NRTE100  -0.08003 -1.36229  1.13701     4950 0.882
+    ## WMGTFLD:NRTE120  -0.40218 -1.60883  0.86245     4950 0.507
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -315,7 +327,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -323,7 +335,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -332,7 +344,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -340,14 +352,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -356,7 +368,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-3-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-4-6.png)
 
 ------------------------------------------------------------------------
 
@@ -385,25 +397,25 @@ summary(LShB_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.24567 
+    ##  DIC: 32.25408 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.6856 7.942e-08     2.11     4950
+    ## REP    0.7845 1.715e-07    2.341     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.3385   0.1025   0.6914     4950
+    ## units    0.3362   0.1024    0.689     4950
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)       1.22180  0.31532  2.08035     4950 0.0238 *
-    ## WMGTFLD          -0.20566 -1.04494  0.58914     4950 0.5903  
-    ## NRTE180           0.07305 -0.70973  0.93650     4950 0.8444  
-    ## WMGTFLD:NRTE180   0.44930 -0.74274  1.58902     4950 0.4121  
+    ## (Intercept)       1.21267  0.33576  2.11965     4950 0.0259 *
+    ## WMGTFLD          -0.20601 -1.01240  0.63787     4950 0.6004  
+    ## NRTE180           0.07461 -0.71785  0.92277     4714 0.8420  
+    ## WMGTFLD:NRTE180   0.45681 -0.72441  1.63095     4950 0.4012  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -433,7 +445,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -441,7 +453,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -450,7 +462,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -458,14 +470,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -474,7 +486,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-4-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-5-6.png)
 
 ### 2016 Tiller Sheath Blight Severity Model
 
@@ -498,25 +510,25 @@ summary(TShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 96.56589 
+    ##  DIC: 96.59314 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     55.97 1.025e-06    157.9     4950
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     49.93  1.7e-06    138.8     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     18.68    5.059    40.78     4788
+    ## units     18.79    5.035    41.19     4644
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
-    ## (Intercept)      19.74455 12.12769 27.84923     4539 0.00444 **
-    ## WMGTFLD           0.72585 -5.38699  6.89249     5267 0.79636   
-    ## NRTE180           0.05777 -5.82309  6.34068     5539 0.99879   
-    ## WMGTFLD:NRTE180   3.65530 -5.10407 12.13925     5152 0.35677   
+    ## (Intercept)      19.84784 12.28505 27.38135     4950 0.00242 **
+    ## WMGTFLD           0.68188 -5.47881  6.54749     4950 0.80000   
+    ## NRTE180           0.05395 -5.85199  6.48373     4950 0.96848   
+    ## WMGTFLD:NRTE180   3.63815 -4.86090 11.99705     4950 0.36283   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -545,7 +557,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -553,7 +565,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -562,7 +574,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -570,14 +582,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -586,7 +598,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-5-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-6-6.png)
 
 ### 2016 Tiller Sheath Blight Incidence Model
 
@@ -610,25 +622,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 60.15824 
+    ##  DIC: 60.14119 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP      3.91 2.36e-08    14.56     4950
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP     3.965 3.097e-07    13.16     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     1.913   0.5575    4.083     4950
+    ## units     1.923   0.5135     4.04     4950
     ## 
     ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-    ## (Intercept)       11.1382   8.9067  13.3053     4950 <2e-04 ***
-    ## WMGTFLD           -0.7842  -2.6622   1.1958     4950  0.401    
-    ## NRTE180            1.5338  -0.2897   3.5349     4950  0.101    
-    ## WMGTFLD:NRTE180    0.7918  -2.0035   3.4401     4950  0.541    
+    ##                 post.mean l-95% CI u-95% CI eff.samp    pMCMC    
+    ## (Intercept)       11.1480   8.9061  13.3845     4950 0.000808 ***
+    ## WMGTFLD           -0.7818  -2.7109   1.1913     4950 0.386263    
+    ## NRTE180            1.5363  -0.3868   3.4275     4950 0.107879    
+    ## WMGTFLD:NRTE180    0.7749  -2.0750   3.4342     5289 0.545859    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -659,7 +671,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -667,7 +679,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-2.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -676,7 +688,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-3.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -684,14 +696,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-4.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-5.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -700,7 +712,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github/unnamed-chunk-6-6.png)
+![](Analysis_files/figure-markdown_github/unnamed-chunk-7-6.png)
 
 Conclusions
 ===========

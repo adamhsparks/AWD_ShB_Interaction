@@ -10,6 +10,18 @@ load.project()
 ```
 ## Notes on this analysis before starting
 
+#### How to interpret these analyses
+
+For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`,
+which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
+
+The MCMCglmm documentation is more in-depth but should still be referenced.
+```{r, eval=FALSE}
+library(MCMCglmm)
+vignette("Overview")
+vignette("CourseNotes")
+```
+
 #### Changes between 2015 and 2016
 
 Before the analysis, note that due to changes between the years, the analysis
