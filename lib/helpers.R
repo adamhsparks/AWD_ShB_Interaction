@@ -46,6 +46,14 @@ plot_treatment_posteriors <- function(d, title) {
     ggtitle(paste(title))
 }
 
+plot_joint_random_error_dist_nested <- function(d, title) {
+  ggplot(d, aes(x = sqrt(REP.WMGT), y = sqrt(units))) +
+    geom_density2d() +
+    geom_abline(intercept = 0, slope = 1) +
+    ggtitle(paste(title)) +
+    theme_tufte()
+}
+
 plot_joint_random_error_dist <- function(d, title) {
   ggplot(d, aes(x = sqrt(REP), y = sqrt(units))) +
     geom_density2d() +

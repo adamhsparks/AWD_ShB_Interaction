@@ -78,8 +78,8 @@ Hash: 69cde77c7421c64fc49a2c610cb486be
 
 Package: assertthat
 Source: CRAN
-Version: 0.1
-Hash: 0afb92b59b02593c70ff8046700ba9d3
+Version: 0.2.0
+Hash: e8805df54c65ac96d50235c44a82615c
 
 Package: backports
 Source: CRAN
@@ -176,6 +176,12 @@ Package: expm
 Source: CRAN
 Version: 0.999-2
 Hash: e8f4ac7e9f15ec8b84b4f7ee5ab3104f
+
+Package: faraway
+Source: CRAN
+Version: 1.0.7
+Hash: 2aff3983aa046e7ef126fc1a2685fe14
+Requires: lme4
 
 Package: fitdistrplus
 Source: CRAN

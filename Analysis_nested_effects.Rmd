@@ -1,0 +1,391 @@
+---
+title: "Analysis with nested effects"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ProjectTemplate)
+load.project()
+```
+## Notes on this analysis before starting
+
+These analyses nest the main plot effect as a random effect with the replicate.
+
+#### How to interpret these analyses
+
+For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`,
+which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
+
+The MCMCglmm documentation is more in-depth but should still be referenced.
+```{r MCMCglmm, eval=FALSE}
+library(MCMCglmm)
+vignette("Overview")
+vignette("CourseNotes")
+```
+
+#### Changes between 2015 and 2016
+
+Before the analysis, note that due to changes between the years, the analysis
+must be carried out on each year separately. The 2015 data and 2016 data cannot
+be combined due to changes in inoculation methods; there are other changes too,
+but the main one is this. Therefore, the analyses will be conducted separately for
+leaf severity and Leaf severity for 2015 dry season and 2016 dry season.
+Comparisons will only be observational and cannot be statistically compared.
+
+#### Iterations
+Fitting the models with the default iterations resulted in some less than
+acceptable models. Because of this, the number of iterations has been increased,
+`nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
+smaller errors for random effects and better models.
+
+## 2015
+### 2015 Leaf Sheath Blight Severity Model
+```{r 2015_LShB}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
+                          random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(LShB_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:14)])
+x <- 1:nrow(reps)
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
+
+# check random effects
+plotTrace(LShB_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(LShB_lmm_2015$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
+```
+
+### 2015 Tiller Sheath Blight Severity Model
+```{r 2015_TShB}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
+                                   random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:14)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
+
+# check random effects
+plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2015$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
+```
+
+### 2015 Tiller Sheath Blight Incidence Model
+```{r 2015_TShB_incidence}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
+                                    random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2015),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:14)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+
+
+*******
+
+## 2016
+
+### 2016 Leaf Sheath Blight Severity Model
+```{r 2016_LShB}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
+                          random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          prior = eprior,
+                          pr = TRUE)
+
+summary(LShB_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:12)])
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
+
+# check random effects
+plotTrace(LShB_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(LShB_lmm_2016$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
+```
+
+
+### 2016 Tiller Sheath Blight Severity Model
+```{r 2016_TShB}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
+                                   random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          prior = eprior,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2016)
+
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:12)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2016$Sol)
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
+
+# check random effects
+plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+```
+
+### 2016 Tiller Sheath Blight Incidence Model
+```{r 2016_TShB_incidence}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
+                                    random = ~REP:WMGT, 
+                          data = as.data.frame(AUDPS_2016),
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:12)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:4])
+names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
+names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
+plot_joint_random_error_dist_nested(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+# Conclusions
+
+The models all appear to be good fits after increasing the number of iterations.
+None of the treatments in either year, 2015 or 2016, were significant. The
+see `pMCMC` values and also posterior graphs. There is a large amount of overlap
+in all of the posterior graphs.
+

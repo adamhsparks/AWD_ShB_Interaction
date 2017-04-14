@@ -10,6 +10,8 @@ load.project()
 ```
 ## Notes on this analysis before starting
 
+These analyses DO NOT nest the main plot effect as a random effect with the replicate.
+
 #### How to interpret these analyses
 
 For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`,
@@ -39,11 +41,12 @@ smaller errors for random effects and better models.
 
 ## 2015
 ### 2015 Leaf Sheath Blight Severity Model
-```{r}
+```{r 2015_LShB}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
+LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
+                          random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -95,11 +98,12 @@ plot_joint_random_error_dist(d = rdf,
 ```
 
 ### 2015 Tiller Sheath Blight Severity Model
-```{r}
+```{r 2015_TShB}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
+                                   random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -150,11 +154,12 @@ plot_joint_random_error_dist(d = rdf,
 ```
 
 ### 2015 Tiller Sheath Blight Incidence Model
-```{r}
+```{r 2015_TShB_incidence}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
+                                    random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -211,11 +216,12 @@ plot_joint_random_error_dist(d = rdf,
 ## 2016
 
 ### 2016 Leaf Sheath Blight Severity Model
-```{r}
+```{r 2016_LShB}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE, ~REP, 
+LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
+                          random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -266,11 +272,12 @@ plot_joint_random_error_dist(d = rdf,
 
 
 ### 2016 Tiller Sheath Blight Severity Model
-```{r}
+```{r 2016_TShB}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE, ~REP, 
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
+                                   random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -320,11 +327,12 @@ plot_joint_random_error_dist(d = rdf,
 ```
 
 ### 2016 Tiller Sheath Blight Incidence Model
-```{r}
+```{r 2016_TShB_incidence}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, ~REP, 
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
+                                    random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           prior = eprior,
