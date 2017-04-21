@@ -29,7 +29,7 @@ Fitting the models with the default iterations resulted in some less than accept
 Setup
 -----
 
-Use set seed for reproducibility.
+Use `set.seed()` for reproducibility.
 
 ``` r
 set.seed(27)

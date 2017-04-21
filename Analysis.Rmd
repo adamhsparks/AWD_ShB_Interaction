@@ -40,7 +40,7 @@ acceptable models. Because of this, the number of iterations has been increased,
 smaller errors for random effects and better models.
 
 ## Setup
-Use set seed for reproducibility.
+Use `set.seed()` for reproducibility.
 
 ```{r set_seed}
 set.seed(27)
