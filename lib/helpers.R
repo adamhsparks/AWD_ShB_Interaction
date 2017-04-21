@@ -16,6 +16,7 @@ plot_diagnostic_lines <- function(d, x, title) {
     xlab("Iteration Number") +
     ylab(NULL) +
     facet_grid(variable ~ .) +
+    theme(strip.text.y = element_text(angle = 0)) +
     ggtitle(paste(title))
 }
 
@@ -47,7 +48,7 @@ plot_treatment_posteriors <- function(d, title) {
 }
 
 plot_joint_random_error_dist_nested <- function(d, title) {
-  ggplot(d, aes(x = sqrt(REP.WMGT), y = sqrt(units))) +
+  ggplot(d, aes(x = sqrt(WMGT.REP), y = sqrt(units))) +
     geom_density2d() +
     geom_abline(intercept = 0, slope = 1) +
     ggtitle(paste(title)) +

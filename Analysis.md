@@ -1,10 +1,10 @@
-Analysis
+Analysis with nested effects
 ================
 
 Notes on this analysis before starting
 --------------------------------------
 
-These analyses DO NOT nest the main plot effect as a random effect with the replicate.
+These analyses nest the main plot effect as a random effect with the replicate.
 
 #### How to interpret these analyses
 
@@ -26,6 +26,15 @@ Before the analysis, note that due to changes between the years, the analysis mu
 
 Fitting the models with the default iterations resulted in some less than acceptable models. Because of this, the number of iterations has been increased, `nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much smaller errors for random effects and better models.
 
+Setup
+-----
+
+Use set seed for reproducibility.
+
+``` r
+set.seed(27)
+```
+
 2015
 ----
 
@@ -35,7 +44,7 @@ Fitting the models with the default iterations resulted in some less than accept
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~REP, 
+                          random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -52,31 +61,31 @@ summary(LShB_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.52874 
+    ##  DIC: 33.33689 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.2525 4.628e-09   0.7431     4950
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP   0.04099 1.082e-10   0.1636     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.1735  0.06652   0.3003     4950
+    ## units    0.1791  0.07547     0.32     4950
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.18318 -0.34931  0.76320     4685 0.446
-    ## WMGTFLD           0.01698 -0.58735  0.57350     4621 0.963
-    ## NRTE100           0.35445 -0.23386  0.92179     4950 0.222
-    ## NRTE120           0.28510 -0.32137  0.85016     5139 0.303
-    ## WMGTFLD:NRTE100  -0.34351 -1.15506  0.43323     4950 0.398
-    ## WMGTFLD:NRTE120  -0.18929 -1.00313  0.64113     4950 0.632
+    ## (Intercept)       0.18381 -0.29541  0.64554     4950 0.402
+    ## WMGTFLD           0.01695 -0.59538  0.67331     4685 0.979
+    ## NRTE100           0.35062 -0.26968  0.91808     4950 0.219
+    ## NRTE120           0.28587 -0.28092  0.90537     4950 0.321
+    ## WMGTFLD:NRTE100  -0.34186 -1.18366  0.46770     4950 0.402
+    ## WMGTFLD:NRTE120  -0.19779 -1.05624  0.59392     4950 0.621
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:10)])
+reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:14)])
 x <- 1:nrow(reps)
 reps <- melt(reps)
 ```
@@ -85,8 +94,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(LShB_lmm_2015$Sol[, 2:6])
-names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
-names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 ```
 
@@ -139,7 +146,7 @@ plotTrace(LShB_lmm_2015$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
@@ -151,7 +158,7 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~REP, 
+                                   random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -168,31 +175,31 @@ summary(TShB_severity_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 121.3387 
+    ##  DIC: 121.4278 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     4.032 8.654e-08    14.36     4722
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP     1.593 1.641e-09    6.077     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units       7.1    2.903    12.37     5015
+    ## units     7.049    2.731    12.72     4950
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.5820  -1.3640   4.8659     4950 0.280
-    ## WMGTFLD           -0.5221  -4.1542   3.4027     4950 0.765
-    ## NRTE100            1.6403  -2.0404   5.5901     4950 0.368
-    ## NRTE120            1.9887  -1.7136   5.7216     4950 0.279
-    ## WMGTFLD:NRTE100   -0.8533  -6.1786   4.3741     4969 0.735
-    ## WMGTFLD:NRTE120    0.2496  -5.4661   5.2550     4950 0.912
+    ## (Intercept)        1.5971  -1.5035   4.2799     4950 0.256
+    ## WMGTFLD           -0.5397  -4.6499   3.4627     4487 0.783
+    ## NRTE100            1.6468  -2.1110   5.4934     5312 0.375
+    ## NRTE120            1.9433  -1.6560   5.7187     4950 0.268
+    ## WMGTFLD:NRTE100   -0.8552  -6.0472   4.2223     4951 0.752
+    ## WMGTFLD:NRTE120    0.3258  -4.9007   5.4478     4645 0.909
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:14)])
 reps <- melt(reps)
 ```
 
@@ -200,8 +207,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
-names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
-names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 ```
 
@@ -254,7 +259,7 @@ plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(TShB_severity_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
@@ -266,7 +271,7 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
-                                    random = ~REP, 
+                                    random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -283,31 +288,31 @@ summary(TShB_incidence_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 52.91417 
+    ##  DIC: 54.18184 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.4959 1.131e-09    1.767     4950
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP   0.08722 4.933e-08   0.3538     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.409   0.1637   0.7396     4737
+    ## units    0.4238   0.1767   0.7476     4950
     ## 
     ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.30054 -0.53841  1.15037     4972 0.431
-    ## WMGTFLD           0.18709 -0.68452  1.11041     4950 0.669
-    ## NRTE100           0.23668 -0.66833  1.13717     4950 0.591
-    ## NRTE120           0.58120 -0.26334  1.50066     5313 0.196
-    ## WMGTFLD:NRTE100  -0.08887 -1.35843  1.19071     4950 0.881
-    ## WMGTFLD:NRTE120  -0.40263 -1.62018  0.93679     4950 0.501
+    ## (Intercept)       0.30766 -0.39290  0.98146     4950 0.364
+    ## WMGTFLD           0.17697 -0.82349  1.16379     4695 0.714
+    ## NRTE100           0.22196 -0.70373  1.11198     4950 0.625
+    ## NRTE120           0.58479 -0.28941  1.47209     4950 0.193
+    ## WMGTFLD:NRTE100  -0.07141 -1.35847  1.26279     5645 0.917
+    ## WMGTFLD:NRTE120  -0.40351 -1.68330  0.87150     4676 0.530
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:14)])
 reps <- melt(reps)
 ```
 
@@ -315,8 +320,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
-names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
-names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 ```
 
@@ -369,7 +372,7 @@ plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
@@ -386,7 +389,7 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~REP, 
+                          random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -403,31 +406,31 @@ summary(LShB_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 32.26912 
+    ##  DIC: 33.45351 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.6965 3.558e-11    2.291     4950
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP    0.1522 1.091e-10   0.5533     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.337   0.1004   0.6726     4950
+    ## units    0.3648   0.1097   0.7573     5218
     ## 
     ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)       1.22970  0.37422  2.20299     4950 0.0214 *
-    ## WMGTFLD          -0.21542 -1.06902  0.55824     4950 0.5705  
-    ## NRTE180           0.06247 -0.73886  0.85918     4950 0.8780  
-    ## WMGTFLD:NRTE180   0.46924 -0.64729  1.65797     4950 0.3984  
+    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
+    ## (Intercept)       1.23469  0.51856  1.98697     4904 0.00525 **
+    ## WMGTFLD          -0.22263 -1.25852  0.81426     4950 0.62020   
+    ## NRTE180           0.06184 -0.81975  0.88529     4950 0.88808   
+    ## WMGTFLD:NRTE180   0.46062 -0.77972  1.59637     3627 0.41051   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:8)])
+reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:12)])
 reps <- melt(reps)
 ```
 
@@ -435,7 +438,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(LShB_lmm_2016$Sol[, 2:4])
-names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
 trts <- melt(trts)
 ```
 
@@ -488,7 +490,7 @@ plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2016$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
@@ -500,7 +502,7 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~REP, 
+                                   random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -517,31 +519,31 @@ summary(TShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 96.58536 
+    ##  DIC: 88.83837 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     50.75 0.000273    144.5     4950
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP     31.35 2.296e-06    85.07     4825
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     19.12    5.319    41.77     4950
+    ## units     12.12     2.38    31.55     4984
     ## 
     ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
-    ## (Intercept)      19.82865 13.01405 27.59300     4950 0.00283 **
-    ## WMGTFLD           0.64928 -5.29329  6.77579     4436 0.82505   
-    ## NRTE180          -0.02778 -6.38218  5.70349     4694 0.99879   
-    ## WMGTFLD:NRTE180   3.79800 -4.88904 12.19439     4725 0.34990   
+    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)      19.86920 13.41562 26.74047     4950 <2e-04 ***
+    ## WMGTFLD           0.59600 -8.83091  9.90697     4950  0.876    
+    ## NRTE180           0.03692 -4.57007  5.03527     4950  0.990    
+    ## WMGTFLD:NRTE180   3.67426 -3.05293 10.80580     4950  0.244    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:12)])
 reps <- melt(reps)
 ```
 
@@ -549,7 +551,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
-names(trts)[names(trts) == "WMGTFLD.NRTE180"] <- "FLD.NRTE180"
 trts <- melt(trts)
 ```
 
@@ -601,7 +602,7 @@ plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(TShB_severity_lmm_2016$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
@@ -613,7 +614,7 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
-                                    random = ~REP, 
+                                    random = ~WMGT:REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           prior = eprior,
@@ -630,31 +631,31 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 60.15199 
+    ##  DIC: 61.96193 
     ## 
-    ##  G-structure:  ~REP
+    ##  G-structure:  ~WMGT:REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     3.749 8.384e-07    13.13     4950
+    ##          post.mean  l-95% CI u-95% CI eff.samp
+    ## WMGT:REP     1.157 6.035e-07    4.215     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     1.912    0.508    3.893     4950
+    ## units     2.133   0.5471    4.354     4950
     ## 
     ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-    ## (Intercept)       11.1374   8.9994  13.4094     5268 <2e-04 ***
-    ## WMGTFLD           -0.7547  -2.5700   1.2733     4950  0.401    
-    ## NRTE180            1.5506  -0.3466   3.4134     4950  0.105    
-    ## WMGTFLD:NRTE180    0.7562  -2.0708   3.3069     5441  0.564    
+    ## (Intercept)       11.1170   9.3059  12.8663     4950 <2e-04 ***
+    ## WMGTFLD           -0.7557  -3.2482   1.9519     5185  0.511    
+    ## NRTE180            1.5275  -0.4599   3.6348     4950  0.129    
+    ## WMGTFLD:NRTE180    0.7650  -2.1088   3.7187     4950  0.571    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:8)])
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:12)])
 reps <- melt(reps)
 ```
 
@@ -662,8 +663,6 @@ reps <- melt(reps)
 
 ``` r
 trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:4])
-names(trts)[names(trts) == "WMGTFLD.NRTE100"] <- "FLD.NRTE100"
-names(trts)[names(trts) == "WMGTFLD.NRTE120"] <- "FLD.NRTE120"
 trts <- melt(trts)
 ```
 
@@ -716,7 +715,7 @@ plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
 ``` r
 # plot joint distibution of error
 rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
-plot_joint_random_error_dist(d = rdf,
+plot_joint_random_error_dist_nested(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
@@ -725,4 +724,66 @@ plot_joint_random_error_dist(d = rdf,
 Conclusions
 ===========
 
-The models all appear to be good fits after increasing the number of iterations. None of the treatments in either year, 2015 or 2016, were significant. The see `pMCMC` values and also posterior graphs. There is a large amount of overlap in all of the posterior graphs.
+The models all appear to be good fits.
+
+None of the diagnostic plots show any signs of autocorrelation or any other obvious patterns.
+
+None of the treatments in either year, 2015 or 2016, were significant. The see `pMCMC` values and also posterior graphs. There is a large amount of overlap in all of the posterior graphs.
+
+The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernable patterns.
+
+The random effects are all fairly equally distributed except for 2016 tiller sheath blight severity where water management:replicate has a larger effect. This is not surprising given that the plot and replicate sizes were different in 2016 due to the use of two fields in the IRRI experiment station, see the [2016 plot layout plan](https://github.com/adamhsparks/AWD_ShB_Interaction/blob/master/doc/Metadata/2016%20AWD%20ShB%20Metadata/ExptLayoutAWD2016.pdf).
+
+R Session Info
+==============
+
+``` r
+sessionInfo()
+```
+
+    ## R version 3.3.3 (2017-03-06)
+    ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+    ## Running under: OS X El Capitan 10.11.6
+    ## 
+    ## locale:
+    ## [1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+    ## 
+    ## attached base packages:
+    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
+    ## 
+    ## other attached packages:
+    ##  [1] plotMCMC_2.0-0      fitdistrplus_1.0-9  survival_2.40-1    
+    ##  [4] lattice_0.20-34     MCMCglmm_2.24       ape_4.1            
+    ##  [7] coda_0.19-1         Matrix_1.2-8        car_2.1-4          
+    ## [10] MASS_7.3-45         dplyr_0.5.0         purrr_0.2.2        
+    ## [13] readr_1.1.0         tidyr_0.6.1         tibble_1.3.0       
+    ## [16] ggplot2_2.2.1       tidyverse_1.1.1     viridis_0.4.0      
+    ## [19] viridisLite_0.2.0   agricolae_1.2-4     lubridate_1.6.0    
+    ## [22] ggthemes_3.4.0      plyr_1.8.4          reshape2_1.4.2     
+    ## [25] ProjectTemplate_0.7
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] nlme_3.1-131         bitops_1.0-6         pbkrtest_0.4-7      
+    ##  [4] gmodels_2.16.2       httr_1.2.1           rprojroot_1.2       
+    ##  [7] tensorA_0.36         tools_3.3.3          backports_1.0.5     
+    ## [10] R6_2.2.0             KernSmooth_2.23-15   AlgDesign_1.1-7.3   
+    ## [13] DBI_0.6-1            lazyeval_0.2.0       mgcv_1.8-17         
+    ## [16] colorspace_1.3-2     nnet_7.3-12          sp_1.2-4            
+    ## [19] gridExtra_2.2.1      mnormt_1.5-5         klaR_0.6-12         
+    ## [22] rvest_0.3.2          quantreg_5.29        SparseM_1.76        
+    ## [25] expm_0.999-2         xml2_1.1.1           labeling_0.3        
+    ## [28] caTools_1.17.1       scales_0.4.1         psych_1.7.3.21      
+    ## [31] stringr_1.2.0        digest_0.6.12        foreign_0.8-67      
+    ## [34] minqa_1.2.4          rmarkdown_1.4.0.9001 htmltools_0.3.5     
+    ## [37] lme4_1.1-12          readxl_0.1.1         combinat_0.0-8      
+    ## [40] jsonlite_1.4         gtools_3.5.0         spdep_0.6-12        
+    ## [43] magrittr_1.5         Rcpp_0.12.10         munsell_0.4.3       
+    ## [46] stringi_1.1.5        yaml_2.1.14          gplots_3.0.1        
+    ## [49] grid_3.3.3           parallel_3.3.3       gdata_2.17.0        
+    ## [52] forcats_0.2.0        deldir_0.1-12        haven_1.0.0         
+    ## [55] splines_3.3.3        hms_0.3              knitr_1.15.1        
+    ## [58] boot_1.3-18          cubature_1.3-6       corpcor_1.6.9       
+    ## [61] LearnBayes_2.15      packrat_0.4.8-1      evaluate_0.10       
+    ## [64] modelr_0.1.0         nloptr_1.0.4         MatrixModels_0.4-1  
+    ## [67] gtable_0.2.0         assertthat_0.2.0     broom_0.4.2         
+    ## [70] cluster_2.0.5
