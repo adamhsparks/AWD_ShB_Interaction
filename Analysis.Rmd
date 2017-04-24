@@ -1,5 +1,5 @@
 ---
-title: "Analysis with nested effects"
+title: "Analysis of split plot design using MCMCglmm"
 output: github_document
 ---
 
@@ -9,8 +9,6 @@ library(ProjectTemplate)
 load.project()
 ```
 ## Notes on this analysis before starting
-
-These analyses nest the main plot effect as a random effect with the replicate.
 
 #### How to interpret these analyses
 
@@ -53,7 +51,7 @@ set.seed(27)
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~WMGT:REP, 
+                          random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -65,7 +63,7 @@ LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
 summary(LShB_lmm_2015)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:14)])
+reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:10)])
 x <- 1:nrow(reps)
 reps <- melt(reps)
 
@@ -98,7 +96,7 @@ plotTrace(LShB_lmm_2015$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2015$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
@@ -108,7 +106,7 @@ plot_joint_random_error_dist_nested(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~WMGT:REP, 
+                                   random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -120,7 +118,7 @@ TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
 summary(TShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:14)])
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
 reps <- melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
@@ -152,7 +150,7 @@ plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(TShB_severity_lmm_2015$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
@@ -162,7 +160,7 @@ plot_joint_random_error_dist_nested(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
-                                    random = ~WMGT:REP, 
+                                    random = ~REP, 
                           data = as.data.frame(AUDPS_2015),
                           verbose = FALSE,
                           prior = eprior,
@@ -174,7 +172,7 @@ TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
 summary(TShB_incidence_lmm_2015)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:14)])
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:10)])
 reps <- melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
@@ -206,7 +204,7 @@ plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
@@ -222,7 +220,7 @@ plot_joint_random_error_dist_nested(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~WMGT:REP, 
+                          random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -234,7 +232,7 @@ LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
 summary(LShB_lmm_2016)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:12)])
+reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
 trts <-  data.frame(LShB_lmm_2016$Sol[, 2:4])
@@ -266,7 +264,7 @@ plotTrace(LShB_lmm_2016$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(LShB_lmm_2016$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
@@ -277,7 +275,7 @@ plot_joint_random_error_dist_nested(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~WMGT:REP, 
+                                   random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           nitt = 5e+05,
@@ -290,7 +288,7 @@ summary(TShB_severity_lmm_2016)
 
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:12)])
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
@@ -321,7 +319,7 @@ plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(TShB_severity_lmm_2016$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
@@ -331,7 +329,7 @@ plot_joint_random_error_dist_nested(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
-                                    random = ~WMGT:REP, 
+                                    random = ~REP, 
                           data = as.data.frame(AUDPS_2016),
                           verbose = FALSE,
                           prior = eprior,
@@ -343,7 +341,7 @@ TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
 summary(TShB_incidence_lmm_2016)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:12)])
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:4])
@@ -375,7 +373,7 @@ plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
 
 # plot joint distibution of error
 rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
-plot_joint_random_error_dist_nested(d = rdf,
+plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 

@@ -62,8 +62,8 @@ Requires: Rcpp
 
 Package: SparseM
 Source: CRAN
-Version: 1.76
-Hash: 806cd94a667a8a17fc253fe2efd788f9
+Version: 1.77
+Hash: 08f1f60e1038957030bcd9f4a58d22d8
 
 Package: agricolae
 Source: CRAN
@@ -114,6 +114,12 @@ Version: 2.1-4
 Hash: d8cc2f66d4ba0c91312f1c1c5773d502
 Requires: pbkrtest, quantreg
 
+Package: cellranger
+Source: CRAN
+Version: 1.1.0
+Hash: 4e1ef4d099b0c5fd531a3938cf4624bd
+Requires: rematch, tibble
+
 Package: coda
 Source: CRAN
 Version: 0.19-1
@@ -142,13 +148,13 @@ Requires: Rcpp
 
 Package: curl
 Source: CRAN
-Version: 2.4
-Hash: 6f9efd95fe30fa735c9aa3b4de10b022
+Version: 2.5
+Hash: 18525896a11a4e04268c762f6391a8f8
 
 Package: deldir
 Source: CRAN
-Version: 0.1-12
-Hash: a767305d4f3b128798b7a0f7c9889c3c
+Version: 0.1-14
+Hash: d898ea6cb91aaf629f785aa898b6e72f
 
 Package: dichromat
 Source: CRAN
@@ -176,12 +182,6 @@ Package: expm
 Source: CRAN
 Version: 0.999-2
 Hash: e8f4ac7e9f15ec8b84b4f7ee5ab3104f
-
-Package: faraway
-Source: CRAN
-Version: 1.0.7
-Hash: 2aff3983aa046e7ef126fc1a2685fe14
-Requires: lme4
 
 Package: fitdistrplus
 Source: CRAN
@@ -302,8 +302,8 @@ Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
 
 Package: lme4
 Source: CRAN
-Version: 1.1-12
-Hash: b60990b5cff50044a9648e971f84ee2d
+Version: 1.1-13
+Hash: d3aa59ebf48bb53e0251e6c454729c34
 Requires: Rcpp, RcppEigen, minqa, nloptr
 
 Package: lubridate
@@ -319,8 +319,8 @@ Hash: bdc4d48c3135e8f3b399536ddf160df4
 
 Package: markdown
 Source: CRAN
-Version: 0.7.7
-Hash: fea2343a1119d61b0cc5c0a950d103a3
+Version: 0.8
+Hash: 045d7c594d503b41f1c28946d076c8aa
 Requires: mime
 
 Package: mime
@@ -398,8 +398,8 @@ Requires: BH, Rcpp, dplyr, lazyeval, magrittr
 
 Package: quantreg
 Source: CRAN
-Version: 5.29
-Hash: a06b5a1adfd5068a49e8e960b884d08e
+Version: 5.33
+Hash: 30421e83e9d36563250019b6b2adafce
 Requires: MatrixModels, SparseM
 
 Package: readr
@@ -410,9 +410,14 @@ Requires: BH, R6, Rcpp, hms, tibble
 
 Package: readxl
 Source: CRAN
-Version: 0.1.1
-Hash: 29d41207f0536a41545dfe6fad3f941c
-Requires: Rcpp
+Version: 1.0.0
+Hash: f0d3323803148df52bca38095bccce46
+Requires: Rcpp, cellranger, tibble
+
+Package: rematch
+Source: CRAN
+Version: 1.0.1
+Hash: ad4faf59e7611117ff165817074c50c7
 
 Package: reshape2
 Source: CRAN
@@ -421,15 +426,11 @@ Hash: 790c06c11c84041b814139d731a872b9
 Requires: Rcpp, plyr, stringr
 
 Package: rmarkdown
-Source: github
-Version: 1.4.0.9001
-Hash: 66189ba474a0ae84a989381a508f5459
+Source: CRAN
+Version: 1.4
+Hash: 030a6baa0a39c528665ed80d14992c11
 Requires: base64enc, caTools, evaluate, htmltools, jsonlite, knitr,
     rprojroot, yaml
-GithubRepo: rmarkdown
-GithubUsername: rstudio
-GithubRef: master
-GithubSha1: b7434dcc5abe87cb27f01cbffb9ca94e1539d322
 
 Package: rprojroot
 Source: CRAN
