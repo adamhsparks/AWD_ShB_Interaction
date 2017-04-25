@@ -14,14 +14,14 @@ Here we check the probability distribution that best fits these data. I'm follow
 ## 2015 Check probability distribution fit for tiller sheath blight incidence
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
-
-f1 <- fitdist(DS2015$TShB_incidence, "norm")
+AUDPS15 <- subset(AUDPS, YEAR == "2015")
+f1 <- fitdist(AUDPS15$TShB_incidence, "norm")
 plot(f1)
-car::qqp(DS2015$TShB_incidence, "norm")
+car::qqp(AUDPS15$TShB_incidence, "norm")
 
-f2 <- fitdist(DS2015$TShB_incidence, "exp")
+f2 <- fitdist(AUDPS15$TShB_incidence, "exp")
 plot(f2)
-car::qqp(DS2015$TShB_incidence, "exp")
+car::qqp(AUDPS15$TShB_incidence, "exp")
 
 ```
 
@@ -30,14 +30,14 @@ car::qqp(DS2015$TShB_incidence, "exp")
 ## 2016 Check probability distribution fit for tiller sheath blight incidence
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
-
-f1 <- fitdist(DS2016$TShB_incidence, "norm")
+AUDPS156 <- subset(AUDPS, YEAR == "2016")
+f1 <- fitdist(AUDPS156$TShB_incidence, "norm")
 plot(f1)
-car::qqp(DS2016$TShB_incidence, "norm")
+car::qqp(AUDPS156$TShB_incidence, "norm")
 
-f2 <- fitdist(DS2016$TShB_incidence, "exp")
+f2 <- fitdist(AUDPS156$TShB_incidence, "exp")
 plot(f2)
-car::qqp(DS2016$TShB_incidence, "exp")
+car::qqp(AUDPS156$TShB_incidence, "exp")
 
 ```
 
