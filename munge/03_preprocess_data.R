@@ -6,14 +6,17 @@ DS2016$PLOT <- rep(1:16, 1728)
 
 #2015
 DATE_1_2015 <- DATE_2_2015 <- DS2015$DATE
+
+# set the first and last dates to NA
 DATE_1_2015[which(DATE_1_2015 == min(DATE_1_2015))] = NA
 DATE_2_2015[which(DATE_2_2015 == max(DATE_2_2015))] = NA
 
-DATE_1 <- na.omit(DATE_1_2015)
-DATE_2 <- na.omit(DATE_2_2015)
+# remove NA values
+DATE_1_2015 <- DATE_1_2015[!is.na(DATE_1_2015)]
+DATE_2_2015 <- DATE_2_2015[!is.na(DATE_2_2015)]
 
 # using lubridate::difftime calculate the time between observations
-DAYS_2015 <- difftime(DATE_1, DATE_2)
+DAYS_2015 <- difftime(DATE_1_2015, DATE_2_2015)
 
 # Add DAYS column to DS2015
 DS2015$DAYS <-
@@ -24,11 +27,12 @@ DATE_1_2016 <- DATE_2_2016 <- DS2016$DATE
 DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] = NA
 DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] = NA
 
-DATE_1 <- na.omit(DATE_1_2016)
-DATE_2 <- na.omit(DATE_2_2016)
+# remove NA values
+DATE_1_2016 <- DATE_1_2016[!is.na(DATE_1_2016)]
+DATE_2_2016 <- DATE_2_2016[!is.na(DATE_2_2016)]
 
 # using lubridate::difftime calculate the time between observations
-DAYS_2016 <- difftime(DATE_1, DATE_2)
+DAYS_2016 <- difftime(DATE_1_2016, DATE_2_2016)
 
 # Add DAYS column to DS2015
 DS2016$DAYS <-
