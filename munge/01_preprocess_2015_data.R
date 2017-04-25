@@ -4,7 +4,7 @@ files <-
   list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
-  x <- read_csv(files[1])
+  x <- read_csv(files)
   x[is.na(x)] <- 0
 
   # ensure that all leaf sheath blight observations are numeric, not character
