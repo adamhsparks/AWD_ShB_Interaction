@@ -88,81 +88,76 @@ DS2016$NRTE[which(DS2016$NRTE == "N2")] = 180
 
 # Add treatment numbers --------------------------------------------------------
 DS2016$TRT <- NA
-DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == 60)] = "FLD_N60"
-DS2016$TRT[which(DS2016$WMGT == "FLD" & DS2016$NRTE == 180)] = "FLD_N180"
-DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == 60)] = "AWD_N60"
-DS2016$TRT[which(DS2016$WMGT == "AWD" & DS2016$NRTE == 180)] = "AWD_N180"
+DS2016$TRT[which(DS2016$WMGT == "FLD" &
+                   DS2016$NRTE == 60)] = "FLD_N60"
+DS2016$TRT[which(DS2016$WMGT == "FLD" &
+                   DS2016$NRTE == 180)] = "FLD_N180"
+DS2016$TRT[which(DS2016$WMGT == "AWD" &
+                   DS2016$NRTE == 60)] = "AWD_N60"
+DS2016$TRT[which(DS2016$WMGT == "AWD" &
+                   DS2016$NRTE == 180)] = "AWD_N180"
 
-# Rename columns for consistency with 2015 -------------------------------------
-DS2016 <- dplyr::rename(DS2016, TShB_rating = NSHShB)
-DS2016 <- dplyr::rename(DS2016, SLA = ShBL1)
-DS2016 <- dplyr::rename(DS2016, SLB = ShBL2)
-DS2016 <- dplyr::rename(DS2016, SLC = ShBL3)
-DS2016 <- dplyr::rename(DS2016, SLD = ShBL4)
-DS2016 <- dplyr::rename(DS2016, SLE = ShBL5)
-DS2016 <- dplyr::rename(DS2016, SLF = ShBL6)
+DS2016 <-
+  DS2016 %>%
+  gather(LEAF,
+         LEAF_SHB,
+         starts_with("ShBL"),
+         -DATE,
+         -ASMT,
+         -TRT,
+         -REP,
+         -WMGT,
+         -SMPL,
+         -NRTE,
+         -HILL,
+         -NTIL,
+         -GL,
+         -DL,
+         -NTShB,
+         -NSHShB,
+         -TIL
+  )
 
-# convert columns 17:19 to numeric from character and change NA to 0 -----------
-cols <- c(17:19)
-DS2016[, cols] = apply(DS2016[, cols], 2, function(x)
-  as.numeric(as.character(x)))
+# reclassify LEAF column to leaf numbers 1...6
+
+DS2016$LEAF[DS2016$LEAF == "ShBL1"] <- 1
+DS2016$LEAF[DS2016$LEAF == "ShBL2"] <- 2
+DS2016$LEAF[DS2016$LEAF == "ShBL3"] <- 3
+DS2016$LEAF[DS2016$LEAF == "ShBL4"] <- 4
+DS2016$LEAF[DS2016$LEAF == "ShBL5"] <- 5
+DS2016$LEAF[DS2016$LEAF == "ShBL6"] <- 6
 
 DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL) %>%
-  mutate(TShB_incidence = NTShB/NTIL) %>%
-  gather(LShB, LShB_rating, starts_with("SL")) %>%
-  gather(GL, GL_value, starts_with("GL")) %>%
-  gather(DL, DL_value, starts_with("DL")) %>%
-  summarise_each(funs(mean, sd),
-                 NTIL,
-                 NTShB,
-                 LShB_rating,
-                 TShB_rating,
-                 TShB_incidence,
-                 GL_value,
-                 DL_value)
+  mutate(TShB_incidence = NTShB / NTIL)
 
-DS2016 <-
-  DS2016 %>%
-  group_by(DATE, ASMT, REP, TRT, WMGT, NRTE) %>%
-  summarise_each(funs(mean),
-                 NTIL_mean,
-                 NTShB_mean,
-                 LShB_rating_mean,
-                 LShB_rating_sd,
-                 TShB_rating_mean,
-                 TShB_rating_sd,
-                 TShB_incidence_mean,
-                 TShB_incidence_sd,
-                 GL_value_mean,
-                 DL_value_mean)
+DS2016$TShB_incidence <- round(DS2016$TShB_incidence, 2)
 
-# arrange columns to be in same order in both data frames
-DS2016 <-
-  DS2016 %>% dplyr::select(DATE,
-                           ASMT,
-                           WMGT,
-                           NRTE,
-                           REP,
-                           TRT,
-                           NTIL_mean,
-                           NTShB_mean,
-                           LShB_rating_mean,
-                           LShB_rating_sd,
-                           TShB_rating_mean,
-                           TShB_rating_sd,
-                           TShB_incidence_mean,
-                           TShB_incidence_sd,
-                           GL_value_mean,
-                           DL_value_mean)
-
-
-cols <- c(7:14)
-DS2016[, cols] <- apply(DS2016[, cols], 2, function(x)
-  round(x, 2))
+DS2016 <- dplyr::rename(DS2016, TIL_SHB = NSHShB)
 
 DS2016$YEAR <- year(DS2016$DATE)
+DS2016$LEAF_SHB <- as.numeric(DS2016$LEAF_SHB)
+
+DS2016 <-
+  DS2016 %>% dplyr::select(
+    YEAR,
+    DATE,
+    ASMT,
+    REP,
+    TRT,
+    WMGT,
+    NRTE,
+    SMPL,
+    HILL,
+    TIL,
+    LEAF,
+    GL,
+    DL,
+    TShB_incidence,
+    TIL_SHB,
+    LEAF_SHB
+  )
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

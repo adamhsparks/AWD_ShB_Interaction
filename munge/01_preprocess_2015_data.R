@@ -11,24 +11,244 @@ reformat <- function(files) {
   x <-
     x %>% mutate_each(funs(as.numeric), starts_with("SL"))
 
-  x <-
+  # Hill number tillers and number tillers with sheath blight ------------------
+  HILL <-
     x %>%
-    group_by(REP, WMGT, NRTE) %>%
-    mutate(TShB_incidence = NTShB/NTIL) %>%
-    gather(LShB, LShB_rating, starts_with("SL")) %>%
-    gather(TShB, TShB_rating, starts_with("SHB")) %>%
-    gather(GL, GL_value, starts_with("GL")) %>%
-    gather(DL, DL_value, starts_with("DL")) %>%
-    summarise_each(funs(mean, sd),
-                   NTIL,
-                   NTShB,
-                   LShB_rating,
-                   TShB_rating,
-                   TShB_incidence,
-                   GL_value,
-                   DL_value)
+    dplyr::select(TRT, REP, WMGT, SMPL, HILL, NRTE, NTIL, NTShB) %>%
+    mutate(TShB_incidence = NTShB / NTIL)
 
-  x[, 4:17] <- round(x[, 4:17], 2)
+  HILL$TShB_incidence <- round(HILL$TShB_incidence, 2)
+  # Tiller 1 -------------------------------------------------------------------
+  TIL1 <-
+    x %>%
+    dplyr::select(TRT,
+                  REP,
+                  WMGT,
+                  SMPL,
+                  NRTE,
+                  HILL,
+                  TIL1,
+                  GL1,
+                  DL1,
+                  SHB1,
+                  SLA1,
+                  SLB1,
+                  SLC1,
+                  SLD1,
+                  SLE1,
+                  SLF1) %>%
+    gather(
+      TIL_key,
+      TIL,
+      starts_with("TIL1"),
+      -TRT,
+      -REP,
+      -WMGT,
+      -SMPL,
+      -NRTE,
+      -HILL,
+      -GL1,
+      -DL1,
+      -SHB1,
+      -SLA1,
+      -SLB1,
+      -SLC1,
+      -SLD1,
+      -SLE1,
+      -SLF1
+    )
+
+  TIL1 <-
+    TIL1 %>%
+    gather(LEAF, LEAF_SHB, starts_with("SL")) %>%
+    dplyr::select(-TIL_key)
+
+  TIL1$LEAF[TIL1$LEAF == "SLA1"] <- 1
+  TIL1$LEAF[TIL1$LEAF == "SLB1"] <- 2
+  TIL1$LEAF[TIL1$LEAF == "SLC1"] <- 3
+  TIL1$LEAF[TIL1$LEAF == "SLD1"] <- 4
+  TIL1$LEAF[TIL1$LEAF == "SLE1"] <- 5
+  TIL1$LEAF[TIL1$LEAF == "SLF1"] <- 6
+
+  TIL1 <- dplyr::rename(TIL1, GL = GL1)
+  TIL1 <- dplyr::rename(TIL1, DL = DL1)
+  TIL1 <- dplyr::rename(TIL1, TIL_SHB = SHB1)
+
+  # Tiller 2 -------------------------------------------------------------------
+
+  TIL2 <-
+    x %>%
+    dplyr::select(TRT,
+                  REP,
+                  WMGT,
+                  SMPL,
+                  NRTE,
+                  HILL,
+                  TIL2,
+                  GL2,
+                  DL2,
+                  SHB2,
+                  SLA2,
+                  SLB2,
+                  SLC2,
+                  SLD2,
+                  SLE2,
+                  SLF2) %>%
+    gather(
+      TIL_key,
+      TIL,
+      starts_with("TIL2"),
+      -TRT,
+      -REP,
+      -WMGT,
+      -SMPL,
+      -NRTE,
+      -HILL,
+      -GL2,
+      -DL2,
+      -SHB2,
+      -SLA2,
+      -SLB2,
+      -SLC2,
+      -SLD2,
+      -SLE2,
+      -SLF2
+    )
+
+  TIL2 <-
+    TIL2 %>%
+    gather(LEAF, LEAF_SHB, starts_with("SL")) %>%
+    dplyr::select(-TIL_key)
+
+  TIL2$LEAF[TIL2$LEAF == "SLA2"] <- 1
+  TIL2$LEAF[TIL2$LEAF == "SLB2"] <- 2
+  TIL2$LEAF[TIL2$LEAF == "SLC2"] <- 3
+  TIL2$LEAF[TIL2$LEAF == "SLD2"] <- 4
+  TIL2$LEAF[TIL2$LEAF == "SLE2"] <- 5
+  TIL2$LEAF[TIL2$LEAF == "SLF2"] <- 6
+
+  TIL2 <- dplyr::rename(TIL2, GL = GL2)
+  TIL2 <- dplyr::rename(TIL2, DL = DL2)
+  TIL2 <- dplyr::rename(TIL2, TIL_SHB = SHB2)
+
+  # Tiller 3 -------------------------------------------------------------------
+
+  TIL3 <-
+    x %>%
+    dplyr::select(TRT,
+                  REP,
+                  WMGT,
+                  SMPL,
+                  NRTE,
+                  HILL,
+                  TIL3,
+                  GL3,
+                  DL3,
+                  SHB3,
+                  SLA3,
+                  SLB3,
+                  SLC3,
+                  SLD3,
+                  SLE3,
+                  SLF3) %>%
+    gather(
+      TIL_key,
+      TIL,
+      starts_with("TIL3"),
+      -TRT,
+      -REP,
+      -WMGT,
+      -SMPL,
+      -NRTE,
+      -HILL,
+      -GL3,
+      -DL3,
+      -SHB3,
+      -SLA3,
+      -SLB3,
+      -SLC3,
+      -SLD3,
+      -SLE3,
+      -SLF3
+    )
+
+  TIL3 <-
+    TIL3 %>%
+    gather(LEAF, LEAF_SHB, starts_with("SL")) %>%
+    dplyr::select(-TIL_key)
+
+  TIL3$LEAF[TIL3$LEAF == "SLA3"] <- 1
+  TIL3$LEAF[TIL3$LEAF == "SLB3"] <- 2
+  TIL3$LEAF[TIL3$LEAF == "SLC3"] <- 3
+  TIL3$LEAF[TIL3$LEAF == "SLD3"] <- 4
+  TIL3$LEAF[TIL3$LEAF == "SLE3"] <- 5
+  TIL3$LEAF[TIL3$LEAF == "SLF3"] <- 6
+
+  TIL3 <- dplyr::rename(TIL3, GL = GL3)
+  TIL3 <- dplyr::rename(TIL3, DL = DL3)
+  TIL3 <- dplyr::rename(TIL3, TIL_SHB = SHB3)
+
+  # Tiller 4 -------------------------------------------------------------------
+
+  TIL4 <-
+    x %>%
+    dplyr::select(TRT,
+                  REP,
+                  WMGT,
+                  SMPL,
+                  NRTE,
+                  HILL,
+                  TIL4,
+                  GL4,
+                  DL4,
+                  SHB4,
+                  SLA4,
+                  SLB4,
+                  SLC4,
+                  SLD4,
+                  SLE4,
+                  SLF4) %>%
+    gather(
+      TIL_key,
+      TIL,
+      starts_with("TIL4"),
+      -TRT,
+      -REP,
+      -WMGT,
+      -SMPL,
+      -NRTE,
+      -HILL,
+      -GL4,
+      -DL4,
+      -SHB4,
+      -SLA4,
+      -SLB4,
+      -SLC4,
+      -SLD4,
+      -SLE4,
+      -SLF4
+    )
+
+  TIL4 <-
+    TIL4 %>%
+    gather(LEAF, LEAF_SHB, starts_with("SL")) %>%
+    dplyr::select(-TIL_key)
+
+  TIL4$LEAF[TIL4$LEAF == "SLA4"] <- 1
+  TIL4$LEAF[TIL4$LEAF == "SLB4"] <- 2
+  TIL4$LEAF[TIL4$LEAF == "SLC4"] <- 3
+  TIL4$LEAF[TIL4$LEAF == "SLD4"] <- 4
+  TIL4$LEAF[TIL4$LEAF == "SLE4"] <- 5
+  TIL4$LEAF[TIL4$LEAF == "SLF4"] <- 6
+
+  TIL4 <- dplyr::rename(TIL4, GL = GL4)
+  TIL4 <- dplyr::rename(TIL4, DL = DL4)
+  TIL4 <- dplyr::rename(TIL4, TIL_SHB = SHB4)
+
+  x <- rbind(TIL1, TIL2, TIL3, TIL4)
+  x <- left_join(HILL, x)
+
+  # Add dates ------------------------------------------------------------------
 
   if (files == "data/DS2015_Raw_22DAI.csv") {
     DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
@@ -58,7 +278,9 @@ reformat <- function(files) {
   }
 }
 
+# Run reformat function for all 2015 files -------------------------------------
 DS2015 <- ldply(.data = files, .fun = reformat)
+
 
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] = 0
@@ -67,32 +289,41 @@ DS2015$NRTE[which(DS2015$NRTE == "N2")] = 120
 
 # Add treatment numbers --------------------------------------------------------
 DS2015$TRT <- NA
-DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 0)] = "FLD_N0"
-DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 100)] = "FLD_N100"
-DS2015$TRT[which(DS2015$WMGT == "FLD" & DS2015$NRTE == 120)] = "FLD_N120"
-DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 0)] = "AWD_N0"
-DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 100)] = "AWD_N100"
-DS2015$TRT[which(DS2015$WMGT == "AWD" & DS2015$NRTE == 120)] = "AWD_N120"
-
-DS2015 <-
-  as_tibble(DS2015) %>% dplyr::select(DATE,
-                                      ASMT,
-                                      WMGT,
-                                      NRTE,
-                                      REP,
-                                      TRT,
-                                      NTIL_mean,
-                                      NTShB_mean,
-                                      LShB_rating_mean,
-                                      LShB_rating_sd,
-                                      TShB_rating_mean,
-                                      TShB_rating_sd,
-                                      TShB_incidence_mean,
-                                      TShB_incidence_sd,
-                                      GL_value_mean,
-                                      DL_value_mean)
+DS2015$TRT[which(DS2015$WMGT == "FLD" &
+                   DS2015$NRTE == 0)] = "FLD_N0"
+DS2015$TRT[which(DS2015$WMGT == "FLD" &
+                   DS2015$NRTE == 100)] = "FLD_N100"
+DS2015$TRT[which(DS2015$WMGT == "FLD" &
+                   DS2015$NRTE == 120)] = "FLD_N120"
+DS2015$TRT[which(DS2015$WMGT == "AWD" &
+                   DS2015$NRTE == 0)] = "AWD_N0"
+DS2015$TRT[which(DS2015$WMGT == "AWD" &
+                   DS2015$NRTE == 100)] = "AWD_N100"
+DS2015$TRT[which(DS2015$WMGT == "AWD" &
+                   DS2015$NRTE == 120)] = "AWD_N120"
 
 DS2015$YEAR <- year(DS2015$DATE)
+
+# Arrange columns --------------------------------------------------------------
+DS2015 <-
+  DS2015 %>% dplyr::select(
+    YEAR,
+    DATE,
+    ASMT,
+    REP,
+    TRT,
+    WMGT,
+    NRTE,
+    SMPL,
+    HILL,
+    TIL,
+    LEAF,
+    GL,
+    DL,
+    TShB_incidence,
+    TIL_SHB,
+    LEAF_SHB
+  )
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")

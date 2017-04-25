@@ -11,17 +11,30 @@
   * HGHT - plant height  
   * NTIL - number of tillers  
   * NTShB - number of tillers with sheath blight  
-  * NSHShB - number of ?
-  * TIL1...TIL4 - tiller number 1...tiller number 4  
+  * ShB1...ShB4 - tiller sheath blight rating (in 2015)  
+  * NSHShB - tiller sheath blight rating (in 2016)  
+  * TIL1...TIL4 (2015) 
+    - tiller number 1...tiller number 4  
+  * TIL (2016) 
+    - tiller number 1...4
   * SHB1...SHB4 - sheath blight severity rating for tiller number 1...tiller number 4  
   * GL1...GL4 - number of green leaves in tiller number 1...tiller number 4  
   * DL1...DL4 - number of dead leaves in tiller number 1...tiller number 4  
-  * SLA1...SLA4 - sheath blight severity rating in leaf 1 of tiller number 1...tiller number 4  
-  * SLB1...SLB4 - sheath blight severity rating in leaf 2 of tiller number 1...tiller number 4  
-  * SLC1...SLC4 - sheath blight severity rating in leaf 3 of tiller number 1...tiller number 4  
-  * SLD1...SLD4 - sheath blight severity rating in leaf 4 of tiller number 1...tiller number 4  
-  * SLE1...SLE4 - sheath blight severity rating in leaf 5 of tiller number 1...tiller number 4  
-  * SLF1...SLF4 - sheath blight severity rating in leaf 6 of tiller number 1...tiller number 4  
+  * SLAn...SLFn (2015)  
+      * SLA1...SLA4 - sheath blight severity rating in leaf 1 of tiller number 1...tiller number 4  
+      * SLB1...SLB4 - sheath blight severity rating in leaf 2 of tiller number 1...tiller number 4  
+      * SLC1...SLC4 - sheath blight severity rating in leaf 3 of tiller number 1...tiller number 4  
+      * SLD1...SLD4 - sheath blight severity rating in leaf 4 of tiller number 1...tiller number 4  
+      * SLE1...SLE4 - sheath blight severity rating in leaf 5 of tiller number 1...tiller number 4  
+      * SLF1...SLF4 - sheath blight severity rating in leaf 6 of tiller number 1...tiller number 4  
+      
+  * SLA .. SLF (2016)  
+      * SLA - sheath blight severity rating in leaf 1 of tiller  
+      * SLB - sheath blight severity rating in leaf 2 of tiller  
+      * SLC - sheath blight severity rating in leaf 3 of tiller  
+      * SLD - sheath blight severity rating in leaf 4 of tiller  
+      * SLE - sheath blight severity rating in leaf 5 of tiller
+      * SLF - sheath blight severity rating in leaf 6 of tiller
 
 ## Measurements:
 
@@ -54,7 +67,7 @@
 
 
 ### 2016
-15/03/2016
-29/03/206
-12/04/2016
-26/04/2016
+15/03/2016  
+29/03/2016  
+12/04/2016  
+26/04/2016  
