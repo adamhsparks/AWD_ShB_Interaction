@@ -177,6 +177,11 @@ Source: CRAN
 Version: 0.6.12
 Hash: e53fb8c58673df868183697e39a6a4d6
 
+Package: doBy
+Source: CRAN
+Version: 4.5-15
+Hash: f32b2857ddce80d26942e88ed22d4947
+
 Package: dplyr
 Source: CRAN
 Version: 0.5.0

@@ -100,7 +100,7 @@ DS2016$TRT[which(DS2016$WMGT == "AWD" &
 DS2016 <-
   DS2016 %>%
   gather(LEAF,
-         LEAF_SHB,
+         LEAF_ShB,
          starts_with("ShBL"),
          -DATE,
          -ASMT,
@@ -134,10 +134,10 @@ DS2016 <-
 
 DS2016$TShB_incidence <- round(DS2016$TShB_incidence, 2)
 
-DS2016 <- dplyr::rename(DS2016, TIL_SHB = NSHShB)
+DS2016 <- dplyr::rename(DS2016, TIL_ShB = NSHShB)
 
 DS2016$YEAR <- year(DS2016$DATE)
-DS2016$LEAF_SHB <- as.numeric(DS2016$LEAF_SHB)
+DS2016$LEAF_ShB <- as.numeric(DS2016$LEAF_ShB)
 
 DS2016 <-
   DS2016 %>% dplyr::select(
@@ -146,8 +146,6 @@ DS2016 <-
     ASMT,
     REP,
     TRT,
-    WMGT,
-    NRTE,
     SMPL,
     HILL,
     TIL,
@@ -155,9 +153,12 @@ DS2016 <-
     GL,
     DL,
     TShB_incidence,
-    TIL_SHB,
-    LEAF_SHB
+    TIL_ShB,
+    LEAF_ShB,
+    WMGT,
+    NRTE
   )
+
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

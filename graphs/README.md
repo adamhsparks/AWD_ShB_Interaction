@@ -24,6 +24,8 @@ Raw data for green leaves and dead leaves
 
 <img src="TShB_Incidence_boxplot.png"  style="display: block; margin: auto;" />
 
+<img src="TShB_AUDPS_boxplot.png"  style="display: block; margin: auto;" />
+
 ******
 
 ## Leaf sheath blight data

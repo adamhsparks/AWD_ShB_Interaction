@@ -57,11 +57,14 @@ set.seed(27)
 ### 2015 Tiller Sheath Blight Incidence Model
 ```{r 2015_TShB_incidence}
 
+# Separate the TRT column into the two treatments for analysis
+AUDPS <- separate(data = AUDPS, col = TRT, into = c("WMGT", "NRTE"))
+
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
+TShB_incidence_lmm_2015 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS_2015),
+                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -119,9 +122,9 @@ plot_joint_random_error_dist(d = rdf,
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
+TShB_incidence_lmm_2016 <- MCMCglmm(AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS_2016),
+                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -178,7 +181,7 @@ None of the treatments in either year, 2015 or 2016, were significant. The
 see `pMCMC` values and also posterior graphs. There is a large amount of overlap
 in all of the posterior graphs.
 
-The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernable patterns.
+The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
 
 The random effects are all fairly equally distributed except for 2016 tiller sheath blight severity where water management:replicate has a larger effect. This is not surprising given that the plot and replicate sizes were different in 2016 due to the use of two fields in the IRRI experiment station, see the [2016 plot layout plan](https://github.com/adamhsparks/AWD_ShB_Interaction/blob/master/doc/Metadata/2016%20AWD%20ShB%20Metadata/ExptLayoutAWD2016.pdf).
 

@@ -4,11 +4,9 @@ Analysis of split plot design using MCMCglmm
 Notes on this analysis before starting
 --------------------------------------
 
-**_THIS IS BEING REVISED_**
+***THIS IS BEING REVISED***
 
-This analysis is unlikely to be the correct approach. The data are being examined
-again and a new analysis will be conducted that accounts for the ordinal scale
-used for data collection for severity.
+This analysis is unlikely to be the correct approach. The data are being examined again and a new analysis will be conducted that accounts for the ordinal scale used for data collection for severity.
 
 However, these analyses should be correct for the tiller sheath blight incidence.
 
@@ -44,241 +42,17 @@ set.seed(27)
 2015
 ----
 
-### 2015 Leaf Sheath Blight Severity Model
-
-``` r
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_lmm_2015 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~REP, 
-                          data = as.data.frame(AUDPS_2015),
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
-
-summary(LShB_lmm_2015)
-```
-
-    ## 
-    ##  Iterations = 5001:499901
-    ##  Thinning interval  = 100
-    ##  Sample size  = 4950 
-    ## 
-    ##  DIC: 32.53085 
-    ## 
-    ##  G-structure:  ~REP
-    ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.3212 2.106e-10   0.6424     4950
-    ## 
-    ##  R-structure:  ~units
-    ## 
-    ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.1739  0.06468   0.3076     5304
-    ## 
-    ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
-    ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.18276 -0.40852  0.68368     4950 0.470
-    ## WMGTFLD           0.02199 -0.54582  0.59875     4604 0.952
-    ## NRTE100           0.35849 -0.24375  0.92693     4950 0.207
-    ## NRTE120           0.29549 -0.28844  0.85184     5166 0.289
-    ## WMGTFLD:NRTE100  -0.35040 -1.20296  0.45835     4950 0.391
-    ## WMGTFLD:NRTE120  -0.20466 -1.00060  0.63703     4950 0.600
-
-``` r
-# create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2015$Sol[, c(1, 7:10)])
-x <- 1:nrow(reps)
-reps <- melt(reps)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-trts <-  data.frame(LShB_lmm_2015$Sol[, 2:6])
-trts <- melt(trts)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(LShB_lmm_2015$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-1.png)
-
-``` r
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-2.png)
-
-``` r
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-3.png)
-
-``` r
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-4.png)
-
-``` r
-# check random effects
-plotTrace(LShB_lmm_2015$VCV, log = TRUE)
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-5.png)
-
-``` r
-# plot joint distibution of error
-rdf <- data.frame(LShB_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
-```
-
-![](Analysis_files/figure-markdown_github/2015_LShB-6.png)
-
-### 2015 Tiller Sheath Blight Severity Model
-
-``` r
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2015 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~REP, 
-                          data = as.data.frame(AUDPS_2015),
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
-
-summary(TShB_severity_lmm_2015)
-```
-
-    ## 
-    ##  Iterations = 5001:499901
-    ##  Thinning interval  = 100
-    ##  Sample size  = 4950 
-    ## 
-    ##  DIC: 121.3647 
-    ## 
-    ##  G-structure:  ~REP
-    ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     3.838 4.455e-08    13.63     4950
-    ## 
-    ##  R-structure:  ~units
-    ## 
-    ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     7.072     2.98    12.59     5218
-    ## 
-    ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
-    ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        1.5512  -1.5066   4.6242     4950 0.271
-    ## WMGTFLD           -0.4959  -4.3343   2.9956     4950 0.780
-    ## NRTE100            1.6474  -1.8609   5.5490     4950 0.360
-    ## NRTE120            1.9708  -1.8964   5.5139     4950 0.273
-    ## WMGTFLD:NRTE100   -0.8858  -5.8375   4.6204     4950 0.745
-    ## WMGTFLD:NRTE120    0.2727  -4.7269   5.6523     4950 0.903
-
-``` r
-# create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
-reps <- melt(reps)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
-trts <- melt(trts)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_severity_lmm_2015$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-1.png)
-
-``` r
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-2.png)
-
-``` r
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-3.png)
-
-``` r
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-4.png)
-
-``` r
-# check random effects
-plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-5.png)
-
-``` r
-# plot joint distibution of error
-rdf <- data.frame(TShB_severity_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
-```
-
-![](Analysis_files/figure-markdown_github/2015_TShB-6.png)
-
 ### 2015 Tiller Sheath Blight Incidence Model
 
 ``` r
+# Separate the TRT column into the two treatments for analysis
+AUDPS <- separate(data = AUDPS, col = TRT, into = c("WMGT", "NRTE"))
+
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE,
+TShB_incidence_lmm_2015 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS_2015),
+                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -294,27 +68,29 @@ summary(TShB_incidence_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 52.91684 
+    ##  DIC: 120.7347 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP    0.5817 3.352e-10    1.423     4950
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     2.678  9.2e-08    10.69     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.4012   0.1606   0.7105     4950
+    ## units     6.935    2.766    12.17     5367
     ## 
-    ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
+    ##  Location effects: AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)       0.30862 -0.53455  1.14737     4950 0.395
-    ## WMGTFLD           0.17858 -0.70971  1.03754     4950 0.684
-    ## NRTE100           0.22314 -0.66777  1.09792     4950 0.600
-    ## NRTE120           0.57763 -0.29675  1.49782     4950 0.196
-    ## WMGTFLD:NRTE100  -0.06425 -1.26695  1.22434     4950 0.917
-    ## WMGTFLD:NRTE120  -0.38576 -1.54844  0.96010     4950 0.544
+    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+    ## (Intercept)         2.3177  -0.5295   5.4005     4950 0.1176  
+    ## WMGTFLD             0.5983  -2.9244   4.3426     4577 0.7543  
+    ## NRTEN100            2.0712  -1.7951   5.6033     4950 0.2505  
+    ## NRTEN120            3.1649  -0.6522   6.5576     5159 0.0885 .
+    ## WMGTFLD:NRTEN100   -1.3002  -6.7856   3.6195     4950 0.6242  
+    ## WMGTFLD:NRTEN120    0.2726  -4.7023   5.6104     4950 0.9055  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -389,239 +165,14 @@ plot_joint_random_error_dist(d = rdf,
 2016
 ----
 
-### 2016 Leaf Sheath Blight Severity Model
-
-``` r
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_lmm_2016 <- MCMCglmm(LShB_AUDPS ~ WMGT * NRTE,
-                          random = ~REP, 
-                          data = as.data.frame(AUDPS_2016),
-                          verbose = FALSE,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          prior = eprior,
-                          pr = TRUE)
-
-summary(LShB_lmm_2016)
-```
-
-    ## 
-    ##  Iterations = 5001:499901
-    ##  Thinning interval  = 100
-    ##  Sample size  = 4950 
-    ## 
-    ##  DIC: 32.25566 
-    ## 
-    ##  G-structure:  ~REP
-    ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP    0.7996 8.26e-09    2.457     4950
-    ## 
-    ##  R-structure:  ~units
-    ## 
-    ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.3342   0.1045   0.6858     4619
-    ## 
-    ##  Location effects: LShB_AUDPS ~ WMGT * NRTE 
-    ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)        1.2195   0.3022   2.1000     4950 0.0251 *
-    ## WMGTFLD           -0.2005  -0.9936   0.6705     4950 0.6077  
-    ## NRTE180            0.0789  -0.7059   0.8956     4950 0.8356  
-    ## WMGTFLD:NRTE180    0.4464  -0.6741   1.5097     4950 0.4085  
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-``` r
-# create data frames for generating diagnostic plots
-reps <- data.frame(LShB_lmm_2016$Sol[, c(1, 5:8)])
-reps <- melt(reps)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-trts <-  data.frame(LShB_lmm_2016$Sol[, 2:4])
-trts <- melt(trts)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(LShB_lmm_2016$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-1.png)
-
-``` r
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-2.png)
-
-``` r
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-3.png)
-
-``` r
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-4.png)
-
-``` r
-# check random effects
-plotTrace(LShB_lmm_2016$VCV, log = TRUE)
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-5.png)
-
-``` r
-# plot joint distibution of error
-rdf <- data.frame(LShB_lmm_2016$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
-```
-
-![](Analysis_files/figure-markdown_github/2016_LShB-6.png)
-
-### 2016 Tiller Sheath Blight Severity Model
-
-``` r
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2016 <- MCMCglmm(TShB_AUDPS ~ WMGT * NRTE,
-                                   random = ~REP, 
-                          data = as.data.frame(AUDPS_2016),
-                          verbose = FALSE,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          prior = eprior,
-                          pr = TRUE)
-
-summary(TShB_severity_lmm_2016)
-```
-
-    ## 
-    ##  Iterations = 5001:499901
-    ##  Thinning interval  = 100
-    ##  Sample size  = 4950 
-    ## 
-    ##  DIC: 96.59792 
-    ## 
-    ##  G-structure:  ~REP
-    ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     45.25 5.925e-05      148     4473
-    ## 
-    ##  R-structure:  ~units
-    ## 
-    ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     18.99     4.86    42.07     5484
-    ## 
-    ##  Location effects: TShB_AUDPS ~ WMGT * NRTE 
-    ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
-    ## (Intercept)      19.80760 12.05199 27.09265     4950 0.00162 **
-    ## WMGTFLD           0.68904 -5.22026  6.67068     5554 0.79596   
-    ## NRTE180           0.02273 -6.21960  6.13512     5254 0.99960   
-    ## WMGTFLD:NRTE180   3.73864 -4.71647 12.16492     5279 0.34263   
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-``` r
-# create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
-reps <- melt(reps)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
-trts <- melt(trts)
-```
-
-    ## No id variables; using all as measure variables
-
-``` r
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_severity_lmm_2016$Sol)
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-1.png)
-
-``` r
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-2.png)
-
-``` r
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-3.png)
-
-``` r
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-4.png)
-
-``` r
-# check random effects
-plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-5.png)
-
-``` r
-# plot joint distibution of error
-rdf <- data.frame(TShB_severity_lmm_2016$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
-```
-
-![](Analysis_files/figure-markdown_github/2016_TShB-6.png)
-
 ### 2016 Tiller Sheath Blight Incidence Model
 
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2016 <- MCMCglmm(TShB_incidence_mean ~ WMGT * NRTE, 
+TShB_incidence_lmm_2016 <- MCMCglmm(AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS_2016),
+                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -637,25 +188,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 60.16531 
+    ##  DIC: 80.75692 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     3.757 9.814e-08    13.33     4577
+    ## REP     35.64 0.0002254    108.2     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     1.906   0.5744    3.958     4950
+    ## units     6.974    1.552    14.61     4950
     ## 
-    ##  Location effects: TShB_incidence_mean ~ WMGT * NRTE 
+    ##  Location effects: AUDPS ~ WMGT * NRTE 
     ## 
     ##                 post.mean l-95% CI u-95% CI eff.samp    pMCMC    
-    ## (Intercept)       11.1450   8.9223  13.3652     4950 0.000808 ***
-    ## WMGTFLD           -0.7830  -2.6862   1.1982     5447 0.384646    
-    ## NRTE180            1.5331  -0.4276   3.4791     4950 0.105859    
-    ## WMGTFLD:NRTE180    0.8049  -1.9439   3.7234     4950 0.534545    
+    ## (Intercept)       48.5942  42.6155  54.5426     5023 0.000404 ***
+    ## WMGTFLD            1.7139  -2.3394   5.3820     4950 0.318384    
+    ## NRTEN60           -4.9906  -8.6134  -1.1616     4850 0.011717 *  
+    ## WMGTFLD:NRTEN60   -0.2142  -5.3626   5.3024     5090 0.926465    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -736,7 +287,7 @@ None of the diagnostic plots show any signs of autocorrelation or any other obvi
 
 None of the treatments in either year, 2015 or 2016, were significant. The see `pMCMC` values and also posterior graphs. There is a large amount of overlap in all of the posterior graphs.
 
-The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernable patterns.
+The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
 
 The random effects are all fairly equally distributed except for 2016 tiller sheath blight severity where water management:replicate has a larger effect. This is not surprising given that the plot and replicate sizes were different in 2016 due to the use of two fields in the IRRI experiment station, see the [2016 plot layout plan](https://github.com/adamhsparks/AWD_ShB_Interaction/blob/master/doc/Metadata/2016%20AWD%20ShB%20Metadata/ExptLayoutAWD2016.pdf).
 
@@ -748,8 +299,8 @@ sessionInfo()
 ```
 
     ## R version 3.4.0 (2017-04-21)
-    ## Platform: x86_64-apple-darwin16.5.0 (64-bit)
-    ## Running under: macOS Sierra 10.12.4
+    ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+    ## Running under: OS X El Capitan 10.11.6
     ## 
     ## Matrix products: default
     ## BLAS/LAPACK: /usr/local/Cellar/openblas/0.2.19/lib/libopenblasp-r0.2.19.dylib
@@ -761,14 +312,14 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] plotMCMC_2.0-0      fitdistrplus_1.0-9  survival_2.41-3    
-    ##  [4] lattice_0.20-35     MCMCglmm_2.24       ape_4.1            
-    ##  [7] coda_0.19-1         Matrix_1.2-9        car_2.1-4          
-    ## [10] MASS_7.3-47         dplyr_0.5.0         purrr_0.2.2        
-    ## [13] readr_1.1.0         tidyr_0.6.1         tibble_1.3.0       
-    ## [16] ggplot2_2.2.1       tidyverse_1.1.1     viridis_0.4.0      
-    ## [19] viridisLite_0.2.0   agricolae_1.2-4     lubridate_1.6.0    
-    ## [22] ggthemes_3.4.0      plyr_1.8.4          reshape2_1.4.2     
+    ##  [1] MCMCglmm_2.24       ape_4.1             coda_0.19-1        
+    ##  [4] Matrix_1.2-9        viridis_0.4.0       viridisLite_0.2.0  
+    ##  [7] lubridate_1.6.0     ggthemes_3.4.0      plyr_1.8.4         
+    ## [10] dplyr_0.5.0         purrr_0.2.2         readr_1.1.0        
+    ## [13] tidyr_0.6.1         tibble_1.3.0        ggplot2_2.2.1      
+    ## [16] tidyverse_1.1.1     plotMCMC_2.0-0      lattice_0.20-35    
+    ## [19] reshape2_1.4.2      agricolae_1.2-4     car_2.1-4          
+    ## [22] fitdistrplus_1.0-9  survival_2.41-3     MASS_7.3-47        
     ## [25] ProjectTemplate_0.7
     ## 
     ## loaded via a namespace (and not attached):
@@ -791,7 +342,7 @@ sessionInfo()
     ## [49] gplots_3.0.1       grid_3.4.0         parallel_3.4.0    
     ## [52] gdata_2.17.0       forcats_0.2.0      deldir_0.1-14     
     ## [55] haven_1.0.0        splines_3.4.0      hms_0.3           
-    ## [58] knitr_1.15.1       boot_1.3-19        cubature_1.3-6    
+    ## [58] knitr_1.15.1       cubature_1.3-6     boot_1.3-19       
     ## [61] corpcor_1.6.9      LearnBayes_2.15    packrat_0.4.8-1   
     ## [64] evaluate_0.10      modelr_0.1.0       nloptr_1.0.4      
     ## [67] MatrixModels_0.4-1 cellranger_1.1.0   gtable_0.2.0      
