@@ -4,12 +4,6 @@ Analysis of split plot design using MCMCglmm
 Notes on this analysis before starting
 --------------------------------------
 
-***THIS IS BEING REVISED***
-
-This analysis is unlikely to be the correct approach. The data are being examined again and a new analysis will be conducted that accounts for the ordinal scale used for data collection for severity.
-
-However, these analyses should be correct for the tiller sheath blight incidence.
-
 #### How to interpret these analyses
 
 For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`, which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
