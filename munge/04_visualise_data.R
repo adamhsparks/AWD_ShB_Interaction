@@ -1,7 +1,6 @@
-# density plot of LShB_rating data ----------------------------------------
-ggplot(RAW_data, aes(x = LEAF_ShB, linetype = as.factor(YEAR))) +
-  geom_density(aes(fill = as.factor(YEAR)),
-               alpha = 0.5) +
+# histogram plot of LShB_rating data ----------------------------------------
+ggplot(RAW_data, aes(x = LEAF_ShB)) +
+  geom_histogram(aes(fill = YEAR), stat = "count") +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
@@ -9,10 +8,9 @@ ggplot(RAW_data, aes(x = LEAF_ShB, linetype = as.factor(YEAR))) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ggsave("graphs/LShB_rating.png", width = 6, height = 4)
 
-# density plot of TShB_rating data ----------------------------------------
-ggplot(RAW_data, aes(x = TIL_ShB, linetype = as.factor(YEAR))) +
-  geom_density(aes(fill = as.factor(YEAR)),
-               alpha = 0.5) +
+# histogram plot of TShB_rating data ----------------------------------------
+ggplot(RAW_data, aes(x = TIL_ShB)) +
+  geom_histogram(aes(fill = YEAR), stat = "count") +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
@@ -22,10 +20,11 @@ ggsave("graphs/TShB_rating.png", width = 6, height = 4)
 
 
 # density plot of TShB_incidence data ----------------------------------------
-ggplot(RAW_data, aes(x = TShB_incidence, linetype = as.factor(YEAR))) +
-  geom_density(aes(fill = as.factor(YEAR)),
-               alpha = 0.5) +
+ggplot(RAW_data, aes(x = TShB_incidence)) +
+  geom_density(aes(fill = YEAR, colour = YEAR)) +
   viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  viridis::scale_colour_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
@@ -37,8 +36,8 @@ ggsave("graphs/TShB_incidence.png", width = 6, height = 4)
 
 
 # density plot of green leaf data ----------------------------------------------
-ggplot(RAW_data, aes(x = GL, linetype = as.factor(YEAR))) +
-  geom_density(aes(fill = as.factor(YEAR)),
+ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
+  geom_density(aes(fill = YEAR),
                alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
@@ -47,11 +46,13 @@ ggplot(RAW_data, aes(x = GL, linetype = as.factor(YEAR))) +
   ggtitle("Green Leaf (count)")
 ggsave("graphs/GL_value.png", width = 6, height = 4)
 
-# density plot of dead leaf data -----------------------------------------------
-ggplot(RAW_data, aes(x = DL, linetype = as.factor(YEAR))) +
-  geom_density(aes(fill = as.factor(YEAR)),
+# density plot plot of dead leaf data -----------------------------------------------
+ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
+  geom_density(aes(fill = YEAR),
                alpha = 0.5) +
   viridis::scale_fill_viridis(discrete = TRUE,
+                              name = "Year") +
+  viridis::scale_colour_viridis(discrete = TRUE,
                               name = "Year") +
   scale_linetype(name = "Year") +
   ggtitle("Dry Leaf (count)")
@@ -63,7 +64,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB,
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,
-                   linetype = as.factor(YEAR)),
+                   linetype = YEAR),
                size = 1) +
   viridis::scale_color_viridis(discrete = TRUE,
                                name = "Treatment") +
@@ -79,7 +80,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB,
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,
-                   linetype = as.factor(YEAR)),
+                   linetype = YEAR),
                size = 1) +
   viridis::scale_color_viridis(discrete = TRUE,
                                name = "Treatment") +
@@ -95,7 +96,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   stat_summary(fun.y = "mean", geom = "line",
                aes(group = factor(TRT),
                    colour = TRT,
-                   linetype = as.factor(YEAR)),
+                   linetype = YEAR),
                size = 1) +
   viridis::scale_color_viridis(discrete = TRUE,
                                name = "Treatment") +
