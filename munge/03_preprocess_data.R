@@ -17,6 +17,11 @@ RAW_data$SMPL <- as.factor(RAW_data$SMPL)
 RAW_data$HILL <- as.factor(RAW_data$HILL)
 RAW_data$TIL <- as.factor(RAW_data$TIL)
 RAW_data$LEAF <- as.factor(RAW_data$LEAF)
+RAW_data$TIL_ShB <- as.factor(RAW_data$TIL_ShB)
+RAW_data$LEAF_ShB <- as.factor(RAW_data$LEAF_ShB)
+
+DS2015 <- subset(RAW_data, YEAR == "2015")
+DS2016 <- subset(RAW_data, YEAR == "2016")
 
 # calculate tiller sheath blight incidence AUDPDS ------------------------------
 AUDPS <-
