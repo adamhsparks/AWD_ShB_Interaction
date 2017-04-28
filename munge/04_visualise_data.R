@@ -66,14 +66,13 @@ ggsave("graphs/TShB_severity_over_time.png", width = 6, height = 4)
 # line plot of tiller sheath blight incidence data ---------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
                      group = TShB_incidence)) +
-  stat_summary(fun.y = "mean", geom = "line",
-               aes(group = TRT,
-                   colour = TRT,
-                   linetype = YEAR),
-               size = 1) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Treatment") +
-  scale_linetype(name = "Year") +
+  geom_point(position = position_jitter(width = 0.05),
+             aes(colour = YEAR), size = 0.75) +
+  xlab("Assessment") +
+  ylab("Incidence") +
+  facet_grid(. ~ TRT) +
+  ggtitle("Tiller Sheath Blight Severity Rating Over Time") +
+  theme(strip.text.x = element_text(angle = 90)) +
   xlab("Assessment") +
   ylab("Incidence") +
   ggtitle("Tiller Sheath Blight Incidence Over Time")

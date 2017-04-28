@@ -182,25 +182,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 80.75692 
+    ##  DIC: 71.92803 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     35.64 0.0002254    108.2     4950
+    ## REP     28.41 6.924e-05    92.28     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     6.974    1.552    14.61     4950
+    ## units     7.747    1.715    18.08     4950
     ## 
     ##  Location effects: AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp    pMCMC    
-    ## (Intercept)       48.5942  42.6155  54.5426     5023 0.000404 ***
-    ## WMGTFLD            1.7139  -2.3394   5.3820     4950 0.318384    
-    ## NRTEN60           -4.9906  -8.6134  -1.1616     4850 0.011717 *  
-    ## WMGTFLD:NRTEN60   -0.2142  -5.3626   5.3024     5090 0.926465    
+    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)       48.8935  43.0868  54.9022     4950 <2e-04 ***
+    ## WMGTFLD            1.4645  -3.0718   5.7389     4950 0.4529    
+    ## NRTEN60           -5.2142  -9.5209  -0.8852     4950 0.0234 *  
+    ## WMGTFLD:NRTEN60    1.1160  -5.2055   6.7414     4950 0.6869    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -289,55 +289,115 @@ R Session Info
 ==============
 
 ``` r
-sessionInfo()
+devtools::session_info()
 ```
 
-    ## R version 3.4.0 (2017-04-21)
-    ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    ## Running under: OS X El Capitan 10.11.6
-    ## 
-    ## Matrix products: default
-    ## BLAS/LAPACK: /usr/local/Cellar/openblas/0.2.19/lib/libopenblasp-r0.2.19.dylib
-    ## 
-    ## locale:
-    ## [1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
-    ## 
-    ## attached base packages:
-    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
-    ## 
-    ## other attached packages:
-    ##  [1] MCMCglmm_2.24       ape_4.1             coda_0.19-1        
-    ##  [4] Matrix_1.2-9        viridis_0.4.0       viridisLite_0.2.0  
-    ##  [7] lubridate_1.6.0     ggthemes_3.4.0      plyr_1.8.4         
-    ## [10] dplyr_0.5.0         purrr_0.2.2         readr_1.1.0        
-    ## [13] tidyr_0.6.1         tibble_1.3.0        ggplot2_2.2.1      
-    ## [16] tidyverse_1.1.1     plotMCMC_2.0-0      lattice_0.20-35    
-    ## [19] reshape2_1.4.2      agricolae_1.2-4     car_2.1-4          
-    ## [22] fitdistrplus_1.0-9  survival_2.41-3     MASS_7.3-47        
-    ## [25] ProjectTemplate_0.7
-    ## 
-    ## loaded via a namespace (and not attached):
-    ##  [1] nlme_3.1-131       bitops_1.0-6       pbkrtest_0.4-7    
-    ##  [4] gmodels_2.16.2     httr_1.2.1         rprojroot_1.2     
-    ##  [7] tensorA_0.36       tools_3.4.0        backports_1.0.5   
-    ## [10] R6_2.2.0           KernSmooth_2.23-15 AlgDesign_1.1-7.3 
-    ## [13] DBI_0.6-1          lazyeval_0.2.0     mgcv_1.8-17       
-    ## [16] colorspace_1.3-2   nnet_7.3-12        sp_1.2-4          
-    ## [19] gridExtra_2.2.1    mnormt_1.5-5       klaR_0.6-12       
-    ## [22] compiler_3.4.0     rvest_0.3.2        quantreg_5.33     
-    ## [25] SparseM_1.77       expm_0.999-2       xml2_1.1.1        
-    ## [28] labeling_0.3       caTools_1.17.1     scales_0.4.1      
-    ## [31] psych_1.7.3.21     stringr_1.2.0      digest_0.6.12     
-    ## [34] foreign_0.8-67     minqa_1.2.4        rmarkdown_1.4     
-    ## [37] htmltools_0.3.5    lme4_1.1-13        readxl_1.0.0      
-    ## [40] combinat_0.0-8     jsonlite_1.4       gtools_3.5.0      
-    ## [43] spdep_0.6-12       magrittr_1.5       Rcpp_0.12.10      
-    ## [46] munsell_0.4.3      stringi_1.1.5      yaml_2.1.14       
-    ## [49] gplots_3.0.1       grid_3.4.0         parallel_3.4.0    
-    ## [52] gdata_2.17.0       forcats_0.2.0      deldir_0.1-14     
-    ## [55] haven_1.0.0        splines_3.4.0      hms_0.3           
-    ## [58] knitr_1.15.1       cubature_1.3-6     boot_1.3-19       
-    ## [61] corpcor_1.6.9      LearnBayes_2.15    packrat_0.4.8-1   
-    ## [64] evaluate_0.10      modelr_0.1.0       nloptr_1.0.4      
-    ## [67] MatrixModels_0.4-1 cellranger_1.1.0   gtable_0.2.0      
-    ## [70] assertthat_0.2.0   broom_0.4.2        cluster_2.0.6
+    ## Session info --------------------------------------------------------------
+
+    ##  setting  value                       
+    ##  version  R version 3.4.0 (2017-04-21)
+    ##  system   x86_64, darwin15.6.0        
+    ##  ui       unknown                     
+    ##  language (EN)                        
+    ##  collate  en_AU.UTF-8                 
+    ##  tz       Australia/Brisbane          
+    ##  date     2017-04-28
+
+    ## Packages ------------------------------------------------------------------
+
+    ##  package         * version  date       source        
+    ##  agricolae       * 1.2-4    2016-06-12 CRAN (R 3.4.0)
+    ##  AlgDesign         1.1-7.3  2014-10-15 CRAN (R 3.4.0)
+    ##  ape             * 4.1      2017-02-14 CRAN (R 3.4.0)
+    ##  assertthat        0.2.0    2017-04-11 CRAN (R 3.4.0)
+    ##  backports         1.0.5    2017-01-18 CRAN (R 3.4.0)
+    ##  bitops            1.0-6    2013-08-17 CRAN (R 3.4.0)
+    ##  boot              1.3-19   2017-02-11 CRAN (R 3.4.0)
+    ##  broom             0.4.2    2017-02-13 CRAN (R 3.4.0)
+    ##  car             * 2.1-4    2016-12-02 CRAN (R 3.4.0)
+    ##  caTools           1.17.1   2014-09-10 CRAN (R 3.4.0)
+    ##  cellranger        1.1.0    2016-07-27 CRAN (R 3.4.0)
+    ##  cluster           2.0.6    2017-03-10 CRAN (R 3.4.0)
+    ##  coda            * 0.19-1   2016-12-08 CRAN (R 3.4.0)
+    ##  colorspace        1.3-2    2016-12-14 CRAN (R 3.4.0)
+    ##  combinat          0.0-8    2012-10-29 CRAN (R 3.4.0)
+    ##  corpcor           1.6.9    2017-04-01 CRAN (R 3.4.0)
+    ##  cubature          1.3-6    2016-12-12 CRAN (R 3.4.0)
+    ##  DBI               0.6-1    2017-04-01 CRAN (R 3.4.0)
+    ##  deldir            0.1-14   2017-04-22 CRAN (R 3.4.0)
+    ##  devtools          1.12.0   2016-12-05 CRAN (R 3.4.0)
+    ##  digest            0.6.12   2017-01-27 CRAN (R 3.4.0)
+    ##  dplyr           * 0.5.0    2016-06-24 CRAN (R 3.4.0)
+    ##  evaluate          0.10     2016-10-11 CRAN (R 3.4.0)
+    ##  expm              0.999-2  2017-03-29 CRAN (R 3.4.0)
+    ##  fitdistrplus    * 1.0-9    2017-03-24 CRAN (R 3.4.0)
+    ##  forcats           0.2.0    2017-01-23 CRAN (R 3.4.0)
+    ##  foreign           0.8-67   2016-09-13 CRAN (R 3.4.0)
+    ##  gdata             2.17.0   2015-07-04 CRAN (R 3.4.0)
+    ##  ggplot2         * 2.2.1    2016-12-30 CRAN (R 3.4.0)
+    ##  ggthemes        * 3.4.0    2017-02-19 CRAN (R 3.4.0)
+    ##  gmodels           2.16.2   2015-07-22 CRAN (R 3.4.0)
+    ##  gplots            3.0.1    2016-03-30 CRAN (R 3.4.0)
+    ##  gridExtra         2.2.1    2016-02-29 CRAN (R 3.4.0)
+    ##  gtable            0.2.0    2016-02-26 CRAN (R 3.4.0)
+    ##  gtools            3.5.0    2015-05-29 CRAN (R 3.4.0)
+    ##  haven             1.0.0    2016-09-23 CRAN (R 3.4.0)
+    ##  hms               0.3      2016-11-22 CRAN (R 3.4.0)
+    ##  htmltools         0.3.5    2016-03-21 CRAN (R 3.4.0)
+    ##  httr              1.2.1    2016-07-03 CRAN (R 3.4.0)
+    ##  jsonlite          1.4      2017-04-08 CRAN (R 3.4.0)
+    ##  KernSmooth        2.23-15  2015-06-29 CRAN (R 3.4.0)
+    ##  klaR              0.6-12   2014-08-06 CRAN (R 3.4.0)
+    ##  knitr             1.15.1   2016-11-22 CRAN (R 3.4.0)
+    ##  labeling          0.3      2014-08-23 CRAN (R 3.4.0)
+    ##  lattice         * 0.20-35  2017-03-25 CRAN (R 3.4.0)
+    ##  lazyeval          0.2.0    2016-06-12 CRAN (R 3.4.0)
+    ##  LearnBayes        2.15     2014-05-29 CRAN (R 3.4.0)
+    ##  lme4              1.1-13   2017-04-19 CRAN (R 3.4.0)
+    ##  lubridate       * 1.6.0    2016-09-13 CRAN (R 3.4.0)
+    ##  magrittr          1.5      2014-11-22 CRAN (R 3.4.0)
+    ##  MASS            * 7.3-47   2017-02-26 CRAN (R 3.4.0)
+    ##  Matrix          * 1.2-9    2017-03-14 CRAN (R 3.4.0)
+    ##  MatrixModels      0.4-1    2015-08-22 CRAN (R 3.4.0)
+    ##  MCMCglmm        * 2.24     2016-11-14 CRAN (R 3.4.0)
+    ##  memoise           1.1.0    2017-04-21 CRAN (R 3.4.0)
+    ##  mgcv              1.8-17   2017-02-08 CRAN (R 3.4.0)
+    ##  minqa             1.2.4    2014-10-09 CRAN (R 3.4.0)
+    ##  mnormt            1.5-5    2016-10-15 CRAN (R 3.4.0)
+    ##  modelr            0.1.0    2016-08-31 CRAN (R 3.4.0)
+    ##  munsell           0.4.3    2016-02-13 CRAN (R 3.4.0)
+    ##  nlme              3.1-131  2017-02-06 CRAN (R 3.4.0)
+    ##  nloptr            1.0.4    2014-08-04 CRAN (R 3.4.0)
+    ##  nnet              7.3-12   2016-02-02 CRAN (R 3.4.0)
+    ##  packrat           0.4.8-1  2016-09-07 CRAN (R 3.4.0)
+    ##  pbkrtest          0.4-7    2017-03-15 CRAN (R 3.4.0)
+    ##  plotMCMC        * 2.0-0    2014-03-12 CRAN (R 3.4.0)
+    ##  plyr            * 1.8.4    2016-06-08 CRAN (R 3.4.0)
+    ##  ProjectTemplate * 0.7      2016-08-11 CRAN (R 3.4.0)
+    ##  psych             1.7.3.21 2017-03-22 CRAN (R 3.4.0)
+    ##  purrr           * 0.2.2    2016-06-18 CRAN (R 3.4.0)
+    ##  quantreg          5.33     2017-04-18 CRAN (R 3.4.0)
+    ##  R6                2.2.0    2016-10-05 CRAN (R 3.4.0)
+    ##  Rcpp              0.12.10  2017-03-19 CRAN (R 3.4.0)
+    ##  readr           * 1.1.0    2017-03-22 CRAN (R 3.4.0)
+    ##  readxl            1.0.0    2017-04-18 CRAN (R 3.4.0)
+    ##  reshape2        * 1.4.2    2016-10-22 CRAN (R 3.4.0)
+    ##  rmarkdown         1.4      2017-03-24 CRAN (R 3.4.0)
+    ##  rprojroot         1.2      2017-01-16 CRAN (R 3.4.0)
+    ##  rvest             0.3.2    2016-06-17 CRAN (R 3.4.0)
+    ##  scales            0.4.1    2016-11-09 CRAN (R 3.4.0)
+    ##  sp                1.2-4    2016-12-22 CRAN (R 3.4.0)
+    ##  SparseM           1.77     2017-04-23 CRAN (R 3.4.0)
+    ##  spdep             0.6-12   2017-04-06 CRAN (R 3.4.0)
+    ##  stringi           1.1.5    2017-04-07 CRAN (R 3.4.0)
+    ##  stringr           1.2.0    2017-02-18 CRAN (R 3.4.0)
+    ##  survival        * 2.41-3   2017-04-04 CRAN (R 3.4.0)
+    ##  tensorA           0.36     2010-12-01 CRAN (R 3.4.0)
+    ##  tibble          * 1.3.0    2017-04-01 CRAN (R 3.4.0)
+    ##  tidyr           * 0.6.1    2017-01-10 CRAN (R 3.4.0)
+    ##  tidyverse       * 1.1.1    2017-01-27 CRAN (R 3.4.0)
+    ##  viridis         * 0.4.0    2017-03-27 CRAN (R 3.4.0)
+    ##  viridisLite     * 0.2.0    2017-03-24 CRAN (R 3.4.0)
+    ##  withr             1.0.2    2016-06-20 CRAN (R 3.4.0)
+    ##  xml2              1.1.1    2017-01-24 CRAN (R 3.4.0)
+    ##  yaml              2.1.14   2016-11-12 CRAN (R 3.4.0)

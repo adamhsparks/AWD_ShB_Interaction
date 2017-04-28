@@ -167,6 +167,13 @@ Source: CRAN
 Version: 0.1-14
 Hash: d898ea6cb91aaf629f785aa898b6e72f
 
+Package: devtools
+Source: CRAN
+Version: 1.12.0
+Hash: bbad95109ae75cbb14099281cda43af2
+Requires: digest, jsonlite, httr, git2r, memoise, rstudioapi, whisker,
+    withr
+
 Package: dichromat
 Source: CRAN
 Version: 2.0-0
@@ -232,6 +239,11 @@ Source: CRAN
 Version: 3.4.0
 Hash: e9f85417507c5352fc05de654bb6f1ab
 Requires: assertthat, colorspace, ggplot2, scales
+
+Package: git2r
+Source: CRAN
+Version: 0.18.0
+Hash: 9dfaafbcca68be29b89ef7783dc1dac0
 
 Package: gmodels
 Source: CRAN
@@ -348,6 +360,12 @@ Package: mcmc
 Source: CRAN
 Version: 0.9-5
 Hash: 83a0dcaeb047387365d9143c3febb2e8
+
+Package: memoise
+Source: CRAN
+Version: 1.1.0
+Hash: 410fcd334bc626db100237cc1370f2e9
+Requires: digest
 
 Package: mime
 Source: CRAN
@@ -470,6 +488,11 @@ Version: 1.2
 Hash: fdcac51a7f47decd60556ceefc3c26b1
 Requires: backports
 
+Package: rstudioapi
+Source: CRAN
+Version: 0.6
+Hash: fd256f8bfb9a64cc35f98b0decb1a79f
+
 Package: rvest
 Source: CRAN
 Version: 0.3.2
@@ -550,6 +573,16 @@ Package: viridisLite
 Source: CRAN
 Version: 0.2.0
 Hash: 10f0c25af3dc84eaae10f5854f47efdb
+
+Package: whisker
+Source: CRAN
+Version: 0.3-2
+Hash: 803d662762e532705c2c066a82d066e7
+
+Package: withr
+Source: CRAN
+Version: 1.0.2
+Hash: 774eb7be9087cdc24b53b74e5359cfac
 
 Package: xml2
 Source: CRAN

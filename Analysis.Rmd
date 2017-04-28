@@ -179,6 +179,6 @@ The random effects are all fairly equally distributed except for 2016 tiller she
 
 # R Session Info
 ```{r session_info}
-sessionInfo()
+devtools::session_info()
 ```
 

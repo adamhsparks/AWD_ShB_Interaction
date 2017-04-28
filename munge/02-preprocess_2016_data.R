@@ -127,6 +127,13 @@ DS2016$LEAF[DS2016$LEAF == "ShBL4"] <- 4
 DS2016$LEAF[DS2016$LEAF == "ShBL5"] <- 5
 DS2016$LEAF[DS2016$LEAF == "ShBL6"] <- 6
 
+# before classifying incidence, set any values where there are more infected
+# tillers in the hill than there are tillers to NA for both columns
+
+DS2016$NTIL[DS2016$NTIL < DS2016$NTShB] <- NA
+DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
+
+# calculate tiller sheath blight incidence
 DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL) %>%
