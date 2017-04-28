@@ -27,57 +27,40 @@ theme(axis.text.x = element_text(size = 8,
 ggsave("graphs/TShB_incidence.png", width = 6, height = 4)
 
 
-# density plot of green leaf data ----------------------------------------------
+# histogram plot of green leaf data ----------------------------------------------
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
-  geom_density(aes(fill = YEAR),
-               alpha = 0.5) +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year") +
-  scale_linetype(name = "Year") +
+  geom_histogram(aes(fill = YEAR)) +
   xlab("Count") +
-  ggtitle("Green Leaf (count)")
+  ggtitle("Green Leaves per Tiller")
 ggsave("graphs/GL_value.png", width = 6, height = 4)
 
-# density plot plot of dead leaf data -----------------------------------------------
+# histogram plot plot of dead leaf data -----------------------------------------------
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
-  geom_density(aes(fill = YEAR),
-               alpha = 0.5) +
-  scale_linetype(name = "Year") +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year") +
-  ggtitle("Dry Leaf (count)")
+  geom_histogram(aes(fill = YEAR)) +
+  xlab("Count") +
+  ggtitle("Dry Leaves per Tiller")
 ggsave("graphs/DL_value.png", width = 6, height = 4)
 
-# line plot of leaf sheath blight severity data --------------------------------
-ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB,
-                     group = LEAF_ShB)) +
-  stat_summary(fun.y = "mean", geom = "line",
-               aes(group = TRT,
-                   colour = TRT,
-                   linetype = YEAR),
-               size = 1) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Treatment") +
-  scale_linetype(name = "Year") +
+# dot plot of leaf sheath blight severity data ---------------------------------
+ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
+  geom_point(position = position_jitter(width = 0.05),
+             aes(colour = YEAR), size = 0.75) +
   xlab("Assessment") +
   ylab("Rating") +
-  ggtitle("Leaf Sheath Blight Severity Over Time")
+  ggtitle("Leaf Sheath Blight Severity Ratings Over Time") +
+  facet_grid(. ~ TRT) +
+  theme(strip.text.x = element_text(angle = 90))
 ggsave("graphs/LShB_severity_over_time.png", width = 6, height = 4)
 
-# line plot of tiller sheath blight severity data ------------------------------
-ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB,
-                     group = TIL_ShB)) +
-  stat_summary(fun.y = "mean", geom = "line",
-               aes(group = TRT,
-                   colour = TRT,
-                   linetype = YEAR),
-               size = 1) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Treatment") +
-  scale_linetype(name = "Year") +
+# dot plot of tiller sheath blight severity data ------------------------------
+ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
+  geom_point(position = position_jitter(width = 0.05),
+             aes(colour = YEAR), size = 0.75) +
   xlab("Assessment") +
   ylab("Rating") +
-  ggtitle("Tiller Sheath Blight Severity Over Time")
+  facet_grid(. ~ TRT) +
+  ggtitle("Tiller Sheath Blight Severity Rating Over Time") +
+  theme(strip.text.x = element_text(angle = 90))
 ggsave("graphs/TShB_severity_over_time.png", width = 6, height = 4)
 
 # line plot of tiller sheath blight incidence data ---------------------------------

@@ -267,6 +267,11 @@ Version: 1.0.0
 Hash: c0a627663eb2abb6172350fa8c4f1167
 Requires: BH, Rcpp, hms, readr, tibble
 
+Package: hexbin
+Source: CRAN
+Version: 1.27.1
+Hash: 378383b2c37556649fd6b2ee0be7e2a5
+
 Package: highr
 Source: CRAN
 Version: 0.6
