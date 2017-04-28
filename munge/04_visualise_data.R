@@ -1,8 +1,6 @@
 # histogram plot of LShB_rating data ----------------------------------------
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year") +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Leaf Sheath Blight Severity Rating")
@@ -11,8 +9,6 @@ ggsave("graphs/LShB_rating.png", width = 6, height = 4)
 # histogram plot of TShB_rating data ----------------------------------------
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year") +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Severity Rating")
@@ -22,10 +18,6 @@ ggsave("graphs/TShB_rating.png", width = 6, height = 4)
 # density plot of TShB_incidence data ----------------------------------------
 ggplot(RAW_data, aes(x = TShB_incidence)) +
   geom_density(aes(fill = YEAR, colour = YEAR)) +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year") +
-  viridis::scale_colour_viridis(discrete = TRUE,
-                              name = "Year") +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Incidence") +
@@ -50,11 +42,9 @@ ggsave("graphs/GL_value.png", width = 6, height = 4)
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
   geom_density(aes(fill = YEAR),
                alpha = 0.5) +
+  scale_linetype(name = "Year") +
   viridis::scale_fill_viridis(discrete = TRUE,
                               name = "Year") +
-  viridis::scale_colour_viridis(discrete = TRUE,
-                              name = "Year") +
-  scale_linetype(name = "Year") +
   ggtitle("Dry Leaf (count)")
 ggsave("graphs/DL_value.png", width = 6, height = 4)
 
@@ -62,7 +52,7 @@ ggsave("graphs/DL_value.png", width = 6, height = 4)
 ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB,
                      group = LEAF_ShB)) +
   stat_summary(fun.y = "mean", geom = "line",
-               aes(group = factor(TRT),
+               aes(group = TRT,
                    colour = TRT,
                    linetype = YEAR),
                size = 1) +
@@ -78,7 +68,7 @@ ggsave("graphs/LShB_severity_over_time.png", width = 6, height = 4)
 ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB,
                      group = TIL_ShB)) +
   stat_summary(fun.y = "mean", geom = "line",
-               aes(group = factor(TRT),
+               aes(group = TRT,
                    colour = TRT,
                    linetype = YEAR),
                size = 1) +
@@ -94,7 +84,7 @@ ggsave("graphs/TShB_severity_over_time.png", width = 6, height = 4)
 ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
                      group = TShB_incidence)) +
   stat_summary(fun.y = "mean", geom = "line",
-               aes(group = factor(TRT),
+               aes(group = TRT,
                    colour = TRT,
                    linetype = YEAR),
                size = 1) +
@@ -106,35 +96,27 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   ggtitle("Tiller Sheath Blight Incidence Over Time")
 ggsave("graphs/TShB_incidence_over_time.png", width = 6, height = 4)
 
-# boxplots of tiller sheath blight incidence data ------------------------------
-ggplot(RAW_data, aes(x = as.factor(TRT), y = TShB_incidence)) +
-  geom_boxplot(aes(fill = YEAR, colour = YEAR)) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Year") +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year",
-                              option = "A") +
+# violin/dot plots of tiller sheath blight incidence data ----------------------
+ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
+  geom_point(position = position_jitter(width = 0.2),
+             aes(colour = YEAR), size = 0.1) +
+  geom_violin(fill = NA) +
   theme(axis.text.x = element_text(size = 8,
                                    angle = 45,
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("Incidence per Hill") +
   ggtitle("Tiller Sheath Blight Incidence")
-ggsave("graphs/TShB_Incidence_boxplot.png", width = 6, height = 4)
+ggsave("graphs/TShB_Incidence_plot.png", width = 6, height = 4)
 
-# boxplots of tiller sheath blight AUDPS data ------------------------------
-ggplot(AUDPS, aes(x = as.factor(TRT), y = AUDPS)) +
-  geom_boxplot(aes(fill = YEAR, colour = YEAR)) +
-  viridis::scale_color_viridis(discrete = TRUE,
-                               name = "Year") +
-  viridis::scale_fill_viridis(discrete = TRUE,
-                              name = "Year",
-                              option = "A") +
+# dotplots of tiller sheath blight AUDPS data ----------------------------------
+ggplot(AUDPS, aes(x = TRT, y = AUDPS)) +
+  geom_point(aes(colour = YEAR)) +
   theme(axis.text.x = element_text(size = 8,
                                    angle = 45,
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   ggtitle("Tiller Sheath Blight Incidence")
-ggsave("graphs/TShB_AUDPS_boxplot.png", width = 6, height = 4)
+ggsave("graphs/TShB_AUDPS_dotplot.png", width = 6, height = 4)
 

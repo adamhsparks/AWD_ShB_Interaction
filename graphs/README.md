@@ -22,9 +22,9 @@ Raw data for green leaves and dead leaves
 
 <img src="TShB_incidence_over_time.png"  style="display: block; margin: auto;" />
 
-<img src="TShB_Incidence_boxplot.png"  style="display: block; margin: auto;" />
+<img src="TShB_Incidence.png"  style="display: block; margin: auto;" />
 
-<img src="TShB_AUDPS_boxplot.png"  style="display: block; margin: auto;" />
+<img src="TShB_AUDPS_dotplot.png"  style="display: block; margin: auto;" />
 
 ******
 
