@@ -84,6 +84,19 @@ IRRI Dry Season (2)
     
 ******
 
+**Disease Rating Scale**
+
+Disease was rated using an ordinal scale for field evaluation of sheath blight (S Savary & N Castilla).
+
+* **Rating Scale - Severity (%)**  
+    * 0 - 0,  
+    * 1 - 1%,  
+    * 2 - 5%,  
+    * 3 - 15%,  
+    * 4 - 50%  
+
+******
+
 **Nitrogen Management Rates**  
 
 <table width = "500">

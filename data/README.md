@@ -41,12 +41,13 @@
   * HGHT - cm  
   * NTIL - count  
   * NSHB - count  
-  * SHBn - sheath blight assessment scale for field evaluation (S Savary & N Castilla); severity(%)-rating scale,  
-      * 0-0,  
-      * 1%-1,  
-      * 5%-2,  
-      * 15%-3,  
-      * 50%-4  
+  * SHBn - sheath blight assessment scale for field evaluation (S Savary & N Castilla)  
+    * Rating Scale - Severity (%)  
+        * 0 - 0,  
+        * 1 - 1%,  
+        * 2 - 5%,  
+        * 3 - 15%,  
+        * 4 - 50%  
   * GLn  - Green leaf number (count)  
   * DLn  - Dead leaf number (count)  
   * SLAn - sheath blight assessment scale  
