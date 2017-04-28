@@ -94,6 +94,7 @@ Disease was rated using an ordinal scale for field evaluation of sheath blight (
     * 2 - 5%,  
     * 3 - 15%,  
     * 4 - 50%  
+    * 5 - >50%  
 
 ******
 

@@ -4,12 +4,6 @@
 RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
                             as.data.frame(DS2016)))
 
-# remove improper ratings for Tiller and Leaf Sheath Blight --------------------
-# there are incidences of leaf sheath blight and tiller sheath blight where they
-# are incorrectly entered as 5, the scale is 0-4 only
-RAW_data$LEAF_ShB[RAW_data$LEAF_ShB == 5] <- NA
-RAW_data$TIL_ShB[RAW_data$TIL_ShB == 5] <- NA
-
 # convert columns to factor ----------------------------------------------------
 RAW_data$YEAR <- factor(RAW_data$YEAR)
 RAW_data$ASMT <- factor(RAW_data$ASMT)

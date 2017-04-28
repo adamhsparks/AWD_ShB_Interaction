@@ -171,7 +171,7 @@ Package: devtools
 Source: CRAN
 Version: 1.12.0
 Hash: bbad95109ae75cbb14099281cda43af2
-Requires: digest, jsonlite, httr, git2r, memoise, rstudioapi, whisker,
+Requires: digest, git2r, httr, jsonlite, memoise, rstudioapi, whisker,
     withr
 
 Package: dichromat
@@ -232,7 +232,7 @@ Package: ggplot2
 Source: CRAN
 Version: 2.2.1
 Hash: 46e5cb78836848aa44655e577433f54b
-Requires: digest, gtable, lazyeval, plyr, reshape2, scales, tibble
+Requires: digest, gtable, lazyeval, plyr, tibble, scales, reshape2
 
 Package: ggthemes
 Source: CRAN
@@ -278,11 +278,6 @@ Source: CRAN
 Version: 1.0.0
 Hash: c0a627663eb2abb6172350fa8c4f1167
 Requires: BH, Rcpp, hms, readr, tibble
-
-Package: hexbin
-Source: CRAN
-Version: 1.27.1
-Hash: 378383b2c37556649fd6b2ee0be7e2a5
 
 Package: highr
 Source: CRAN
@@ -503,7 +498,7 @@ Package: scales
 Source: CRAN
 Version: 0.4.1
 Hash: 2d008b6e3fb9938255669ddf3c85f1f3
-Requires: RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr
+Requires: RColorBrewer, Rcpp, dichromat, labeling, plyr, munsell
 
 Package: selectr
 Source: CRAN
@@ -567,7 +562,7 @@ Package: viridis
 Source: CRAN
 Version: 0.4.0
 Hash: 5bdac1bcf74a10a7a96f82191f498ab7
-Requires: ggplot2, gridExtra, viridisLite
+Requires: viridisLite, gridExtra, ggplot2
 
 Package: viridisLite
 Source: CRAN

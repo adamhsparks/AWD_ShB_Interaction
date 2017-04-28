@@ -48,6 +48,8 @@
         * 2 - 5%,  
         * 3 - 15%,  
         * 4 - 50%  
+        * 5 - >50%  
+
   * GLn  - Green leaf number (count)  
   * DLn  - Dead leaf number (count)  
   * SLAn - sheath blight assessment scale  
