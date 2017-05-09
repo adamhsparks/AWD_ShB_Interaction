@@ -18,6 +18,11 @@ Source: CRAN
 Version: 0.6-1
 Hash: 4aef5bda70897c1663d5b8bae2f4419a
 
+Package: KernSmooth
+Source: CRAN
+Version: 2.23-15
+Hash: aa5fd163456721a62d34a98fddc510bf
+
 Package: LearnBayes
 Source: CRAN
 Version: 2.15
@@ -255,7 +260,7 @@ Package: gplots
 Source: CRAN
 Version: 3.0.1
 Hash: b7abe122479c203aa236499b7fc4b816
-Requires: caTools, gdata, gtools
+Requires: KernSmooth, caTools, gdata, gtools
 
 Package: gridExtra
 Source: CRAN
