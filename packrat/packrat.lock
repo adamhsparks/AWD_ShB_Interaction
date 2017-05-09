@@ -518,8 +518,8 @@ Hash: 4ffcf86fffee89e7b859f760528dd545
 
 Package: spdep
 Source: CRAN
-Version: 0.6-12
-Hash: 93bc919f86394e011487da77e7aba327
+Version: 0.6-13
+Hash: fb568c1fb0c87fd24d601d0c57949468
 Requires: LearnBayes, coda, deldir, expm, gmodels, sp
 
 Package: stringi

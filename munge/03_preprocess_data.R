@@ -41,15 +41,12 @@ RAW_data$TRT <-
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
-# calculate tiller sheath blight incidence AUDPDS ------------------------------
-AUDPS <-
+# calculate AUDPS values -------------------------------------------------------
+TShB <-
   RAW_data %>%
-  group_by(YEAR, DATE, REP, TRT) %>%
+  group_by(YEAR, DATE, REP, TRT, SMPL, HILL, TIL) %>%
   summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
   arrange(YEAR, REP, TRT, DATE)
 
-AUDPS <- ddply(AUDPS,
-               c("YEAR", "REP", "TRT"),
-               summarise,
-               AUDPS = audps(PLOT_TShB_incidence, dates = DATE))
-AUDPS$AUDPS <- as.numeric(AUDPS$AUDPS)
+TShB_AUDPS <- mutate(TShB, TShB_AUC_inc = audps(PLOT_TShB_incidence, dates = DATE))
+AUDPS$AUDPS <- as.numeric(AUDPS$TShB_AUC_inc)
