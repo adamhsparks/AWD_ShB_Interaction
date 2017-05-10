@@ -50,7 +50,7 @@ set.seed(27)
 ```{r 2015_TShB_incidence}
 
 # Separate the TRT column into the two treatments for analysis
-AUDPS <- separate(data = AUDPS, col = TRT, into = c("WMGT", "NRTE"))
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))

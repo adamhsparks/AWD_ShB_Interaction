@@ -12,7 +12,6 @@ plot_diagnostic_lines <- function(d, x, title) {
     group = variable
   )) +
     geom_line() +
-    theme_tufte() +
     xlab("Iteration Number") +
     ylab(NULL) +
     facet_grid(variable ~ .) +
@@ -29,7 +28,6 @@ plot_replicate_posteriors <- function(d, title) {
                                 name = "Variable") +
     viridis::scale_color_viridis(discrete = TRUE,
                                 name = "Variable") +
-    theme_tufte() +
     ggtitle(paste(title))
 }
 
@@ -43,7 +41,6 @@ plot_treatment_posteriors <- function(d, title) {
                                 name = "Variable") +
     viridis::scale_color_viridis(discrete = TRUE,
                                   name = "Variable") +
-    theme_tufte() +
     ggtitle(paste(title))
 }
 
@@ -51,6 +48,5 @@ plot_joint_random_error_dist <- function(d, title) {
   ggplot(d, aes(x = sqrt(REP), y = sqrt(units))) +
     geom_density2d() +
     geom_abline(intercept = 0, slope = 1) +
-    ggtitle(paste(title)) +
-    theme_tufte()
+    ggtitle(paste(title))
 }

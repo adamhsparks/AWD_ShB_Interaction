@@ -40,7 +40,7 @@ set.seed(27)
 
 ``` r
 # Separate the TRT column into the two treatments for analysis
-AUDPS <- separate(data = AUDPS, col = TRT, into = c("WMGT", "NRTE"))
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
@@ -62,27 +62,27 @@ summary(TShB_incidence_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 120.7347 
+    ##  DIC: 180.6266 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     2.678  9.2e-08    10.69     4950
+    ##     post.mean  l-95% CI u-95% CI eff.samp
+    ## REP     0.688 0.0009616    2.035     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     6.935    2.766    12.17     5367
+    ## units    0.2446   0.1853   0.3127     5094
     ## 
     ##  Location effects: AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)         2.3177  -0.5295   5.4005     4950 0.1176  
-    ## WMGTFLD             0.5983  -2.9244   4.3426     4577 0.7543  
-    ## NRTEN100            2.0712  -1.7951   5.6033     4950 0.2505  
-    ## NRTEN120            3.1649  -0.6522   6.5576     5159 0.0885 .
-    ## WMGTFLD:NRTEN100   -1.3002  -6.7856   3.6195     4950 0.6242  
-    ## WMGTFLD:NRTEN120    0.2726  -4.7023   5.6104     4950 0.9055  
+    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)        0.29180 -0.41139  1.00268     4950 0.2651    
+    ## WMGTFLD            0.19546 -0.10844  0.51573     4950 0.2283    
+    ## NRTEN100           0.25662 -0.05612  0.56049     4950 0.1030    
+    ## NRTEN120           0.60904  0.28740  0.91452     4950 <2e-04 ***
+    ## WMGTFLD:NRTEN100  -0.10612 -0.54801  0.32716     4950 0.6388    
+    ## WMGTFLD:NRTEN120  -0.40513 -0.86633  0.02570     4950 0.0651 .  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -182,25 +182,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 71.92803 
+    ##  DIC: 164.0519 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     28.41 6.924e-05    92.28     4950
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     6.299   0.1059    21.34     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     7.747    1.715    18.08     4950
+    ## units    0.9728   0.6052     1.37     4950
     ## 
     ##  Location effects: AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-    ## (Intercept)       48.8935  43.0868  54.9022     4950 <2e-04 ***
-    ## WMGTFLD            1.4645  -3.0718   5.7389     4950 0.4529    
-    ## NRTEN60           -5.2142  -9.5209  -0.8852     4950 0.0234 *  
-    ## WMGTFLD:NRTEN60    1.1160  -5.2055   6.7414     4950 0.6869    
+    ##                 post.mean l-95% CI u-95% CI eff.samp    pMCMC    
+    ## (Intercept)       12.3024   9.8008  14.6569     5277 0.000404 ***
+    ## WMGTFLD            0.3832  -0.3794   1.1257     4950 0.315556    
+    ## NRTEN60           -1.2037  -1.9472  -0.4329     5201 0.002020 ** 
+    ## WMGTFLD:NRTEN60   -0.9033  -1.9881   0.1888     5065 0.098990 .  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -296,12 +296,12 @@ devtools::session_info()
 
     ##  setting  value                       
     ##  version  R version 3.4.0 (2017-04-21)
-    ##  system   x86_64, darwin15.6.0        
+    ##  system   x86_64, darwin16.5.0        
     ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-04-28
+    ##  date     2017-05-10
 
     ## Packages ------------------------------------------------------------------
 
@@ -332,10 +332,9 @@ devtools::session_info()
     ##  expm              0.999-2  2017-03-29 CRAN (R 3.4.0)
     ##  fitdistrplus    * 1.0-9    2017-03-24 CRAN (R 3.4.0)
     ##  forcats           0.2.0    2017-01-23 CRAN (R 3.4.0)
-    ##  foreign           0.8-67   2016-09-13 CRAN (R 3.4.0)
+    ##  foreign           0.8-68   2017-04-24 CRAN (R 3.4.0)
     ##  gdata             2.17.0   2015-07-04 CRAN (R 3.4.0)
     ##  ggplot2         * 2.2.1    2016-12-30 CRAN (R 3.4.0)
-    ##  ggthemes        * 3.4.0    2017-02-19 CRAN (R 3.4.0)
     ##  gmodels           2.16.2   2015-07-22 CRAN (R 3.4.0)
     ##  gplots            3.0.1    2016-03-30 CRAN (R 3.4.0)
     ##  gridExtra         2.2.1    2016-02-29 CRAN (R 3.4.0)
@@ -357,7 +356,7 @@ devtools::session_info()
     ##  lubridate       * 1.6.0    2016-09-13 CRAN (R 3.4.0)
     ##  magrittr          1.5      2014-11-22 CRAN (R 3.4.0)
     ##  MASS            * 7.3-47   2017-02-26 CRAN (R 3.4.0)
-    ##  Matrix          * 1.2-9    2017-03-14 CRAN (R 3.4.0)
+    ##  Matrix          * 1.2-10   2017-04-28 CRAN (R 3.4.0)
     ##  MatrixModels      0.4-1    2015-08-22 CRAN (R 3.4.0)
     ##  MCMCglmm        * 2.24     2016-11-14 CRAN (R 3.4.0)
     ##  memoise           1.1.0    2017-04-21 CRAN (R 3.4.0)
@@ -388,7 +387,7 @@ devtools::session_info()
     ##  scales            0.4.1    2016-11-09 CRAN (R 3.4.0)
     ##  sp                1.2-4    2016-12-22 CRAN (R 3.4.0)
     ##  SparseM           1.77     2017-04-23 CRAN (R 3.4.0)
-    ##  spdep             0.6-12   2017-04-06 CRAN (R 3.4.0)
+    ##  spdep             0.6-13   2017-04-25 CRAN (R 3.4.0)
     ##  stringi           1.1.5    2017-04-07 CRAN (R 3.4.0)
     ##  stringr           1.2.0    2017-02-18 CRAN (R 3.4.0)
     ##  survival        * 2.41-3   2017-04-04 CRAN (R 3.4.0)
@@ -396,8 +395,8 @@ devtools::session_info()
     ##  tibble          * 1.3.0    2017-04-01 CRAN (R 3.4.0)
     ##  tidyr           * 0.6.1    2017-01-10 CRAN (R 3.4.0)
     ##  tidyverse       * 1.1.1    2017-01-27 CRAN (R 3.4.0)
-    ##  viridis         * 0.4.0    2017-03-27 CRAN (R 3.4.0)
-    ##  viridisLite     * 0.2.0    2017-03-24 CRAN (R 3.4.0)
+    ##  viridis           0.4.0    2017-03-27 CRAN (R 3.4.0)
+    ##  viridisLite       0.2.0    2017-03-24 CRAN (R 3.4.0)
     ##  withr             1.0.2    2016-06-20 CRAN (R 3.4.0)
     ##  xml2              1.1.1    2017-01-24 CRAN (R 3.4.0)
     ##  yaml              2.1.14   2016-11-12 CRAN (R 3.4.0)
