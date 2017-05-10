@@ -6,38 +6,53 @@ Here we check the probability distribution that best fits these data. I'm follow
 2015 Check probability distribution fit for tiller sheath blight incidence
 --------------------------------------------------------------------------
 
+### Normal
+
 ``` r
 AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](Probability_distribution_checks_files/figure-markdown_github/norm-1.png)
 
 ``` r
 car::qqp(AUDPS15$AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-2.png)
+![](Probability_distribution_checks_files/figure-markdown_github/norm-2.png)
+
+### Exponential
+
+``` r
+AUDPS15 <- subset(AUDPS, YEAR == "2015")
+f1 <- fitdist(AUDPS15$AUDPS, "exp")
+plot(f1)
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github/exp-1.png)
+
+``` r
+car::qqp(AUDPS15$AUDPS, "exp")
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github/exp-2.png)
 
 ------------------------------------------------------------------------
 
 2016 Check probability distribution fit for tiller sheath blight incidence
 --------------------------------------------------------------------------
 
+Until the issue with more diseased tillers than tillers in a hill is addressed, this section will not work completely and properly.
+
 ``` r
 AUDPS156 <- subset(AUDPS, YEAR == "2016")
-f1 <- fitdist(AUDPS156$AUDPS, "norm")
-plot(f1)
-```
-
-![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-2-1.png)
-
-``` r
+# f1 <- fitdist(AUDPS156$AUDPS, "norm")
+#plot(f1)
 car::qqp(AUDPS156$AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-2-2.png)
+![](Probability_distribution_checks_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 Conclusions
 -----------

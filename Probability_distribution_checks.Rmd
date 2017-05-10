@@ -13,22 +13,34 @@ Here we check the probability distribution that best fits these data. I'm follow
 
 ## 2015 Check probability distribution fit for tiller sheath blight incidence
 
-```{r, results='hide', message=FALSE, warning=FALSE}
+### Normal
+```{r norm, results='hide', message=FALSE, warning=FALSE}
 AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$AUDPS, "norm")
 plot(f1)
 car::qqp(AUDPS15$AUDPS, "norm")
+```
 
+### Exponential
+
+```{r exp, results='hide', message=FALSE, warning=FALSE}
+AUDPS15 <- subset(AUDPS, YEAR == "2015")
+f1 <- fitdist(AUDPS15$AUDPS, "exp")
+plot(f1)
+car::qqp(AUDPS15$AUDPS, "exp")
 ```
 
 *******
 
 ## 2016 Check probability distribution fit for tiller sheath blight incidence
 
+Until the issue with more diseased tillers than tillers in a hill is addressed,
+this section will not work completely and properly.
+
 ```{r, results='hide', message=FALSE, warning=FALSE}
 AUDPS156 <- subset(AUDPS, YEAR == "2016")
-f1 <- fitdist(AUDPS156$AUDPS, "norm")
-plot(f1)
+# f1 <- fitdist(AUDPS156$AUDPS, "norm")
+#plot(f1)
 car::qqp(AUDPS156$AUDPS, "norm")
 
 ```
