@@ -14,10 +14,9 @@ DS2016_A1 <-
 
 # Fill dates
 DS2016_A1[, 1] <- as.Date("2016-03-15", origin = "1970-01-01")
-ASMT <- rep(1, nrow(DS2016_A1))
-DS2016_A1 <- cbind(ASMT, DS2016_A1)
+DS2016_A1$ASMT <- rep(1, nrow(DS2016_A1))
+DS2016_A1$PLOT <- rep(1:16, each = 72)
 
-DS2016_A1 <- dplyr::select(DS2016_A1, DATE, everything())
 
 # Second assessement -----------------------------------------------------------
 DS2016_A2 <- read_csv("data/DS2016_2.csv")
@@ -28,10 +27,8 @@ DS2016_A2 <-
 
 # Fill dates
 DS2016_A2[, 1] <- as.Date("2016-03-29", origin = "1970-01-01")
-ASMT <- rep(2, nrow(DS2016_A2))
-DS2016_A2 <- cbind(ASMT, DS2016_A2)
-
-DS2016_A2 <- dplyr::select(DS2016_A2, DATE, everything())
+DS2016_A2$ASMT <- rep(2, nrow(DS2016_A2))
+DS2016_A2$PLOT <- rep(1:16, each = 72)
 
 
 # Third assessement ------------------------------------------------------------
@@ -43,10 +40,8 @@ DS2016_A3 <-
 
 # Fill dates
 DS2016_A3[, 1] <- as.Date("2016-04-12", origin = "1970-01-01")
-ASMT <- rep(3, nrow(DS2016_A3))
-DS2016_A3 <- cbind(ASMT, DS2016_A3)
-
-DS2016_A3 <- dplyr::select(DS2016_A3, DATE, everything())
+DS2016_A3$ASMT <- rep(3, nrow(DS2016_A3))
+DS2016_A3$PLOT <- rep(1:16, each = 72)
 
 # Fourth assessment ------------------------------------------------------------
 DS2016_A4 <- read_csv("data/DS2016_4.csv")
@@ -57,10 +52,8 @@ DS2016_A4 <-
 
 # Fill dates
 DS2016_A4[, 1] <- as.Date("2016-04-26", origin = "1970-01-01")
-ASMT <- rep(4, nrow(DS2016_A4))
-DS2016_A4 <- cbind(ASMT, DS2016_A4)
-
-DS2016_A4 <- dplyr::select(DS2016_A4, DATE, everything())
+DS2016_A4$ASMT <- rep(4, nrow(DS2016_A4))
+DS2016_A4$PLOT <- rep(1:16, each = 72)
 
 # Combine all assessments ------------------------------------------------------
 DS2016 <- rbind(
@@ -104,6 +97,7 @@ DS2016 <-
          starts_with("ShBL"),
          -DATE,
          -ASMT,
+         -PLOT,
          -TRT,
          -REP,
          -WMGT,
@@ -136,7 +130,7 @@ DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 # calculate tiller sheath blight incidence
 DS2016 <-
   DS2016 %>%
-  group_by(DATE, ASMT, REP, TRT, WMGT, NRTE, SMPL, HILL) %>%
+  group_by(DATE, ASMT, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
   mutate(TShB_incidence = NTShB / NTIL)
 
 DS2016$TShB_incidence <- round(DS2016$TShB_incidence, 2)
@@ -152,6 +146,7 @@ DS2016 <-
     DATE,
     ASMT,
     REP,
+    PLOT,
     TRT,
     SMPL,
     HILL,
@@ -166,6 +161,21 @@ DS2016 <-
     NRTE
   )
 
+DS2016 <- as_tibble(arrange(DS2016, ASMT, PLOT))
+
+# 2016
+DATE_1_2016 <- DATE_2_2016 <- DS2016$DATE
+DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] = NA
+DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] = NA
+
+DATE_1 <- na.omit(DATE_1_2016)
+DATE_2 <- na.omit(DATE_2_2016)
+
+DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
+DS2016$DAYS <-
+  c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
+
+rm(DS2016_A1, DS2016_A2, DS2016_A3, DS2016_A4, DATE_1, DATE_1_2016, DATE_2, DATE_2_2016, DAYS_2016)
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

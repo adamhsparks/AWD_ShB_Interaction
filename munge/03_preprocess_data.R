@@ -1,7 +1,5 @@
 
-# Add plot and observation numbers ---------------------------------------------
-DS2015$PLOT <- as.factor(rep(1:24, 4))
-DS2016$PLOT <- as.factor(rep(1:16, 4))
+
 
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
@@ -11,6 +9,7 @@ RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
 # convert columns to factor ----------------------------------------------------
 RAW_data$YEAR <- factor(RAW_data$YEAR)
 RAW_data$ASMT <- factor(RAW_data$ASMT)
+RAW_data$PLOT <- factor(RAW_data$PLOT)
 RAW_data$REP <- factor(RAW_data$REP)
 RAW_data$TRT <- factor(RAW_data$TRT)
 RAW_data$WMGT <- factor(RAW_data$WMGT)
@@ -45,49 +44,56 @@ RAW_data$TRT <-
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
-# Create new columns of dates to calcluate AUDPS -------------------------------
-#2015
-DATE_1_2015 <- DATE_2_2015 <- DS2015$DATE
-DATE_1_2015[which(DATE_1_2015 == min(DATE_1_2015))] = NA
-DATE_2_2015[which(DATE_2_2015 == max(DATE_2_2015))] = NA
 
-DATE_1 <- na.omit(DATE_1_2015)
-DATE_2 <- na.omit(DATE_2_2015)
-
-DAYS_2015 <- time_length(DATE_1 - DATE_2, unit = "day")
-DS2015$DAYS <-
-  c(rep(0, times = (nrow(DS2015) - length(DAYS_2015))), DAYS_2015)
-
-# 2016
-DATE_1_2016 <- DATE_2_2016 <- DS2016$DATE
-DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] = NA
-DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] = NA
-
-DATE_1 <- na.omit(DATE_1_2016)
-DATE_2 <- na.omit(DATE_2_2016)
-
-DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
-DS2016$DAYS <-
-  c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
 
 # calculate AUDPS values -------------------------------------------------------
 
+# 2015 AUDPC -------------------------------------------------------------------
 TShB_15 <-
   DS2015 %>%
-  group_by(DATE, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL, TIL, DAYS) %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
-  arrange(REP, TRT, SMPL, HILL, TIL, DATE)
+  arrange(PLOT)
 
-AUDPS <- TShB_15[, c(1, 9:11)]
-reshape2::dcast(AUDPS, DATE + DAYS ~ TIL + PLOT_TShB_incidence)
+TShB_wide <-
+  dcast(TShB_15, PLOT ~ ASMT + DAYS, value.var = "PLOT_TShB_incidence")
 
-(TShB_15, DAYS, value = c(DATE, REP, TRT, WMGT, NRTE, SMPL, HILL, TIL, PLOT_TShB_incidence))
+AUDPS <-
+  audps(evaluation = TShB_wide[, 2:6], dates = as_vector(TShB_15[1:5, 6]))
 
-TShB_15 <-
-  TShB_15 %>%
-  group_by(DATE, REP, TRT, WMGT, NRTE, SMPL, HILL, TIL) %>%
-  mutate(PLOT_TShB_auc = audps(evaluation = PLOT_TShB_incidence,
-                               dates = DAYS))
+AUDPS_15 <-
+  as_tibble(cbind(
+    PLOT = 1:24,
+    AUDPS = round(AUDPS, 2))
+  )
 
-TShB_AUDPS <-
-  mutate(TShB_15, TShB_AUC_inc = audps(PLOT_TShB_incidence, dates = DAYS))
+AUDPS_15$PLOT <- as.factor(as.character(AUDPS_15$PLOT))
+
+TShB_15 <- left_join(TShB_15, AUDPS_15, by = "PLOT")
+
+# 2016 AUDPC -------------------------------------------------------------------
+
+TShB_16 <-
+  DS2016 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
+  arrange(PLOT)
+
+TShB_wide <-
+  dcast(TShB_16, PLOT ~ ASMT + DAYS, value.var = "PLOT_TShB_incidence")
+
+AUDPS <-
+  audps(evaluation = TShB_wide[, 2:5], dates = as_vector(TShB_16[1:4, 6]))
+
+AUDPS_16 <-
+  as_tibble(cbind(
+    PLOT = 1:16,
+    AUDPS = round(AUDPS, 2)
+  ))
+
+AUDPS_16$PLOT <- as.factor(as.character(AUDPS_16$PLOT))
+
+TShB_16 <- left_join(TShB_16, AUDPS_16, by = "PLOT")
+# Merge AUDPS data -------------------------------------------------------------
+
+AUDPS <- rbind(TShB_15, TShB_16)

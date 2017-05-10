@@ -7,6 +7,11 @@ reformat <- function(files) {
   x <- read_csv(files)
   x[is.na(x)] <- 0
 
+  x <- arrange(x, REP, TRT)
+
+  # add plot numbers
+  x$PLOT <- rep(1:24, each = 18)
+
   # ensure that all leaf sheath blight observations are numeric ----------------
   x <-
     x %>% mutate_each(funs(as.numeric), starts_with("SL"))
@@ -230,6 +235,8 @@ DS2015$TRT[which(DS2015$WMGT == "AWD" &
 
 DS2015$YEAR <- year(DS2015$DATE)
 
+DS2015$PLOT <- rep(1:24, each = 432)
+
 # Arrange columns --------------------------------------------------------------
 DS2015 <-
   DS2015 %>% dplyr::select(
@@ -237,6 +244,7 @@ DS2015 <-
     DATE,
     ASMT,
     REP,
+    PLOT,
     TRT,
     SMPL,
     HILL,
@@ -250,6 +258,23 @@ DS2015 <-
     WMGT,
     NRTE
   )
+
+DS2015 <- as_tibble(arrange(DS2015, ASMT, PLOT))
+
+# Create new columns of dates to calcluate AUDPS -------------------------------
+#2015
+DATE_1_2015 <- DATE_2_2015 <- DS2015$DATE
+DATE_1_2015[which(DATE_1_2015 == min(DATE_1_2015))] = NA
+DATE_2_2015[which(DATE_2_2015 == max(DATE_2_2015))] = NA
+
+DATE_1 <- na.omit(DATE_1_2015)
+DATE_2 <- na.omit(DATE_2_2015)
+
+DAYS_2015 <- time_length(DATE_1 - DATE_2, unit = "day")
+DS2015$DAYS <-
+  c(rep(0, times = (nrow(DS2015) - length(DAYS_2015))), DAYS_2015)
+
+rm(files, reformat, DATE_1_2015, DATE_2_2015, DAYS_2015)
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")
