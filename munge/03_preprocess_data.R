@@ -1,6 +1,7 @@
 
 
 
+
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
 RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
@@ -48,7 +49,7 @@ DS2016 <- subset(RAW_data, YEAR == "2016")
 
 # calculate AUDPS values -------------------------------------------------------
 
-# 2015 AUDPC -------------------------------------------------------------------
+# 2015 Tiller Incidence AUDPS --------------------------------------------------
 TShB_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -56,22 +57,20 @@ TShB_15 <-
   arrange(PLOT)
 
 TShB_wide <-
-  dcast(TShB_15, PLOT ~ ASMT + DAYS, value.var = "PLOT_TShB_incidence")
+  dcast(TShB_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 AUDPS <-
   audps(evaluation = TShB_wide[, 2:6], dates = as_vector(TShB_15[1:5, 6]))
 
 AUDPS_15 <-
-  as_tibble(cbind(
-    PLOT = 1:24,
-    AUDPS = round(AUDPS, 2))
-  )
+  as_tibble(cbind(PLOT = 1:24,
+                  AUDPS = round(AUDPS, 2)))
 
 AUDPS_15$PLOT <- as.factor(as.character(AUDPS_15$PLOT))
 
 TShB_15 <- left_join(TShB_15, AUDPS_15, by = "PLOT")
 
-# 2016 AUDPC -------------------------------------------------------------------
+# 2016 Tiller Incidence AUDPS --------------------------------------------------
 
 TShB_16 <-
   DS2016 %>%
@@ -80,20 +79,19 @@ TShB_16 <-
   arrange(PLOT)
 
 TShB_wide <-
-  dcast(TShB_16, PLOT ~ ASMT + DAYS, value.var = "PLOT_TShB_incidence")
+  dcast(TShB_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 AUDPS <-
   audps(evaluation = TShB_wide[, 2:5], dates = as_vector(TShB_16[1:4, 6]))
 
 AUDPS_16 <-
-  as_tibble(cbind(
-    PLOT = 1:16,
-    AUDPS = round(AUDPS, 2)
-  ))
+  as_tibble(cbind(PLOT = 1:16,
+                  AUDPS = round(AUDPS, 2)))
 
 AUDPS_16$PLOT <- as.factor(as.character(AUDPS_16$PLOT))
 
 TShB_16 <- left_join(TShB_16, AUDPS_16, by = "PLOT")
-# Merge AUDPS data -------------------------------------------------------------
+
+# Merge Tiller Incidence AUDPS data --------------------------------------------
 
 AUDPS <- rbind(TShB_15, TShB_16)
