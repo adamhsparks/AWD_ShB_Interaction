@@ -10,7 +10,8 @@ full and fills the NTIL and NTShB columns for the entire hill where raw data
 only has the first observation for each hill filled.
 
 *03-preprocess_data.R* - this R script merges the 2015 and 2016 data and
-reformats the columns into factors where appropriate
+reformats the columns into factors where appropriate. This is the script that
+calculates AUDPS.
 
 *04_visualise_data.R* - this R script generates graphs of the raw data and
 boxplots of the AUDPS data and puts them in the "graphs" folder.
