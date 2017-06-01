@@ -4,6 +4,8 @@ Analysis of split plot design using MCMCglmm
 Notes on this analysis before starting
 --------------------------------------
 
+The analyses are semi-automated. When this file is knit, it automatically loads the *ProjectTemplate* package and calls the `load.project()` function. This loads the data, cleans and munges it creating the `AUDPS` data frame used for the analysis below. The scripts used to clean and munge the data are located in the [munge](./munge) folder and numbered in the sequential order in which they are run.
+
 #### How to interpret these analyses
 
 For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`, which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
@@ -301,7 +303,7 @@ devtools::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-05-10
+    ##  date     2017-06-01
 
     ## Packages ------------------------------------------------------------------
 
