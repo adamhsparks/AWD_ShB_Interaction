@@ -1,7 +1,4 @@
 
-
-
-
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
 RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
@@ -19,8 +16,6 @@ RAW_data$SMPL <- factor(RAW_data$SMPL)
 RAW_data$HILL <- factor(RAW_data$HILL)
 RAW_data$TIL <- factor(RAW_data$TIL)
 RAW_data$LEAF <- factor(RAW_data$LEAF)
-RAW_data$TIL_ShB <- factor(RAW_data$TIL_ShB)
-RAW_data$LEAF_ShB <- factor(RAW_data$LEAF_ShB)
 
 
 # reorder the treatments by level/year - low to high, 2015-2016
@@ -49,49 +44,105 @@ DS2016 <- subset(RAW_data, YEAR == "2016")
 
 # calculate AUDPS values -------------------------------------------------------
 
-# 2015 Tiller Incidence AUDPS --------------------------------------------------
-TShB_15 <-
+# 2015 AUDPS -------------------------------------------------------------------
+TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
   arrange(PLOT)
 
-TShB_wide <-
+TShB_inc_wide <-
   dcast(TShB_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
-AUDPS <-
-  audps(evaluation = TShB_wide[, 2:6], dates = as_vector(TShB_15[1:5, 6]))
+TShB_sev_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(mean), PLOT_TShB_severity = TIL_ShB) %>%
+  arrange(PLOT)
+
+TShB_sev_wide <-
+  dcast(TShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
+
+LShB_sev_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(mean), PLOT_LShB_severity = LEAF_ShB) %>%
+  arrange(PLOT)
+
+LShB_sev_wide <-
+  dcast(LShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
+
+TShB_inc_AUDPS <-
+  audps(evaluation = TShB_inc_wide[, 2:6], dates = as_vector(TShB_inc_15[1:5, 6]))
+
+TShB_sev_AUDPS <-
+  audps(evaluation = TShB_sev_wide[, 2:6], dates = as_vector(TShB_sev_15[1:5, 6]))
+
+LShB_sev_AUDPS <-
+  audps(evaluation = LShB_sev_wide[, 2:6], dates = as_vector(LShB_sev_15[1:5, 6]))
 
 AUDPS_15 <-
   as_tibble(cbind(PLOT = 1:24,
-                  AUDPS = round(AUDPS, 2)))
+                  TShB_inc_AUDPS = round(TShB_inc_AUDPS, 2),
+                  TShB_sev_AUDPS = round(TShB_sev_AUDPS, 2),
+                  LShB_sev_AUDPS = round(LShB_sev_AUDPS, 2)
+                  )
+            )
 
 AUDPS_15$PLOT <- as.factor(as.character(AUDPS_15$PLOT))
 
-TShB_15 <- left_join(TShB_15, AUDPS_15, by = "PLOT")
+ShB_15 <- left_join(TShB_15, AUDPS_15, by = "PLOT")
 
-# 2016 Tiller Incidence AUDPS --------------------------------------------------
+# 2016 AUDPS -------------------------------------------------------------------
 
-TShB_16 <-
+TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
   arrange(PLOT)
 
-TShB_wide <-
-  dcast(TShB_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
+TShB_inc_wide <-
+  dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
-AUDPS <-
-  audps(evaluation = TShB_wide[, 2:5], dates = as_vector(TShB_16[1:4, 6]))
+TShB_inc_AUDPS <-
+  audps(evaluation = TShB_inc_wide[, 2:5], dates = as_vector(TShB_inc_16[1:4, 6]))
+
+TShB_sev_16 <-
+  DS2016 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(mean), PLOT_TShB_severity = TIL_ShB) %>%
+  arrange(PLOT)
+
+TShB_sev_wide <-
+  dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
+
+TShB_sev_AUDPS <-
+  audps(evaluation = TShB_sev_wide[, 2:5], dates = as_vector(TShB_sev_16[1:4, 6]))
+
+LShB_sev_16 <-
+  DS2016 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(mean), PLOT_LShB_severity = LEAF_ShB) %>%
+  arrange(PLOT)
+
+LShB_sev_wide <-
+  dcast(LShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
+
+LShB_sev_AUDPS <-
+  audps(evaluation = LShB_sev_wide[, 2:5], dates = as_vector(LShB_sev_16[1:4, 6]))
 
 AUDPS_16 <-
   as_tibble(cbind(PLOT = 1:16,
-                  AUDPS = round(AUDPS, 2)))
+                  TShB_inc_AUDPS = round(TShB_inc_AUDPS, 2),
+                  TShB_sev_AUDPS = round(TShB_sev_AUDPS, 2),
+                  LShB_sev_AUDPS = round(LShB_sev_AUDPS, 2)
+  )
+  )
 
 AUDPS_16$PLOT <- as.factor(as.character(AUDPS_16$PLOT))
 
-TShB_16 <- left_join(TShB_16, AUDPS_16, by = "PLOT")
+ShB_16 <- left_join(TShB_16, AUDPS_16, by = "PLOT")
 
 # Merge Tiller Incidence AUDPS data --------------------------------------------
 
-AUDPS <- rbind(TShB_15, TShB_16)
+AUDPS <- rbind(ShB_15, ShB_16)
