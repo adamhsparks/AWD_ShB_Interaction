@@ -343,6 +343,11 @@ Version: 1.1-13
 Hash: d3aa59ebf48bb53e0251e6c454729c34
 Requires: Rcpp, RcppEigen, minqa, nloptr
 
+Package: log4r
+Source: CRAN
+Version: 0.2
+Hash: fb5df475409bc27eab1b412643ad6caa
+
 Package: lubridate
 Source: CRAN
 Version: 1.6.0
