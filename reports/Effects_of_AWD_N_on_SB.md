@@ -13,12 +13,25 @@ ______
 
 #####
 
+# Introduction
+
+Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [-@Bouman2001; -@Feng2007]. In AWD rice fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [-@Richards2014]. Fields are furthermore kept flooded during the flowering period. Besides saving water AWD also reduces greenhouse gas (GHG) emissions of rice fields, which is a substantial factor in the GHG budget of rice producing countries, by around 50% [-@Yan2005; -@Sander2015].
+
+The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, e.g., Bangladesh, Vietnam, Thailand and the Philippines, plan to widely apply AWD to local rice production [-@MOEF2015]. However, a change in water regime in rice fields on large scale might encompass different other effects, for example related to plant health.
+
+We therefore established field experiments in order to…
+
 # Materials and Methods
 ## Experimental design
 Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14°11' N, , longitude 121°15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
 
 ### 2015 Dry Season
-The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m. The main plot treatments were alternate wetting and drying (AWD) and flooded or farmers' practice.
+The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m. The main plot treatments were alternate wetting and drying (AWD) and ) and continuously flooded (CF) or farmers' practice.
+
+Irrigation in AWD plots was determined by the water level in plots, i.e., when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In CF plots a standing water layer of 3-5cm was maintained throughout the growing season. 
+
+The sub plot treatments were different rates of nitrogen…
+
 
 ### 2016 Dry Season
 In 2016 dry season the plot size was increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
