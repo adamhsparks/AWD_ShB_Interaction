@@ -24,7 +24,9 @@ Raw data for green leaves and dead leaves
 
 <img src="TShB_Incidence_plot.png" style="display: block; margin: auto;" />
 
-<img src="TShB_AUDPS_dotplot.png" style="display: block; margin: auto;" />
+<img src="TShB_inc_AUDPS_dotplot.png" style="display: block; margin: auto;" />
+
+<img src="TShB_sev_AUDPS_dotplot.png" style="display: block; margin: auto;" />
 
 ******
 
@@ -33,4 +35,6 @@ Raw data for green leaves and dead leaves
 <img src="LShB_rating.png" style="display: block; margin: auto;" />
 
 <img src="LShB_severity_over_time.png" style="display: block; margin: auto;" />
+
+<img src="LShB_sev_AUDPS_dotplot.png" style="display: block; margin: auto;" />
 

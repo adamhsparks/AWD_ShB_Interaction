@@ -29,14 +29,14 @@ ggsave("graphs/TShB_incidence.png", width = 6, height = 4)
 
 # histogram plot of green leaf data ----------------------------------------------
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
-  geom_histogram(aes(fill = YEAR)) +
+  geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Green Leaves per Tiller")
 ggsave("graphs/GL_value.png", width = 6, height = 4)
 
 # histogram plot plot of dead leaf data -----------------------------------------------
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
-  geom_histogram(aes(fill = YEAR)) +
+  geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Dry Leaves per Tiller")
 ggsave("graphs/DL_value.png", width = 6, height = 4)
@@ -91,8 +91,8 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   ggtitle("Tiller Sheath Blight Incidence")
 ggsave("graphs/TShB_Incidence_plot.png", width = 6, height = 4)
 
-# dotplots of tiller sheath blight AUDPS data ----------------------------------
-ggplot(AUDPS, aes(x = TRT, y = AUDPS)) +
+# dotplots of tiller sheath blight incidence AUDPS data ------------------------
+ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_inc_AUDPS)) +
   geom_point(aes(colour = YEAR, shape = REP), size = 2) +
   theme(axis.text.x = element_text(size = 8,
                                    angle = 45,
@@ -100,5 +100,26 @@ ggplot(AUDPS, aes(x = TRT, y = AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   ggtitle("Tiller Sheath Blight Incidence")
-ggsave("graphs/TShB_AUDPS_dotplot.png", width = 6, height = 4)
+ggsave("graphs/TShB_inc_AUDPS_dotplot.png", width = 6, height = 4)
 
+# dotplots of tiller sheath blight severity AUDPS data ------------------------
+ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_sev_AUDPS)) +
+  geom_point(aes(colour = YEAR, shape = REP), size = 2) +
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45,
+                                   hjust = 1)) +
+  xlab("Treatment") +
+  ylab("AUDPS") +
+  ggtitle("Tiller Sheath Blight Severity")
+ggsave("graphs/TShB_sev_AUDPS_dotplot.png", width = 6, height = 4)
+
+# dotplots of leav sheath blight severity AUDPS data ------------------------
+ggplot(AUDPS, aes(x = as.factor(TRT), y = LShB_sev_AUDPS)) +
+  geom_point(aes(colour = YEAR, shape = REP), size = 2) +
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45,
+                                   hjust = 1)) +
+  xlab("Treatment") +
+  ylab("AUDPS") +
+  ggtitle("Leaf Sheath Blight Severity")
+ggsave("graphs/LShB_sev_AUDPS_dotplot.png", width = 6, height = 4)
