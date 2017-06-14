@@ -211,12 +211,12 @@ reformat <- function(files) {
 }
 
 # Run reformat function for all 2015 files -------------------------------------
-DS2015 <- ldply(.data = files, .fun = reformat)
+DS2015 <- map_df(.x = files, .f = reformat)
 
 # Replace "N*" with a number for NRTE ------------------------------------------
-DS2015$NRTE[which(DS2015$NRTE == "N0")] = 0
-DS2015$NRTE[which(DS2015$NRTE == "N1")] = 100
-DS2015$NRTE[which(DS2015$NRTE == "N2")] = 120
+DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
+DS2015$NRTE[which(DS2015$NRTE == "N1")] <- 100
+DS2015$NRTE[which(DS2015$NRTE == "N2")] <- 120
 
 # Add treatment numbers --------------------------------------------------------
 DS2015$TRT <- NA

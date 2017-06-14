@@ -40,8 +40,6 @@ RAW_data$TRT <-
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
-
-
 # calculate AUDPS values -------------------------------------------------------
 
 # 2015 AUDPS -------------------------------------------------------------------
@@ -52,7 +50,7 @@ TShB_inc_15 <-
   arrange(PLOT)
 
 TShB_inc_wide <-
-  dcast(TShB_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
+  dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 TShB_sev_15 <-
   DS2015 %>%
@@ -89,9 +87,10 @@ AUDPS_15 <-
                   )
             )
 
-AUDPS_15$PLOT <- as.factor(as.character(AUDPS_15$PLOT))
+AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
+TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
-ShB_15 <- left_join(TShB_15, AUDPS_15, by = "PLOT")
+ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
 # 2016 AUDPS -------------------------------------------------------------------
 
@@ -99,7 +98,8 @@ TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_each(funs(mean), PLOT_TShB_incidence = TShB_incidence) %>%
-  arrange(PLOT)
+  arrange(PLOT) %>%
+  droplevels()
 
 TShB_inc_wide <-
   dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
@@ -111,7 +111,8 @@ TShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_each(funs(mean), PLOT_TShB_severity = TIL_ShB) %>%
-  arrange(PLOT)
+  arrange(PLOT) %>%
+  droplevels()
 
 TShB_sev_wide <-
   dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
@@ -139,9 +140,11 @@ AUDPS_16 <-
   )
   )
 
-AUDPS_16$PLOT <- as.factor(as.character(AUDPS_16$PLOT))
+# add plot numbers to merge with the remaing treatment data
+AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
+TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
-ShB_16 <- left_join(TShB_16, AUDPS_16, by = "PLOT")
+ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge Tiller Incidence AUDPS data --------------------------------------------
 

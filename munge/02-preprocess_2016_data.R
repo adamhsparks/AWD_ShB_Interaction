@@ -165,8 +165,8 @@ DS2016 <- as_tibble(arrange(DS2016, ASMT, PLOT))
 
 # 2016
 DATE_1_2016 <- DATE_2_2016 <- DS2016$DATE
-DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] = NA
-DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] = NA
+DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] <- NA
+DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] <- NA
 
 DATE_1 <- na.omit(DATE_1_2016)
 DATE_2 <- na.omit(DATE_2_2016)

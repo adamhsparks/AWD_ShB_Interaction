@@ -49,6 +49,13 @@ Source: CRAN
 Version: 0.4-1
 Hash: 60a5c75e57aae4a0ce76cb7422939aaf
 
+Package: NMF
+Source: CRAN
+Version: 0.20.6
+Hash: 632aad207ab2e551b33990c9f09ab8af
+Requires: RColorBrewer, colorspace, digest, doParallel, foreach,
+    ggplot2, gridBase, pkgmaker, registry, reshape2, rngtools, stringr
+
 Package: ProjectTemplate
 Source: CRAN
 Version: 0.7
@@ -58,6 +65,11 @@ Package: R6
 Source: CRAN
 Version: 2.2.0
 Hash: 712773a3439bd32db5c40938e1a9aac2
+
+Package: RANN
+Source: CRAN
+Version: 2.5.1
+Hash: 9d8696e2b36cb08ebc6d806d1eca4da7
 
 Package: RColorBrewer
 Source: CRAN
@@ -198,6 +210,12 @@ Source: CRAN
 Version: 4.5-15
 Hash: f32b2857ddce80d26942e88ed22d4947
 
+Package: doParallel
+Source: CRAN
+Version: 1.0.10
+Hash: df91a7abfa938c06ad87b9a2b9269adb
+Requires: foreach, iterators
+
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
@@ -225,6 +243,12 @@ Source: CRAN
 Version: 0.2.0
 Hash: e5a3b0b96a39f5581467b0c6366f7408
 Requires: magrittr, tibble
+
+Package: foreach
+Source: CRAN
+Version: 1.4.3
+Hash: cd53ef4cf29dc59ce3f8c5c1af735fd1
+Requires: iterators
 
 Package: formatR
 Source: CRAN
@@ -265,6 +289,11 @@ Source: CRAN
 Version: 3.0.1
 Hash: b7abe122479c203aa236499b7fc4b816
 Requires: KernSmooth, caTools, gdata, gtools
+
+Package: gridBase
+Source: CRAN
+Version: 0.4-7
+Hash: d4b7f73c0fdf11d18d1e1ae1643ac4ec
 
 Package: gridExtra
 Source: CRAN
@@ -309,6 +338,22 @@ Source: CRAN
 Version: 1.2.1
 Hash: 7de1f8f760441881804af7c1ff324340
 Requires: R6, curl, jsonlite, mime, openssl
+
+Package: igraph
+Source: CRAN
+Version: 1.0.1
+Hash: 26ac36402e881905359daabfd9ba4057
+Requires: NMF, irlba, magrittr
+
+Package: irlba
+Source: CRAN
+Version: 2.2.1
+Hash: 9a77571d304ef3473cfef7effdae93b5
+
+Package: iterators
+Source: CRAN
+Version: 1.0.8
+Hash: 488b93c2a4166db0d15f1e8d882cb1d4
 
 Package: jsonlite
 Source: CRAN
@@ -358,6 +403,12 @@ Package: magrittr
 Source: CRAN
 Version: 1.5
 Hash: bdc4d48c3135e8f3b399536ddf160df4
+
+Package: maptools
+Source: CRAN
+Version: 0.9-2
+Hash: 2dfbad6ef57f83a91e4e9d4ccc0807cd
+Requires: sp
 
 Package: markdown
 Source: CRAN
@@ -436,6 +487,12 @@ Version: 0.4-7
 Hash: f195c3a0f527f69c491569c5cbaaf1db
 Requires: lme4
 
+Package: pkgmaker
+Source: CRAN
+Version: 0.22
+Hash: 2e5fc2a6b7eaeb1e1d397a8dc5f54480
+Requires: digest, registry, stringr, xtable
+
 Package: plotMCMC
 Source: CRAN
 Version: 2.0-0
@@ -478,6 +535,11 @@ Version: 1.0.0
 Hash: f0d3323803148df52bca38095bccce46
 Requires: Rcpp, cellranger, tibble
 
+Package: registry
+Source: CRAN
+Version: 0.3
+Hash: f9447c26b51b8c96f53720c5ff862c93
+
 Package: rematch
 Source: CRAN
 Version: 1.0.1
@@ -489,12 +551,24 @@ Version: 1.4.2
 Hash: 790c06c11c84041b814139d731a872b9
 Requires: Rcpp, plyr, stringr
 
+Package: rgeos
+Source: CRAN
+Version: 0.3-23
+Hash: 7f7ce992b079e8de185c20dfe1ae71c8
+Requires: sp
+
 Package: rmarkdown
 Source: CRAN
 Version: 1.4
 Hash: 030a6baa0a39c528665ed80d14992c11
 Requires: base64enc, caTools, evaluate, htmltools, jsonlite, knitr,
     rprojroot, yaml
+
+Package: rngtools
+Source: CRAN
+Version: 1.2.4
+Hash: 4db0661fe95ab6eb3d6339495bf22003
+Requires: digest, pkgmaker, stringr
 
 Package: rprojroot
 Source: CRAN
@@ -529,6 +603,11 @@ Package: sp
 Source: CRAN
 Version: 1.2-4
 Hash: 4ffcf86fffee89e7b859f760528dd545
+
+Package: spam
+Source: CRAN
+Version: 1.4-0
+Hash: a82fb29f79c3d556fe2584db0000bfbc
 
 Package: spdep
 Source: CRAN
@@ -603,6 +682,11 @@ Source: CRAN
 Version: 1.1.1
 Hash: 19ad10ef8e73cb435eb49f9d5d259980
 Requires: BH, Rcpp
+
+Package: xtable
+Source: CRAN
+Version: 1.8-2
+Hash: 7293235cfcc14cdff1ce7fd1a0212031
 
 Package: yaml
 Source: CRAN
