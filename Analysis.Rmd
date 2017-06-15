@@ -34,12 +34,14 @@ leaf severity and Leaf severity for 2015 dry season and 2016 dry season.
 Comparisons will only be observational and cannot be statistically compared.
 
 #### Iterations
+
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
 `nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
 smaller errors for random effects and better models.
 
 ## Setup
+
 Use `set.seed()` for reproducibility.
 
 ```{r set_seed}
@@ -49,14 +51,16 @@ set.seed(27)
 ## 2015
 
 ### 2015 Tiller Sheath Blight Incidence Model
+
 ```{r 2015_TShB_incidence}
 
 # Separate the TRT column into the two treatments for analysis
 AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(AUDPS, .funs = factor, .cols = c("NRTE", "WMGT"))
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
                           verbose = FALSE,
@@ -110,13 +114,13 @@ plot_joint_random_error_dist(d = rdf,
 
 ## 2016
 
-
 ### 2016 Tiller Sheath Blight Incidence Model
+
 ```{r 2016_TShB_incidence}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2016 <- MCMCglmm(AUDPS ~ WMGT * NRTE, 
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
                           data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
                           verbose = FALSE,
@@ -165,22 +169,23 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-# Conclusions
+## Conclusions
+
+### Tiller Sheath Blight Incidence
+
+In 2015 the highest N treatment was significant, in 2016 both the flooded water management and the N rates were significant.
 
 The models all appear to be good fits.
 
 None of the diagnostic plots show any signs of autocorrelation or any other obvious patterns.
 
-None of the treatments in either year, 2015 or 2016, were significant. The
-see `pMCMC` values and also posterior graphs. There is a large amount of overlap
-in all of the posterior graphs.
-
 The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
 
 The random effects are all fairly equally distributed except for 2016 tiller sheath blight severity where water management:replicate has a larger effect. This is not surprising given that the plot and replicate sizes were different in 2016 due to the use of two fields in the IRRI experiment station, see the [2016 plot layout plan](https://github.com/adamhsparks/AWD_ShB_Interaction/blob/master/doc/Metadata/2016%20AWD%20ShB%20Metadata/ExptLayoutAWD2016.pdf).
 
-# R Session Info
-```{r session_info}
+## R Session Info
+
+```{r session_info, echo=FALSE}
 devtools::session_info()
 ```
 

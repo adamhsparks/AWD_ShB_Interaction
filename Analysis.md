@@ -43,10 +43,11 @@ set.seed(27)
 ``` r
 # Separate the TRT column into the two treatments for analysis
 AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(AUDPS, .funs = factor, .cols = c("NRTE", "WMGT"))
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
                           verbose = FALSE,
@@ -55,7 +56,14 @@ TShB_incidence_lmm_2015 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
                           burnin = 5000,
                           thin = 100,
                           pr = TRUE)
+```
 
+    ## Warning in MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, random = ~REP, data =
+    ## as.data.frame(AUDPS[AUDPS$YEAR == : some fixed effects are not estimable
+    ## and have been removed. Use singular.ok=TRUE to sample these effects, but
+    ## use an informative prior!
+
+``` r
 summary(TShB_incidence_lmm_2015)
 ```
 
@@ -64,27 +72,27 @@ summary(TShB_incidence_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 180.6266 
+    ##  DIC: 179.4771 
     ## 
     ##  G-structure:  ~REP
     ## 
-    ##     post.mean  l-95% CI u-95% CI eff.samp
-    ## REP     0.688 0.0009616    2.035     4950
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP    0.6689 0.006269    2.016     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.2446   0.1853   0.3127     5094
+    ## units    0.2423   0.1836   0.3096     5096
     ## 
-    ##  Location effects: AUDPS ~ WMGT * NRTE 
+    ##  Location effects: TShB_inc_AUDPS ~ WMGT * NRTE 
     ## 
     ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-    ## (Intercept)        0.29180 -0.41139  1.00268     4950 0.2651    
-    ## WMGTFLD            0.19546 -0.10844  0.51573     4950 0.2283    
-    ## NRTEN100           0.25662 -0.05612  0.56049     4950 0.1030    
-    ## NRTEN120           0.60904  0.28740  0.91452     4950 <2e-04 ***
-    ## WMGTFLD:NRTEN100  -0.10612 -0.54801  0.32716     4950 0.6388    
-    ## WMGTFLD:NRTEN120  -0.40513 -0.86633  0.02570     4950 0.0651 .  
+    ## (Intercept)        0.30427 -0.38568  1.01449     4950  0.248    
+    ## WMGTFLD            0.18547 -0.11693  0.50422     4950  0.246    
+    ## NRTEN100           0.24161 -0.06968  0.54405     4950  0.123    
+    ## NRTEN120           0.58155  0.26143  0.88559     4950 <2e-04 ***
+    ## WMGTFLD:NRTEN100  -0.09362 -0.53339  0.33760     4950  0.678    
+    ## WMGTFLD:NRTEN120  -0.36516 -0.82421  0.06362     4950  0.102    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -166,7 +174,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2016 <- MCMCglmm(AUDPS ~ WMGT * NRTE, 
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
                           data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
                           verbose = FALSE,
@@ -175,7 +183,14 @@ TShB_incidence_lmm_2016 <- MCMCglmm(AUDPS ~ WMGT * NRTE,
                           burnin = 5000,
                           thin = 100,
                           pr = TRUE)
+```
 
+    ## Warning in MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, random = ~REP, data =
+    ## as.data.frame(AUDPS[AUDPS$YEAR == : some fixed effects are not estimable
+    ## and have been removed. Use singular.ok=TRUE to sample these effects, but
+    ## use an informative prior!
+
+``` r
 summary(TShB_incidence_lmm_2016)
 ```
 
@@ -184,25 +199,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 164.0519 
+    ##  DIC: 187.047 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     6.299   0.1059    21.34     4950
+    ## REP     5.481  0.08205    16.31     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.9728   0.6052     1.37     4950
+    ## units    0.9837   0.6561    1.369     4950
     ## 
-    ##  Location effects: AUDPS ~ WMGT * NRTE 
+    ##  Location effects: TShB_inc_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp    pMCMC    
-    ## (Intercept)       12.3024   9.8008  14.6569     5277 0.000404 ***
-    ## WMGTFLD            0.3832  -0.3794   1.1257     4950 0.315556    
-    ## NRTEN60           -1.2037  -1.9472  -0.4329     5201 0.002020 ** 
-    ## WMGTFLD:NRTEN60   -0.9033  -1.9881   0.1888     5065 0.098990 .  
+    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)       11.15630  9.11776 13.39980     4950 <2e-04 ***
+    ## WMGTFLD           -0.78063 -1.44752 -0.08466     4950 0.0283 *  
+    ## NRTEN180           1.53454  0.86156  2.23196     4950 <2e-04 ***
+    ## WMGTFLD:NRTEN180   0.78049 -0.20431  1.74507     4950 0.1184    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -277,11 +292,11 @@ plot_joint_random_error_dist(d = rdf,
 Conclusions
 ===========
 
+In 2015 the highest N treatment was significant, in 2016 both the flooded water management and the N rates were significant.
+
 The models all appear to be good fits.
 
 None of the diagnostic plots show any signs of autocorrelation or any other obvious patterns.
-
-None of the treatments in either year, 2015 or 2016, were significant. The see `pMCMC` values and also posterior graphs. There is a large amount of overlap in all of the posterior graphs.
 
 The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
 
@@ -290,20 +305,16 @@ The random effects are all fairly equally distributed except for 2016 tiller she
 R Session Info
 ==============
 
-``` r
-devtools::session_info()
-```
-
     ## Session info --------------------------------------------------------------
 
     ##  setting  value                       
     ##  version  R version 3.4.0 (2017-04-21)
-    ##  system   x86_64, darwin16.5.0        
+    ##  system   x86_64, darwin15.6.0        
     ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-06-01
+    ##  date     2017-06-15
 
     ## Packages ------------------------------------------------------------------
 
@@ -334,7 +345,7 @@ devtools::session_info()
     ##  expm              0.999-2  2017-03-29 CRAN (R 3.4.0)
     ##  fitdistrplus    * 1.0-9    2017-03-24 CRAN (R 3.4.0)
     ##  forcats           0.2.0    2017-01-23 CRAN (R 3.4.0)
-    ##  foreign           0.8-68   2017-04-24 CRAN (R 3.4.0)
+    ##  foreign           0.8-67   2016-09-13 CRAN (R 3.4.0)
     ##  gdata             2.17.0   2015-07-04 CRAN (R 3.4.0)
     ##  ggplot2         * 2.2.1    2016-12-30 CRAN (R 3.4.0)
     ##  gmodels           2.16.2   2015-07-22 CRAN (R 3.4.0)
@@ -358,7 +369,7 @@ devtools::session_info()
     ##  lubridate       * 1.6.0    2016-09-13 CRAN (R 3.4.0)
     ##  magrittr          1.5      2014-11-22 CRAN (R 3.4.0)
     ##  MASS            * 7.3-47   2017-02-26 CRAN (R 3.4.0)
-    ##  Matrix          * 1.2-10   2017-04-28 CRAN (R 3.4.0)
+    ##  Matrix          * 1.2-9    2017-03-14 CRAN (R 3.4.0)
     ##  MatrixModels      0.4-1    2015-08-22 CRAN (R 3.4.0)
     ##  MCMCglmm        * 2.24     2016-11-14 CRAN (R 3.4.0)
     ##  memoise           1.1.0    2017-04-21 CRAN (R 3.4.0)
@@ -373,7 +384,7 @@ devtools::session_info()
     ##  packrat           0.4.8-1  2016-09-07 CRAN (R 3.4.0)
     ##  pbkrtest          0.4-7    2017-03-15 CRAN (R 3.4.0)
     ##  plotMCMC        * 2.0-0    2014-03-12 CRAN (R 3.4.0)
-    ##  plyr            * 1.8.4    2016-06-08 CRAN (R 3.4.0)
+    ##  plyr              1.8.4    2016-06-08 CRAN (R 3.4.0)
     ##  ProjectTemplate * 0.7      2016-08-11 CRAN (R 3.4.0)
     ##  psych             1.7.3.21 2017-03-22 CRAN (R 3.4.0)
     ##  purrr           * 0.2.2    2016-06-18 CRAN (R 3.4.0)

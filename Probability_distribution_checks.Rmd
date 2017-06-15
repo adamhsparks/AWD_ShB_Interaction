@@ -9,42 +9,66 @@ library(ProjectTemplate)
 load.project()
 ```
 
-Here we check the probability distribution that best fits these data. I'm following a method from http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html. As you see in that guide, there are several distributions that can be checked, however, the data both fit a normal distribution.
+Here we check the probability distribution that best fits these data. I'm following a method from http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html. As you see in that guide, there are several distributions that can be checked. However, in these data only normal and exponential 
 
-## 2015 Check probability distribution fit for tiller sheath blight incidence
+## 2015
 
-### Normal
-```{r norm, results='hide', message=FALSE, warning=FALSE}
+### Check probability distribution fit for tiller sheath blight incidence
+
+#### Normal
+
+```{r 2015_inc_norm, results='hide', message=FALSE, warning=FALSE}
 AUDPS15 <- subset(AUDPS, YEAR == "2015")
-f1 <- fitdist(AUDPS15$AUDPS, "norm")
+f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "norm")
 plot(f1)
-car::qqp(AUDPS15$AUDPS, "norm")
+
+car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
 ```
 
-### Exponential
+#### Exponential
 
-```{r exp, results='hide', message=FALSE, warning=FALSE}
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
-f1 <- fitdist(AUDPS15$AUDPS, "exp")
+```{r 2015_inc_exp, results='hide', message=FALSE, warning=FALSE}
+
+f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
 plot(f1)
-car::qqp(AUDPS15$AUDPS, "exp")
+car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
+car::qqp(AUDPS15$TShB_inc_AUDPS, "lnorm")
+
 ```
 
 *******
 
-## 2016 Check probability distribution fit for tiller sheath blight incidence
+## 2016 
 
-Until the issue with more diseased tillers than tillers in a hill is addressed,
-this section will not work completely and properly.
+### Check probability distribution fit for tiller sheath blight incidence
 
-```{r, results='hide', message=FALSE, warning=FALSE}
-AUDPS156 <- subset(AUDPS, YEAR == "2016")
-# f1 <- fitdist(AUDPS156$AUDPS, "norm")
-#plot(f1)
-car::qqp(AUDPS156$AUDPS, "norm")
+#### Normal
 
+```{r, 2016_inc_norm, results='hide', message=FALSE, warning=FALSE}
+AUDPS16 <- subset(AUDPS, YEAR == "2016")
+ f1 <- fitdist(AUDPS16$TShB_inc_AUDPS, "norm")
+plot(f1)
+
+car::qqp(AUDPS16$TShB_inc_AUDPS, "norm")
 ```
+
+#### Exponential
+
+```{r 2016_inc_exp, results='hide', message=FALSE, warning=FALSE}
+
+f1 <- fitdist(AUDPS16$TShB_inc_AUDPS, "exp")
+plot(f1)
+
+car::qqp(AUDPS16$TShB_inc_AUDPS, "exp")
+```
+
+
+
 
 ## Conclusions
 
-To read the graphs, we want to select a distribution where most of the points fall between the dotted red lines. On the y-axis are the observations and on the x-axis the quantiles modelled by the distribution. A perfect distribution fit is represented by the solid red line and the dashed red lines are the confidence intervals of the perfect distribution fit. Here both sets of data fit a normal distribution.
+To read the graphs, we want to select a distribution where most of the points fall between the dotted red lines. On the y-axis are the observations and on the x-axis the quantiles modelled by the distribution. A perfect distribution fit is represented by the solid red line and the dashed red lines are the confidence intervals of the perfect distribution fit.
+
+### Tiller Incidence Distributions
+
+The 2015 data fit an exponential distribution while the 2016 data fit a normal distribution.
