@@ -154,6 +154,5 @@ TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
-# Merge Tiller Incidence AUDPS data --------------------------------------------
-
+# Merge AUDPS data for graphing ------------------------------------------------
 AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))

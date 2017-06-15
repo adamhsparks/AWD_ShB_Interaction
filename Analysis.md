@@ -35,35 +35,45 @@ Use `set.seed()` for reproducibility.
 set.seed(27)
 ```
 
+The `AUDPS` object is created when the project is loaded, in the file [munge/03\_preprocess\_data.R](munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+
+First, separate the TRT column into the two treatments for analysis
+
+``` r
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
+```
+
+Now create individual data frames for the analysis.
+
+``` r
+AUDPS_15 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_15 <- droplevels(AUDPS_15)
+
+AUDPS_16 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_16 <- droplevels(AUDPS_16)
+```
+
+Now that the `AUDPS_15` and `AUDPS_16` `data.frames` exist, we can start the analysis.
+
 2015
 ----
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
 ``` r
-# Separate the TRT column into the two treatments for analysis
-AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
-AUDPS <- mutate_at(AUDPS, .funs = factor, .cols = c("NRTE", "WMGT"))
-
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
+                          data = AUDPS_15,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
                           burnin = 5000,
                           thin = 100,
                           pr = TRUE)
-```
 
-    ## Warning in MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, random = ~REP, data =
-    ## as.data.frame(AUDPS[AUDPS$YEAR == : some fixed effects are not estimable
-    ## and have been removed. Use singular.ok=TRUE to sample these effects, but
-    ## use an informative prior!
-
-``` r
 summary(TShB_incidence_lmm_2015)
 ```
 
@@ -174,23 +184,17 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+
 TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
                           burnin = 5000,
                           thin = 100,
                           pr = TRUE)
-```
 
-    ## Warning in MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, random = ~REP, data =
-    ## as.data.frame(AUDPS[AUDPS$YEAR == : some fixed effects are not estimable
-    ## and have been removed. Use singular.ok=TRUE to sample these effects, but
-    ## use an informative prior!
-
-``` r
 summary(TShB_incidence_lmm_2016)
 ```
 
@@ -213,11 +217,11 @@ summary(TShB_incidence_lmm_2016)
     ## 
     ##  Location effects: TShB_inc_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-    ## (Intercept)       11.15630  9.11776 13.39980     4950 <2e-04 ***
-    ## WMGTFLD           -0.78063 -1.44752 -0.08466     4950 0.0283 *  
-    ## NRTEN180           1.53454  0.86156  2.23196     4950 <2e-04 ***
-    ## WMGTFLD:NRTEN180   0.78049 -0.20431  1.74507     4950 0.1184    
+    ##                  post.mean   l-95% CI   u-95% CI eff.samp  pMCMC    
+    ## (Intercept)     12.6908470 10.4839982 14.8468956     4950 <2e-04 ***
+    ## WMGTFLD         -0.0001417 -0.7404857  0.6665119     5158  0.994    
+    ## NRTEN60         -1.5345443 -2.2319594 -0.8615530     4950 <2e-04 ***
+    ## WMGTFLD:NRTEN60 -0.7804929 -1.7450672  0.2043041     4950  0.118    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -290,9 +294,11 @@ plot_joint_random_error_dist(d = rdf,
 ![](Analysis_files/figure-markdown_github/2016_TShB_incidence-6.png)
 
 Conclusions
-===========
+-----------
 
-In 2015 the highest N treatment was significant, in 2016 both the flooded water management and the N rates were significant.
+### Tiller Sheath Blight Incidence
+
+In 2015 the highest N treatment was significant, in 2016 the lowest N rates were significant.
 
 The models all appear to be good fits.
 
@@ -303,7 +309,7 @@ The random effects all appear to be acceptable, the dotted line stays near to th
 The random effects are all fairly equally distributed except for 2016 tiller sheath blight severity where water management:replicate has a larger effect. This is not surprising given that the plot and replicate sizes were different in 2016 due to the use of two fields in the IRRI experiment station, see the [2016 plot layout plan](https://github.com/adamhsparks/AWD_ShB_Interaction/blob/master/doc/Metadata/2016%20AWD%20ShB%20Metadata/ExptLayoutAWD2016.pdf).
 
 R Session Info
-==============
+--------------
 
     ## Session info --------------------------------------------------------------
 

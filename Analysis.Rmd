@@ -48,21 +48,37 @@ Use `set.seed()` for reproducibility.
 set.seed(27)
 ```
 
+The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+
+First, separate the TRT column into the two treatments for analysis
+
+```{r data_setup}
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
+```
+
+Now create individual data frames for the analysis.
+
+```{r create_analysis_df}
+AUDPS_15 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_15 <- droplevels(AUDPS_15)
+
+AUDPS_16 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_16 <- droplevels(AUDPS_16)
+```
+
+Now that the `AUDPS_15` and `AUDPS_16` `data.frames` exist, we can start the analysis.
+
 ## 2015
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
 ```{r 2015_TShB_incidence}
-
-# Separate the TRT column into the two treatments for analysis
-AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
-AUDPS <- mutate_at(AUDPS, .funs = factor, .cols = c("NRTE", "WMGT"))
-
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2015, ]),
+                          data = AUDPS_15,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -120,9 +136,10 @@ plot_joint_random_error_dist(d = rdf,
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+
 TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
-                          data = as.data.frame(AUDPS[AUDPS$YEAR == 2016, ]),
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -173,7 +190,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 the highest N treatment was significant, in 2016 both the flooded water management and the N rates were significant.
+In 2015 the highest N treatment was significant, in 2016 the lowest N rates were significant.
 
 The models all appear to be good fits.
 
