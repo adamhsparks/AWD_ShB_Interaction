@@ -174,6 +174,232 @@ plot_joint_random_error_dist(d = rdf,
 
 ![](Analysis_files/figure-markdown_github/2015_TShB_incidence-6.png)
 
+### 2015 Tiller Sheath Blight Severity Model
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_15,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2015)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 645.3289 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     16.78   0.3232    51.69     4431
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units     11.78    8.861       15     4950
+    ## 
+    ##  Location effects: TShB_sev_AUDPS ~ WMGT * NRTE 
+    ## 
+    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+    ## (Intercept)         4.5710   0.5424   8.8091     4950 0.0339 *
+    ## WMGTFLD            -0.5974  -2.8103   1.4701     4950 0.5786  
+    ## NRTEN100            1.4007  -0.6460   3.7407     4950 0.2117  
+    ## NRTEN120            2.7747   0.5226   4.8641     4950 0.0141 *
+    ## WMGTFLD:NRTEN100   -1.2761  -4.2439   1.8370     4950 0.4109  
+    ## WMGTFLD:NRTEN120   -0.8917  -3.9626   1.9592     5249 0.5434  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:6])
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-4.png)
+
+``` r
+# check random effects
+plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
+```
+
+![](Analysis_files/figure-markdown_github/2015_TShB_severity-6.png)
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_severity_lmm_2015 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_15,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(LShB_severity_lmm_2015)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 161.4038 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP    0.9671  0.01567    3.158     4950
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units    0.2095   0.1535   0.2659     4950
+    ## 
+    ##  Location effects: LShB_sev_AUDPS ~ WMGT * NRTE 
+    ## 
+    ##                  post.mean l-95% CI u-95% CI eff.samp pMCMC
+    ## (Intercept)        0.57150 -0.28186  1.54311     4950 0.118
+    ## WMGTFLD           -0.22898 -0.49812  0.05708     4950 0.112
+    ## NRTEN100           0.17793 -0.09471  0.46454     4950 0.217
+    ## NRTEN120           0.10595 -0.16553  0.41045     4950 0.458
+    ## WMGTFLD:NRTEN100  -0.29047 -0.69757  0.10243     4950 0.144
+    ## WMGTFLD:NRTEN120  -0.08826 -0.49071  0.28548     4519 0.673
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_severity_lmm_2015$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(LShB_severity_lmm_2015$Sol[, 2:6])
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_severity_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-4.png)
+
+``` r
+# check random effects
+plotTrace(LShB_severity_lmm_2015$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(LShB_severity_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
+```
+
+![](Analysis_files/figure-markdown_github/2015_LShB_severity-6.png)
+
 ------------------------------------------------------------------------
 
 2016
@@ -203,25 +429,25 @@ summary(TShB_incidence_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 187.047 
+    ##  DIC: 187.0551 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     5.481  0.08205    16.31     4950
+    ## REP     5.186  0.09985    16.64     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.9837   0.6561    1.369     4950
+    ## units    0.9824   0.6364    1.363     5135
     ## 
     ##  Location effects: TShB_inc_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean   l-95% CI   u-95% CI eff.samp  pMCMC    
-    ## (Intercept)     12.6908470 10.4839982 14.8468956     4950 <2e-04 ***
-    ## WMGTFLD         -0.0001417 -0.7404857  0.6665119     5158  0.994    
-    ## NRTEN60         -1.5345443 -2.2319594 -0.8615530     4950 <2e-04 ***
-    ## WMGTFLD:NRTEN60 -0.7804929 -1.7450672  0.2043041     4950  0.118    
+    ##                 post.mean  l-95% CI  u-95% CI eff.samp  pMCMC    
+    ## (Intercept)     12.684651 10.498329 14.690101     4950 <2e-04 ***
+    ## WMGTFLD          0.004514 -0.712805  0.666176     4559  0.996    
+    ## NRTEN60         -1.537113 -2.231441 -0.891587     4950 <2e-04 ***
+    ## WMGTFLD:NRTEN60 -0.774722 -1.767406  0.193410     4950  0.115    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -293,8 +519,231 @@ plot_joint_random_error_dist(d = rdf,
 
 ![](Analysis_files/figure-markdown_github/2016_TShB_incidence-6.png)
 
-Conclusions
------------
+### 2016 Tiller Sheath Blight Severity Model
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_15,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2016)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 645.3083 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     17.12   0.3972    58.22     4950
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units      11.8    8.965    15.13     6356
+    ## 
+    ##  Location effects: TShB_sev_AUDPS ~ WMGT * NRTE 
+    ## 
+    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+    ## (Intercept)         4.5611   0.6357   9.0101     5315 0.0412 *
+    ## WMGTFLD            -0.6089  -2.7281   1.5798     4950 0.5778  
+    ## NRTEN100            1.3715  -0.7216   3.5797     4950 0.2101  
+    ## NRTEN120            2.7405   0.5635   4.7512     4950 0.0101 *
+    ## WMGTFLD:NRTEN100   -1.2441  -4.3705   1.7433     5219 0.4182  
+    ## WMGTFLD:NRTEN120   -0.8826  -3.9524   2.1528     4950 0.5624  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:6])
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-4.png)
+
+``` r
+# check random effects
+plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+```
+
+![](Analysis_files/figure-markdown_github/2016_TShB_severity-6.png)
+
+``` r
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_15,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(LShB_severity_lmm_2016)
+```
+
+    ## 
+    ##  Iterations = 5001:499901
+    ##  Thinning interval  = 100
+    ##  Sample size  = 4950 
+    ## 
+    ##  DIC: 161.3886 
+    ## 
+    ##  G-structure:  ~REP
+    ## 
+    ##     post.mean l-95% CI u-95% CI eff.samp
+    ## REP     0.983  0.01324    3.427     4525
+    ## 
+    ##  R-structure:  ~units
+    ## 
+    ##       post.mean l-95% CI u-95% CI eff.samp
+    ## units    0.2097    0.156   0.2673     4950
+    ## 
+    ##  Location effects: LShB_sev_AUDPS ~ WMGT * NRTE 
+    ## 
+    ##                  post.mean l-95% CI u-95% CI eff.samp pMCMC
+    ## (Intercept)        0.57248 -0.36830  1.52108     5416 0.122
+    ## WMGTFLD           -0.22700 -0.50529  0.04655     5490 0.109
+    ## NRTEN100           0.18311 -0.10218  0.46265     5216 0.195
+    ## NRTEN120           0.10670 -0.17971  0.38569     5622 0.452
+    ## WMGTFLD:NRTEN100  -0.29915 -0.69075  0.10354     5472 0.147
+    ## WMGTFLD:NRTEN120  -0.08880 -0.48083  0.30279     4950 0.661
+
+``` r
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- melt(reps)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:6])
+trts <- melt(trts)
+```
+
+    ## No id variables; using all as measure variables
+
+``` r
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_severity_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-1.png)
+
+``` r
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-2.png)
+
+``` r
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-3.png)
+
+``` r
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-4.png)
+
+``` r
+# check random effects
+plotTrace(LShB_severity_lmm_2016$VCV, log = TRUE)
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-5.png)
+
+``` r
+# plot joint distibution of error
+rdf <- data.frame(LShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
+```
+
+![](Analysis_files/figure-markdown_github/2016_LShB_severity-6.png) \#\# Conclusions
 
 ### Tiller Sheath Blight Incidence
 
@@ -315,12 +764,12 @@ R Session Info
 
     ##  setting  value                       
     ##  version  R version 3.4.0 (2017-04-21)
-    ##  system   x86_64, darwin15.6.0        
+    ##  system   x86_64, darwin16.5.0        
     ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-06-15
+    ##  date     2017-06-16
 
     ## Packages ------------------------------------------------------------------
 
@@ -351,7 +800,7 @@ R Session Info
     ##  expm              0.999-2  2017-03-29 CRAN (R 3.4.0)
     ##  fitdistrplus    * 1.0-9    2017-03-24 CRAN (R 3.4.0)
     ##  forcats           0.2.0    2017-01-23 CRAN (R 3.4.0)
-    ##  foreign           0.8-67   2016-09-13 CRAN (R 3.4.0)
+    ##  foreign           0.8-68   2017-04-24 CRAN (R 3.4.0)
     ##  gdata             2.17.0   2015-07-04 CRAN (R 3.4.0)
     ##  ggplot2         * 2.2.1    2016-12-30 CRAN (R 3.4.0)
     ##  gmodels           2.16.2   2015-07-22 CRAN (R 3.4.0)
@@ -375,7 +824,7 @@ R Session Info
     ##  lubridate       * 1.6.0    2016-09-13 CRAN (R 3.4.0)
     ##  magrittr          1.5      2014-11-22 CRAN (R 3.4.0)
     ##  MASS            * 7.3-47   2017-02-26 CRAN (R 3.4.0)
-    ##  Matrix          * 1.2-9    2017-03-14 CRAN (R 3.4.0)
+    ##  Matrix          * 1.2-10   2017-04-28 CRAN (R 3.4.0)
     ##  MatrixModels      0.4-1    2015-08-22 CRAN (R 3.4.0)
     ##  MCMCglmm        * 2.24     2016-11-14 CRAN (R 3.4.0)
     ##  memoise           1.1.0    2017-04-21 CRAN (R 3.4.0)
