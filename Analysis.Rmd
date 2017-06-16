@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ProjectTemplate)
 load.project()
 ```
+
 ## Notes on this analysis before starting
 
 The analyses are semi-automated. When this file is knit, it automatically loads the _ProjectTemplate_ package and calls the `load.project()` function. This loads the data, cleans and munges it creating the `AUDPS` data frame used for the analysis below. The scripts used to clean and munge the data are located in the [munge](./munge) folder and numbered in the sequential order in which they are run.
@@ -48,7 +49,7 @@ Use `set.seed()` for reproducibility.
 set.seed(27)
 ```
 
-The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 First, separate the TRT column into the two treatments for analysis
 
@@ -301,7 +302,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -312,10 +313,10 @@ TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
 summary(TShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:6])
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
@@ -355,7 +356,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -366,10 +367,10 @@ LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
 summary(LShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:6])
+trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:4])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
@@ -401,11 +402,12 @@ rdf <- data.frame(LShB_severity_lmm_2016$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
+
 ## Conclusions
 
 ### Tiller Sheath Blight Incidence and Severity
 
-In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity.
+In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity. In 2016 the flooding treatment was significant for tiller sheath blight severity.
 
 ### Leaf Sheath Blight Severity
 
@@ -413,7 +415,7 @@ In neither experiment was the leaf sheath blight affected by nitrogen rates or i
 
 ### Interactions of Nitrogen and Irrigation Regime
 
-In neither experiment was the interaction of nitrogen with irrigation regime significant.
+In 2015 no significant itneraction was observed. In 2016 a significant interaction between flooding and nitrogen rate is observed for both the tiller and leaf severity ratings.
 
 ### Model Fit
 

@@ -35,7 +35,7 @@ Use `set.seed()` for reproducibility.
 set.seed(27)
 ```
 
-The `AUDPS` object is created when the project is loaded, in the file [munge/03\_preprocess\_data.R](munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is created when the project is loaded, in the file [munge/03\_preprocess\_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 First, separate the TRT column into the two treatments for analysis
 
@@ -43,8 +43,6 @@ First, separate the TRT column into the two treatments for analysis
 AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
 AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
 ```
-
-    ## `.cols` has been renamed and is deprecated, please use `.vars`
 
 Now create individual data frames for the analysis.
 
@@ -530,7 +528,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -546,40 +544,38 @@ summary(TShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 645.3083 
+    ##  DIC: 329.6857 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     17.12   0.3972    58.22     4950
+    ## REP     60.68    2.369      159     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units      11.8    8.965    15.13     6356
+    ## units      9.09    6.094    12.78     5403
     ## 
     ##  Location effects: TShB_sev_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)         4.5611   0.6357   9.0101     5315 0.0412 *
-    ## WMGTFLD            -0.6089  -2.7281   1.5798     4950 0.5778  
-    ## NRTEN100            1.3715  -0.7216   3.5797     4950 0.2101  
-    ## NRTEN120            2.7405   0.5635   4.7512     4950 0.0101 *
-    ## WMGTFLD:NRTEN100   -1.2441  -4.3705   1.7433     5219 0.4182  
-    ## WMGTFLD:NRTEN120   -0.8826  -3.9524   2.1528     4950 0.5624  
+    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC    
+    ## (Intercept)      19.83953 12.85648 26.82258     4950 0.00323 ** 
+    ## WMGTFLD           4.41469  2.38064  6.53289     4950 < 2e-04 ***
+    ## NRTEN60          -0.03163 -2.04377  2.11426     4950 0.97535    
+    ## WMGTFLD:NRTEN60  -3.69394 -6.49861 -0.62015     4950 0.01818 *  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 ```
 
     ## No id variables; using all as measure variables
 
 ``` r
-trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:6])
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:4])
 trts <- melt(trts)
 ```
 
@@ -645,7 +641,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_16,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -661,38 +657,38 @@ summary(LShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 161.3886 
+    ##  DIC: 77.73421 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     0.983  0.01324    3.427     4525
+    ## REP    0.8253  0.01089    2.941     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.2097    0.156   0.2673     4950
+    ## units     0.178    0.117   0.2434     4950
     ## 
     ##  Location effects: LShB_sev_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        0.57248 -0.36830  1.52108     5416 0.122
-    ## WMGTFLD           -0.22700 -0.50529  0.04655     5490 0.109
-    ## NRTEN100           0.18311 -0.10218  0.46265     5216 0.195
-    ## NRTEN120           0.10670 -0.17971  0.38569     5622 0.452
-    ## WMGTFLD:NRTEN100  -0.29915 -0.69075  0.10354     5472 0.147
-    ## WMGTFLD:NRTEN120  -0.08880 -0.48083  0.30279     4950 0.661
+    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+    ## (Intercept)       1.29280  0.43018  2.08331     4950 0.0251 *
+    ## WMGTFLD           0.24466 -0.03946  0.55038     4950 0.1026  
+    ## NRTEN60          -0.07157 -0.36996  0.21426     4314 0.6263  
+    ## WMGTFLD:NRTEN60  -0.45444 -0.85116 -0.02565     4950 0.0347 *
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 7:10)])
+reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 ```
 
     ## No id variables; using all as measure variables
 
 ``` r
-trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:6])
+trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:4])
 trts <- melt(trts)
 ```
 
@@ -749,11 +745,14 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-6.png) \#\# Conclusions
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-6.png)
+
+Conclusions
+-----------
 
 ### Tiller Sheath Blight Incidence and Severity
 
-In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity.
+In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity. In 2016 the flooding treatment was significant for tiller sheath blight severity.
 
 ### Leaf Sheath Blight Severity
 
@@ -761,7 +760,7 @@ In neither experiment was the leaf sheath blight affected by nitrogen rates or i
 
 ### Interactions of Nitrogen and Irrigation Regime
 
-In neither experiment was the interaction of nitrogen with irrigation regime significant.
+In 2015 no significant itneraction was observed. In 2016 a significant interaction between flooding and nitrogen rate is observed for both the tiller and leaf severity ratings.
 
 ### Model Fit
 
@@ -796,8 +795,6 @@ R Session Info
     ##  assertthat        0.2.0   2017-04-11 CRAN (R 3.4.0) 
     ##  backports         1.1.0   2017-05-22 cran (@1.1.0)  
     ##  base            * 3.4.0   2017-05-11 local          
-    ##  bindr             0.1     2016-11-13 cran (@0.1)    
-    ##  bindrcpp        * 0.1     2016-12-11 cran (@0.1)    
     ##  bitops            1.0-6   2013-08-17 CRAN (R 3.4.0) 
     ##  boot              1.3-19  2017-02-11 CRAN (R 3.4.0) 
     ##  broom             0.4.2   2017-02-13 CRAN (R 3.4.0) 
@@ -812,10 +809,11 @@ R Session Info
     ##  corpcor           1.6.9   2017-04-01 CRAN (R 3.4.0) 
     ##  cubature          1.3-8   2017-05-11 cran (@1.3-8)  
     ##  datasets        * 3.4.0   2017-05-11 local          
+    ##  DBI               0.6-1   2017-04-01 CRAN (R 3.4.0) 
     ##  deldir            0.1-14  2017-04-22 CRAN (R 3.4.0) 
     ##  devtools          1.13.2  2017-06-02 cran (@1.13.2) 
     ##  digest            0.6.12  2017-01-27 CRAN (R 3.4.0) 
-    ##  dplyr           * 0.7.0   2017-06-09 cran (@0.7.0)  
+    ##  dplyr           * 0.5.0   2016-06-24 url            
     ##  evaluate          0.10    2016-10-11 CRAN (R 3.4.0) 
     ##  expm              0.999-2 2017-03-29 CRAN (R 3.4.0) 
     ##  fitdistrplus    * 1.0-9   2017-03-24 CRAN (R 3.4.0) 
@@ -823,7 +821,6 @@ R Session Info
     ##  foreign           0.8-67  2016-09-13 CRAN (R 3.4.0) 
     ##  gdata             2.18.0  2017-06-06 cran (@2.18.0) 
     ##  ggplot2         * 2.2.1   2016-12-30 CRAN (R 3.4.0) 
-    ##  glue              1.1.0   2017-06-13 cran (@1.1.0)  
     ##  gmodels           2.16.2  2015-07-22 CRAN (R 3.4.0) 
     ##  gplots            3.0.1   2016-03-30 CRAN (R 3.4.0) 
     ##  graphics        * 3.4.0   2017-05-11 local          
@@ -864,7 +861,6 @@ R Session Info
     ##  packrat           0.4.8-1 2016-09-07 CRAN (R 3.4.0) 
     ##  parallel          3.4.0   2017-05-11 local          
     ##  pbkrtest          0.4-7   2017-03-15 CRAN (R 3.4.0) 
-    ##  pkgconfig         2.0.1   2017-03-21 cran (@2.0.1)  
     ##  plotMCMC        * 2.0-0   2014-03-12 CRAN (R 3.4.0) 
     ##  plyr              1.8.4   2016-06-08 CRAN (R 3.4.0) 
     ##  ProjectTemplate * 0.7     2016-08-11 CRAN (R 3.4.0) 
