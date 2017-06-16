@@ -179,7 +179,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-
+### 2015 Leaf Sheath Blight Severity Model
 
 ```{r 2015_LShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
@@ -348,7 +348,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-
+### 2016 Leaf Sheath Blight Severity Model
 
 ```{r 2016_LShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
@@ -403,9 +403,19 @@ plot_joint_random_error_dist(d = rdf,
 ```
 ## Conclusions
 
-### Tiller Sheath Blight Incidence
+### Tiller Sheath Blight Incidence and Severity
 
-In 2015 the highest N treatment was significant, in 2016 the lowest N rates were significant.
+In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity.
+
+### Leaf Sheath Blight Severity
+
+In neither experiment was the leaf sheath blight affected by nitrogen rates or irrigation regime.
+
+### Interactions of Nitrogen and Irrigation Regime
+
+In neither experiment was the interaction of nitrogen with irrigation regime significant.
+
+### Model Fit
 
 The models all appear to be good fits.
 

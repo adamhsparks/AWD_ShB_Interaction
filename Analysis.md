@@ -44,6 +44,8 @@ AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
 AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
 ```
 
+    ## `.cols` has been renamed and is deprecated, please use `.vars`
+
 Now create individual data frames for the analysis.
 
 ``` r
@@ -131,7 +133,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -139,7 +141,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -148,7 +150,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -156,14 +158,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -172,7 +174,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_incidence-6.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-6.png)
 
 ### 2015 Tiller Sheath Blight Severity Model
 
@@ -246,7 +248,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -254,7 +256,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -263,7 +265,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -271,14 +273,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -287,7 +289,9 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/2015_TShB_severity-6.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-6.png)
+
+### 2015 Leaf Sheath Blight Severity Model
 
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
@@ -357,7 +361,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -365,7 +369,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -374,7 +378,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -382,14 +386,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -398,7 +402,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/2015_LShB_severity-6.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-6.png)
 
 ------------------------------------------------------------------------
 
@@ -476,7 +480,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -484,7 +488,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -493,7 +497,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -501,14 +505,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -517,7 +521,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_incidence-6.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-6.png)
 
 ### 2016 Tiller Sheath Blight Severity Model
 
@@ -591,7 +595,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -599,7 +603,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -608,7 +612,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -616,14 +620,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -632,7 +636,9 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/2016_TShB_severity-6.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-6.png)
+
+### 2016 Leaf Sheath Blight Severity Model
 
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
@@ -702,7 +708,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-1.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -710,7 +716,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-2.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -719,7 +725,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-3.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -727,14 +733,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-4.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_severity_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-5.png)
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -743,11 +749,21 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github/2016_LShB_severity-6.png) \#\# Conclusions
+![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-6.png) \#\# Conclusions
 
-### Tiller Sheath Blight Incidence
+### Tiller Sheath Blight Incidence and Severity
 
-In 2015 the highest N treatment was significant, in 2016 the lowest N rates were significant.
+In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity.
+
+### Leaf Sheath Blight Severity
+
+In neither experiment was the leaf sheath blight affected by nitrogen rates or irrigation regime.
+
+### Interactions of Nitrogen and Irrigation Regime
+
+In neither experiment was the interaction of nitrogen with irrigation regime significant.
+
+### Model Fit
 
 The models all appear to be good fits.
 
@@ -760,111 +776,127 @@ The random effects are all fairly equally distributed except for 2016 tiller she
 R Session Info
 --------------
 
-    ## Session info --------------------------------------------------------------
+    ## Session info -------------------------------------------------------------
 
     ##  setting  value                       
     ##  version  R version 3.4.0 (2017-04-21)
-    ##  system   x86_64, darwin16.5.0        
+    ##  system   x86_64, darwin15.6.0        
     ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
     ##  date     2017-06-16
 
-    ## Packages ------------------------------------------------------------------
+    ## Packages -----------------------------------------------------------------
 
-    ##  package         * version  date       source        
-    ##  agricolae       * 1.2-4    2016-06-12 CRAN (R 3.4.0)
-    ##  AlgDesign         1.1-7.3  2014-10-15 CRAN (R 3.4.0)
-    ##  ape             * 4.1      2017-02-14 CRAN (R 3.4.0)
-    ##  assertthat        0.2.0    2017-04-11 CRAN (R 3.4.0)
-    ##  backports         1.0.5    2017-01-18 CRAN (R 3.4.0)
-    ##  bitops            1.0-6    2013-08-17 CRAN (R 3.4.0)
-    ##  boot              1.3-19   2017-02-11 CRAN (R 3.4.0)
-    ##  broom             0.4.2    2017-02-13 CRAN (R 3.4.0)
-    ##  car             * 2.1-4    2016-12-02 CRAN (R 3.4.0)
-    ##  caTools           1.17.1   2014-09-10 CRAN (R 3.4.0)
-    ##  cellranger        1.1.0    2016-07-27 CRAN (R 3.4.0)
-    ##  cluster           2.0.6    2017-03-10 CRAN (R 3.4.0)
-    ##  coda            * 0.19-1   2016-12-08 CRAN (R 3.4.0)
-    ##  colorspace        1.3-2    2016-12-14 CRAN (R 3.4.0)
-    ##  combinat          0.0-8    2012-10-29 CRAN (R 3.4.0)
-    ##  corpcor           1.6.9    2017-04-01 CRAN (R 3.4.0)
-    ##  cubature          1.3-6    2016-12-12 CRAN (R 3.4.0)
-    ##  DBI               0.6-1    2017-04-01 CRAN (R 3.4.0)
-    ##  deldir            0.1-14   2017-04-22 CRAN (R 3.4.0)
-    ##  devtools          1.12.0   2016-12-05 CRAN (R 3.4.0)
-    ##  digest            0.6.12   2017-01-27 CRAN (R 3.4.0)
-    ##  dplyr           * 0.5.0    2016-06-24 CRAN (R 3.4.0)
-    ##  evaluate          0.10     2016-10-11 CRAN (R 3.4.0)
-    ##  expm              0.999-2  2017-03-29 CRAN (R 3.4.0)
-    ##  fitdistrplus    * 1.0-9    2017-03-24 CRAN (R 3.4.0)
-    ##  forcats           0.2.0    2017-01-23 CRAN (R 3.4.0)
-    ##  foreign           0.8-68   2017-04-24 CRAN (R 3.4.0)
-    ##  gdata             2.17.0   2015-07-04 CRAN (R 3.4.0)
-    ##  ggplot2         * 2.2.1    2016-12-30 CRAN (R 3.4.0)
-    ##  gmodels           2.16.2   2015-07-22 CRAN (R 3.4.0)
-    ##  gplots            3.0.1    2016-03-30 CRAN (R 3.4.0)
-    ##  gridExtra         2.2.1    2016-02-29 CRAN (R 3.4.0)
-    ##  gtable            0.2.0    2016-02-26 CRAN (R 3.4.0)
-    ##  gtools            3.5.0    2015-05-29 CRAN (R 3.4.0)
-    ##  haven             1.0.0    2016-09-23 CRAN (R 3.4.0)
-    ##  hms               0.3      2016-11-22 CRAN (R 3.4.0)
-    ##  htmltools         0.3.5    2016-03-21 CRAN (R 3.4.0)
-    ##  httr              1.2.1    2016-07-03 CRAN (R 3.4.0)
-    ##  jsonlite          1.4      2017-04-08 CRAN (R 3.4.0)
-    ##  KernSmooth        2.23-15  2015-06-29 CRAN (R 3.4.0)
-    ##  klaR              0.6-12   2014-08-06 CRAN (R 3.4.0)
-    ##  knitr             1.15.1   2016-11-22 CRAN (R 3.4.0)
-    ##  labeling          0.3      2014-08-23 CRAN (R 3.4.0)
-    ##  lattice         * 0.20-35  2017-03-25 CRAN (R 3.4.0)
-    ##  lazyeval          0.2.0    2016-06-12 CRAN (R 3.4.0)
-    ##  LearnBayes        2.15     2014-05-29 CRAN (R 3.4.0)
-    ##  lme4              1.1-13   2017-04-19 CRAN (R 3.4.0)
-    ##  lubridate       * 1.6.0    2016-09-13 CRAN (R 3.4.0)
-    ##  magrittr          1.5      2014-11-22 CRAN (R 3.4.0)
-    ##  MASS            * 7.3-47   2017-02-26 CRAN (R 3.4.0)
-    ##  Matrix          * 1.2-10   2017-04-28 CRAN (R 3.4.0)
-    ##  MatrixModels      0.4-1    2015-08-22 CRAN (R 3.4.0)
-    ##  MCMCglmm        * 2.24     2016-11-14 CRAN (R 3.4.0)
-    ##  memoise           1.1.0    2017-04-21 CRAN (R 3.4.0)
-    ##  mgcv              1.8-17   2017-02-08 CRAN (R 3.4.0)
-    ##  minqa             1.2.4    2014-10-09 CRAN (R 3.4.0)
-    ##  mnormt            1.5-5    2016-10-15 CRAN (R 3.4.0)
-    ##  modelr            0.1.0    2016-08-31 CRAN (R 3.4.0)
-    ##  munsell           0.4.3    2016-02-13 CRAN (R 3.4.0)
-    ##  nlme              3.1-131  2017-02-06 CRAN (R 3.4.0)
-    ##  nloptr            1.0.4    2014-08-04 CRAN (R 3.4.0)
-    ##  nnet              7.3-12   2016-02-02 CRAN (R 3.4.0)
-    ##  packrat           0.4.8-1  2016-09-07 CRAN (R 3.4.0)
-    ##  pbkrtest          0.4-7    2017-03-15 CRAN (R 3.4.0)
-    ##  plotMCMC        * 2.0-0    2014-03-12 CRAN (R 3.4.0)
-    ##  plyr              1.8.4    2016-06-08 CRAN (R 3.4.0)
-    ##  ProjectTemplate * 0.7      2016-08-11 CRAN (R 3.4.0)
-    ##  psych             1.7.3.21 2017-03-22 CRAN (R 3.4.0)
-    ##  purrr           * 0.2.2    2016-06-18 CRAN (R 3.4.0)
-    ##  quantreg          5.33     2017-04-18 CRAN (R 3.4.0)
-    ##  R6                2.2.0    2016-10-05 CRAN (R 3.4.0)
-    ##  Rcpp              0.12.10  2017-03-19 CRAN (R 3.4.0)
-    ##  readr           * 1.1.0    2017-03-22 CRAN (R 3.4.0)
-    ##  readxl            1.0.0    2017-04-18 CRAN (R 3.4.0)
-    ##  reshape2        * 1.4.2    2016-10-22 CRAN (R 3.4.0)
-    ##  rmarkdown         1.4      2017-03-24 CRAN (R 3.4.0)
-    ##  rprojroot         1.2      2017-01-16 CRAN (R 3.4.0)
-    ##  rvest             0.3.2    2016-06-17 CRAN (R 3.4.0)
-    ##  scales            0.4.1    2016-11-09 CRAN (R 3.4.0)
-    ##  sp                1.2-4    2016-12-22 CRAN (R 3.4.0)
-    ##  SparseM           1.77     2017-04-23 CRAN (R 3.4.0)
-    ##  spdep             0.6-13   2017-04-25 CRAN (R 3.4.0)
-    ##  stringi           1.1.5    2017-04-07 CRAN (R 3.4.0)
-    ##  stringr           1.2.0    2017-02-18 CRAN (R 3.4.0)
-    ##  survival        * 2.41-3   2017-04-04 CRAN (R 3.4.0)
-    ##  tensorA           0.36     2010-12-01 CRAN (R 3.4.0)
-    ##  tibble          * 1.3.0    2017-04-01 CRAN (R 3.4.0)
-    ##  tidyr           * 0.6.1    2017-01-10 CRAN (R 3.4.0)
-    ##  tidyverse       * 1.1.1    2017-01-27 CRAN (R 3.4.0)
-    ##  viridis           0.4.0    2017-03-27 CRAN (R 3.4.0)
-    ##  viridisLite       0.2.0    2017-03-24 CRAN (R 3.4.0)
-    ##  withr             1.0.2    2016-06-20 CRAN (R 3.4.0)
-    ##  xml2              1.1.1    2017-01-24 CRAN (R 3.4.0)
-    ##  yaml              2.1.14   2016-11-12 CRAN (R 3.4.0)
+    ##  package         * version date       source         
+    ##  agricolae       * 1.2-4   2016-06-12 CRAN (R 3.4.0) 
+    ##  AlgDesign         1.1-7.3 2014-10-15 CRAN (R 3.4.0) 
+    ##  ape             * 4.1     2017-02-14 CRAN (R 3.4.0) 
+    ##  assertthat        0.2.0   2017-04-11 CRAN (R 3.4.0) 
+    ##  backports         1.1.0   2017-05-22 cran (@1.1.0)  
+    ##  base            * 3.4.0   2017-05-11 local          
+    ##  bindr             0.1     2016-11-13 cran (@0.1)    
+    ##  bindrcpp        * 0.1     2016-12-11 cran (@0.1)    
+    ##  bitops            1.0-6   2013-08-17 CRAN (R 3.4.0) 
+    ##  boot              1.3-19  2017-02-11 CRAN (R 3.4.0) 
+    ##  broom             0.4.2   2017-02-13 CRAN (R 3.4.0) 
+    ##  car             * 2.1-4   2016-12-02 CRAN (R 3.4.0) 
+    ##  caTools           1.17.1  2014-09-10 CRAN (R 3.4.0) 
+    ##  cellranger        1.1.0   2016-07-27 CRAN (R 3.4.0) 
+    ##  cluster           2.0.6   2017-03-10 CRAN (R 3.4.0) 
+    ##  coda            * 0.19-1  2016-12-08 CRAN (R 3.4.0) 
+    ##  colorspace        1.3-2   2016-12-14 CRAN (R 3.4.0) 
+    ##  combinat          0.0-8   2012-10-29 CRAN (R 3.4.0) 
+    ##  compiler          3.4.0   2017-05-11 local          
+    ##  corpcor           1.6.9   2017-04-01 CRAN (R 3.4.0) 
+    ##  cubature          1.3-8   2017-05-11 cran (@1.3-8)  
+    ##  datasets        * 3.4.0   2017-05-11 local          
+    ##  deldir            0.1-14  2017-04-22 CRAN (R 3.4.0) 
+    ##  devtools          1.13.2  2017-06-02 cran (@1.13.2) 
+    ##  digest            0.6.12  2017-01-27 CRAN (R 3.4.0) 
+    ##  dplyr           * 0.7.0   2017-06-09 cran (@0.7.0)  
+    ##  evaluate          0.10    2016-10-11 CRAN (R 3.4.0) 
+    ##  expm              0.999-2 2017-03-29 CRAN (R 3.4.0) 
+    ##  fitdistrplus    * 1.0-9   2017-03-24 CRAN (R 3.4.0) 
+    ##  forcats           0.2.0   2017-01-23 CRAN (R 3.4.0) 
+    ##  foreign           0.8-67  2016-09-13 CRAN (R 3.4.0) 
+    ##  gdata             2.18.0  2017-06-06 cran (@2.18.0) 
+    ##  ggplot2         * 2.2.1   2016-12-30 CRAN (R 3.4.0) 
+    ##  glue              1.1.0   2017-06-13 cran (@1.1.0)  
+    ##  gmodels           2.16.2  2015-07-22 CRAN (R 3.4.0) 
+    ##  gplots            3.0.1   2016-03-30 CRAN (R 3.4.0) 
+    ##  graphics        * 3.4.0   2017-05-11 local          
+    ##  grDevices       * 3.4.0   2017-05-11 local          
+    ##  grid              3.4.0   2017-05-11 local          
+    ##  gridExtra         2.2.1   2016-02-29 CRAN (R 3.4.0) 
+    ##  gtable            0.2.0   2016-02-26 CRAN (R 3.4.0) 
+    ##  gtools            3.5.0   2015-05-29 CRAN (R 3.4.0) 
+    ##  haven             1.0.0   2016-09-23 CRAN (R 3.4.0) 
+    ##  hms               0.3     2016-11-22 CRAN (R 3.4.0) 
+    ##  htmltools         0.3.6   2017-04-28 cran (@0.3.6)  
+    ##  httr              1.2.1   2016-07-03 CRAN (R 3.4.0) 
+    ##  jsonlite          1.5     2017-06-01 cran (@1.5)    
+    ##  KernSmooth        2.23-15 2015-06-29 CRAN (R 3.4.0) 
+    ##  klaR              0.6-12  2014-08-06 CRAN (R 3.4.0) 
+    ##  knitr             1.16    2017-05-18 cran (@1.16)   
+    ##  labeling          0.3     2014-08-23 CRAN (R 3.4.0) 
+    ##  lattice         * 0.20-35 2017-03-25 CRAN (R 3.4.0) 
+    ##  lazyeval          0.2.0   2016-06-12 CRAN (R 3.4.0) 
+    ##  LearnBayes        2.15    2014-05-29 CRAN (R 3.4.0) 
+    ##  lme4              1.1-13  2017-04-19 CRAN (R 3.4.0) 
+    ##  lubridate       * 1.6.0   2016-09-13 CRAN (R 3.4.0) 
+    ##  magrittr          1.5     2014-11-22 CRAN (R 3.4.0) 
+    ##  MASS            * 7.3-47  2017-02-26 CRAN (R 3.4.0) 
+    ##  Matrix          * 1.2-9   2017-03-14 CRAN (R 3.4.0) 
+    ##  MatrixModels      0.4-1   2015-08-22 CRAN (R 3.4.0) 
+    ##  MCMCglmm        * 2.24    2016-11-14 CRAN (R 3.4.0) 
+    ##  memoise           1.1.0   2017-04-21 CRAN (R 3.4.0) 
+    ##  methods         * 3.4.0   2017-05-11 local          
+    ##  mgcv              1.8-17  2017-02-08 CRAN (R 3.4.0) 
+    ##  minqa             1.2.4   2014-10-09 CRAN (R 3.4.0) 
+    ##  mnormt            1.5-5   2016-10-15 CRAN (R 3.4.0) 
+    ##  modelr            0.1.0   2016-08-31 CRAN (R 3.4.0) 
+    ##  munsell           0.4.3   2016-02-13 CRAN (R 3.4.0) 
+    ##  nlme              3.1-131 2017-02-06 CRAN (R 3.4.0) 
+    ##  nloptr            1.0.4   2014-08-04 CRAN (R 3.4.0) 
+    ##  nnet              7.3-12  2016-02-02 CRAN (R 3.4.0) 
+    ##  packrat           0.4.8-1 2016-09-07 CRAN (R 3.4.0) 
+    ##  parallel          3.4.0   2017-05-11 local          
+    ##  pbkrtest          0.4-7   2017-03-15 CRAN (R 3.4.0) 
+    ##  pkgconfig         2.0.1   2017-03-21 cran (@2.0.1)  
+    ##  plotMCMC        * 2.0-0   2014-03-12 CRAN (R 3.4.0) 
+    ##  plyr              1.8.4   2016-06-08 CRAN (R 3.4.0) 
+    ##  ProjectTemplate * 0.7     2016-08-11 CRAN (R 3.4.0) 
+    ##  psych             1.7.5   2017-05-03 cran (@1.7.5)  
+    ##  purrr           * 0.2.2.2 2017-05-11 cran (@0.2.2.2)
+    ##  quantreg          5.33    2017-04-18 CRAN (R 3.4.0) 
+    ##  R6                2.2.1   2017-05-10 cran (@2.2.1)  
+    ##  Rcpp              0.12.11 2017-05-22 cran (@0.12.11)
+    ##  readr           * 1.1.1   2017-05-16 cran (@1.1.1)  
+    ##  readxl            1.0.0   2017-04-18 CRAN (R 3.4.0) 
+    ##  reshape2        * 1.4.2   2016-10-22 CRAN (R 3.4.0) 
+    ##  rlang             0.1.1   2017-05-18 cran (@0.1.1)  
+    ##  rmarkdown         1.6     2017-06-15 cran (@1.6)    
+    ##  rprojroot         1.2     2017-01-16 CRAN (R 3.4.0) 
+    ##  rvest             0.3.2   2016-06-17 CRAN (R 3.4.0) 
+    ##  scales            0.4.1   2016-11-09 CRAN (R 3.4.0) 
+    ##  sp                1.2-4   2016-12-22 CRAN (R 3.4.0) 
+    ##  SparseM           1.77    2017-04-23 CRAN (R 3.4.0) 
+    ##  spdep             0.6-13  2017-04-25 CRAN (R 3.4.0) 
+    ##  splines           3.4.0   2017-05-11 local          
+    ##  stats           * 3.4.0   2017-05-11 local          
+    ##  stringi           1.1.5   2017-04-07 CRAN (R 3.4.0) 
+    ##  stringr           1.2.0   2017-02-18 CRAN (R 3.4.0) 
+    ##  survival        * 2.41-3  2017-04-04 CRAN (R 3.4.0) 
+    ##  tensorA           0.36    2010-12-01 CRAN (R 3.4.0) 
+    ##  tibble          * 1.3.3   2017-05-28 cran (@1.3.3)  
+    ##  tidyr           * 0.6.3   2017-05-15 CRAN (R 3.4.0) 
+    ##  tidyverse       * 1.1.1   2017-01-27 CRAN (R 3.4.0) 
+    ##  tools             3.4.0   2017-05-11 local          
+    ##  utils           * 3.4.0   2017-05-11 local          
+    ##  viridis           0.4.0   2017-03-27 CRAN (R 3.4.0) 
+    ##  viridisLite       0.2.0   2017-03-24 CRAN (R 3.4.0) 
+    ##  withr             1.0.2   2016-06-20 CRAN (R 3.4.0) 
+    ##  xml2              1.1.1   2017-01-24 CRAN (R 3.4.0) 
+    ##  yaml              2.1.14  2016-11-12 CRAN (R 3.4.0)
