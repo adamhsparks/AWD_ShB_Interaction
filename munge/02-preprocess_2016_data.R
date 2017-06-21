@@ -135,13 +135,13 @@ DS2016 <-
 
 DS2016$TShB_incidence <- round(DS2016$TShB_incidence, 2)
 
-DS2016 <- dplyr::rename(DS2016, TIL_ShB = NSHShB)
+DS2016 <- rename(DS2016, TIL_ShB = NSHShB)
 
 DS2016$YEAR <- year(DS2016$DATE)
 DS2016$LEAF_ShB <- as.numeric(DS2016$LEAF_ShB)
 
 DS2016 <-
-  DS2016 %>% dplyr::select(
+  DS2016 %>% select(
     YEAR,
     DATE,
     ASMT,

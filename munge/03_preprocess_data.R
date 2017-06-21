@@ -37,6 +37,29 @@ RAW_data$TRT <-
     "FLD_N180"
   )
 
+# add column with midpoint % tiller ShB severity
+RAW_data <- mutate(RAW_data, PERC_TIL_ShB = ifelse(TIL_ShB == 0, 0,
+                                                   ifelse(
+                                                     TIL_ShB == 1, 1,
+                                                     ifelse(TIL_ShB == 2, 2.5,
+                                                            ifelse(
+                                                              TIL_ShB == 3, 10,
+                                                              ifelse(TIL_ShB == 4, 32.5, 75)
+                                                            ))
+                                                   )))
+
+# add column with midpoint % leaf ShB severity
+RAW_data <-
+  mutate(RAW_data, PERC_LEAF_ShB = ifelse(LEAF_ShB == 0, 0,
+                                          ifelse(
+                                            LEAF_ShB == 1, 1,
+                                            ifelse(LEAF_ShB == 2, 2.5,
+                                                   ifelse(
+                                                     LEAF_ShB == 3, 10,
+                                                     ifelse(LEAF_ShB == 4, 32.5, 75)
+                                                   ))
+                                          )))
+
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
@@ -63,6 +86,16 @@ TShB_sev_15 <-
 TShB_sev_wide <-
   dcast(TShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
 
+TShB_perc_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
+                 PLOT_TShB_PERCENT = PERC_TIL_ShB) %>%
+  arrange(PLOT)
+
+TShB_perc_wide <-
+  dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+
 LShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -73,6 +106,16 @@ LShB_sev_15 <-
 LShB_sev_wide <-
   dcast(LShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
+LShB_perc_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
+                 PLOT_LShB_PERCENT = PERC_LEAF_ShB) %>%
+  arrange(PLOT)
+
+LShB_perc_wide <-
+  dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+
 TShB_inc_AUDPS <-
   audps(evaluation = TShB_inc_wide[, 2:6], dates = as_vector(TShB_inc_15[1:5, 6]))
 
@@ -82,13 +125,21 @@ TShB_sev_AUDPS <-
 LShB_sev_AUDPS <-
   audps(evaluation = LShB_sev_wide[, 2:6], dates = as_vector(LShB_sev_15[1:5, 6]))
 
+TShB_percent_AUDPS <-
+  audps(evaluation = TShB_perc_wide[, 2:6], dates = as_vector(TShB_perc_15[1:5, 6]))
+
+LShB_percent_AUDPS <-
+  audps(evaluation = LShB_perc_wide[, 2:6], dates = as_vector(LShB_perc_15[1:5, 6]))
+
 AUDPS_15 <-
   as_tibble(
     cbind(
       PLOT = 1:24,
       TShB_inc_AUDPS,
       TShB_sev_AUDPS,
-      LShB_sev_AUDPS
+      TShB_percent_AUDPS,
+      LShB_sev_AUDPS,
+      LShB_percent_AUDPS
     )
   )
 
@@ -109,9 +160,6 @@ TShB_inc_16 <-
 TShB_inc_wide <-
   dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
-TShB_inc_AUDPS <-
-  audps(evaluation = TShB_inc_wide[, 2:5], dates = as_vector(TShB_inc_16[1:4, 6]))
-
 TShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -122,8 +170,15 @@ TShB_sev_16 <-
 TShB_sev_wide <-
   dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
 
-TShB_sev_AUDPS <-
-  audps(evaluation = TShB_sev_wide[, 2:5], dates = as_vector(TShB_sev_16[1:4, 6]))
+TShB_perc_16 <-
+  DS2016 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
+                 PLOT_TShB_PERCENT = PERC_TIL_ShB) %>%
+  arrange(PLOT)
+
+TShB_perc_wide <-
+  dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
 
 LShB_sev_16 <-
   DS2016 %>%
@@ -135,8 +190,30 @@ LShB_sev_16 <-
 LShB_sev_wide <-
   dcast(LShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
+LShB_perc_16 <-
+  DS2016 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
+                 PLOT_LShB_PERCENT = PERC_LEAF_ShB) %>%
+  arrange(PLOT)
+
+LShB_perc_wide <-
+  dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+
+TShB_inc_AUDPS <-
+  audps(evaluation = TShB_inc_wide[, 2:5], dates = as_vector(TShB_inc_16[1:4, 6]))
+
+TShB_sev_AUDPS <-
+  audps(evaluation = TShB_sev_wide[, 2:5], dates = as_vector(TShB_sev_16[1:4, 6]))
+
 LShB_sev_AUDPS <-
   audps(evaluation = LShB_sev_wide[, 2:5], dates = as_vector(LShB_sev_16[1:4, 6]))
+
+TShB_percent_AUDPS <-
+  audps(evaluation = TShB_perc_wide[, 2:5], dates = as_vector(TShB_perc_16[1:4, 6]))
+
+LShB_percent_AUDPS <-
+  audps(evaluation = LShB_perc_wide[, 2:5], dates = as_vector(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
   as_tibble(
@@ -144,7 +221,9 @@ AUDPS_16 <-
       PLOT = 1:16,
       TShB_inc_AUDPS,
       TShB_sev_AUDPS,
-      LShB_sev_AUDPS
+      TShB_percent_AUDPS,
+      LShB_sev_AUDPS,
+      LShB_percent_AUDPS
     )
   )
 

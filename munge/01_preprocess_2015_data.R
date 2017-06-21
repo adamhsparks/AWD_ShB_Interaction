@@ -24,7 +24,7 @@ reformat <- function(files) {
   x$TShB_incidence <- round(x$TShB_incidence, 2)
 
   TShB_incidence <-
-    x %>% dplyr::select(REP,
+    x %>% select(REP,
                         TRT,
                         WMGT,
                         NRTE,
@@ -38,7 +38,7 @@ reformat <- function(files) {
   # Tiller 1 -------------------------------------------------------------------
   TIL1 <-
     x %>%
-    dplyr::select(TRT,
+    select(TRT,
                   REP,
                   WMGT,
                   SMPL,
@@ -65,16 +65,16 @@ reformat <- function(files) {
   TIL1$LEAF[TIL1$LEAF == "SLE1"] <- 5
   TIL1$LEAF[TIL1$LEAF == "SLF1"] <- 6
 
-  TIL1 <- dplyr::rename(TIL1, GL = GL1)
-  TIL1 <- dplyr::rename(TIL1, DL = DL1)
-  TIL1 <- dplyr::rename(TIL1, TIL = TIL1)
-  TIL1 <- dplyr::rename(TIL1, TIL_ShB = SHB1)
+  TIL1 <- rename(TIL1, GL = GL1)
+  TIL1 <- rename(TIL1, DL = DL1)
+  TIL1 <- rename(TIL1, TIL = TIL1)
+  TIL1 <- rename(TIL1, TIL_ShB = SHB1)
 
   # Tiller 2 -------------------------------------------------------------------
 
   TIL2 <-
     x %>%
-    dplyr::select(TRT,
+    select(TRT,
                   REP,
                   WMGT,
                   SMPL,
@@ -101,16 +101,16 @@ reformat <- function(files) {
   TIL2$LEAF[TIL2$LEAF == "SLE1"] <- 5
   TIL2$LEAF[TIL2$LEAF == "SLF1"] <- 6
 
-  TIL2 <- dplyr::rename(TIL2, GL = GL1)
-  TIL2 <- dplyr::rename(TIL2, DL = DL1)
-  TIL2 <- dplyr::rename(TIL2, TIL = TIL2)
-  TIL2 <- dplyr::rename(TIL2, TIL_ShB = SHB1)
+  TIL2 <- rename(TIL2, GL = GL1)
+  TIL2 <- rename(TIL2, DL = DL1)
+  TIL2 <- rename(TIL2, TIL = TIL2)
+  TIL2 <- rename(TIL2, TIL_ShB = SHB1)
 
   # Tiller 3 -------------------------------------------------------------------
 
   TIL3 <-
     x %>%
-    dplyr::select(TRT,
+    select(TRT,
                   REP,
                   WMGT,
                   SMPL,
@@ -137,15 +137,15 @@ reformat <- function(files) {
   TIL3$LEAF[TIL3$LEAF == "SLE1"] <- 5
   TIL3$LEAF[TIL3$LEAF == "SLF1"] <- 6
 
-  TIL3 <- dplyr::rename(TIL3, GL = GL1)
-  TIL3 <- dplyr::rename(TIL3, DL = DL1)
-  TIL3 <- dplyr::rename(TIL3, TIL = TIL3)
-  TIL3 <- dplyr::rename(TIL3, TIL_ShB = SHB1)
+  TIL3 <- rename(TIL3, GL = GL1)
+  TIL3 <- rename(TIL3, DL = DL1)
+  TIL3 <- rename(TIL3, TIL = TIL3)
+  TIL3 <- rename(TIL3, TIL_ShB = SHB1)
   # Tiller 4 -------------------------------------------------------------------
 
   TIL4 <-
     x %>%
-    dplyr::select(TRT,
+    select(TRT,
                   REP,
                   WMGT,
                   SMPL,
@@ -172,10 +172,10 @@ reformat <- function(files) {
   TIL4$LEAF[TIL4$LEAF == "SLE1"] <- 5
   TIL4$LEAF[TIL4$LEAF == "SLF1"] <- 6
 
-  TIL4 <- dplyr::rename(TIL4, GL = GL1)
-  TIL4 <- dplyr::rename(TIL4, DL = DL1)
-  TIL4 <- dplyr::rename(TIL4, TIL = TIL4)
-  TIL4 <- dplyr::rename(TIL4, TIL_ShB = SHB1)
+  TIL4 <- rename(TIL4, GL = GL1)
+  TIL4 <- rename(TIL4, DL = DL1)
+  TIL4 <- rename(TIL4, TIL = TIL4)
+  TIL4 <- rename(TIL4, TIL_ShB = SHB1)
 
   y <- rbind(TIL1, TIL2, TIL3, TIL4)
   x <- left_join(TShB_incidence, y)
@@ -239,7 +239,7 @@ DS2015$PLOT <- rep(1:24, each = 432)
 
 # Arrange columns --------------------------------------------------------------
 DS2015 <-
-  DS2015 %>% dplyr::select(
+  DS2015 %>% select(
     YEAR,
     DATE,
     ASMT,
