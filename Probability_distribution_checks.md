@@ -1,7 +1,7 @@
 Probability Distribution Checks
 ================
 
-Here we check the probability distribution that best fits these data. I'm following a method from <http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html>. As you see in that guide, there are several distributions that can be checked. However, in these data only normal and exponential
+Here we check the probability distribution that best fits these data. I'm following a method from <http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html>. As you see in that guide, there are several distributions that can be checked. However, in these data only normal and exponential are necessary.
 
 2016
 ----
@@ -186,4 +186,12 @@ To read the graphs, we want to select a distribution where most of the points fa
 
 ### Tiller Incidence Distributions
 
-The 2016 data fit an exponential distribution while the 2016 data fit a normal distribution.
+The 2015 data fit an exponential distribution while the 2016 data fit a normal distribution.
+
+### Leaf Sheath Blight Severity Distributions
+
+The 2015 data contain negative values, so an exponential distribution will not fit. The 2016 data fit a normal distribution better than exponential.
+
+### Tiller Sheath Blight Severity Distributions
+
+The 2015 data contain negative values, so an exponential distribution will not fit. The 2016 data fit a normal distribution better than exponential.
