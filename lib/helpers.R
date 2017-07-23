@@ -24,9 +24,9 @@ plot_replicate_posteriors <- function(d, title) {
                                                color = variable,
                                                fill = variable)) +
     geom_density(alpha = 0.25) +
-    viridis::scale_fill_viridis(discrete = TRUE,
+    scale_fill_brewer(type = "qual", palette = "Set1",
                                 name = "Variable") +
-    viridis::scale_color_viridis(discrete = TRUE,
+    scale_colour_brewer(type = "qual", palette = "Set1",
                                 name = "Variable") +
     ggtitle(paste(title))
 }
@@ -37,9 +37,9 @@ plot_treatment_posteriors <- function(d, title) {
                        color = variable,
                        fill = variable)) +
     geom_density(alpha = 0.25) +
-    viridis::scale_fill_viridis(discrete = TRUE,
+    scale_fill_brewer(type = "qual", palette = "Set1",
                                 name = "Variable") +
-    viridis::scale_color_viridis(discrete = TRUE,
+    scale_colour_brewer(type = "qual", palette = "Set1",
                                   name = "Variable") +
     ggtitle(paste(title))
 }

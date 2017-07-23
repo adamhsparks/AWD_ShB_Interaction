@@ -28,6 +28,10 @@ Raw data for green leaves and dead leaves
 
 <img src="TShB_sev_AUDPS_dotplot.png" style="display: block; margin: auto;" />
 
+<img src="TShB_incidence_progress_curves.png" style="display: block; margin: auto;" />
+
+<img src="TShB_progress_curves.png" style="display: block; margin: auto;" />
+
 ******
 
 ## Leaf sheath blight data
@@ -37,4 +41,6 @@ Raw data for green leaves and dead leaves
 <img src="LShB_severity_over_time.png" style="display: block; margin: auto;" />
 
 <img src="LShB_sev_AUDPS_dotplot.png" style="display: block; margin: auto;" />
+
+<img src="LShB_progress_curves.png" style="display: block; margin: auto;" />
 

@@ -41,7 +41,7 @@ First, separate the TRT column into the two treatments for analysis
 
 ``` r
 AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
-AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
 ```
 
 Now create individual data frames for the analysis.
@@ -179,7 +179,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2015 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_15,
                           verbose = FALSE,
@@ -197,27 +197,27 @@ summary(TShB_severity_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 645.3289 
+    ##  DIC: 913.867 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     16.78   0.3232    51.69     4431
+    ## REP     257.4    9.161    799.8     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     11.78    8.861       15     4950
+    ## units     110.4    82.77    140.4     5164
     ## 
-    ##  Location effects: TShB_sev_AUDPS ~ WMGT * NRTE 
+    ##  Location effects: TShB_percent_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)         4.5710   0.5424   8.8091     4950 0.0339 *
-    ## WMGTFLD            -0.5974  -2.8103   1.4701     4950 0.5786  
-    ## NRTEN100            1.4007  -0.6460   3.7407     4950 0.2117  
-    ## NRTEN120            2.7747   0.5226   4.8641     4950 0.0141 *
-    ## WMGTFLD:NRTEN100   -1.2761  -4.2439   1.8370     4950 0.4109  
-    ## WMGTFLD:NRTEN120   -0.8917  -3.9626   1.9592     5249 0.5434  
+    ##                  post.mean l-95% CI u-95% CI eff.samp   pMCMC   
+    ## (Intercept)         8.7159  -8.3426  23.6635     4950 0.20889   
+    ## WMGTFLD             0.5902  -6.1860   6.9247     4950 0.84970   
+    ## NRTEN100            7.9406   1.6956  15.1105     4950 0.02020 * 
+    ## NRTEN120           10.8350   3.9351  17.2328     4950 0.00162 **
+    ## WMGTFLD:NRTEN100  -14.0426 -23.1169  -4.5472     4950 0.00242 **
+    ## WMGTFLD:NRTEN120  -10.3885 -19.8187  -1.6800     5249 0.02626 * 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -294,7 +294,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_severity_lmm_2015 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_15,
                           verbose = FALSE,
@@ -312,27 +312,29 @@ summary(LShB_severity_lmm_2015)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 161.4038 
+    ##  DIC: 470.7685 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP    0.9671  0.01567    3.158     4950
+    ## REP     9.859   0.2805     32.1     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units    0.2095   0.1535   0.2659     4950
+    ## units     2.757    2.003    3.475     4950
     ## 
-    ##  Location effects: LShB_sev_AUDPS ~ WMGT * NRTE 
+    ##  Location effects: LShB_percent_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                  post.mean l-95% CI u-95% CI eff.samp pMCMC
-    ## (Intercept)        0.57150 -0.28186  1.54311     4950 0.118
-    ## WMGTFLD           -0.22898 -0.49812  0.05708     4950 0.112
-    ## NRTEN100           0.17793 -0.09471  0.46454     4950 0.217
-    ## NRTEN120           0.10595 -0.16553  0.41045     4950 0.458
-    ## WMGTFLD:NRTEN100  -0.29047 -0.69757  0.10243     4950 0.144
-    ## WMGTFLD:NRTEN120  -0.08826 -0.49071  0.28548     4519 0.673
+    ##                  post.mean l-95% CI u-95% CI eff.samp    pMCMC    
+    ## (Intercept)         0.9902  -1.9896   4.1239     4950 0.357576    
+    ## WMGTFLD             0.6121  -0.3656   1.6499     4950 0.243636    
+    ## NRTEN100            2.2659   1.2744   3.3071     4950 0.000404 ***
+    ## NRTEN120            0.8444  -0.1399   1.9471     4950 0.113535    
+    ## WMGTFLD:NRTEN100   -3.4761  -4.9637  -2.0619     4950  < 2e-04 ***
+    ## WMGTFLD:NRTEN120   -1.7062  -3.1627  -0.3503     4518 0.023030 *  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 # create data frames for generating diagnostic plots
@@ -526,7 +528,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_16,
                           verbose = FALSE,
@@ -544,25 +546,25 @@ summary(TShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 329.6857 
+    ##  DIC: 462.8646 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP     60.68    2.369      159     4950
+    ## REP     267.8     10.4    745.7     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units      9.09    6.094    12.78     5403
+    ## units     72.86     48.4    102.2     5351
     ## 
-    ##  Location effects: TShB_sev_AUDPS ~ WMGT * NRTE 
+    ##  Location effects: TShB_percent_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC    
-    ## (Intercept)      19.83953 12.85648 26.82258     4950 0.00323 ** 
-    ## WMGTFLD           4.41469  2.38064  6.53289     4950 < 2e-04 ***
-    ## NRTEN60          -0.03163 -2.04377  2.11426     4950 0.97535    
-    ## WMGTFLD:NRTEN60  -3.69394 -6.49861 -0.62015     4950 0.01818 *  
+    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+    ## (Intercept)       26.2450  10.3569  40.9267     4950 0.0141 *  
+    ## WMGTFLD           12.7532   7.0270  18.7851     4950 <2e-04 ***
+    ## NRTEN60           -0.2008  -6.1862   5.5885     4950 0.9491    
+    ## WMGTFLD:NRTEN60   -8.9841 -16.9150  -0.2855     4950 0.0352 *  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -639,7 +641,7 @@ plot_joint_random_error_dist(d = rdf,
 ``` r
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_16,
                           verbose = FALSE,
@@ -657,25 +659,25 @@ summary(LShB_severity_lmm_2016)
     ##  Thinning interval  = 100
     ##  Sample size  = 4950 
     ## 
-    ##  DIC: 77.73421 
+    ##  DIC: 85.01022 
     ## 
     ##  G-structure:  ~REP
     ## 
     ##     post.mean l-95% CI u-95% CI eff.samp
-    ## REP    0.8253  0.01089    2.941     4950
+    ## REP     1.051  0.01496    3.436     4950
     ## 
     ##  R-structure:  ~units
     ## 
     ##       post.mean l-95% CI u-95% CI eff.samp
-    ## units     0.178    0.117   0.2434     4950
+    ## units    0.1994   0.1336   0.2751     4950
     ## 
-    ##  Location effects: LShB_sev_AUDPS ~ WMGT * NRTE 
+    ##  Location effects: LShB_percent_AUDPS ~ WMGT * NRTE 
     ## 
-    ##                 post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-    ## (Intercept)       1.29280  0.43018  2.08331     4950 0.0251 *
-    ## WMGTFLD           0.24466 -0.03946  0.55038     4950 0.1026  
-    ## NRTEN60          -0.07157 -0.36996  0.21426     4314 0.6263  
-    ## WMGTFLD:NRTEN60  -0.45444 -0.85116 -0.02565     4950 0.0347 *
+    ##                 post.mean l-95% CI u-95% CI eff.samp   pMCMC   
+    ## (Intercept)       1.32767  0.41132  2.27194     4950 0.02384 * 
+    ## WMGTFLD           0.24465 -0.07577  0.55093     4950 0.12283   
+    ## NRTEN60           0.24335 -0.06666  0.55150     4315 0.12242   
+    ## WMGTFLD:NRTEN60  -0.73441 -1.17030 -0.29765     4950 0.00242 **
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -778,121 +780,121 @@ R Session Info
     ## Session info -------------------------------------------------------------
 
     ##  setting  value                       
-    ##  version  R version 3.4.0 (2017-04-21)
-    ##  system   x86_64, darwin15.6.0        
+    ##  version  R version 3.4.1 (2017-06-30)
+    ##  system   x86_64, darwin16.6.0        
     ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-06-16
+    ##  date     2017-07-23
 
     ## Packages -----------------------------------------------------------------
 
-    ##  package         * version date       source         
-    ##  agricolae       * 1.2-4   2016-06-12 CRAN (R 3.4.0) 
-    ##  AlgDesign         1.1-7.3 2014-10-15 CRAN (R 3.4.0) 
-    ##  ape             * 4.1     2017-02-14 CRAN (R 3.4.0) 
-    ##  assertthat        0.2.0   2017-04-11 CRAN (R 3.4.0) 
-    ##  backports         1.1.0   2017-05-22 cran (@1.1.0)  
-    ##  base            * 3.4.0   2017-05-11 local          
-    ##  bitops            1.0-6   2013-08-17 CRAN (R 3.4.0) 
-    ##  boot              1.3-19  2017-02-11 CRAN (R 3.4.0) 
-    ##  broom             0.4.2   2017-02-13 CRAN (R 3.4.0) 
-    ##  car             * 2.1-4   2016-12-02 CRAN (R 3.4.0) 
-    ##  caTools           1.17.1  2014-09-10 CRAN (R 3.4.0) 
-    ##  cellranger        1.1.0   2016-07-27 CRAN (R 3.4.0) 
-    ##  cluster           2.0.6   2017-03-10 CRAN (R 3.4.0) 
-    ##  coda            * 0.19-1  2016-12-08 CRAN (R 3.4.0) 
-    ##  colorspace        1.3-2   2016-12-14 CRAN (R 3.4.0) 
-    ##  combinat          0.0-8   2012-10-29 CRAN (R 3.4.0) 
-    ##  compiler          3.4.0   2017-05-11 local          
-    ##  corpcor           1.6.9   2017-04-01 CRAN (R 3.4.0) 
-    ##  cubature          1.3-8   2017-05-11 cran (@1.3-8)  
-    ##  datasets        * 3.4.0   2017-05-11 local          
-    ##  DBI               0.6-1   2017-04-01 CRAN (R 3.4.0) 
-    ##  deldir            0.1-14  2017-04-22 CRAN (R 3.4.0) 
-    ##  devtools          1.13.2  2017-06-02 cran (@1.13.2) 
-    ##  digest            0.6.12  2017-01-27 CRAN (R 3.4.0) 
-    ##  dplyr           * 0.5.0   2016-06-24 url            
-    ##  evaluate          0.10    2016-10-11 CRAN (R 3.4.0) 
-    ##  expm              0.999-2 2017-03-29 CRAN (R 3.4.0) 
-    ##  fitdistrplus    * 1.0-9   2017-03-24 CRAN (R 3.4.0) 
-    ##  forcats           0.2.0   2017-01-23 CRAN (R 3.4.0) 
-    ##  foreign           0.8-67  2016-09-13 CRAN (R 3.4.0) 
-    ##  gdata             2.18.0  2017-06-06 cran (@2.18.0) 
-    ##  ggplot2         * 2.2.1   2016-12-30 CRAN (R 3.4.0) 
-    ##  gmodels           2.16.2  2015-07-22 CRAN (R 3.4.0) 
-    ##  gplots            3.0.1   2016-03-30 CRAN (R 3.4.0) 
-    ##  graphics        * 3.4.0   2017-05-11 local          
-    ##  grDevices       * 3.4.0   2017-05-11 local          
-    ##  grid              3.4.0   2017-05-11 local          
-    ##  gridExtra         2.2.1   2016-02-29 CRAN (R 3.4.0) 
-    ##  gtable            0.2.0   2016-02-26 CRAN (R 3.4.0) 
-    ##  gtools            3.5.0   2015-05-29 CRAN (R 3.4.0) 
-    ##  haven             1.0.0   2016-09-23 CRAN (R 3.4.0) 
-    ##  hms               0.3     2016-11-22 CRAN (R 3.4.0) 
-    ##  htmltools         0.3.6   2017-04-28 cran (@0.3.6)  
-    ##  httr              1.2.1   2016-07-03 CRAN (R 3.4.0) 
-    ##  jsonlite          1.5     2017-06-01 cran (@1.5)    
-    ##  KernSmooth        2.23-15 2015-06-29 CRAN (R 3.4.0) 
-    ##  klaR              0.6-12  2014-08-06 CRAN (R 3.4.0) 
-    ##  knitr             1.16    2017-05-18 cran (@1.16)   
-    ##  labeling          0.3     2014-08-23 CRAN (R 3.4.0) 
-    ##  lattice         * 0.20-35 2017-03-25 CRAN (R 3.4.0) 
-    ##  lazyeval          0.2.0   2016-06-12 CRAN (R 3.4.0) 
-    ##  LearnBayes        2.15    2014-05-29 CRAN (R 3.4.0) 
-    ##  lme4              1.1-13  2017-04-19 CRAN (R 3.4.0) 
-    ##  lubridate       * 1.6.0   2016-09-13 CRAN (R 3.4.0) 
-    ##  magrittr          1.5     2014-11-22 CRAN (R 3.4.0) 
-    ##  MASS            * 7.3-47  2017-02-26 CRAN (R 3.4.0) 
-    ##  Matrix          * 1.2-9   2017-03-14 CRAN (R 3.4.0) 
-    ##  MatrixModels      0.4-1   2015-08-22 CRAN (R 3.4.0) 
-    ##  MCMCglmm        * 2.24    2016-11-14 CRAN (R 3.4.0) 
-    ##  memoise           1.1.0   2017-04-21 CRAN (R 3.4.0) 
-    ##  methods         * 3.4.0   2017-05-11 local          
-    ##  mgcv              1.8-17  2017-02-08 CRAN (R 3.4.0) 
-    ##  minqa             1.2.4   2014-10-09 CRAN (R 3.4.0) 
-    ##  mnormt            1.5-5   2016-10-15 CRAN (R 3.4.0) 
-    ##  modelr            0.1.0   2016-08-31 CRAN (R 3.4.0) 
-    ##  munsell           0.4.3   2016-02-13 CRAN (R 3.4.0) 
-    ##  nlme              3.1-131 2017-02-06 CRAN (R 3.4.0) 
-    ##  nloptr            1.0.4   2014-08-04 CRAN (R 3.4.0) 
-    ##  nnet              7.3-12  2016-02-02 CRAN (R 3.4.0) 
-    ##  packrat           0.4.8-1 2016-09-07 CRAN (R 3.4.0) 
-    ##  parallel          3.4.0   2017-05-11 local          
-    ##  pbkrtest          0.4-7   2017-03-15 CRAN (R 3.4.0) 
-    ##  plotMCMC        * 2.0-0   2014-03-12 CRAN (R 3.4.0) 
-    ##  plyr              1.8.4   2016-06-08 CRAN (R 3.4.0) 
-    ##  ProjectTemplate * 0.7     2016-08-11 CRAN (R 3.4.0) 
-    ##  psych             1.7.5   2017-05-03 cran (@1.7.5)  
-    ##  purrr           * 0.2.2.2 2017-05-11 cran (@0.2.2.2)
-    ##  quantreg          5.33    2017-04-18 CRAN (R 3.4.0) 
-    ##  R6                2.2.1   2017-05-10 cran (@2.2.1)  
-    ##  Rcpp              0.12.11 2017-05-22 cran (@0.12.11)
-    ##  readr           * 1.1.1   2017-05-16 cran (@1.1.1)  
-    ##  readxl            1.0.0   2017-04-18 CRAN (R 3.4.0) 
-    ##  reshape2        * 1.4.2   2016-10-22 CRAN (R 3.4.0) 
-    ##  rlang             0.1.1   2017-05-18 cran (@0.1.1)  
-    ##  rmarkdown         1.6     2017-06-15 cran (@1.6)    
-    ##  rprojroot         1.2     2017-01-16 CRAN (R 3.4.0) 
-    ##  rvest             0.3.2   2016-06-17 CRAN (R 3.4.0) 
-    ##  scales            0.4.1   2016-11-09 CRAN (R 3.4.0) 
-    ##  sp                1.2-4   2016-12-22 CRAN (R 3.4.0) 
-    ##  SparseM           1.77    2017-04-23 CRAN (R 3.4.0) 
-    ##  spdep             0.6-13  2017-04-25 CRAN (R 3.4.0) 
-    ##  splines           3.4.0   2017-05-11 local          
-    ##  stats           * 3.4.0   2017-05-11 local          
-    ##  stringi           1.1.5   2017-04-07 CRAN (R 3.4.0) 
-    ##  stringr           1.2.0   2017-02-18 CRAN (R 3.4.0) 
-    ##  survival        * 2.41-3  2017-04-04 CRAN (R 3.4.0) 
-    ##  tensorA           0.36    2010-12-01 CRAN (R 3.4.0) 
-    ##  tibble          * 1.3.3   2017-05-28 cran (@1.3.3)  
-    ##  tidyr           * 0.6.3   2017-05-15 CRAN (R 3.4.0) 
-    ##  tidyverse       * 1.1.1   2017-01-27 CRAN (R 3.4.0) 
-    ##  tools             3.4.0   2017-05-11 local          
-    ##  utils           * 3.4.0   2017-05-11 local          
-    ##  viridis           0.4.0   2017-03-27 CRAN (R 3.4.0) 
-    ##  viridisLite       0.2.0   2017-03-24 CRAN (R 3.4.0) 
-    ##  withr             1.0.2   2016-06-20 CRAN (R 3.4.0) 
-    ##  xml2              1.1.1   2017-01-24 CRAN (R 3.4.0) 
-    ##  yaml              2.1.14  2016-11-12 CRAN (R 3.4.0)
+    ##  package         * version    date       source                       
+    ##  agricolae       * 1.2-4      2016-06-12 CRAN (R 3.4.0)               
+    ##  AlgDesign         1.1-7.3    2014-10-15 CRAN (R 3.4.0)               
+    ##  ape             * 4.1        2017-02-14 CRAN (R 3.4.0)               
+    ##  assertthat        0.2.0      2017-04-11 CRAN (R 3.4.0)               
+    ##  backports         1.1.0      2017-05-22 cran (@1.1.0)                
+    ##  base            * 3.4.1      2017-07-07 local                        
+    ##  bindr             0.1        2016-11-13 cran (@0.1)                  
+    ##  bindrcpp        * 0.2        2017-06-17 cran (@0.2)                  
+    ##  bitops            1.0-6      2013-08-17 CRAN (R 3.4.0)               
+    ##  boot              1.3-19     2017-02-11 CRAN (R 3.4.1)               
+    ##  broom             0.4.2      2017-02-13 CRAN (R 3.4.0)               
+    ##  car             * 2.1-5      2017-07-04 cran (@2.1-5)                
+    ##  caTools           1.17.1     2014-09-10 CRAN (R 3.4.0)               
+    ##  cellranger        1.1.0      2016-07-27 CRAN (R 3.4.0)               
+    ##  cluster           2.0.6      2017-03-10 CRAN (R 3.4.1)               
+    ##  coda            * 0.19-1     2016-12-08 CRAN (R 3.4.0)               
+    ##  colorspace        1.3-2      2016-12-14 CRAN (R 3.4.0)               
+    ##  combinat          0.0-8      2012-10-29 CRAN (R 3.4.0)               
+    ##  compiler          3.4.1      2017-07-07 local                        
+    ##  corpcor           1.6.9      2017-04-01 CRAN (R 3.4.0)               
+    ##  cubature          1.3-11     2017-07-19 cran (@1.3-11)               
+    ##  datasets        * 3.4.1      2017-07-07 local                        
+    ##  deldir            0.1-14     2017-04-22 CRAN (R 3.4.0)               
+    ##  devtools          1.13.2     2017-06-02 cran (@1.13.2)               
+    ##  digest            0.6.12     2017-01-27 CRAN (R 3.4.0)               
+    ##  dplyr           * 0.7.2      2017-07-20 cran (@0.7.2)                
+    ##  evaluate          0.10.1     2017-06-24 cran (@0.10.1)               
+    ##  expm              0.999-2    2017-03-29 CRAN (R 3.4.0)               
+    ##  fitdistrplus    * 1.0-9      2017-03-24 CRAN (R 3.4.0)               
+    ##  forcats           0.2.0      2017-01-23 CRAN (R 3.4.0)               
+    ##  foreign           0.8-69     2017-06-22 CRAN (R 3.4.1)               
+    ##  gdata             2.18.0     2017-06-06 cran (@2.18.0)               
+    ##  ggplot2         * 2.2.1      2016-12-30 CRAN (R 3.4.0)               
+    ##  glue              1.1.1      2017-06-21 cran (@1.1.1)                
+    ##  gmodels           2.16.2     2015-07-22 CRAN (R 3.4.0)               
+    ##  gplots            3.0.1      2016-03-30 CRAN (R 3.4.0)               
+    ##  graphics        * 3.4.1      2017-07-07 local                        
+    ##  grDevices       * 3.4.1      2017-07-07 local                        
+    ##  grid              3.4.1      2017-07-07 local                        
+    ##  gtable            0.2.0      2016-02-26 CRAN (R 3.4.0)               
+    ##  gtools            3.5.0      2015-05-29 CRAN (R 3.4.0)               
+    ##  haven             1.1.0      2017-07-09 cran (@1.1.0)                
+    ##  hms               0.3        2016-11-22 CRAN (R 3.4.0)               
+    ##  htmltools         0.3.6      2017-04-28 CRAN (R 3.4.0)               
+    ##  httr              1.2.1      2016-07-03 CRAN (R 3.4.0)               
+    ##  jsonlite          1.5        2017-06-01 cran (@1.5)                  
+    ##  KernSmooth        2.23-15    2015-06-29 CRAN (R 3.4.1)               
+    ##  klaR              0.6-12     2014-08-06 CRAN (R 3.4.0)               
+    ##  knitr             1.16       2017-05-18 cran (@1.16)                 
+    ##  labeling          0.3        2014-08-23 CRAN (R 3.4.0)               
+    ##  lattice         * 0.20-35    2017-03-25 CRAN (R 3.4.1)               
+    ##  lazyeval          0.2.0      2016-06-12 CRAN (R 3.4.0)               
+    ##  LearnBayes        2.15       2014-05-29 CRAN (R 3.4.0)               
+    ##  lme4              1.1-13     2017-04-19 CRAN (R 3.4.0)               
+    ##  lubridate       * 1.6.0      2016-09-13 CRAN (R 3.4.0)               
+    ##  magrittr          1.5        2014-11-22 CRAN (R 3.4.0)               
+    ##  MASS            * 7.3-47     2017-02-26 CRAN (R 3.4.1)               
+    ##  Matrix          * 1.2-10     2017-05-03 CRAN (R 3.4.1)               
+    ##  MatrixModels      0.4-1      2015-08-22 CRAN (R 3.4.0)               
+    ##  MCMCglmm        * 2.24       2016-11-14 CRAN (R 3.4.0)               
+    ##  memoise           1.1.0      2017-04-21 CRAN (R 3.4.0)               
+    ##  methods         * 3.4.1      2017-07-07 local                        
+    ##  mgcv              1.8-17     2017-02-08 CRAN (R 3.4.1)               
+    ##  minqa             1.2.4      2014-10-09 CRAN (R 3.4.0)               
+    ##  mnormt            1.5-5      2016-10-15 CRAN (R 3.4.0)               
+    ##  modelr            0.1.0      2016-08-31 CRAN (R 3.4.0)               
+    ##  munsell           0.4.3      2016-02-13 CRAN (R 3.4.0)               
+    ##  nlme              3.1-131    2017-02-06 CRAN (R 3.4.1)               
+    ##  nloptr            1.0.4      2014-08-04 CRAN (R 3.4.0)               
+    ##  nnet              7.3-12     2016-02-02 CRAN (R 3.4.1)               
+    ##  parallel          3.4.1      2017-07-07 local                        
+    ##  pbkrtest          0.4-7      2017-03-15 CRAN (R 3.4.0)               
+    ##  pkgconfig         2.0.1      2017-03-21 cran (@2.0.1)                
+    ##  plotMCMC        * 2.0-0      2014-03-12 CRAN (R 3.4.0)               
+    ##  plyr              1.8.4      2016-06-08 CRAN (R 3.4.0)               
+    ##  ProjectTemplate * 0.7        2016-08-11 CRAN (R 3.4.0)               
+    ##  psych             1.7.5      2017-05-03 CRAN (R 3.4.0)               
+    ##  purrr           * 0.2.2.2    2017-05-11 cran (@0.2.2.2)              
+    ##  quantreg          5.33       2017-04-18 CRAN (R 3.4.0)               
+    ##  R6                2.2.2      2017-06-17 cran (@2.2.2)                
+    ##  RColorBrewer      1.1-2      2014-12-07 CRAN (R 3.4.0)               
+    ##  Rcpp              0.12.12    2017-07-15 cran (@0.12.12)              
+    ##  readr           * 1.1.1      2017-05-16 cran (@1.1.1)                
+    ##  readxl            1.0.0      2017-04-18 CRAN (R 3.4.0)               
+    ##  reshape2        * 1.4.2      2016-10-22 CRAN (R 3.4.0)               
+    ##  rlang             0.1.1.9000 2017-07-02 Github (hadley/rlang@ff87439)
+    ##  rmarkdown         1.6        2017-06-15 cran (@1.6)                  
+    ##  rprojroot         1.2        2017-01-16 CRAN (R 3.4.0)               
+    ##  rvest             0.3.2      2016-06-17 CRAN (R 3.4.0)               
+    ##  scales            0.4.1      2016-11-09 CRAN (R 3.4.0)               
+    ##  sp                1.2-5      2017-06-29 cran (@1.2-5)                
+    ##  SparseM           1.77       2017-04-23 CRAN (R 3.4.0)               
+    ##  spdep             0.6-13     2017-04-25 CRAN (R 3.4.0)               
+    ##  splines           3.4.1      2017-07-07 local                        
+    ##  stats           * 3.4.1      2017-07-07 local                        
+    ##  stringi           1.1.5      2017-04-07 CRAN (R 3.4.0)               
+    ##  stringr           1.2.0      2017-02-18 CRAN (R 3.4.0)               
+    ##  survival        * 2.41-3     2017-04-04 CRAN (R 3.4.1)               
+    ##  tensorA           0.36       2010-12-01 CRAN (R 3.4.0)               
+    ##  tibble          * 1.3.3      2017-05-28 cran (@1.3.3)                
+    ##  tidyr           * 0.6.3      2017-05-15 cran (@0.6.3)                
+    ##  tidyverse       * 1.1.1      2017-01-27 CRAN (R 3.4.0)               
+    ##  tools             3.4.1      2017-07-07 local                        
+    ##  utils           * 3.4.1      2017-07-07 local                        
+    ##  withr             1.0.2      2016-06-20 CRAN (R 3.4.0)               
+    ##  xml2              1.1.1      2017-01-24 CRAN (R 3.4.0)               
+    ##  yaml              2.1.14     2016-11-12 CRAN (R 3.4.0)

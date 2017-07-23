@@ -55,7 +55,7 @@ First, separate the TRT column into the two treatments for analysis
 
 ```{r data_setup}
 AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
-AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .cols = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
 ```
 
 Now create individual data frames for the analysis.
@@ -131,7 +131,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2015_TShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2015 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_15,
                           verbose = FALSE,
@@ -185,7 +185,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2015_LShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_severity_lmm_2015 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_15,
                           verbose = FALSE,
@@ -300,7 +300,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2016_TShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_severity_lmm_2016 <- MCMCglmm(TShB_sev_AUDPS ~ WMGT * NRTE,
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_16,
                           verbose = FALSE,
@@ -354,7 +354,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2016_LShB_severity}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-LShB_severity_lmm_2016 <- MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
+LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
                           data = AUDPS_16,
                           verbose = FALSE,
