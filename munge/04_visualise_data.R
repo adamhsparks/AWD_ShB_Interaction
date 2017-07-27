@@ -6,6 +6,7 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ggsave("graphs/LShB_rating.png", width = 6, height = 4)
 
+
 # histogram plot of TShB_rating data ----------------------------------------
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
@@ -27,21 +28,23 @@ theme(axis.text.x = element_text(size = 8,
 ggsave("graphs/TShB_incidence.png", width = 6, height = 4)
 
 
-# histogram plot of green leaf data ----------------------------------------------
+# histogram plot of green leaf data -------------------------------------------
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Green Leaves per Tiller")
 ggsave("graphs/GL_value.png", width = 6, height = 4)
 
-# histogram plot plot of dead leaf data -----------------------------------------------
+
+# histogram plot plot of dead leaf data ---------------------------------------
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Dry Leaves per Tiller")
 ggsave("graphs/DL_value.png", width = 6, height = 4)
 
-# dot plot of leaf sheath blight severity data ---------------------------------
+
+# dot plot of leaf sheath blight severity data --------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   geom_point(position = position_jitter(width = 0.05),
              aes(colour = YEAR), size = 0.75) +
@@ -51,6 +54,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   facet_grid(. ~ TRT) +
   theme(strip.text.x = element_text(angle = 90))
 ggsave("graphs/LShB_severity_over_time.png", width = 6, height = 4)
+
 
 # dot plot of tiller sheath blight severity data ------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
@@ -63,7 +67,8 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   theme(strip.text.x = element_text(angle = 90))
 ggsave("graphs/TShB_severity_over_time.png", width = 6, height = 4)
 
-# line plot of tiller sheath blight incidence data ---------------------------------
+
+# line graph of tiller sheath blight incidence data ---------------------------
 ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
                      group = TShB_incidence)) +
   geom_point(position = position_jitter(width = 0.05),
@@ -78,6 +83,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   ggtitle("Tiller Sheath Blight at Each Assessment")
 ggsave("graphs/TShB_incidence_over_time.png", width = 6, height = 4)
 
+
 # violin/dot plots of tiller sheath blight incidence data ----------------------
 ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   geom_point(position = position_jitter(width = 0.2),
@@ -91,6 +97,7 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   ggtitle("Tiller Sheath Blight Incidence")
 ggsave("graphs/TShB_Incidence_plot.png", width = 6, height = 4)
 
+
 # dotplots of tiller sheath blight incidence AUDPS data ------------------------
 ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_inc_AUDPS)) +
   geom_point(aes(colour = YEAR, shape = REP), size = 2) +
@@ -101,6 +108,7 @@ ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_inc_AUDPS)) +
   ylab("AUDPS") +
   ggtitle("Tiller Sheath Blight Incidence")
 ggsave("graphs/TShB_inc_AUDPS_dotplot.png", width = 6, height = 4)
+
 
 # dotplots of tiller sheath blight severity AUDPS data ------------------------
 ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_percent_AUDPS)) +
@@ -113,7 +121,8 @@ ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_percent_AUDPS)) +
   ggtitle("Tiller Sheath Blight Severity")
 ggsave("graphs/TShB_percent_AUDPS_dotplot.png", width = 6, height = 4)
 
-# dotplots of leaf sheath blight severity AUDPS data ------------------------
+
+# dotplots of leaf sheath blight severity AUDPS data --------------------------
 ggplot(AUDPS, aes(x = as.factor(TRT), y = LShB_percent_AUDPS)) +
   geom_point(aes(colour = YEAR, shape = REP), size = 2) +
   theme(axis.text.x = element_text(size = 8,
@@ -124,39 +133,45 @@ ggplot(AUDPS, aes(x = as.factor(TRT), y = LShB_percent_AUDPS)) +
   ggtitle("Leaf Sheath Blight Severity")
 ggsave("graphs/LShB_percent_AUDPS_dotplot.png", width = 6, height = 4)
 
-RAW_data %>% group_by(YEAR, TRT, ASMT) %>%
+
+# line graph of leaf sheath blight severity AUDPS data ------------------------
+RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
   summarize(value = mean(LEAF_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = TRT,
              group = TRT)) +
-  geom_line() +
+  geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
   ylab("Mean Sheath Blight Severity Rating") +
   facet_grid(. ~ YEAR) +
   ggtitle("Leaf Sheath Blight Severity Disease Progress Curves")
 ggsave("graphs/LShB_progress_curves.png", width = 6, height = 4)
 
-RAW_data %>% group_by(YEAR, TRT, ASMT) %>%
+
+# line graph of tiller sheath blight severity AUDPS data ----------------------
+RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
   summarize(value = mean(TIL_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = TRT,
              group = TRT)) +
-  geom_line() +
+  geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
   ylab("Mean Sheath Blight Severity Rating") +
   facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity Disease Progress Curves")
 ggsave("graphs/TShB_progress_curves.png", width = 6, height = 4)
 
-RAW_data %>% group_by(YEAR, TRT, ASMT) %>%
+
+# line graph of tiller sheath blight incidence AUDPS data ---------------------
+RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
   summarize(value = mean(TShB_incidence)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = TRT,
              group = TRT)) +
-  geom_line() +
+  geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
   ylab("Mean Tiller Sheath Blight Incidence") +
   facet_grid(. ~ YEAR) +

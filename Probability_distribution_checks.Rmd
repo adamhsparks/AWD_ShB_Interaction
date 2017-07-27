@@ -15,7 +15,7 @@ http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20gui
 As you see in that guide, there are several distributions that can be checked.
 However, in these data only normal and exponential are necessary.
 
-## 2016
+## 2015
 
 ### Check probability distribution fit for tiller sheath blight incidence
 
@@ -27,15 +27,6 @@ f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "norm")
 plot(f1)
 
 car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
-```
-
-#### Tiller Incidence Exponential
-
-```{r 2015_TShB_inc_exp, results='hide', message=FALSE, warning=FALSE}
-
-f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
-plot(f1)
-car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
 ```
 
 #### Tiller Severity Normal

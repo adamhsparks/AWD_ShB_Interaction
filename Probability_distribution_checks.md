@@ -3,7 +3,7 @@ Probability Distribution Checks
 
 Here we check the probability distribution that best fits these data. I'm following a method from <http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html>. As you see in that guide, there are several distributions that can be checked. However, in these data only normal and exponential are necessary.
 
-2016
+2015
 ----
 
 ### Check probability distribution fit for tiller sheath blight incidence
@@ -23,21 +23,6 @@ car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
 ```
 
 ![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-2.png)
-
-#### Tiller Incidence Exponential
-
-``` r
-f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
-plot(f1)
-```
-
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_exp-1.png)
-
-``` r
-car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
-```
-
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_exp-2.png)
 
 #### Tiller Severity Normal
 

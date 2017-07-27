@@ -12,10 +12,6 @@ reformat <- function(files) {
   # add plot numbers
   x$PLOT <- rep(1:24, each = 18)
 
-  # ensure that all leaf sheath blight observations are numeric ----------------
-  x <-
-    x %>% mutate_each(funs(as.numeric), starts_with("SL"))
-
   # calculate tiller sheath blight incidence -----------------------------------
   x <-
     x %>%
@@ -81,30 +77,30 @@ reformat <- function(files) {
                   NRTE,
                   HILL,
                   TIL2,
-                  GL1,
-                  DL1,
-                  SHB1,
-                  SLA1,
-                  SLB1,
-                  SLC1,
-                  SLD1,
-                  SLE1,
-                  SLF1) %>%
+                  GL2,
+                  DL2,
+                  SHB2,
+                  SLA2,
+                  SLB2,
+                  SLC2,
+                  SLD2,
+                  SLE2,
+                  SLF2) %>%
     gather(LEAF,
            LEAF_ShB,
-           SLA1:SLF1)
+           SLA2:SLF2)
 
-  TIL2$LEAF[TIL2$LEAF == "SLA1"] <- 1
-  TIL2$LEAF[TIL2$LEAF == "SLB1"] <- 2
-  TIL2$LEAF[TIL2$LEAF == "SLC1"] <- 3
-  TIL2$LEAF[TIL2$LEAF == "SLD1"] <- 4
-  TIL2$LEAF[TIL2$LEAF == "SLE1"] <- 5
-  TIL2$LEAF[TIL2$LEAF == "SLF1"] <- 6
+  TIL2$LEAF[TIL2$LEAF == "SLA2"] <- 1
+  TIL2$LEAF[TIL2$LEAF == "SLB2"] <- 2
+  TIL2$LEAF[TIL2$LEAF == "SLC2"] <- 3
+  TIL2$LEAF[TIL2$LEAF == "SLD2"] <- 4
+  TIL2$LEAF[TIL2$LEAF == "SLE2"] <- 5
+  TIL2$LEAF[TIL2$LEAF == "SLF2"] <- 6
 
-  TIL2 <- rename(TIL2, GL = GL1)
-  TIL2 <- rename(TIL2, DL = DL1)
+  TIL2 <- rename(TIL2, GL = GL2)
+  TIL2 <- rename(TIL2, DL = DL2)
   TIL2 <- rename(TIL2, TIL = TIL2)
-  TIL2 <- rename(TIL2, TIL_ShB = SHB1)
+  TIL2 <- rename(TIL2, TIL_ShB = SHB2)
 
   # Tiller 3 -------------------------------------------------------------------
 
@@ -117,30 +113,31 @@ reformat <- function(files) {
                   NRTE,
                   HILL,
                   TIL3,
-                  GL1,
-                  DL1,
-                  SHB1,
-                  SLA1,
-                  SLB1,
-                  SLC1,
-                  SLD1,
-                  SLE1,
-                  SLF1) %>%
+                  GL3,
+                  DL3,
+                  SHB3,
+                  SLA3,
+                  SLB3,
+                  SLC3,
+                  SLD3,
+                  SLE3,
+                  SLF3) %>%
     gather(LEAF,
            LEAF_ShB,
-           SLA1:SLF1)
+           SLA3:SLF3)
 
-  TIL3$LEAF[TIL3$LEAF == "SLA1"] <- 1
-  TIL3$LEAF[TIL3$LEAF == "SLB1"] <- 2
-  TIL3$LEAF[TIL3$LEAF == "SLC1"] <- 3
-  TIL3$LEAF[TIL3$LEAF == "SLD1"] <- 4
-  TIL3$LEAF[TIL3$LEAF == "SLE1"] <- 5
-  TIL3$LEAF[TIL3$LEAF == "SLF1"] <- 6
+  TIL3$LEAF[TIL3$LEAF == "SLA3"] <- 1
+  TIL3$LEAF[TIL3$LEAF == "SLB3"] <- 2
+  TIL3$LEAF[TIL3$LEAF == "SLC3"] <- 3
+  TIL3$LEAF[TIL3$LEAF == "SLD3"] <- 4
+  TIL3$LEAF[TIL3$LEAF == "SLE3"] <- 5
+  TIL3$LEAF[TIL3$LEAF == "SLF3"] <- 6
 
-  TIL3 <- rename(TIL3, GL = GL1)
-  TIL3 <- rename(TIL3, DL = DL1)
+  TIL3 <- rename(TIL3, GL = GL3)
+  TIL3 <- rename(TIL3, DL = DL3)
   TIL3 <- rename(TIL3, TIL = TIL3)
-  TIL3 <- rename(TIL3, TIL_ShB = SHB1)
+  TIL3 <- rename(TIL3, TIL_ShB = SHB3)
+
   # Tiller 4 -------------------------------------------------------------------
 
   TIL4 <-
@@ -152,30 +149,30 @@ reformat <- function(files) {
                   NRTE,
                   HILL,
                   TIL4,
-                  GL1,
-                  DL1,
-                  SHB1,
-                  SLA1,
-                  SLB1,
-                  SLC1,
-                  SLD1,
-                  SLE1,
-                  SLF1) %>%
+                  GL4,
+                  DL4,
+                  SHB4,
+                  SLA4,
+                  SLB4,
+                  SLC4,
+                  SLD4,
+                  SLE4,
+                  SLF4) %>%
     gather(LEAF,
            LEAF_ShB,
-           SLA1:SLF1)
+           SLA4:SLF4)
 
-  TIL4$LEAF[TIL4$LEAF == "SLA1"] <- 1
-  TIL4$LEAF[TIL4$LEAF == "SLB1"] <- 2
-  TIL4$LEAF[TIL4$LEAF == "SLC1"] <- 3
-  TIL4$LEAF[TIL4$LEAF == "SLD1"] <- 4
-  TIL4$LEAF[TIL4$LEAF == "SLE1"] <- 5
-  TIL4$LEAF[TIL4$LEAF == "SLF1"] <- 6
+  TIL4$LEAF[TIL4$LEAF == "SLA4"] <- 1
+  TIL4$LEAF[TIL4$LEAF == "SLB4"] <- 2
+  TIL4$LEAF[TIL4$LEAF == "SLC4"] <- 3
+  TIL4$LEAF[TIL4$LEAF == "SLD4"] <- 4
+  TIL4$LEAF[TIL4$LEAF == "SLE4"] <- 5
+  TIL4$LEAF[TIL4$LEAF == "SLF4"] <- 6
 
-  TIL4 <- rename(TIL4, GL = GL1)
-  TIL4 <- rename(TIL4, DL = DL1)
+  TIL4 <- rename(TIL4, GL = GL4)
+  TIL4 <- rename(TIL4, DL = DL4)
   TIL4 <- rename(TIL4, TIL = TIL4)
-  TIL4 <- rename(TIL4, TIL_ShB = SHB1)
+  TIL4 <- rename(TIL4, TIL_ShB = SHB4)
 
   y <- rbind(TIL1, TIL2, TIL3, TIL4)
   x <- left_join(TShB_incidence, y)
@@ -211,7 +208,7 @@ reformat <- function(files) {
 }
 
 # Run reformat function for all 2015 files -------------------------------------
-DS2015 <- map_df(.x = files, .f = reformat)
+DS2015 <- map_df(files, reformat)
 
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
@@ -259,22 +256,17 @@ DS2015 <-
     NRTE
   )
 
+DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
+
 DS2015 <- as_tibble(arrange(DS2015, ASMT, PLOT))
 
-# Create new columns of dates to calcluate AUDPS -------------------------------
-#2015
-DATE_1_2015 <- DATE_2_2015 <- DS2015$DATE
-DATE_1_2015[which(DATE_1_2015 == min(DATE_1_2015))] = NA
-DATE_2_2015[which(DATE_2_2015 == max(DATE_2_2015))] = NA
+# Create new columns of days to calcluate AUDPS -------------------------------
 
-DATE_1 <- na.omit(DATE_1_2015)
-DATE_2 <- na.omit(DATE_2_2015)
+DAYS <- as.numeric(substr(files, 17, 18))
 
-DAYS_2015 <- time_length(DATE_1 - DATE_2, unit = "day")
-DS2015$DAYS <-
-  c(rep(0, times = (nrow(DS2015) - length(DAYS_2015))), DAYS_2015)
+DS2015$DAYS <- c(rep(0, 432), rep(diff(DAYS), each = 432))
 
-rm(files, reformat, DATE_1_2015, DATE_2_2015, DAYS_2015)
+rm(files, reformat)
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2015, "./cache/AWD_2015_Data.csv")
