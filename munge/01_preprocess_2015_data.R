@@ -12,7 +12,7 @@ reformat <- function(files) {
   # add plot numbers
   x$PLOT <- rep(1:24, each = 18)
 
-  # calculate tiller sheath blight incidence -----------------------------------
+  # Calculate tiller sheath blight incidence -----------------------------------
   x <-
     x %>%
     mutate(TShB_incidence = NTShB / NTIL)
@@ -21,190 +21,100 @@ reformat <- function(files) {
 
   TShB_incidence <-
     x %>% select(REP,
-                        TRT,
-                        WMGT,
-                        NRTE,
-                        SMPL,
-                        HILL,
-                        HGHT,
-                        NTIL,
-                        NTShB,
-                        TShB_incidence)
+                 TRT,
+                 WMGT,
+                 NRTE,
+                 SMPL,
+                 HILL,
+                 HGHT,
+                 NTIL,
+                 NTShB,
+                 TShB_incidence)
 
-  # Tiller 1 -------------------------------------------------------------------
-  TIL1 <-
-    x %>%
-    select(TRT,
-                  REP,
-                  WMGT,
-                  SMPL,
-                  NRTE,
-                  HILL,
-                  TIL1,
-                  GL1,
-                  DL1,
-                  SHB1,
-                  SLA1,
-                  SLB1,
-                  SLC1,
-                  SLD1,
-                  SLE1,
-                  SLF1) %>%
-    gather(LEAF,
-           LEAF_ShB,
-           SLA1:SLF1)
+  # Gather Tillers--------------------------------------------------------------
+  TIL <- vector(mode = "list", length = 4)
+  for (i in 1:4) {
 
-  TIL1$LEAF[TIL1$LEAF == "SLA1"] <- 1
-  TIL1$LEAF[TIL1$LEAF == "SLB1"] <- 2
-  TIL1$LEAF[TIL1$LEAF == "SLC1"] <- 3
-  TIL1$LEAF[TIL1$LEAF == "SLD1"] <- 4
-  TIL1$LEAF[TIL1$LEAF == "SLE1"] <- 5
-  TIL1$LEAF[TIL1$LEAF == "SLF1"] <- 6
+    l <- paste0("SLA", i, ":SLF", i)
+    y <-
+      x %>%
+      select(
+        TRT,
+        REP,
+        WMGT,
+        SMPL,
+        NRTE,
+        HILL,
+        paste0("TIL", i),
+        paste0("GL", i),
+        paste0("DL", i),
+        paste0("SHB", i),
+        paste0("SLA", i),
+        paste0("SLB", i),
+        paste0("SLC", i),
+        paste0("SLD", i),
+        paste0("SLE", i),
+        paste0("SLF", i)
+      ) %>%
+      gather(LEAF,
+             LEAF_ShB,
+             l)
 
-  TIL1 <- rename(TIL1, GL = GL1)
-  TIL1 <- rename(TIL1, DL = DL1)
-  TIL1 <- rename(TIL1, TIL = TIL1)
-  TIL1 <- rename(TIL1, TIL_ShB = SHB1)
+    y$LEAF[y$LEAF == paste0("SLA", i)] <- 1
+    y$LEAF[y$LEAF == paste0("SLB", i)] <- 2
+    y$LEAF[y$LEAF == paste0("SLC", i)] <- 3
+    y$LEAF[y$LEAF == paste0("SLD", i)] <- 4
+    y$LEAF[y$LEAF == paste0("SLE", i)] <- 5
+    y$LEAF[y$LEAF == paste0("SLF", i)] <- 6
 
-  # Tiller 2 -------------------------------------------------------------------
+    names(y)[7] <- "TIL"
+    names(y)[8] <- "GL"
+    names(y)[9] <- "DL"
+    names(y)[10] <- "TIL_ShB"
 
-  TIL2 <-
-    x %>%
-    select(TRT,
-                  REP,
-                  WMGT,
-                  SMPL,
-                  NRTE,
-                  HILL,
-                  TIL2,
-                  GL2,
-                  DL2,
-                  SHB2,
-                  SLA2,
-                  SLB2,
-                  SLC2,
-                  SLD2,
-                  SLE2,
-                  SLF2) %>%
-    gather(LEAF,
-           LEAF_ShB,
-           SLA2:SLF2)
+    y[, 12] <- as.character(y[, 12])
 
-  TIL2$LEAF[TIL2$LEAF == "SLA2"] <- 1
-  TIL2$LEAF[TIL2$LEAF == "SLB2"] <- 2
-  TIL2$LEAF[TIL2$LEAF == "SLC2"] <- 3
-  TIL2$LEAF[TIL2$LEAF == "SLD2"] <- 4
-  TIL2$LEAF[TIL2$LEAF == "SLE2"] <- 5
-  TIL2$LEAF[TIL2$LEAF == "SLF2"] <- 6
+    TIL[[i]] <- y
+  }
 
-  TIL2 <- rename(TIL2, GL = GL2)
-  TIL2 <- rename(TIL2, DL = DL2)
-  TIL2 <- rename(TIL2, TIL = TIL2)
-  TIL2 <- rename(TIL2, TIL_ShB = SHB2)
-
-  # Tiller 3 -------------------------------------------------------------------
-
-  TIL3 <-
-    x %>%
-    select(TRT,
-                  REP,
-                  WMGT,
-                  SMPL,
-                  NRTE,
-                  HILL,
-                  TIL3,
-                  GL3,
-                  DL3,
-                  SHB3,
-                  SLA3,
-                  SLB3,
-                  SLC3,
-                  SLD3,
-                  SLE3,
-                  SLF3) %>%
-    gather(LEAF,
-           LEAF_ShB,
-           SLA3:SLF3)
-
-  TIL3$LEAF[TIL3$LEAF == "SLA3"] <- 1
-  TIL3$LEAF[TIL3$LEAF == "SLB3"] <- 2
-  TIL3$LEAF[TIL3$LEAF == "SLC3"] <- 3
-  TIL3$LEAF[TIL3$LEAF == "SLD3"] <- 4
-  TIL3$LEAF[TIL3$LEAF == "SLE3"] <- 5
-  TIL3$LEAF[TIL3$LEAF == "SLF3"] <- 6
-
-  TIL3 <- rename(TIL3, GL = GL3)
-  TIL3 <- rename(TIL3, DL = DL3)
-  TIL3 <- rename(TIL3, TIL = TIL3)
-  TIL3 <- rename(TIL3, TIL_ShB = SHB3)
-
-  # Tiller 4 -------------------------------------------------------------------
-
-  TIL4 <-
-    x %>%
-    select(TRT,
-                  REP,
-                  WMGT,
-                  SMPL,
-                  NRTE,
-                  HILL,
-                  TIL4,
-                  GL4,
-                  DL4,
-                  SHB4,
-                  SLA4,
-                  SLB4,
-                  SLC4,
-                  SLD4,
-                  SLE4,
-                  SLF4) %>%
-    gather(LEAF,
-           LEAF_ShB,
-           SLA4:SLF4)
-
-  TIL4$LEAF[TIL4$LEAF == "SLA4"] <- 1
-  TIL4$LEAF[TIL4$LEAF == "SLB4"] <- 2
-  TIL4$LEAF[TIL4$LEAF == "SLC4"] <- 3
-  TIL4$LEAF[TIL4$LEAF == "SLD4"] <- 4
-  TIL4$LEAF[TIL4$LEAF == "SLE4"] <- 5
-  TIL4$LEAF[TIL4$LEAF == "SLF4"] <- 6
-
-  TIL4 <- rename(TIL4, GL = GL4)
-  TIL4 <- rename(TIL4, DL = DL4)
-  TIL4 <- rename(TIL4, TIL = TIL4)
-  TIL4 <- rename(TIL4, TIL_ShB = SHB4)
-
-  y <- rbind(TIL1, TIL2, TIL3, TIL4)
-  x <- left_join(TShB_incidence, y)
+  z <- bind_rows(TIL)
+  x <- left_join(TShB_incidence, z)
 
   # Add dates ------------------------------------------------------------------
 
-  if (files == "data/DS2015_Raw_22DAI.csv") {
-    DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
-                times = nrow(x))
-    ASMT <- rep(1, times = nrow(x))
-    visit <- data.frame(DATE, ASMT, x)
-  } else if (files == "data/DS2015_Raw_35DAI.csv") {
-    DATE <- rep(as.Date("2015-02-20", origin = "1970-01-01"),
-                times = nrow(x))
-    ASMT <- rep(2, times = nrow(x))
-    visit <- data.frame(DATE, ASMT, x)
-  } else if (files == "data/DS2015_Raw_49DAI.csv") {
-    DATE <- rep(as.Date("2015-03-05", origin = "1970-01-01"),
-                times = nrow(x))
-    ASMT <- rep(3, times = nrow(x))
-    visit <- data.frame(DATE, ASMT, x)
-  } else if (files == "data/DS2015_Raw_62DAI.csv") {
-    DATE <- rep(as.Date("2015-03-19", origin = "1970-01-01"),
-                times = nrow(x))
-    ASMT <- rep(4, times = nrow(x))
-    visit <- data.frame(DATE, ASMT, x)
-  } else if (files == "data/DS2015_Raw_83DAI.csv") {
-    DATE <- rep(as.Date("2015-04-01", origin = "1970-01-01"),
-                times = nrow(x))
-    ASMT <- rep(5, times = nrow(x))
-    visit <- data.frame(DATE, ASMT, x)
-  }
+  switch(
+    files,
+    "data/DS2015_Raw_22DAI.csv" = {
+      DATE <- rep(as.Date("2015-02-12", origin = "1970-01-01"),
+                  times = nrow(x))
+      ASMT <- rep(1, times = nrow(x))
+      visit <- data.frame(DATE, ASMT, x)
+    },
+    "data/DS2015_Raw_35DAI.csv" = {
+      DATE <- rep(as.Date("2015-02-20", origin = "1970-01-01"),
+                  times = nrow(x))
+      ASMT <- rep(2, times = nrow(x))
+      visit <- data.frame(DATE, ASMT, x)
+    },
+    "data/DS2015_Raw_49DAI.csv" = {
+      DATE <- rep(as.Date("2015-03-05", origin = "1970-01-01"),
+                  times = nrow(x))
+      ASMT <- rep(3, times = nrow(x))
+      visit <- data.frame(DATE, ASMT, x)
+    },
+    "data/DS2015_Raw_62DAI.csv" = {
+      DATE <- rep(as.Date("2015-03-19", origin = "1970-01-01"),
+                  times = nrow(x))
+      ASMT <- rep(4, times = nrow(x))
+      visit <- data.frame(DATE, ASMT, x)
+    },
+    "data/DS2015_Raw_83DAI.csv" = {
+      DATE <- rep(as.Date("2015-04-01", origin = "1970-01-01"),
+                  times = nrow(x))
+      ASMT <- rep(5, times = nrow(x))
+      visit <- data.frame(DATE, ASMT, x)
+    }
+  )
 }
 
 # Run reformat function for all 2015 files -------------------------------------
