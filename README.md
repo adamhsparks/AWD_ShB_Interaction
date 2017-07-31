@@ -163,6 +163,8 @@ http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html
 
 ### Using MCMCglmm
 
+http://www.maths.bath.ac.uk/~jjf23/mixchange/onewayanova.html
+
 http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm
 
 https://github.com/tmalsburg/MCMCglmm-intro
