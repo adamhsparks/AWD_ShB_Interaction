@@ -95,7 +95,7 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   xlab("Treatment") +
   ylab("Incidence per Hill") +
   ggtitle("Tiller Sheath Blight Incidence")
-ggsave("graphs/TShB_Incidence_plot.png", width = 6, height = 4)
+ggsave("graphs/TShB_incidence_plot.png", width = 6, height = 4)
 
 
 # dotplots of tiller sheath blight incidence AUDPS data ------------------------
@@ -176,4 +176,4 @@ RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
   ylab("Mean Tiller Sheath Blight Incidence") +
   facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Incidence Disease Progress Curves")
-ggsave("graphs/TShB_Incidence_progress_curves.png", width = 6, height = 4)
+ggsave("graphs/TShB_incidence_progress_curves.png", width = 6, height = 4)
