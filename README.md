@@ -119,7 +119,7 @@ Disease was rated using an ordinal scale for field evaluation of sheath blight (
   <td>0</td>
 </tr>
 <tr>
-  <td>N1</td>
+  <td>N100</td>
   <td>2015</td>
   <td>100</td>
   <td>60</td>
@@ -127,7 +127,7 @@ Disease was rated using an ordinal scale for field evaluation of sheath blight (
   <td>20</td>
 </tr>
 <tr>
-  <td>N2</td>
+  <td>N120</td>
   <td>2015</td>
   <td>120</td>
   <td>60</td>
@@ -135,7 +135,7 @@ Disease was rated using an ordinal scale for field evaluation of sheath blight (
   <td>30</td>
 </tr>
 <tr>
-  <td>N3</td>
+  <td>N60</td>
   <td>2016</td>
   <td>60</td>
   <td>30</td>
@@ -143,7 +143,7 @@ Disease was rated using an ordinal scale for field evaluation of sheath blight (
   <td>0</td>
 </tr>
 <tr>
-  <td>N4</td>
+  <td>N180</td>
   <td>2016</td>
   <td>180</td>
   <td>60</td>
