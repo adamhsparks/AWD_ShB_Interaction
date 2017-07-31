@@ -16,13 +16,13 @@ f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-1.png)
 
 ``` r
 car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-2.png)
 
 #### Tiller Incidence Exponential
 
@@ -31,13 +31,13 @@ f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-1.png)
 
 ``` r
 car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-2.png)
 
 #### Tiller Severity Normal
 
@@ -46,13 +46,13 @@ f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_norm-1.png)
 
 ``` r
 car::qqp(AUDPS15$TShB_percent_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_norm-2.png)
 
 #### Tiller Severity Exponential
 
@@ -61,13 +61,13 @@ f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-1.png)
 
 ``` r
 car::qqp(AUDPS15$TShB_percent_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-2.png)
 
 #### Leaf Severity Normal
 
@@ -76,13 +76,13 @@ f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_norm-1.png)
 
 ``` r
 car::qqp(AUDPS15$LShB_percent_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_norm-2.png)
 
 #### Leaf Severity Exponential
 
@@ -91,13 +91,13 @@ f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-1.png)
 
 ``` r
 car::qqp(AUDPS15$LShB_percent_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-2.png)
 
 ------------------------------------------------------------------------
 
@@ -114,13 +114,13 @@ f1 <- fitdist(AUDPS16$TShB_inc_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_norm-1.png)
 
 ``` r
 car::qqp(AUDPS16$TShB_inc_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_norm-2.png)
 
 #### Tiller Incidence Exponential
 
@@ -129,13 +129,13 @@ f1 <- fitdist(AUDPS16$TShB_inc_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_exp-1.png)
 
 ``` r
 car::qqp(AUDPS16$TShB_inc_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_inc_exp-2.png)
 
 #### Tiller Severity Normal
 
@@ -145,13 +145,13 @@ f1 <- fitdist(AUDPS16$TShB_percent_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_norm-1.png)
 
 ``` r
 car::qqp(AUDPS16$TShB_percent_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_norm-2.png)
 
 #### Tiller Severity Exponential
 
@@ -160,13 +160,13 @@ f1 <- fitdist(AUDPS16$TShB_percent_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_exp-1.png)
 
 ``` r
 car::qqp(AUDPS16$TShB_percent_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_TShB_percent_exp-2.png)
 
 #### Leaf Severity Normal
 
@@ -176,13 +176,13 @@ f1 <- fitdist(AUDPS16$LShB_percent_AUDPS, "norm")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_norm-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_norm-1.png)
 
 ``` r
 car::qqp(AUDPS16$LShB_percent_AUDPS, "norm")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_norm-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_norm-2.png)
 
 #### Leaf Severity Exponential
 
@@ -191,13 +191,13 @@ f1 <- fitdist(AUDPS16$LShB_percent_AUDPS, "exp")
 plot(f1)
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_exp-1.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_exp-1.png)
 
 ``` r
 car::qqp(AUDPS16$LShB_percent_AUDPS, "exp")
 ```
 
-![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_exp-2.png)
+![](01-Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2016_LShB_percent_exp-2.png)
 
 Conclusions
 -----------
