@@ -407,7 +407,10 @@ plot_joint_random_error_dist(d = rdf,
 
 ### Tiller Sheath Blight Incidence and Severity
 
-In 2015 and 2016 the highest N treatment was significant in both the tiller sheath blight incidence and severity. In 2016 the flooding treatment was significant for tiller sheath blight severity.
+In 2015 and 2016 the highest N treatments (note that they were different amounts
+in these two years) were significant in both the tiller
+sheath blight incidence and severity. In 2016 the flooding treatment was
+significant for tiller sheath blight severity.
 
 ### Leaf Sheath Blight Severity
 
@@ -415,7 +418,7 @@ In neither experiment was the leaf sheath blight affected by nitrogen rates or i
 
 ### Interactions of Nitrogen and Irrigation Regime
 
-In 2015 no significant itneraction was observed. In 2016 a significant interaction between flooding and nitrogen rate is observed for both the tiller and leaf severity ratings.
+In 2015 no significant interaction was observed. In 2016 a significant interaction between flooding and nitrogen rate is observed for both the tiller and leaf severity ratings.
 
 ### Model Fit
 

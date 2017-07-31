@@ -69,8 +69,8 @@ DS2016 <- subset(RAW_data, YEAR == "2016")
 TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_incidence = TShB_incidence) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
   arrange(PLOT)
 
 TShB_inc_wide <-
@@ -79,8 +79,8 @@ TShB_inc_wide <-
 TShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_severity = TIL_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_sev_wide <-
@@ -89,8 +89,8 @@ TShB_sev_wide <-
 TShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_PERCENT = PERC_TIL_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
@@ -99,8 +99,8 @@ TShB_perc_wide <-
 LShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_LShB_severity = LEAF_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_sev_wide <-
@@ -109,8 +109,8 @@ LShB_sev_wide <-
 LShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_LShB_PERCENT = PERC_LEAF_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_perc_wide <-
@@ -153,8 +153,8 @@ ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_incidence = TShB_incidence) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
   arrange(PLOT)
 
 TShB_inc_wide <-
@@ -163,8 +163,8 @@ TShB_inc_wide <-
 TShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_severity = TIL_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_sev_wide <-
@@ -173,8 +173,8 @@ TShB_sev_wide <-
 TShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_TShB_PERCENT = PERC_TIL_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
@@ -183,8 +183,8 @@ TShB_perc_wide <-
 LShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_LShB_severity = LEAF_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_sev_wide <-
@@ -193,8 +193,8 @@ LShB_sev_wide <-
 LShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_each(funs(round(mean(., na.rm = TRUE), 2)),
-                 PLOT_LShB_PERCENT = PERC_LEAF_ShB) %>%
+  summarise_at(.funs = funs(round(mean(., na.rm = TRUE), 2)),
+               .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_perc_wide <-

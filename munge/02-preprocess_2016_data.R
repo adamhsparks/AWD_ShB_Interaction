@@ -92,24 +92,25 @@ DS2016$TRT[which(DS2016$WMGT == "AWD" &
 
 DS2016 <-
   DS2016 %>%
-  gather(LEAF,
-         LEAF_ShB,
-         starts_with("ShBL"),
-         -DATE,
-         -ASMT,
-         -PLOT,
-         -TRT,
-         -REP,
-         -WMGT,
-         -SMPL,
-         -NRTE,
-         -HILL,
-         -NTIL,
-         -GL,
-         -DL,
-         -NTShB,
-         -NSHShB,
-         -TIL
+  gather(
+    LEAF,
+    LEAF_ShB,
+    starts_with("ShBL"),
+    -DATE,
+    -ASMT,
+    -PLOT,
+    -TRT,
+    -REP,
+    -WMGT,
+    -SMPL,
+    -NRTE,
+    -HILL,
+    -NTIL,
+    -GL,
+    -DL,
+    -NTShB,
+    -NSHShB,
+    -TIL
   )
 
 # reclassify LEAF column to leaf numbers 1...6
@@ -141,7 +142,7 @@ DS2016$YEAR <- year(DS2016$DATE)
 DS2016$LEAF_ShB <- as.numeric(DS2016$LEAF_ShB)
 
 DS2016 <-
-  DS2016 %>% select(
+  DS2016 %>% dplyr::select(
     YEAR,
     DATE,
     ASMT,
@@ -175,7 +176,39 @@ DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
 DS2016$DAYS <-
   c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
 
-rm(DS2016_A1, DS2016_A2, DS2016_A3, DS2016_A4, DATE_1, DATE_1_2016, DATE_2, DATE_2_2016, DAYS_2016)
+rm(
+  DS2016_A1,
+  DS2016_A2,
+  DS2016_A3,
+  DS2016_A4,
+  DATE_1,
+  DATE_1_2016,
+  DATE_2,
+  DATE_2_2016,
+  DAYS_2016
+)
+
+DS2016 <-
+  DS2016 %>% dplyr::select(
+    YEAR,
+    DATE,
+    ASMT,
+    REP,
+    PLOT,
+    TRT,
+    SMPL,
+    HILL,
+    TIL,
+    LEAF,
+    GL,
+    DL,
+    TShB_incidence,
+    TIL_ShB,
+    LEAF_ShB,
+    WMGT,
+    NRTE,
+    DAYS
+  )
 
 # write CSV to cache -----------------------------------------------------------
 write_csv(DS2016, "./cache/AWD_2016_Data.csv")

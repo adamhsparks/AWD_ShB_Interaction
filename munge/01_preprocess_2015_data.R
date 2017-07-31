@@ -1,10 +1,64 @@
-# Preprocess 2015 data for all assessments
+# Preprocess 2015 data for all assessment dates
 
 files <-
   list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
 reformat <- function(files) {
-  x <- read_csv(files)
+  x <- read_csv(
+    files,
+    cols(
+      col_character(),
+      col_character(),
+      col_character(),
+      col_character(),
+      col_character(),
+      col_character(),
+      col_double(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer(),
+      col_integer()
+    ),
+    col_names = TRUE
+  )
   x[is.na(x)] <- 0
 
   x <- arrange(x, REP, TRT)
@@ -20,25 +74,24 @@ reformat <- function(files) {
   x$TShB_incidence <- round(x$TShB_incidence, 2)
 
   TShB_incidence <-
-    x %>% select(REP,
-                 TRT,
-                 WMGT,
-                 NRTE,
-                 SMPL,
-                 HILL,
-                 HGHT,
-                 NTIL,
-                 NTShB,
-                 TShB_incidence)
+    x %>% dplyr::select(REP,
+                        TRT,
+                        WMGT,
+                        NRTE,
+                        SMPL,
+                        HILL,
+                        HGHT,
+                        NTIL,
+                        NTShB,
+                        TShB_incidence)
 
   # Gather Tillers--------------------------------------------------------------
   TIL <- vector(mode = "list", length = 4)
-  for (i in 1:4) {
 
-    l <- paste0("SLA", i, ":SLF", i)
+  for (i in 1:4) {
     y <-
       x %>%
-      select(
+      dplyr::select(
         TRT,
         REP,
         WMGT,
@@ -58,7 +111,12 @@ reformat <- function(files) {
       ) %>%
       gather(LEAF,
              LEAF_ShB,
-             l)
+             starts_with("SL"))
+
+    names(y)[7] <- "TIL"
+    names(y)[8] <- "GL"
+    names(y)[9] <- "DL"
+    names(y)[10] <- "TIL_ShB"
 
     y$LEAF[y$LEAF == paste0("SLA", i)] <- 1
     y$LEAF[y$LEAF == paste0("SLB", i)] <- 2
@@ -66,13 +124,6 @@ reformat <- function(files) {
     y$LEAF[y$LEAF == paste0("SLD", i)] <- 4
     y$LEAF[y$LEAF == paste0("SLE", i)] <- 5
     y$LEAF[y$LEAF == paste0("SLF", i)] <- 6
-
-    names(y)[7] <- "TIL"
-    names(y)[8] <- "GL"
-    names(y)[9] <- "DL"
-    names(y)[10] <- "TIL_ShB"
-
-    y[, 12] <- as.character(y[, 12])
 
     TIL[[i]] <- y
   }
@@ -146,7 +197,7 @@ DS2015$PLOT <- rep(1:24, each = 432)
 
 # Arrange columns --------------------------------------------------------------
 DS2015 <-
-  DS2015 %>% select(
+  DS2015 %>% dplyr::select(
     YEAR,
     DATE,
     ASMT,
