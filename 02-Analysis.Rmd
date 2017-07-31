@@ -64,8 +64,8 @@ Now create individual data frames for the analysis.
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
-AUDPS_16 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
-AUDPS_16 <- droplevels(AUDPS_16)
+AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_2016 <- droplevels(AUDPS_2016)
 ```
 
 Now that the `AUDPS_15` and `AUDPS_16` `data.frames` exist, we can start the analysis.
@@ -247,7 +247,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
 
 TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
                                     random = ~REP, 
-                          data = AUDPS_16,
+                          data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -302,7 +302,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_16,
+                          data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -356,7 +356,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_16,
+                          data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -408,9 +408,9 @@ plot_joint_random_error_dist(d = rdf,
 ### Tiller Sheath Blight Incidence and Severity
 
 In 2015 and 2016 the highest N treatments (note that they were different amounts
-in these two years) were significant in both the tiller
-sheath blight incidence and severity. In 2016 the flooding treatment was
-significant for tiller sheath blight severity.
+in these two years) were significant in both the tiller sheath blight incidence
+and severity. In 2016 the flooding treatment was significant for tiller sheath
+blight severity.
 
 ### Leaf Sheath Blight Severity
 
