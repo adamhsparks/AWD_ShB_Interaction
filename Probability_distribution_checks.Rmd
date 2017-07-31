@@ -30,20 +30,18 @@ car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
 
 ```
 
-#### Tiller Incidence Log Normal
+#### Tiller Incidence Exponential
 
-```{r 2015_TShB_inc_norm, results='hide', message=FALSE, warning=FALSE}
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
-f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "lnorm")
+```{r 2015_TShB_incidence_exp, results='hide', message=FALSE, warning=FALSE}
+f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
 plot(f1)
 
-car::qqp(AUDPS15$TShB_inc_AUDPS, "lnorm")
+car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
 ```
 
 #### Tiller Severity Normal
 
 ```{r 2015_TShB_percent_norm, results='hide', message=FALSE, warning=FALSE}
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "norm")
 plot(f1)
 
@@ -52,12 +50,16 @@ car::qqp(AUDPS15$TShB_percent_AUDPS, "norm")
 
 #### Tiller Severity Exponential
 
-2015 Tiller AUDPS is negative, so an exponential model will not fit
+```{r 2015_TShB_percent_exp, results='hide', message=FALSE, warning=FALSE}
+f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "exp")
+plot(f1)
+
+car::qqp(AUDPS15$TShB_percent_AUDPS, "exp")
+```
 
 #### Leaf Severity Normal
 
 ```{r 2015_LShB_percent_norm, results='hide', message=FALSE, warning=FALSE}
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "norm")
 plot(f1)
 
@@ -66,8 +68,12 @@ car::qqp(AUDPS15$LShB_percent_AUDPS, "norm")
 
 #### Leaf Severity Exponential
 
-These data do not fit this distribution, all values must be positive. There are
-negative AUDPS values present.
+```{r 2015_LShB_percent_exp, results='hide', message=FALSE, warning=FALSE}
+f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "exp")
+plot(f1)
+
+car::qqp(AUDPS15$LShB_percent_AUDPS, "exp")
+```
 
 *******
 

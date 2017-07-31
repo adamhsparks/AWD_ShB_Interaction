@@ -24,10 +24,24 @@ car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
 
 ![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_inc_norm-2.png)
 
+#### Tiller Incidence Exponential
+
+``` r
+f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "exp")
+plot(f1)
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-1.png)
+
+``` r
+car::qqp(AUDPS15$TShB_inc_AUDPS, "exp")
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence_exp-2.png)
+
 #### Tiller Severity Normal
 
 ``` r
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "norm")
 plot(f1)
 ```
@@ -42,12 +56,22 @@ car::qqp(AUDPS15$TShB_percent_AUDPS, "norm")
 
 #### Tiller Severity Exponential
 
-2015 Tiller AUDPS is negative, so an exponential model will not fit
+``` r
+f1 <- fitdist(AUDPS15$TShB_percent_AUDPS, "exp")
+plot(f1)
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-1.png)
+
+``` r
+car::qqp(AUDPS15$TShB_percent_AUDPS, "exp")
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_TShB_percent_exp-2.png)
 
 #### Leaf Severity Normal
 
 ``` r
-AUDPS15 <- subset(AUDPS, YEAR == "2015")
 f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "norm")
 plot(f1)
 ```
@@ -62,7 +86,18 @@ car::qqp(AUDPS15$LShB_percent_AUDPS, "norm")
 
 #### Leaf Severity Exponential
 
-These data do not fit this distribution, all values must be positive.
+``` r
+f1 <- fitdist(AUDPS15$LShB_percent_AUDPS, "exp")
+plot(f1)
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-1.png)
+
+``` r
+car::qqp(AUDPS15$LShB_percent_AUDPS, "exp")
+```
+
+![](Probability_distribution_checks_files/figure-markdown_github-ascii_identifiers/2015_LShB_percent_exp-2.png)
 
 ------------------------------------------------------------------------
 
