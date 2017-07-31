@@ -61,8 +61,8 @@ AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
 Now create individual data frames for the analysis.
 
 ```{r create_analysis_df}
-AUDPS_15 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
-AUDPS_15 <- droplevels(AUDPS_15)
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2015 <- droplevels(AUDPS_2015)
 
 AUDPS_16 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
 AUDPS_16 <- droplevels(AUDPS_16)
@@ -79,7 +79,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -133,7 +133,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,
@@ -187,7 +187,7 @@ eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
                                     random = ~REP, 
-                          data = AUDPS_15,
+                          data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
                           nitt = 5e+05,

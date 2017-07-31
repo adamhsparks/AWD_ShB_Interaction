@@ -4,7 +4,6 @@ helper.function <- function()
 }
 
 plot_diagnostic_lines <- function(d, x, title) {
-
   # Diagnostic line plots for replicate
   ggplot(data = d, aes(
     x = rep(x, length(unique(d$variable))),
@@ -20,28 +19,22 @@ plot_diagnostic_lines <- function(d, x, title) {
 }
 
 plot_replicate_posteriors <- function(d, title) {
-  ggplot(d[d$variable != "X.Intercept.",], aes(x = value,
-                                               color = variable,
-                                               fill = variable)) +
-    geom_density(alpha = 0.25) +
-    scale_fill_brewer(type = "qual", palette = "Set1",
-                                name = "Variable") +
-    scale_colour_brewer(type = "qual", palette = "Set1",
-                                name = "Variable") +
-    ggtitle(paste(title))
+  ggplot(data = d[d$variable != "X.Intercept.", ], aes(x = variable,
+                                                       y = value)) +
+    geom_violin() +
+    geom_abline(slope = 0, intercept = 0) +
+    ggtitle(paste(title)) +
+    theme(axis.text.x = element_text(angle = 35, hjust = 1))
 }
 
 
 plot_treatment_posteriors <- function(d, title) {
-  ggplot(data = d, aes(x = value,
-                       color = variable,
-                       fill = variable)) +
-    geom_density(alpha = 0.25) +
-    scale_fill_brewer(type = "qual", palette = "Set1",
-                                name = "Variable") +
-    scale_colour_brewer(type = "qual", palette = "Set1",
-                                  name = "Variable") +
-    ggtitle(paste(title))
+  ggplot(data = d, aes(x = variable,
+                       y = value)) +
+    geom_violin() +
+    geom_abline(slope = 0, intercept = 0) +
+    ggtitle(paste(title)) +
+    theme(axis.text.x = element_text(angle = 35, hjust = 1))
 }
 
 plot_joint_random_error_dist <- function(d, title) {
