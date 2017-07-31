@@ -27,6 +27,17 @@ f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "norm")
 plot(f1)
 
 car::qqp(AUDPS15$TShB_inc_AUDPS, "norm")
+
+```
+
+#### Tiller Incidence Log Normal
+
+```{r 2015_TShB_inc_norm, results='hide', message=FALSE, warning=FALSE}
+AUDPS15 <- subset(AUDPS, YEAR == "2015")
+f1 <- fitdist(AUDPS15$TShB_inc_AUDPS, "lnorm")
+plot(f1)
+
+car::qqp(AUDPS15$TShB_inc_AUDPS, "lnorm")
 ```
 
 #### Tiller Severity Normal
@@ -55,7 +66,8 @@ car::qqp(AUDPS15$LShB_percent_AUDPS, "norm")
 
 #### Leaf Severity Exponential
 
-These data do not fit this distribution, all values must be positive.
+These data do not fit this distribution, all values must be positive. There are
+negative AUDPS values present.
 
 *******
 

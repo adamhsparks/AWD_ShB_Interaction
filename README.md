@@ -11,8 +11,6 @@ library(ProjectTemplate)
 ```
 Clone the repository to your local hard drive.
 
-This repository uses the [Packrat](https://cran.r-project.org/package=packrat) package for reproducibility so the initial start up may be slowed with package installations. This will automatically be handled so that all the versions of R packages used for this analysis are the same across computers.
-
 The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts. It is worth looking at these to see how the raw data are handled prior to analysis.
 
 The [graphs](graphs) folder contains graphs from munging and the [README.md](graphs/README.md) file displays them in an ordered fashion.

@@ -118,7 +118,7 @@ ggplot(AUDPS, aes(x = as.factor(TRT), y = TShB_percent_AUDPS)) +
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("AUDPS") +
-  ggtitle("Tiller Sheath Blight Severity")
+  ggtitle("Tiller Sheath Blight")
 ggsave("graphs/TShB_percent_AUDPS_dotplot.png", width = 6, height = 4)
 
 
@@ -130,20 +130,20 @@ ggplot(AUDPS, aes(x = as.factor(TRT), y = LShB_percent_AUDPS)) +
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("AUDPS") +
-  ggtitle("Leaf Sheath Blight Severity")
+  ggtitle("Leaf Sheath Blight")
 ggsave("graphs/LShB_percent_AUDPS_dotplot.png", width = 6, height = 4)
 
 
-# line graph of leaf sheath blight severity AUDPS data ------------------------
+# line graph of leaf sheath blight severity data -------------------------------
 RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
-  summarize(value = mean(LEAF_ShB)) %>%
+  summarize(value = mean(PERC_LEAF_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = TRT,
              group = TRT)) +
   geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
-  ylab("Mean Sheath Blight Severity Rating") +
+  ylab("Severity (%)") +
   facet_grid(. ~ YEAR) +
   ggtitle("Leaf Sheath Blight Severity Disease Progress Curves")
 ggsave("graphs/LShB_progress_curves.png", width = 6, height = 4)
@@ -151,16 +151,16 @@ ggsave("graphs/LShB_progress_curves.png", width = 6, height = 4)
 
 # line graph of tiller sheath blight severity AUDPS data ----------------------
 RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
-  summarize(value = mean(TIL_ShB)) %>%
+  summarize(value = mean(PERC_TIL_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = TRT,
              group = TRT)) +
   geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
-  ylab("Mean Sheath Blight Severity Rating") +
+  ylab("Severity (%)") +
   facet_grid(. ~ YEAR) +
-  ggtitle("Tiller Sheath Blight Severity Disease Progress Curves")
+  ggtitle("Tiller Sheath Blight")
 ggsave("graphs/TShB_progress_curves.png", width = 6, height = 4)
 
 
@@ -173,7 +173,7 @@ RAW_data %>% group_by(YEAR, WMGT, TRT, ASMT) %>%
              group = TRT)) +
   geom_line(aes(linetype = WMGT)) +
   xlab("Assessment") +
-  ylab("Mean Tiller Sheath Blight Incidence") +
+  ylab("Mean Incidence (%)") +
   facet_grid(. ~ YEAR) +
-  ggtitle("Tiller Sheath Blight Incidence Disease Progress Curves")
+  ggtitle("Tiller Sheath Blight")
 ggsave("graphs/TShB_incidence_progress_curves.png", width = 6, height = 4)

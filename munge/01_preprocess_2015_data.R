@@ -225,7 +225,7 @@ DS2015 <- as_tibble(arrange(DS2015, ASMT, PLOT))
 
 DAYS <- as.numeric(substr(files, 17, 18))
 
-DS2015$DAYS <- c(rep(0, 432), rep(diff(DAYS), each = 432))
+DS2015$DAYS <- c(rep(0, 10368), rep(diff(DAYS), each = 10368))
 
 rm(files, reformat)
 
