@@ -13,13 +13,11 @@ Clone the repository to your local hard drive.
 
 The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts. It is worth looking at these to see how the raw data are handled prior to analysis.
 
-The [graphs](graphs) folder contains graphs from munging and the [README.md](graphs/README.md) file displays them in an ordered fashion.
+The [graphs](graphs) folder contains of the raw data and AUDPS values and the [README.md](graphs/README.md) file displays them in an ordered fashion.
 
 ### Rmd files
 
 Knitting the Rmd files will automatically run the scripts in the [munge](munge) and generate the outputs linked to below in the GitHub `.md` files. This folder has the steps used to create the AUDPS values used in analysis and other summaries and cleaning of the data.
-
-The [`Probability_distribution_checks.Rmd`](Probability_distribution_checks.md) file generates/displays the normal and log distribution checks for the analyses.
 
 The [`Analysis.Rmd`](Analysis.md) file contains the models used for data analysis and shows the analysis carried out.
 
