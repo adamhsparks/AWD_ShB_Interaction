@@ -444,7 +444,7 @@ In 2016 both the AWD and highest N rate, N180, were significantly different from
 
 No interactions were found to be significant in the tiller sheath blight incidence.
 
-## Tiller Sheath Blight Severity
+### Tiller Sheath Blight Severity
 
 In 2015 both the N100 and N120 rates were significantly different from the N0 treatment. The interaction of the N100 rate with AWD was also significantly different than N0 and FLD treatments.
 
