@@ -1,5 +1,5 @@
 ---
-title: "Analysis of split plot design using MCMCglmm"
+  title: "Analysis of split plot design using lme4"
 output: github_document
 ---
 
@@ -10,24 +10,6 @@ load.project()
 ```
 
 ## Notes on This Analysis Before Starting
-
-The analyses are semi-automated. When this file is knit, it automatically loads the _ProjectTemplate_ package and calls the `load.project()` function. This loads the data, cleans and munges it creating the `AUDPS` data frame used for the analysis below. The scripts used to clean and munge the data are located in the [munge](./munge) folder and numbered in the sequential order in which they are run.
-
-#### Interpreting these analyses
-
-For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`,
-which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
-
-The MCMCglmm documentation is more in-depth but should still be referenced.
-```{r MCMCglmm, eval=FALSE}
-library(MCMCglmm)
-vignette("Overview")
-vignette("CourseNotes")
-```
-
-I found this CrossValidated topic to be useful in interpreting the outputs from
-MCMCglmm as it explains the interpretation of the effects. While it is about
-output from a `lmer`, the output is read in the same way, [How to interpret 2-way and 3-way interaction in lmer?](https://stats.stackexchange.com/questions/87412/how-to-interpret-2-way-and-3-way-interaction-in-lmer#87415).
 
 The base levels for this analysis are:
 
@@ -48,20 +30,7 @@ but the main one is this. Therefore, the analyses will be conducted separately
 such that comparisons will only be observational and cannot be statistically
 compared.
 
-#### MCMCglmm model fitting notes
-
-Fitting the models with the default iterations resulted in some less than
-acceptable models. Because of this, the number of iterations has been increased,
-`nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
-smaller errors for random effects and better models.
-
 ## Setup
-
-Use `set.seed()` for reproducibility.
-
-```{r set_seed}
-set.seed(27)
-```
 
 The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
@@ -97,55 +66,17 @@ Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames` exist, we can start the
 ### 2015 Tiller Sheath Blight Incidence Model
 
 ```{r 2015_TShB_incidence}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+library(pbkrtest)
+lmodr <- lmer(TShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
+lmoda <- lmer(TShB_percent_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2015)
 
-summary(TShB_incidence_lmm_2015)
+KRmodcomp(lmodr, lmoda)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 7:10)])
-reps <- melt(reps)
+lmodi <- lmer(yield ~ irrigation + (1|field),data=irrigation)
+KRmodcomp(lmoda, lmodi)
 
-trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:6])
-trts <- melt(trts)
-
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
-
-# check random effects
-plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
+lmodv <- lmer(yield ~  variety + (1|field),data=irrigation)
+KRmodcomp(lmoda, lmodv)
 ```
 
 ### 2015 Tiller Sheath Blight Severity Model
@@ -154,14 +85,14 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+                                   random = ~REP,
+                                   data = AUDPS_2015,
+                                   verbose = FALSE,
+                                   prior = eprior,
+                                   nitt = 5e+05,
+                                   burnin = 5000,
+                                   thin = 100,
+                                   pr = TRUE)
 
 summary(TShB_severity_lmm_2015)
 
@@ -208,14 +139,14 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+                                   random = ~REP,
+                                   data = AUDPS_2015,
+                                   verbose = FALSE,
+                                   prior = eprior,
+                                   nitt = 5e+05,
+                                   burnin = 5000,
+                                   thin = 100,
+                                   pr = TRUE)
 
 summary(LShB_severity_lmm_2015)
 
@@ -258,24 +189,24 @@ plot_joint_random_error_dist(d = rdf,
 
 *******
 
-## 2016
+  ## 2016
 
-### 2016 Tiller Sheath Blight Incidence Model
+  ### 2016 Tiller Sheath Blight Incidence Model
 
-```{r 2016_TShB_incidence}
+  ```{r 2016_TShB_incidence}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 
-TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE, 
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
+                                    random = ~REP,
+                                    data = AUDPS_2016,
+                                    verbose = FALSE,
+                                    prior = eprior,
+                                    nitt = 5e+05,
+                                    burnin = 5000,
+                                    thin = 100,
+                                    pr = TRUE)
 
 summary(TShB_incidence_lmm_2016)
 
@@ -323,14 +254,14 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+                                   random = ~REP,
+                                   data = AUDPS_2016,
+                                   verbose = FALSE,
+                                   prior = eprior,
+                                   nitt = 5e+05,
+                                   burnin = 5000,
+                                   thin = 100,
+                                   pr = TRUE)
 
 summary(TShB_severity_lmm_2016)
 
@@ -377,14 +308,14 @@ plot_joint_random_error_dist(d = rdf,
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 5e+05,
-                          burnin = 5000,
-                          thin = 100,
-                          pr = TRUE)
+                                   random = ~REP,
+                                   data = AUDPS_2016,
+                                   verbose = FALSE,
+                                   prior = eprior,
+                                   nitt = 5e+05,
+                                   burnin = 5000,
+                                   thin = 100,
+                                   pr = TRUE)
 
 summary(LShB_severity_lmm_2016)
 
