@@ -1,0 +1,172 @@
+---
+title: "Analysis of split plot design using lme4"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ProjectTemplate)
+load.project()
+```
+
+## Notes on This Analysis Before Starting
+
+The base levels for this analysis are:
+
+- 2015 `NRTE:0`
+
+- 2015 `WMGT:FLD`
+
+- 2016 `NRTE:60`
+
+- 2016 `WMGT:FLD`
+
+#### Changes between 2015 and 2016
+
+Before the analysis, note that due to changes between the years, the analysis
+must be carried out on each year separately. The 2015 data and 2016 data cannot
+be combined due to changes in inoculation methods; there are other changes too,
+but the main one is this. Therefore, the analyses will be conducted separately
+such that comparisons will only be observational and cannot be statistically
+compared.
+
+## Setup
+
+The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+
+First, separate the TRT column into the two treatments for analysis.
+
+```{r data_setup}
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
+```
+
+Now create individual data frames for the analysis.
+
+```{r create_analysis_df}
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2015 <- droplevels(AUDPS_2015)
+
+# relevel factors for easier interpretation of  analysis
+AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
+AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "FLD"))
+
+AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_2016 <- droplevels(AUDPS_2016)
+
+# relevel factors for easier interpretation of  analysis
+AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
+AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
+```
+
+Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames` exist, we can start the analysis.
+
+## 2015
+
+### 2015 Tiller Sheath Blight Incidence Model
+
+```{r 2015_TShB_incidence}
+library(lme4)
+library(lsmeans)
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2015)
+summary(TShB_inc_AUDPS)
+
+plot(TShB_inc_AUDPS)
+qqnorm(resid(TShB_inc_AUDPS))
+qqline(resid(TShB_inc_AUDPS))
+
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+### 2015 Tiller Sheath Blight Severity Model
+
+```{r 2015_TShB_severity}
+TShB_sev_AUDPS <- lmer(TShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
+summary(TShB_sev_AUDPS)
+
+plot(TShB_sev_AUDPS)
+qqnorm(resid(TShB_sev_AUDPS))
+qqline(resid(TShB_sev_AUDPS))
+
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+### 2015 Leaf Sheath Blight Severity Model
+
+```{r 2015_LShB_severity}
+LShB_sev_AUDPS <- lmer(LShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
+summary(LShB_sev_AUDPS)
+
+plot(LShB_sev_AUDPS)
+qqnorm(resid(LShB_sev_AUDPS))
+qqline(resid(LShB_sev_AUDPS))
+
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+*******
+
+## 2016
+
+### 2016 Tiller Sheath Blight Incidence Model
+
+```{r 2016_TShB_incidence}
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2016)
+summary(TShB_inc_AUDPS)
+
+plot(TShB_inc_AUDPS)
+qqnorm(resid(TShB_inc_AUDPS))
+qqline(resid(TShB_inc_AUDPS))
+
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+### 2016 Tiller Sheath Blight Severity Model
+
+```{r 2016_TShB_severity}
+TShB_sev_AUDPS <- lmer(TShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
+summary(TShB_sev_AUDPS)
+
+plot(TShB_sev_AUDPS)
+qqnorm(resid(TShB_sev_AUDPS))
+qqline(resid(TShB_sev_AUDPS))
+
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+### 2016 Leaf Sheath Blight Severity Model
+
+```{r 2016_LShB_severity}
+LShB_sev_AUDPS <- lmer(LShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
+summary(LShB_sev_AUDPS)
+
+plot(LShB_sev_AUDPS)
+qqnorm(resid(LShB_sev_AUDPS))
+qqline(resid(LShB_sev_AUDPS))
+
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
+print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey"))
+```
+
+## Conclusions
+
+The `lme4` `lmer` models do not appear to be a good fit based on the qqplots.
+However, they do seem to agree with the `MCMCglmm` analysis results. But I'm
+dubious about using these models based on the diagnostics that I see above.
+
+## R Session Info
+
+```{r session_info, echo=FALSE}
+devtools::session_info()
+```
