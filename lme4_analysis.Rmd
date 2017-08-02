@@ -68,7 +68,7 @@ Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames` exist, we can start the
 ```{r 2015_TShB_incidence}
 library(lme4)
 library(lsmeans)
-TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2015)
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
 summary(TShB_inc_AUDPS)
 
 plot(TShB_inc_AUDPS)
@@ -117,7 +117,7 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 ### 2016 Tiller Sheath Blight Incidence Model
 
 ```{r 2016_TShB_incidence}
-TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2016)
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
 summary(TShB_inc_AUDPS)
 
 plot(TShB_inc_AUDPS)

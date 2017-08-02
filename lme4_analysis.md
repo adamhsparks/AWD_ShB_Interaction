@@ -63,38 +63,42 @@ library(lsmeans)
     ## Loading required package: estimability
 
 ``` r
-TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2015)
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
 summary(TShB_inc_AUDPS)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
-    ## Formula: TShB_inc_AUDPS ~ WMGT + NRTE + (1 | REP)
+    ## Formula: TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP)
     ##    Data: AUDPS_2015
     ## 
-    ## REML criterion at convergence: 329.3
+    ## REML criterion at convergence: 327.2
     ## 
     ## Scaled residuals: 
-    ##      Min       1Q   Median       3Q      Max 
-    ## -2.19625 -0.67683 -0.06657  0.82647  1.78033 
+    ##     Min      1Q  Median      3Q     Max 
+    ## -2.2566 -0.6199 -0.1448  0.7987  1.6508 
     ## 
     ## Random effects:
     ##  Groups   Name        Variance Std.Dev.
-    ##  REP      (Intercept) 0.1473   0.3838  
-    ##  Residual             0.8425   0.9179  
+    ##  REP      (Intercept) 0.1474   0.3839  
+    ##  Residual             0.8406   0.9168  
     ## Number of obs: 120, groups:  REP, 4
     ## 
     ## Fixed effects:
-    ##             Estimate Std. Error t value
-    ## (Intercept)   1.1192     0.2548   4.393
-    ## WMGTAWD       0.1192     0.1676   0.711
-    ## NRTEN100      0.6312     0.2052   3.076
-    ## NRTEN120      1.0112     0.2052   4.927
+    ##                  Estimate Std. Error t value
+    ## (Intercept)        1.2925     0.2809   4.602
+    ## WMGTAWD           -0.2275     0.2899  -0.785
+    ## NRTEN100           0.4050     0.2899   1.397
+    ## NRTEN120           0.7175     0.2899   2.475
+    ## WMGTAWD:NRTEN100   0.4525     0.4100   1.104
+    ## WMGTAWD:NRTEN120   0.5875     0.4100   1.433
     ## 
     ## Correlation of Fixed Effects:
-    ##          (Intr) WMGTAW NRTEN10
-    ## WMGTAWD  -0.329               
-    ## NRTEN100 -0.403  0.000        
-    ## NRTEN120 -0.403  0.000  0.500
+    ##                 (Intr) WMGTAWD NRTEN10 NRTEN12 WMGTAWD:NRTEN10
+    ## WMGTAWD         -0.516                                        
+    ## NRTEN100        -0.516  0.500                                 
+    ## NRTEN120        -0.516  0.500   0.500                         
+    ## WMGTAWD:NRTEN10  0.365 -0.707  -0.707  -0.354                 
+    ## WMGTAWD:NRTEN12  0.365 -0.707  -0.354  -0.707   0.500
 
 ``` r
 plot(TShB_inc_AUDPS)
@@ -115,11 +119,13 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
 
     ## Loading required namespace: lmerTest
 
+    ## NOTE: Results may be misleading due to involvement in interactions
+
     ## $`lsmeans of NRTE`
     ##  NRTE  lsmean        SE   df  lower.CL upper.CL
-    ##  N0   1.17875 0.2406108 5.21 0.3473807 2.010119
-    ##  N100 1.81000 0.2406108 5.21 0.9786307 2.641369
-    ##  N120 2.19000 0.2406108 5.21 1.3586307 3.021369
+    ##  N0   1.17875 0.2405456 5.21 0.3472165 2.010283
+    ##  N100 1.81000 0.2405456 5.21 0.9784665 2.641533
+    ##  N120 2.19000 0.2405456 5.21 1.3584665 3.021533
     ## 
     ## Results are averaged over the levels of: WMGT 
     ## Degrees-of-freedom method: satterthwaite 
@@ -128,9 +134,9 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
     ## 
     ## $`pairwise differences of contrast`
     ##  contrast    estimate        SE  df t.ratio p.value
-    ##  N0 - N100   -0.63125 0.2052429 113  -3.076  0.0074
-    ##  N0 - N120   -1.01125 0.2052429 113  -4.927  <.0001
-    ##  N100 - N120 -0.38000 0.2052429 113  -1.851  0.1578
+    ##  N0 - N100   -0.63125 0.2050136 111  -3.079  0.0073
+    ##  N0 - N120   -1.01125 0.2050136 111  -4.933  <.0001
+    ##  N100 - N120 -0.38000 0.2050136 111  -1.854  0.1572
     ## 
     ## Results are averaged over the levels of: WMGT 
     ## P value adjustment: tukey method for comparing a family of 3 estimates
@@ -139,10 +145,12 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
 print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
 ```
 
+    ## NOTE: Results may be misleading due to involvement in interactions
+
     ## $`lsmeans of WMGT`
-    ##  WMGT   lsmean      SE   df  lower.CL upper.CL
-    ##  FLD  1.666667 0.22555 4.03 0.8848847 2.448449
-    ##  AWD  1.785833 0.22555 4.03 1.0040513 2.567615
+    ##  WMGT   lsmean        SE   df  lower.CL upper.CL
+    ##  FLD  1.666667 0.2255152 4.03 0.8847587 2.448575
+    ##  AWD  1.785833 0.2255152 4.03 1.0039253 2.567741
     ## 
     ## Results are averaged over the levels of: NRTE 
     ## Degrees-of-freedom method: satterthwaite 
@@ -151,7 +159,7 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
     ## 
     ## $`pairwise differences of contrast`
     ##  contrast    estimate        SE  df t.ratio p.value
-    ##  FLD - AWD -0.1191667 0.1675801 113  -0.711  0.4785
+    ##  FLD - AWD -0.1191667 0.1673929 111  -0.712  0.4780
     ## 
     ## Results are averaged over the levels of: NRTE
 
@@ -161,19 +169,19 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
     ## $`lsmeans of WMGT | NRTE`
     ## NRTE = N0:
-    ##  WMGT   lsmean       SE   df  lower.CL upper.CL
-    ##  FLD  1.119167 0.254783 6.53 0.3840198 1.854314
-    ##  AWD  1.238333 0.254783 6.53 0.5031864 1.973480
+    ##  WMGT lsmean        SE   df  lower.CL upper.CL
+    ##  FLD  1.2925 0.2808514 9.54 0.5487673 2.036233
+    ##  AWD  1.0650 0.2808514 9.54 0.3212673 1.808733
     ## 
     ## NRTE = N100:
-    ##  WMGT   lsmean       SE   df  lower.CL upper.CL
-    ##  FLD  1.750417 0.254783 6.53 1.0152698 2.485564
-    ##  AWD  1.869583 0.254783 6.53 1.1344364 2.604730
+    ##  WMGT lsmean        SE   df  lower.CL upper.CL
+    ##  FLD  1.6975 0.2808514 9.54 0.9537673 2.441233
+    ##  AWD  1.9225 0.2808514 9.54 1.1787673 2.666233
     ## 
     ## NRTE = N120:
-    ##  WMGT   lsmean       SE   df  lower.CL upper.CL
-    ##  FLD  2.130417 0.254783 6.53 1.3952698 2.865564
-    ##  AWD  2.249583 0.254783 6.53 1.5144364 2.984730
+    ##  WMGT lsmean        SE   df  lower.CL upper.CL
+    ##  FLD  2.0100 0.2808514 9.54 1.2662673 2.753733
+    ##  AWD  2.3700 0.2808514 9.54 1.6262673 3.113733
     ## 
     ## Degrees-of-freedom method: satterthwaite 
     ## Confidence level used: 0.95 
@@ -181,16 +189,16 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
     ## 
     ## $`pairwise differences of contrast, NRTE | NRTE`
     ## NRTE = N0:
-    ##  contrast    estimate        SE  df t.ratio p.value
-    ##  FLD - AWD -0.1191667 0.1675801 113  -0.711  0.4785
+    ##  contrast  estimate       SE  df t.ratio p.value
+    ##  FLD - AWD   0.2275 0.289933 111   0.785  0.4343
     ## 
     ## NRTE = N100:
-    ##  contrast    estimate        SE  df t.ratio p.value
-    ##  FLD - AWD -0.1191667 0.1675801 113  -0.711  0.4785
+    ##  contrast  estimate       SE  df t.ratio p.value
+    ##  FLD - AWD  -0.2250 0.289933 111  -0.776  0.4394
     ## 
     ## NRTE = N120:
-    ##  contrast    estimate        SE  df t.ratio p.value
-    ##  FLD - AWD -0.1191667 0.1675801 113  -0.711  0.4785
+    ##  contrast  estimate       SE  df t.ratio p.value
+    ##  FLD - AWD  -0.3600 0.289933 111  -1.242  0.2170
 
 ### 2015 Tiller Sheath Blight Severity Model
 
@@ -476,36 +484,38 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 ### 2016 Tiller Sheath Blight Incidence Model
 
 ``` r
-TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT + NRTE + (1|REP), data = AUDPS_2016)
+TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
 summary(TShB_inc_AUDPS)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
-    ## Formula: TShB_inc_AUDPS ~ WMGT + NRTE + (1 | REP)
+    ## Formula: TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP)
     ##    Data: AUDPS_2016
     ## 
-    ## REML criterion at convergence: 189.1
+    ## REML criterion at convergence: 186.3
     ## 
     ## Scaled residuals: 
-    ##      Min       1Q   Median       3Q      Max 
-    ## -1.56438 -0.74359 -0.04506  0.39341  1.95282 
+    ##     Min      1Q  Median      3Q     Max 
+    ## -1.7825 -0.5549 -0.1991  0.2983  2.1760 
     ## 
     ## Random effects:
     ##  Groups   Name        Variance Std.Dev.
-    ##  REP      (Intercept) 0.8560   0.9252  
-    ##  Residual             0.9705   0.9852  
+    ##  REP      (Intercept) 0.8576   0.9261  
+    ##  Residual             0.9460   0.9726  
     ## Number of obs: 64, groups:  REP, 4
     ## 
     ## Fixed effects:
-    ##             Estimate Std. Error t value
-    ## (Intercept)  10.5525     0.5094  20.715
-    ## WMGTAWD       0.3850     0.2463   1.563
-    ## NRTEN180      1.9250     0.2463   7.816
+    ##                  Estimate Std. Error t value
+    ## (Intercept)       10.3600     0.5230  19.809
+    ## WMGTAWD            0.7700     0.3439   2.239
+    ## NRTEN180           2.3100     0.3439   6.718
+    ## WMGTAWD:NRTEN180  -0.7700     0.4863  -1.583
     ## 
     ## Correlation of Fixed Effects:
-    ##          (Intr) WMGTAW
-    ## WMGTAWD  -0.242       
-    ## NRTEN180 -0.242  0.000
+    ##             (Intr) WMGTAWD NRTEN1
+    ## WMGTAWD     -0.329               
+    ## NRTEN180    -0.329  0.500        
+    ## WMGTAWD:NRT  0.232 -0.707  -0.707
 
 ``` r
 plot(TShB_inc_AUDPS)
@@ -524,10 +534,12 @@ qqline(resid(TShB_inc_AUDPS))
 print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
 ```
 
+    ## NOTE: Results may be misleading due to involvement in interactions
+
     ## $`lsmeans of NRTE`
-    ##  NRTE lsmean        SE   df  lower.CL upper.CL
-    ##  N60  10.745 0.4943093 3.41  8.861432 12.62857
-    ##  N180 12.670 0.4943093 3.41 10.786432 14.55357
+    ##  NRTE lsmean        SE  df  lower.CL upper.CL
+    ##  N60  10.745 0.4939207 3.4  8.859208 12.63079
+    ##  N180 12.670 0.4939207 3.4 10.784208 14.55579
     ## 
     ## Results are averaged over the levels of: WMGT 
     ## Degrees-of-freedom method: satterthwaite 
@@ -536,7 +548,7 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
     ## 
     ## $`pairwise differences of contrast`
     ##  contrast   estimate        SE df t.ratio p.value
-    ##  N60 - N180   -1.925 0.2462897 58  -7.816  <.0001
+    ##  N60 - N180   -1.925 0.2431509 57  -7.917  <.0001
     ## 
     ## Results are averaged over the levels of: WMGT
 
@@ -544,10 +556,12 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ NRTE)), adjust = c("tukey"))
 print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
 ```
 
+    ## NOTE: Results may be misleading due to involvement in interactions
+
     ## $`lsmeans of WMGT`
-    ##  WMGT lsmean        SE   df  lower.CL upper.CL
-    ##  FLD  11.515 0.4943093 3.41  9.631432 13.39857
-    ##  AWD  11.900 0.4943093 3.41 10.016432 13.78357
+    ##  WMGT lsmean        SE  df  lower.CL upper.CL
+    ##  FLD  11.515 0.4939207 3.4  9.629208 13.40079
+    ##  AWD  11.900 0.4939207 3.4 10.014208 13.78579
     ## 
     ## Results are averaged over the levels of: NRTE 
     ## Degrees-of-freedom method: satterthwaite 
@@ -556,7 +570,7 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
     ## 
     ## $`pairwise differences of contrast`
     ##  contrast  estimate        SE df t.ratio p.value
-    ##  FLD - AWD   -0.385 0.2462897 58  -1.563  0.1234
+    ##  FLD - AWD   -0.385 0.2431509 57  -1.583  0.1189
     ## 
     ## Results are averaged over the levels of: NRTE
 
@@ -566,14 +580,14 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
     ## $`lsmeans of WMGT | NRTE`
     ## NRTE = N60:
-    ##  WMGT  lsmean        SE   df  lower.CL upper.CL
-    ##  FLD  10.5525 0.5094176 3.84  8.741508 12.36349
-    ##  AWD  10.9375 0.5094176 3.84  9.126508 12.74849
+    ##  WMGT lsmean        SE   df lower.CL upper.CL
+    ##  FLD   10.36 0.5229903 4.26   8.5956  12.1244
+    ##  AWD   11.13 0.5229903 4.26   9.3656  12.8944
     ## 
     ## NRTE = N180:
-    ##  WMGT  lsmean        SE   df  lower.CL upper.CL
-    ##  FLD  12.4775 0.5094176 3.84 10.666508 14.28849
-    ##  AWD  12.8625 0.5094176 3.84 11.051508 14.67349
+    ##  WMGT lsmean        SE   df lower.CL upper.CL
+    ##  FLD   12.67 0.5229903 4.26  10.9056  14.4344
+    ##  AWD   12.67 0.5229903 4.26  10.9056  14.4344
     ## 
     ## Degrees-of-freedom method: satterthwaite 
     ## Confidence level used: 0.95 
@@ -581,12 +595,12 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
     ## 
     ## $`pairwise differences of contrast, NRTE | NRTE`
     ## NRTE = N60:
-    ##  contrast  estimate        SE df t.ratio p.value
-    ##  FLD - AWD   -0.385 0.2462897 58  -1.563  0.1234
+    ##  contrast       estimate        SE df t.ratio p.value
+    ##  FLD - AWD -7.700000e-01 0.3438673 57  -2.239  0.0291
     ## 
     ## NRTE = N180:
-    ##  contrast  estimate        SE df t.ratio p.value
-    ##  FLD - AWD   -0.385 0.2462897 58  -1.563  0.1234
+    ##  contrast       estimate        SE df t.ratio p.value
+    ##  FLD - AWD -1.332268e-15 0.3438673 57   0.000  1.0000
 
 ### 2016 Tiller Sheath Blight Severity Model
 
@@ -847,136 +861,136 @@ R Session Info
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2017-08-01
+    ##  date     2017-08-03
 
     ## Packages -----------------------------------------------------------------
 
-    ##  package         * version date       source        
-    ##  acepack           1.4.1   2016-10-29 CRAN (R 3.4.0)
-    ##  agricolae       * 1.2-5   2017-07-26 CRAN (R 3.4.1)
-    ##  AlgDesign         1.1-7.3 2014-10-15 CRAN (R 3.4.0)
-    ##  ape             * 4.1     2017-02-14 CRAN (R 3.4.0)
-    ##  assertthat        0.2.0   2017-04-11 CRAN (R 3.4.1)
-    ##  backports         1.1.0   2017-05-22 CRAN (R 3.4.1)
-    ##  base            * 3.4.1   2017-07-07 local         
-    ##  base64enc         0.1-3   2015-07-28 CRAN (R 3.4.1)
-    ##  bindr             0.1     2016-11-13 CRAN (R 3.4.1)
-    ##  bindrcpp        * 0.2     2017-06-17 CRAN (R 3.4.1)
-    ##  bitops            1.0-6   2013-08-17 CRAN (R 3.4.1)
-    ##  boot              1.3-19  2017-04-21 CRAN (R 3.4.1)
-    ##  broom             0.4.2   2017-02-13 CRAN (R 3.4.1)
-    ##  car             * 2.1-5   2017-07-04 CRAN (R 3.4.1)
-    ##  caTools           1.17.1  2014-09-10 CRAN (R 3.4.1)
-    ##  cellranger        1.1.0   2016-07-27 CRAN (R 3.4.1)
-    ##  checkmate         1.8.3   2017-07-03 CRAN (R 3.4.1)
-    ##  cluster           2.0.6   2017-03-10 CRAN (R 3.4.1)
-    ##  coda            * 0.19-1  2016-12-08 CRAN (R 3.4.0)
-    ##  codetools         0.2-15  2016-10-05 CRAN (R 3.4.1)
-    ##  colorspace        1.3-2   2016-12-14 CRAN (R 3.4.1)
-    ##  combinat          0.0-8   2012-10-29 CRAN (R 3.4.0)
-    ##  compiler          3.4.1   2017-07-07 local         
-    ##  corpcor           1.6.9   2017-04-01 CRAN (R 3.4.0)
-    ##  cubature          1.3-11  2017-07-19 CRAN (R 3.4.1)
-    ##  data.table        1.10.4  2017-02-01 CRAN (R 3.4.0)
-    ##  datasets        * 3.4.1   2017-07-07 local         
-    ##  deldir            0.1-14  2017-04-22 CRAN (R 3.4.0)
-    ##  devtools          1.13.2  2017-06-02 CRAN (R 3.4.1)
-    ##  digest            0.6.12  2017-01-27 CRAN (R 3.4.1)
-    ##  dplyr           * 0.7.2   2017-07-20 CRAN (R 3.4.1)
-    ##  estimability    * 1.2     2016-11-19 CRAN (R 3.4.0)
-    ##  evaluate          0.10.1  2017-06-24 CRAN (R 3.4.1)
-    ##  expm              0.999-2 2017-03-29 CRAN (R 3.4.0)
-    ##  fitdistrplus    * 1.0-9   2017-03-24 CRAN (R 3.4.0)
-    ##  forcats           0.2.0   2017-01-23 CRAN (R 3.4.1)
-    ##  foreign           0.8-69  2017-06-21 CRAN (R 3.4.1)
-    ##  Formula           1.2-2   2017-07-10 CRAN (R 3.4.1)
-    ##  gdata             2.18.0  2017-06-06 CRAN (R 3.4.0)
-    ##  ggplot2         * 2.2.1   2016-12-30 CRAN (R 3.4.1)
-    ##  glue              1.1.1   2017-06-21 CRAN (R 3.4.1)
-    ##  gmodels           2.16.2  2015-07-22 CRAN (R 3.4.0)
-    ##  gplots            3.0.1   2016-03-30 CRAN (R 3.4.0)
-    ##  graphics        * 3.4.1   2017-07-07 local         
-    ##  grDevices       * 3.4.1   2017-07-07 local         
-    ##  grid              3.4.1   2017-07-07 local         
-    ##  gridExtra         2.2.1   2016-02-29 CRAN (R 3.4.1)
-    ##  gtable            0.2.0   2016-02-26 CRAN (R 3.4.1)
-    ##  gtools            3.5.0   2015-05-29 CRAN (R 3.4.0)
-    ##  haven             1.1.0   2017-07-09 CRAN (R 3.4.1)
-    ##  Hmisc             4.0-3   2017-05-02 CRAN (R 3.4.0)
-    ##  hms               0.3     2016-11-22 CRAN (R 3.4.1)
-    ##  htmlTable         1.9     2017-01-26 CRAN (R 3.4.0)
-    ##  htmltools         0.3.6   2017-04-28 CRAN (R 3.4.1)
-    ##  htmlwidgets       0.9     2017-07-10 CRAN (R 3.4.1)
-    ##  httr              1.2.1   2016-07-03 CRAN (R 3.4.1)
-    ##  jsonlite          1.5     2017-06-01 CRAN (R 3.4.1)
-    ##  KernSmooth        2.23-15 2015-06-29 CRAN (R 3.4.1)
-    ##  klaR              0.6-12  2014-08-06 CRAN (R 3.4.0)
-    ##  knitr             1.16    2017-05-18 CRAN (R 3.4.1)
-    ##  labeling          0.3     2014-08-23 CRAN (R 3.4.1)
-    ##  lattice         * 0.20-35 2017-03-25 CRAN (R 3.4.1)
-    ##  latticeExtra      0.6-28  2016-02-09 CRAN (R 3.4.0)
-    ##  lazyeval          0.2.0   2016-06-12 CRAN (R 3.4.1)
-    ##  LearnBayes        2.15    2014-05-29 CRAN (R 3.4.0)
-    ##  lme4            * 1.1-13  2017-04-19 CRAN (R 3.4.0)
-    ##  lmerTest          2.0-33  2016-12-03 CRAN (R 3.4.0)
-    ##  lsmeans         * 2.26-3  2017-05-09 CRAN (R 3.4.0)
-    ##  lubridate       * 1.6.0   2016-09-13 CRAN (R 3.4.1)
-    ##  magrittr          1.5     2014-11-22 CRAN (R 3.4.1)
-    ##  MASS            * 7.3-47  2017-04-21 CRAN (R 3.4.1)
-    ##  Matrix          * 1.2-10  2017-05-03 CRAN (R 3.4.1)
-    ##  MatrixModels      0.4-1   2015-08-22 CRAN (R 3.4.0)
-    ##  MCMCglmm        * 2.24    2016-11-14 CRAN (R 3.4.0)
-    ##  memoise           1.1.0   2017-04-21 CRAN (R 3.4.1)
-    ##  methods         * 3.4.1   2017-07-07 local         
-    ##  mgcv              1.8-17  2017-02-08 CRAN (R 3.4.0)
-    ##  minqa             1.2.4   2014-10-09 CRAN (R 3.4.0)
-    ##  mnormt            1.5-5   2016-10-15 CRAN (R 3.4.0)
-    ##  modelr            0.1.1   2017-07-24 CRAN (R 3.4.1)
-    ##  multcomp          1.4-6   2016-07-14 CRAN (R 3.4.0)
-    ##  munsell           0.4.3   2016-02-13 CRAN (R 3.4.1)
-    ##  mvtnorm           1.0-6   2017-03-02 CRAN (R 3.4.0)
-    ##  nlme              3.1-131 2017-02-06 CRAN (R 3.4.0)
-    ##  nloptr            1.0.4   2014-08-04 CRAN (R 3.4.0)
-    ##  nnet              7.3-12  2016-02-02 CRAN (R 3.4.1)
-    ##  parallel          3.4.1   2017-07-07 local         
-    ##  pbkrtest          0.4-7   2017-03-15 CRAN (R 3.4.0)
-    ##  pkgconfig         2.0.1   2017-03-21 CRAN (R 3.4.1)
-    ##  plotMCMC        * 2.0-0   2014-03-12 CRAN (R 3.4.0)
-    ##  plyr              1.8.4   2016-06-08 CRAN (R 3.4.1)
-    ##  ProjectTemplate * 0.7     2016-08-11 CRAN (R 3.4.0)
-    ##  psych             1.7.5   2017-05-03 CRAN (R 3.4.1)
-    ##  purrr           * 0.2.2.2 2017-05-11 CRAN (R 3.4.1)
-    ##  quantreg          5.33    2017-04-18 CRAN (R 3.4.0)
-    ##  R6                2.2.2   2017-06-17 CRAN (R 3.4.1)
-    ##  RColorBrewer      1.1-2   2014-12-07 CRAN (R 3.4.1)
-    ##  Rcpp              0.12.12 2017-07-15 CRAN (R 3.4.1)
-    ##  readr           * 1.1.1   2017-05-16 CRAN (R 3.4.1)
-    ##  readxl            1.0.0   2017-04-18 CRAN (R 3.4.1)
-    ##  reshape2        * 1.4.2   2016-10-22 CRAN (R 3.4.1)
-    ##  rlang             0.1.1   2017-05-18 CRAN (R 3.4.1)
-    ##  rmarkdown         1.6     2017-06-15 CRAN (R 3.4.1)
-    ##  rpart             4.1-11  2017-04-21 CRAN (R 3.4.1)
-    ##  rprojroot         1.2     2017-01-16 CRAN (R 3.4.1)
-    ##  rvest             0.3.2   2016-06-17 CRAN (R 3.4.1)
-    ##  sandwich          2.4-0   2017-07-26 CRAN (R 3.4.1)
-    ##  scales            0.4.1   2016-11-09 CRAN (R 3.4.1)
-    ##  sp                1.2-5   2017-06-29 CRAN (R 3.4.1)
-    ##  SparseM           1.77    2017-04-23 CRAN (R 3.4.0)
-    ##  spdep             0.6-13  2017-04-25 CRAN (R 3.4.0)
-    ##  splines           3.4.1   2017-07-07 local         
-    ##  stats           * 3.4.1   2017-07-07 local         
-    ##  stringi           1.1.5   2017-04-07 CRAN (R 3.4.1)
-    ##  stringr           1.2.0   2017-02-18 CRAN (R 3.4.1)
-    ##  survival        * 2.41-3  2017-04-04 CRAN (R 3.4.1)
-    ##  tensorA           0.36    2010-12-01 CRAN (R 3.4.0)
-    ##  TH.data           1.0-8   2017-01-23 CRAN (R 3.4.0)
-    ##  tibble          * 1.3.3   2017-05-28 CRAN (R 3.4.1)
-    ##  tidyr           * 0.6.3   2017-05-15 CRAN (R 3.4.1)
-    ##  tidyverse       * 1.1.1   2017-01-27 CRAN (R 3.4.1)
-    ##  tools             3.4.1   2017-07-07 local         
-    ##  utils           * 3.4.1   2017-07-07 local         
-    ##  withr             2.0.0   2017-07-28 cran (@2.0.0) 
-    ##  xml2              1.1.1   2017-01-24 CRAN (R 3.4.1)
-    ##  xtable            1.8-2   2016-02-05 CRAN (R 3.4.1)
-    ##  yaml              2.1.14  2016-11-12 CRAN (R 3.4.1)
-    ##  zoo               1.8-0   2017-04-12 CRAN (R 3.4.0)
+    ##  package         * version    date       source                       
+    ##  acepack           1.4.1      2016-10-29 CRAN (R 3.4.0)               
+    ##  agricolae       * 1.2-5      2017-07-26 CRAN (R 3.4.1)               
+    ##  AlgDesign         1.1-7.3    2014-10-15 CRAN (R 3.4.0)               
+    ##  ape             * 4.1        2017-02-14 CRAN (R 3.4.0)               
+    ##  assertthat        0.2.0      2017-04-11 CRAN (R 3.4.1)               
+    ##  backports         1.1.0      2017-05-22 CRAN (R 3.4.1)               
+    ##  base            * 3.4.1      2017-07-07 local                        
+    ##  base64enc         0.1-3      2015-07-28 CRAN (R 3.4.1)               
+    ##  bindr             0.1        2016-11-13 CRAN (R 3.4.1)               
+    ##  bindrcpp        * 0.2        2017-06-17 CRAN (R 3.4.1)               
+    ##  bitops            1.0-6      2013-08-17 CRAN (R 3.4.1)               
+    ##  boot              1.3-19     2017-04-21 CRAN (R 3.4.1)               
+    ##  broom             0.4.2      2017-02-13 CRAN (R 3.4.1)               
+    ##  car             * 2.1-5      2017-07-04 CRAN (R 3.4.1)               
+    ##  caTools           1.17.1     2014-09-10 CRAN (R 3.4.1)               
+    ##  cellranger        1.1.0      2016-07-27 CRAN (R 3.4.1)               
+    ##  checkmate         1.8.3      2017-07-03 CRAN (R 3.4.1)               
+    ##  cluster           2.0.6      2017-03-10 CRAN (R 3.4.1)               
+    ##  coda            * 0.19-1     2016-12-08 CRAN (R 3.4.0)               
+    ##  codetools         0.2-15     2016-10-05 CRAN (R 3.4.1)               
+    ##  colorspace        1.3-2      2016-12-14 CRAN (R 3.4.1)               
+    ##  combinat          0.0-8      2012-10-29 CRAN (R 3.4.0)               
+    ##  compiler          3.4.1      2017-07-07 local                        
+    ##  corpcor           1.6.9      2017-04-01 CRAN (R 3.4.0)               
+    ##  cubature          1.3-11     2017-07-19 CRAN (R 3.4.1)               
+    ##  data.table        1.10.4     2017-02-01 CRAN (R 3.4.0)               
+    ##  datasets        * 3.4.1      2017-07-07 local                        
+    ##  deldir            0.1-14     2017-04-22 CRAN (R 3.4.0)               
+    ##  devtools          1.13.2     2017-06-02 CRAN (R 3.4.1)               
+    ##  digest            0.6.12     2017-01-27 CRAN (R 3.4.1)               
+    ##  dplyr           * 0.7.2      2017-07-20 CRAN (R 3.4.1)               
+    ##  estimability    * 1.2        2016-11-19 CRAN (R 3.4.0)               
+    ##  evaluate          0.10.1     2017-06-24 CRAN (R 3.4.1)               
+    ##  expm              0.999-2    2017-03-29 CRAN (R 3.4.0)               
+    ##  fitdistrplus    * 1.0-9      2017-03-24 CRAN (R 3.4.0)               
+    ##  forcats           0.2.0      2017-01-23 CRAN (R 3.4.1)               
+    ##  foreign           0.8-69     2017-06-21 CRAN (R 3.4.1)               
+    ##  Formula           1.2-2      2017-07-10 CRAN (R 3.4.1)               
+    ##  gdata             2.18.0     2017-06-06 CRAN (R 3.4.0)               
+    ##  ggplot2         * 2.2.1      2016-12-30 CRAN (R 3.4.1)               
+    ##  glue              1.1.1      2017-06-21 CRAN (R 3.4.1)               
+    ##  gmodels           2.16.2     2015-07-22 CRAN (R 3.4.0)               
+    ##  gplots            3.0.1      2016-03-30 CRAN (R 3.4.0)               
+    ##  graphics        * 3.4.1      2017-07-07 local                        
+    ##  grDevices       * 3.4.1      2017-07-07 local                        
+    ##  grid              3.4.1      2017-07-07 local                        
+    ##  gridExtra         2.2.1      2016-02-29 CRAN (R 3.4.1)               
+    ##  gtable            0.2.0      2016-02-26 CRAN (R 3.4.1)               
+    ##  gtools            3.5.0      2015-05-29 CRAN (R 3.4.0)               
+    ##  haven             1.1.0      2017-07-09 CRAN (R 3.4.1)               
+    ##  Hmisc             4.0-3      2017-05-02 CRAN (R 3.4.0)               
+    ##  hms               0.3        2016-11-22 CRAN (R 3.4.1)               
+    ##  htmlTable         1.9        2017-01-26 CRAN (R 3.4.0)               
+    ##  htmltools         0.3.6      2017-04-28 CRAN (R 3.4.1)               
+    ##  htmlwidgets       0.9        2017-07-10 CRAN (R 3.4.1)               
+    ##  httr              1.2.1      2016-07-03 CRAN (R 3.4.1)               
+    ##  jsonlite          1.5        2017-06-01 CRAN (R 3.4.1)               
+    ##  KernSmooth        2.23-15    2015-06-29 CRAN (R 3.4.1)               
+    ##  klaR              0.6-12     2014-08-06 CRAN (R 3.4.0)               
+    ##  knitr             1.16       2017-05-18 CRAN (R 3.4.1)               
+    ##  labeling          0.3        2014-08-23 CRAN (R 3.4.1)               
+    ##  lattice         * 0.20-35    2017-03-25 CRAN (R 3.4.1)               
+    ##  latticeExtra      0.6-28     2016-02-09 CRAN (R 3.4.0)               
+    ##  lazyeval          0.2.0      2016-06-12 CRAN (R 3.4.1)               
+    ##  LearnBayes        2.15       2014-05-29 CRAN (R 3.4.0)               
+    ##  lme4            * 1.1-13     2017-04-19 CRAN (R 3.4.0)               
+    ##  lmerTest          2.0-33     2016-12-03 CRAN (R 3.4.0)               
+    ##  lsmeans         * 2.26-3     2017-05-09 CRAN (R 3.4.0)               
+    ##  lubridate       * 1.6.0      2016-09-13 CRAN (R 3.4.1)               
+    ##  magrittr          1.5        2014-11-22 CRAN (R 3.4.1)               
+    ##  MASS            * 7.3-47     2017-04-21 CRAN (R 3.4.1)               
+    ##  Matrix          * 1.2-10     2017-05-03 CRAN (R 3.4.1)               
+    ##  MatrixModels      0.4-1      2015-08-22 CRAN (R 3.4.0)               
+    ##  MCMCglmm        * 2.24       2016-11-14 CRAN (R 3.4.0)               
+    ##  memoise           1.1.0      2017-04-21 CRAN (R 3.4.1)               
+    ##  methods         * 3.4.1      2017-07-07 local                        
+    ##  mgcv              1.8-17     2017-02-08 CRAN (R 3.4.0)               
+    ##  minqa             1.2.4      2014-10-09 CRAN (R 3.4.0)               
+    ##  mnormt            1.5-5      2016-10-15 CRAN (R 3.4.0)               
+    ##  modelr            0.1.1      2017-07-24 CRAN (R 3.4.1)               
+    ##  multcomp          1.4-6      2016-07-14 CRAN (R 3.4.0)               
+    ##  munsell           0.4.3      2016-02-13 CRAN (R 3.4.1)               
+    ##  mvtnorm           1.0-6      2017-03-02 CRAN (R 3.4.0)               
+    ##  nlme              3.1-131    2017-02-06 CRAN (R 3.4.0)               
+    ##  nloptr            1.0.4      2014-08-04 CRAN (R 3.4.0)               
+    ##  nnet              7.3-12     2016-02-02 CRAN (R 3.4.1)               
+    ##  parallel          3.4.1      2017-07-07 local                        
+    ##  pbkrtest          0.4-7      2017-03-15 CRAN (R 3.4.0)               
+    ##  pkgconfig         2.0.1      2017-03-21 CRAN (R 3.4.1)               
+    ##  plotMCMC        * 2.0-0      2014-03-12 CRAN (R 3.4.0)               
+    ##  plyr              1.8.4      2016-06-08 CRAN (R 3.4.1)               
+    ##  ProjectTemplate * 0.7        2016-08-11 CRAN (R 3.4.0)               
+    ##  psych             1.7.5      2017-05-03 CRAN (R 3.4.1)               
+    ##  purrr           * 0.2.2.2    2017-05-11 CRAN (R 3.4.1)               
+    ##  quantreg          5.33       2017-04-18 CRAN (R 3.4.0)               
+    ##  R6                2.2.2      2017-06-17 CRAN (R 3.4.1)               
+    ##  RColorBrewer      1.1-2      2014-12-07 CRAN (R 3.4.1)               
+    ##  Rcpp              0.12.12    2017-07-15 CRAN (R 3.4.1)               
+    ##  readr           * 1.1.1      2017-05-16 CRAN (R 3.4.1)               
+    ##  readxl            1.0.0      2017-04-18 CRAN (R 3.4.1)               
+    ##  reshape2        * 1.4.2      2016-10-22 CRAN (R 3.4.1)               
+    ##  rlang             0.1.1.9000 2017-08-02 Github (hadley/rlang@e469466)
+    ##  rmarkdown         1.6        2017-06-15 CRAN (R 3.4.1)               
+    ##  rpart             4.1-11     2017-04-21 CRAN (R 3.4.1)               
+    ##  rprojroot         1.2        2017-01-16 CRAN (R 3.4.1)               
+    ##  rvest             0.3.2      2016-06-17 CRAN (R 3.4.1)               
+    ##  sandwich          2.4-0      2017-07-26 CRAN (R 3.4.1)               
+    ##  scales            0.4.1      2016-11-09 CRAN (R 3.4.1)               
+    ##  sp                1.2-5      2017-06-29 CRAN (R 3.4.1)               
+    ##  SparseM           1.77       2017-04-23 CRAN (R 3.4.0)               
+    ##  spdep             0.6-13     2017-04-25 CRAN (R 3.4.0)               
+    ##  splines           3.4.1      2017-07-07 local                        
+    ##  stats           * 3.4.1      2017-07-07 local                        
+    ##  stringi           1.1.5      2017-04-07 CRAN (R 3.4.1)               
+    ##  stringr           1.2.0      2017-02-18 CRAN (R 3.4.1)               
+    ##  survival        * 2.41-3     2017-04-04 CRAN (R 3.4.1)               
+    ##  tensorA           0.36       2010-12-01 CRAN (R 3.4.0)               
+    ##  TH.data           1.0-8      2017-01-23 CRAN (R 3.4.0)               
+    ##  tibble          * 1.3.3      2017-05-28 CRAN (R 3.4.1)               
+    ##  tidyr           * 0.6.3      2017-05-15 CRAN (R 3.4.1)               
+    ##  tidyverse       * 1.1.1      2017-01-27 CRAN (R 3.4.1)               
+    ##  tools             3.4.1      2017-07-07 local                        
+    ##  utils           * 3.4.1      2017-07-07 local                        
+    ##  withr             2.0.0      2017-07-28 cran (@2.0.0)                
+    ##  xml2              1.1.1      2017-01-24 CRAN (R 3.4.1)               
+    ##  xtable            1.8-2      2016-02-05 CRAN (R 3.4.1)               
+    ##  yaml              2.1.14     2016-11-12 CRAN (R 3.4.1)               
+    ##  zoo               1.8-0      2017-04-12 CRAN (R 3.4.0)
