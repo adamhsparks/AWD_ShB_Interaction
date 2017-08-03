@@ -64,7 +64,7 @@ library(lsmeans)
 
 ``` r
 TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
-summary(TShB_inc_AUDPS)
+print(summary(TShB_inc_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -91,14 +91,6 @@ summary(TShB_inc_AUDPS)
     ## NRTEN120           0.7175     0.2899   2.475
     ## WMGTAWD:NRTEN100   0.4525     0.4100   1.104
     ## WMGTAWD:NRTEN120   0.5875     0.4100   1.433
-    ## 
-    ## Correlation of Fixed Effects:
-    ##                 (Intr) WMGTAWD NRTEN10 NRTEN12 WMGTAWD:NRTEN10
-    ## WMGTAWD         -0.516                                        
-    ## NRTEN100        -0.516  0.500                                 
-    ## NRTEN120        -0.516  0.500   0.500                         
-    ## WMGTAWD:NRTEN10  0.365 -0.707  -0.707  -0.354                 
-    ## WMGTAWD:NRTEN12  0.365 -0.707  -0.354  -0.707   0.500
 
 ``` r
 plot(TShB_inc_AUDPS)
@@ -204,7 +196,7 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ``` r
 TShB_sev_AUDPS <- lmer(TShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
-summary(TShB_sev_AUDPS)
+print(summary(TShB_sev_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -231,14 +223,6 @@ summary(TShB_sev_AUDPS)
     ## NRTEN120           17.352      4.345   3.994
     ## WMGTAWD:NRTEN100   13.288      6.145   2.162
     ## WMGTAWD:NRTEN120   -1.237      6.145  -0.201
-    ## 
-    ## Correlation of Fixed Effects:
-    ##                 (Intr) WMGTAWD NRTEN10 NRTEN12 WMGTAWD:NRTEN10
-    ## WMGTAWD         -0.628                                        
-    ## NRTEN100        -0.628  0.500                                 
-    ## NRTEN120        -0.628  0.500   0.500                         
-    ## WMGTAWD:NRTEN10  0.444 -0.707  -0.707  -0.354                 
-    ## WMGTAWD:NRTEN12  0.444 -0.707  -0.354  -0.707   0.500
 
 ``` r
 plot(TShB_sev_AUDPS)
@@ -342,7 +326,7 @@ print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ``` r
 LShB_sev_AUDPS <- lmer(LShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2015)
-summary(LShB_sev_AUDPS)
+print(summary(LShB_sev_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -369,14 +353,6 @@ summary(LShB_sev_AUDPS)
     ## NRTEN120           1.9050     0.7218   2.639
     ## WMGTAWD:NRTEN100   4.2725     1.0207   4.186
     ## WMGTAWD:NRTEN120   2.4400     1.0207   2.390
-    ## 
-    ## Correlation of Fixed Effects:
-    ##                 (Intr) WMGTAWD NRTEN10 NRTEN12 WMGTAWD:NRTEN10
-    ## WMGTAWD         -0.401                                        
-    ## NRTEN100        -0.401  0.500                                 
-    ## NRTEN120        -0.401  0.500   0.500                         
-    ## WMGTAWD:NRTEN10  0.284 -0.707  -0.707  -0.354                 
-    ## WMGTAWD:NRTEN12  0.284 -0.707  -0.354  -0.707   0.500
 
 ``` r
 plot(LShB_sev_AUDPS)
@@ -485,7 +461,7 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ``` r
 TShB_inc_AUDPS <- lmer(TShB_inc_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
-summary(TShB_inc_AUDPS)
+print(summary(TShB_inc_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -510,12 +486,6 @@ summary(TShB_inc_AUDPS)
     ## WMGTAWD            0.7700     0.3439   2.239
     ## NRTEN180           2.3100     0.3439   6.718
     ## WMGTAWD:NRTEN180  -0.7700     0.4863  -1.583
-    ## 
-    ## Correlation of Fixed Effects:
-    ##             (Intr) WMGTAWD NRTEN1
-    ## WMGTAWD     -0.329               
-    ## NRTEN180    -0.329  0.500        
-    ## WMGTAWD:NRT  0.232 -0.707  -0.707
 
 ``` r
 plot(TShB_inc_AUDPS)
@@ -606,7 +576,7 @@ print(lsmeans(TShB_inc_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ``` r
 TShB_sev_AUDPS <- lmer(TShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
-summary(TShB_sev_AUDPS)
+print(summary(TShB_sev_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -631,12 +601,6 @@ summary(TShB_sev_AUDPS)
     ## WMGTAWD            -3.710      2.965  -1.251
     ## NRTEN180            9.240      2.965   3.116
     ## WMGTAWD:NRTEN180   -9.030      4.193  -2.154
-    ## 
-    ## Correlation of Fixed Effects:
-    ##             (Intr) WMGTAWD NRTEN1
-    ## WMGTAWD     -0.292               
-    ## NRTEN180    -0.292  0.500        
-    ## WMGTAWD:NRT  0.206 -0.707  -0.707
 
 ``` r
 plot(TShB_sev_AUDPS)
@@ -727,7 +691,7 @@ print(lsmeans(TShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ``` r
 LShB_sev_AUDPS <- lmer(LShB_percent_AUDPS ~ WMGT * NRTE + (1|REP), data = AUDPS_2016)
-summary(LShB_sev_AUDPS)
+print(summary(LShB_sev_AUDPS), correlation = FALSE)
 ```
 
     ## Linear mixed model fit by REML ['lmerMod']
@@ -752,12 +716,6 @@ summary(LShB_sev_AUDPS)
     ## WMGTAWD            0.4900     0.1549   3.163
     ## NRTEN180           0.4900     0.1549   3.163
     ## WMGTAWD:NRTEN180  -0.7350     0.2191  -3.355
-    ## 
-    ## Correlation of Fixed Effects:
-    ##             (Intr) WMGTAWD NRTEN1
-    ## WMGTAWD     -0.366               
-    ## NRTEN180    -0.366  0.500        
-    ## WMGTAWD:NRT  0.259 -0.707  -0.707
 
 ``` r
 plot(LShB_sev_AUDPS)
@@ -847,8 +805,6 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 Conclusions
 -----------
 
-The `lme4` `lmer` models do not appear to be a good fit based on the qqplots. However, they do seem to agree with the `MCMCglmm` analysis results. But I'm dubious about using these models based on the diagnostics that I see above.
-
 R Session Info
 --------------
 
@@ -856,8 +812,8 @@ R Session Info
 
     ##  setting  value                       
     ##  version  R version 3.4.1 (2017-06-30)
-    ##  system   x86_64, darwin15.6.0        
-    ##  ui       X11                         
+    ##  system   x86_64, darwin16.7.0        
+    ##  ui       unknown                     
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
@@ -865,132 +821,132 @@ R Session Info
 
     ## Packages -----------------------------------------------------------------
 
-    ##  package         * version    date       source                       
-    ##  acepack           1.4.1      2016-10-29 CRAN (R 3.4.0)               
-    ##  agricolae       * 1.2-5      2017-07-26 CRAN (R 3.4.1)               
-    ##  AlgDesign         1.1-7.3    2014-10-15 CRAN (R 3.4.0)               
-    ##  ape             * 4.1        2017-02-14 CRAN (R 3.4.0)               
-    ##  assertthat        0.2.0      2017-04-11 CRAN (R 3.4.1)               
-    ##  backports         1.1.0      2017-05-22 CRAN (R 3.4.1)               
-    ##  base            * 3.4.1      2017-07-07 local                        
-    ##  base64enc         0.1-3      2015-07-28 CRAN (R 3.4.1)               
-    ##  bindr             0.1        2016-11-13 CRAN (R 3.4.1)               
-    ##  bindrcpp        * 0.2        2017-06-17 CRAN (R 3.4.1)               
-    ##  bitops            1.0-6      2013-08-17 CRAN (R 3.4.1)               
-    ##  boot              1.3-19     2017-04-21 CRAN (R 3.4.1)               
-    ##  broom             0.4.2      2017-02-13 CRAN (R 3.4.1)               
-    ##  car             * 2.1-5      2017-07-04 CRAN (R 3.4.1)               
-    ##  caTools           1.17.1     2014-09-10 CRAN (R 3.4.1)               
-    ##  cellranger        1.1.0      2016-07-27 CRAN (R 3.4.1)               
-    ##  checkmate         1.8.3      2017-07-03 CRAN (R 3.4.1)               
-    ##  cluster           2.0.6      2017-03-10 CRAN (R 3.4.1)               
-    ##  coda            * 0.19-1     2016-12-08 CRAN (R 3.4.0)               
-    ##  codetools         0.2-15     2016-10-05 CRAN (R 3.4.1)               
-    ##  colorspace        1.3-2      2016-12-14 CRAN (R 3.4.1)               
-    ##  combinat          0.0-8      2012-10-29 CRAN (R 3.4.0)               
-    ##  compiler          3.4.1      2017-07-07 local                        
-    ##  corpcor           1.6.9      2017-04-01 CRAN (R 3.4.0)               
-    ##  cubature          1.3-11     2017-07-19 CRAN (R 3.4.1)               
-    ##  data.table        1.10.4     2017-02-01 CRAN (R 3.4.0)               
-    ##  datasets        * 3.4.1      2017-07-07 local                        
-    ##  deldir            0.1-14     2017-04-22 CRAN (R 3.4.0)               
-    ##  devtools          1.13.2     2017-06-02 CRAN (R 3.4.1)               
-    ##  digest            0.6.12     2017-01-27 CRAN (R 3.4.1)               
-    ##  dplyr           * 0.7.2      2017-07-20 CRAN (R 3.4.1)               
-    ##  estimability    * 1.2        2016-11-19 CRAN (R 3.4.0)               
-    ##  evaluate          0.10.1     2017-06-24 CRAN (R 3.4.1)               
-    ##  expm              0.999-2    2017-03-29 CRAN (R 3.4.0)               
-    ##  fitdistrplus    * 1.0-9      2017-03-24 CRAN (R 3.4.0)               
-    ##  forcats           0.2.0      2017-01-23 CRAN (R 3.4.1)               
-    ##  foreign           0.8-69     2017-06-21 CRAN (R 3.4.1)               
-    ##  Formula           1.2-2      2017-07-10 CRAN (R 3.4.1)               
-    ##  gdata             2.18.0     2017-06-06 CRAN (R 3.4.0)               
-    ##  ggplot2         * 2.2.1      2016-12-30 CRAN (R 3.4.1)               
-    ##  glue              1.1.1      2017-06-21 CRAN (R 3.4.1)               
-    ##  gmodels           2.16.2     2015-07-22 CRAN (R 3.4.0)               
-    ##  gplots            3.0.1      2016-03-30 CRAN (R 3.4.0)               
-    ##  graphics        * 3.4.1      2017-07-07 local                        
-    ##  grDevices       * 3.4.1      2017-07-07 local                        
-    ##  grid              3.4.1      2017-07-07 local                        
-    ##  gridExtra         2.2.1      2016-02-29 CRAN (R 3.4.1)               
-    ##  gtable            0.2.0      2016-02-26 CRAN (R 3.4.1)               
-    ##  gtools            3.5.0      2015-05-29 CRAN (R 3.4.0)               
-    ##  haven             1.1.0      2017-07-09 CRAN (R 3.4.1)               
-    ##  Hmisc             4.0-3      2017-05-02 CRAN (R 3.4.0)               
-    ##  hms               0.3        2016-11-22 CRAN (R 3.4.1)               
-    ##  htmlTable         1.9        2017-01-26 CRAN (R 3.4.0)               
-    ##  htmltools         0.3.6      2017-04-28 CRAN (R 3.4.1)               
-    ##  htmlwidgets       0.9        2017-07-10 CRAN (R 3.4.1)               
-    ##  httr              1.2.1      2016-07-03 CRAN (R 3.4.1)               
-    ##  jsonlite          1.5        2017-06-01 CRAN (R 3.4.1)               
-    ##  KernSmooth        2.23-15    2015-06-29 CRAN (R 3.4.1)               
-    ##  klaR              0.6-12     2014-08-06 CRAN (R 3.4.0)               
-    ##  knitr             1.16       2017-05-18 CRAN (R 3.4.1)               
-    ##  labeling          0.3        2014-08-23 CRAN (R 3.4.1)               
-    ##  lattice         * 0.20-35    2017-03-25 CRAN (R 3.4.1)               
-    ##  latticeExtra      0.6-28     2016-02-09 CRAN (R 3.4.0)               
-    ##  lazyeval          0.2.0      2016-06-12 CRAN (R 3.4.1)               
-    ##  LearnBayes        2.15       2014-05-29 CRAN (R 3.4.0)               
-    ##  lme4            * 1.1-13     2017-04-19 CRAN (R 3.4.0)               
-    ##  lmerTest          2.0-33     2016-12-03 CRAN (R 3.4.0)               
-    ##  lsmeans         * 2.26-3     2017-05-09 CRAN (R 3.4.0)               
-    ##  lubridate       * 1.6.0      2016-09-13 CRAN (R 3.4.1)               
-    ##  magrittr          1.5        2014-11-22 CRAN (R 3.4.1)               
-    ##  MASS            * 7.3-47     2017-04-21 CRAN (R 3.4.1)               
-    ##  Matrix          * 1.2-10     2017-05-03 CRAN (R 3.4.1)               
-    ##  MatrixModels      0.4-1      2015-08-22 CRAN (R 3.4.0)               
-    ##  MCMCglmm        * 2.24       2016-11-14 CRAN (R 3.4.0)               
-    ##  memoise           1.1.0      2017-04-21 CRAN (R 3.4.1)               
-    ##  methods         * 3.4.1      2017-07-07 local                        
-    ##  mgcv              1.8-17     2017-02-08 CRAN (R 3.4.0)               
-    ##  minqa             1.2.4      2014-10-09 CRAN (R 3.4.0)               
-    ##  mnormt            1.5-5      2016-10-15 CRAN (R 3.4.0)               
-    ##  modelr            0.1.1      2017-07-24 CRAN (R 3.4.1)               
-    ##  multcomp          1.4-6      2016-07-14 CRAN (R 3.4.0)               
-    ##  munsell           0.4.3      2016-02-13 CRAN (R 3.4.1)               
-    ##  mvtnorm           1.0-6      2017-03-02 CRAN (R 3.4.0)               
-    ##  nlme              3.1-131    2017-02-06 CRAN (R 3.4.0)               
-    ##  nloptr            1.0.4      2014-08-04 CRAN (R 3.4.0)               
-    ##  nnet              7.3-12     2016-02-02 CRAN (R 3.4.1)               
-    ##  parallel          3.4.1      2017-07-07 local                        
-    ##  pbkrtest          0.4-7      2017-03-15 CRAN (R 3.4.0)               
-    ##  pkgconfig         2.0.1      2017-03-21 CRAN (R 3.4.1)               
-    ##  plotMCMC        * 2.0-0      2014-03-12 CRAN (R 3.4.0)               
-    ##  plyr              1.8.4      2016-06-08 CRAN (R 3.4.1)               
-    ##  ProjectTemplate * 0.7        2016-08-11 CRAN (R 3.4.0)               
-    ##  psych             1.7.5      2017-05-03 CRAN (R 3.4.1)               
-    ##  purrr           * 0.2.2.2    2017-05-11 CRAN (R 3.4.1)               
-    ##  quantreg          5.33       2017-04-18 CRAN (R 3.4.0)               
-    ##  R6                2.2.2      2017-06-17 CRAN (R 3.4.1)               
-    ##  RColorBrewer      1.1-2      2014-12-07 CRAN (R 3.4.1)               
-    ##  Rcpp              0.12.12    2017-07-15 CRAN (R 3.4.1)               
-    ##  readr           * 1.1.1      2017-05-16 CRAN (R 3.4.1)               
-    ##  readxl            1.0.0      2017-04-18 CRAN (R 3.4.1)               
-    ##  reshape2        * 1.4.2      2016-10-22 CRAN (R 3.4.1)               
-    ##  rlang             0.1.1.9000 2017-08-02 Github (hadley/rlang@e469466)
-    ##  rmarkdown         1.6        2017-06-15 CRAN (R 3.4.1)               
-    ##  rpart             4.1-11     2017-04-21 CRAN (R 3.4.1)               
-    ##  rprojroot         1.2        2017-01-16 CRAN (R 3.4.1)               
-    ##  rvest             0.3.2      2016-06-17 CRAN (R 3.4.1)               
-    ##  sandwich          2.4-0      2017-07-26 CRAN (R 3.4.1)               
-    ##  scales            0.4.1      2016-11-09 CRAN (R 3.4.1)               
-    ##  sp                1.2-5      2017-06-29 CRAN (R 3.4.1)               
-    ##  SparseM           1.77       2017-04-23 CRAN (R 3.4.0)               
-    ##  spdep             0.6-13     2017-04-25 CRAN (R 3.4.0)               
-    ##  splines           3.4.1      2017-07-07 local                        
-    ##  stats           * 3.4.1      2017-07-07 local                        
-    ##  stringi           1.1.5      2017-04-07 CRAN (R 3.4.1)               
-    ##  stringr           1.2.0      2017-02-18 CRAN (R 3.4.1)               
-    ##  survival        * 2.41-3     2017-04-04 CRAN (R 3.4.1)               
-    ##  tensorA           0.36       2010-12-01 CRAN (R 3.4.0)               
-    ##  TH.data           1.0-8      2017-01-23 CRAN (R 3.4.0)               
-    ##  tibble          * 1.3.3      2017-05-28 CRAN (R 3.4.1)               
-    ##  tidyr           * 0.6.3      2017-05-15 CRAN (R 3.4.1)               
-    ##  tidyverse       * 1.1.1      2017-01-27 CRAN (R 3.4.1)               
-    ##  tools             3.4.1      2017-07-07 local                        
-    ##  utils           * 3.4.1      2017-07-07 local                        
-    ##  withr             2.0.0      2017-07-28 cran (@2.0.0)                
-    ##  xml2              1.1.1      2017-01-24 CRAN (R 3.4.1)               
-    ##  xtable            1.8-2      2016-02-05 CRAN (R 3.4.1)               
-    ##  yaml              2.1.14     2016-11-12 CRAN (R 3.4.1)               
-    ##  zoo               1.8-0      2017-04-12 CRAN (R 3.4.0)
+    ##  package         * version date       source        
+    ##  acepack           1.4.1   2016-10-29 CRAN (R 3.4.1)
+    ##  agricolae       * 1.2-5   2017-07-26 cran (@1.2-5) 
+    ##  AlgDesign         1.1-7.3 2014-10-15 CRAN (R 3.4.1)
+    ##  ape             * 4.1     2017-02-14 CRAN (R 3.4.1)
+    ##  assertthat        0.2.0   2017-04-11 CRAN (R 3.4.1)
+    ##  backports         1.1.0   2017-05-22 CRAN (R 3.4.1)
+    ##  base            * 3.4.1   2017-07-25 local         
+    ##  base64enc         0.1-3   2015-07-28 CRAN (R 3.4.1)
+    ##  bindr             0.1     2016-11-13 CRAN (R 3.4.1)
+    ##  bindrcpp        * 0.2     2017-06-17 CRAN (R 3.4.1)
+    ##  bitops            1.0-6   2013-08-17 CRAN (R 3.4.1)
+    ##  boot              1.3-19  2017-02-11 CRAN (R 3.4.1)
+    ##  broom             0.4.2   2017-02-13 CRAN (R 3.4.1)
+    ##  car             * 2.1-5   2017-07-04 CRAN (R 3.4.1)
+    ##  caTools           1.17.1  2014-09-10 CRAN (R 3.4.1)
+    ##  cellranger        1.1.0   2016-07-27 CRAN (R 3.4.1)
+    ##  checkmate         1.8.3   2017-07-03 CRAN (R 3.4.1)
+    ##  cluster           2.0.6   2017-03-10 CRAN (R 3.4.1)
+    ##  coda            * 0.19-1  2016-12-08 CRAN (R 3.4.1)
+    ##  codetools         0.2-15  2016-10-05 CRAN (R 3.4.1)
+    ##  colorspace        1.3-2   2016-12-14 CRAN (R 3.4.1)
+    ##  combinat          0.0-8   2012-10-29 CRAN (R 3.4.1)
+    ##  compiler          3.4.1   2017-07-25 local         
+    ##  corpcor           1.6.9   2017-04-01 CRAN (R 3.4.1)
+    ##  cubature          1.3-11  2017-07-19 CRAN (R 3.4.1)
+    ##  data.table        1.10.4  2017-02-01 CRAN (R 3.4.1)
+    ##  datasets        * 3.4.1   2017-07-25 local         
+    ##  deldir            0.1-14  2017-04-22 CRAN (R 3.4.1)
+    ##  devtools          1.13.2  2017-06-02 CRAN (R 3.4.1)
+    ##  digest            0.6.12  2017-01-27 CRAN (R 3.4.1)
+    ##  dplyr           * 0.7.2   2017-07-20 CRAN (R 3.4.1)
+    ##  estimability    * 1.2     2016-11-19 CRAN (R 3.4.1)
+    ##  evaluate          0.10.1  2017-06-24 CRAN (R 3.4.1)
+    ##  expm              0.999-2 2017-03-29 CRAN (R 3.4.1)
+    ##  fitdistrplus    * 1.0-9   2017-03-24 CRAN (R 3.4.1)
+    ##  forcats           0.2.0   2017-01-23 CRAN (R 3.4.1)
+    ##  foreign           0.8-69  2017-06-22 CRAN (R 3.4.1)
+    ##  Formula           1.2-2   2017-07-10 CRAN (R 3.4.1)
+    ##  gdata             2.18.0  2017-06-06 CRAN (R 3.4.1)
+    ##  ggplot2         * 2.2.1   2016-12-30 CRAN (R 3.4.1)
+    ##  glue              1.1.1   2017-06-21 CRAN (R 3.4.1)
+    ##  gmodels           2.16.2  2015-07-22 CRAN (R 3.4.1)
+    ##  gplots            3.0.1   2016-03-30 CRAN (R 3.4.1)
+    ##  graphics        * 3.4.1   2017-07-25 local         
+    ##  grDevices       * 3.4.1   2017-07-25 local         
+    ##  grid              3.4.1   2017-07-25 local         
+    ##  gridExtra         2.2.1   2016-02-29 CRAN (R 3.4.1)
+    ##  gtable            0.2.0   2016-02-26 CRAN (R 3.4.1)
+    ##  gtools            3.5.0   2015-05-29 CRAN (R 3.4.1)
+    ##  haven             1.1.0   2017-07-09 CRAN (R 3.4.1)
+    ##  Hmisc             4.0-3   2017-05-02 CRAN (R 3.4.1)
+    ##  hms               0.3     2016-11-22 CRAN (R 3.4.1)
+    ##  htmlTable         1.9     2017-01-26 CRAN (R 3.4.1)
+    ##  htmltools         0.3.6   2017-04-28 CRAN (R 3.4.1)
+    ##  htmlwidgets       0.9     2017-07-10 CRAN (R 3.4.1)
+    ##  httr              1.2.1   2016-07-03 CRAN (R 3.4.1)
+    ##  jsonlite          1.5     2017-06-01 CRAN (R 3.4.1)
+    ##  KernSmooth        2.23-15 2015-06-29 CRAN (R 3.4.1)
+    ##  klaR              0.6-12  2014-08-06 CRAN (R 3.4.1)
+    ##  knitr             1.16    2017-05-18 CRAN (R 3.4.1)
+    ##  labeling          0.3     2014-08-23 CRAN (R 3.4.1)
+    ##  lattice         * 0.20-35 2017-03-25 CRAN (R 3.4.1)
+    ##  latticeExtra      0.6-28  2016-02-09 CRAN (R 3.4.1)
+    ##  lazyeval          0.2.0   2016-06-12 CRAN (R 3.4.1)
+    ##  LearnBayes        2.15    2014-05-29 CRAN (R 3.4.1)
+    ##  lme4            * 1.1-13  2017-04-19 CRAN (R 3.4.1)
+    ##  lmerTest          2.0-33  2016-12-03 CRAN (R 3.4.1)
+    ##  lsmeans         * 2.26-3  2017-05-09 CRAN (R 3.4.1)
+    ##  lubridate       * 1.6.0   2016-09-13 CRAN (R 3.4.1)
+    ##  magrittr          1.5     2014-11-22 CRAN (R 3.4.1)
+    ##  MASS            * 7.3-47  2017-02-26 CRAN (R 3.4.1)
+    ##  Matrix          * 1.2-10  2017-05-03 CRAN (R 3.4.1)
+    ##  MatrixModels      0.4-1   2015-08-22 CRAN (R 3.4.1)
+    ##  MCMCglmm        * 2.24    2016-11-14 CRAN (R 3.4.1)
+    ##  memoise           1.1.0   2017-04-21 CRAN (R 3.4.1)
+    ##  methods         * 3.4.1   2017-07-25 local         
+    ##  mgcv              1.8-17  2017-02-08 CRAN (R 3.4.1)
+    ##  minqa             1.2.4   2014-10-09 CRAN (R 3.4.1)
+    ##  mnormt            1.5-5   2016-10-15 CRAN (R 3.4.1)
+    ##  modelr            0.1.1   2017-07-24 CRAN (R 3.4.1)
+    ##  multcomp          1.4-6   2016-07-14 CRAN (R 3.4.1)
+    ##  munsell           0.4.3   2016-02-13 CRAN (R 3.4.1)
+    ##  mvtnorm           1.0-6   2017-03-02 CRAN (R 3.4.1)
+    ##  nlme              3.1-131 2017-02-06 CRAN (R 3.4.1)
+    ##  nloptr            1.0.4   2014-08-04 CRAN (R 3.4.1)
+    ##  nnet              7.3-12  2016-02-02 CRAN (R 3.4.1)
+    ##  parallel          3.4.1   2017-07-25 local         
+    ##  pbkrtest          0.4-7   2017-03-15 CRAN (R 3.4.1)
+    ##  pkgconfig         2.0.1   2017-03-21 CRAN (R 3.4.1)
+    ##  plotMCMC        * 2.0-0   2014-03-12 CRAN (R 3.4.1)
+    ##  plyr              1.8.4   2016-06-08 CRAN (R 3.4.1)
+    ##  ProjectTemplate * 0.7     2016-08-11 CRAN (R 3.4.1)
+    ##  psych             1.7.5   2017-05-03 CRAN (R 3.4.1)
+    ##  purrr           * 0.2.2.2 2017-05-11 CRAN (R 3.4.1)
+    ##  quantreg          5.33    2017-04-18 CRAN (R 3.4.1)
+    ##  R6                2.2.2   2017-06-17 CRAN (R 3.4.1)
+    ##  RColorBrewer      1.1-2   2014-12-07 CRAN (R 3.4.1)
+    ##  Rcpp              0.12.12 2017-07-15 CRAN (R 3.4.1)
+    ##  readr           * 1.1.1   2017-05-16 CRAN (R 3.4.1)
+    ##  readxl            1.0.0   2017-04-18 CRAN (R 3.4.1)
+    ##  reshape2        * 1.4.2   2016-10-22 CRAN (R 3.4.1)
+    ##  rlang             0.1.1   2017-05-18 CRAN (R 3.4.1)
+    ##  rmarkdown         1.6     2017-06-15 CRAN (R 3.4.1)
+    ##  rpart             4.1-11  2017-03-13 CRAN (R 3.4.1)
+    ##  rprojroot         1.2     2017-01-16 CRAN (R 3.4.1)
+    ##  rvest             0.3.2   2016-06-17 CRAN (R 3.4.1)
+    ##  sandwich          2.4-0   2017-07-26 cran (@2.4-0) 
+    ##  scales            0.4.1   2016-11-09 CRAN (R 3.4.1)
+    ##  sp                1.2-5   2017-06-29 CRAN (R 3.4.1)
+    ##  SparseM           1.77    2017-04-23 CRAN (R 3.4.1)
+    ##  spdep             0.6-13  2017-04-25 CRAN (R 3.4.1)
+    ##  splines           3.4.1   2017-07-25 local         
+    ##  stats           * 3.4.1   2017-07-25 local         
+    ##  stringi           1.1.5   2017-04-07 CRAN (R 3.4.1)
+    ##  stringr           1.2.0   2017-02-18 CRAN (R 3.4.1)
+    ##  survival        * 2.41-3  2017-04-04 CRAN (R 3.4.1)
+    ##  tensorA           0.36    2010-12-01 CRAN (R 3.4.1)
+    ##  TH.data           1.0-8   2017-01-23 CRAN (R 3.4.1)
+    ##  tibble          * 1.3.3   2017-05-28 CRAN (R 3.4.1)
+    ##  tidyr           * 0.6.3   2017-05-15 CRAN (R 3.4.1)
+    ##  tidyverse       * 1.1.1   2017-01-27 CRAN (R 3.4.1)
+    ##  tools             3.4.1   2017-07-25 local         
+    ##  utils           * 3.4.1   2017-07-25 local         
+    ##  withr             2.0.0   2017-07-28 cran (@2.0.0) 
+    ##  xml2              1.1.1   2017-01-24 CRAN (R 3.4.1)
+    ##  xtable            1.8-2   2016-02-05 CRAN (R 3.4.1)
+    ##  yaml              2.1.14  2016-11-12 CRAN (R 3.4.1)
+    ##  zoo               1.8-0   2017-04-12 CRAN (R 3.4.1)
