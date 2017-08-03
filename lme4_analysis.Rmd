@@ -161,8 +161,6 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT | NRTE)), adjust = c("tukey")
 
 ## Conclusions
 
-
-
 ## R Session Info
 
 ```{r session_info, echo=FALSE}

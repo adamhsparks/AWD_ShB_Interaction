@@ -37,7 +37,7 @@ RAW_data$TRT <-
     "FLD_N180"
   )
 
-# add column with midpoint % tiller ShB severity
+# add column with midpoint % tiller ShB severity -------------------------------
 
 RAW_data <- mutate(RAW_data, PERC_TIL_ShB = ifelse(TIL_ShB == 0, 0,
                                                    ifelse(
@@ -49,7 +49,7 @@ RAW_data <- mutate(RAW_data, PERC_TIL_ShB = ifelse(TIL_ShB == 0, 0,
                                                             ))
                                                    )))
 
-# add column with midpoint % leaf ShB severity
+# add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
   mutate(RAW_data, PERC_LEAF_ShB = ifelse(LEAF_ShB == 0, 0,
                                           ifelse(
@@ -66,8 +66,7 @@ DS2016 <- subset(RAW_data, YEAR == "2016")
 
 # calculate AUDPS values -------------------------------------------------------
 
-# 2015 AUDPS -------------------------------------------------------------------
-# 2015 Tiller Incidence AUDPS --------------------------------------------------
+# 2015 Tiller Incidence setup --------------------------------------------------
 TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -99,7 +98,7 @@ TShB_perc_15 <-
 TShB_perc_wide <-
   dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
 
-# 2015 Leaf Severity AUDPS -----------------------------------------------------
+# 2015 Leaf Severity setup -----------------------------------------------------
 LShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -119,6 +118,8 @@ LShB_perc_15 <-
 
 LShB_perc_wide <-
   dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+
+# 2015 AUDPS -------------------------------------------------------------------
 
 TShB_inc_AUDPS <-
   audps(evaluation = TShB_inc_wide[, 2:6], dates = as_vector(TShB_inc_15[1:5, 6]))
@@ -152,8 +153,7 @@ TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
-# 2016 AUDPS -------------------------------------------------------------------
-# 2015 Tiller Incidence AUDPS --------------------------------------------------
+# 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -174,7 +174,7 @@ TShB_sev_16 <-
 TShB_sev_wide <-
   dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
 
-# 2015 Tiller Severity AUDPS ---------------------------------------------------
+# 2016 Tiller Severity setup ---------------------------------------------------
 
 TShB_perc_16 <-
   DS2016 %>%
@@ -185,6 +185,8 @@ TShB_perc_16 <-
 
 TShB_perc_wide <-
   dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+
+# 2016 Leaf Severity setup -----------------------------------------------------
 
 LShB_sev_16 <-
   DS2016 %>%
@@ -206,6 +208,8 @@ LShB_perc_16 <-
 LShB_perc_wide <-
   dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
 
+# 2016 AUDPS -------------------------------------------------------------------
+
 TShB_inc_AUDPS <-
   audps(evaluation = TShB_inc_wide[, 2:5], dates = as_vector(TShB_inc_16[1:4, 6]))
 
@@ -217,8 +221,6 @@ LShB_sev_AUDPS <-
 
 TShB_percent_AUDPS <-
   audps(evaluation = TShB_perc_wide[, 2:5], dates = as_vector(TShB_perc_16[1:4, 6]))
-
-# 2015 Leaf Severity AUDPS -----------------------------------------------------
 
 LShB_percent_AUDPS <-
   audps(evaluation = LShB_perc_wide[, 2:5], dates = as_vector(LShB_perc_16[1:4, 6]))
