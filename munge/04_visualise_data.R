@@ -19,6 +19,7 @@ ggsave("graphs/TShB_rating.png", width = 6, height = 4)
 # density plot of TShB_incidence data ----------------------------------------
 ggplot(RAW_data, aes(x = TShB_incidence)) +
   geom_density(aes(fill = YEAR, colour = YEAR)) +
+  geom_rug() +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Incidence") +

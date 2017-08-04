@@ -1,5 +1,4 @@
 
-
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
 RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
