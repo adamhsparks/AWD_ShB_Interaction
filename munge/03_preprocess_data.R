@@ -1,4 +1,5 @@
 
+
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
 RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
@@ -39,27 +40,33 @@ RAW_data$TRT <-
 
 # add column with midpoint % tiller ShB severity -------------------------------
 
-RAW_data <- mutate(RAW_data, PERC_TIL_ShB = ifelse(TIL_ShB == 0, 0,
-                                                   ifelse(
-                                                     TIL_ShB == 1, 1,
-                                                     ifelse(TIL_ShB == 2, 2.5,
-                                                            ifelse(
-                                                              TIL_ShB == 3, 10,
-                                                              ifelse(TIL_ShB == 4, 32.5, 75)
-                                                            ))
-                                                   )))
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_TIL_ShB = case_when(
+      TIL_ShB == 0 ~ 0,
+      TIL_ShB == 1 ~ 1,
+      TIL_ShB == 2 ~ 2.5,
+      TIL_ShB == 3 ~ 10,
+      TIL_ShB == 4 ~ 32.5,
+      TRUE ~ 75
+    )
+  )
+
 
 # add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
-  mutate(RAW_data, PERC_LEAF_ShB = ifelse(LEAF_ShB == 0, 0,
-                                          ifelse(
-                                            LEAF_ShB == 1, 1,
-                                            ifelse(LEAF_ShB == 2, 2.5,
-                                                   ifelse(
-                                                     LEAF_ShB == 3, 10,
-                                                     ifelse(LEAF_ShB == 4, 32.5, 75)
-                                                   ))
-                                          )))
+  mutate(
+    RAW_data,
+    PERC_LEAF_ShB = case_when(
+      LEAF_ShB == 0 ~ 0,
+      LEAF_ShB == 1 ~ 1,
+      LEAF_ShB == 2 ~ 2.5,
+      LEAF_ShB == 3 ~ 10,
+      LEAF_ShB == 4 ~ 32.5,
+      TRUE ~ 75
+    )
+  )
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
