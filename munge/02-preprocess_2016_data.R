@@ -134,8 +134,6 @@ DS2016 <-
   group_by(DATE, ASMT, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
   mutate(TShB_incidence = NTShB / NTIL)
 
-DS2016$TShB_incidence <- round(DS2016$TShB_incidence, 2)
-
 DS2016 <- rename(DS2016, TIL_ShB = NSHShB)
 
 DS2016$YEAR <- year(DS2016$DATE)
@@ -164,7 +162,8 @@ DS2016 <-
 
 DS2016 <- as_tibble(arrange(DS2016, ASMT, PLOT))
 
-# 2016
+# Create new columns of days to calcluate AUDPS -------------------------------
+
 DATE_1_2016 <- DATE_2_2016 <- DS2016$DATE
 DATE_1_2016[which(DATE_1_2016 == min(DATE_1_2016))] <- NA
 DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] <- NA
@@ -175,6 +174,8 @@ DATE_2 <- na.omit(DATE_2_2016)
 DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
 DS2016$DAYS <-
   c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
+
+# cleanup workspace ------------------------------------------------------------
 
 rm(
   DS2016_A1,
@@ -188,6 +189,7 @@ rm(
   DAYS_2016
 )
 
+# Arrange columns --------------------------------------------------------------
 DS2016 <-
   DS2016 %>% dplyr::select(
     YEAR,

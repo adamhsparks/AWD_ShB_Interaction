@@ -71,8 +71,6 @@ reformat <- function(files) {
     x %>%
     mutate(TShB_incidence = NTShB / NTIL)
 
-  x$TShB_incidence <- round(x$TShB_incidence, 2)
-
   TShB_incidence <-
     x %>% dplyr::select(REP,
                         TRT,
@@ -85,7 +83,7 @@ reformat <- function(files) {
                         NTShB,
                         TShB_incidence)
 
-  # Gather Tillers--------------------------------------------------------------
+  # Gather tillers--------------------------------------------------------------
   TIL <- vector(mode = "list", length = 4)
 
   for (i in 1:4) {
