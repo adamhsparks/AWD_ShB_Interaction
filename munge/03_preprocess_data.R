@@ -77,6 +77,8 @@ DS2016 <- subset(RAW_data, YEAR == "2016")
 
 # calculate AUDPS values -------------------------------------------------------
 
+# 2015 AUDPS -------------------------------------------------------------------
+
 # 2015 Tiller incidence setup --------------------------------------------------
 TShB_inc_15 <-
   DS2015 %>%
@@ -130,7 +132,7 @@ LShB_perc_15 <-
 LShB_perc_wide <-
   dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
 
-# 2015 AUDPS -------------------------------------------------------------------
+# Calculate 2015 AUDPS ---------------------------------------------------------
 
 TShB_inc_AUDPS <-
   audps(evaluation = TShB_inc_wide[, 2:6], dates = as_vector(TShB_inc_15[1:5, 6]))
@@ -163,6 +165,8 @@ AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
+
+# 2015 AUDPS -------------------------------------------------------------------
 
 # 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
@@ -256,3 +260,5 @@ ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
 AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
+AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
