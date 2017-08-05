@@ -135,7 +135,7 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   ggtitle("Tiller Sheath Blight Severity")
-ggsave("graphs/12_TShB_severity_AUDPS_boxplot.png", width = 6, height = 4)
+ggsave("graphs/12_TShB_severity_NRTE_AUDPS_boxplot.png", width = 6, height = 4)
 
 ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
@@ -144,7 +144,7 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity")
-ggsave("graphs/13_TShB_severity_AUDPS_boxplot.png", width = 6, height = 4)
+ggsave("graphs/13_TShB_severity_WMGT_AUDPS_boxplot.png", width = 6, height = 4)
 
 
 # Box/dotplots of leaf sheath blight severity AUDPS ----------------------------
@@ -154,7 +154,7 @@ ggplot(AUDPS, aes(x = NRTE, y = LShB_percent_AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   ggtitle("Leaf Sheath Blight Severity")
-ggsave("graphs/14_LShB_severity_AUDPS_NRTE_boxplot.png", width = 6, height = 4)
+ggsave("graphs/14_LShB_severity_NRTE_AUDPS_boxplot.png", width = 6, height = 4)
 
 
 ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
@@ -164,7 +164,7 @@ ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
   ggtitle("Leaf Sheath Blight Severity")
-ggsave("graphs/15_LShB_seveity_AUDPS_WMGT_boxplot.png", width = 6, height = 4)
+ggsave("graphs/15_LShB_severity_WMGT_AUDPS_boxplot.png", width = 6, height = 4)
 
 # Line graph of leaf sheath blight severity data -------------------------------
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%

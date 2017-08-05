@@ -21,13 +21,11 @@ prepended with a number to display them in order, *e.g.*,
 <img src="09_TShB_incidence_violin_plot.png" alt="09_TShB_incidence_violin_plot.png" />
 <img src="10_TShB_inc_AUDPS_NRTE_boxplot.png" alt="10_TShB_inc_AUDPS_NRTE_boxplot.png" />
 <img src="11_TShB_inc_AUDPS_WMGT_boxplot.png" alt="11_TShB_inc_AUDPS_WMGT_boxplot.png" />
-<img src="12_TShB_severity_AUDPS_boxplot.png" alt="12_TShB_severity_AUDPS_boxplot.png" />
-<img src="13_TShB_severity_AUDPS_boxplot.png" alt="13_TShB_severity_AUDPS_boxplot.png" />
-<img src="14_LShB_severity_AUDPS_NRTE_boxplot.png" alt="14_LShB_severity_AUDPS_NRTE_boxplot.png" />
-<img src="15_LShB_seveity_AUDPS_WMGT_boxplot.png" alt="15_LShB_seveity_AUDPS_WMGT_boxplot.png" />
+<img src="12_TShB_severity_NRTE_AUDPS_boxplot.png" alt="12_TShB_severity_NRTE_AUDPS_boxplot.png" />
+<img src="13_TShB_severity_WMGT_AUDPS_boxplot.png" alt="13_TShB_severity_WMGT_AUDPS_boxplot.png" />
+<img src="14_LShB_severity_NRTE_AUDPS_boxplot.png" alt="14_LShB_severity_NRTE_AUDPS_boxplot.png" />
+<img src="15_LShB_severity_WMGT_AUDPS_boxplot.png" alt="15_LShB_severity_WMGT_AUDPS_boxplot.png" />
 <img src="16_LShB_progress_curves.png" alt="16_LShB_progress_curves.png" />
-<img src="16_TShB_progress_curves.png" alt="16_TShB_progress_curves.png" />
-<img src="17_TShB_incidence_progress_curves.png" alt="17_TShB_incidence_progress_curves.png" />
 <img src="17_TShB_progress_curves.png" alt="17_TShB_progress_curves.png" />
-<img src="18_LShB_progress_curves.png" alt="18_LShB_progress_curves.png" />
 <img src="18_TShB_incidence_progress_curves.png" alt="18_TShB_incidence_progress_curves.png" />
+
