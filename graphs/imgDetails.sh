@@ -30,8 +30,7 @@ for ITEM in ${ALLOWED[@]}; do
       fi
     done
     if [ -n ${PROPS[0]} -a -n ${PROPS[1]} ]; then
-      echo "<img src=\"${ITEM}\" width=\"${PROPS[0]}\" " \
-        "height=\"${PROPS[1]}\" alt=\"${ITEM}\" />" | tee -a $OUT
+      echo "<img src=\"${ITEM}\" alt=\"${ITEM}\" />" | tee -a $OUT
       [ $? == 0 ] && SUCCESS=SUCCESS+1
     fi
     COUNT=COUNT+1
