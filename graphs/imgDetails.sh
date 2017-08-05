@@ -15,6 +15,8 @@ declare -r OUT=./imgDetails.html
 declare -r CMD="sips -g pixelWidth -g pixelHeight"
 declare -ar ALLOWED=(*.jpg *.JPG *.jpeg *.GIF *.gif *.png *.PNG)
 
+rm imgDetails.html
+
 for ITEM in ${ALLOWED[@]}; do
   if [ -f $ITEM ]; then
     declare -i POS=0
