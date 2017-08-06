@@ -12,7 +12,6 @@
 declare -i COUNT=0
 declare -i SUCCESS=0
 declare -r OUT=./imgDetails.html
-declare -r CMD="sips -g pixelWidth -g pixelHeight"
 declare -ar ALLOWED=(*.jpg *.JPG *.jpeg *.GIF *.gif *.png *.PNG)
 
 rm imgDetails.html
