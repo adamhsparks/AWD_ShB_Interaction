@@ -1,28 +1,6 @@
 
 # Alternate Wetting and Drying (AWD) and Nitrogen Interaction Effects on Rice Sheath Blight
 
-## Quick start with this repository
-
-Install the [`ProjectTemplate`](https://cran.r-project.org/package=ProjectTemplate) package. 
-
-```r
-install.packages("ProjectTemplate")
-library(ProjectTemplate)
-```
-Clone the repository to your local hard drive.
-
-The [munge](munge) folder contains all the preprocessing and raw data visualisation scripts. It is worth looking at these to see how the raw data are handled prior to analysis.
-
-The [graphs](graphs) folder contains of the raw data and AUDPS values and the [README.md](graphs/README.md) file displays them in an ordered fashion.
-
-### Rmd files
-
-Knitting the Rmd files will automatically run the scripts in the [munge](munge) and generate the outputs linked to below in the GitHub `.md` files. This folder has the steps used to create the AUDPS values used in analysis and other summaries and cleaning of the data.
-
-The [`01_Test_Residuals_for_Model_Fits.Rmd](01_Test_Residuals_for_Model_Fits.md) file contains tests for the data's residuals to help determine the best model to use for analysis.
-
-The [`02_MCMCglmm_analysis.Rmd`](02_MCMCglmm_analysis.md) file contains the models used for data analysis and shows the analysis carried out.
-
 ## Study
 
 **Objective:** Study the effects of different water and nitrogen managements on sheath blight of rice  
