@@ -189,7 +189,7 @@ DS2015$TRT[which(DS2015$WMGT == "AWD" &
 DS2015$TRT[which(DS2015$WMGT == "AWD" &
                    DS2015$NRTE == 120)] = "AWD_N120"
 
-DS2015$YEAR <- year(DS2015$DATE)
+DS2015$YEAR <- lubridate::year(DS2015$DATE)
 
 DS2015$PLOT <- rep(1:24, each = 432)
 
