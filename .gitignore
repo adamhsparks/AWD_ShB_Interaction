@@ -1,8 +1,6 @@
 .Rproj*
-
 *Rproj
 .Rhistory
 .Rproj.user
 .DS_Store
 *.pdf
-packrat/lib*/
