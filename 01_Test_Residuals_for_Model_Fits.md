@@ -175,7 +175,7 @@ qqp(AUDPS_16$LShB_percent_AUDPS, "chisq", df = 2)
 
 ![](01_Test_Residuals_for_Model_Fits_files/figure-markdown_github-ascii_identifiers/2016_Leaf_Sev-4.png)
 
-Based on these graphs, few of the data are a good fit for a normal distribution. Ideally, we want to see the residuals close to the solid line and between the dotted lines. Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, *e.g.* a Bayesian analysis method should be used. The *MCMCglmm* package provides an easy way to implement this type of analysis. The analyses can be found in the [02\_MCMC\_glmm\_analysis.md](02_MCMC_glmm_analysis.md) file.
+Based on these graphs, few of the data are a good fit for a normal distribution. Ideally, we want to see the residuals close to the solid line and between the dotted lines. Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, *e.g.* a Bayesian analysis method should be used. The *MCMCglmm* package provides an easy way to implement this type of analysis. The analyses can be found in the [02\_MCMCglmm\_analysis.md](02_MCMCglmm_analysis.md) file.
 
 R Session Info
 --------------
