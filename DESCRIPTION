@@ -1,0 +1,29 @@
+Package: rice.awd.shb
+Title: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight
+Version: 0.0.0.9000
+Authors@R: person("Adam H", "Sparks", email = "adamhsparks@gmail.com", role = c("aut", "cre"))
+Description: Provides a research compendium of analysis associated with experiments
+  conducted at the International Rice Research Institute (IRRI), Los Baños,
+  Calabarzon, Philippines in the dry seasons of 2015 and 2016. The experiments
+  were designed to test the effects of alternate wetting and drying irrigation
+  managment on rice sheath blight disease. The plots were split plot with an
+  irrigation main plot and nitrogen sub-plot treatments.
+Depends: R (>= 3.4.1)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: bookdown,
+     fitdistrplus,
+    car,
+    MASS,
+    agricolae,
+    reshape2,
+    lattice,
+    plotMCMC,
+    tidyverse,
+    lubridate,
+    MCMCglmm
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -1,0 +1,449 @@
+---
+title: "Sheath Blight Analysis"
+author: "Adam H Sparks"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sheath Blight Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Notes on This Analysis Before Starting
+
+The analyses are semi-automated. When this file is knit, it automatically loads the _ProjectTemplate_ package and calls the `load.project()` function. This loads the data, cleans and munges it creating the `AUDPS` data frame used for the analysis below. The scripts used to clean and munge the data are located in the [munge](./munge) folder and numbered in the sequential order in which they are run.
+
+#### Interpreting these analyses
+
+The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
+
+```{r MCMCglmm, eval=FALSE}
+library(MCMCglmm)
+vignette("Overview")
+vignette("CourseNotes")
+```
+
+When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatement.
+
+The base levels for this analysis are:
+
+- 2015 
+  
+    - `NRTE:0`
+
+    - `WMGT:FLD`
+
+- 2016
+
+    - `NRTE:60`
+
+    - `WMGT:FLD`
+
+#### Changes between 2015 and 2016
+
+Before the analysis, note that due to changes between the years, the analysis
+must be carried out on each year separately. The 2015 data and 2016 data cannot
+be combined due to changes in inoculation methods; there are other changes too,
+but the main one is this. Therefore, the analyses will be conducted separately
+such that comparisons will only be observational and cannot be statistically
+compared.
+
+#### _MCMCglmm_ model fitting notes
+
+Fitting the models with the default iterations resulted in some less than
+acceptable models. Because of this, the number of iterations has been increased,
+`nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
+smaller errors for random effects and better models.
+
+## Setup
+
+Use `set.seed()` for reproducibility.
+
+```{r set_seed}
+set.seed(27)
+```
+
+The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+
+Create individual data frames for the analysis.
+
+```{r create_analysis_df}
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2015 <- droplevels(AUDPS_2015)
+
+# relevel factors for easier interpretation of  analysis
+AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
+AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "FLD"))
+
+AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_2016 <- droplevels(AUDPS_2016)
+
+# relevel factors for easier interpretation of  analysis
+AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
+AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
+```
+
+Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start the analysis.
+
+## 2015
+
+### 2015 Tiller Sheath Blight Incidence Model
+
+```{r 2015_TShB_incidence}
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_2015,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:4])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+### 2015 Tiller Sheath Blight Severity Model
+
+```{r 2015_TShB_severity}
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_2015,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:4])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
+
+# check random effects
+plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
+```
+
+### 2015 Leaf Sheath Blight Severity Model
+
+```{r 2015_LShB_severity}
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_2015,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(LShB_severity_lmm_2015)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_severity_lmm_2015$Sol[, c(1, 5:8)])
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_severity_lmm_2015$Sol[, 2:4])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_severity_lmm_2015$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
+
+# check random effects
+plotTrace(LShB_severity_lmm_2015$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(LShB_severity_lmm_2015$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
+```
+
+*******
+
+## 2016
+
+### 2016 Tiller Sheath Blight Incidence Model
+
+```{r 2016_TShB_incidence}
+
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+
+TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE, 
+                                    random = ~REP, 
+                          data = AUDPS_2016,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_incidence_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 4:7)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:3])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
+
+# check random effects
+plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
+```
+
+
+### 2016 Tiller Sheath Blight Severity Model
+
+```{r 2016_TShB_severity}
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_2016,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(TShB_severity_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 4:7)])
+reps <- melt(reps)
+
+trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:3])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(TShB_severity_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
+
+# check random effects
+plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(TShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+```
+
+### 2016 Leaf Sheath Blight Severity Model
+
+```{r 2016_LShB_severity}
+eprior <- list(R = list(V = 1, nu = 0.02),
+               G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
+LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+                                    random = ~REP, 
+                          data = AUDPS_2016,
+                          verbose = FALSE,
+                          prior = eprior,
+                          nitt = 5e+05,
+                          burnin = 5000,
+                          thin = 100,
+                          pr = TRUE)
+
+summary(LShB_severity_lmm_2016)
+
+# create data frames for generating diagnostic plots
+reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 4:7)])
+reps <- melt(reps)
+
+trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:3])
+trts <- melt(trts)
+
+# Create a dummy x-axis variable for plotting
+x <- 1:nrow(LShB_severity_lmm_2016$Sol)
+
+# diagnostic line plots for replicate
+plot_diagnostic_lines(d = reps,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
+
+# posterior distributions for replicate
+plot_replicate_posteriors(d = reps,
+                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
+
+# diagnostic line plots for treatments
+plot_diagnostic_lines(d = trts,
+                      x = x,
+                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
+
+# Posterior distributions for treatment
+plot_treatment_posteriors(d = trts,
+                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
+
+# check random effects
+plotTrace(LShB_severity_lmm_2016$VCV, log = TRUE)
+
+# plot joint distibution of error
+rdf <- data.frame(LShB_severity_lmm_2016$VCV)
+plot_joint_random_error_dist(d = rdf,
+                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
+```
+
+### Model Fit
+
+The models all appear to be good fits.
+
+None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns.
+
+The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
+
+## Conclusions
+
+### Tiller Sheath Blight Incidence
+
+In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.
+
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.
+
+
+### Tiller Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
+
+### Leaf Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
