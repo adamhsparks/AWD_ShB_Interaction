@@ -418,7 +418,6 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-
 ### Model Fit
 
 The models all appear to be good fits.
@@ -431,23 +430,22 @@ The random effects all appear to be acceptable, the dotted line stays near to th
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 the highest N rate, N120, was significantly different from the base, N0 rate.
+In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.
 
-In 2016 both the AWD and highest N rate, N180, were significantly different from the FLD and N60 treatments.
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.
 
-No interactions were found to be significant in the tiller sheath blight incidence.
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different from the N0 treatment. The interaction of the N100 rate with AWD was also significantly different than N0 and FLD treatments.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
 
-In 2016 the N180 was significantly different from the N60 rate and the interaction of the N180 and AWD was significantly different than the N60 and FLD interaction.
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 the N120 was significantly different than the N0 treatment. The interactions of both the N100 and N120 with AWD were significantly different than the N0 FLD interaction.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
 
-In 2016 the N180 was significantly different from the N60 treatment. The AWD was significantly different from the FLD and the interaction of N180:AWD was significantly different from the N60:FLD treatments interaction.
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
 
 ## R Session Info
 
