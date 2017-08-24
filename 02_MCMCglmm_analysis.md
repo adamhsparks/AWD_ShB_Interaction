@@ -142,7 +142,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -150,7 +150,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -159,7 +159,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -167,14 +167,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -183,7 +183,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_incidence-6.png)
 
 ### 2015 Tiller Sheath Blight Severity Model
 
@@ -255,7 +255,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -263,7 +263,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -272,7 +272,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -280,14 +280,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -296,7 +296,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_TShB_severity-6.png)
 
 ### 2015 Leaf Sheath Blight Severity Model
 
@@ -368,7 +368,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -376,7 +376,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -385,7 +385,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -393,14 +393,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_severity_lmm_2015$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -409,7 +409,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2015_LShB_severity-6.png)
 
 ------------------------------------------------------------------------
 
@@ -486,7 +486,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -494,7 +494,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -503,7 +503,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -511,14 +511,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -527,7 +527,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_incidence-6.png)
 
 ### 2016 Tiller Sheath Blight Severity Model
 
@@ -598,7 +598,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -606,7 +606,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -615,7 +615,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -623,14 +623,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -639,7 +639,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_TShB_severity-6.png)
 
 ### 2016 Leaf Sheath Blight Severity Model
 
@@ -710,7 +710,7 @@ plot_diagnostic_lines(d = reps,
                       title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-1.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-1.png)
 
 ``` r
 # posterior distributions for replicate
@@ -718,7 +718,7 @@ plot_replicate_posteriors(d = reps,
                           title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-2.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-2.png)
 
 ``` r
 # diagnostic line plots for treatments
@@ -727,7 +727,7 @@ plot_diagnostic_lines(d = trts,
                       title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-3.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-3.png)
 
 ``` r
 # Posterior distributions for treatment
@@ -735,14 +735,14 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-4.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-4.png)
 
 ``` r
 # check random effects
 plotTrace(LShB_severity_lmm_2016$VCV, log = TRUE)
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-5.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-5.png)
 
 ``` r
 # plot joint distibution of error
@@ -751,7 +751,7 @@ plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
 
-![](Analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-6.png)
+![](02_MCMCglmm_analysis_files/figure-markdown_github-ascii_identifiers/2016_LShB_severity-6.png)
 
 ### Model Fit
 
