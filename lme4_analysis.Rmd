@@ -34,14 +34,7 @@ compared.
 
 The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
-First, separate the TRT column into the two treatments for analysis.
-
-```{r data_setup}
-AUDPS <- separate(data = AUDPS, col = TRT, sep = "_", into = c("WMGT", "NRTE"))
-AUDPS <- mutate_at(.tbl = AUDPS, .funs = factor, .vars = c("WMGT", "NRTE"))
-```
-
-Now create individual data frames for the analysis.
+Create individual data frames for the analysis.
 
 ```{r create_analysis_df}
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
@@ -154,6 +147,28 @@ print(lsmeans(LShB_sev_AUDPS, list(pairwise ~ WMGT)), adjust = c("tukey"))
 ```
 
 ## Conclusions
+
+
+## Conclusions
+
+### Tiller Sheath Blight Incidence
+
+In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.
+
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.
+
+
+### Tiller Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
+
+### Leaf Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
 
 ## R Session Info
 
