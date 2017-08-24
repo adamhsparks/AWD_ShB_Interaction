@@ -80,9 +80,7 @@ qqp(AUDPS_16$LShB_percent_AUDPS, "exp")
 qqp(AUDPS_16$LShB_percent_AUDPS, "chisq", df = 2)
 ```
 
-Based on these graphs, few of the data are a good fit for a normal distribution, which suggests that using an analysis that does need these assumptions to be met, _e.g._ a Bayesian analysis method. The _MCMCglmm_ package provides an easy way to implement this type of analysis.
-
-These analyses can be found in the [02_MCMC_glmm_analysis.md](02_MCMC_glmm_analysis.md) file.
+Based on these graphs, few of the data are a good fit for a normal distribution. Ideally, we want to see the residuals close to the solid line and between the dotted lines. Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, _e.g._ a Bayesian analysis method should be used. The _MCMCglmm_ package provides an easy way to implement this type of analysis. The analyses can be found in the [02_MCMC_glmm_analysis.md](02_MCMC_glmm_analysis.md) file.
 
 ## R Session Info
 
