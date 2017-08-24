@@ -1,3 +1,20 @@
+Clean 2015 Raw Data
+================
+
+The raw data are located in the `extdata` folder of the installed *rice.awd.pests* and can be accessed using:
+
+``` r
+load(system.file("extdata", "DS2015_Raw_22DAI.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2015_Raw_35DAI.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2015_Raw_49DAI.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2015_Raw_62DAI.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2015_Raw_83DAI.csv", package = "rice.awd.pests"))
+```
+
+``` r
+library(readr)
+library(magrittr)
+
 # Preprocess 2015 data for all assessment dates
 
 files <-
@@ -60,17 +77,17 @@ reformat <- function(files) {
     col_names = TRUE
   )
   x[is.na(x)] <- 0
-
-  x <- arrange(x, REP, TRT)
-
+  
+  x <- dplyr::arrange(x, REP, TRT)
+  
   # add plot numbers
   x$PLOT <- rep(1:24, each = 18)
-
+  
   # Calculate tiller sheath blight incidence -----------------------------------
   x <-
     x %>%
-    mutate(TShB_incidence = NTShB / NTIL)
-
+    dplyr::mutate(TShB_incidence = NTShB / NTIL)
+  
   TShB_incidence <-
     x %>% dplyr::select(REP,
                         TRT,
@@ -82,10 +99,10 @@ reformat <- function(files) {
                         NTIL,
                         NTShB,
                         TShB_incidence)
-
+  
   # Gather tillers--------------------------------------------------------------
   TIL <- vector(mode = "list", length = 4)
-
+  
   for (i in 1:4) {
     y <-
       x %>%
@@ -107,30 +124,30 @@ reformat <- function(files) {
         paste0("SLE", i),
         paste0("SLF", i)
       ) %>%
-      gather(LEAF,
-             LEAF_ShB,
-             starts_with("SL"))
-
+      tidyr::gather(LEAF,
+                    LEAF_ShB,
+                    dplyr::starts_with("SL"))
+    
     names(y)[7] <- "TIL"
     names(y)[8] <- "GL"
     names(y)[9] <- "DL"
     names(y)[10] <- "TIL_ShB"
-
+    
     y$LEAF[y$LEAF == paste0("SLA", i)] <- 1
     y$LEAF[y$LEAF == paste0("SLB", i)] <- 2
     y$LEAF[y$LEAF == paste0("SLC", i)] <- 3
     y$LEAF[y$LEAF == paste0("SLD", i)] <- 4
     y$LEAF[y$LEAF == paste0("SLE", i)] <- 5
     y$LEAF[y$LEAF == paste0("SLF", i)] <- 6
-
+    
     TIL[[i]] <- y
   }
-
-  z <- bind_rows(TIL)
-  x <- left_join(TShB_incidence, z)
-
+  
+  z <- dplyr::bind_rows(TIL)
+  x <- dplyr::left_join(TShB_incidence, z)
+  
   # Add dates ------------------------------------------------------------------
-
+  
   switch(
     files,
     "data/DS2015_Raw_22DAI.csv" = {
@@ -167,8 +184,16 @@ reformat <- function(files) {
 }
 
 # Run reformat function for all 2015 files -------------------------------------
-DS2015 <- map_df(files, reformat)
+DS2015 <- purrr::map_df(files, reformat)
+```
 
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+
+``` r
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
 DS2015$NRTE[which(DS2015$NRTE == "N1")] <- 100
@@ -217,7 +242,7 @@ DS2015 <-
 
 DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
 
-DS2015 <- as_tibble(arrange(DS2015, ASMT, PLOT))
+DS2015 <- tibble::as_tibble(dplyr::arrange(DS2015, ASMT, PLOT))
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -226,6 +251,4 @@ DAYS <- as.numeric(substr(files, 17, 18))
 DS2015$DAYS <- c(rep(0, 10368), rep(diff(DAYS), each = 10368))
 
 rm(files, reformat)
-
-# write CSV to cache -----------------------------------------------------------
-write_csv(DS2015, "./cache/AWD_2015_Data.csv")
+```
