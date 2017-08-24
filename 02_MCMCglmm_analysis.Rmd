@@ -15,29 +15,29 @@ The analyses are semi-automated. When this file is knit, it automatically loads 
 
 #### Interpreting these analyses
 
-For a quick overview, see this thread on Stack Overflow that walks through the output of `summary.MCMCglmm`,
-which is used below. [R: Making sense of the output of a MCMCglmm](http://stackoverflow.com/questions/20993643/r-making-sense-of-the-output-of-a-mcmcglmm)
+The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
 
-The MCMCglmm documentation is more in-depth but should still be referenced.
 ```{r MCMCglmm, eval=FALSE}
 library(MCMCglmm)
 vignette("Overview")
 vignette("CourseNotes")
 ```
 
-I found this CrossValidated topic to be useful in interpreting the outputs from
-MCMCglmm as it explains the interpretation of the effects. While it is about
-output from a `lmer`, the output is read in the same way, [How to interpret 2-way and 3-way interaction in lmer?](https://stats.stackexchange.com/questions/87412/how-to-interpret-2-way-and-3-way-interaction-in-lmer#87415).
+When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatement.
 
 The base levels for this analysis are:
 
-- 2015 `NRTE:0`
+- 2015 
+  
+    - `NRTE:0`
 
-- 2015 `WMGT:FLD`
+    - `WMGT:FLD`
 
-- 2016 `NRTE:60`
+- 2016
 
-- 2016 `WMGT:FLD`
+    - `NRTE:60`
+
+    - `WMGT:FLD`
 
 #### Changes between 2015 and 2016
 
@@ -48,7 +48,7 @@ but the main one is this. Therefore, the analyses will be conducted separately
 such that comparisons will only be observational and cannot be statistically
 compared.
 
-#### MCMCglmm model fitting notes
+#### _MCMCglmm_ model fitting notes
 
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
@@ -63,7 +63,7 @@ Use `set.seed()` for reproducibility.
 set.seed(27)
 ```
 
-The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 Create individual data frames for the analysis.
 
@@ -83,7 +83,7 @@ AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 ```
 
-Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames` exist, we can start the analysis.
+Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start the analysis.
 
 ## 2015
 
@@ -452,4 +452,3 @@ In 2016 the none of the treatments, nitrogen rate or water management, were sign
 ```{r session_info, echo=FALSE}
 devtools::session_info()
 ```
-
