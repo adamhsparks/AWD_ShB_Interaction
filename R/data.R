@@ -12,4 +12,3 @@
 #' organised into a tidy data frame.
 #'
 "RAW_data"
-

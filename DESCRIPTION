@@ -6,7 +6,7 @@ Description: Provides a research compendium of analysis associated with experime
   conducted at the International Rice Research Institute (IRRI), Los Baños,
   Calabarzon, Philippines in the dry seasons of 2015 and 2016. The experiments
   were designed to test the effects of alternate wetting and drying irrigation
-  managment on rice sheath blight disease. The plots were split plot with an
+  management on rice sheath blight disease. The plots were split plot with an
   irrigation main plot and nitrogen sub-plot treatments.
 Depends: R (>= 3.4.1)
 License: MIT + file LICENSE
