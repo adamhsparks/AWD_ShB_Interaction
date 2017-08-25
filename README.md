@@ -5,12 +5,12 @@
 rice.awd.shb
 ============
 
-The goal of *rice.awd.shb* is to examine the effects of using alternate wetting and drying irrigation techniques on insect pests and sheath blight disease in rice paddies.
+The goal of *rice.awd.shb* is to examine the effects of using alternate wetting and drying irrigation techniques on insect populations and sheath blight disease in rice paddies.
 
 Study
 -----
 
-**Objective:** Study the effects of different water and nitrogen managements on sheath blight of rice
+**Objective 1:** Study the effects of different water and nitrogen managements on sheath blight of rice
 
 **Project PI:** Dr. Adam H Sparks and Dr. Buyung AR Hadi
 
@@ -272,7 +272,7 @@ Resources
 
 Please cite this compendium as:
 
-> Authors, (2017). *Title of compendium*. Accessed 25 Aug 2017. Online at <https://doi.org/xxx/xxx>
+> Authors, (2017). *Title of compendium*. Accessed 26 Aug 2017. Online at <https://doi.org/xxx/xxx>
 
 ### Licenses
 
