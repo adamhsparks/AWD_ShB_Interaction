@@ -2,7 +2,12 @@
 title: "Check Data Residuals"
 author: "Adam H Sparks"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: yeti
 vignette: >
   %\VignetteIndexEntry{02 Check Data Residuals}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,0 +1,5 @@
+title: rice.awd.pests
+url: https://phytopathology.github.io/rice_awd_pests/
+template:
+  params:
+    bootswatch: yeti

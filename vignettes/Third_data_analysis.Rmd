@@ -2,14 +2,19 @@
 title: "Sheath Blight Analysis"
 author: "Adam H Sparks"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: yeti
 vignette: >
   %\VignetteIndexEntry{Sheath Blight Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-#### Interpreting these analyses
+#### Interpreting These Analyses
 
 The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
 
@@ -44,7 +49,7 @@ but the main one is this. Therefore, the analyses will be conducted separately
 such that comparisons will only be observational and cannot be statistically
 compared.
 
-#### _MCMCglmm_ model fitting notes
+#### _MCMCglmm_ Model Fitting Notes
 
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
@@ -86,7 +91,7 @@ AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 
 Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start the analysis.
 
-## 2015
+## 2015 Models
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
@@ -252,7 +257,7 @@ plot_joint_random_error_dist(d = rdf,
 
 *******
 
-## 2016
+## 2016 Models
 
 ### 2016 Tiller Sheath Blight Incidence Model
 

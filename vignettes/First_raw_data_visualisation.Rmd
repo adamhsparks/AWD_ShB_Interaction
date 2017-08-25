@@ -2,7 +2,10 @@
 title: "Visualise Data"
 author: "Adam H Sparks"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: false
+    theme: yeti
 vignette: >
   %\VignetteIndexEntry{01 Visualise Data}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,15 +19,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r libraries}
 library("rice.awd.pests")
 library("dplyr")
+library("forcats")
 library("ggplot2")
-
-# create dataframes from data provided by rice.awd.pests package
-AUDPS_15 <- subset(AUDPS, YEAR == "2015")
-AUDPS_16 <- subset(AUDPS, YEAR == "2016")
 ```
 
+# Histogram plot of LShB_rating data
+
 ```{r}
-# Histogram plot of LShB_rating data ----------------------------------------
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   scale_linetype(name = "Year") +
@@ -32,8 +33,9 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
+# Histogram plot of TShB_rating data
+
 ```{r}
-# Histogram plot of TShB_rating data ----------------------------------------
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   scale_linetype(name = "Year") +
@@ -41,8 +43,9 @@ ggplot(RAW_data, aes(x = TIL_ShB)) +
   ggtitle("Tiller Sheath Blight Severity Rating")
 ```
 
+# Density plot of TShB_incidence data
+
 ```{r}
-# Density plot of TShB_incidence data ----------------------------------------
 ggplot(RAW_data, aes(x = TShB_incidence)) +
   geom_density(aes(fill = YEAR, colour = YEAR)) +
   geom_rug() +
@@ -54,24 +57,27 @@ theme(axis.text.x = element_text(size = 8,
                                  hjust = 1))
 ```
 
+# Histogram plot of green leaf data
+
 ```{r}
-# Histogram plot of green leaf data -------------------------------------------
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Green Leaves per Tiller")
 ```
 
+# Histogram plot plot of dead leaf data
+
 ```{r}
-# Histogram plot plot of dead leaf data ---------------------------------------
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
   ggtitle("Dry Leaves per Tiller")
 ```
 
+# Dot plot of leaf sheath blight severity data
+
 ```{r}
-# Dot plot of leaf sheath blight severity data --------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   geom_point(position = position_jitter(width = 0.05),
              aes(colour = YEAR), size = 0.75) +
@@ -82,8 +88,9 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
+# Dot plot of tiller sheath blight severity data
+
 ```{r}
-# Dot plot of tiller sheath blight severity data ------------------------------
 ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   geom_point(position = position_jitter(width = 0.05),
              aes(colour = YEAR), size = 0.75) +
@@ -94,8 +101,9 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
+# Line graph of tiller sheath blight incidence data
+
 ```{r}
-# Line graph of tiller sheath blight incidence data ---------------------------
 ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
                      group = TShB_incidence)) +
   geom_point(position = position_jitter(width = 0.05),
@@ -110,8 +118,9 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   ggtitle("Tiller Sheath Blight at Each Assessment")
 ```
 
+# Violin/dot plots of tiller sheath blight incidence data
+
 ```{r}
-# Violin/dot plots of tiller sheath blight incidence data ----------------------
 ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   geom_point(position = position_jitter(width = 0.2),
              aes(colour = YEAR), size = 0.1) +
@@ -124,6 +133,8 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
+# Box/dotplots of leaf sheath blight severity AUDPS
+
 ```{r}
 # Reorder factors for easier interpretation of plots
 AUDPS$NRTE <-
@@ -134,7 +145,6 @@ AUDPS$NRTE <-
                        "N60",
                        "N180")
 
-# Box/dotplots of leaf sheath blight severity AUDPS ----------------------------
 ggplot(AUDPS, aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
@@ -153,8 +163,10 @@ ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
+# Box/dotplots of tiller sheath blight incidence AUDPS data
+
 ```{r}
-# Box/dotplots of tiller sheath blight incidence AUDPS data --------------------
+
 ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
@@ -173,8 +185,9 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
+# Box/dotplots of leaf sheath blight severity AUDPS data
+
 ```{r}
-# Box/dotplots of leaf sheath blight severity AUDPS data -----------------------
 ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
@@ -193,8 +206,9 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
+# Line graph of leaf sheath blight severity data
+
 ```{r}
-# Line graph of leaf sheath blight severity data -------------------------------
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   summarize(value = mean(PERC_LEAF_ShB)) %>%
   ggplot(aes(x = ASMT,
@@ -208,8 +222,9 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggtitle("Leaf Sheath Blight")
 ```
 
+# Line graph of tiller sheath blight severity AUDPS data
+
 ```{r}
-# Line graph of tiller sheath blight severity AUDPS data ----------------------
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   summarize(value = mean(PERC_TIL_ShB)) %>%
   ggplot(aes(x = ASMT,
@@ -223,8 +238,9 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggtitle("Tiller Sheath Blight")
 ```
 
+# Line graph of tiller sheath blight incidence AUDPS data
+
 ```{r}
-# Line graph of tiller sheath blight incidence AUDPS data ---------------------
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   summarize(value = mean(TShB_incidence)) %>%
   ggplot(aes(x = ASMT,

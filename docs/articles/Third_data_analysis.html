@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sheath Blight Analysis • rice.awd.pests</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -79,7 +79,7 @@
 <div class="contents">
 <div id="interpreting-these-analyses" class="section level4">
 <h4 class="hasAnchor">
-<a href="#interpreting-these-analyses" class="anchor"></a>Interpreting these analyses</h4>
+<a href="#interpreting-these-analyses" class="anchor"></a>Interpreting These Analyses</h4>
 <p>The <em>MCMCglmm</em> documentation provides an excellent resource for interpreting the outputs for each of the models below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MCMCglmm)
 <span class="kw">vignette</span>(<span class="st">"Overview"</span>)
@@ -110,7 +110,7 @@
 </div>
 <div id="mcmcglmm-model-fitting-notes" class="section level4">
 <h4 class="hasAnchor">
-<a href="#mcmcglmm-model-fitting-notes" class="anchor"></a><em>MCMCglmm</em> model fitting notes</h4>
+<a href="#mcmcglmm-model-fitting-notes" class="anchor"></a><em>MCMCglmm</em> Model Fitting Notes</h4>
 <p>Fitting the models with the default iterations resulted in some less than acceptable models. Because of this, the number of iterations has been increased, <code>nitt = 5e+05</code> and <code>burnin = 5000</code> and <code>thin = 100</code>. This results in much smaller errors for random effects and better models.</p>
 </div>
 <div id="setup" class="section level2">
@@ -143,9 +143,9 @@ AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw
 AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</code></pre></div>
 <p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> <code>data.frames()</code> exist, we can start the analysis.</p>
 </div>
-<div id="section" class="section level2">
+<div id="models" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section" class="anchor"></a>2015</h2>
+<a href="#models" class="anchor"></a>2015 Models</h2>
 <div id="tiller-sheath-blight-incidence-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h3>
@@ -385,9 +385,9 @@ rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severi
 <hr>
 </div>
 </div>
-<div id="section-1" class="section level2">
+<div id="models-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-1" class="anchor"></a>2016</h2>
+<a href="#models-1" class="anchor"></a>2016 Models</h2>
 <div id="tiller-sheath-blight-incidence-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
@@ -662,8 +662,8 @@ rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severi
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#setup">Setup</a></li>
-      <li><a href="#section">2015</a></li>
-      <li><a href="#section-1">2016</a></li>
+      <li><a href="#models">2015 Models</a></li>
+      <li><a href="#models-1">2016 Models</a></li>
       <li><a href="#conclusions">Conclusions</a></li>
       </ul>
 </div>
