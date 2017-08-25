@@ -1,5 +1,5 @@
 ---
-title: Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Pests and Diseases?
+title: Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Insect Populations and Diseases?
 author:
   - name: A.H. Sparks
     email: adam.sparks@usq.edu.au
