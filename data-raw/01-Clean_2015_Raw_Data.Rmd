@@ -264,7 +264,7 @@ save(DS2015, file = "../data/DS2015", compress = "bzip2")
 
 The raw data are located in the `extdata` folder of the installed
 _rice.awd.pests_ and can be accessed using:
-```r
+```{r, eval=FALSE}
 load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2016_Raw_2.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2016_Raw_3.csv", package = "rice.awd.pests"))
