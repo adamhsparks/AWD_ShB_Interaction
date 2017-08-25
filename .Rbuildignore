@@ -1,2 +1,12 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^CONDUCT\.md$
+^CONTRIBUTING\.md$
+^README\.Rmd$
+^README-.*\.png$
+^data-raw$
+^\.travis\.yml$
+^Dockerfile$
+analysis
+^circle\.yml$
+^docs$

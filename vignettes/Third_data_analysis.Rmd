@@ -61,6 +61,11 @@ smaller errors for random effects and better models.
 Use `set.seed()` for reproducibility.
 
 ```{r set_seed}
+library("rice.awd.pests")
+library("reshape2")
+library("MCMCglmm")
+library("plotMCMC")
+
 set.seed(27)
 ```
 
@@ -107,10 +112,10 @@ summary(TShB_incidence_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:4])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
@@ -161,10 +166,10 @@ summary(TShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:4])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_severity_lmm_2015$Sol)
@@ -215,10 +220,10 @@ summary(LShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_severity_lmm_2015$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(LShB_severity_lmm_2015$Sol[, 2:4])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(LShB_severity_lmm_2015$Sol)
@@ -275,10 +280,10 @@ summary(TShB_incidence_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:3])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
@@ -330,10 +335,10 @@ summary(TShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:3])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_severity_lmm_2016$Sol)
@@ -384,10 +389,10 @@ summary(LShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+reps <- reshape2::melt(reps)
 
 trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:3])
-trts <- melt(trts)
+trts <- reshape2::melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(LShB_severity_lmm_2016$Sol)

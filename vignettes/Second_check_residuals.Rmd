@@ -4,7 +4,7 @@ author: "Adam H Sparks"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Check Data Residuals}
+  %\VignetteIndexEntry{02 Check Data Residuals}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,12 +24,11 @@ Below are several tests for each of the different sets of data using four differ
 ## 2015 Tiller Incidence
 
 ```{r load_libraries}
-library(car)
-
+library("rice.awd.pests")
+library("car")
 ```
 
 ```{r create data_frames}
-load(system.file("data", "AWD_AUDPS.rda", package = "rice.awd.pests"))
 AUDPS_15 <- subset(AUDPS, YEAR == 2015)
 AUDPS_16 <- subset(AUDPS, YEAR == 2016)
 ```
