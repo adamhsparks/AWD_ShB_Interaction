@@ -640,23 +640,23 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = as.vector(TShB_inc_15[1:5, 6]))
+                   dates = dplyr::pull(TShB_inc_15[1:5, 6]))
 
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:6],
-                   dates = as.vector(TShB_sev_15[1:5, 6]))
+                   dates = dplyr::pull(TShB_sev_15[1:5, 6]))
 
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
-                   dates = as.vector(LShB_sev_15[1:5, 6]))
+                   dates = dplyr::pull(LShB_sev_15[1:5, 6]))
 
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
-        dates = as.vector(TShB_perc_15[1:5, 6]))
+        dates = dplyr::pull(TShB_perc_15[1:5, 6]))
 
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
-        dates = as.vector(LShB_perc_15[1:5, 6]))
+        dates = dplyr::pull(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
   tibble::as_tibble(
@@ -675,7 +675,7 @@ TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 ShB_15 <- dplyr::left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
-# 2015 AUDPS -------------------------------------------------------------------
+# 2016 AUDPS -------------------------------------------------------------------
 
 # 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
@@ -736,23 +736,23 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:5],
-                   dates = as.vector(TShB_inc_16[1:4, 6]))
+                   dates = dplyr::pull(TShB_inc_16[1:4, 6]))
 
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:5],
-                   dates = as.vector(TShB_sev_16[1:4, 6]))
+                   dates = dplyr::pull(TShB_sev_16[1:4, 6]))
 
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:5],
-                   dates = as.vector(LShB_sev_16[1:4, 6]))
+                   dates = dplyr::pull(LShB_sev_16[1:4, 6]))
 
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:5],
-                   dates = as.vector(TShB_perc_16[1:4, 6]))
+                   dates = dplyr::pull(TShB_perc_16[1:4, 6]))
 
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:5],
-                   dates = as.vector(LShB_perc_16[1:4, 6]))
+                   dates = dplyr::pull(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
   tibble::as_tibble(
@@ -766,7 +766,7 @@ AUDPS_16 <-
     )
   )
 
-# add plot numbers to merge with the remaing treatment data
+# add plot numbers to merge with the remaining treatment data
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 

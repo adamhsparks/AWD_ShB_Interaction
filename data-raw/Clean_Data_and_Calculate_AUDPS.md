@@ -738,54 +738,24 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = as.vector(TShB_inc_15[1:5, 6]))
-```
+                   dates = dplyr::pull(TShB_inc_15[1:5, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:6],
-                   dates = as.vector(TShB_sev_15[1:5, 6]))
-```
+                   dates = dplyr::pull(TShB_sev_15[1:5, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
-                   dates = as.vector(LShB_sev_15[1:5, 6]))
-```
+                   dates = dplyr::pull(LShB_sev_15[1:5, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
-        dates = as.vector(TShB_perc_15[1:5, 6]))
-```
+        dates = dplyr::pull(TShB_perc_15[1:5, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
-        dates = as.vector(LShB_perc_15[1:5, 6]))
-```
+        dates = dplyr::pull(LShB_perc_15[1:5, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 AUDPS_15 <-
   tibble::as_tibble(
     cbind(
@@ -803,7 +773,7 @@ TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 ShB_15 <- dplyr::left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
-# 2015 AUDPS -------------------------------------------------------------------
+# 2016 AUDPS -------------------------------------------------------------------
 
 # 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
@@ -864,54 +834,24 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:5],
-                   dates = as.vector(TShB_inc_16[1:4, 6]))
-```
+                   dates = dplyr::pull(TShB_inc_16[1:4, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:5],
-                   dates = as.vector(TShB_sev_16[1:4, 6]))
-```
+                   dates = dplyr::pull(TShB_sev_16[1:4, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:5],
-                   dates = as.vector(LShB_sev_16[1:4, 6]))
-```
+                   dates = dplyr::pull(LShB_sev_16[1:4, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:5],
-                   dates = as.vector(TShB_perc_16[1:4, 6]))
-```
+                   dates = dplyr::pull(TShB_perc_16[1:4, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:5],
-                   dates = as.vector(LShB_perc_16[1:4, 6]))
-```
+                   dates = dplyr::pull(LShB_perc_16[1:4, 6]))
 
-    ## Error:
-    ## The number of dates of evaluation 
-    ## must agree with the number of evaluations
-
-``` r
 AUDPS_16 <-
   tibble::as_tibble(
     cbind(
@@ -924,7 +864,7 @@ AUDPS_16 <-
     )
   )
 
-# add plot numbers to merge with the remaing treatment data
+# add plot numbers to merge with the remaining treatment data
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
@@ -950,4 +890,4 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-    ## Saving AUDPS as AUDPS.rda to /Users/U8004755/Development/AWD_ShB_Interaction/data
+    ## Saving AUDPS as AUDPS.rda to /Users/asparks/Development/rice_awd_pests/data
