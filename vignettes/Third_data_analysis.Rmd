@@ -9,11 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-## Notes on This Analysis Before Starting
-
-The analyses are semi-automated. When this file is knit, it automatically loads the _ProjectTemplate_ package and calls the `load.project()` function. This loads the data, cleans and munges it creating the `AUDPS` data frame used for the analysis below. The scripts used to clean and munge the data are located in the [munge](./munge) folder and numbered in the sequential order in which they are run.
-
 #### Interpreting these analyses
 
 The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.

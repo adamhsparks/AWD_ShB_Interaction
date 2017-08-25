@@ -77,10 +77,6 @@
     
     
 <div class="contents">
-<div id="notes-on-this-analysis-before-starting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#notes-on-this-analysis-before-starting" class="anchor"></a>Notes on This Analysis Before Starting</h2>
-<p>The analyses are semi-automated. When this file is knit, it automatically loads the <em>ProjectTemplate</em> package and calls the <code>load.project()</code> function. This loads the data, cleans and munges it creating the <code>AUDPS</code> data frame used for the analysis below. The scripts used to clean and munge the data are located in the <a href="./munge">munge</a> folder and numbered in the sequential order in which they are run.</p>
 <div id="interpreting-these-analyses" class="section level4">
 <h4 class="hasAnchor">
 <a href="#interpreting-these-analyses" class="anchor"></a>Interpreting these analyses</h4>
@@ -116,7 +112,6 @@
 <h4 class="hasAnchor">
 <a href="#mcmcglmm-model-fitting-notes" class="anchor"></a><em>MCMCglmm</em> model fitting notes</h4>
 <p>Fitting the models with the default iterations resulted in some less than acceptable models. Because of this, the number of iterations has been increased, <code>nitt = 5e+05</code> and <code>burnin = 5000</code> and <code>thin = 100</code>. This results in much smaller errors for random effects and better models.</p>
-</div>
 </div>
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
@@ -666,8 +661,7 @@ rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severi
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#notes-on-this-analysis-before-starting">Notes on This Analysis Before Starting</a></li>
-      <li><a href="#setup">Setup</a></li>
+<li><a href="#setup">Setup</a></li>
       <li><a href="#section">2015</a></li>
       <li><a href="#section-1">2016</a></li>
       <li><a href="#conclusions">Conclusions</a></li>
