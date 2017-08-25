@@ -84,6 +84,7 @@
     
     
 <div class="contents">
+<p>Based on the residual plots where several do not meet assumptions for a normal distribution, I’ve elected to use <code><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm()</a></code> for a split plot analysis rather than a <code>lmer()</code> model. The <code><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm()</a></code> model will work for all the data regardless of the residuals.</p>
 <div id="interpreting-these-analyses" class="section level4">
 <h4 class="hasAnchor">
 <a href="#interpreting-these-analyses" class="anchor"></a>Interpreting These Analyses</h4>
@@ -91,7 +92,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MCMCglmm)
 <span class="kw">vignette</span>(<span class="st">"Overview"</span>)
 <span class="kw">vignette</span>(<span class="st">"CourseNotes"</span>)</code></pre></div>
-<p>When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatement.</p>
+<p>When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
 <p>The base levels for this analysis are:</p>
 <ul>
 <li>
