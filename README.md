@@ -12,7 +12,7 @@ Study
 
 **Objective 1:** Study the effects of different water and nitrogen managements on sheath blight of rice
 
-**Project PI:** Dr. Adam H Sparks and Dr. Buyung AR Hadi
+**Project PI:** Dr. Adam H Sparks
 
 **Staff:**
 
