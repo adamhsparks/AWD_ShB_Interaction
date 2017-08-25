@@ -11,3 +11,4 @@
 analysis
 ^circle\.yml$
 ^docs$
+^appveyor\.yml$

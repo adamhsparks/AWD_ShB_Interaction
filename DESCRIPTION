@@ -33,3 +33,5 @@ Suggests: knitr,
     rmarkdown,
     rticles (>= 0.4.1)
 VignetteBuilder: knitr
+URL: https://github.com/phytopathology/rice_awd_pests
+BugReports: https://github.com/phytopathology/rice_awd_pests/issues

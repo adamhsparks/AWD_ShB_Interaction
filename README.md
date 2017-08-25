@@ -1,5 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/phytopathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/phytopathology/rice_awd_pests) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&svg=true)](https://ci.appveyor.com/project/phytopathology/rice_awd_pests)
+
 rice.awd.shb
 ============
 
