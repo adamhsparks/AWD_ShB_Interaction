@@ -8,7 +8,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 The raw data are located in the `extdata` folder of the installed
-_rice.awd.pests_ and can be accessed using:
+_rice.awd.pests_ 
+
+# Dry season 2015 importing and cleaning
+
+DS2015 data can be accessed using:
 
 ```{r, eval=FALSE}
 load(system.file("extdata", "DS2015_Raw_22DAI.csv", package = "rice.awd.pests"))
@@ -257,13 +261,13 @@ rm(files, reformat)
 if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
-
-save(DS2015, file = "../data/DS2015", compress = "bzip2")
-
 ```
 
-The raw data are located in the `extdata` folder of the installed
+# Dry season 2016 importing and cleaning
+
+The 2016 season raw data are located in the `extdata` folder of the installed
 _rice.awd.pests_ and can be accessed using:
+
 ```{r, eval=FALSE}
 load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2016_Raw_2.csv", package = "rice.awd.pests"))
@@ -487,6 +491,18 @@ DS2016 <-
   )
 ```
 
+# Calculating Area Under the Disease Progress Stairs (AUDPS)
+
+Because the data were collected on an ordinal scale, but not evenly spaced,
+the data are converted to the midpoint value of the percent range for severity
+and then the AUDPS is calculated from that. See lines 544 and 559 for this.
+
+After that the AUDPS is calculated using functionality from the _agricolae_
+package.
+
+Last, the data are saved in the package for use analysis, which is detailed
+in the package [vingettes](../vignettes).
+
 ```{r}
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
@@ -532,7 +548,6 @@ RAW_data$TRT <-
   )
 
 # add column with midpoint % tiller ShB severity -------------------------------
-
 RAW_data <-
   dplyr::mutate(
     RAW_data,
@@ -636,11 +651,11 @@ LShB_sev_AUDPS <-
                    dates = as.vector(LShB_sev_15[1:5, 6]))
 
 TShB_percent_AUDPS <-
-  audps(evaluation = TShB_perc_wide[, 2:6],
+  agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
         dates = as.vector(TShB_perc_15[1:5, 6]))
 
 LShB_percent_AUDPS <-
-  audps(evaluation = LShB_perc_wide[, 2:6],
+  agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
         dates = as.vector(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
@@ -658,7 +673,7 @@ AUDPS_15 <-
 AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
-ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
+ShB_15 <- dplyr::left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
 # 2015 AUDPS -------------------------------------------------------------------
 
@@ -690,7 +705,7 @@ TShB_perc_16 <-
   dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
                       .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
-  varrange(PLOT)
+  dplyr::arrange(PLOT)
 
 TShB_perc_wide <-
   reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
@@ -755,14 +770,14 @@ AUDPS_16 <-
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
-ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
+ShB_16 <- dplyr::left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
-AUDPS <- tibble::as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- tibble::as_data_frame(tibble::as_tibble(rbind(ShB_15, ShB_16)))
 AUDPS <- tidyr::separate(data = AUDPS, col = TRT,
                          sep = "_",
                          into = c("WMGT", "NRTE"))
-AUDPS <- agricolae::mutate_at(.tbl = AUDPS,
+AUDPS <- dplyr::mutate_at(.tbl = AUDPS,
                               .funs = factor,
                               .vars = c("WMGT", "NRTE"))
 
@@ -772,5 +787,7 @@ if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
 
-save(AUDPS, file = "../data/AWD_AUDPS", compress = "bzip2")
+devtools::use_data(AUDPS,
+                   compress = "bzip2",
+                   overwrite = TRUE)
 ```

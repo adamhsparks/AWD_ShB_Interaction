@@ -1,16 +1,14 @@
----
-title: "Clean 2015 Raw Data"
-output: github_document
----
+Clean 2015 Raw Data
+================
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+The raw data are located in the `extdata` folder of the installed *rice.awd.pests*
 
-The raw data are located in the `extdata` folder of the installed
-_rice.awd.pests_ and can be accessed using:
+Dry season 2015 importing and cleaning
+======================================
 
-```{r, eval=FALSE}
+DS2015 data can be accessed using:
+
+``` r
 load(system.file("extdata", "DS2015_Raw_22DAI.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2015_Raw_35DAI.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2015_Raw_49DAI.csv", package = "rice.awd.pests"))
@@ -18,10 +16,7 @@ load(system.file("extdata", "DS2015_Raw_62DAI.csv", package = "rice.awd.pests"))
 load(system.file("extdata", "DS2015_Raw_83DAI.csv", package = "rice.awd.pests"))
 ```
 
-## 2015 raw data
-
-```{r}
-
+``` r
 library(readr)
 library(magrittr)
 
@@ -195,7 +190,15 @@ reformat <- function(files) {
 
 # Run reformat function for all 2015 files -------------------------------------
 DS2015 <- purrr::map_df(files, reformat)
+```
 
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+    ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+
+``` r
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
 DS2015$NRTE[which(DS2015$NRTE == "N1")] <- 100
@@ -254,19 +257,26 @@ DS2015$DAYS <- c(rep(0, 10368), rep(diff(DAYS), each = 10368))
 
 rm(files, reformat)
 
+# Save data for inclusion in the package ---------------------------------------
+
+if (!dir.exists("../data")) {
+  dir.create("../data", recursive = TRUE)
+}
 ```
 
-## 2016 raw data
+Dry season 2016 importing and cleaning
+======================================
 
-The raw data are located in the `extdata` folder of the installed
-_rice.awd.pests_ and can be accessed using:
+The 2016 season raw data are located in the `extdata` folder of the installed *rice.awd.pests* and can be accessed using:
 
-`load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))`
-`load(system.file("extdata", "DS2016_Raw_2.csv", package = "rice.awd.pests"))`
-`load(system.file("extdata", "DS2016_Raw_3.csv", package = "rice.awd.pests"))`
-`load(system.file("extdata", "DS2016_Raw_4.csv", package = "rice.awd.pests"))`
+``` r
+load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2016_Raw_2.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2016_Raw_3.csv", package = "rice.awd.pests"))
+load(system.file("extdata", "DS2016_Raw_4.csv", package = "rice.awd.pests"))
+```
 
-```{r}
+``` r
 # Preprocess 2016 data for all assessments
 #
 # 1. Cleanup date format and fill empty dates
@@ -275,6 +285,31 @@ _rice.awd.pests_ and can be accessed using:
 
 # First assessment -------------------------------------------------------------
 DS2016_A1 <- readr::read_csv("data/DS2016_Raw_1.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   DATE = col_character(),
+    ##   REP = col_integer(),
+    ##   WMGT = col_character(),
+    ##   NRTE = col_character(),
+    ##   SMPL = col_character(),
+    ##   HILL = col_integer(),
+    ##   NTIL = col_integer(),
+    ##   NTShB = col_integer(),
+    ##   NSHShB = col_integer(),
+    ##   TIL = col_integer(),
+    ##   GL = col_integer(),
+    ##   DL = col_integer(),
+    ##   ShBL1 = col_integer(),
+    ##   ShBL2 = col_integer(),
+    ##   ShBL3 = col_integer(),
+    ##   ShBL4 = col_integer(),
+    ##   ShBL5 = col_integer(),
+    ##   ShBL6 = col_integer()
+    ## )
+
+``` r
 # Fill missing values in NTIL and NTShB
 DS2016_A1 <-
   DS2016_A1 %>% tidyr::fill(NTIL)
@@ -289,6 +324,31 @@ DS2016_A1$PLOT <- rep(1:16, each = 72)
 
 # Second assessement -----------------------------------------------------------
 DS2016_A2 <- readr::read_csv("data/DS2016_Raw_2.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   DATE = col_character(),
+    ##   REP = col_integer(),
+    ##   WMGT = col_character(),
+    ##   NRTE = col_character(),
+    ##   SMPL = col_character(),
+    ##   HILL = col_integer(),
+    ##   NTIL = col_integer(),
+    ##   NTShB = col_integer(),
+    ##   NSHShB = col_integer(),
+    ##   TIL = col_integer(),
+    ##   GL = col_integer(),
+    ##   DL = col_integer(),
+    ##   ShBL1 = col_integer(),
+    ##   ShBL2 = col_integer(),
+    ##   ShBL3 = col_integer(),
+    ##   ShBL4 = col_integer(),
+    ##   ShBL5 = col_integer(),
+    ##   ShBL6 = col_integer()
+    ## )
+
+``` r
 DS2016_A2 <-
   DS2016_A2 %>% tidyr::fill(NTIL)
 DS2016_A2 <-
@@ -302,6 +362,31 @@ DS2016_A2$PLOT <- rep(1:16, each = 72)
 
 # Third assessement ------------------------------------------------------------
 DS2016_A3 <- readr::read_csv("data/DS2016_Raw_3.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   DATE = col_character(),
+    ##   REP = col_integer(),
+    ##   WMGT = col_character(),
+    ##   NRTE = col_character(),
+    ##   SMPL = col_character(),
+    ##   HILL = col_integer(),
+    ##   NTIL = col_integer(),
+    ##   NTShB = col_integer(),
+    ##   NSHShB = col_integer(),
+    ##   TIL = col_integer(),
+    ##   GL = col_integer(),
+    ##   DL = col_integer(),
+    ##   ShBL1 = col_integer(),
+    ##   ShBL2 = col_integer(),
+    ##   ShBL3 = col_integer(),
+    ##   ShBL4 = col_integer(),
+    ##   ShBL5 = col_integer(),
+    ##   ShBL6 = col_character()
+    ## )
+
+``` r
 DS2016_A3 <-
   DS2016_A3 %>% tidyr::fill(NTIL)
 DS2016_A3 <-
@@ -314,6 +399,31 @@ DS2016_A3$PLOT <- rep(1:16, each = 72)
 
 # Fourth assessment ------------------------------------------------------------
 DS2016_A4 <- readr::read_csv("data/DS2016_Raw_4.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   DATE = col_character(),
+    ##   REP = col_integer(),
+    ##   WMGT = col_character(),
+    ##   NRTE = col_character(),
+    ##   SMPL = col_character(),
+    ##   HILL = col_integer(),
+    ##   NTIL = col_integer(),
+    ##   NTShB = col_integer(),
+    ##   NSHShB = col_integer(),
+    ##   TIL = col_integer(),
+    ##   GL = col_integer(),
+    ##   DL = col_integer(),
+    ##   ShBL1 = col_integer(),
+    ##   ShBL2 = col_integer(),
+    ##   ShBL3 = col_integer(),
+    ##   ShBL4 = col_character(),
+    ##   ShBL5 = col_character(),
+    ##   ShBL6 = col_character()
+    ## )
+
+``` r
 DS2016_A4 <-
   DS2016_A4 %>% tidyr::fill(NTIL)
 DS2016_A4 <-
@@ -482,9 +592,16 @@ DS2016 <-
   )
 ```
 
-## Calculate AUDPS and create final data for analysis
+Calculating Area Under the Disease Progress Stairs (AUDPS)
+==========================================================
 
-```{r}
+Because the data were collected on an ordinal scale, but not evenly spaced, the data are converted to the midpoint value of the percent range for severity and then the AUDPS is calculated from that. See lines 544 and 559 for this.
+
+After that the AUDPS is calculated using functionality from the *agricolae* package.
+
+Last, the data are saved in the package for use analysis, which is detailed in the package [vingettes](../vignettes).
+
+``` r
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
 RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
@@ -529,7 +646,6 @@ RAW_data$TRT <-
   )
 
 # add column with midpoint % tiller ShB severity -------------------------------
-
 RAW_data <-
   dplyr::mutate(
     RAW_data,
@@ -557,8 +673,6 @@ RAW_data <-
       TRUE ~ 75
     )
   )
-
-devtools::use_data(RAW_data, compress = "bzip2")
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
@@ -624,24 +738,54 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = dplyr::pull(TShB_inc_15[1:5, 6]))
+                   dates = as.vector(TShB_inc_15[1:5, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(TShB_sev_15[1:5, 6]))
+                   dates = as.vector(TShB_sev_15[1:5, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(LShB_sev_15[1:5, 6]))
+                   dates = as.vector(LShB_sev_15[1:5, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
-        dates = dplyr::pull(TShB_perc_15[1:5, 6]))
+        dates = as.vector(TShB_perc_15[1:5, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
-        dates = dplyr::pull(LShB_perc_15[1:5, 6]))
+        dates = as.vector(LShB_perc_15[1:5, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 AUDPS_15 <-
   tibble::as_tibble(
     cbind(
@@ -720,24 +864,54 @@ LShB_perc_wide <-
 
 TShB_inc_AUDPS <-
   agricolae::audps(evaluation = TShB_inc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_inc_16[1:4, 6]))
+                   dates = as.vector(TShB_inc_16[1:4, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 TShB_sev_AUDPS <-
   agricolae::audps(evaluation = TShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(TShB_sev_16[1:4, 6]))
+                   dates = as.vector(TShB_sev_16[1:4, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(LShB_sev_16[1:4, 6]))
+                   dates = as.vector(LShB_sev_16[1:4, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_perc_16[1:4, 6]))
+                   dates = as.vector(TShB_perc_16[1:4, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(LShB_perc_16[1:4, 6]))
+                   dates = as.vector(LShB_perc_16[1:4, 6]))
+```
 
+    ## Error:
+    ## The number of dates of evaluation 
+    ## must agree with the number of evaluations
+
+``` r
 AUDPS_16 <-
   tibble::as_tibble(
     cbind(
@@ -771,5 +945,9 @@ if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
 
-devtools::use_data(AUDPS,  compress = "bzip2")
+devtools::use_data(AUDPS,
+                   compress = "bzip2",
+                   overwrite = TRUE)
 ```
+
+    ## Saving AUDPS as AUDPS.rda to /Users/U8004755/Development/AWD_ShB_Interaction/data
