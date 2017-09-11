@@ -1,0 +1,31 @@
+---
+title: "SciPlant2017 Presentation"
+author: "AH Sparks, NP Castilla, BO Sander"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+  toc: true
+toc_float: true
+toc_depth: 3
+theme: yeti
+vignette: >
+  %\VignetteIndexEntry{Sheath Blight Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r load_libraries}
+library(officer)
+library(flextable)
+library(magrittr)
+```
+
+```{r import_template}
+my_pres <- read_pptx() %>% 
+  add_slide(layout = "Two Content", master = "Office Theme") %>% 
+  add_slide(layout = "Title and Content", master = "Office Theme") %>% 
+  add_slide(layout = "Title Only", master = "Office Theme")
+length(my_pres)
+```
+
+See <https://davidgohel.github.io/officer/articles/powerpoint.html> for more.
