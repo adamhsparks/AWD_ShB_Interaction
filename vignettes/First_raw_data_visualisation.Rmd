@@ -101,7 +101,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
-# Line graph of tiller sheath blight incidence data
+# Dot plot of tiller sheath blight incidence data
 
 ```{r}
 ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
