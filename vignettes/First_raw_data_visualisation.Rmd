@@ -28,7 +28,6 @@ library("ggplot2")
 ```{r}
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
-  scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
@@ -38,7 +37,6 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
 ```{r}
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
-  scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   ggtitle("Tiller Sheath Blight Severity Rating")
 ```

@@ -78,7 +78,7 @@
       <h1>Visualise Data</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2017-09-14</h4>
+            <h4 class="date">2017-09-18</h4>
           </div>
 
     
@@ -101,7 +101,6 @@
 <a href="#histogram-plot-of-lshb_rating-data" class="anchor"></a>Histogram plot of LShB_rating data</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(RAW_data, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> LEAF_ShB)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_histogram">geom_histogram</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR), <span class="dt">stat =</span> <span class="st">"count"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_linetype">scale_linetype</a></span>(<span class="dt">name =</span> <span class="st">"Year"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>NRTE) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity Rating"</span>)</code></pre></div>
 <pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
@@ -112,7 +111,6 @@
 <a href="#histogram-plot-of-tshb_rating-data" class="anchor"></a>Histogram plot of TShB_rating data</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(RAW_data, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> TIL_ShB)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_histogram">geom_histogram</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR), <span class="dt">stat =</span> <span class="st">"count"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_linetype">scale_linetype</a></span>(<span class="dt">name =</span> <span class="st">"Year"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>NRTE) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity Rating"</span>)</code></pre></div>
 <pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
