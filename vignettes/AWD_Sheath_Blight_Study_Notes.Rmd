@@ -1,0 +1,375 @@
+---
+title: "AWD Sheath Blight Study Notes"
+author: "N P Castilla"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: TRUE
+    toc_float: true
+    theme: yeti
+vignette: >
+  %\VignetteIndexEntry{AWD Sheath Blight Study Notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Although this study examines the same effect of alternate wetting and drying
+(AWD) on rice sheath blight, causal agent _Rhizoctonia solani_, there are
+differences between the 2015 and 2016 seasons that make them two separate
+experiments that cannot be analysed as one. These changes are a result of the
+findings in 2015 and were made in an effort to improve the experiment.
+
+The differences are: 
+
+ - plot sizes are larger in 2016 than 2015,
+ 
+ - the inoculation amounts and timing differ with 2016 having more applied to the sampling area at a later date after transplanting, and
+ 
+ - nitrogen rates were changed in 2016.
+
+See the following lists for complete details.
+
+# Schedule
+
+IRRI Dry Season (2)
+
+-   2015 (December 2014 – April 2015)
+
+-   2016 (January 2016 - May 2016)
+
+## 2015 Schedule of Major Activities
+
+<table>
+<tr>
+<th style = "padding:5px;">Activity</td>
+<th style = "padding:5px;">Date</td>
+<th style = "padding:5px;">Days After<br />Transplanting</td>
+<th style = "padding:5px;">Days After<br /> Inoculation</td>
+</tr>
+<tr>
+<td style = "padding:5px;">Transplanting</td>
+<td style = "padding:5px;">2015-09-01</td>
+<td style = "padding:5px; text-align:right;">0</td>
+<td style = "padding:5px;"></td>
+</tr>
+<tr>
+<td style = "padding:5px;">Inoculation</td>
+<td style = "padding:5px;">2015-29-01</td>
+<td style = "padding:5px; text-align:right;">20</td>
+<td style = "padding:5px; text-align:right;">0</td>
+</tr>
+<tr>
+<td style = "padding:5px;">First Assessment</td>
+<td style = "padding:5px;">2015-02-12</td>
+<td style = "padding:5px; text-align:right;x">34</td>
+<td style = "padding:5px; text-align:right;">14</td>
+</tr>
+<tr>
+<td style = "padding:5px;">Second Assessment</td>
+<td style = "padding:5px;">2015-02-20</td>
+<td style = "padding:5px; text-align:right;">42</td>
+<td style = "padding:5px; text-align:right;">22</td>
+</tr>
+<tr>
+<td style = "padding:5px;">Third Assessment</td>
+<td style = "padding:5px;">2015-03-05</td>
+<td style = "padding:5px; text-align:right;">55</td>
+<td style = "padding:5px; text-align:right;">35</td>
+</tr>
+<tr>
+<td style = "padding:5px;">Fourth Assessment</td>
+<td style = "padding:5px;">2015-03-19</td>
+<td style = "padding:5px; text-align:right;">69</td>
+<td style = "padding:5px; text-align:right;">49</td>
+</tr>
+<tr>
+<td style = "padding:5px;">Fifth Assessment</td>
+<td style = "padding:5px;">2015-04-01</td>
+<td style = "padding:5px; text-align:right;">82</td>
+<td style = "padding:5px; text-align:right;">62</td>
+</tr>
+</table>
+
+## 2016 Schedule of Major Activities
+
+<table>
+<tr>
+<th style="padding:7px">Activity</th>
+<th style="padding:7px">Date</th>
+<th style="padding:7px">Days After<br />Transplanting</th>
+<th style="padding:7px">Days After<br />Inoculation</th>
+</tr>
+
+<tr>
+<td style="padding:7px">Transplanting</td>
+<td style="padding:7px">2016-01-20<br />to<br />2016-01-22</td>
+<td style="padding:7px; text-align:right;">0</td>
+<td style="padding:7px"></td>
+</tr>
+
+<tr>
+<td style="padding:7px">Inoculation</td>
+<td style="padding:7px">2016-03-01</td>
+<td style="padding:7px; text-align:right;">41</td>
+<td style = "padding:5px;"></td>
+</tr>
+
+<tr>
+<td style="padding:7px">First assessment</td>
+<td style="padding:7px">2016-03-15</td>
+<td style="padding:7px; text-align:right;">55</td>
+<td style="padding:7px; text-align:right;">14</td>
+</tr>
+
+<tr>
+<td style="padding:7px">Second assessment</td>
+<td style="padding:7px">2016-03-29</td>
+<td style="padding:7px; text-align:right;">69</td>
+<td style="padding:7px; text-align:right;">28</td>
+</tr>
+
+<tr>
+<td style="padding:7px">Third assessment</td>
+<td style="padding:7px">2016-04-13</td>
+<td style="padding:7px; text-align:right;">84</td>
+<td style="padding:7px; text-align:right;">43</td>
+</tr>
+
+<tr>
+<td style="padding:7px">Fourth assessment</td>
+<td style="padding:7px">2016-04-29</td>
+<td style="padding:7px; text-align:right;">100</td>
+<td style="padding:7px; text-align:right;">59</td>
+</tr>
+</table>
+
+
+# Methodology
+
+## Experimental Design: Split-plot
+
+-   Main plot : Water management (2)
+
+    -   W1 – Alternate Wetting and Drying (AWD)
+
+    -   W2 – Flooded/Farmer’s Practice
+
+-   Sub-plot : Nitrogen management (5)
+
+    -   2015
+
+        -   N0 – 0 kg/ha
+
+        -   N1 – 100 kg/ha
+
+        -   N2 – 120 kg/ha
+
+    -   2016
+
+        -   N3 – 60 kg/ha
+
+        -   N4 - 180 kg/ha
+
+## Plot layout
+
+-   Replication: Four (4)
+
+-   Plot Sizes (2015)
+
+    -   Main plot size: 12m x 12m (144 sq m)
+
+    -   Sub-plot size: 5m x 5m (25 sq m)
+
+    -   Replication size: 12m x 24m (288 sq m)
+
+    -   Buffer: 1m per sub plot
+
+    -   Experiment size: 1,152 sq m
+
+-   Plot Sizes (2016)
+
+    -   Main plot size
+
+    -   Block 2007: 21m x 20.5m (412.5 sq m)
+
+    -   Block 2008: 20.25m x 21.6m (437.4 sq m)
+
+    -   Sub-plot size
+
+    -   Block 2007: 21m x 10.25m (215.25 sq m)
+
+    -   Block 2008: 20.25m x 10.8m (218.7 sq m)
+
+    -   Replication size:
+
+    -   Block 2007: 42m x 20.5m (861 sq m)
+
+    -   Block 2008: 40.5m x 21.6m (874.8 sq m)
+
+    -   Buffer: 0.5m per sub plot
+
+    -   Experiment size: 3471.6 sq m
+    
+## Inoculation methods
+
+-   Inoculation methods (2015)
+
+    -   20 bottles (1 bottle = 151g) of inoculum were spread over each
+    plot (4m x 11m)
+    
+-   Inoculation methods (2016)
+
+    -   10 bottles (1 bottle = 151g) of inoculum were spread over
+    one sampling area (1m x 1m) in each plot
+
+------------------------------------------------------------------------
+
+## Disease Rating Scale
+
+Disease was rated using an ordinal scale for field evaluation of sheath blight (S Savary & N Castilla).
+
+-   **Rating Scale - Severity (%)**
+
+    -   0 - 0,
+
+    -   1 - 1%,
+
+    -   2 - 5%,
+
+    -   3 - 15%,
+
+    -   4 - 50%,
+
+    -   5 - &gt;50%
+
+------------------------------------------------------------------------
+
+## Nitrogen Management Rates
+
+<table width="500">
+<tr>
+<th rowspan="2">
+Nitrogen<br>treatment
+</th>
+<th rowspan="2">
+Year
+</th>
+<th rowspan="2">
+Total N<br>(kg/ha)
+</th>
+<th colspan="4">
+Application Amount (kg/ha)
+</th>
+</tr>
+<tr>
+<th style = "padding:5px;">
+Basal
+</th>
+<th style = "padding:5px;">
+Tillering
+</th>
+<th style = "padding:5px;">
+Panicle<br>Intitiation
+</th>
+</tr>
+<tr>
+<td style = "padding:5px;">
+N0
+</td>
+<td style = "padding:5px;">
+2015
+</td>
+<td style = "padding:5px; text-align:right;">
+0
+</td>
+<td style = "padding:5px; text-align:right;">
+0
+</td>
+<td style = "padding:5px; text-align:right;">
+0
+</td>
+<td style = "padding:5px; text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style = "padding:5px;">
+N100
+</td>
+<td style = "padding:5px;">
+2015
+</td>
+<td style = "padding:5px; text-align:right;">
+100
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+<td style = "padding:5px; text-align:right;">
+20
+</td>
+<td style = "padding:5px; text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style = "padding:5px;">
+N120
+</td>
+<td style = "padding:5px;">
+2015
+</td>
+<td style = "padding:5px; text-align:right;">
+120
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+<td style = "padding:5px; text-align:right;">
+30
+</td>
+<td style = "padding:5px; text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style = "padding:5px;">
+N60
+</td>
+<td style = "padding:5px;">
+2016
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+<td style = "padding:5px; text-align:right;">
+30
+</td>
+<td style = "padding:5px; text-align:right;">
+30
+</td>
+<td style = "padding:5px; text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style = "padding:5px;">
+N180
+</td>
+<td style = "padding:5px;">
+2016
+</td>
+<td style = "padding:5px; text-align:right;">
+180
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+<td style = "padding:5px; text-align:right;">
+60
+</td>
+</tr>
+</table>
