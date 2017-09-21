@@ -1,6 +1,6 @@
 ---
 title: "AWD Sheath Blight Study Notes"
-author: "N P Castilla"
+author: "A H Sparks, N P Castilla and M Noel"
 date: "`r Sys.Date()`"
 output:
   html_document:
