@@ -87,18 +87,15 @@
     
     
 <div class="contents">
+<div id="libraries" class="section level1">
+<h1 class="hasAnchor">
+<a href="#libraries" class="anchor"></a>Libraries</h1>
+<p>Load packages necessary to conduct this work.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)
-<span class="kw">library</span>(<span class="st">"dplyr"</span>)</code></pre></div>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"forcats"</span>)
+<span class="kw">library</span>(<span class="st">"dplyr"</span>)
+<span class="kw">library</span>(<span class="st">"forcats"</span>)
 <span class="kw">library</span>(<span class="st">"ggplot2"</span>)</code></pre></div>
+</div>
 <div id="histogram-plot-of-lshb_rating-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#histogram-plot-of-lshb_rating-data" class="anchor"></a>Histogram plot of LShB_rating data</h1>
@@ -262,7 +259,7 @@ AUDPS<span class="op">$</span>NRTE &lt;-
 <h1 class="hasAnchor">
 <a href="#boxdotplots-of-tiller-sheath-blight-severity-audps-data" class="anchor"></a>Box/dotplots of tiller sheath blight severity AUDPS data</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_percent_AUDPS)) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> WMGT)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
@@ -332,7 +329,8 @@ AUDPS<span class="op">$</span>NRTE &lt;-
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#histogram-plot-of-lshb_rating-data">Histogram plot of LShB_rating data</a></li>
+<li><a href="#libraries">Libraries</a></li>
+      <li><a href="#histogram-plot-of-lshb_rating-data">Histogram plot of LShB_rating data</a></li>
       <li><a href="#histogram-plot-of-tshb_rating-data">Histogram plot of TShB_rating data</a></li>
       <li><a href="#density-plot-of-tshb_incidence-data">Density plot of TShB_incidence data</a></li>
       <li><a href="#histogram-plot-of-green-leaf-data">Histogram plot of green leaf data</a></li>
