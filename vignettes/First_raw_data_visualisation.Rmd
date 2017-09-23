@@ -131,6 +131,29 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
+# Box/dotplots of tiller sheath blight incidence AUDPS data
+
+```{r}
+
+ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
+  geom_boxplot(aes(fill = YEAR)) +
+  geom_point() +
+  xlab("Treatment") +
+  ylab("AUDPS") +
+  ggtitle("Tiller Sheath Blight Incidence")
+```
+
+```{r}
+ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
+  geom_boxplot(aes(fill = YEAR)) +
+  geom_point() +
+  xlab("Treatment") +
+  ylab("AUDPS") +
+  facet_grid(. ~ YEAR) +
+  ggtitle("Tiller Sheath Blight Incidence")
+```
+
+
 # Box/dotplots of leaf sheath blight severity AUDPS
 
 ```{r}
@@ -161,32 +184,10 @@ ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
-# Box/dotplots of tiller sheath blight incidence AUDPS data
+# Box/dotplots of tiller sheath blight severity AUDPS data
 
 ```{r}
-
-ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
-  geom_boxplot(aes(fill = YEAR)) +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
-  ggtitle("Tiller Sheath Blight Incidence")
-```
-
-```{r}
-ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
-  geom_boxplot(aes(fill = YEAR)) +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
-  facet_grid(. ~ YEAR) +
-  ggtitle("Tiller Sheath Blight Incidence")
-```
-
-# Box/dotplots of leaf sheath blight severity AUDPS data
-
-```{r}
-ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
+ggplot(AUDPS, aes(x = WMGT, y = TShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
@@ -195,12 +196,11 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
 ```
 
 ```{r}
-ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
+ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
-  facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 

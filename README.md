@@ -272,7 +272,7 @@ Resources
 
 Please cite this compendium as:
 
-> Authors, (2017). *Title of compendium*. Accessed 21 Sep 2017. Online at <https://doi.org/xxx/xxx>
+> Authors, (2017). *Title of compendium*. Accessed 23 Sep 2017. Online at <https://doi.org/xxx/xxx>
 
 ### Licenses
 

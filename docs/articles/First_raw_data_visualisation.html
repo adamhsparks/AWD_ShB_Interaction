@@ -81,7 +81,7 @@
       <h1>Visualise Data</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2017-09-21</h4>
+            <h4 class="date">2017-09-23</h4>
           </div>
 
     
@@ -211,6 +211,25 @@
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
+<div id="boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="anchor"></a>Box/dotplots of tiller sheath blight incidence AUDPS data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</code></pre></div>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</code></pre></div>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+</div>
 <div id="boxdotplots-of-leaf-sheath-blight-severity-audps" class="section level1">
 <h1 class="hasAnchor">
 <a href="#boxdotplots-of-leaf-sheath-blight-severity-audps" class="anchor"></a>Box/dotplots of leaf sheath blight severity AUDPS</h1>
@@ -229,7 +248,7 @@ AUDPS<span class="op">$</span>NRTE &lt;-
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(WMGT, <span class="dt">y =</span> LShB_percent_AUDPS)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
@@ -237,43 +256,23 @@ AUDPS<span class="op">$</span>NRTE &lt;-
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
-</div>
-<div id="boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="anchor"></a>Box/dotplots of tiller sheath blight incidence AUDPS data</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 </div>
-<div id="boxdotplots-of-leaf-sheath-blight-severity-audps-data" class="section level1">
+<div id="boxdotplots-of-tiller-sheath-blight-severity-audps-data" class="section level1">
 <h1 class="hasAnchor">
-<a href="#boxdotplots-of-leaf-sheath-blight-severity-audps-data" class="anchor"></a>Box/dotplots of leaf sheath blight severity AUDPS data</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> TShB_percent_AUDPS)) <span class="op">+</span>
+<a href="#boxdotplots-of-tiller-sheath-blight-severity-audps-data" class="anchor"></a>Box/dotplots of tiller sheath blight severity AUDPS data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_percent_AUDPS)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity"</span>)</code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> TShB_percent_AUDPS)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span>
 <span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity"</span>)</code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
 </div>
@@ -342,9 +341,9 @@ AUDPS<span class="op">$</span>NRTE &lt;-
       <li><a href="#dot-plot-of-tiller-sheath-blight-severity-data">Dot plot of tiller sheath blight severity data</a></li>
       <li><a href="#dot-plot-of-tiller-sheath-blight-incidence-data">Dot plot of tiller sheath blight incidence data</a></li>
       <li><a href="#violindot-plots-of-tiller-sheath-blight-incidence-data">Violin/dot plots of tiller sheath blight incidence data</a></li>
-      <li><a href="#boxdotplots-of-leaf-sheath-blight-severity-audps">Box/dotplots of leaf sheath blight severity AUDPS</a></li>
       <li><a href="#boxdotplots-of-tiller-sheath-blight-incidence-audps-data">Box/dotplots of tiller sheath blight incidence AUDPS data</a></li>
-      <li><a href="#boxdotplots-of-leaf-sheath-blight-severity-audps-data">Box/dotplots of leaf sheath blight severity AUDPS data</a></li>
+      <li><a href="#boxdotplots-of-leaf-sheath-blight-severity-audps">Box/dotplots of leaf sheath blight severity AUDPS</a></li>
+      <li><a href="#boxdotplots-of-tiller-sheath-blight-severity-audps-data">Box/dotplots of tiller sheath blight severity AUDPS data</a></li>
       <li><a href="#line-graph-of-leaf-sheath-blight-severity-data">Line graph of leaf sheath blight severity data</a></li>
       <li><a href="#line-graph-of-tiller-sheath-blight-severity-audps-data">Line graph of tiller sheath blight severity AUDPS data</a></li>
       <li><a href="#line-graph-of-tiller-sheath-blight-incidence-audps-data">Line graph of tiller sheath blight incidence AUDPS data</a></li>
