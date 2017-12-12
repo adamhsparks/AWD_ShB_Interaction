@@ -29,7 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -81,7 +81,7 @@
       <h1>Sheath Blight Analysis</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2017-09-23</h4>
+            <h4 class="date">2017-12-12</h4>
           </div>
 
     
@@ -92,9 +92,9 @@
 <h4 class="hasAnchor">
 <a href="#interpreting-these-analyses" class="anchor"></a>Interpreting These Analyses</h4>
 <p>The <em>MCMCglmm</em> documentation provides an excellent resource for interpreting the outputs for each of the models below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MCMCglmm)
-<span class="kw">vignette</span>(<span class="st">"Overview"</span>)
-<span class="kw">vignette</span>(<span class="st">"CourseNotes"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(MCMCglmm)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">vignette</span>(<span class="st">"Overview"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">vignette</span>(<span class="st">"CourseNotes"</span>)</a></code></pre>
 <p>When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
 <p>The base levels for this analysis are:</p>
 <ul>
@@ -128,30 +128,30 @@
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Use <code>set.seed()</code> for reproducibility.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)
-<span class="kw">library</span>(<span class="st">"reshape2"</span>)
-<span class="kw">library</span>(<span class="st">"MCMCglmm"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(<span class="st">"reshape2"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"MCMCglmm"</span>)</a></code></pre>
 <pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## Loading required package: coda</code></pre>
 <pre><code>## Loading required package: ape</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"plotMCMC"</span>)
-
-<span class="kw">set.seed</span>(<span class="dv">27</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"plotMCMC"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">27</span>)</a></code></pre>
 <p>The <code>AUDPS</code> object is created when the project is loaded, in the file <a href="./munge/03_preprocess_data.R">munge/03_preprocess_data.R</a>. However, because it is a <code>tibble()</code> and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.</p>
 <p>Create individual data frames for the analysis.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, ])
-AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2015</span>)
-
-<span class="co"># relevel factors for easier interpretation of  analysis</span>
-AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N0"</span>))
-AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))
-
-AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>, ])
-AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2016</span>)
-
-<span class="co"># relevel factors for easier interpretation of  analysis</span>
-AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))
-AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, ])</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2015</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N0"</span>))</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>, ])</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2016</span>)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a></code></pre>
 <p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> <code>data.frames()</code> exist, we can start the analysis.</p>
 </div>
 <div id="models" class="section level2">
@@ -160,19 +160,19 @@ AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw
 <div id="tiller-sheath-blight-incidence-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-TShB_incidence_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(TShB_incidence_lmm_<span class="dv">2015</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">TShB_incidence_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="kw">summary</span>(TShB_incidence_lmm_<span class="dv">2015</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -199,59 +199,59 @@ TShB_incidence_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><s
 ## NRTEN120      0.99738  0.59538  1.40781     4950 &lt; 2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb15"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb17"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb18"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Incidence"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb19"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Incidence"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-6.png" width="672"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-TShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(TShB_severity_lmm_<span class="dv">2015</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb20"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">TShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="kw">summary</span>(TShB_severity_lmm_<span class="dv">2015</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -278,59 +278,59 @@ TShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><sp
 ## NRTEN120       16.689   10.552   22.974     4950 &lt; 2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb22"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb24"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb26"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb27"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb28"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb29"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb30"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Severity"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb31"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Severity"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-6.png" width="672"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-LShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(LShB_severity_lmm_<span class="dv">2015</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb32"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">LShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb32-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb32-13" data-line-number="13"><span class="kw">summary</span>(LShB_severity_lmm_<span class="dv">2015</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -357,41 +357,41 @@ LShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><sp
 ## NRTEN120       3.1456   2.0471   4.2073     4950 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb34"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)])</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb36"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb38"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb38-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb39"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb40"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb41"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb42"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Leaf ShB Severity"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb43"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Leaf ShB Severity"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-6.png" width="672"></p>
 <hr>
 </div>
@@ -402,20 +402,20 @@ rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severi
 <div id="tiller-sheath-blight-incidence-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-
-TShB_incidence_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE, 
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(TShB_incidence_lmm_<span class="dv">2016</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb44"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">TShB_incidence_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE, </a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb44-12" data-line-number="12">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb44-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb44-14" data-line-number="14"><span class="kw">summary</span>(TShB_incidence_lmm_<span class="dv">2016</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -441,59 +441,59 @@ TShB_incidence_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><s
 ## NRTEN180       1.9657   1.4955   2.4612     4950  &lt; 2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb46"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb48"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb50"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb51"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb52"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Incidence"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb53"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Incidence"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb54"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Incidence"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb55"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Incidence"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-6.png" width="672"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-TShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(TShB_severity_lmm_<span class="dv">2016</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb56"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">TShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb56-7" data-line-number="7">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb56-8" data-line-number="8">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb56-9" data-line-number="9">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb56-10" data-line-number="10">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb56-11" data-line-number="11">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb56-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb56-13" data-line-number="13"><span class="kw">summary</span>(TShB_severity_lmm_<span class="dv">2016</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -519,59 +519,59 @@ TShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><sp
 ## NRTEN180       4.7284   0.4613   9.1059     4950 0.035556 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb58"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb60"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb62"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb62-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb63"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb64"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb65"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb66"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Severity"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb67"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb67-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Severity"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-6.png" width="672"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),
-               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))
-LShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,
-                                    <span class="dt">random =</span> <span class="op">~</span>REP, 
-                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,
-                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
-                          <span class="dt">prior =</span> eprior,
-                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,
-                          <span class="dt">burnin =</span> <span class="dv">5000</span>,
-                          <span class="dt">thin =</span> <span class="dv">100</span>,
-                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">summary</span>(LShB_severity_lmm_<span class="dv">2016</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb68"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">LShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">                          <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb68-7" data-line-number="7">                          <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb68-8" data-line-number="8">                          <span class="dt">nitt =</span> <span class="fl">5e+05</span>,</a>
+<a class="sourceLine" id="cb68-9" data-line-number="9">                          <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb68-10" data-line-number="10">                          <span class="dt">thin =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb68-11" data-line-number="11">                          <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb68-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb68-13" data-line-number="13"><span class="kw">summary</span>(LShB_severity_lmm_<span class="dv">2016</span>)</a></code></pre>
 <pre><code>## 
 ##  Iterations = 5001:499901
 ##  Thinning interval  = 100
@@ -597,41 +597,41 @@ LShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><sp
 ## NRTEN180      0.15733 -0.07931  0.41171     4950 0.1871  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames for generating diagnostic plots</span>
-reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])
-reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</code></pre></div>
+<pre class="sourceCode r" id="cb70"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">reps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">7</span>)])</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">reps &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(reps)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])
-trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</code></pre></div>
+<pre class="sourceCode r" id="cb72"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">trts &lt;-<span class="st">  </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">trts &lt;-<span class="st"> </span>reshape2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reshape2/topics/melt">melt</a></span>(trts)</a></code></pre>
 <pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a dummy x-axis variable for plotting</span>
-x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)
-
-<span class="co"># diagnostic line plots for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb74"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># Create a dummy x-axis variable for plotting</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="co"># diagnostic line plots for replicate</span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># posterior distributions for replicate</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,
-                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb75"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># diagnostic line plots for treatments</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,
-                      <span class="dt">x =</span> x,
-                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb76"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Posterior distributions for treatment</span>
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,
-                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Leaf ShB Severity"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb77"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Leaf ShB Severity"</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check random effects</span>
-<span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb78"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co"># check random effects</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot joint distibution of error</span>
-rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)
-<span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,
-                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Leaf ShB Severity"</span>))</code></pre></div>
+<pre class="sourceCode r" id="cb79"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Leaf ShB Severity"</span>))</a></code></pre>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-6.png" width="672"></p>
 </div>
 <div id="model-fit" class="section level3">
