@@ -407,7 +407,7 @@ N180
 
 Please cite this compendium as:
 
-> Authors, (2017). *Title of compendium*. Accessed 12 Dec 2017. Online
+> Authors, (2018). *Title of compendium*. Accessed 17 Jan 2018. Online
 > at <https://doi.org/xxx/xxx>
 
 ### Licenses
