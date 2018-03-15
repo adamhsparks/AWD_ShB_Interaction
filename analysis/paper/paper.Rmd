@@ -69,7 +69,7 @@ The plots were inoculated using...
 
 ## Data collection and analysis
 
-Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. Five and four disease assessments were made in 2015 and 2016, respectively. Data were analysed using the area under the disease progress stairs (AUDPS) and multivariate generalised linear mixed models. We were unable to detect any differences in disease in either experiment due to irrigation methods, N rates or the interaction of the two treatments in either season. Our findings indicate that farmers can safely adopt the AWD technology without risk of increasing sheath blight disease.
+Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. Five and four disease assessments were made in 2015 and 2016, respectively.
 
 Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area] and analysed using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
 
