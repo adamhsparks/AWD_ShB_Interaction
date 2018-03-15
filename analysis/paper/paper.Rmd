@@ -1,36 +1,41 @@
 ---
-title: Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Insect Populations and Diseases?
-author:
-  - name: A.H. Sparks
-    email: adam.sparks@usq.edu.au
-    affiliation: University of Southern Queensland
-    corresponding: adam.sparks@usq.edu.au
-  - name: N.P. Castilla
-    email: n.castilla@irri.org
-    affiliation: International Rice Research Institute
-  - name: B.A.R. Hadi
-    email: b.hadi@irri.org
-    affiliation: International Rice Research Institute
-  - name: B.O. Sander
-    email: b.sander@irri.org
-    affiliation: International Rice Research Institute
-address:
-  - code: University of Southern Queensland
-    address: Centre for Crop Health, West Street, Toowoomba, Queensland, Australia, 4350
-  - code: International Rice Research Institute
-    address: Los Baños, Laguna, Philippines, 4031
+title: Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Sheath Blight?
+author: |
+  | Adam H. Sparks 1^[Corresponding author: Adam.Sparks@usq.edu.au] $^1, *$, Nancy P. Castilla $^1$, Bjorn Ole Sander $^1$
+  | $^1$International Rice Research Institute, Los Baños, Laguna, Philippines, 4031 $*$Current Address: University of Southern Queensland, Centre for Crop Health, West Street, Tooowoomba, Queensland, Australia, 4350
 abstract: |
   Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two management practices may trigger sheath blight of rice, caused by _Rhizoctonia solani_, which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water saving (alternate wetting and drying) regime and traditional flood irrigation regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored in the same way in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. We were unable to detect any differences in disease in either experiment due to irrigation regime, N rates or the interaction of the two treatments in either season. This suggests that farmers can adopt water saving technologies without risking increased sheath blight incidence. We suggest that further cross-cutting research in this area is warranted.
-  
-author_summary: |
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget porta erat. Morbi consectetur est vel gravida pretium. Suspendisse ut dui eu ante cursus gravida non sed sem. Nullam sapien tellus, commodo id velit id, eleifend volutpat quam. Phasellus mauris velit, dapibus finibus elementum vel, pulvinar non tellus. Nunc pellentesque pretium diam, quis maximus dolor faucibus id. Nunc convallis sodales ante, ut ullamcorper est egestas vitae. Nam sit amet enim ultrices, ultrices elit pulvinar, volutpat risus.
 
 bibliography: references.bib
-output: rticles::plos_article
-csl: plos.csl
+output:
+  bookdown::pdf_document2:
+  toc: no
+fig_caption: yes
+
+always_allow_html: yes
+
+# These are LaTex settings to take care of floating figures/tables, line spacing, etc
+header-includes:
+  - \usepackage{endfloat}    
+  - \usepackage{setspace}\doublespacing
+  - \usepackage{lineno}
+  - \linenumbers
 ---
 
-_Text based on plos sample manuscript, see [http://journals.plos.org/ploscompbiol/s/latex](http://journals.plos.org/ploscompbiol/s/latex)_
+```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(fig.pos = "p") # Places figures on their own pages
+knitr::opts_chunk$set(out.width = "100%", dpi = 300)
+
+# I usually load my libraries up front to keep things organized
+library(bookdown)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(ggthemes)
+library(ggExtra)
+library(dplyr)
+library(stringr)
+```
 
 # Introduction
 
@@ -44,7 +49,7 @@ We therefore established field experiments in order to…
 
 ## Experimental design
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14°11' N, , longitude 121°15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, , longitude 121&deg; 15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
 
 ### 2015 Dry Season
 

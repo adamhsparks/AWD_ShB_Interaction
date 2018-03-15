@@ -1,7 +1,7 @@
 %% This BibTeX bibliography file was created using BibDesk.
 %% http://bibdesk.sourceforge.net/
 
-%% Created for Adam Sparks at 2018-03-15 22:31:24 +1000 
+%% Created for Adam Sparks at 2017-06-09 17:12:20 +1000 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
@@ -19,6 +19,7 @@
 	Pages = {1131--1141},
 	Publisher = {Blackwell Science Ltd},
 	Title = {Statistical analysis of the major variables controlling methane emission from rice fields},
+	Url = {http://dx.doi.org/10.1111/j.1365-2486.2005.00976.x},
 	Volume = {11},
 	Year = {2005},
 	Bdsk-Url-1 = {http://dx.doi.org/10.1111/j.1365-2486.2005.00976.x}}
@@ -57,7 +58,8 @@
 	Abstract = {The structure of a model for rice sheath blight which integrates processes at the tiller level and their contribution to epidemics is reported. The model considers two processes, primary and secondary infection, leading to disease increase. It incorporates disease aggregation in terms of accessibility of healthy tillers to infection by the pathogen from diseased tillers. Parameters from the model were derived either empirically or by numerical optimisation from published data, and from a field experiment. A separate field experiment was conducted for model evaluation. The model has the potential to adequately account for actual epidemics. Sensitivity analysis showed that the intrinsic rate of secondary infection had a large effect on simulated epidemics, while effect of the intrinsic rate of primary infection was comparatively small. The aggregation parameter had a strong effect on simulated epidemics in their later stages. The model adequately simulated the pattern of actual epidemiological data, except in the later stage of epidemics, when it failed to account for decrease in disease incidence at the tiller level. The model was considered to comply with the requirements of a preliminary simulation model, and approaches to improve its performances are discussed.},
 	Author = {Savary, S. and Willocquet, L. and Teng, P. S.},
 	Doi = {10.1016/S0308-521X(97)00014-0},
-	Issn = {0308-521X},
+	File = {:Users/U8004755/Documents/Projects/IRRI.039.Sheath Blight/References/1-s2.0-S0308521X97000140-main.pdf:pdf},
+	Issn = {0308521X},
 	Journal = {Agric. Syst.},
 	Number = {3},
 	Pages = {359--384},
@@ -88,8 +90,8 @@
 	Bdsk-Url-1 = {http://www.jstatsoft.org/v33/i02/}}
 
 @article{Bouman2001,
-	Author = {B.A.M Bouman and T.P. Tuong},
-	Doi = {10.1016/S0378-3774(00)00128-1},
+	Author = {B.A.M Bouman and T.P Tuong},
+	Doi = {https://doi.org/10.1016/S0378-3774(00)00128-1},
 	Issn = {0378-3774},
 	Journal = {Agricultural Water Management},
 	Keywords = {Water productivity},
@@ -105,12 +107,11 @@
 @article{Feng2007,
 	Abstract = {China's grain basket in the North China Plain is threatened by increasing water scarcity and there is an urgent need to develop water-saving irrigation strategies. Water savings in rice can be realized by alternate wetting and drying (AWD) under lowland conditions, or by aerobic rice in which the crop is grown under nonflooded conditions with supplemental irrigation. Field experimentation and simulation modelling are a powerful combination to understand complex crop-water interactions and to extrapolate site-specific empirical results to other environments and conditions. In this paper, we present results from 4 years of field experiments on \{AWD\} and aerobic rice in 2001{\^a}2004 near Kaifeng, Henan Province, China. The experimental data were used to parameterize and evaluate the rice growth model ORYZA2000. A subsequent paper reports on the extrapolation of the experimental results using \{ORYZA2000\} and on farmer-participatory testing of aerobic rice. In the lowland area of the study site, rice yields under flooded conditions were around 8000 kg ha{\^a}1 with 900 mm total (rain, irrigation) water input. Irrigation water savings were 40{\^a}70% without any yield loss by applying AWD. In the upland area of the study site, aerobic rice yielded 2400{\^a}3600 kg ha{\^a}1, using 750{\^a}1100 mm total water input. \{ORYZA2000\} satisfactorily reproduced the dynamics in measured crop variables (biomass, leaf area, N uptake) and soil water variables (ponded water depth, soil water tension). The root mean square error of predicted yield was 11% for lowland rice and 19% for aerobic rice, which was only one and a half times the error in the measured values. We concluded that \{ORYZA2000\} is sufficiently accurate to extrapolate our results on \{AWD\} and aerobic rice to different management and environmental conditions in our study area. },
 	Author = {Liping Feng and B.A.M. Bouman and T.P. Tuong and R.J. Cabangon and Yalong Li and Guoan Lu and Yuehua Feng},
-	Date-Modified = {2018-03-15 12:31:15 +0000},
-	Doi = {10.1016/j.agwat.2006.10.006},
+	Doi = {https://doi.org/10.1016/j.agwat.2006.10.006},
 	Issn = {0378-3774},
 	Journal = {Agricultural Water Management},
 	Keywords = {China},
-	Number = {1 - 3},
+	Number = {1{\^a}3},
 	Pages = {1 - 13},
 	Title = {Exploring options to grow rice using less water in northern China using a modelling approach: I. Field experiments and model evaluation},
 	Url = {http://www.sciencedirect.com/science/article/pii/S0378377406002630},
