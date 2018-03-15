@@ -15,7 +15,6 @@ fig_caption: yes
 
 always_allow_html: yes
 
-# These are LaTex settings to take care of floating figures/tables, line spacing, etc
 header-includes:
   - \usepackage{endfloat}
   - \usepackage{setspace}\doublespacing
@@ -24,7 +23,7 @@ header-includes:
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(fig.pos = "p") # Places figures on their own pages
+knitr::opts_chunk$set(fig.pos = "p")
 knitr::opts_chunk$set(out.width = "100%", dpi = 300)
 
 library(bookdown)
