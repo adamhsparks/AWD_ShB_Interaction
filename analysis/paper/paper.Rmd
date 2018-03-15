@@ -65,7 +65,10 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 ## Data Collection and Analysis
 
-Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI. Two sample areas per plot (1m x 1m) were assessed. for 9 hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller. Five and four disease assessments were made in 2015 and 2016, respectively.
+Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI \ref{figure1}. Two sample areas per plot (1m x 1m) were assessed. for 9 hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller. Five and four disease assessments were made in 2015 and 2016, respectively.
+
+![IRRI sheath blight field severity rating scale where, 0 - 0%, 1 - 1%, 2 - 5%,
+3 - 15%, 4 - 50%, 5 - >50%. \label{figure1}](./Figures/Figure 1 IRRI Sheath Blight Severity Assessment.png)
 
 Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area] and analysed using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
 
