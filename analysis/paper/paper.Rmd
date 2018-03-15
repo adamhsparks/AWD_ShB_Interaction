@@ -1,7 +1,7 @@
 ---
 title: Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Sheath Blight?
 author: |
-  | Adam H. Sparks 1^[Corresponding author: Adam.Sparks@usq.edu.au]  \textsuperscript{1, \dag}, Nancy P. Castilla \textsuperscript{1}, Bjorn Ole Sander \textsuperscript{1}
+  | Adam H. Sparks 1^[Corresponding author: Adam.Sparks@usq.edu.au]  \textsuperscript{1\dag}, Nancy P. Castilla \textsuperscript{1}, Bjorn Ole Sander \textsuperscript{1}
   | \textsuperscript{1}International Rice Research Institute, Crop and Environmental Sciences Division, Los Baños, Laguna, Philippines, 4031
   | \textsuperscript{\dag} Current Address: University of Southern Queensland, Centre for Crop Health, West Street, Tooowoomba, Queensland, Australia, 4350
 abstract: |
