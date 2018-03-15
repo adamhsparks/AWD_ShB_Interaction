@@ -26,7 +26,6 @@ header-includes:
 knitr::opts_chunk$set(fig.pos = "p") # Places figures on their own pages
 knitr::opts_chunk$set(out.width = "100%", dpi = 300)
 
-# I usually load my libraries up front to keep things organized
 library(bookdown)
 library(knitr)
 library(kableExtra)
