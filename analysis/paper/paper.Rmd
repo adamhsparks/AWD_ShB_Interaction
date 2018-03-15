@@ -49,22 +49,23 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m. The main plot treatments were alternate wetting and drying (AWD) and ) and continuously flooded (CF) or farmers' practice.
 
-Irrigation in AWD plots was determined by the water level in plots, i.e., when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In CF plots a standing water layer of 3-5cm was maintained throughout the growing season. 
+Irrigation in AWD plots was determined by the water level in plots, \emph{i.e.}, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In CF plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The subplot treatments were different rates of nitrogen…
+The subplot treatments were different rates of nitrogen, 0 kg/ha (control), 100 kg/ha in three splits, and 120 kg/ha in three splits.
 
-The plots were inoculated using...
-
+The plots were inoculated 20 days after transplanting using 151g of inoculum per plot (4m x 11m).
 
 ### 2016 Dry Season
 
 In 2016 dry season the plot size was increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
 
-The plots were inoculated using...
+Subplot N rates were changed from the 2015 rates to use 60 kg/ha split into two applications (control) and 180 kg/ha in three splits.
+
+Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
 ## Data Collection and Analysis
 
-Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. Five and four disease assessments were made in 2015 and 2016, respectively.
+Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI. Two sample areas per plot (1m x 1m) were assessed. for 9 hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller. Five and four disease assessments were made in 2015 and 2016, respectively.
 
 Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area] and analysed using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
 
