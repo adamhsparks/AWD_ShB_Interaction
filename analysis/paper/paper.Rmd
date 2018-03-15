@@ -9,7 +9,7 @@ abstract: |
 bibliography: references.bib
 output:
   bookdown::pdf_document2:
-  toc: no
+    toc: no
 fig_caption: yes
 
 always_allow_html: yes
