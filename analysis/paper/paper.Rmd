@@ -16,7 +16,7 @@ always_allow_html: yes
 
 # These are LaTex settings to take care of floating figures/tables, line spacing, etc
 header-includes:
-  - \usepackage{endfloat}    
+  - \usepackage{endfloat}
   - \usepackage{setspace}\doublespacing
   - \usepackage{lineno}
   - \linenumbers
