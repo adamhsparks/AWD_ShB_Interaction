@@ -29,11 +29,6 @@ knitr::opts_chunk$set(out.width = "100%", dpi = 300)
 library(bookdown)
 library(knitr)
 library(kableExtra)
-library(ggplot2)
-library(ggthemes)
-library(ggExtra)
-library(dplyr)
-library(stringr)
 ```
 
 # Introduction
