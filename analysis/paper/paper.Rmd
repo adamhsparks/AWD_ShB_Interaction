@@ -74,6 +74,25 @@ Disease severity was converted to area under the disease progress stairs (AUDPS)
 
 # Results
 
+### Tiller Sheath Blight Incidence
+
+In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.
+
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.
+
+
+### Tiller Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
+
+### Leaf Sheath Blight Severity
+
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
+
 # Discussion
 
 # Acknowledgments
