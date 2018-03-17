@@ -8,8 +8,16 @@
 <title>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight and Insect Populations • rice.awd.pests</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight and Insect Populations">
+<meta property="og:description" content="Provides a research compendium of analysis associated with experiments
+  conducted at the International Rice Research Institute (IRRI), Los Baños,
+  Calabarzon, Philippines in the dry seasons of 2015 and 2016. The experiments
+  were designed to test the effects of alternate wetting and drying irrigation
+  management on rice sheath blight disease. The plots were split plot with an
+  irrigation main plot and nitrogen sub-plot treatments.">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -84,9 +92,13 @@
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<section id="rice.awd.pests" class="level1"><div class="page-header"><h1>rice.awd.pests</h1></div>
+<div id="rice-awd-pests" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#rice-awd-pests" class="anchor"></a>rice.awd.pests</h1></div>
 <p>The goal of <em>rice.awd.pests</em> is to examine the effects of using alternate wetting and drying irrigation techniques on insect populations and sheath blight disease in rice paddies.</p>
-<section id="study" class="level2"><h2>Study</h2>
+<div id="study" class="section level2">
+<h2 class="hasAnchor">
+<a href="#study" class="anchor"></a>Study</h2>
 <p><strong>Objective 1:</strong> Study the effects of different water and nitrogen managements on sheath blight of rice</p>
 <p><strong>Project PI:</strong> Dr. Adam H Sparks</p>
 <p><strong>Staff:</strong></p>
@@ -95,12 +107,18 @@
 <li><p>Mr. Michael Noel (2015)</p></li>
 </ul>
 <hr>
-<section id="schedule" class="level3"><h3>1. SCHEDULE</h3>
+<div id="schedule" class="section level3">
+<h3 class="hasAnchor">
+<a href="#schedule" class="anchor"></a>1. SCHEDULE</h3>
 <p>IRRI Dry Season (2)</p>
 <ul>
 <li><p>2015 (December 2014 – April 2015)</p></li>
 <li><p>2016 (January 2016 - May 2016)</p></li>
-</ul></section><section id="methodology" class="level3"><h3>2. METHODOLOGY</h3>
+</ul>
+</div>
+<div id="methodology" class="section level3">
+<h3 class="hasAnchor">
+<a href="#methodology" class="anchor"></a>2. METHODOLOGY</h3>
 <p><strong>Experimental Design: Split-plot</strong></p>
 <ul>
 <li>
@@ -314,29 +332,53 @@ N180
 60
 </td>
 </tr>
-</table></section></section><section id="resources" class="level2"><h2>Resources</h2>
-<section id="glmm-split-plot-analysis" class="level3"><h3>glmm split plot analysis</h3>
+</table>
+</div>
+</div>
+<div id="resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h2>
+<div id="glmm-split-plot-analysis" class="section level3">
+<h3 class="hasAnchor">
+<a href="#glmm-split-plot-analysis" class="anchor"></a>glmm split plot analysis</h3>
 <p><a href="http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html">http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html</a></p>
 <p><a href="http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf" class="uri">http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf</a></p>
 <p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html</a></p>
-</section><section id="using-mcmcglmm" class="level3"><h3>Using MCMCglmm</h3>
+</div>
+<div id="using-mcmcglmm" class="section level3">
+<h3 class="hasAnchor">
+<a href="#using-mcmcglmm" class="anchor"></a>Using MCMCglmm</h3>
 <p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/onewayanova.html" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/onewayanova.html</a></p>
 <p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm</a></p>
 <p><a href="https://github.com/tmalsburg/MCMCglmm-intro" class="uri">https://github.com/tmalsburg/MCMCglmm-intro</a></p>
-</section><section id="general-glmm-in-r" class="level3"><h3>General GLMM in R</h3>
+</div>
+<div id="general-glmm-in-r" class="section level3">
+<h3 class="hasAnchor">
+<a href="#general-glmm-in-r" class="anchor"></a>General GLMM in R</h3>
 <p><a href="http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html" class="uri">http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a></p>
-</section><section id="citation" class="level3"><h3>Citation</h3>
+</div>
+<div id="citation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h3>
 <p>Please cite this compendium as:</p>
 <blockquote>
-<p>Authors, (2018). <em>Title of compendium</em>. Accessed 17 Jan 2018. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
+<p>Authors, (2018). <em>Title of compendium</em>. Accessed 17 Mar 2018. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
 </blockquote>
-</section><section id="licenses" class="level3"><h3>Licenses</h3>
+</div>
+<div id="licenses" class="section level3">
+<h3 class="hasAnchor">
+<a href="#licenses" class="anchor"></a>Licenses</h3>
 <p>Text and figures: <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
 <p>Code: See the <a href="DESCRIPTION" class="uri">DESCRIPTION</a> file</p>
 <p>Data: <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC-0</a> attribution requested in reuse</p>
-</section><section id="contributions" class="level3"><h3>Contributions</h3>
+</div>
+<div id="contributions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#contributions" class="anchor"></a>Contributions</h3>
 <p>We welcome contributions from everyone. Before you get started, please see our <a href="CONTRIBUTING.md">contributor guidelines</a>. Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-</section></section></section>
+</div>
+</div>
+</div>
 </div>
   </div>
 
@@ -353,7 +395,7 @@ N180
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Adam Sparks <br><small class="roles"> Author, maintainer </small> <br><small>(https://orcid.org/0000-0002-0061-8359)</small>
+<li>Adam Sparks <br><small class="roles"> Author, maintainer </small>  <br><small>(https://orcid.org/0000-0002-0061-8359)</small>
 </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
@@ -372,7 +414,7 @@ N180
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

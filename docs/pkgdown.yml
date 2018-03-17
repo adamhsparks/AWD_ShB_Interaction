@@ -1,9 +1,12 @@
-urls:
-  reference: https://phytopathology.github.io/rice_awd_pests//reference
-  article: https://phytopathology.github.io/rice_awd_pests//articles
+pandoc: 2.1.2
+pkgdown: 0.1.0.9000
+pkgdown_sha: 094d9bfb5fafbc79dcb28d1adb30a3fc5fb2f34e
 articles:
   AWD_Sheath_Blight_Study_Notes: AWD_Sheath_Blight_Study_Notes.html
   First_raw_data_visualisation: First_raw_data_visualisation.html
   Second_check_residuals: Second_check_residuals.html
   Third_data_analysis: Third_data_analysis.html
+urls:
+  reference: https://phytopathology.github.io/rice_awd_pests//reference
+  article: https://phytopathology.github.io/rice_awd_pests//articles
 
