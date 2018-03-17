@@ -59,7 +59,7 @@ The plots were inoculated 20 days after transplanting using 151g of inoculum per
 
 In 2016 dry season the plot size was increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
 
-Subplot N rates were changed from the 2015 rates to use 60 kg/ha split into two applications (control) and 180 kg/ha in three splits.
+Subplot N rates differed from the 2015 rates. The control was applied as 60 kg/ha split into two applications and a second treatment of 180 kg/ha in three splits was applied.
 
 Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
@@ -70,7 +70,7 @@ Disease scoring was the same in both experiments using a sheath blight assessmen
 ![IRRI sheath blight field severity rating scale where, 0 - 0%, 1 - 1%, 2 - 5%,
 3 - 15%, 4 - 50%, 5 - >50%. \label{figure1}](./Figures/Figure 1 IRRI Sheath Blight Severity Assessment.png)
 
-Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area] and analysed using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
+Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area]. As most of the data did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
 
 # Results
 
