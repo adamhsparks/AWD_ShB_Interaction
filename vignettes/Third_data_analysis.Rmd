@@ -75,7 +75,7 @@ The `AUDPS` object is created when the project is loaded, in the file [munge/03_
 
 Create individual data frames for the analysis.
 
-```{r create_analysis_df}
+```{r create_analysis_df, cache=TRUE}
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
@@ -97,7 +97,7 @@ Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start t
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
-```{r 2015_TShB_incidence}
+```{r 2015_TShB_incidence, cache=TRUE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
@@ -151,7 +151,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### 2015 Tiller Sheath Blight Severity Model
 
-```{r 2015_TShB_severity}
+```{r 2015_TShB_severity, cache=TRUE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
@@ -205,7 +205,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### 2015 Leaf Sheath Blight Severity Model
 
-```{r 2015_LShB_severity}
+```{r 2015_LShB_severity, cache=TRUE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
@@ -263,7 +263,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### 2016 Tiller Sheath Blight Incidence Model
 
-```{r 2016_TShB_incidence}
+```{r 2016_TShB_incidence, cache=TRUE}
 
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
@@ -320,7 +320,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### 2016 Tiller Sheath Blight Severity Model
 
-```{r 2016_TShB_severity}
+```{r 2016_TShB_severity, cache=TRUE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
@@ -374,7 +374,7 @@ plot_joint_random_error_dist(d = rdf,
 
 ### 2016 Leaf Sheath Blight Severity Model
 
-```{r 2016_LShB_severity}
+```{r 2016_LShB_severity, cache=TRUE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.02, alpha.V = 1000)))
 LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,

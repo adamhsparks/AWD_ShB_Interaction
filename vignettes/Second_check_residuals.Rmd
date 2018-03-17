@@ -33,12 +33,12 @@ library("rice.awd.pests")
 library("car")
 ```
 
-```{r create data_frames}
+```{r create data_frames, cache=TRUE}
 AUDPS_15 <- subset(AUDPS, YEAR == 2015)
 AUDPS_16 <- subset(AUDPS, YEAR == 2016)
 ```
 
-```{r 2015_Tiller_Inc}
+```{r 2015_Tiller_Inc, cache=TRUE}
 qqp(AUDPS_15$TShB_inc_AUDPS, "norm")
 qqp(AUDPS_15$TShB_inc_AUDPS, "lnorm")
 qqp(AUDPS_15$TShB_inc_AUDPS, "exp")
@@ -47,7 +47,7 @@ qqp(AUDPS_15$TShB_inc_AUDPS, "chisq", df = 2)
 
 ## 2015 Tiller Severity
 
-```{r 2015_Tiller_Sev}
+```{r 2015_Tiller_Sev, cache=TRUE}
 qqp(AUDPS_15$TShB_percent_AUDPS, "norm")
 qqp(AUDPS_15$TShB_percent_AUDPS, "lnorm")
 qqp(AUDPS_15$TShB_percent_AUDPS, "exp")
@@ -56,7 +56,7 @@ qqp(AUDPS_15$TShB_percent_AUDPS, "chisq", df = 2)
 
 ## 2015 Leaf Severity
 
-```{r 2015_Leaf_Sev}
+```{r 2015_Leaf_Sev, cache=TRUE}
 qqp(AUDPS_15$LShB_percent_AUDPS, "norm")
 qqp(AUDPS_15$LShB_percent_AUDPS, "lnorm")
 qqp(AUDPS_15$LShB_percent_AUDPS, "exp")
@@ -65,7 +65,7 @@ qqp(AUDPS_15$LShB_percent_AUDPS, "chisq", df = 2)
 
 ## 2016 Tiller Incidence
 
-```{r 2016_Tiller_Inc}
+```{r 2016_Tiller_Inc, cache=TRUE}
 qqp(AUDPS_16$TShB_inc_AUDPS, "norm")
 qqp(AUDPS_16$TShB_inc_AUDPS, "lnorm")
 qqp(AUDPS_16$TShB_inc_AUDPS, "exp")
@@ -74,7 +74,7 @@ qqp(AUDPS_16$TShB_inc_AUDPS, "chisq", df = 2)
 
 ## 2016 Tiller Severity
 
-```{r 2016_Tiller_Sev}
+```{r 2016_Tiller_Sev, cache=TRUE}
 qqp(AUDPS_16$TShB_percent_AUDPS, "norm")
 qqp(AUDPS_16$TShB_percent_AUDPS, "lnorm")
 qqp(AUDPS_16$TShB_percent_AUDPS, "exp")
@@ -83,7 +83,7 @@ qqp(AUDPS_16$TShB_percent_AUDPS, "chisq", df = 2)
 
 ## 2016 Leaf Severity
 
-```{r 2016_Leaf_Sev}
+```{r 2016_Leaf_Sev, cache=TRUE}
 qqp(AUDPS_16$LShB_percent_AUDPS, "norm")
 qqp(AUDPS_16$LShB_percent_AUDPS, "lnorm")
 qqp(AUDPS_16$LShB_percent_AUDPS, "exp")
