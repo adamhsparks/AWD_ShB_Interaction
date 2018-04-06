@@ -2,7 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Travis-CI Build
-Status](https://travis-ci.org/phytopathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/phytopathology/rice_awd_pests)
+Status](https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/openplantpathology/rice_awd_pests)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&svg=true)](https://ci.appveyor.com/project/phytopathology/rice_awd_pests)
 
@@ -407,7 +407,7 @@ N180
 
 Please cite this compendium as:
 
-> Authors, (2018). *Title of compendium*. Accessed 17 Mar 2018. Online
+> Authors, (2018). *Title of compendium*. Accessed 06 Apr 2018. Online
 > at <https://doi.org/xxx/xxx>
 
 ### Licenses
