@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">rice.awd.pests</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">rice.awd.pests</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -79,20 +83,20 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Sheath Blight Analysis</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2018-03-17</h4>
+            <h4 class="date">2018-04-06</h4>
       
-      <small>Source: <a href="https:/github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
+      <div class="hidden name"><code>Third_data_analysis.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p>Based on the residual plots where several do not meet assumptions for a normal distribution, I’ve elected to use <code><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm()</a></code> for a split plot analysis rather than a <code>lmer()</code> model. The <code><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm()</a></code> model will work for all the data regardless of the residuals.</p>
 <div id="interpreting-these-analyses" class="section level4">
 <h4 class="hasAnchor">
@@ -219,28 +223,28 @@
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb15-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb16-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="700"></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="700"></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb19-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Incidence"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-6.png" width="700"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
@@ -298,28 +302,28 @@
 <a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb26-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb26-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb27-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb28-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb28-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb29-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="700"></p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="700"></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb31-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb31-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Tiller ShB Severity"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-6.png" width="700"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
@@ -377,28 +381,28 @@
 <a class="sourceLine" id="cb38-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb38-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb38-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb39-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb40-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb40-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2015 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb41-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2015 Posteriors for Treatments, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-4.png" width="700"></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-5.png" width="700"></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb43-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2015</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb43-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb43-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2015 Random Error Distribution for Leaf ShB Severity"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-6.png" width="700"></p>
 <hr>
 </div>
 </div>
@@ -461,28 +465,28 @@
 <a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb50-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb50-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb51-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb52-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb52-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb53-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Incidence"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-4.png" width="700"></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-5.png" width="700"></p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb55-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_incidence_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb55-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb55-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Incidence"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-6.png" width="700"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
@@ -539,28 +543,28 @@
 <a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb62-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb62-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb63-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb64-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb64-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb65-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Tiller ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="700"></p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="700"></p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb67-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(TShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb67-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb67-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Tiller ShB Severity"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-6.png" width="700"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
@@ -617,28 +621,28 @@
 <a class="sourceLine" id="cb74-5" data-line-number="5"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb74-6" data-line-number="6">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb74-7" data-line-number="7">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Replicates, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># posterior distributions for replicate</span></a>
 <a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_replicate_posteriors</a></span>(<span class="dt">d =</span> reps,</a>
 <a class="sourceLine" id="cb75-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"></p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co"># diagnostic line plots for treatments</span></a>
 <a class="sourceLine" id="cb76-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_diagnostic_lines</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb76-3" data-line-number="3">                      <span class="dt">x =</span> x,</a>
 <a class="sourceLine" id="cb76-4" data-line-number="4">                      <span class="dt">title =</span> <span class="st">"2016 Diagnostic Plots for Treatments, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"></p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co"># Posterior distributions for treatment</span></a>
 <a class="sourceLine" id="cb77-2" data-line-number="2"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_treatment_posteriors</a></span>(<span class="dt">d =</span> trts,</a>
 <a class="sourceLine" id="cb77-3" data-line-number="3">                          <span class="dt">title =</span> <span class="st">"2016 Posteriors for Treatments, Leaf ShB Severity"</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-4.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-4.png" width="700"></p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co"># check random effects</span></a>
 <a class="sourceLine" id="cb78-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/plotMCMC/topics/plotTrace">plotTrace</a></span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV, <span class="dt">log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-5.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-5.png" width="700"></p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="co"># plot joint distibution of error</span></a>
 <a class="sourceLine" id="cb79-2" data-line-number="2">rdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(LShB_severity_lmm_<span class="dv">2016</span><span class="op">$</span>VCV)</a>
 <a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw"><a href="../reference/plot_mcmc_glmm.html">plot_joint_random_error_dist</a></span>(<span class="dt">d =</span> rdf,</a>
 <a class="sourceLine" id="cb79-4" data-line-number="4">                             <span class="dt">title =</span> (<span class="st">"2016 Random Error Distribution for Leaf ShB Severity"</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-6.png" width="672"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-6.png" width="700"></p>
 </div>
 <div id="model-fit" class="section level3">
 <h3 class="hasAnchor">
@@ -670,7 +674,6 @@
 <p>In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.</p>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -699,6 +702,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

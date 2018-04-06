@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">rice.awd.pests</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">rice.awd.pests</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -79,20 +83,20 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Visualise Data</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2018-03-17</h4>
+            <h4 class="date">2018-04-06</h4>
       
-      <small>Source: <a href="https:/github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/First_raw_data_visualisation.Rmd"><code>vignettes/First_raw_data_visualisation.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/First_raw_data_visualisation.Rmd"><code>vignettes/First_raw_data_visualisation.Rmd</code></a></small>
+      <div class="hidden name"><code>First_raw_data_visualisation.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div id="libraries" class="section level1">
 <h1 class="hasAnchor">
 <a href="#libraries" class="anchor"></a>Libraries</h1>
@@ -110,7 +114,7 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>NRTE) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity Rating"</span>)</a></code></pre></div>
 <pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-1-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 </div>
 <div id="histogram-plot-of-tshb_rating-data" class="section level1">
 <h1 class="hasAnchor">
@@ -120,7 +124,7 @@
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>NRTE) <span class="op">+</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity Rating"</span>)</a></code></pre></div>
 <pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div id="density-plot-of-tshb_incidence-data" class="section level1">
 <h1 class="hasAnchor">
@@ -134,7 +138,7 @@
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">size =</span> <span class="dv">8</span>,</a>
 <a class="sourceLine" id="cb6-8" data-line-number="8">                                 <span class="dt">angle =</span> <span class="dv">45</span>,</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9">                                 <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div id="histogram-plot-of-green-leaf-data" class="section level1">
 <h1 class="hasAnchor">
@@ -144,7 +148,7 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Count"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Green Leaves per Tiller"</span>)</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div id="histogram-plot-plot-of-dead-leaf-data" class="section level1">
 <h1 class="hasAnchor">
@@ -154,7 +158,7 @@
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Count"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Dry Leaves per Tiller"</span>)</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div id="dot-plot-of-leaf-sheath-blight-severity-data" class="section level1">
 <h1 class="hasAnchor">
@@ -167,7 +171,7 @@
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity at Each Assessment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>TRT) <span class="op">+</span></a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">strip.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">90</span>))</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 <div id="dot-plot-of-tiller-sheath-blight-severity-data" class="section level1">
 <h1 class="hasAnchor">
@@ -180,7 +184,7 @@
 <a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>TRT) <span class="op">+</span></a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity at Each Assessment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">strip.text.x =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">angle =</span> <span class="dv">90</span>))</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 <div id="dot-plot-of-tiller-sheath-blight-incidence-data" class="section level1">
 <h1 class="hasAnchor">
@@ -197,7 +201,7 @@
 <a class="sourceLine" id="cb13-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Assessment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Incidence"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb13-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight at Each Assessment"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div id="violindot-plots-of-tiller-sheath-blight-incidence-data" class="section level1">
 <h1 class="hasAnchor">
@@ -212,7 +216,7 @@
 <a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Incidence per Hill"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 <div id="boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="section level1">
 <h1 class="hasAnchor">
@@ -223,7 +227,7 @@
 <a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> WMGT, <span class="dt">y =</span> TShB_inc_AUDPS)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
@@ -231,7 +235,7 @@
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Incidence"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>
 <div id="boxdotplots-of-leaf-sheath-blight-severity-audps" class="section level1">
 <h1 class="hasAnchor">
@@ -251,7 +255,7 @@
 <a class="sourceLine" id="cb17-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(WMGT, <span class="dt">y =</span> LShB_percent_AUDPS)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
@@ -259,7 +263,7 @@
 <a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div id="boxdotplots-of-tiller-sheath-blight-severity-audps-data" class="section level1">
 <h1 class="hasAnchor">
@@ -270,14 +274,14 @@
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> TShB_percent_AUDPS)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight Severity"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 <div id="line-graph-of-leaf-sheath-blight-severity-data" class="section level1">
 <h1 class="hasAnchor">
@@ -293,7 +297,7 @@
 <a class="sourceLine" id="cb21-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Severity (%)"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb21-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span></a>
 <a class="sourceLine" id="cb21-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-16-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 <div id="line-graph-of-tiller-sheath-blight-severity-audps-data" class="section level1">
 <h1 class="hasAnchor">
@@ -309,7 +313,7 @@
 <a class="sourceLine" id="cb22-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Severity (%)"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb22-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span></a>
 <a class="sourceLine" id="cb22-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 </div>
 <div id="line-graph-of-tiller-sheath-blight-incidence-audps-data" class="section level1">
 <h1 class="hasAnchor">
@@ -325,8 +329,7 @@
 <a class="sourceLine" id="cb23-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Incidence (%)"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb23-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(WMGT <span class="op">~</span><span class="st"> </span>YEAR) <span class="op">+</span></a>
 <a class="sourceLine" id="cb23-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight"</span>)</a></code></pre></div>
-<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
-</div>
+<p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
 </div>
   </div>
 
@@ -368,6 +371,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>
