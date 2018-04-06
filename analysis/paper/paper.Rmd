@@ -39,6 +39,8 @@ The AWD technology has been identified as promising climate smart practice for d
 
 We therefore established field experiments in order to determine what effects AWD could have on sheath blight disease (\emph{Rhizoctonia solani} Kühn) [(teleomorph: \emph{Thanatephorus cucumeris} (A.B. Frank) Donk.] of rice.
 
+Sheath blight is economically important worldwide and it is difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually through cultural practices, which include nitrogen and water management.
+
 # Materials and Methods
 
 ## Experimental Design
