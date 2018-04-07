@@ -2,7 +2,7 @@
 
 env:
   global:
-  - REPO=$DOCKER_USER/awd_shb
+  - REPO=$DOCKER_USER/awd_shb:Dockerfile
 
 sudo: required
 
