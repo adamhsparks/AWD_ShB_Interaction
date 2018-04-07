@@ -4,7 +4,7 @@ FROM rocker/verse:3.4.4
 # required
 MAINTAINER Your Name adamhsparks@gmail.com
 
-COPY . /home/rstudio/rice_awd_pests
+COPY --chown=rstudio . /home/rstudio/rice_awd_pests
 
 # go into the repo directory
 RUN . /etc/environment \
