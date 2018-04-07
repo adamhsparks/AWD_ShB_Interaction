@@ -19,11 +19,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: agricolae,
     car,
+    carData,
     dplyr (>= 0.7.0),
     fitdistrplus,
     forcats,
     ggplot2,
-    kableExtra,
     lattice,
     lubridate,
     MASS,
