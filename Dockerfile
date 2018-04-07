@@ -8,15 +8,15 @@ COPY . /rice_awd_pests
 
 # go into the repo directory
 RUN . /etc/environment \
-
+  \
   # Install linux depedendencies here
   # e.g. need this for ggforce::geom_sina
   && sudo apt-get update \
   && sudo apt-get install libudunits2-dev -y \
-
+  \
   # build this compendium package
   && R -e "devtools::install('/rice_awd_pests', dep=TRUE)" \
-
+ \
  # render the manuscript into a docx, you'll need to edit this if you've
  # customised the location and name of your main Rmd file
-  && R -e "rmarkdown::render('analysis/paper/paper.Rmd')"
+  && R -e "rmarkdown::render('rice_awd_pests/analysis/paper/paper.Rmd')"
