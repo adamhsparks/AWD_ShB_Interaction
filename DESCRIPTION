@@ -18,12 +18,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: agricolae,
-    bookdown,
     car,
     dplyr (>= 0.7.0),
     fitdistrplus,
     forcats,
     ggplot2,
+    kableExtra,
     lattice,
     lubridate,
     MASS,
@@ -34,9 +34,10 @@ Imports: agricolae,
     tibble,
     tidyr (>= 0.7.0)
 RoxygenNote: 6.0.1
-Suggests: knitr,
+Suggests: bookdown, 
+    knitr,
     rmarkdown,
-    rticles (>= 0.4.1)
+    kableExtra
 VignetteBuilder: knitr
 URL: https://github.com/openplantpathology/rice_awd_pests
 BugReports: https://github.com/openplantpathology/rice_awd_pests/issues
