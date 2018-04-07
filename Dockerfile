@@ -4,19 +4,14 @@ FROM rocker/verse:3.4.4
 # required
 MAINTAINER Your Name adamhsparks@gmail.com
 
-COPY . /rice_awd_pests
+COPY . /home/rstudio/rice_awd_pests
 
 # go into the repo directory
 RUN . /etc/environment \
   \
-  # Install linux depedendencies here
-  # e.g. need this for ggforce::geom_sina
-  && sudo apt-get update \
-  && sudo apt-get install libudunits2-dev -y \
+ # build this compendium package
+  && R -e "devtools::install('home/rstudio/rice_awd_pests', dep=TRUE)" \
   \
-  # build this compendium package
-  && R -e "devtools::install('/rice_awd_pests', dep=TRUE)" \
- \
  # render the manuscript into a docx, you'll need to edit this if you've
  # customised the location and name of your main Rmd file
-  && R -e "rmarkdown::render('rice_awd_pests/analysis/paper/paper.Rmd')"
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/analysis/paper/paper.Rmd')"
