@@ -2,7 +2,7 @@
 FROM rocker/verse:3.4.4
 
 # required
-MAINTAINER Your Name adamhsparks@gmail.com
+MAINTAINER Adam Sparks adamhsparks@gmail.com
 
 COPY --chown=rstudio . /home/rstudio/rice_awd_pests
 
