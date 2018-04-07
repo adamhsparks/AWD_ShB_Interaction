@@ -2,7 +2,7 @@
 
 env:
   global:
-  - REPO=$DOCKER_USER/rice_awd_pests
+  - REPO=$DOCKER_USER/awd_pests
 
 sudo: required
 
