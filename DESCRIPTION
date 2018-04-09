@@ -1,5 +1,5 @@
 Package: rice.awd.pests
-Title: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight and Insect Populations
+Title: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight
 Version: 0.0.0.9000
 Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
     email = "adamhsparks@gmail.com",
