@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 # rice.awd.pests
 
 The goal of _rice.awd.pests_ is to examine the effects of using alternate
-wetting and drying irrigation techniques on insect populations and sheath blight
-disease in rice paddies.
+wetting and drying irrigation techniques on sheath blight disease in rice
+paddies.
 
 ## Study 
 

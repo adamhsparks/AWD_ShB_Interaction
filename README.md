@@ -9,8 +9,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_a
 # rice.awd.pests
 
 The goal of *rice.awd.pests* is to examine the effects of using
-alternate wetting and drying irrigation techniques on insect populations
-and sheath blight disease in rice paddies.
+alternate wetting and drying irrigation techniques on sheath blight
+disease in rice paddies.
 
 ## Study
 
