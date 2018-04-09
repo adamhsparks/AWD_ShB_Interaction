@@ -3,10 +3,13 @@ Title: Reproducible Research Compendium for Analysing Effects of Water Managemen
 Version: 0.0.0.9000
 Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
     email = "adamhsparks@gmail.com",
-    comment = "https://orcid.org/0000-0002-0061-8359"),
-    person("Nancy", "Castilla", role = "ctb",
+    comment = c(ORCID = "0000-0002-0061-8359")),
+    person("Nancy", "Castilla", role = "aut",
     email = "n.castilla@irri.org"),
-    person("Michael", "Noel", role = "ctb"))
+    person("Bjoern Ole", "Sander", role = "aut",
+    email = "b.sander@irri.org",
+    comment = c(ORCID = "0000-0002-7967-6147")),
+    person("Michael", "Noel", role = "aut"))
 Description: Provides a research compendium of analysis associated with
     experiments conducted at the International Rice Research Institute (IRRI),
     Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The
