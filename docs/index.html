@@ -95,292 +95,90 @@
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div id="rice-awd-pests" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rice-awd-pests" class="anchor"></a>rice.awd.pests</h1></div>
-<p>The goal of <em>rice.awd.pests</em> is to examine the effects of using alternate wetting and drying irrigation techniques on sheath blight disease in rice paddies.</p>
-<div id="study" class="section level2">
+<div id="research-compendium-for-a-report-on-the-effects-of-using-alternate-wetting-and-drying-irrigation-techniques-on-sheath-blight-disease-in-rice-paddies-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#study" class="anchor"></a>Study</h2>
-<p><strong>Objective 1:</strong> Study the effects of different water and nitrogen managements on sheath blight of rice</p>
-<p><strong>Project PI:</strong> Dr. Adam H Sparks</p>
-<p><strong>Staff:</strong></p>
-<ul>
-<li><p>Dr. Nancy P. Castilla (2016)</p></li>
-<li><p>Mr. Michael Noel (2015)</p></li>
-</ul>
-<hr>
-<div id="schedule" class="section level3">
+<a href="#research-compendium-for-a-report-on-the-effects-of-using-alternate-wetting-and-drying-irrigation-techniques-on-sheath-blight-disease-in-rice-paddies-" class="anchor"></a>Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques on sheath blight disease in rice paddies.</h2>
+<div id="compendium-doi" class="section level3">
 <h3 class="hasAnchor">
-<a href="#schedule" class="anchor"></a>1. SCHEDULE</h3>
-<p>IRRI Dry Season (2)</p>
-<ul>
-<li><p>2015 (December 2014 – April 2015)</p></li>
-<li><p>2016 (January 2016 - May 2016)</p></li>
-</ul>
+<a href="#compendium-doi" class="anchor"></a>Compendium DOI:</h3>
+<p><a href="http://dx.doi.org/xxxxxxx" class="uri">http://dx.doi.org/xxxxxxx</a></p>
+<p>The files at the URL above will generate the results as found in the publication. The files hosted at github.com/openplantpathology/rice.awd.pests are the development versions and may have changed since the report was published.</p>
 </div>
-<div id="methodology" class="section level3">
+<div id="authors-of-this-repository" class="section level3">
 <h3 class="hasAnchor">
-<a href="#methodology" class="anchor"></a>2. METHODOLOGY</h3>
-<p><strong>Experimental Design: Split-plot</strong></p>
+<a href="#authors-of-this-repository" class="anchor"></a>Authors of this repository:</h3>
+<p>Adam H. Sparks (<a href="mailto:adam.sparks@usq.edu.au">adam.sparks@usq.edu.au</a>)</p>
+<p>Nancy P. Castilla (<a href="mailto:n.castilla@irri.org">n.castilla@irri.org</a>)</p>
+<p>B. Ole Sander (<a href="mailto:b.sander@irri.org">b.sander@irri.org</a>)</p>
+<p>M. Noel</p>
+</div>
+<div id="published-in" class="section level3">
+<h3 class="hasAnchor">
+<a href="#published-in" class="anchor"></a>Published in:</h3>
+<p>Sparks, A, xxxxx</p>
+</div>
+<div id="overview-of-contents" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview-of-contents" class="anchor"></a>Overview of contents</h3>
+<p>This repository is our research compendium for our analysis of the effects of alternate wetting and drying irrigation technology on rice sheath blight disease. The compendium contains all data, code, and text associated with the publication. The <code>Rmd</code> files in the <code>analysis/paper/</code> directory contain details of how all the analyses reported in the paper were conducted, as well as instructions on how to rerun the analysis to reproduce the results. The <code>data/</code> directory in the <code>analysis/</code> directory contains all the raw data.</p>
+</div>
+<div id="the-supplementary-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-supplementary-files" class="anchor"></a>The supplementary files</h3>
+<p>The <code>analysis/</code> directory contains:</p>
 <ul>
-<li>
-<p>Main plot : Water management (2)</p>
-<ul>
-<li><p>W1 – Alternate Wetting and Drying (AWD)</p></li>
-<li><p>W2 – Flooded/Farmer’s Practice</p></li>
+<li>the manuscript as submitted (in PDF format) and it’s Rmd source file</li>
+<li>all the data files (in CSV file format, in the <code>data/</code> directory)</li>
+<li>supplementary information source files (in R markdown format) and executed versions</li>
+<li>all the figures that are included in the paper (in the <code>figures/</code> directory)</li>
 </ul>
-</li>
-<li>
-<p>Sub-plot : Nitrogen management (5)</p>
-<ul>
-<li>
-<p>2015</p>
-<ul>
-<li><p>N0 – 0 kg/ha</p></li>
-<li><p>N1 – 100 kg/ha (farmer’s practice – based from J. Bigornia research)</p></li>
-<li><p>N2 – 120 kg/ha (IRRI practice – based from L. Willocquet research)</p></li>
-</ul>
-</li>
-<li>
-<p>2016</p>
-<ul>
-<li><p>N3 – 60 kg/ha</p></li>
-<li><p>N4 - 180 kg/ha</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Replication: Four (4)</p></li>
-<li>
-<p>Plot Sizes (2015)</p>
-<ul>
-<li><p>Main plot size: 12m x 12m (144 sq m)</p></li>
-<li><p>Sub-plot size: 5m x 5m (25 sq m)</p></li>
-<li><p>Replication size: 12m x 24m (288 sq m)</p></li>
-<li><p>Buffer: 1m per sub plot</p></li>
-<li><p>Experiment size: 1,152 sq m</p></li>
-</ul>
-</li>
-<li>
-<p>Plot Sizes (2016)</p>
-<ul>
-<li>
-<p>Main plot size</p>
-<ul>
-<li><p>Block 2007: 21m x 20.5m (412.5 sq m)</p></li>
-<li><p>Block 2008: 20.25m x 21.6m (437.4 sq m)</p></li>
-</ul>
-</li>
-<li>
-<p>Sub-plot size</p>
-<ul>
-<li><p>Block 2007: 21m x 10.25m (215.25 sq m)</p></li>
-<li><p>Block 2008: 20.25m x 10.8m (218.7 sq m)</p></li>
-</ul>
-</li>
-<li>
-<p>Replication size:</p>
-<ul>
-<li><p>Block 2007: 42m x 20.5m (861 sq m)</p></li>
-<li><p>Block 2008: 40.5m x 21.6m (874.8 sq m)</p></li>
-</ul>
-</li>
-<li><p>Buffer: 0.5m per sub plot</p></li>
-<li><p>Experiment size: 3471.6 sq m</p></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><strong>Disease Rating Scale</strong></p>
-<p>Disease was rated using an ordinal scale for field evaluation of sheath blight (S Savary &amp; N Castilla).</p>
-<ul>
-<li>
-<p><strong>Rating Scale - Severity (%)</strong></p>
-<ul>
-<li><p>0 - 0,</p></li>
-<li><p>1 - 1%,</p></li>
-<li><p>2 - 5%,</p></li>
-<li><p>3 - 15%,</p></li>
-<li><p>4 - 50%,</p></li>
-<li><p>5 - &gt;50%</p></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><strong>Nitrogen Management Rates</strong></p>
-<table width="500" class="table">
-<tr>
-<th rowspan="2">
-Nitrogen<br>treatment
-</th>
-<th rowspan="2">
-Year
-</th>
-<th rowspan="2">
-Total N<br>(kg/ha)
-</th>
-<th colspan="4">
-Application Amount (kg/ha)
-</th>
-</tr>
-<tr>
-<th>
-Basal
-</th>
-<th>
-Tillering
-</th>
-<th>
-Panicle<br>Intitiation
-</th>
-</tr>
-<tr>
-<td>
-N0
-</td>
-<td>
-2015
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-</tr>
-<tr>
-<td>
-N100
-</td>
-<td>
-2015
-</td>
-<td>
-100
-</td>
-<td>
-60
-</td>
-<td>
-20
-</td>
-<td>
-20
-</td>
-</tr>
-<tr>
-<td>
-N120
-</td>
-<td>
-2015
-</td>
-<td>
-120
-</td>
-<td>
-60
-</td>
-<td>
-30
-</td>
-<td>
-30
-</td>
-</tr>
-<tr>
-<td>
-N60
-</td>
-<td>
-2016
-</td>
-<td>
-60
-</td>
-<td>
-30
-</td>
-<td>
-30
-</td>
-<td>
-0
-</td>
-</tr>
-<tr>
-<td>
-N180
-</td>
-<td>
-2016
-</td>
-<td>
-180
-</td>
-<td>
-60
-</td>
-<td>
-60
-</td>
-<td>
-60
-</td>
-</tr>
-</table>
+</div>
+<div id="the-r-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-r-package" class="anchor"></a>The R package</h3>
+<p>This repository is organized as an R package. There are no actual R functions in this package - all the R code is in the Rmd file. I simply used the R package structure to help manage dependencies, to take advantage of continuous integration for automated code testing, and so I didn’t have to think too much about how to organise the files.</p>
+<p>To download the package source as you see it on GitHub, for offline browsing, use this line at the shell prompt (assuming you have Git installed on your computer):</p>
+<pre><code>git clone https://github.com/openplantpathology/rice_awd_pests.git</code></pre>
+<p>Once the download is complete, open the <code>rice.awd.pests.Rproj</code> in RStudio to begin working with the package and compendium files.</p>
+<p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve done two things to simpify access to the compendium. First is the packrat directory, which contains the source code for all the packages we depend on. If all works well, these will be installed on your computer when you open <code>rice_awd_.pests.Rproj</code> in RStudio. Second is our Docker image that includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.</p>
+</div>
+<div id="the-docker-image" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-docker-image" class="anchor"></a>The Docker image</h3>
+<p>A Docker image is a lightweight GNU/Linux virtual computer that can be run as a piece of software on Windows and OSX (and other Linux systems). To capture the complete computational environment used for this project we have a Dockerfile that specifies how to make the Docker image that we developed this project in. The Docker image includes all of the software dependencies needed to run the code in this project, as well as the R package and other compendium files. To launch the Docker image for this project, first, <a href="https://docs.docker.com/installation/">install Docker</a> on your computer. At the Docker prompt, enter:</p>
+<pre><code>docker run -dp 8787:8787 adamhsparks/rice.awd.pests</code></pre>
+<p>This will start a server instance of RStudio. Then open your web browser at localhost:8787 or or run <code>docker-machine ip default</code> in the shell to find the correct IP address, and log in with rstudio/rstudio.</p>
+<p>Once logged in, use the Files pane (bottom right) to navigate to <code>/</code> (the root directory), then open the folder for this project, and open the <code>.Rproj</code> file for this project. Once that’s open, you’ll see the <code>analysis/paper</code> directory in the Files pane where you can find the R markdown document, and knit them to produce the results in the paper. More information about using RStudio in Docker is avaiable at the <a href="https://github.com/rocker-org">Rocker</a> <a href="https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image">wiki</a> pages.</p>
+<p>We developed and tested the package on this Docker container, so this is the only platform that We’re confident it works on, and so recommend to anyone wanting to use this package to generate the vignette, etc.</p>
 </div>
 </div>
-<div id="resources" class="section level2">
+<div id="citation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
-<div id="glmm-split-plot-analysis" class="section level3">
-<h3 class="hasAnchor">
-<a href="#glmm-split-plot-analysis" class="anchor"></a>glmm split plot analysis</h3>
-<p><a href="http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html">http://ase.tufts.edu/gsc/gradresources/guidetomixedmodelsinr/mixed%20model%20guide.html</a></p>
-<p><a href="http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf" class="uri">http://www.stat.wisc.edu/courses/st572-larget/Spring2007/handouts16-4.pdf</a></p>
-<p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html</a></p>
-</div>
-<div id="using-mcmcglmm" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-mcmcglmm" class="anchor"></a>Using MCMCglmm</h3>
-<p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/onewayanova.html" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/onewayanova.html</a></p>
-<p><a href="http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm" class="uri">http://www.maths.bath.ac.uk/~jjf23/mixchange/split.html#mcmcglmm</a></p>
-<p><a href="https://github.com/tmalsburg/MCMCglmm-intro" class="uri">https://github.com/tmalsburg/MCMCglmm-intro</a></p>
-</div>
-<div id="general-glmm-in-r" class="section level3">
-<h3 class="hasAnchor">
-<a href="#general-glmm-in-r" class="anchor"></a>General GLMM in R</h3>
-<p><a href="http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html" class="uri">http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a></p>
-</div>
-<div id="citation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h3>
+<a href="#citation" class="anchor"></a>Citation</h2>
 <p>Please cite this compendium as:</p>
 <blockquote>
 <p>Authors, (2018). <em>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight</em>. Accessed 09 Apr 2018. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
 </blockquote>
 </div>
-<div id="licenses" class="section level3">
-<h3 class="hasAnchor">
-<a href="#licenses" class="anchor"></a>Licenses</h3>
-<p>Text and figures: <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
-<p>Code: See the <a href="DESCRIPTION" class="uri">DESCRIPTION</a> file</p>
+<div id="licenses" class="section level2">
+<h2 class="hasAnchor">
+<a href="#licenses" class="anchor"></a>Licenses</h2>
+<p>Manuscript: <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
+<p>Code: <a href="http://opensource.org/licenses/MIT">MIT</a> year: 2018, copyright holder: Adam Sparks</p>
 <p>Data: <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC-0</a> attribution requested in reuse</p>
 </div>
-<div id="contributions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#contributions" class="anchor"></a>Contributions</h3>
-<p>We welcome contributions from everyone. Before you get started, please see our <a href="CONTRIBUTING.html">contributor guidelines</a>. Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<div id="dependencies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dependencies" class="anchor"></a>Dependencies</h2>
+<p>I used <a href="http://www.rstudio.com/products/rstudio/">RStudio</a> on MacOS and Ubuntu 17.10. See the colophon section of the docx file in <code>analysis/paper</code> for a full list of the packages that this project depends on.</p>
 </div>
-</div>
+<div id="contact" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contact" class="anchor"></a>Contact</h2>
+<p>Adam Sparks, Associate Professor, Centre for Crop Health<br>
+University of Southern Queensland, West<br>
+St. Toowoomba, Qld 4350 Australia</p>
+<p>(+61) 7.4631.1948 <a href="mailto:adam.sparks@usq.edu.au">adam.sparks@usq.edu.au</a><br><a href="https://staffprofile.usq.edu.au/Profile/Adam-Sparks" class="uri">https://staffprofile.usq.edu.au/Profile/Adam-Sparks</a></p>
 </div>
   </div>
 
@@ -415,6 +213,9 @@ N180
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://github.com/openplantpathology/rice.awd.pests/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--04--09-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-3.4.4-brightgreen.svg" alt="minimal R version"></a></li>
+<li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 <li><a href="https://travis-ci.org/openplantpathology/rice_awd_pests"><img src="https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/phytopathology/rice_awd_pests"><img src="https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 </ul>
