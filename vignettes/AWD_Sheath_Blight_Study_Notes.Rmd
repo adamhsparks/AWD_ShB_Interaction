@@ -23,7 +23,8 @@ The differences are:
 
  - plot sizes are larger in 2016 than 2015,
  
- - the inoculation amounts and timing differ with 2016 having more applied to the sampling area at a later date after transplanting, and
+ - the inoculation amounts and timing differ with 2016 having more applied to
+ the sampling area at a later date after transplanting, and
  
  - nitrogen rates were changed in 2016.
 
@@ -226,7 +227,8 @@ IRRI Dry Season (2)
 
 ## Disease Rating Scale
 
-Disease was rated using an ordinal scale for field evaluation of sheath blight (S Savary & N Castilla).
+Disease was rated using an ordinal scale for field evaluation of sheath blight
+(S Savary & N Castilla).
 
 -   **Rating Scale - Severity (%)**
 
