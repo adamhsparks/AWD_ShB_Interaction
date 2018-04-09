@@ -1,12 +1,13 @@
 Clean 2015 Raw Data
 ================
 
-The raw data are located in the `extdata` folder of the installed *rice.awd.pests*
+The raw data are located in the `extdata` folder of the installed
+*rice.awd.pests*
 
-Dry season 2015 importing and cleaning
-======================================
+# Dry season 2015 importing and cleaning
 
-DS2015 data can be accessed using:
+DS2015 data can be accessed
+using:
 
 ``` r
 load(system.file("extdata", "DS2015_Raw_22DAI.csv", package = "rice.awd.pests"))
@@ -264,10 +265,11 @@ if (!dir.exists("../data")) {
 }
 ```
 
-Dry season 2016 importing and cleaning
-======================================
+# Dry season 2016 importing and cleaning
 
-The 2016 season raw data are located in the `extdata` folder of the installed *rice.awd.pests* and can be accessed using:
+The 2016 season raw data are located in the `extdata` folder of the
+installed *rice.awd.pests* and can be accessed
+using:
 
 ``` r
 load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))
@@ -592,14 +594,19 @@ DS2016 <-
   )
 ```
 
-Calculating Area Under the Disease Progress Stairs (AUDPS)
-==========================================================
+# Calculating Area Under the Disease Progress Stairs (AUDPS)
 
-Because the data were collected on an ordinal scale, but not evenly spaced, the data are converted to the midpoint value of the percent range for severity and then the AUDPS is calculated from that. See lines 544 and 559 for this.
+Because the data were collected on an ordinal scale, but not evenly
+spaced, the data are converted to the midpoint value of the percent
+range for severity and then the AUDPS is calculated from that. See lines
+544 and 559 for this.
 
-After that the AUDPS is calculated using functionality from the *agricolae* package.
+After that the AUDPS is calculated using functionality from the
+*agricolae* package.
 
-Last, the data are saved in the package for use analysis, which is detailed in the package [vingettes](../vignettes).
+Last, the data are saved in the package for use analysis, which is
+detailed in the package
+[vingettes](../vignettes).
 
 ``` r
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
@@ -890,4 +897,4 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-    ## Saving AUDPS as AUDPS.rda to /Users/asparks/Development/rice_awd_pests/data
+    ## Saving AUDPS as AUDPS.rda to /Users/U8004755/Development/rice_awd_pests/data
