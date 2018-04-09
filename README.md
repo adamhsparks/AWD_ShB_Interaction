@@ -407,8 +407,9 @@ N180
 
 Please cite this compendium as:
 
-> Authors, (2018). *Title of compendium*. Accessed 06 Apr 2018. Online
-> at <https://doi.org/xxx/xxx>
+> Authors, (2018). *Reproducible Research Compendium for Analysing
+> Effects of Water Management and Nitrogen on Rice Sheath Blight*.
+> Accessed 09 Apr 2018. Online at <https://doi.org/xxx/xxx>
 
 ### Licenses
 
