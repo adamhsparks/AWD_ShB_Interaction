@@ -49,13 +49,13 @@ IRRI Dry Season (2)
 </tr>
 <tr>
 <td style = "padding:5px;">Transplanting</td>
-<td style = "padding:5px;">2015-09-01</td>
+<td style = "padding:5px;">2015-01-09</td>
 <td style = "padding:5px; text-align:right;">0</td>
 <td style = "padding:5px;"></td>
 </tr>
 <tr>
 <td style = "padding:5px;">Inoculation</td>
-<td style = "padding:5px;">2015-29-01</td>
+<td style = "padding:5px;">2015-01-29</td>
 <td style = "padding:5px; text-align:right;">20</td>
 <td style = "padding:5px; text-align:right;">0</td>
 </tr>
