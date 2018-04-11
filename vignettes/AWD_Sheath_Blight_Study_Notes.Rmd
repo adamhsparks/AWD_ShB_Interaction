@@ -112,7 +112,7 @@ IRRI Dry Season (2)
 <td style="padding:7px">Inoculation</td>
 <td style="padding:7px">2016-03-01</td>
 <td style="padding:7px; text-align:right;">41</td>
-<td style = "padding:5px;"></td>
+<td style = "padding:5px;">0</td>
 </tr>
 
 <tr>
