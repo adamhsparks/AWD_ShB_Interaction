@@ -78,7 +78,7 @@ Disease scoring was the same in both experiments using the same sheath blight as
 ![IRRI sheath blight field severity rating scale for rice leaf tissue where, 0 - 0%, 1 - 1%, 2 - 5%,
 3 - 15%, 4 - 50%, 5 - >50% severity. \label{figure1}](./Figures/Figure 1 IRRI Sheath Blight Severity Assessment.png)
 
-Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area]. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2018].
+Disease incidence and severity were converted to area under the disease progress stairs (AUDPS) [@simko2012area]. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2010] in the R programming environment [@R2018].
 
 # Results
 
