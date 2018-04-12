@@ -84,19 +84,19 @@ Disease incidence and severity were converted to area under the disease progress
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 both of the nitrogen rates, N100 and N120, were significantly different when compared with the control N0 rate. However, water management was not significantly different.
+In 2015 both of the nitrogen treatements, N100 and N120, were significantly different when compared with the control N0 treatement. However, water management was not significantly different.
 
-In 2016 the nitrogen rate N180, was significantly different than the control N60 rate. As in the 2015 study, water management did not significantly differ.
+In 2016 the nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the control flooding treatment.
+In 2016 the N180 treatement was significantly different from the N60 treatment. The AWD water management was also significantly different from the control flooding treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
 
 In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf sheath blight severity.
 
