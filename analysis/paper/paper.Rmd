@@ -9,9 +9,9 @@ abstract: |
 
 bibliography: references.bib
 output:
-  bookdown::pdf_document2:
+  bookdown::word_document2:
     toc: no
-fig_caption: yes
+    fig_caption: yes
 
 always_allow_html: yes
 
@@ -35,70 +35,99 @@ library(kableExtra)
 
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (\emph{Oryza sativa L.}) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
-The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, \textit{e.g.}, Bangladesh, Vietnam, Thailand and the Philippines, plan to widely apply AWD to local rice production [@MOEF2015]. However, a change in water regime in rice fields on large scale might encompass different other effects, for example related to plant health.
+The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, \textit{e.g.}, Bangladesh, Vietnam, Thailand and the Philip pines, plan to widely apply AWD to local rice production [@MOEF2015]. However, a change in water regime in rice fields on large scale might encompass different other effects, for example related to plant health.
 
-We therefore established field experiments in order to determine what effects AWD could have on sheath blight disease (\emph{Rhizoctonia solani} Kühn) [(teleomorph: \emph{Thanatephorus cucumeris} (A.B. Frank) Donk.] of rice.
+We therefore established field experiments in order to determine what effects AWD could have on sheath blight disease (\emph{Rhizoctonia solani} Kühn), anastamosis group 1 [(teleomorph: \emph{Thanatephorus cucumeris} (A.B. Frank) Donk.] of rice.
 
-Sheath blight is economically important worldwide and it is difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually through cultural practices, which include nitrogen and water management.
+Sheath blight is economically important worldwide and it is difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually a combination of cultural practices, which include nitrogen and water management. High nitrogen levels 
 
 # Materials and Methods
 
+## Crop establishment
+
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, , longitude 121&deg; 15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season.
+
+Nurseries of NSIC Rc222, a short-season in-bred irrigated lowland rice variety with 114 day maturity when transplanted were established on 27 December 2014 and 7 January 2015 for the 2015 and 2016 experiments, respectively. Seedlings were transplanted on 9 January 2015 and 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
+
+## Inoculum
+
+An isolate of *Rhizoctonia solani* AG1-1a from infected rice was maintained on potato dextrose agar (PDA) medium in tubes. The isolate was transferred to 90mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C). Glass bottles of autoclaved rice grain and hull substrate were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks.
+
 ## Experimental Design
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, , longitude 121&deg; 15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season. Both seasons consisted of split plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The changes between seasons and experiments are detailed following.
+Both experiments consisted of split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (CF) or farmers' practice, the control treatment. The changes between seasons and experiments are detailed following.
 
-### 2015 Dry Season
-
-The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub plot for a whole experiment size of 1,152 sq m. The main plot treatments were alternate wetting and drying (AWD) and ) and continuously flooded (CF) or farmers' practice.
+**2015 Dry Season Experiment** The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub-plot for a whole experiment size of 1,152 sq m.
 
 Irrigation in AWD plots was determined by the water level in plots, \emph{i.e.}, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In CF plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The subplot treatments were different rates of nitrogen, 0 kg/ha (control), 100 kg/ha in three splits, and 120 kg/ha in three splits.
+The sub-plot treatments were different rates of nitrogen, N0 (no nitrogen supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
 
 The plots were inoculated 20 days after transplanting using 151g of inoculum per plot (4m x 11m).
 
-### 2016 Dry Season
+**2016 Dry Season Experiment** In 2016 dry season the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub-plot was used and the overall experiment size was 3471.6 sq m.
 
-In 2016 dry season the plot size was increased and due to these changes, the sizes of the replicates are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub plot was used and the overall experiment size was 3471.6 sq m.
-
-Subplot N rates differed from the 2015 rates. The control was applied as 60 kg/ha split into two applications and a second treatment of 180 kg/ha in three splits was applied.
+Sub-plot N rates differed from the 2015 rates with only two nitrogen treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) was applied.
 
 Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
 ## Data Collection and Analysis
 
-Disease scoring was the same in both experiments using a sheath blight assessment scale for field evaluation developed at IRRI \ref{figure1}. Two sample areas per plot (1m x 1m) were assessed. for 9 hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller. Five and four disease assessments were made in 2015 and 2016, respectively.
+Disease scoring was the same in both experiments using the same sheath blight assessment scale for field evaluation developed at IRRI \ref{figure1}. Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller using the rating scale. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-![IRRI sheath blight field severity rating scale where, 0 - 0%, 1 - 1%, 2 - 5%,
-3 - 15%, 4 - 50%, 5 - >50%. \label{figure1}](./Figures/Figure 1 IRRI Sheath Blight Severity Assessment.png)
+![IRRI sheath blight field severity rating scale for rice leaf tissue where, 0 - 0%, 1 - 1%, 2 - 5%,
+3 - 15%, 4 - 50%, 5 - >50% severity. \label{figure1}](./Figures/Figure 1 IRRI Sheath Blight Severity Assessment.png)
 
-Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area]. As most of the data did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2017].
+Disease severity was converted to area under the disease progress stairs (AUDPS) [@simko2012area]. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the MCMCglmm package [@MCMCglmm2017] in R [@R2018].
 
 # Results
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.
+In 2015 both of the nitrogen rates, N100 and N120, were significantly different when compared with the control N0 rate. However, water management was not significantly different.
 
-In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.
-
+In 2016 the nitrogen rate N180, was significantly different than the control N60 rate. As in the 2015 study, water management did not significantly differ.
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+In 2015 both the N100 and N120 rates were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the control flooding treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
 
-In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf sheath blight severity.
 
 # Discussion
 
 # Acknowledgments
 
-# References {#references .unnumbered}
+The authors wish to thank Rachel King University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper, Dale Amozola for technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in 2015.
 
-Supporting information captions (if applicable)
+<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
+##### pagebreak
+
+# References 
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+<div id="refs"></div>
+
+##### pagebreak
+
+### Colophon
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? You may need to change the path value
+# if your Rmd is not in analysis/paper/
+git2r::repository("../..")
+```
