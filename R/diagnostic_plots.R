@@ -64,6 +64,7 @@ plot_replicate_posteriors <- function(d, title) {
     ggplot2::geom_violin() +
     ggplot2::geom_abline(slope = 0, intercept = 0) +
     ggplot2::ggtitle(paste(title)) +
+    ggplot2::coord_flip() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 35, hjust = 1))
 }
 
@@ -76,6 +77,7 @@ plot_treatment_posteriors <- function(d, title) {
     ggplot2::geom_violin() +
     ggplot2::geom_abline(slope = 0, intercept = 0) +
     ggplot2::ggtitle(paste(title)) +
+    ggplot2::coord_flip() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 35, hjust = 1))
 }
 
