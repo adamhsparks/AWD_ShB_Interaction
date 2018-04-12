@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--09-brightgreen.svg)](https://github.com/openplantpathology/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--12-brightgreen.svg)](https://github.com/openplantpathology/rice.awd.pests/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.4.4-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
@@ -10,7 +10,7 @@ Status](https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=maste
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&svg=true)](https://ci.appveyor.com/project/phytopathology/rice_awd_pests)
 
-## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques on sheath blight disease in rice paddies.
+## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
 
 ### Compendium DOI:
 
@@ -123,7 +123,7 @@ Please cite this compendium as:
 
 > Authors, (2018). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 09 Apr 2018. Online at <https://doi.org/xxx/xxx>
+> Accessed 12 Apr 2018. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
