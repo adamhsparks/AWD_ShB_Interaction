@@ -37,7 +37,8 @@ Imports: agricolae,
     tibble,
     tidyr (>= 0.7.0)
 RoxygenNote: 6.0.1
-Suggests: bookdown, 
+Suggests: bookdown,
+    ggpubr,
     knitr,
     rmarkdown,
     kableExtra
