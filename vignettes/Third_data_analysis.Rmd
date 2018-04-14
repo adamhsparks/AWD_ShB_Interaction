@@ -445,12 +445,12 @@ In 2016 the nitrogen rate N180, was significantly different than the base N60 ra
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not different from the base FLD treatment.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base flooding treatment.
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base FLD treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was also significantly different from the base flooding treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not different from the control FLD treatment.
 
-In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the base treatment for leaf sheath blight severity.
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
