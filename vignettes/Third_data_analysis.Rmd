@@ -71,7 +71,7 @@ library("plotMCMC")
 set.seed(27)
 ```
 
-The `AUDPS` object is created when the project is loaded, in the file [munge/03_preprocess_data.R](./munge/03_preprocess_data.R). However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the AUDPC data were generated from the original raw data, see the [../data-raw/README.md](../data-raw/README.md) file. However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 Create individual data frames for the analysis.
 
