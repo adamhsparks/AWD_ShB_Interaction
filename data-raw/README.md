@@ -274,12 +274,6 @@ DAYS <- as.numeric(substr(files, 17, 18))
 DS2015$DAYS <- c(rep(0, 10368), rep(diff(DAYS), each = 10368))
 
 rm(files, reformat)
-
-# Save data for inclusion in the package ---------------------------------------
-
-if (!dir.exists("../data")) {
-  dir.create("../data", recursive = TRUE)
-}
 ```
 
 # 2016 experiment
@@ -290,6 +284,7 @@ if (!dir.exists("../data")) {
 # 1. Cleanup date format and fill empty dates
 # 2. Fill empty NTIL (for same hill, not missing values)
 # 3. Fill empty NTShB (for same hill, not missing values)
+# 4. Add column with number of days after inoculation (DAI)
 
 # First assessment -------------------------------------------------------------
 DS2016_A1 <- readr::read_csv("data/DS2016_Raw_1.csv")
