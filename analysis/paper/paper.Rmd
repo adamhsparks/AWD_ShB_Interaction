@@ -22,13 +22,20 @@ header-includes:
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(fig.pos = "p")
-knitr::opts_chunk$set(out.width = "100%", dpi = 300)
-knitr::opts_chunk$set(fig.width = 3.31)
-knitr::opts_chunk$set(fig.height = 3.31)
-knitr::opts_chunk$set(eval = TRUE)
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(message = FALSE)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  comment = "#>",
+  fig.path = "../figures/",
+  dev = c("postscript"),
+  fig.width = 3.31,
+  fig.height = 3.31,
+  out.width = "100%",
+  dpi = 300
+)
 
 library(bookdown)
 library(knitr)
@@ -157,7 +164,6 @@ ggplot(RAW_data,
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
 
-ggsave("./Figures/Sparks_Figure_1.eps", width = 84, height = 84, units = "mm")
 
 ```
 
@@ -190,7 +196,6 @@ ggplot(RAW_data,
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
 
-ggsave("./Figures/Sparks_Figure_2.eps", width = 84, height = 84, units = "mm")
 ```
 
 ```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
@@ -221,7 +226,6 @@ ggplot(RAW_data,
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
 
-ggsave("./Figures/Sparks_Figure_3.eps", width = 84, height = 84, units = "mm")
 ```
 
 ##### pagebreak
