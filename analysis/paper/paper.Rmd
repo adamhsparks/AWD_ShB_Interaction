@@ -173,7 +173,9 @@ ggplot(RAW_data,
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = TRT)) +
-  scale_y_continuous(labels = function(x) paste0(x*100), limits = c(0, 1)) +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Tiller Sheath Blight Incidence (%)") +
   scale_shape_discrete(labels = c(expression(N[0]),
                                   expression(N[1]),
                                   expression(N[2]),
@@ -184,7 +186,6 @@ ggplot(RAW_data,
                                      expression(N[2]),
                                      expression(N[3]),
                                      expression(N[4]))) +
-  ylab("Tiller Sheath Blight Incidence (%)") +
   xlab("Days After Inoculation") +
   facet_grid(WMGT ~ YEAR,
              scales = "free_x") +
