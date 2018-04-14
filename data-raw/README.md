@@ -658,7 +658,6 @@ RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
 # convert columns to factor ----------------------------------------------------
 RAW_data$YEAR <- factor(RAW_data$YEAR)
 RAW_data$ASMT <- factor(RAW_data$ASMT)
-RAW_data$DAI <- factor(RAW_data$DAI)
 RAW_data$PLOT <- factor(RAW_data$PLOT)
 RAW_data$REP <- factor(RAW_data$REP)
 RAW_data$TRT <- factor(RAW_data$TRT)
@@ -797,94 +796,15 @@ TShB_sev_AUDPS <-
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
                    dates = dplyr::pull(LShB_sev_15[1:5, 6]))
-```
 
-    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
-
-    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
-
-    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
-    ## factors
-
-``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
         dates = dplyr::pull(TShB_perc_15[1:5, 6]))
-```
 
-    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
-    
-    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
-
-    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
-
-    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
-    ## factors
-
-``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
         dates = dplyr::pull(LShB_perc_15[1:5, 6]))
-```
 
-    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
-    
-    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
-
-    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
-
-    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-    
-    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
-    ## factors
-
-    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
-    ## factors
-
-``` r
 AUDPS_15 <-
   tibble::as_tibble(
     cbind(

@@ -539,7 +539,6 @@ RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
 # convert columns to factor ----------------------------------------------------
 RAW_data$YEAR <- factor(RAW_data$YEAR)
 RAW_data$ASMT <- factor(RAW_data$ASMT)
-RAW_data$DAI <- factor(RAW_data$DAI)
 RAW_data$PLOT <- factor(RAW_data$PLOT)
 RAW_data$REP <- factor(RAW_data$REP)
 RAW_data$TRT <- factor(RAW_data$TRT)
