@@ -88,7 +88,7 @@
       <h1>Sheath Blight Analysis</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2018-04-12</h4>
+            <h4 class="date">2018-04-14</h4>
       
       <small>Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>Third_data_analysis.Rmd</code></div>
@@ -267,25 +267,25 @@
 ##  Thinning interval  = 100
 ##  Sample size  = 4950 
 ## 
-##  DIC: 983.1584 
+##  DIC: 1114.419 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean  l-95% CI u-95% CI eff.samp
-## REP     38.57 4.952e-06    132.2     4950
+## REP     57.28 1.244e-06    194.6     4950
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units     200.4    152.5      257     4719
+## units     601.3    452.4    767.4     4677
 ## 
 ##  Location effects: TShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
-##             post.mean l-95% CI u-95% CI eff.samp   pMCMC    
-## (Intercept)     4.532   -3.298   11.909     4950 0.19960    
-## WMGTAWD         8.413    3.272   13.458     4950 0.00162 ** 
-## NRTEN100       16.979   11.221   23.273     4950 &lt; 2e-04 ***
-## NRTEN120       16.689   10.552   22.974     4950 &lt; 2e-04 ***
+##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+## (Intercept)    13.463    2.381   24.622     4950 0.0234 *  
+## WMGTAWD         4.861   -3.986   13.671     4950 0.2764    
+## NRTEN100       26.172   15.947   36.801     4950 &lt;2e-04 ***
+## NRTEN120       41.139   30.465   52.025     4950 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -346,25 +346,25 @@
 ##  Thinning interval  = 100
 ##  Sample size  = 4950 
 ## 
-##  DIC: 565.1823 
+##  DIC: 636.415 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean l-95% CI u-95% CI eff.samp
-## REP     11.91  0.01855     33.8     4950
+## REP     54.04     2.42    146.3     4950
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units     6.158    4.544    7.724     4950
+## units     11.14    8.228    13.99     4950
 ## 
 ##  Location effects: LShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-## (Intercept)    0.7390  -2.2351   3.9463     4950 0.4885    
-## WMGTAWD        1.0293   0.1378   1.9005     4436 0.0238 *  
-## NRTEN100       3.0140   1.8997   4.0799     4950 &lt;2e-04 ***
-## NRTEN120       3.1456   2.0471   4.2073     4950 &lt;2e-04 ***
+## (Intercept)   1.78865 -4.53496  8.61789     4950  0.444    
+## WMGTAWD       0.04416 -1.15825  1.21223     4437  0.941    
+## NRTEN100      4.53686  3.03757  5.96651     4950 &lt;2e-04 ***
+## NRTEN120      5.00138  3.50707  6.41040     4950 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
