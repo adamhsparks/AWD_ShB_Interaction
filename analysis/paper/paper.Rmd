@@ -24,6 +24,8 @@ header-includes:
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(fig.pos = "p")
 knitr::opts_chunk$set(out.width = "100%", dpi = 300)
+knitr::opts_chunk$set(fig.width = 3.31)
+knitr::opts_chunk$set(fig.height = 3.31)
 knitr::opts_chunk$set(eval = TRUE)
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(message = FALSE)
@@ -93,7 +95,40 @@ Disease severity values were converted to the midpoint percentage value of the d
 
 In 2015 the incidence of tiller sheath blight remained low throughout the growing season only reaching 15% in 2015 in the N120/flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment. However, water management was not significantly different.
 
-```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treaments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+The changes to the inoculation methodology resulted in a much higher rate of infection in 2016, with the N180/flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
+
+## Tiller Sheath Blight Severity {-}
+
+In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+
+In 2016 the N180 treatment was significantly different from the N60 treatment. The AWD water management was also significantly different from the control flooding treatment.
+
+## Leaf Sheath Blight Severity {-}
+
+In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+
+In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf sheath blight severity.
+
+# Discussion {-}
+
+# Notes {-}
+
+## Acknowledgments {-}
+
+The authors wish to thank Rachel King University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper, Dale Amozola for technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in 2015.
+
+<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
+##### pagebreak
+
+# References {-}
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+<div id="refs"></div>
+
+##### pagebreak
+
+# Figures {-}
+
+```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -112,24 +147,22 @@ ggplot(RAW_data,
   ylab("Tiller Sheath Blight Incidence (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
-  labs(linetype = "Nitrogen treatment",
-       shape = "Nitrogen treatment") +
+  labs(linetype = "N Treatment",
+       shape = "N Treatment") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(linetype = guide_legend(nrow = 2),
+         shape = guide_legend(nrow = 2))
+
+ggsave("./Figures/Sparks_Figure_1.eps", width = 84, height = 84, units = "mm")
+
 ```
 
-The changes to the inoculation methodology resulted in a much higher rate of infection in 2016, with the N180/flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
 
-## Tiller Sheath Blight Severity {-}
-
-In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
-
-In 2016 the N180 treatment was significantly different from the N60 treatment. The AWD water management was also significantly different from the control flooding treatment.
-
-```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treaments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -147,22 +180,20 @@ ggplot(RAW_data,
   ylab("Tiller Sheath Blight Severity (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
-  labs(linetype = "Nitrogen treatment",
-       shape = "Nitrogen treatment") +
+  labs(linetype = "N Treatment",
+       shape = "N Treatment") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(linetype = guide_legend(nrow = 2),
+         shape = guide_legend(nrow = 2))
+
+ggsave("./Figures/Sparks_Figure_2.eps", width = 84, height = 84, units = "mm")
 ```
 
-## Leaf Sheath Blight Severity {-}
-
-In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
-
-In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf sheath blight severity.
-
-```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treaments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -180,29 +211,18 @@ ggplot(RAW_data,
   ylab("Leaf Sheath Blight Severity (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
-  labs(linetype = "Nitrogen treatment",
-       shape = "Nitrogen treatment") +
+  labs(linetype = "N Treatment",
+       shape = "N Treatment") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(linetype = guide_legend(nrow = 2),
+         shape = guide_legend(nrow = 2))
+
+ggsave("./Figures/Sparks_Figure_3.eps", width = 84, height = 84, units = "mm")
 ```
-
-# Discussion {-}
-
-# Notes {-}
-
-## Acknowledgments {-}
-
-The authors wish to thank Rachel King University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper, Dale Amozola for technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in 2015.
-
-<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
-##### pagebreak
-
-# References {-}
-<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
-<div id="refs"></div>
 
 ##### pagebreak
 
