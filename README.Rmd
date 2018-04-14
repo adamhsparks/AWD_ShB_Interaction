@@ -24,9 +24,9 @@ knitr::opts_chunk$set(
 http://dx.doi.org/xxxxxxx
 
 The files at the URL above will generate the results as found in the
-publication. The files hosted at github.com/openplantpathology/rice.awd.pests
-are the development versions and may have changed since the report was
-published.
+publication. The files hosted at
+<https://github.com/openplantpathology/rice_awd_pests> are the development
+versions and may have changed since the report was published.
 
 ### Authors of this repository:
 
@@ -54,17 +54,28 @@ instructions on how to rerun the analysis to reproduce the results. The
 
 ### The supplementary files
 
+The `data-raw` directory contains:
+
+- a Rmd file and Markdown file detailing how the raw data was handled and
+Area Under the Disease Progress Stairs (AUDPS) was calculated for analysis and
+the .Rda files used in the analysis were generated
+
 The `analysis/` directory contains:
 
-- the manuscript as submitted (in PDF format) and it's Rmd source file
+- the manuscript as submitted (in MS Word format) and it's Rmd source file
+
 - all the data files (in CSV file format, in the `data/` directory)
-- supplementary information source files (in R markdown format) and executed versions
+
+- supplementary information source files (in R markdown format) and executed
+versions
+
 - all the figures that are included in the paper (in the `figures/` directory)
 
 ### The R package 
 
-This repository is organized as an R package. There are no actual R functions in
-this package - all the R code is in the Rmd file. I simply used the R package
+This repository is organized as an R package. There are a few R functions in
+this package that were used to generate some of the diagnostic plots related to
+the analysis. However, for the most part I simply used the R package
 structure to help manage dependencies, to take advantage of continuous
 integration for automated code testing, and so I didn't have to think too much
 about how to organise the files. 
@@ -82,14 +93,10 @@ begin working with the package and compendium files.
 
 The package has a number of dependencies on other R packages, and programs
 outside of R. These are listed at the bottom of this README. Installing these
-can be time-consuming and complicated, so we've done two things to simpify
-access to the compendium. First is the packrat directory, which contains the
-source code for all the packages we depend on. If all works well, these will be
-installed on your computer when you open `rice_awd_.pests.Rproj` in RStudio.
-Second is our Docker image that includes all the necessary software, code and
-data to run our analysis. The Docker image may give a quicker entry point to the
-project, and is more self-contained, so might save some fiddling with installing
-things.
+can be time-consuming and complicated, so we've used a Docker image. The Docker
+image includes all the necessary software, code and data to run our analysis.
+The Docker image may give a quicker entry point to the project, and is more
+self-contained, so might save some fiddling with installing things.
 
 ### The Docker image 
 
@@ -109,16 +116,17 @@ This will start a server instance of RStudio. Then open your web browser at
 localhost:8787 or or run `docker-machine ip default` in the shell to find the
 correct IP address, and log in with rstudio/rstudio.
 
-Once logged in, use the Files pane (bottom right) to navigate to `/` (the root
-directory), then open the folder for this project, and open the `.Rproj` file
-for this project. Once that's open, you'll see the `analysis/paper` directory in
-the Files pane where you can find the R markdown document, and knit them to
-produce the results in the paper. More information about using RStudio in Docker
-is avaiable at the [Rocker](https://github.com/rocker-org) [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image) pages.
+Once logged in, use the Files pane (bottom right) open the folder for this
+project, and open the `.Rproj` file for this project. Once that's open, you'll
+see the `analysis/paper` directory in the Files pane where you can find the R
+markdown document, and knit them to produce the results in the paper. More
+information about using RStudio in Docker is avaiable at the
+[Rocker](https://github.com/rocker-org)
+[wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image) pages.
  
 We developed and tested the package on this Docker container, so this is the
-only platform that We're confident it works on, and so recommend to anyone
-wanting to use this package to generate the vignette, etc. 
+only platform that we're confident it works on, and so recommend to anyone
+wanting to use this package to generate the vignettes, etc. 
 
 ## Citation
 
@@ -150,3 +158,27 @@ Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948   adam.sparks@usq.edu.au  
 https://staffprofile.usq.edu.au/Profile/Adam-Sparks
+
+## Required packages
+ - agricolae
+ - bookdown
+ - car
+ - carData
+ - dplyr (>= 0.7.0)
+ - fitdistrplus
+ - forcats
+ - ggplot2
+ - ggpubr
+ - kableExtra
+ - knitr
+ - lattice
+ - lubridate
+ - MASS
+ - MCMCglmm
+ - reshape2
+ - rmarkdown
+ - plotMCMC
+ - purrr (>= 0.2.3)
+ - tibble
+ - tidyr (>= 0.7.0)
+ 
