@@ -102,7 +102,7 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 Disease scoring was the same in both experiments using the same sheath blight disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the number of tillers per hill and number of tillers with sheath blight (incidence) were measured. Tiller sheath blight severity was measured for four tillers per hill and six leaves tiller using the rating scale. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-Disease severity values were converted to the midpoint percentage value of the disease assessment scale. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
+Because the data were collected on an ordinal scale, but not evenly spaced, the data are converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
 
 # Results {-}
 
@@ -163,7 +163,7 @@ Table of N application timings and dates here...
 ```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
-       aes(x = ASMT,
+       aes(x = DAI,
            y = TShB_incidence,
            linetype = NRTE,
            shape = NRTE)) +
@@ -185,8 +185,9 @@ ggplot(RAW_data,
                                      expression(N[3]),
                                      expression(N[4]))) +
   ylab("Tiller Sheath Blight Incidence (%)") +
-  xlab("Assessment") +
-  facet_grid(WMGT ~ YEAR) +
+  xlab("Days After Inoculation") +
+  facet_grid(WMGT ~ YEAR,
+             scales = "free_x") +
   labs(linetype = "N Treatment",
        shape = "N Treatment") +
   theme_bw() +
@@ -203,7 +204,7 @@ ggplot(RAW_data,
 ```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
-       aes(x = ASMT,
+       aes(x = DAI,
            y = PERC_TIL_ShB,
            linetype = NRTE,
            shape = NRTE)) +
@@ -224,8 +225,9 @@ ggplot(RAW_data,
                                      expression(N[3]),
                                      expression(N[4]))) +
   ylab("Tiller Sheath Blight Severity (%)") +
-  xlab("Assessment") +
-  facet_grid(WMGT ~ YEAR) +
+  xlab("Days After Inoculation") +
+  facet_grid(WMGT ~ YEAR,
+             scales = "free_x") +
   labs(linetype = "N Treatment",
        shape = "N Treatment") +
   theme_bw() +
@@ -242,7 +244,7 @@ ggplot(RAW_data,
 ```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
-       aes(x = ASMT,
+       aes(x = DAI,
            y = PERC_LEAF_ShB,
            linetype = NRTE,
            shape = NRTE)) +
@@ -263,8 +265,9 @@ ggplot(RAW_data,
                                      expression(N[3]),
                                      expression(N[4]))) +
   ylab("Leaf Sheath Blight Severity (%)") +
-  xlab("Assessment") +
-  facet_grid(WMGT ~ YEAR) +
+  xlab("Days After Inoculation") +
+  facet_grid(WMGT ~ YEAR,
+             scales = "free_x") +
   labs(linetype = "N Treatment",
        shape = "N Treatment") +
   theme_bw() +
