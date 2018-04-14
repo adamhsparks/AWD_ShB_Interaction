@@ -114,11 +114,11 @@ In 2015 the incidence of tiller sheath blight remained low throughout the growin
 
 ### Tiller Sheath Blight Severity {-}
 
-In 2015 both the N~1~ and N~2~ treatments were significantly different than the control N~0~ treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N~1~ and N~2~ treatments were significantly different than the control N~0~ treatment. However, the AWD water management was not significantly different from the FLD treatment.
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2015 both the N~1~ and N~2~ treatments were significantly different than the N~0~ treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N~1~ and N~2~ treatments were significantly different than the N~0~ treatment. However, the AWD water management was not significantly different from the FLD treatment.
 
 ## 2016 Experiment {-}
 
