@@ -4,18 +4,7 @@ Clean 2015 Raw Data
 The raw data are located in the `data` folder of the installed
 *rice.awd.pests*
 
-# Dry season 2015 importing and cleaning
-
-DS2015 data can be accessed
-using:
-
-``` r
-load(system.file("extdata", "DS2015_Raw_22DAI.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2015_Raw_35DAI.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2015_Raw_49DAI.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2015_Raw_62DAI.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2015_Raw_83DAI.csv", package = "rice.awd.pests"))
-```
+# 2015 experiment
 
 ``` r
 library(readr)
@@ -293,18 +282,7 @@ if (!dir.exists("../data")) {
 }
 ```
 
-# Dry season 2016 importing and cleaning
-
-The 2016 season raw data are located in the `extdata` folder of the
-installed *rice.awd.pests* and can be accessed
-using:
-
-``` r
-load(system.file("extdata", "DS2016_Raw_1.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2016_Raw_2.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2016_Raw_3.csv", package = "rice.awd.pests"))
-load(system.file("extdata", "DS2016_Raw_4.csv", package = "rice.awd.pests"))
-```
+# 2016 experiment
 
 ``` r
 # Preprocess 2016 data for all assessments
