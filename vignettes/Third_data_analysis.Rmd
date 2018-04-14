@@ -71,7 +71,7 @@ library("plotMCMC")
 set.seed(27)
 ```
 
-The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the AUDPC data were generated from the original raw data, see the [../data-raw/README.md](../data-raw/README.md) file. However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the AUDPC data were generated from the original raw data, see the [https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw](https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw) file. However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 Create individual data frames for the analysis.
 
