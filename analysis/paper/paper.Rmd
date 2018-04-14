@@ -58,11 +58,17 @@ Sheath blight is economically important worldwide and it is difficult to find re
 
 # Materials and Methods {-}
 
-## Crop establishment {-}
+## Crop Establishment {-}
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, , longitude 121&deg; 15' E) in the 2015 and 2016 dry seasons. For the 2016 season changes were made to optimize the experiment based on findings from the 2015 season.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, , longitude 121&deg; 15' E) in the 2015 and 2016 dry seasons. For 2016 changes were made to optimize the experiment based on findings from the 2015 experiment.
 
-Nurseries of NSIC Rc222, a short-season in-bred irrigated lowland rice variety with 114 day maturity when transplanted were established on 27 December 2014 and 7 January 2015 for the 2015 and 2016 experiments, respectively. Seedlings were transplanted on 9 January 2015 and 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
+### 2015 Crop Establishment
+
+In 2015 trays of NSIC Rc222, a short-season in-bred irrigated lowland rice variety with 114 day maturity when transplanted were established on 27 December 2014. Trays were randomised and transplanted using a mechanical transplanter.
+
+### 2016 Crop Establishment
+
+Nurseries of NSIC Rc222 were established on 7 January 2015 for the 2015 and 2016 experiments, respectively. Seedlings were transplanted on 9 January 2015 and 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
 
 ## Inoculum {-}
 
@@ -70,15 +76,15 @@ An isolate of *Rhizoctonia solani* AG1-1a from infected rice was maintained on p
 
 ## Experimental Design {-}
 
-Both experiments consisted of split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (CF) or farmers' practice, the control treatment. The changes between seasons and experiments are detailed following.
+Both experiments consisted of split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split plot treatment. The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (FLD) or farmers' practice, the control treatment. The changes between seasons and experiments are detailed following.
 
 ### 2015 Dry Season Experiment {-}
 
 The main plot size was 12m x 12m (144 sq m), with a sub-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per sub-plot for a whole experiment size of 1,152 sq m.
 
-Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In CF plots a standing water layer of 3-5cm was maintained throughout the growing season. 
+Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The sub-plot treatments were different rates of nitrogen, N0 (no nitrogen supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
+The sub-plot treatments were different rates of nitrogen, N~0~ (no nitrogen supply), N~1~ (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N~2~ (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
 
 The plots were inoculated 20 days after transplanting using 151g of inoculum per plot (4m x 11m).
 
@@ -86,7 +92,7 @@ The plots were inoculated 20 days after transplanting using 151g of inoculum per
 
 In 2016 dry season the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The sub-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per sub-plot was used and the overall experiment size was 3471.6 sq m.
 
-Sub-plot N rates differed from the 2015 rates with only two nitrogen treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) was applied.
+Sub-plot N rates differed from the 2015 rates with only two nitrogen treatments, N~3~ (60 kg per ha as urea split into two applications) and N~4~ (180 kg per ha in three splits) was applied.
 
 Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
@@ -100,19 +106,19 @@ Disease severity values were converted to the midpoint percentage value of the d
 
 ## Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller sheath blight remained low throughout the growing season only reaching 15% in 2015 in the N120/flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment. However, water management was not significantly different.
+In 2015 the incidence of tiller sheath blight remained low throughout the growing season only reaching 15% in 2015 in the N~2~, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N~1~ and N~2~, were both significantly different when compared with the control N~0~ treatment. However, water management was not significantly different.
 
-The changes to the inoculation methodology resulted in a much higher rate of infection in 2016, with the N180/flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
+The changes to the inoculation methodology resulted in a much higher rate of infection in 2016, with the N~4~, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N~4~, was significantly different than the control N~3~ treatment. As in the 2015 study, water management did not significantly differ.
 
 ## Tiller Sheath Blight Severity {-}
 
-In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N~1~ and N~2~ treatments were significantly different than the control N~0~ treatment. The AWD water management was also significantly different from the control flooding treatment.
 
-In 2016 the N180 treatment was significantly different from the N60 treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2016 the N~4~ treatment was significantly different from the N~3~ treatment. The AWD water management was also significantly different from the control flooding treatment.
 
 ## Leaf Sheath Blight Severity {-}
 
-In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. The AWD water management was also significantly different from the control flooding treatment.
+In 2015 both the N~1~ and N~2~ treatments were significantly different than the N~0~ treatment. The AWD water management was also significantly different from the control flooding treatment.
 
 In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf sheath blight severity.
 
@@ -135,7 +141,7 @@ The authors wish to thank Rachel King University of Southern Queensland Statisti
 
 # Figures {-}
 
-```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -149,8 +155,16 @@ ggplot(RAW_data,
                geom = "point",
                aes(group = TRT)) +
   scale_y_continuous(labels = function(x) paste0(x*100), limits = c(0, 1)) +
-  scale_shape_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
-  scale_linetype_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
+  scale_shape_discrete(labels = c(expression(N[0]),
+                                  expression(N[1]),
+                                  expression(N[2]),
+                                  expression(N[3]),
+                                  expression(N[4]))) +
+  scale_linetype_discrete(labels = c(expression(N[0]),
+                                     expression(N[1]),
+                                     expression(N[2]),
+                                     expression(N[3]),
+                                     expression(N[4]))) +
   ylab("Tiller Sheath Blight Incidence (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
@@ -163,12 +177,11 @@ ggplot(RAW_data,
   theme(legend.position = "bottom") +
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
-
-
 ```
 
+##### pagebreak
 
-```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -181,8 +194,16 @@ ggplot(RAW_data,
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = TRT)) +
-  scale_shape_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
-  scale_linetype_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
+  scale_shape_discrete(labels = c(expression(N[0]),
+                                  expression(N[1]),
+                                  expression(N[2]),
+                                  expression(N[3]),
+                                  expression(N[4]))) +
+  scale_linetype_discrete(labels = c(expression(N[0]),
+                                     expression(N[1]),
+                                     expression(N[2]),
+                                     expression(N[3]),
+                                     expression(N[4]))) +
   ylab("Tiller Sheath Blight Severity (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
@@ -195,10 +216,11 @@ ggplot(RAW_data,
   theme(legend.position = "bottom") +
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
-
 ```
 
-```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatements were applied: no N (N0), 100 units of N (N100) and 180 units of N (N180). In the 2016 experiment, two nitrogen rate treatments were applied: 60 units of N (N60) and 180 units of N (N180)."}
+##### pagebreak
+
+```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = ASMT,
@@ -211,8 +233,16 @@ ggplot(RAW_data,
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = TRT)) +
-  scale_shape_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
-  scale_linetype_discrete(labels = c("N0", "N100", "N120", "N60", "N180")) +
+  scale_shape_discrete(labels = c(expression(N[0]),
+                                  expression(N[1]),
+                                  expression(N[2]),
+                                  expression(N[3]),
+                                  expression(N[4]))) +
+  scale_linetype_discrete(labels = c(expression(N[0]),
+                                     expression(N[1]),
+                                     expression(N[2]),
+                                     expression(N[3]),
+                                     expression(N[4]))) +
   ylab("Leaf Sheath Blight Severity (%)") +
   xlab("Assessment") +
   facet_grid(WMGT ~ YEAR) +
@@ -225,7 +255,6 @@ ggplot(RAW_data,
   theme(legend.position = "bottom") +
   guides(linetype = guide_legend(nrow = 2),
          shape = guide_legend(nrow = 2))
-
 ```
 
 ##### pagebreak
