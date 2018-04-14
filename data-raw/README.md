@@ -1,7 +1,7 @@
 Clean 2015 Raw Data
 ================
 
-The raw data are located in the `extdata` folder of the installed
+The raw data are located in the `data` folder of the installed
 *rice.awd.pests*
 
 # Dry season 2015 importing and cleaning
@@ -19,8 +19,21 @@ load(system.file("extdata", "DS2015_Raw_83DAI.csv", package = "rice.awd.pests"))
 
 ``` r
 library(readr)
-library(magrittr)
+library(dplyr)
+```
 
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
 # Preprocess 2015 data for all assessment dates
 
 files <-
@@ -194,12 +207,26 @@ DS2015 <- purrr::map_df(files, reformat)
 ```
 
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
+
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
 
 ``` r
+# Add days after inoculation column
+DS2015 <- 
+  DS2015 %>%
+  mutate(
+    DAI = case_when(
+      ASMT == 1 ~ 14,
+      ASMT == 2 ~ 22,
+      ASMT == 3 ~ 35,
+      ASMT == 4 ~ 49,
+      ASMT == 5 ~ 62,
+    )
+  )
+
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
 DS2015$NRTE[which(DS2015$NRTE == "N1")] <- 100
@@ -230,6 +257,7 @@ DS2015 <-
     YEAR,
     DATE,
     ASMT,
+    DAI,
     REP,
     PLOT,
     TRT,
@@ -323,6 +351,8 @@ DS2016_A1[, 1] <- as.Date("2016-03-15", origin = "1970-01-01")
 DS2016_A1$ASMT <- rep(1, nrow(DS2016_A1))
 DS2016_A1$PLOT <- rep(1:16, each = 72)
 
+# Fill days after inoculation
+DS2016_A1$DAI <- rep(14, nrow(DS2016_A1))
 
 # Second assessement -----------------------------------------------------------
 DS2016_A2 <- readr::read_csv("data/DS2016_Raw_2.csv")
@@ -361,6 +391,8 @@ DS2016_A2[, 1] <- as.Date("2016-03-29", origin = "1970-01-01")
 DS2016_A2$ASMT <- rep(2, nrow(DS2016_A2))
 DS2016_A2$PLOT <- rep(1:16, each = 72)
 
+# Fill days after inoculation
+DS2016_A2$DAI <- rep(28, nrow(DS2016_A2))
 
 # Third assessement ------------------------------------------------------------
 DS2016_A3 <- readr::read_csv("data/DS2016_Raw_3.csv")
@@ -399,6 +431,9 @@ DS2016_A3[, 1] <- as.Date("2016-04-12", origin = "1970-01-01")
 DS2016_A3$ASMT <- rep(3, nrow(DS2016_A3))
 DS2016_A3$PLOT <- rep(1:16, each = 72)
 
+# Fill days after inoculation
+DS2016_A3$DAI <- rep(43, nrow(DS2016_A3))
+
 # Fourth assessment ------------------------------------------------------------
 DS2016_A4 <- readr::read_csv("data/DS2016_Raw_4.csv")
 ```
@@ -435,6 +470,9 @@ DS2016_A4 <-
 DS2016_A4[, 1] <- as.Date("2016-04-26", origin = "1970-01-01")
 DS2016_A4$ASMT <- rep(4, nrow(DS2016_A4))
 DS2016_A4$PLOT <- rep(1:16, each = 72)
+
+# Fill days after inoculation
+DS2016_A4$DAI <- rep(59, nrow(DS2016_A4))
 
 # Combine all assessments ------------------------------------------------------
 DS2016 <- rbind(
@@ -479,6 +517,7 @@ DS2016 <-
     dplyr::starts_with("ShBL"),
     -DATE,
     -ASMT,
+    -DAI,
     -PLOT,
     -TRT,
     -REP,
@@ -512,7 +551,7 @@ DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 # calculate tiller sheath blight incidence
 DS2016 <-
   DS2016 %>%
-  dplyr::group_by(DATE, ASMT, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
+  dplyr::group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
   dplyr::mutate(TShB_incidence = NTShB / NTIL)
 
 DS2016 <- dplyr::rename(DS2016, TIL_ShB = NSHShB)
@@ -525,6 +564,7 @@ DS2016 <-
     YEAR,
     DATE,
     ASMT,
+    DAI,
     REP,
     PLOT,
     TRT,
@@ -576,6 +616,7 @@ DS2016 <-
     YEAR,
     DATE,
     ASMT,
+    DAI,
     REP,
     PLOT,
     TRT,
@@ -617,6 +658,7 @@ RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
 # convert columns to factor ----------------------------------------------------
 RAW_data$YEAR <- factor(RAW_data$YEAR)
 RAW_data$ASMT <- factor(RAW_data$ASMT)
+RAW_data$DAI <- factor(RAW_data$DAI)
 RAW_data$PLOT <- factor(RAW_data$PLOT)
 RAW_data$REP <- factor(RAW_data$REP)
 RAW_data$TRT <- factor(RAW_data$TRT)
@@ -666,7 +708,6 @@ RAW_data <-
     )
   )
 
-
 # add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
   dplyr::mutate(
@@ -680,6 +721,8 @@ RAW_data <-
       TRUE ~ 75
     )
   )
+
+
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
@@ -712,7 +755,7 @@ TShB_sev_wide <-
 
 TShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
                       .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
   dplyr::arrange(PLOT)
@@ -723,7 +766,7 @@ TShB_perc_wide <-
 # 2015 Leaf Severity setup -----------------------------------------------------
 LShB_sev_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
                       .vars = dplyr::vars(PLOT_LShB_severity = LEAF_ShB)) %>%
   dplyr::arrange(PLOT)
@@ -733,7 +776,7 @@ LShB_sev_wide <-
 
 LShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
                       .vars = dplyr::vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
   dplyr::arrange(PLOT)
@@ -754,15 +797,94 @@ TShB_sev_AUDPS <-
 LShB_sev_AUDPS <-
   agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
                    dates = dplyr::pull(LShB_sev_15[1:5, 6]))
+```
 
+    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
+
+    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
+
+    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
+    ## factors
+
+``` r
 TShB_percent_AUDPS <-
   agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
         dates = dplyr::pull(TShB_perc_15[1:5, 6]))
+```
 
+    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
+    
+    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
+
+    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
+
+    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
+    ## factors
+
+``` r
 LShB_percent_AUDPS <-
   agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
         dates = dplyr::pull(LShB_perc_15[1:5, 6]))
+```
 
+    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
+    
+    ## Warning in Ops.factor(dates[2], dates[1]): '-' not meaningful for factors
+
+    ## Warning in Ops.factor(d1 + d2, dates[n]): '+' not meaningful for factors
+
+    ## Warning in Ops.factor(d1 + d2 + dates[n], dates[1]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+    
+    ## Warning in Ops.factor(dates[i + 1], dates[i]): '-' not meaningful for
+    ## factors
+
+    ## Warning in Ops.factor(dates[n], dates[n - 1]): '-' not meaningful for
+    ## factors
+
+``` r
 AUDPS_15 <-
   tibble::as_tibble(
     cbind(
@@ -892,9 +1014,17 @@ if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
 
+devtools::use_data(RAW_data,
+                   compress = "bzip2",
+                   overwrite = TRUE)
+```
+
+    ## Saving RAW_data as RAW_data.rda to /Users/adamsparks/Development/rice_awd_pests/data
+
+``` r
 devtools::use_data(AUDPS,
                    compress = "bzip2",
                    overwrite = TRUE)
 ```
 
-    ## Saving AUDPS as AUDPS.rda to /Users/U8004755/Development/rice_awd_pests/data
+    ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
