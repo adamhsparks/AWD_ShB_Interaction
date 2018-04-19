@@ -46,15 +46,15 @@ library(ggpubr)
 
 # Introduction {-}
 
+Sheath blight disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is economically important worldwide and difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually a combination of cultural practices, which include nitrogen and water management (citation).
+
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
 The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, *e.g.*, Bangladesh, Vietnam, Thailand and the Philippines, plan to widely apply AWD to local rice production [@MOEF2015]. However, a change in water regime in rice fields on large scale might encompass different other effects, for example related to plant health.
 
 Nitrogen is known to affect sheath blight [@Castilla1996]...
 
-We therefore established field experiments in order to determine what effects AWD could have on sheath blight disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice.
-
-Sheath blight is economically important worldwide and it is difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually a combination of cultural practices, which include nitrogen and water management. High nitrogen levels 
+We therefore established field experiments in order to determine what effects AWD could have on sheath blight.
 
 # Materials and Methods {-}
 
