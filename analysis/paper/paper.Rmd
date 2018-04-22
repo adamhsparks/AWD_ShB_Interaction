@@ -46,7 +46,7 @@ library(ggpubr)
 
 # Introduction {-}
 
-Sheath blight disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is economically important worldwide and difficult to find resistance to the disease [@Srinivasachary2011]. Therefore management is usually a combination of cultural practices, which include nitrogen and water management (citation).
+Sheath blight disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide causing up to 25% yield losses [@Kumar2009]. The disease is best managed through an integrated disease management approach which includes fungicide applications [@Groth2008], nitrogen management [@Castilla1996, @Slaton2003, @Tang2007] and water management [@Castilla1996].
 
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
