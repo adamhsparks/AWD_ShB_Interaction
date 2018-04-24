@@ -799,3 +799,9 @@ devtools::use_data(AUDPS,
                    compress = "bzip2",
                    overwrite = TRUE)
 ```
+
+## Colophon
+
+```{r}
+sessioninfo::session_info()
+```
