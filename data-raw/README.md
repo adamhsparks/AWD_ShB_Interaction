@@ -912,7 +912,7 @@ devtools::use_data(RAW_data,
                    overwrite = TRUE)
 ```
 
-    ## Saving RAW_data as RAW_data.rda to /Users/adamsparks/Development/rice_awd_pests/data
+    ## Saving RAW_data as RAW_data.rda to /Users/asparks/Development/rice_awd_pests/data
 
 ``` r
 devtools::use_data(AUDPS,
@@ -920,4 +920,4 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-    ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
+    ## Saving AUDPS as AUDPS.rda to /Users/asparks/Development/rice_awd_pests/data
