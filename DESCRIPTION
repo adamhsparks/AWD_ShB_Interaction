@@ -42,6 +42,7 @@ Suggests: bookdown,
     ggpubr,
     knitr,
     rmarkdown,
+    sessioninfo,
     kableExtra
 VignetteBuilder: knitr
 URL: https://github.com/openplantpathology/rice_awd_pests
