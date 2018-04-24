@@ -14,7 +14,7 @@ RUN . /etc/environment \
   \
  # render the data-raw file creating data that is used in analysis from raw data
   \
-  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/data-raw/README.Rmd')"
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/data-raw/README.Rmd')" \
   \
  # render the manuscript into a docx, you'll need to edit this if you've
  # customised the location and name of your main Rmd file
