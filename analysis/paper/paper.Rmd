@@ -179,11 +179,11 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 
 ```{r N-management, tab.cap="Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Treatments were applied in splits, basal, tillering and panicle initiation growth stages."}
 
-N_rate <- xtable(N_rate) # the N_rate object is a tibble of data distributed with rice.awd.pests
-N_rate <- xtable_to_flextable(x = N_rate, NA.string = "-")
+N_rates <- xtable(N_rates) # the N_rates object is a tibble of data distributed with rice.awd.pests
+N_rates <- xtable_to_flextable(x = N_rates, NA.string = "-")
 
-N_rate <- flextable::display(
-  N_rate,
+N_rates <- flextable::display(
+  N_rates,
   i = 1,
   col_key = "rowname",
   pattern = "{{val}}{{pow}}",
@@ -194,8 +194,8 @@ N_rate <- flextable::display(
   ))
 )
 
-N_rate <- flextable::display(
-  N_rate,
+N_rates <- flextable::display(
+  N_rates,
   i = 2,
   col_key = "rowname",
   pattern = "{{val}}{{pow}}",
@@ -206,8 +206,8 @@ N_rate <- flextable::display(
   ))
 )
 
-N_rate <- flextable::display(
-  N_rate,
+N_rates <- flextable::display(
+  N_rates,
   i = 3,
   col_key = "rowname",
   pattern = "{{val}}{{pow}}",
@@ -218,8 +218,8 @@ N_rate <- flextable::display(
   ))
 )
 
-N_rate <- flextable::display(
-  N_rate,
+N_rates <- flextable::display(
+  N_rates,
   i = 4,
   col_key = "rowname",
   pattern = "{{val}}{{pow}}",
@@ -230,8 +230,8 @@ N_rate <- flextable::display(
   ))
 )
 
-N_rate <- flextable::display(
-  N_rate,
+N_rates <- flextable::display(
+  N_rates,
   i = 5,
   col_key = "rowname",
   pattern = "{{val}}{{pow}}",
@@ -242,15 +242,15 @@ N_rate <- flextable::display(
   ))
 )
 
-N_rate <- add_header(N_rate,
+N_rates <- add_header(N_rates,
                            Year = "Year",
                            Tillering = "Application Rate (kg/ha)")
 
-N_rate <- merge_v(N_rate, part = "header")
+N_rates <- merge_v(N_rates, part = "header")
 
 
-N_rate <- autofit(N_rate)
-N_rate
+N_rates <- autofit(N_rates)
+N_rates
 
 ```
 
