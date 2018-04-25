@@ -40,14 +40,14 @@ knitr::opts_chunk$set(
 
 library(bookdown)
 library(knitr)
-library(kableExtra)
+library(flextable)
 library(rice.awd.pests)
 library(ggpubr)
 ```
 
 # Introduction {-}
 
-Sheath blight (ShB) disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. The disease can cause up to 50\% yield losses [@Marchetti1991] under conducive conditions. Studies by Savary et al. [-@Savary2000] estimated yield losses in tropical irrigated lowland rice in Asia at 5-10\%. As resistance is difficult to breed for [@Srinivasachary2011], the disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
+Sheath blight (ShB) disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions he disease can cause up to 50\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009, @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
@@ -63,13 +63,13 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 ### Experimental Design {-}
 
-The plot design was a split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split-plot treatment. The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (FLD) or farmers' practice, the control treatment.
+The plot design was a split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split-plot. The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (FLD) or farmers' practice as the control treatment.
 
 The main plot size was 12m x 12m (144 sq m), with a split-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per split-plot for a whole experiment size of 1,152 sq m.
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The split-plot treatments were different rates of nitrogen, N~0~ (no nitrogen supply), N~1~ (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N~2~ (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
+The split-plot treatment rates of nitrogen were N~0~ (no nitrogen supply), N~1~ (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N~2~ (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
 
 ### Crop Establishment {-}
 
@@ -79,7 +79,7 @@ Trays of NSIC Rc222, a short-season inbred irrigated lowland rice variety with 1
 
 An isolate of *Rhizoctonia solani* AG1-1a from infected rice was maintained on potato dextrose agar (PDA) medium in tubes. The isolate was transferred to 90mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C). Glass bottles of autoclaved rice grain and hull substrate were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks.
 
-The plots were inoculated 20 days after transplanting using 151g of inoculum per plot (4m x 11m).
+The plots were inoculated 20 days after transplanting by spreading 151g of inoculum over the split-plot area with a 1m buffer on either end (4m x 11m).
 
 ## 2016 Experiment {-}
 
@@ -87,11 +87,11 @@ The plots were inoculated 20 days after transplanting using 151g of inoculum per
 
 The experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two nitrogen treatments, N~3~ (60 kg per ha as urea split into two applications) and N~4~ (180 kg per ha in three splits) was applied.
+Split-plot N rates differed from the 2015 rates with only two nitrogen treatments, N~3~ (60 kg per ha as urea split into two applications) and N~4~ (180 kg per ha in three splits) being applied.
 
 ### Crop Establishment {-}
 
-Nurseries of NSIC Rc222 were established on 7 January 2015 for the 2015 and 2016 experiments, respectively. Seedlings were transplanted on 9 January 2015 and 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
+Nurseries of NSIC Rc222 were established on 7 January 2016 experiments. Seedlings were transplanted by hand 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
 
 ### Inoculum Preparation and Application {-}
 
@@ -101,7 +101,7 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 Disease scoring was the same in both experiments using the same disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions. Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the number of tillers per hill and number of tillers with ShB (incidence) were measured. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using the rating scale. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-Because the data were collected on an ordinal scale, but not evenly spaced, the data are converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
+Because the data were collected on an ordinal scale, but not evenly spaced, the data were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
 
 # Results {-}
 
@@ -127,14 +127,15 @@ The changes to the inoculation methodology resulted in a much higher rate of inf
 
 ### Tiller Sheath Blight Severity {-}
 
-In 2016 the N~4~ treatment was significantly different from the N~3~ treatment. The AWD water management was also significantly different from the control flooding treatment.
-
+In 2016 the N~4~ treatment was significantly different from the N~3~ treatment, with N~4~ severity being higher. The AWD water management, which was lower than FLD, was also significantly different.
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the none of the treatments, nitrogen rate or water management, were significantly different from the control treatment for leaf ShB severity.
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity.
 
 # Discussion {-}
+
+In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In 2016 one measurement, tiller sheath blight severity, was significantly lower for AWD than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on leaf ShB severity.
 
 # Notes {-}
 
@@ -153,7 +154,15 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 
 # Tables {-}
 
-Table of N application timings and dates here...
+```{r N-management, }
+regulartable(N_management, col_keys = c("Nitrogen treatment",
+                                        "Year", 
+                                        "Total N (kg/ha)",
+                                        "Basal",
+                                        "Tillering",
+                                        "Panicle Initiation")
+             )
+```
 
 ##### pagebreak
 
