@@ -161,27 +161,3 @@ Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948   adam.sparks@usq.edu.au  
 https://staffprofile.usq.edu.au/Profile/Adam-Sparks
-
-## Required packages
- - agricolae
- - bookdown
- - car
- - carData
- - dplyr (>= 0.7.0)
- - fitdistrplus
- - forcats
- - ggplot2
- - ggpubr
- - kableExtra
- - knitr
- - lattice
- - lubridate
- - MASS
- - MCMCglmm
- - reshape2
- - rmarkdown
- - plotMCMC
- - purrr (>= 0.2.3)
- - tibble
- - tidyr (>= 0.7.0)
- 
