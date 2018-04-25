@@ -922,7 +922,91 @@ devtools::use_data(AUDPS,
 
     ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
 
-## Colophon
+# Nitrogen management data
+
+Create a `tibble` object of the N treatments for use in the paper as a
+table.
+
+``` r
+N_management <- tibble::tibble(
+  `Nitrogen treatment` = character(),
+  Year = integer(),
+  `Total N (kg/ha)` = integer(),
+  `Basal Application` = integer(),
+  `Tillering Application` = integer(),
+  `Panicle Initiation` = integer()
+)
+
+N_management <- tibble::add_row(N_management, `Nitrogen treatment` = c("N0",
+  "N100",
+  "N120",
+  "N60",
+  "N180"
+))
+
+N_management$Year <- c(
+  2015,
+  2015,
+  2015,
+  2016,
+  2016
+)
+
+N_management$`Total N (kg/ha)` <- c(
+  0,
+  100,
+  120,
+  60,
+  180
+)
+
+N_management$`Basal Application` <- c(
+  0,
+  60,
+  60,
+  30,
+  60
+)
+
+N_management$`Tillering Application` <- c(
+  0,
+  20,
+  30,
+  30,
+  60
+)
+
+N_management$`Panicle Initiation` <- c(
+  0,
+  20,
+  30,
+  0,
+  60
+)
+
+N_management
+```
+
+    ## # A tibble: 5 x 6
+    ##   `Nitrogen treatment`  Year `Total N (kg/ha)` `Basal Application`
+    ##   <chr>                <dbl>             <dbl>               <dbl>
+    ## 1 N0                   2015.                0.                  0.
+    ## 2 N100                 2015.              100.                 60.
+    ## 3 N120                 2015.              120.                 60.
+    ## 4 N60                  2016.               60.                 30.
+    ## 5 N180                 2016.              180.                 60.
+    ## # ... with 2 more variables: `Tillering Application` <dbl>, `Panicle
+    ## #   Initiation` <dbl>
+
+``` r
+devtools::use_data(N_management,
+                   compress = "bzip2",
+                   overwrite = TRUE)
+```
+
+    ## Saving N_management as N_management.rda to /Users/adamsparks/Development/rice_awd_pests/data
+
+# Colophon
 
 ``` r
 sessioninfo::session_info()
@@ -937,7 +1021,7 @@ sessioninfo::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2018-04-24                  
+    ##  date     2018-04-25                  
     ## 
     ## ─ Packages ──────────────────────────────────────────────────────────────
     ##  package     * version date       source        
@@ -948,10 +1032,12 @@ sessioninfo::session_info()
     ##  bindr         0.1.1   2018-03-13 CRAN (R 3.5.0)
     ##  bindrcpp    * 0.2.2   2018-03-29 CRAN (R 3.5.0)
     ##  boot          1.3-20  2017-08-06 CRAN (R 3.5.0)
+    ##  cli           1.0.0   2017-11-05 CRAN (R 3.5.0)
     ##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.0)
     ##  cluster       2.0.7-1 2018-04-13 CRAN (R 3.5.0)
     ##  coda          0.19-1  2016-12-08 CRAN (R 3.5.0)
     ##  combinat      0.0-8   2012-10-29 CRAN (R 3.5.0)
+    ##  crayon        1.3.4   2017-09-16 CRAN (R 3.5.0)
     ##  deldir        0.1-15  2018-04-01 CRAN (R 3.5.0)
     ##  devtools      1.13.5  2018-02-18 CRAN (R 3.5.0)
     ##  digest        0.6.15  2018-01-28 CRAN (R 3.5.0)
@@ -1004,6 +1090,7 @@ sessioninfo::session_info()
     ##  tibble        1.4.2   2018-01-22 CRAN (R 3.5.0)
     ##  tidyr         0.8.0   2018-01-29 CRAN (R 3.5.0)
     ##  tidyselect    0.2.4   2018-02-26 CRAN (R 3.5.0)
+    ##  utf8          1.1.3   2018-01-03 CRAN (R 3.5.0)
     ##  withr         2.1.2   2018-03-15 CRAN (R 3.5.0)
     ##  xtable        1.8-2   2016-02-05 CRAN (R 3.5.0)
     ##  yaml          2.1.18  2018-03-08 CRAN (R 3.5.0)

@@ -800,7 +800,76 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-## Colophon
+# Nitrogen management data
+
+Create a `tibble` object of the N treatments for use in the paper as a table.
+
+```{r}
+
+N_management <- tibble::tibble(
+  `Nitrogen treatment` = character(),
+  Year = integer(),
+  `Total N (kg/ha)` = integer(),
+  `Basal Application` = integer(),
+  `Tillering Application` = integer(),
+  `Panicle Initiation` = integer()
+)
+
+N_management <- tibble::add_row(N_management, `Nitrogen treatment` = c("N0",
+  "N100",
+  "N120",
+  "N60",
+  "N180"
+))
+
+N_management$Year <- c(
+  2015,
+  2015,
+  2015,
+  2016,
+  2016
+)
+
+N_management$`Total N (kg/ha)` <- c(
+  0,
+  100,
+  120,
+  60,
+  180
+)
+
+N_management$`Basal Application` <- c(
+  0,
+  60,
+  60,
+  30,
+  60
+)
+
+N_management$`Tillering Application` <- c(
+  0,
+  20,
+  30,
+  30,
+  60
+)
+
+N_management$`Panicle Initiation` <- c(
+  0,
+  20,
+  30,
+  0,
+  60
+)
+
+N_management
+
+devtools::use_data(N_management,
+                   compress = "bzip2",
+                   overwrite = TRUE)
+```
+
+# Colophon
 
 ```{r}
 sessioninfo::session_info()
