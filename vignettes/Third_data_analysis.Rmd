@@ -55,8 +55,8 @@ compared.
 
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
-`nitt = 5e+05` and `burnin = 5000` and `thin = 100`. This results in much
-smaller errors for random effects and better models.
+`nitt = 55000,` and `burnin = 5000` and `thin = 10`. This results in a sample
+size of 5000 and much smaller errors for random effects and better models.
 
 ## Setup
 
@@ -105,19 +105,19 @@ TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(TShB_incidence_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 5:8)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:4])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
@@ -159,19 +159,19 @@ TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(TShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 5:8)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:4])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_severity_lmm_2015$Sol)
@@ -213,19 +213,19 @@ LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2015,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(LShB_severity_lmm_2015)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_severity_lmm_2015$Sol[, c(1, 5:8)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(LShB_severity_lmm_2015$Sol[, 2:4])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(LShB_severity_lmm_2015$Sol)
@@ -273,19 +273,19 @@ TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(TShB_incidence_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 4:7)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:3])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
@@ -328,19 +328,19 @@ TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(TShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 4:7)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:3])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(TShB_severity_lmm_2016$Sol)
@@ -382,19 +382,19 @@ LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                           data = AUDPS_2016,
                           verbose = FALSE,
                           prior = eprior,
-                          nitt = 5e+05,
+                          nitt = 55000,,
                           burnin = 5000,
-                          thin = 100,
+                          thin = 10,
                           pr = TRUE)
 
 summary(LShB_severity_lmm_2016)
 
 # create data frames for generating diagnostic plots
 reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 4:7)])
-reps <- reshape2::melt(reps)
+reps <- melt(reps)
 
 trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:3])
-trts <- reshape2::melt(trts)
+trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
 x <- 1:nrow(LShB_severity_lmm_2016$Sol)
