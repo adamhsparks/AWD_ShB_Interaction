@@ -39,11 +39,11 @@ Imports: agricolae,
 RoxygenNote: 6.0.1
 Suggests: bookdown,
     devtools,
+    flextable,
     ggpubr,
     knitr,
     rmarkdown,
-    sessioninfo,
-    kableExtra
+    sessioninfo
 VignetteBuilder: knitr
 URL: https://github.com/openplantpathology/rice_awd_pests
 BugReports: https://github.com/openplantpathology/rice_awd_pests/issues
