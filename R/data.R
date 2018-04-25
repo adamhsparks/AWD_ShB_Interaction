@@ -12,3 +12,10 @@
 #' organised into a tidy data frame.
 #'
 "RAW_data"
+
+#' A Tibble of Nitrogen Rates and Split Application Timings
+#'
+#' A dataset containing the N rates and time of application split organised
+#' into a tidy data frame.
+#'
+"N_rates"

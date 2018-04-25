@@ -922,6 +922,52 @@ devtools::use_data(AUDPS,
 
     ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
 
+# N rates
+
+Create a `tibble` of N rates and time of application used in this study.
+
+``` r
+N_rates <- tibble::tibble(Year = integer())
+
+N_rates <-
+  tibble::add_row(N_rates,
+                  Year = as.integer(c(2015,
+                                      2015,
+                                      2015,
+                                      2016,
+                                      2016)))
+
+N_rates$`Total N` <- as.integer(c(0,
+                                  100,
+                                  120,
+                                  60,
+                                  180))
+
+N_rates$Basal <- as.integer(c(0,
+                              60,
+                              60,
+                              30,
+                              60))
+
+N_rates$Tillering <- as.integer(c(0,
+                                  20,
+                                  30,
+                                  30,
+                                  60))
+
+N_rates$`Panicle\nInitiation` <- as.integer(c(0,
+                                              20,
+                                              30,
+                                              0,
+                                              60))
+
+devtools::use_data(N_rates,
+                   compress = "bzip2",
+                   overwrite = TRUE)
+```
+
+    ## Saving N_rates as N_rates.rda to /Users/adamsparks/Development/rice_awd_pests/data
+
 # Colophon
 
 ``` r
