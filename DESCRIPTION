@@ -42,8 +42,10 @@ Suggests: bookdown,
     flextable,
     ggpubr,
     knitr,
+    officer,
     rmarkdown,
-    sessioninfo
+    sessioninfo,
+    xtable
 VignetteBuilder: knitr
 URL: https://github.com/openplantpathology/rice_awd_pests
 BugReports: https://github.com/openplantpathology/rice_awd_pests/issues
