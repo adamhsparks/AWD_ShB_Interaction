@@ -928,64 +928,58 @@ Create a `tibble` object of the N treatments for use in the paper as a
 table.
 
 ``` r
-N_management <- tibble::tibble(
-  `Nitrogen treatment` = character(),
-  Year = integer(),
-  `Total N (kg/ha)` = integer(),
-  `Basal` = integer(),
-  `Tillering` = integer(),
-  `Panicle Initiation` = integer()
-  )
-  
-  N_management <-
+N_management <- tibble::tibble(`Nitrogen treatment` = character())
+
+N_management <-
   tibble::add_row(N_management,
-  `Nitrogen treatment` = c("N0",
-  "N100",
-  "N120",
-  "N60",
-  "N180"))
-  
-  N_management$Year <- c(2015,
-  2015,
-  2015,
-  2016,
-  2016)
-  
-  N_management$`Total N (kg/ha)` <- c(0,
-  100,
-  120,
-  60,
-  180)
-  
-  N_management$Basal <- c(0,
-  60,
-  60,
-  30,
-  60)
-  
-  N_management$Tillering <- c(0,
-  20,
-  30,
-  30,
-  60)
-  
-  N_management$`Panicle Initiation` <- c(0,
-  20,
-  30,
-  0,
-  60)
-  
-  N_management
+                  `Nitrogen treatment` = c("N0",
+                                           "N100",
+                                           "N120",
+                                           "N60",
+                                           "N180"))
+
+N_management$Year <- as.integer(c(2015,
+                                  2015,
+                                  2015,
+                                  2016,
+                                  2016))
+
+N_management$`Total N (kg/ha)` <- as.integer(c(0,
+                                               100,
+                                               120,
+                                               60,
+                                               180))
+
+N_management$Basal <- as.integer(c(0,
+                                   60,
+                                   60,
+                                   30,
+                                   60))
+
+N_management$Tillering <- as.integer(c(0,
+                                       20,
+                                       30,
+                                       30,
+                                       60))
+
+N_management$`Panicle Initiation` <- as.integer(c(0,
+                                                  20,
+                                                  30,
+                                                  0,
+                                                  60))
+
+
+N_management
 ```
 
     ## # A tibble: 5 x 6
     ##   `Nitrogen treat…  Year `Total N (kg/ha… Basal Tillering `Panicle Initia…
-    ##   <chr>            <dbl>            <dbl> <dbl>     <dbl>            <dbl>
-    ## 1 N0               2015.               0.    0.        0.               0.
-    ## 2 N100             2015.             100.   60.       20.              20.
-    ## 3 N120             2015.             120.   60.       30.              30.
-    ## 4 N60              2016.              60.   30.       30.               0.
-    ## 5 N180             2016.             180.   60.       60.              60.
+    ##   <chr>            <int>            <int> <int>     <int>            <int>
+    ## 1 N0                2015                0     0         0                0
+    ## 2 N100              2015              100    60        20               20
+    ## 3 N120              2015              120    60        30               30
+    ## 4 N60               2016               60    30        30                0
+    ## 5 N180              2016              180    60        60               60
 
 ``` r
 devtools::use_data(N_management,
