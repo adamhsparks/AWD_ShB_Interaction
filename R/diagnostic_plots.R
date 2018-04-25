@@ -59,24 +59,28 @@ plot_diagnostic_lines <- function(d, x, title) {
 plot_replicate_posteriors <- function(d, title) {
   d <- d[d$variable != "X.Intercept.", ]
   ggplot2::ggplot(data = d,
-                  ggplot2::aes(x = d$variable,
-                               y = d$value)) +
-    ggplot2::geom_violin() +
-    ggplot2::geom_abline(slope = 0, intercept = 0) +
+                  ggplot2::aes(x = d$value,
+                               colour = d$variable)) +
+    ggplot2::geom_density() +
     ggplot2::ggtitle(paste(title)) +
-    ggplot2::coord_flip()
+    ggplot2::scale_color_brewer(type = "qual") +
+    ggplot2::guides(colour = ggplot2::guide_legend(title = "Treatment")) +
+    ggplot2::xlab("Sheath Blight Rating")
 }
 
 #' @export
 #' @rdname plot_mcmc_glmm
 plot_treatment_posteriors <- function(d, title) {
   ggplot2::ggplot(data = d,
-                  ggplot2::aes(x = d$variable,
-                               y = d$value)) +
-    ggplot2::geom_violin() +
-    ggplot2::geom_abline(slope = 0, intercept = 0) +
+                  ggplot2::aes(colour = d$variable,
+                               linetype = d$variable,
+                               x = d$value)) +
+    ggplot2::geom_density() +
     ggplot2::ggtitle(paste(title)) +
-    ggplot2::coord_flip()
+    ggplot2::scale_color_brewer(type = "qual") +
+    ggplot2::scale_linetype(name = "Treatment") +
+    ggplot2::guides(colour = ggplot2::guide_legend(title = "Treatment")) +
+    ggplot2::xlab("Sheath Blight Rating")
 }
 
 #' @export
