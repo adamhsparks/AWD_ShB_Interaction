@@ -922,6 +922,7 @@ devtools::use_data(AUDPS,
 
     ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
 
+<<<<<<< HEAD
 # Nitrogen management data
 
 Create a `tibble` object of the N treatments for use in the paper as a
@@ -990,6 +991,9 @@ devtools::use_data(N_management,
     ## Saving N_management as N_management.rda to /Users/adamsparks/Development/rice_awd_pests/data
 
 # Colophon
+=======
+## Colophon
+>>>>>>> parent of cc10c31... Add N treatment tibble
 
 ``` r
 sessioninfo::session_info()
@@ -1004,7 +1008,7 @@ sessioninfo::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2018-04-25                  
+    ##  date     2018-04-24                  
     ## 
     ## ─ Packages ──────────────────────────────────────────────────────────────
     ##  package     * version date       source        
@@ -1015,12 +1019,10 @@ sessioninfo::session_info()
     ##  bindr         0.1.1   2018-03-13 CRAN (R 3.5.0)
     ##  bindrcpp    * 0.2.2   2018-03-29 CRAN (R 3.5.0)
     ##  boot          1.3-20  2017-08-06 CRAN (R 3.5.0)
-    ##  cli           1.0.0   2017-11-05 CRAN (R 3.5.0)
     ##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.0)
     ##  cluster       2.0.7-1 2018-04-13 CRAN (R 3.5.0)
     ##  coda          0.19-1  2016-12-08 CRAN (R 3.5.0)
     ##  combinat      0.0-8   2012-10-29 CRAN (R 3.5.0)
-    ##  crayon        1.3.4   2017-09-16 CRAN (R 3.5.0)
     ##  deldir        0.1-15  2018-04-01 CRAN (R 3.5.0)
     ##  devtools      1.13.5  2018-02-18 CRAN (R 3.5.0)
     ##  digest        0.6.15  2018-01-28 CRAN (R 3.5.0)
@@ -1073,7 +1075,6 @@ sessioninfo::session_info()
     ##  tibble        1.4.2   2018-01-22 CRAN (R 3.5.0)
     ##  tidyr         0.8.0   2018-01-29 CRAN (R 3.5.0)
     ##  tidyselect    0.2.4   2018-02-26 CRAN (R 3.5.0)
-    ##  utf8          1.1.3   2018-01-03 CRAN (R 3.5.0)
     ##  withr         2.1.2   2018-03-15 CRAN (R 3.5.0)
     ##  xtable        1.8-2   2016-02-05 CRAN (R 3.5.0)
     ##  yaml          2.1.18  2018-03-08 CRAN (R 3.5.0)

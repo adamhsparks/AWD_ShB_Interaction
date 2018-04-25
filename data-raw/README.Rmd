@@ -800,6 +800,7 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
+<<<<<<< HEAD
 # Nitrogen management data
 
 Create a `tibble` object of the N treatments for use in the paper as a table.
@@ -856,6 +857,9 @@ devtools::use_data(N_management,
 ```
 
 # Colophon
+=======
+## Colophon
+>>>>>>> parent of cc10c31... Add N treatment tibble
 
 ```{r}
 sessioninfo::session_info()
