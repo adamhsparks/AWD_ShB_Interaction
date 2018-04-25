@@ -800,66 +800,7 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-<<<<<<< HEAD
-# Nitrogen management data
-
-Create a `tibble` object of the N treatments for use in the paper as a table.
-
-```{r}
-
-
-N_management <- tibble::tibble(`Nitrogen treatment` = character())
-
-N_management <-
-  tibble::add_row(N_management,
-                  `Nitrogen treatment` = c("N0",
-                                           "N100",
-                                           "N120",
-                                           "N60",
-                                           "N180"))
-
-N_management$Year <- as.integer(c(2015,
-                                  2015,
-                                  2015,
-                                  2016,
-                                  2016))
-
-N_management$`Total N (kg/ha)` <- as.integer(c(0,
-                                               100,
-                                               120,
-                                               60,
-                                               180))
-
-N_management$Basal <- as.integer(c(0,
-                                   60,
-                                   60,
-                                   30,
-                                   60))
-
-N_management$Tillering <- as.integer(c(0,
-                                       20,
-                                       30,
-                                       30,
-                                       60))
-
-N_management$`Panicle Initiation` <- as.integer(c(0,
-                                                  20,
-                                                  30,
-                                                  0,
-                                                  60))
-
-
-N_management
-  
-devtools::use_data(N_management,
-                   compress = "bzip2",
-                   overwrite = TRUE)
-```
-
 # Colophon
-=======
-## Colophon
->>>>>>> parent of cc10c31... Add N treatment tibble
 
 ```{r}
 sessioninfo::session_info()

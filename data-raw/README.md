@@ -922,78 +922,7 @@ devtools::use_data(AUDPS,
 
     ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
 
-<<<<<<< HEAD
-# Nitrogen management data
-
-Create a `tibble` object of the N treatments for use in the paper as a
-table.
-
-``` r
-N_management <- tibble::tibble(`Nitrogen treatment` = character())
-
-N_management <-
-  tibble::add_row(N_management,
-                  `Nitrogen treatment` = c("N0",
-                                           "N100",
-                                           "N120",
-                                           "N60",
-                                           "N180"))
-
-N_management$Year <- as.integer(c(2015,
-                                  2015,
-                                  2015,
-                                  2016,
-                                  2016))
-
-N_management$`Total N (kg/ha)` <- as.integer(c(0,
-                                               100,
-                                               120,
-                                               60,
-                                               180))
-
-N_management$Basal <- as.integer(c(0,
-                                   60,
-                                   60,
-                                   30,
-                                   60))
-
-N_management$Tillering <- as.integer(c(0,
-                                       20,
-                                       30,
-                                       30,
-                                       60))
-
-N_management$`Panicle Initiation` <- as.integer(c(0,
-                                                  20,
-                                                  30,
-                                                  0,
-                                                  60))
-
-
-N_management
-```
-
-    ## # A tibble: 5 x 6
-    ##   `Nitrogen treat…  Year `Total N (kg/ha… Basal Tillering `Panicle Initia…
-    ##   <chr>            <int>            <int> <int>     <int>            <int>
-    ## 1 N0                2015                0     0         0                0
-    ## 2 N100              2015              100    60        20               20
-    ## 3 N120              2015              120    60        30               30
-    ## 4 N60               2016               60    30        30                0
-    ## 5 N180              2016              180    60        60               60
-
-``` r
-devtools::use_data(N_management,
-                   compress = "bzip2",
-                   overwrite = TRUE)
-```
-
-    ## Saving N_management as N_management.rda to /Users/adamsparks/Development/rice_awd_pests/data
-
 # Colophon
-=======
-## Colophon
->>>>>>> parent of cc10c31... Add N treatment tibble
 
 ``` r
 sessioninfo::session_info()
@@ -1008,7 +937,7 @@ sessioninfo::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2018-04-24                  
+    ##  date     2018-04-25                  
     ## 
     ## ─ Packages ──────────────────────────────────────────────────────────────
     ##  package     * version date       source        
