@@ -38,11 +38,34 @@ knitr::opts_chunk$set(
   dpi = 300
 )
 
+# table captions
+tn <- local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    paste('\n\nTable ', i, ': ', x, sep = '')
+    # The : before Table tells pandoc to wrap your caption in <caption></caption>
+  }
+})
+knitr::knit_hooks$set(tab.cap = function(before, options, envir) {
+  if (!before)
+    tn(options$tab.cap)
+})
+default_output_hook = knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  if (is.null(options$tab.cap) == F)  
+    x
+  else
+    default_output_hook(x,options)
+})
+
 library(bookdown)
 library(knitr)
 library(flextable)
-library(rice.awd.pests)
 library(ggpubr)
+library(officer)
+library(rice.awd.pests)
+library(xtable)
 ```
 
 # Introduction {-}
@@ -154,14 +177,115 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 
 # Tables {-}
 
-```{r N-management, }
-regulartable(N_management, col_keys = c("Nitrogen treatment",
-                                        "Year", 
-                                        "Total N (kg/ha)",
-                                        "Basal",
-                                        "Tillering",
-                                        "Panicle Initiation")
-             )
+```{r N-management, tab.cap="Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Treatments were applied in splits, basal, tillering and panicle initiation growth stages."}
+
+N_management <- tibble::tibble(Year = integer())
+
+N_management <-
+  tibble::add_row(N_management,
+                  Year = as.integer(c(2015,
+                                      2015,
+                                      2015,
+                                      2016,
+                                      2016)))
+
+N_management$`Total N` <- as.integer(c(0,
+                                                100,
+                                                120,
+                                                60,
+                                                180))
+
+N_management$Basal <- as.integer(c(0,
+                                   60,
+                                   60,
+                                   30,
+                                   60))
+
+N_management$Tillering <- as.integer(c(0,
+                                       20,
+                                       30,
+                                       30,
+                                       60))
+
+N_management$`Panicle\nInitiation` <- as.integer(c(0,
+                                                   20,
+                                                   30,
+                                                   0,
+                                                   60))
+
+N_management <- xtable(N_management)
+N_management <- xtable_to_flextable(x = N_management, NA.string = "-")
+
+N_management <- flextable::display(
+  N_management,
+  i = 1,
+  col_key = "rowname",
+  pattern = "{{val}}{{pow}}",
+  part = "body",
+  formatters = list(val ~ as.character("N"), pow ~ as.character("0")),
+  fprops = list(pow = fp_text(
+    vertical.align = "subscript", font.size = 8
+  ))
+)
+
+N_management <- flextable::display(
+  N_management,
+  i = 2,
+  col_key = "rowname",
+  pattern = "{{val}}{{pow}}",
+  part = "body",
+  formatters = list(val ~ as.character("N"), pow ~ as.character("1")),
+  fprops = list(pow = fp_text(
+    vertical.align = "subscript", font.size = 8
+  ))
+)
+
+N_management <- flextable::display(
+  N_management,
+  i = 3,
+  col_key = "rowname",
+  pattern = "{{val}}{{pow}}",
+  part = "body",
+  formatters = list(val ~ as.character("N"), pow ~ as.character("2")),
+  fprops = list(pow = fp_text(
+    vertical.align = "subscript", font.size = 8
+  ))
+)
+
+N_management <- flextable::display(
+  N_management,
+  i = 4,
+  col_key = "rowname",
+  pattern = "{{val}}{{pow}}",
+  part = "body",
+  formatters = list(val ~ as.character("N"), pow ~ as.character("3")),
+  fprops = list(pow = fp_text(
+    vertical.align = "subscript", font.size = 8
+  ))
+)
+
+N_management <- flextable::display(
+  N_management,
+  i = 5,
+  col_key = "rowname",
+  pattern = "{{val}}{{pow}}",
+  part = "body",
+  formatters = list(val ~ as.character("N"), pow ~ as.character("4")),
+  fprops = list(pow = fp_text(
+    vertical.align = "subscript", font.size = 8
+  ))
+)
+
+N_management <- add_header(N_management,
+                           Year = "Year",
+                           Tillering = "Application Rate (kg/ha)")
+
+N_management <- merge_v(N_management, part = "header")
+
+
+N_management <- autofit(N_management)
+N_management
+
 ```
 
 ##### pagebreak
