@@ -32,8 +32,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "../figures/",
   dev = c("postscript"),
-  fig.width = 3.31,
-  fig.height = 3.31,
+  fig.width = 6.85,
+  fig.height = 6.85,
   out.width = "100%",
   dpi = 300
 )
@@ -120,11 +120,17 @@ Nurseries of NSIC Rc222 were established on 7 January 2016 experiments. Seedling
 
 Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
-## Data Collection and Analysis {-}
+### Data Collection {-}
 
 Disease scoring was the same in both experiments using the same disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions. Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the number of tillers per hill and number of tillers with ShB (incidence) were measured. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using the rating scale. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-Because the data were collected on an ordinal scale, but not evenly spaced, the data were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
+### Statistical Analysis {-}
+
+Because the severity data were collected on an unevenly spaced ordinal scale, they were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity.
+
+As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
+
+For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a  single  MCMC chain was run for 50,000 steps, with the first 5000 discarded as burn in. The remaining samples were thinned by taking every one-hundredth sample, yielding 5000 independent draws from the posterior distribution of the  parameters of the model. Convergence of the chains was assessed using the coda package in R. The priors of the variances and covariances of the random effects in the  model are locally non-informative priors [74]. 
 
 # Results {-}
 
