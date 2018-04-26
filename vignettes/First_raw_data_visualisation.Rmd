@@ -27,7 +27,7 @@ library("forcats")
 library("ggplot2")
 ```
 
-# Histogram plot of LShB_rating data
+# Histogram plot of leaf sheath blight severity data
 
 ```{r, cache=FALSE}
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
@@ -36,7 +36,7 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
-# Histogram plot of TShB_rating data
+# Histogram plot of tiller sheath blight severity data
 
 ```{r, cache=FALSE}
 ggplot(RAW_data, aes(x = TIL_ShB)) +
@@ -45,7 +45,7 @@ ggplot(RAW_data, aes(x = TIL_ShB)) +
   ggtitle("Tiller Sheath Blight Severity Rating")
 ```
 
-# Density plot of TShB_incidence data
+# Density plot of tiller sheath blight incidence data
 
 ```{r, , cache=FALSE}
 ggplot(RAW_data, aes(x = TShB_incidence)) +
@@ -196,6 +196,7 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_percent_AUDPS)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
+  facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
