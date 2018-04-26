@@ -16,7 +16,7 @@ Description: Provides a research compendium of analysis associated with
     experiments were designed to test the effects of alternate wetting and
     drying irrigation management on rice sheath blight disease. The plots were
     split plot with an irrigation main plot and nitrogen sub-plot treatments.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -39,13 +39,10 @@ Imports: agricolae,
 RoxygenNote: 6.0.1
 Suggests: bookdown,
     devtools,
-    flextable,
     ggpubr,
     knitr,
-    officer,
     rmarkdown,
-    sessioninfo,
-    xtable
+    sessioninfo
 VignetteBuilder: knitr
 URL: https://github.com/openplantpathology/rice_awd_pests
 BugReports: https://github.com/openplantpathology/rice_awd_pests/issues
