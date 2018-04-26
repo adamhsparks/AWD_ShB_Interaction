@@ -785,6 +785,15 @@ AUDPS <- dplyr::mutate_at(.tbl = AUDPS,
                               .funs = factor,
                               .vars = c("WMGT", "NRTE"))
 
+# Arrange NRTE values
+AUDPS$NRTE <-
+  forcats::fct_relevel(AUDPS$NRTE,
+                       "N0",
+                       "N100",
+                       "N120",
+                       "N60",
+                       "N180")
+
 # Save data for inclusion in the package ---------------------------------------
 
 if (!dir.exists("../data")) {
