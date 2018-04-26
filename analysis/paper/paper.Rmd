@@ -127,7 +127,7 @@ Because the severity data were collected on an unevenly spaced ordinal scale, th
 
 As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
 
-For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a  single  MCMC chain was run for 50,000 steps, with the first 5000 discarded as burn in. The remaining samples were thinned by taking every one-hundredth sample, yielding 5000 independent draws from the posterior distribution of the  parameters of the model. Convergence of the chains was assessed using the coda package in R. The priors of the variances and covariances of the random effects in the  model are locally non-informative priors [74]. 
+For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a single MCMC chain was run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample, resulting in 5000 independent draws from the posterior distribution of the parameters of the model.
 
 # Results {-}
 
@@ -164,6 +164,10 @@ In 2016 the neither of the treatments, nitrogen rate or water management, were s
 In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In 2016 one measurement, tiller sheath blight severity, was significantly lower for AWD than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on leaf ShB severity.
 
 # Notes {-}
+
+## Data and Code Availability
+
+All data generated from this project and code used for analysis are available as a research compendium from <https://github.com/openplantpathology/rice_awd_pests> with instructions on how to cite the compendium and use the Docker file to recreate the full analysis and this manuscript [@Sparks2018].
 
 ## Acknowledgments {-}
 
