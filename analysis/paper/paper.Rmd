@@ -311,7 +311,7 @@ ggplot(RAW_data,
 
 ##### pagebreak
 
-```{r figure-4, fig.cap="Tiller sheath blight incidence per hill in the 2015 and 2016 experiments. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+```{r figure-4, fig.cap="Tiller sheath blight severity progress was measured in the 2016 experiment at four assessment points. Sheath blight severity was rated on an unevenly spaced ordinal scale and converted to the mid-point percentage value to calculate the area under the disease progress stairs (AUDPS). Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
 ggplot(subset(AUDPS, YEAR == 2016),
        aes(x = WMGT, y = TShB_percent_AUDPS)) +
   geom_boxplot() +
@@ -326,7 +326,7 @@ ggplot(subset(AUDPS, YEAR == 2016),
 
 ##### pagebreak
 
-```{r figure-5, fig.cap="Tiller sheath blight incidence per hill in the 2015 and 2016 experiments. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+```{r figure-5, fig.cap="Tiller sheath blight incidence per hill in the 2015 and 2016 experiments. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Sheath blight incidence was calculated as the number of tillers per hill that were infected with sheath blight divided by the whole number of tillers in the hill. Differing inoculation techniques were used in the 2015 and 2016 experiments, leading to a higher rate of incidence in 2016."}
 ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   geom_boxplot(fill = NA) +
   theme(axis.text.x = element_text(size = 8,
