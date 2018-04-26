@@ -171,7 +171,7 @@
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">TShB_incidence_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb8-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
@@ -188,25 +188,25 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 332.8648 
+##  DIC: 332.8236 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean  l-95% CI u-95% CI eff.samp
-## REP     1.124 2.444e-06    3.552     2674
+## REP    0.8069 1.044e-05    2.415     2529
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units    0.8856   0.6643    1.118     5732
+## units    0.8858   0.6615    1.122     5000
 ## 
 ##  Location effects: TShB_inc_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-## (Intercept)    1.1457   0.1568   2.0762     5000 0.0316 *  
-## WMGTAWD        0.1270  -0.2206   0.4576     5212 0.4672    
-## NRTEN100       0.6244   0.2173   1.0198     4450 0.0028 ** 
-## NRTEN120       1.0011   0.6122   1.4115     5000 &lt;2e-04 ***
+## (Intercept)    1.1418   0.3340   2.0631     5000 0.0256 *  
+## WMGTAWD        0.1273  -0.2097   0.4624     5250 0.4644    
+## NRTEN100       0.6231   0.2223   1.0322     5000 0.0028 ** 
+## NRTEN120       0.9998   0.5991   1.4003     5000 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -250,7 +250,7 @@
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3">TShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
 <a class="sourceLine" id="cb20-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb20-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
@@ -267,25 +267,25 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 1114.35 
+##  DIC: 1114.374 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean  l-95% CI u-95% CI eff.samp
-## REP        53 5.618e-08    205.5     3934
+## REP     37.98 1.036e-06      145     5000
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units     604.1      447    758.2     5000
+## units     604.4    447.1    758.3     5000
 ## 
 ##  Location effects: TShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-## (Intercept)    13.717    2.645   24.282     5000 0.0164 *  
-## WMGTAWD         4.750   -4.024   13.312     5000 0.2792    
-## NRTEN100       26.226   15.144   36.285     5000 &lt;2e-04 ***
-## NRTEN120       41.147   30.331   51.126     5000 &lt;2e-04 ***
+## (Intercept)    13.585    2.779   23.053     5000 0.0104 *  
+## WMGTAWD         4.769   -3.661   13.674     5000 0.2716    
+## NRTEN100       26.214   15.868   37.041     5000 &lt;2e-04 ***
+## NRTEN120       41.113   31.312   52.316     5000 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -329,7 +329,7 @@
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb32-3" data-line-number="3">LShB_severity_lmm_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
 <a class="sourceLine" id="cb32-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb32-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
@@ -346,25 +346,25 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 636.3602 
+##  DIC: 636.4118 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean l-95% CI u-95% CI eff.samp
-## REP     46.97    1.965    143.7     5000
+## REP     42.15    1.625    115.1     5000
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units     11.12    8.379    14.11     5266
+## units     11.13    8.365    14.04     5000
 ## 
 ##  Location effects: LShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-## (Intercept)   1.83141 -4.37403  8.55701     5000  0.447    
-## WMGTAWD       0.02791 -1.12743  1.32153     4794  0.972    
-## NRTEN100      4.55171  3.11237  6.05823     4613 &lt;2e-04 ***
-## NRTEN120      4.99266  3.52679  6.41303     5000 &lt;2e-04 ***
+## (Intercept)     1.832   -4.885    7.325     5000  0.424    
+## WMGTAWD         0.038   -1.152    1.298     5000  0.958    
+## NRTEN100        4.548    3.026    6.015     5000 &lt;2e-04 ***
+## NRTEN120        4.985    3.540    6.457     5000 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -413,7 +413,7 @@
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb44-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb44-4" data-line-number="4">TShB_incidence_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE, </a>
 <a class="sourceLine" id="cb44-5" data-line-number="5">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
@@ -431,24 +431,24 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 185.8929 
+##  DIC: 185.9179 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean l-95% CI u-95% CI eff.samp
-## REP     5.057  0.09418    15.84     4746
+## REP      3.33    0.102    10.04     5000
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units    0.9816   0.6319    1.354     5000
+## units    0.9783   0.6437    1.339     5000
 ## 
 ##  Location effects: TShB_inc_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC    
-## (Intercept)   10.5518   8.4394  12.7032     6678 0.0008 ***
-## WMGTAWD        0.3706  -0.1322   0.8252     5000 0.1376    
-## NRTEN180       1.9629   1.4886   2.4561     5233 &lt;2e-04 ***
+## (Intercept)   10.5347   8.7608  12.2510     4681 &lt;2e-04 ***
+## WMGTAWD        0.3689  -0.1072   0.8567     5110  0.141    
+## NRTEN180       1.9625   1.4759   2.4609     5611 &lt;2e-04 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -492,7 +492,7 @@
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb56-3" data-line-number="3">TShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
 <a class="sourceLine" id="cb56-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb56-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
@@ -509,24 +509,24 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 465.8817 
+##  DIC: 465.899 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean l-95% CI u-95% CI eff.samp
-## REP     261.5    7.263    795.9     4486
+## REP     263.9    9.492    806.7     4205
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units     77.78    49.97    106.7     5000
+## units     77.55    50.07    106.5     5000
 ## 
 ##  Location effects: TShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC   
-## (Intercept)   31.9058  17.3010  46.8793     5522 0.0068 **
-## WMGTAWD       -8.1909 -12.3642  -3.6717     5000 0.0012 **
-## NRTEN180       4.7493   0.5014   9.0768     5000 0.0292 * 
+## (Intercept)   31.8295  16.8723  48.2002     5439 0.0072 **
+## WMGTAWD       -8.2365 -12.4488  -3.9052     5000 0.0012 **
+## NRTEN180       4.7356   0.5379   9.1572     5000 0.0288 * 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -570,7 +570,7 @@
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>),</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.02</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>, <span class="dt">alpha.V =</span> <span class="dv">1000</span>)))</a>
 <a class="sourceLine" id="cb68-3" data-line-number="3">LShB_severity_lmm_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
 <a class="sourceLine" id="cb68-4" data-line-number="4">                                    <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb68-5" data-line-number="5">                          <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
@@ -587,24 +587,24 @@
 ##  Thinning interval  = 10
 ##  Sample size  = 5000 
 ## 
-##  DIC: 99.23027 
+##  DIC: 99.20144 
 ## 
 ##  G-structure:  ~REP
 ## 
 ##     post.mean l-95% CI u-95% CI eff.samp
-## REP     1.109  0.01054     3.64     2326
+## REP    0.9776  0.01038    2.443     5000
 ## 
 ##  R-structure:  ~units
 ## 
 ##       post.mean l-95% CI u-95% CI eff.samp
-## units    0.2531   0.1705   0.3506     5000
+## units    0.2527   0.1683   0.3522     5000
 ## 
 ##  Location effects: LShB_percent_AUDPS ~ WMGT + NRTE 
 ## 
 ##             post.mean l-95% CI u-95% CI eff.samp  pMCMC  
-## (Intercept)   1.24045  0.31956  2.28561     5000 0.0328 *
-## WMGTAWD       0.13005 -0.10991  0.37925     5000 0.2872  
-## NRTEN180      0.15952 -0.09568  0.39984     5700 0.2072  
+## (Intercept)   1.24005  0.44120  2.07147     4737 0.0232 *
+## WMGTAWD       0.13155 -0.11769  0.37697     5000 0.2932  
+## NRTEN180      0.15916 -0.08376  0.39861     5000 0.1964  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># create data frames for generating diagnostic plots</span></a>
@@ -648,7 +648,7 @@
 <h3 class="hasAnchor">
 <a href="#model-fit" class="anchor"></a>Model Fit</h3>
 <p>The models all appear to be good fits.</p>
-<p>None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns.</p>
+<p>None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.</p>
 <p>The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.</p>
 </div>
 </div>
@@ -658,19 +658,19 @@
 <div id="tiller-sheath-blight-incidence" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence" class="anchor"></a>Tiller Sheath Blight Incidence</h3>
-<p>In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significant.</p>
-<p>In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significant.</p>
+<p>In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significantly different.</p>
+<p>In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significantly different.</p>
 </div>
 <div id="tiller-sheath-blight-severity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity" class="anchor"></a>Tiller Sheath Blight Severity</h3>
-<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not different from the base FLD treatment.</p>
+<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base FLD treatment.</p>
 <p>In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base FLD treatment.</p>
 </div>
 <div id="leaf-sheath-blight-severity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity" class="anchor"></a>Leaf Sheath Blight Severity</h3>
-<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not different from the control FLD treatment.</p>
+<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.</p>
 <p>In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.</p>
 </div>
 </div>
