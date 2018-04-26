@@ -103,8 +103,7 @@
 <p>Load packages necessary to conduct this work.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">"dplyr"</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"forcats"</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</a></code></pre></div>
 </div>
 <div id="histogram-plot-of-leaf-sheath-blight-severity-data" class="section level1">
 <h1 class="hasAnchor">
@@ -240,21 +239,12 @@
 <div id="boxdotplots-of-leaf-sheath-blight-severity-audps" class="section level1">
 <h1 class="hasAnchor">
 <a href="#boxdotplots-of-leaf-sheath-blight-severity-audps" class="anchor"></a>Box/dotplots of leaf sheath blight severity AUDPS</h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Reorder factors for easier interpretation of plots</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">AUDPS<span class="op">$</span>NRTE &lt;-</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span>forcats<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/forcats/topics/fct_relevel">fct_relevel</a></span>(AUDPS<span class="op">$</span>NRTE,</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">                       <span class="st">"N0"</span>,</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">                       <span class="st">"N100"</span>,</a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">                       <span class="st">"N120"</span>,</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">                       <span class="st">"N60"</span>,</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">                       <span class="st">"N180"</span>)</a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> LShB_percent_AUDPS)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> NRTE, <span class="dt">y =</span> LShB_percent_AUDPS)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"AUDPS"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight Severity"</span>)</a></code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(AUDPS, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(WMGT, <span class="dt">y =</span> LShB_percent_AUDPS)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> YEAR)) <span class="op">+</span></a>
