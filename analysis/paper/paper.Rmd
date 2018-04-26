@@ -60,12 +60,10 @@ knitr::knit_hooks$set(output = function(x, options) {
 })
 
 library(bookdown)
+library(kableExtra)
 library(knitr)
-library(flextable)
 library(ggpubr)
-library(officer)
 library(rice.awd.pests)
-library(xtable)
 ```
 
 # Introduction {-}
@@ -92,7 +90,7 @@ The main plot size was 12m x 12m (144 sq m), with a split-plot size of 5m x 5m (
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of nitrogen were N~0~ (no nitrogen supply), N~1~ (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N~2~ (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
+The split-plot treatment rates of nitrogen were N0 (no nitrogen supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation).
 
 ### Crop Establishment {-}
 
@@ -110,7 +108,7 @@ The plots were inoculated 20 days after transplanting by spreading 151g of inocu
 
 The experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two nitrogen treatments, N~3~ (60 kg per ha as urea split into two applications) and N~4~ (180 kg per ha in three splits) being applied.
+Split-plot N rates differed from the 2015 rates with only two nitrogen treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied.
 
 ### Crop Establishment {-}
 
@@ -138,25 +136,25 @@ For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a  sing
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N~2~, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N~1~ and N~2~, were both significantly different when compared with the control N~0~ treatment. However, water management was not significantly different.
+In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N120, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment. However, water management was not significantly different.
 
 ### Tiller Sheath Blight Severity {-}
 
-In 2015 both the N~1~ and N~2~ treatments were significantly different than the control N~0~ treatment. However, the AWD water management was not significantly different from the FLD treatment.
+In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. However, the AWD water management was not significantly different from the FLD treatment.
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2015 both the N~1~ and N~2~ treatments were significantly different than the N~0~ treatment. However, the AWD water management was not significantly different from the FLD treatment.
+In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. However, the AWD water management was not significantly different from the FLD treatment.
 
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a much higher rate of infection in 2016, with the N~4~, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N~4~, was significantly different than the control N~3~ treatment. As in the 2015 study, water management did not significantly differ.
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
 
 ### Tiller Sheath Blight Severity {-}
 
-In 2016 the N~4~ treatment was significantly different from the N~3~ treatment, with N~4~ severity being higher. The AWD water management, which was lower than FLD, was also significantly different.
+In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher. The AWD water management, which was lower than FLD, was also significantly different.
 
 ### Leaf Sheath Blight Severity {-}
 
@@ -183,80 +181,8 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 
 # Tables {-}
 
-```{r N-management, tab.cap="Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Treatments were applied in splits, basal, tillering and panicle initiation growth stages."}
-
-N_rates <- xtable(N_rates) # the N_rates object is a tibble of data distributed with rice.awd.pests
-N_rates <- xtable_to_flextable(x = N_rates, NA.string = "-")
-
-N_rates <- flextable::display(
-  N_rates,
-  i = 1,
-  col_key = "rowname",
-  pattern = "{{val}}{{pow}}",
-  part = "body",
-  formatters = list(val ~ as.character("N"), pow ~ as.character("0")),
-  fprops = list(pow = fp_text(
-    vertical.align = "subscript", font.size = 8
-  ))
-)
-
-N_rates <- flextable::display(
-  N_rates,
-  i = 2,
-  col_key = "rowname",
-  pattern = "{{val}}{{pow}}",
-  part = "body",
-  formatters = list(val ~ as.character("N"), pow ~ as.character("1")),
-  fprops = list(pow = fp_text(
-    vertical.align = "subscript", font.size = 8
-  ))
-)
-
-N_rates <- flextable::display(
-  N_rates,
-  i = 3,
-  col_key = "rowname",
-  pattern = "{{val}}{{pow}}",
-  part = "body",
-  formatters = list(val ~ as.character("N"), pow ~ as.character("2")),
-  fprops = list(pow = fp_text(
-    vertical.align = "subscript", font.size = 8
-  ))
-)
-
-N_rates <- flextable::display(
-  N_rates,
-  i = 4,
-  col_key = "rowname",
-  pattern = "{{val}}{{pow}}",
-  part = "body",
-  formatters = list(val ~ as.character("N"), pow ~ as.character("3")),
-  fprops = list(pow = fp_text(
-    vertical.align = "subscript", font.size = 8
-  ))
-)
-
-N_rates <- flextable::display(
-  N_rates,
-  i = 5,
-  col_key = "rowname",
-  pattern = "{{val}}{{pow}}",
-  part = "body",
-  formatters = list(val ~ as.character("N"), pow ~ as.character("4")),
-  fprops = list(pow = fp_text(
-    vertical.align = "subscript", font.size = 8
-  ))
-)
-
-N_rates <- add_header(N_rates,
-                           Year = "Year",
-                           Tillering = "Application Rate (kg/ha)")
-
-N_rates <- merge_v(N_rates, part = "header")
-
-
-N_rates <- autofit(N_rates)
-N_rates
+```{r table-1, tab.cap="Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages."}
+kable(N_rates)
 
 ```
 
@@ -264,7 +190,7 @@ N_rates
 
 # Figures {-}
 
-```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
+```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = DAI,
@@ -306,7 +232,7 @@ ggplot(RAW_data,
 
 ##### pagebreak
 
-```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
+```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = DAI,
@@ -346,7 +272,7 @@ ggplot(RAW_data,
 
 ##### pagebreak
 
-```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N~0~), 100 kg per ha N (N~1~) and 180 kg per ha N (N~2~). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N~3~) and 180 kg per ha N (N~4~). Points represent the mean of four replications."}
+```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = DAI,
