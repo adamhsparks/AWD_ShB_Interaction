@@ -205,16 +205,16 @@ ggplot(RAW_data,
   scale_y_continuous(labels = function(x) paste0(x*100),
                      limits = c(0, 1),
                      name = "Tiller Sheath Blight Incidence (%)") +
-  scale_shape_discrete(labels = c(expression(N[0]),
-                                  expression(N[1]),
-                                  expression(N[2]),
-                                  expression(N[3]),
-                                  expression(N[4]))) +
-  scale_linetype_discrete(labels = c(expression(N[0]),
-                                     expression(N[1]),
-                                     expression(N[2]),
-                                     expression(N[3]),
-                                     expression(N[4]))) +
+  scale_shape_discrete(labels = c("N0",
+                                  "N100",
+                                  "N120",
+                                  "N60",
+                                  "N180")) +
+  scale_linetype_discrete(labels = c("N0",
+                                     "N100",
+                                     "N120",
+                                     "N60",
+                                     "N180")) +
   xlab("Days After Inoculation") +
   facet_grid(WMGT ~ YEAR,
              scales = "free_x") +
@@ -224,9 +224,7 @@ ggplot(RAW_data,
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom") +
-  guides(linetype = guide_legend(nrow = 2),
-         shape = guide_legend(nrow = 2))
+  theme(legend.position = "bottom")
 ```
 
 ##### pagebreak
@@ -244,16 +242,16 @@ ggplot(RAW_data,
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = TRT)) +
-  scale_shape_discrete(labels = c(expression(N[0]),
-                                  expression(N[1]),
-                                  expression(N[2]),
-                                  expression(N[3]),
-                                  expression(N[4]))) +
-  scale_linetype_discrete(labels = c(expression(N[0]),
-                                     expression(N[1]),
-                                     expression(N[2]),
-                                     expression(N[3]),
-                                     expression(N[4]))) +
+  scale_shape_discrete(labels = c("N0",
+                                  "N100",
+                                  "N120",
+                                  "N60",
+                                  "N180")) +
+  scale_linetype_discrete(labels = c("N0",
+                                     "N100",
+                                     "N120",
+                                     "N60",
+                                     "N180")) +
   ylab("Tiller Sheath Blight Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(WMGT ~ YEAR,
@@ -264,9 +262,7 @@ ggplot(RAW_data,
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom") +
-  guides(linetype = guide_legend(nrow = 2),
-         shape = guide_legend(nrow = 2))
+  theme(legend.position = "bottom")
 ```
 
 ##### pagebreak
@@ -284,16 +280,16 @@ ggplot(RAW_data,
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = TRT)) +
-  scale_shape_discrete(labels = c(expression(N[0]),
-                                  expression(N[1]),
-                                  expression(N[2]),
-                                  expression(N[3]),
-                                  expression(N[4]))) +
-  scale_linetype_discrete(labels = c(expression(N[0]),
-                                     expression(N[1]),
-                                     expression(N[2]),
-                                     expression(N[3]),
-                                     expression(N[4]))) +
+  scale_shape_discrete(labels = c("N0",
+                                  "N100",
+                                  "N120",
+                                  "N60",
+                                  "N180")) +
+  scale_linetype_discrete(labels = c("N0",
+                                     "N100",
+                                     "N120",
+                                     "N60",
+                                     "N180")) +
   ylab("Leaf Sheath Blight Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(WMGT ~ YEAR,
@@ -304,9 +300,7 @@ ggplot(RAW_data,
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom") +
-  guides(linetype = guide_legend(nrow = 2),
-         shape = guide_legend(nrow = 2))
+  theme(legend.position = "bottom")
 ```
 
 ##### pagebreak
