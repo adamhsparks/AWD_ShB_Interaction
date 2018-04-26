@@ -23,7 +23,6 @@ Load packages necessary to conduct this work.
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
 library("rice.awd.pests")
 library("dplyr")
-library("forcats")
 library("ggplot2")
 ```
 
@@ -161,15 +160,6 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
 # Box/dotplots of leaf sheath blight severity AUDPS
 
 ```{r, , cache=FALSE}
-# Reorder factors for easier interpretation of plots
-AUDPS$NRTE <-
-  forcats::fct_relevel(AUDPS$NRTE,
-                       "N0",
-                       "N100",
-                       "N120",
-                       "N60",
-                       "N180")
-
 ggplot(AUDPS, aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
