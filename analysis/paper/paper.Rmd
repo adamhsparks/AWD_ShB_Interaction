@@ -161,7 +161,7 @@ In 2016 the neither of the treatments, nitrogen rate or water management, were s
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In 2016 one measurement, tiller sheath blight severity, was significantly lower for AWD than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on leaf ShB severity.
+In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In 2016 one measurement, tiller sheath blight severity, was significantly lower for AWD (FIGURE XXX) than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on leaf ShB severity.
 
 The changes made for the 2016 experiment appear to have worked, increasing the incidence and decreased variability of sheath blight in the plots.
 
@@ -312,6 +312,21 @@ ggplot(RAW_data,
 ##### pagebreak
 
 ```{r figure-4, fig.cap="Tiller sheath blight incidence per hill in the 2015 and 2016 experiments. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+ggplot(subset(AUDPS, YEAR == 2016),
+       aes(x = WMGT, y = TShB_percent_AUDPS)) +
+  geom_boxplot() +
+  geom_point() +
+  xlab("Treatment") +
+  ylab("AUDPS") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"))
+```
+
+##### pagebreak
+
+```{r figure-5, fig.cap="Tiller sheath blight incidence per hill in the 2015 and 2016 experiments. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
 ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   geom_boxplot(fill = NA) +
   theme(axis.text.x = element_text(size = 8,
@@ -323,8 +338,7 @@ ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  facet_grid(. ~ YEAR) +
-  theme(legend.position = "bottom")
+  facet_grid(. ~ YEAR)
 ```
 
 ##### pagebreak
