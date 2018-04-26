@@ -60,7 +60,6 @@ knitr::knit_hooks$set(output = function(x, options) {
 })
 
 library(bookdown)
-library(kableExtra)
 library(knitr)
 library(ggpubr)
 library(rice.awd.pests)
