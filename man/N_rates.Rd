@@ -3,8 +3,8 @@
 \docType{data}
 \name{N_rates}
 \alias{N_rates}
-\title{A Tibble of Nitrogen Rates and Split Application Timings}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 5 rows and 5 columns.}
+\title{A data.frame of Nitrogen Rates and Split Application Timings}
+\format{An object of class \code{matrix} with 5 rows and 5 columns.}
 \usage{
 N_rates
 }

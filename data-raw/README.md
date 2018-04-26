@@ -912,7 +912,7 @@ devtools::use_data(RAW_data,
                    overwrite = TRUE)
 ```
 
-    ## Saving RAW_data as RAW_data.rda to /Users/adamsparks/Development/rice_awd_pests/data
+    ## Saving RAW_data as RAW_data.rda to /Users/asparks/Development/rice_awd_pests/data
 
 ``` r
 devtools::use_data(AUDPS,
@@ -920,53 +920,57 @@ devtools::use_data(AUDPS,
                    overwrite = TRUE)
 ```
 
-    ## Saving AUDPS as AUDPS.rda to /Users/adamsparks/Development/rice_awd_pests/data
+    ## Saving AUDPS as AUDPS.rda to /Users/asparks/Development/rice_awd_pests/data
 
 # N rates
 
 Create a `tibble` of N rates and time of application used in this study.
 
 ``` r
-N_rates <- tibble::tibble(Year = integer())
+Year <- as.integer(c(2015,
+                     2015,
+                     2015,
+                     2016,
+                     2016))
 
-N_rates <-
-  tibble::add_row(N_rates,
-                  Year = as.integer(c(2015,
-                                      2015,
-                                      2015,
-                                      2016,
-                                      2016)))
-
-N_rates$`Total N` <- as.integer(c(0,
+`Total N (kg/ha)` <- as.integer(c(0,
                                   100,
                                   120,
                                   60,
                                   180))
 
-N_rates$Basal <- as.integer(c(0,
-                              60,
-                              60,
-                              30,
-                              60))
-
-N_rates$Tillering <- as.integer(c(0,
-                                  20,
-                                  30,
+`Basal N (kg/ha)` <- as.integer(c(0,
+                                  60,
+                                  60,
                                   30,
                                   60))
 
-N_rates$`Panicle\nInitiation` <- as.integer(c(0,
-                                              20,
-                                              30,
-                                              0,
-                                              60))
+`Tillering N (kg/ha)` <- as.integer(c(0,
+                                      20,
+                                      30,
+                                      30,
+                                      60))
+
+`Panicle Initiation N (kg/ha)` <- as.integer(c(0,
+                                               20,
+                                               30,
+                                               0,
+                                               60))
+
+N_rates <- cbind(Year,
+                 `Total N (kg/ha)`,
+                 `Basal N (kg/ha)`,
+                 `Tillering N (kg/ha)`,
+                 `Panicle Initiation N (kg/ha)`)
+
+row.names(N_rates) <- c("N0", "N100", "N120", "N60", "N180")
 
 devtools::use_data(N_rates,
                    compress = "bzip2",
                    overwrite = TRUE)
 ```
 
-    ## Saving N_rates as N_rates.rda to /Users/adamsparks/Development/rice_awd_pests/data
+    ## Saving N_rates as N_rates.rda to /Users/asparks/Development/rice_awd_pests/data
 
 # Colophon
 
@@ -983,73 +987,73 @@ sessioninfo::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2018-04-25                  
+    ##  date     2018-04-26                  
     ## 
     ## ─ Packages ──────────────────────────────────────────────────────────────
-    ##  package     * version date       source        
-    ##  agricolae     1.2-8   2017-09-12 CRAN (R 3.5.0)
-    ##  AlgDesign     1.1-7.3 2014-10-15 CRAN (R 3.5.0)
-    ##  assertthat    0.2.0   2017-04-11 CRAN (R 3.5.0)
-    ##  backports     1.1.2   2017-12-13 CRAN (R 3.5.0)
-    ##  bindr         0.1.1   2018-03-13 CRAN (R 3.5.0)
-    ##  bindrcpp    * 0.2.2   2018-03-29 CRAN (R 3.5.0)
-    ##  boot          1.3-20  2017-08-06 CRAN (R 3.5.0)
-    ##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.0)
-    ##  cluster       2.0.7-1 2018-04-13 CRAN (R 3.5.0)
-    ##  coda          0.19-1  2016-12-08 CRAN (R 3.5.0)
-    ##  combinat      0.0-8   2012-10-29 CRAN (R 3.5.0)
-    ##  deldir        0.1-15  2018-04-01 CRAN (R 3.5.0)
-    ##  devtools      1.13.5  2018-02-18 CRAN (R 3.5.0)
-    ##  digest        0.6.15  2018-01-28 CRAN (R 3.5.0)
-    ##  dplyr       * 0.7.4   2017-09-28 CRAN (R 3.5.0)
-    ##  evaluate      0.10.1  2017-06-24 CRAN (R 3.5.0)
-    ##  expm          0.999-2 2017-03-29 CRAN (R 3.5.0)
-    ##  forcats       0.3.0   2018-02-19 CRAN (R 3.5.0)
-    ##  gdata         2.18.0  2017-06-06 CRAN (R 3.5.0)
-    ##  glue          1.2.0   2017-10-29 CRAN (R 3.5.0)
-    ##  gmodels       2.16.2  2015-07-22 CRAN (R 3.5.0)
-    ##  gtools        3.5.0   2015-05-29 CRAN (R 3.5.0)
-    ##  highr         0.6     2016-05-09 CRAN (R 3.5.0)
-    ##  hms           0.4.2   2018-03-10 CRAN (R 3.5.0)
-    ##  htmltools     0.3.6   2017-04-28 CRAN (R 3.5.0)
-    ##  httpuv        1.4.1   2018-04-21 CRAN (R 3.5.0)
-    ##  klaR          0.6-14  2018-03-19 CRAN (R 3.5.0)
-    ##  knitr         1.20    2018-02-20 CRAN (R 3.5.0)
-    ##  later         0.7.1   2018-03-07 CRAN (R 3.5.0)
-    ##  lattice       0.20-35 2017-03-25 CRAN (R 3.5.0)
-    ##  LearnBayes    2.15.1  2018-03-18 CRAN (R 3.5.0)
-    ##  lubridate     1.7.4   2018-04-11 CRAN (R 3.5.0)
-    ##  magrittr      1.5     2014-11-22 CRAN (R 3.5.0)
-    ##  MASS          7.3-49  2018-02-23 CRAN (R 3.5.0)
-    ##  Matrix        1.2-14  2018-04-13 CRAN (R 3.5.0)
-    ##  memoise       1.1.0   2017-04-21 CRAN (R 3.5.0)
-    ##  mime          0.5     2016-07-07 CRAN (R 3.5.0)
-    ##  miniUI        0.1.1   2016-01-15 CRAN (R 3.5.0)
-    ##  nlme          3.1-137 2018-04-07 CRAN (R 3.5.0)
-    ##  pillar        1.2.1   2018-02-27 CRAN (R 3.5.0)
-    ##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.5.0)
-    ##  plyr          1.8.4   2016-06-08 CRAN (R 3.5.0)
-    ##  promises      1.0.1   2018-04-13 CRAN (R 3.5.0)
-    ##  purrr         0.2.4   2017-10-18 CRAN (R 3.5.0)
-    ##  questionr     0.6.2   2017-11-01 CRAN (R 3.5.0)
-    ##  R6            2.2.2   2017-06-17 CRAN (R 3.5.0)
-    ##  Rcpp          0.12.16 2018-03-13 CRAN (R 3.5.0)
-    ##  readr       * 1.1.1   2017-05-16 CRAN (R 3.5.0)
-    ##  reshape2      1.4.3   2017-12-11 CRAN (R 3.5.0)
-    ##  rlang         0.2.0   2018-02-20 CRAN (R 3.5.0)
-    ##  rmarkdown     1.9     2018-03-01 CRAN (R 3.5.0)
-    ##  rprojroot     1.3-2   2018-01-03 CRAN (R 3.5.0)
-    ##  rstudioapi    0.7     2017-09-07 CRAN (R 3.5.0)
-    ##  sessioninfo   1.0.0   2017-06-21 CRAN (R 3.5.0)
-    ##  shiny         1.0.5   2017-08-23 CRAN (R 3.5.0)
-    ##  sp            1.2-7   2018-01-19 CRAN (R 3.5.0)
-    ##  spData        0.2.8.3 2018-03-25 CRAN (R 3.5.0)
-    ##  spdep         0.7-7   2018-04-03 CRAN (R 3.5.0)
-    ##  stringi       1.1.7   2018-03-12 CRAN (R 3.5.0)
-    ##  stringr       1.3.0   2018-02-19 CRAN (R 3.5.0)
-    ##  tibble        1.4.2   2018-01-22 CRAN (R 3.5.0)
-    ##  tidyr         0.8.0   2018-01-29 CRAN (R 3.5.0)
-    ##  tidyselect    0.2.4   2018-02-26 CRAN (R 3.5.0)
-    ##  withr         2.1.2   2018-03-15 CRAN (R 3.5.0)
-    ##  xtable        1.8-2   2016-02-05 CRAN (R 3.5.0)
+    ##  package     * version date       source         
+    ##  agricolae     1.2-8   2017-09-12 cran (@1.2-8)  
+    ##  AlgDesign     1.1-7.3 2014-10-15 cran (@1.1-7.3)
+    ##  assertthat    0.2.0   2017-04-11 CRAN (R 3.5.0) 
+    ##  backports     1.1.2   2017-12-13 CRAN (R 3.5.0) 
+    ##  bindr         0.1.1   2018-03-13 CRAN (R 3.5.0) 
+    ##  bindrcpp    * 0.2.2   2018-03-29 CRAN (R 3.5.0) 
+    ##  boot          1.3-20  2017-08-06 CRAN (R 3.5.0) 
+    ##  clisymbols    1.2.0   2017-05-21 CRAN (R 3.5.0) 
+    ##  cluster       2.0.7-1 2018-04-13 CRAN (R 3.5.0) 
+    ##  coda          0.19-1  2016-12-08 CRAN (R 3.5.0) 
+    ##  combinat      0.0-8   2012-10-29 cran (@0.0-8)  
+    ##  deldir        0.1-15  2018-04-01 CRAN (R 3.5.0) 
+    ##  devtools      1.13.5  2018-02-18 CRAN (R 3.5.0) 
+    ##  digest        0.6.15  2018-01-28 CRAN (R 3.5.0) 
+    ##  dplyr       * 0.7.4   2017-09-28 CRAN (R 3.5.0) 
+    ##  evaluate      0.10.1  2017-06-24 CRAN (R 3.5.0) 
+    ##  expm          0.999-2 2017-03-29 CRAN (R 3.5.0) 
+    ##  forcats       0.3.0   2018-02-19 CRAN (R 3.5.0) 
+    ##  gdata         2.18.0  2017-06-06 CRAN (R 3.5.0) 
+    ##  glue          1.2.0   2017-10-29 CRAN (R 3.5.0) 
+    ##  gmodels       2.16.2  2015-07-22 CRAN (R 3.5.0) 
+    ##  gtools        3.5.0   2015-05-29 CRAN (R 3.5.0) 
+    ##  highr         0.6     2016-05-09 CRAN (R 3.5.0) 
+    ##  hms           0.4.2   2018-03-10 CRAN (R 3.5.0) 
+    ##  htmltools     0.3.6   2017-04-28 CRAN (R 3.5.0) 
+    ##  httpuv        1.4.1   2018-04-21 CRAN (R 3.5.0) 
+    ##  klaR          0.6-14  2018-03-19 cran (@0.6-14) 
+    ##  knitr         1.20    2018-02-20 CRAN (R 3.5.0) 
+    ##  later         0.7.1   2018-03-07 CRAN (R 3.5.0) 
+    ##  lattice       0.20-35 2017-03-25 CRAN (R 3.5.0) 
+    ##  LearnBayes    2.15.1  2018-03-18 CRAN (R 3.5.0) 
+    ##  lubridate     1.7.4   2018-04-11 CRAN (R 3.5.0) 
+    ##  magrittr      1.5     2014-11-22 CRAN (R 3.5.0) 
+    ##  MASS          7.3-49  2018-02-23 CRAN (R 3.5.0) 
+    ##  Matrix        1.2-14  2018-04-13 CRAN (R 3.5.0) 
+    ##  memoise       1.1.0   2017-04-21 CRAN (R 3.5.0) 
+    ##  mime          0.5     2016-07-07 CRAN (R 3.5.0) 
+    ##  miniUI        0.1.1   2016-01-15 cran (@0.1.1)  
+    ##  nlme          3.1-137 2018-04-07 CRAN (R 3.5.0) 
+    ##  pillar        1.2.1   2018-02-27 CRAN (R 3.5.0) 
+    ##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.5.0) 
+    ##  plyr          1.8.4   2016-06-08 CRAN (R 3.5.0) 
+    ##  promises      1.0.1   2018-04-13 CRAN (R 3.5.0) 
+    ##  purrr         0.2.4   2017-10-18 CRAN (R 3.5.0) 
+    ##  questionr     0.6.2   2017-11-01 cran (@0.6.2)  
+    ##  R6            2.2.2   2017-06-17 CRAN (R 3.5.0) 
+    ##  Rcpp          0.12.16 2018-03-13 CRAN (R 3.5.0) 
+    ##  readr       * 1.1.1   2017-05-16 CRAN (R 3.5.0) 
+    ##  reshape2      1.4.3   2017-12-11 CRAN (R 3.5.0) 
+    ##  rlang         0.2.0   2018-02-20 CRAN (R 3.5.0) 
+    ##  rmarkdown     1.9     2018-03-01 CRAN (R 3.5.0) 
+    ##  rprojroot     1.3-2   2018-01-03 CRAN (R 3.5.0) 
+    ##  rstudioapi    0.7     2017-09-07 CRAN (R 3.5.0) 
+    ##  sessioninfo   1.0.0   2017-06-21 CRAN (R 3.5.0) 
+    ##  shiny         1.0.5   2017-08-23 CRAN (R 3.5.0) 
+    ##  sp            1.2-7   2018-01-19 CRAN (R 3.5.0) 
+    ##  spData        0.2.8.3 2018-03-25 CRAN (R 3.5.0) 
+    ##  spdep         0.7-7   2018-04-03 CRAN (R 3.5.0) 
+    ##  stringi       1.1.7   2018-03-12 CRAN (R 3.5.0) 
+    ##  stringr       1.3.0   2018-02-19 CRAN (R 3.5.0) 
+    ##  tibble        1.4.2   2018-01-22 CRAN (R 3.5.0) 
+    ##  tidyr         0.8.0   2018-01-29 CRAN (R 3.5.0) 
+    ##  tidyselect    0.2.4   2018-02-26 CRAN (R 3.5.0) 
+    ##  withr         2.1.2   2018-03-15 CRAN (R 3.5.0) 
+    ##  xtable        1.8-2   2016-02-05 CRAN (R 3.5.0) 
     ##  yaml          2.1.18  2018-03-08 CRAN (R 3.5.0)

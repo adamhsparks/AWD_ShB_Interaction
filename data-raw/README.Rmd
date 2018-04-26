@@ -805,39 +805,44 @@ devtools::use_data(AUDPS,
 Create a `tibble` of N rates and time of application used in this study.
 
 ```{r N_rates}
-N_rates <- tibble::tibble(Year = integer())
 
-N_rates <-
-  tibble::add_row(N_rates,
-                  Year = as.integer(c(2015,
-                                      2015,
-                                      2015,
-                                      2016,
-                                      2016)))
+Year <- as.integer(c(2015,
+                     2015,
+                     2015,
+                     2016,
+                     2016))
 
-N_rates$`Total N` <- as.integer(c(0,
+`Total N (kg/ha)` <- as.integer(c(0,
                                   100,
                                   120,
                                   60,
                                   180))
 
-N_rates$Basal <- as.integer(c(0,
-                              60,
-                              60,
-                              30,
-                              60))
-
-N_rates$Tillering <- as.integer(c(0,
-                                  20,
-                                  30,
+`Basal N (kg/ha)` <- as.integer(c(0,
+                                  60,
+                                  60,
                                   30,
                                   60))
 
-N_rates$`Panicle\nInitiation` <- as.integer(c(0,
-                                              20,
-                                              30,
-                                              0,
-                                              60))
+`Tillering N (kg/ha)` <- as.integer(c(0,
+                                      20,
+                                      30,
+                                      30,
+                                      60))
+
+`Panicle Initiation N (kg/ha)` <- as.integer(c(0,
+                                               20,
+                                               30,
+                                               0,
+                                               60))
+
+N_rates <- cbind(Year,
+                 `Total N (kg/ha)`,
+                 `Basal N (kg/ha)`,
+                 `Tillering N (kg/ha)`,
+                 `Panicle Initiation N (kg/ha)`)
+
+row.names(N_rates) <- c("N0", "N100", "N120", "N60", "N180")
 
 devtools::use_data(N_rates,
                    compress = "bzip2",
@@ -845,7 +850,6 @@ devtools::use_data(N_rates,
 ```
 
 # Colophon
-
 
 ```{r}
 sessioninfo::session_info()
