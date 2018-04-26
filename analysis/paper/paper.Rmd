@@ -135,24 +135,25 @@ For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a singl
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N120, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment. However, water management was not significantly different.
+In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N120, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Figure \@ref(fig:TShB-N-inc)). However, water management was not significantly different (Figure \@ref(fig:TShB-W-inc)).
 
 ### Tiller Sheath Blight Severity {-}
 
-In 2015 both the N100 and N120 treatments were significantly different than the control N0 treatment. However, the AWD water management was not significantly different from the FLD treatment.
+Tiller ShB severity remained below 2% (Figure \@ref(fig:figure-2)). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Figure \@ref(fig:TShB-N-sev)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:TShB-w-sev)).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2015 both the N100 and N120 treatments were significantly different than the N0 treatment. However, the AWD water management was not significantly different from the FLD treatment.
+Severity of leaf ShB remained low, less than 0.4% across all treatments (Figure \@ref(fig:figure-3))). Both the N100 and N120 treatments were significantly different than the N0 treatment (Figure \@ref(fig:LShB-N-sev)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:LShB-W-sev)).
 
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment. As in the 2015 study, water management did not significantly differ.
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment (Figure \@ref(fig:TShB-N-inc)). As in the 2015 study, water management did not significantly differ \@ref(fig:TShB-W-inc)).
 
 ### Tiller Sheath Blight Severity {-}
 
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded
 In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Figure \@ref(fig:TShB-N-sev)). The AWD water management, which was lower than the FLD treatment, was also significantly different (Figure \@ref(fig:TShB-W-sev)).
 
 ### Leaf Sheath Blight Severity {-}
@@ -197,34 +198,52 @@ kable(N_rates,
 
 # Figures {-}
 
-```{r figure-1, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
+```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
 
 ggplot(RAW_data,
        aes(x = DAI,
            y = TShB_incidence,
-           linetype = NRTE,
-           shape = NRTE)) +
+           group = WMGT,
+           shape = WMGT,
+           linetype = WMGT)) +
   stat_summary(fun.y = "mean",
-               geom = "line",
-               aes(group = TRT)) +
+               geom = "line") +
   stat_summary(fun.y = "mean",
-               geom = "point",
-               aes(group = TRT)) +
+               geom = "point") +
   scale_y_continuous(labels = function(x) paste0(x*100),
                      limits = c(0, 1),
                      name = "Tiller Sheath Blight Incidence (%)") +
-  scale_shape_discrete(labels = c("N0",
-                                  "N100",
-                                  "N120",
-                                  "N60",
-                                  "N180")) +
-  scale_linetype_discrete(labels = c("N0",
-                                     "N100",
-                                     "N120",
-                                     "N60",
-                                     "N180")) +
   xlab("Days After Inoculation") +
-  facet_grid(WMGT ~ YEAR,
+  facet_grid(. ~ YEAR,
+             scales = "free_x") +
+  labs(linetype = "N Treatment",
+       shape = "N Treatment") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black")) +
+  theme(legend.position = "bottom")
+```
+
+##### Tiller ShB severity - NRTE
+
+```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
+
+ggplot(RAW_data,
+       aes(x = DAI,
+           y = TShB_incidence,
+           group = NRTE,
+           shape = NRTE,
+           linetype = NRTE)) +
+  stat_summary(fun.y = "mean",
+               geom = "line") +
+  stat_summary(fun.y = "mean",
+               geom = "point") +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Tiller Sheath Blight Incidence (%)") +
+  xlab("Days After Inoculation") +
+  facet_grid(. ~ YEAR,
              scales = "free_x") +
   labs(linetype = "N Treatment",
        shape = "N Treatment") +
