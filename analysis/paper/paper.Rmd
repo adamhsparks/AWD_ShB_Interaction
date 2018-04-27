@@ -193,10 +193,15 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 # Tables {-}
 
 ```{r N-rates}
-
 kable(N_rates,
       caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages.")
 
+```
+
+```{r MCMC-table}
+MCMC_table <- readRDS("../data/derived_data/MCMC_table.Rds")
+kable(MCMC_table,
+      caption = "MCMC fit")
 ```
 
 ##### pagebreak
