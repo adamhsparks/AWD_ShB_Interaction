@@ -61,7 +61,10 @@ knitr::knit_hooks$set(output = function(x, options) {
 
 library(bookdown)
 library(knitr)
+library(ggplot2)
 library(ggpubr)
+library(grid)
+library(gridExtra)
 library(rice.awd.pests)
 ```
 
@@ -119,11 +122,13 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 ### Data Collection {-}
 
-Disease scoring was the same in both experiments using the same disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions. Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the number of tillers per hill and number of tillers with ShB (incidence) were measured. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using the rating scale. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the total number of tillers per hill and number of tillers with ShB (incidence) were measured. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using the rating scale. Leaves were rated as green (living) having at least XXX% living tissue or dead, defined as having less than XXX% living tissue. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+
+Disease rating was the same in both experiments using the same disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions.
 
 ### Statistical Analysis {-}
 
-Because the severity data were collected on an unevenly spaced ordinal scale, they were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity.
+Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity.
 
 As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
 
@@ -198,9 +203,9 @@ kable(N_rates,
 
 # Figures {-}
 
-```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
+```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
 
-ggplot(RAW_data,
+p1 <- ggplot(RAW_data,
        aes(x = DAI,
            y = TShB_incidence,
            group = WMGT,
@@ -212,224 +217,247 @@ ggplot(RAW_data,
                geom = "point") +
   scale_y_continuous(labels = function(x) paste0(x*100),
                      limits = c(0, 1),
-                     name = "Tiller Sheath Blight Incidence (%)") +
+                     name = "Tiller Incidence (%)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "N Treatment",
-       shape = "N Treatment") +
+  labs(linetype = "Irrigation",
+       shape = "Irrigation") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
-```
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        legend.position = c(x = 0.065, y = 0.76),
+        legend.background = element_rect(color = "black", 
+                                         size = 0.5,
+                                         linetype = "solid"),
+        axis.title.x = element_blank())
 
-##### Tiller ShB severity - NRTE
-
-```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
-
-ggplot(RAW_data,
-       aes(x = DAI,
-           y = TShB_incidence,
-           group = NRTE,
-           shape = NRTE,
-           linetype = NRTE)) +
+p2 <- ggplot(RAW_data,
+             aes(x = DAI,
+                 y = PERC_TIL_ShB,
+                 group = WMGT,
+                 shape = WMGT,
+                 linetype = WMGT)) +
   stat_summary(fun.y = "mean",
                geom = "line") +
   stat_summary(fun.y = "mean",
                geom = "point") +
   scale_y_continuous(labels = function(x) paste0(x*100),
                      limits = c(0, 1),
-                     name = "Tiller Sheath Blight Incidence (%)") +
+                     name = "Tiller Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "N Treatment",
-       shape = "N Treatment") +
+  labs(linetype = "Irrigation",
+       shape = "Irrigation") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
-```
+        axis.line = element_line(colour = "black"),
+        legend.position = "none",
+        axis.title.x = element_blank(),)
 
-##### Tiller ShB progress
-
-```{r figure-2, fig.cap="Tiller sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
-
-ggplot(RAW_data,
-       aes(x = DAI,
-           y = PERC_TIL_ShB,
-           linetype = NRTE,
-           shape = NRTE)) +
+p3 <- ggplot(RAW_data,
+             aes(x = DAI,
+                 y = PERC_LEAF_ShB,
+                 group = WMGT,
+                 shape = WMGT,
+                 linetype = WMGT)) +
   stat_summary(fun.y = "mean",
-               geom = "line",
-               aes(group = TRT)) +
+               geom = "line") +
   stat_summary(fun.y = "mean",
-               geom = "point",
-               aes(group = TRT)) +
-  scale_shape_discrete(labels = c("N0",
-                                  "N100",
-                                  "N120",
-                                  "N60",
-                                  "N180")) +
-  scale_linetype_discrete(labels = c("N0",
-                                     "N100",
-                                     "N120",
-                                     "N60",
-                                     "N180")) +
-  ylab("Tiller Sheath Blight Severity (%)") +
+               geom = "point") +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Leaf Severity (%)") +
   xlab("Days After Inoculation") +
-  facet_grid(WMGT ~ YEAR,
+  facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "N Treatment",
-       shape = "N Treatment") +
+  labs(linetype = "Irrigation",
+       shape = "Irrigation") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        legend.position = "none")
+
+grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
+```
+
+##### Tiller ShB N progress
+
+```{r tiller-ShB-N-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
+
+p4 <- ggplot(RAW_data,
+             aes(x = DAI,
+                 y = TShB_incidence,
+                 group = NRTE,
+                 shape = NRTE,
+                 linetype = NRTE)) +
+  stat_summary(fun.y = "mean",
+               geom = "line") +
+  stat_summary(fun.y = "mean",
+               geom = "point") +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Tiller Incidence (%)") +
+  facet_grid(. ~ YEAR,
+             scales = "free_x") +
+  labs(linetype = "N Rate",
+       shape = "N Rate") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
-```
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        legend.position = c(x = 0.095, y = 0.69),
+        legend.background = element_rect(color = "black", 
+                                         size = 0.5,
+                                         linetype = "solid"),
+        axis.title.x = element_blank()) +
+  guides(linetype = guide_legend(ncol = 2),
+         shape = guide_legend(ncol = 2))
 
-##### Leaf ShB progress
-
-```{r figure-3, fig.cap="Leaf sheath blight severity progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season in both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
-
-ggplot(RAW_data,
-       aes(x = DAI,
-           y = PERC_LEAF_ShB,
-           linetype = NRTE,
-           shape = NRTE)) +
+p5 <- ggplot(RAW_data,
+             aes(x = DAI,
+                 y = PERC_TIL_ShB,
+                 group = NRTE,
+                 shape = NRTE,
+                 linetype = NRTE)) +
   stat_summary(fun.y = "mean",
-               geom = "line",
-               aes(group = TRT)) +
+               geom = "line") +
   stat_summary(fun.y = "mean",
-               geom = "point",
-               aes(group = TRT)) +
-  scale_shape_discrete(labels = c("N0",
-                                  "N100",
-                                  "N120",
-                                  "N60",
-                                  "N180")) +
-  scale_linetype_discrete(labels = c("N0",
-                                     "N100",
-                                     "N120",
-                                     "N60",
-                                     "N180")) +
-  ylab("Leaf Sheath Blight Severity (%)") +
+               geom = "point") +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Tiller Severity (%)") +
+  facet_grid(. ~ YEAR,
+             scales = "free_x") +
+  labs(linetype = "N Rate",
+       shape = "N Rate") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        legend.position = "none",
+        axis.title.x = element_blank(),)
+
+p6 <- ggplot(RAW_data,
+             aes(x = DAI,
+                 y = PERC_LEAF_ShB,
+                 group = NRTE,
+                 shape = NRTE,
+                 linetype = NRTE)) +
+  stat_summary(fun.y = "mean",
+               geom = "line") +
+  stat_summary(fun.y = "mean",
+               geom = "point") +
+  scale_y_continuous(labels = function(x) paste0(x*100),
+                     limits = c(0, 1),
+                     name = "Leaf Severity (%)") +
   xlab("Days After Inoculation") +
-  facet_grid(WMGT ~ YEAR,
+  facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "N Treatment",
-       shape = "N Treatment") +
+  labs(linetype = "N Rate",
+       shape = "N Rate") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  theme(legend.position = "bottom")
+        axis.line = element_line(colour = "black"),
+        legend.position = "none")
+
+grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 ```
 
-##### Tiller ShB incidence - WMGT
+##### ShB boxplot - WMGT
 
-```{r TShB-W-inc, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
-ggplot(AUDPS,
-       aes(x = WMGT, y = TShB_inc_AUDPS)) +
+```{r TShB-W-inc, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+p7 <- ggplot(AUDPS,
+             aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
+  ylab("Tiller Incidence AUDPS") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
+        axis.line = element_line(colour = "black"),
+        axis.title.x = element_blank()) +
   facet_grid(. ~ YEAR,
              scales = "free_x")
-```
 
-##### Tiller ShB incidence - NRTE
-
-```{r TShB-N-inc, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
-ggplot(AUDPS,
-       aes(x = NRTE, y = TShB_inc_AUDPS)) +
-  geom_boxplot() +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
-  theme_bw() +
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  facet_grid(. ~ YEAR,
-             scales = "free_x")
-```
-
-##### Tiller ShB severity - WMGT
-
-```{r TShB-W-sev, fig.cap="Tiller sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight severity was rated on an unevenly spaced ordinal scale and converted to the mid-point percentage value to calculate the area under the disease progress stairs (AUDPS). Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
-ggplot(AUDPS,
+p8 <- ggplot(AUDPS,
        aes(x = WMGT, y = TShB_sev_AUDPS)) +
   geom_boxplot() +
-  geom_point() +
+  ylab("Tiller Severity AUDPS") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.title.x = element_blank()) +
+  facet_grid(. ~ YEAR,
+             scales = "free_x")
+
+p9 <- ggplot(AUDPS,
+       aes(x = WMGT, y = LShB_sev_AUDPS)) +
+  geom_boxplot() +
   xlab("Treatment") +
-  ylab("AUDPS") +
+  ylab("Leaf Severity AUDPS") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
   facet_grid(. ~ YEAR,
              scales = "free_x")
+
+grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 ```
 
-##### Tiller ShB severity - NRTE
+##### ShB boxplot - NRTE
 
-```{r TShB-N-sev, fig.cap="Tiller sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight severity was rated on an unevenly spaced ordinal scale and converted to the mid-point percentage value to calculate the area under the disease progress stairs (AUDPS). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
-ggplot(AUDPS,
-       aes(x = NRTE, y = TShB_sev_AUDPS)) +
+```{r TShB-N-sev, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points.  Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+p10 <- ggplot(AUDPS,
+              aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
-  geom_point() +
   xlab("Treatment") +
-  ylab("AUDPS") +
+  ylab("Tiller Incidence AUDPS") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.title.x = element_blank()) +
+  facet_grid(. ~ YEAR,
+             scales = "free_x")
+
+p11 <- ggplot(AUDPS,
+              aes(x = NRTE, y = TShB_percent_AUDPS)) +
+  geom_boxplot() +
+  ylab("Tiller Severity AUDPS") +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.title.x = element_blank()) +
+  facet_grid(. ~ YEAR,
+             scales = "free_x")
+
+p12 <- ggplot(AUDPS,
+              aes(x = NRTE, y = LShB_percent_AUDPS)) +
+  geom_boxplot() +
+  xlab("Treatment") +
+  ylab("Leaf Severity AUDPS") +
   theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
   facet_grid(. ~ YEAR,
              scales = "free_x")
-```
 
-##### Leaf ShB severity - WMGT
-
-```{r LShB-W-sev, fig.cap="Leaf sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight severity was rated on an unevenly spaced ordinal scale and converted to the mid-point percentage value to calculate the area under the disease progress stairs (AUDPS). Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
-ggplot(AUDPS,
-       aes(x = WMGT, y = LShB_percent_AUDPS)) +
-  geom_boxplot() +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
-  theme_bw() +
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  facet_grid(. ~ YEAR,
-             scales = "free_x")
-```
-
-##### Leaf ShB severity - NRTE
-
-```{r LShB-N-sev, fig.cap="Leaf sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight severity was rated on an unevenly spaced ordinal scale and converted to the mid-point percentage value to calculate the area under the disease progress stairs (AUDPS). Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
-ggplot(AUDPS,
-       aes(x = NRTE, y = LShB_percent_AUDPS)) +
-  geom_boxplot() +
-  geom_point() +
-  xlab("Treatment") +
-  ylab("AUDPS") +
-  theme_bw() +
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  facet_grid(. ~ YEAR,
-             scales = "free_x")
+grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
 ##### pagebreak
