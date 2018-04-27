@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rice.awd.pests</title>
+<title>MCMCglmm results table — mcmc_table • rice.awd.pests</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,7 +28,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="MCMCglmm results table — mcmc_table" />
+
+<meta property="og:description" content="Generate a table of MCMCglmm results" />
+<meta name="twitter:card" content="summary" />
 
 
 <!-- mathjax -->
@@ -43,7 +46,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -110,71 +113,49 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>MCMCglmm results table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/openplantpathology/rice_awd_pests/blob/master/R/mcmc_table.R'><code>R/mcmc_table.R</code></a></small>
+    <div class="hidden name"><code>mcmc_table.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Generate a table of MCMCglmm results</p>
+    
+    </div>
 
-    <colgroup>
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        <!--  -->
-        <td>
-          <p><code><a href="AUDPS.html">AUDPS</a></code> </p>
-        </td>
-        <td><p>A Tidy Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations</p></td>
-      </tr><tr>
-        <!--  -->
-        <td>
-          <p><code><a href="N_rates.html">N_rates</a></code> </p>
-        </td>
-        <td><p>A data.frame of Nitrogen Rates and Split Application Timings</p></td>
-      </tr><tr>
-        <!--  -->
-        <td>
-          <p><code><a href="RAW_data.html">RAW_data</a></code> </p>
-        </td>
-        <td><p>A Tidy Data frame of Raw Data for Sheath Blight Observations</p></td>
-      </tr><tr>
-        <!--  -->
-        <td>
-          <p><code><a href="mcmc_table.html">mcmc_table()</a></code> </p>
-        </td>
-        <td><p>MCMCglmm results table</p></td>
-      </tr><tr>
-        <!--  -->
-        <td>
-          <p><code><a href="plot_mcmc_glmm.html">plot_diagnostic_lines()</a></code> <code><a href="plot_mcmc_glmm.html">plot_replicate_posteriors()</a></code> <code><a href="plot_mcmc_glmm.html">plot_treatment_posteriors()</a></code> <code><a href="plot_mcmc_glmm.html">plot_joint_random_error_dist()</a></code> </p>
-        </td>
-        <td><p>MCMCglmm diagnostic plots</p></td>
-      </tr><tr>
-        <!--  -->
-        <td>
-          <p><code><a href="rice.awd.pests-package.html">rice.awd.pests-package</a></code> </p>
-        </td>
-        <td><p>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight and Insect Populations</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>mcmc_table</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An MCMCglmm model</p></td>
+    </tr>
     </table>
-  </div>
+    
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>mcmc_table</span>(<span class='no'>MCMC_model</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Adam H Sparks, <a href='mailto:adamhsparks@gmail.com'>adamhsparks@gmail.com</a>
+
   </div>
 </div>
 

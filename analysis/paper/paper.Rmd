@@ -198,6 +198,8 @@ kable(N_rates,
 
 ```
 
+##### pagebreak
+
 ```{r MCMC-table}
 MCMC_table <- readRDS("../data/derived_data/MCMC_table.Rds")
 kable(MCMC_table,
@@ -208,7 +210,7 @@ kable(MCMC_table,
 
 # Figures {-}
 
-```{r tiller-ShB-w-progress, fig.cap="Tiller sheath blight progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
+```{r ShB-W-progress, fig.cap="Sheath blight progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
 
 p1 <- ggplot(RAW_data,
        aes(x = DAI,
@@ -295,7 +297,7 @@ grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 
 ##### Tiller ShB N progress
 
-```{r tiller-ShB-N-progress, fig.cap="Tiller sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
+```{r ShB-N-progress, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
 
 p4 <- ggplot(RAW_data,
              aes(x = DAI,
@@ -382,7 +384,7 @@ grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - WMGT
 
-```{r TShB-W-inc, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+```{r ShB-W-inc, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
 p7 <- ggplot(AUDPS,
              aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
@@ -424,7 +426,7 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - NRTE
 
-```{r TShB-N-sev, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points.  Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r ShB-N-sev, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points.  Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
 p10 <- ggplot(AUDPS,
               aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
