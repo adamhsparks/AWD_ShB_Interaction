@@ -63,10 +63,12 @@ size of 5000 and much smaller errors for random effects and better models.
 Use `set.seed()` for reproducibility.
 
 ```{r set_seed}
-library("rice.awd.pests")
-library("reshape2")
-library("MCMCglmm")
-library("plotMCMC")
+library(dplyr)
+library(rice.awd.pests)
+library(reshape2)
+library(magrittr)
+library(MCMCglmm)
+library(plotMCMC)
 
 set.seed(27)
 ```
@@ -100,7 +102,7 @@ Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start t
 ```{r 2015_TShB_incidence, cache=FALSE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+m1 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
                                     random = ~REP, 
                           data = AUDPS_2015,
                           verbose = FALSE,
@@ -110,17 +112,17 @@ TShB_incidence_lmm_2015 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(TShB_incidence_lmm_2015)
+summary(m1)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2015$Sol[, c(1, 5:8)])
+reps <- data.frame(m1$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_incidence_lmm_2015$Sol[, 2:4])
+trts <-  data.frame(m1$Sol[, 2:4])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_incidence_lmm_2015$Sol)
+x <- 1:nrow(m1$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -141,10 +143,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
 
 # check random effects
-plotTrace(TShB_incidence_lmm_2015$VCV, log = TRUE)
+plotTrace(m1$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_incidence_lmm_2015$VCV)
+rdf <- data.frame(m1$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
@@ -154,7 +156,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2015_TShB_severity, cache=FALSE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+m2 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                                     random = ~REP, 
                           data = AUDPS_2015,
                           verbose = FALSE,
@@ -164,17 +166,17 @@ TShB_severity_lmm_2015 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(TShB_severity_lmm_2015)
+summary(m2)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2015$Sol[, c(1, 5:8)])
+reps <- data.frame(m2$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_severity_lmm_2015$Sol[, 2:4])
+trts <-  data.frame(m2$Sol[, 2:4])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_severity_lmm_2015$Sol)
+x <- 1:nrow(m2$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -195,10 +197,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Tiller ShB Severity")
 
 # check random effects
-plotTrace(TShB_severity_lmm_2015$VCV, log = TRUE)
+plotTrace(m2$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_severity_lmm_2015$VCV)
+rdf <- data.frame(m2$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Tiller ShB Severity"))
 ```
@@ -208,7 +210,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2015_LShB_severity, cache=FALSE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+m3 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                                     random = ~REP, 
                           data = AUDPS_2015,
                           verbose = FALSE,
@@ -218,17 +220,17 @@ LShB_severity_lmm_2015 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(LShB_severity_lmm_2015)
+summary(m3)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_severity_lmm_2015$Sol[, c(1, 5:8)])
+reps <- data.frame(m3$Sol[, c(1, 5:8)])
 reps <- melt(reps)
 
-trts <-  data.frame(LShB_severity_lmm_2015$Sol[, 2:4])
+trts <-  data.frame(m3$Sol[, 2:4])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(LShB_severity_lmm_2015$Sol)
+x <- 1:nrow(m3$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -249,10 +251,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2015 Posteriors for Treatments, Leaf ShB Severity")
 
 # check random effects
-plotTrace(LShB_severity_lmm_2015$VCV, log = TRUE)
+plotTrace(m3$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(LShB_severity_lmm_2015$VCV)
+rdf <- data.frame(m3$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2015 Random Error Distribution for Leaf ShB Severity"))
 ```
@@ -264,11 +266,10 @@ plot_joint_random_error_dist(d = rdf,
 ### 2016 Tiller Sheath Blight Incidence Model
 
 ```{r 2016_TShB_incidence, cache=FALSE}
-
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
 
-TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE, 
+m4 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE, 
                                     random = ~REP, 
                           data = AUDPS_2016,
                           verbose = FALSE,
@@ -278,17 +279,17 @@ TShB_incidence_lmm_2016 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(TShB_incidence_lmm_2016)
+summary(m4)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_incidence_lmm_2016$Sol[, c(1, 4:7)])
+reps <- data.frame(m4$Sol[, c(1, 4:7)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_incidence_lmm_2016$Sol[, 2:3])
+trts <-  data.frame(m4$Sol[, 2:3])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_incidence_lmm_2016$Sol)
+x <- 1:nrow(m4$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -309,10 +310,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
 
 # check random effects
-plotTrace(TShB_incidence_lmm_2016$VCV, log = TRUE)
+plotTrace(m4$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_incidence_lmm_2016$VCV)
+rdf <- data.frame(m4$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
 ```
@@ -323,7 +324,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2016_TShB_severity, cache=FALSE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+m5 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                                     random = ~REP, 
                           data = AUDPS_2016,
                           verbose = FALSE,
@@ -333,17 +334,17 @@ TShB_severity_lmm_2016 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(TShB_severity_lmm_2016)
+summary(m5)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(TShB_severity_lmm_2016$Sol[, c(1, 4:7)])
+reps <- data.frame(m5$Sol[, c(1, 4:7)])
 reps <- melt(reps)
 
-trts <-  data.frame(TShB_severity_lmm_2016$Sol[, 2:3])
+trts <-  data.frame(m5$Sol[, 2:3])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(TShB_severity_lmm_2016$Sol)
+x <- 1:nrow(m5$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -364,10 +365,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Tiller ShB Severity")
 
 # check random effects
-plotTrace(TShB_severity_lmm_2016$VCV, log = TRUE)
+plotTrace(m5$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(TShB_severity_lmm_2016$VCV)
+rdf <- data.frame(m5$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Tiller ShB Severity"))
 ```
@@ -377,7 +378,7 @@ plot_joint_random_error_dist(d = rdf,
 ```{r 2016_LShB_severity, cache=FALSE}
 eprior <- list(R = list(V = 1, nu = 0.02),
                G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+m6 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                                     random = ~REP, 
                           data = AUDPS_2016,
                           verbose = FALSE,
@@ -387,17 +388,17 @@ LShB_severity_lmm_2016 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
                           thin = 10,
                           pr = TRUE)
 
-summary(LShB_severity_lmm_2016)
+summary(m6)
 
 # create data frames for generating diagnostic plots
-reps <- data.frame(LShB_severity_lmm_2016$Sol[, c(1, 4:7)])
+reps <- data.frame(m6$Sol[, c(1, 4:7)])
 reps <- melt(reps)
 
-trts <-  data.frame(LShB_severity_lmm_2016$Sol[, 2:3])
+trts <-  data.frame(m6$Sol[, 2:3])
 trts <- melt(trts)
 
 # Create a dummy x-axis variable for plotting
-x <- 1:nrow(LShB_severity_lmm_2016$Sol)
+x <- 1:nrow(m6$Sol)
 
 # diagnostic line plots for replicate
 plot_diagnostic_lines(d = reps,
@@ -418,10 +419,10 @@ plot_treatment_posteriors(d = trts,
                           title = "2016 Posteriors for Treatments, Leaf ShB Severity")
 
 # check random effects
-plotTrace(LShB_severity_lmm_2016$VCV, log = TRUE)
+plotTrace(m6$VCV, log = TRUE)
 
 # plot joint distibution of error
-rdf <- data.frame(LShB_severity_lmm_2016$VCV)
+rdf <- data.frame(m6$VCV)
 plot_joint_random_error_dist(d = rdf,
                              title = ("2016 Random Error Distribution for Leaf ShB Severity"))
 ```
@@ -453,3 +454,35 @@ In 2016 the N180 was significantly different from the N60 rate. The AWD water ma
 In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.
 
 In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
+
+# Create table for paper
+
+The last step is to create a `data.frame` of model information for the paper. 
+
+```{r mcmc_table, message=FALSE}
+
+tables_list <-
+  list(
+    `2015 Tiller Incidence` = m1,
+    `2015 Tiller Severity` = m2,
+    `2015 Leaf Severity` = m3,
+    `2016 Tiller Incidence` = m4,
+    `2016 Tiller Severity` = m5,
+    `2016 Leaf Severity` = m6
+  )
+
+pub_table <- vector("list", 6)
+
+for (i in tables_list) {
+  x <- mcmc_table(i)
+  pub_table[[i]] <- x
+  
+}
+  
+  pub_table <- bind_rows(pub_table)
+
+pub_table
+
+
+
+```
