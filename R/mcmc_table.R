@@ -15,14 +15,13 @@
 
 mcmc_table <- function(x) {
   sols <- summary(x)$solutions[-1, -4]
+  sols[, c(1:3)] <- round(sols[, c(1:3)], 3)
 
-  DV <- c(deparse(substitute(x)), rep(" ", nrow(sols) - 1))
   Predictors <- row.names(sols)
   DIC <- c(round(x$DIC, 2), rep(" ", nrow(sols) - 1))
 
-  y <- data.frame(DV, Predictors, sols, DIC)
-  names(y) <- c("Dependent Variable",
-                "Predictors",
+  y <- data.frame(Predictors, sols, DIC)
+  names(y) <- c("Predictors",
                 "Post Mean",
                 "Lower 95% CI",
                 "Upper 95% CI",

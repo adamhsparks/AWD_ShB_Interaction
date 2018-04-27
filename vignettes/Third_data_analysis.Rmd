@@ -69,6 +69,7 @@ library(reshape2)
 library(magrittr)
 library(MCMCglmm)
 library(plotMCMC)
+library(tidyr)
 
 set.seed(27)
 ```
@@ -457,32 +458,32 @@ In 2016 the neither of the treatments, nitrogen rate or water management, were s
 
 # Create table for paper
 
-The last step is to create a `data.frame` of model information for the paper. 
+The last step is to create a `data.frame` of model information for the paper as an `Rds` object to be loaded when knitting the Word document.
 
-```{r mcmc_table, message=FALSE}
+```{r mcmc_table, message=FALSE, warning=FALSE}
 
 tables_list <-
   list(
-    `2015 Tiller Incidence` = m1,
-    `2015 Tiller Severity` = m2,
-    `2015 Leaf Severity` = m3,
-    `2016 Tiller Incidence` = m4,
-    `2016 Tiller Severity` = m5,
-    `2016 Leaf Severity` = m6
+    `Tiller Incidence 2015` = m1,
+    `Tiller Severity 2015` = m2,
+    `Leaf Severity 2015` = m3,
+    `Tiller Incidence 2016` = m4,
+    `Tiller Severity 2016` = m5,
+    `Leaf Severity 2016` = m6
   )
 
-pub_table <- vector("list", 6)
+doc_table <- lapply(tables_list, mcmc_table) %>% 
+  bind_rows(.id = "Dependent Variable") %>%
+  separate(`Dependent Variable`,
+           into = c("Dependent Variable", "Year"), 
+           sep = "(?<=[A-Za-z])(?<=[A-Za-z]) (?=[0-9])"
+           )
 
-for (i in tables_list) {
-  x <- mcmc_table(i)
-  pub_table[[i]] <- x
-  
-}
-  
-  pub_table <- bind_rows(pub_table)
+# Set blanks to not repeat dependent variables all the way down using DIC
+doc_table[, 1] <- ifelse(doc_table[, 8] == " ", " ", doc_table[, 1])
 
-pub_table
+doc_table
 
-
+saveRDS(doc_table, file = "../analysis/data/derived_data/MCMC_table.Rds")
 
 ```
