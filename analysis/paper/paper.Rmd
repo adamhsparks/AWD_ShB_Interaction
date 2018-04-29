@@ -216,7 +216,7 @@ p1 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "Irrigation",
        shape = "Irrigation") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
@@ -247,7 +247,7 @@ p2 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "Irrigation",
        shape = "Irrigation") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -272,7 +272,7 @@ p3 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "Irrigation",
        shape = "Irrigation") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -302,7 +302,7 @@ p4 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "N Rate",
        shape = "N Rate") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
@@ -334,7 +334,7 @@ p5 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "N Rate",
        shape = "N Rate") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -359,7 +359,7 @@ p6 <- ggplot(RAW_data,
              scales = "free_x") +
   labs(linetype = "N Rate",
        shape = "N Rate") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -375,7 +375,7 @@ p7 <- ggplot(AUDPS,
              aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
   ylab("Tiller Incidence AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -387,7 +387,7 @@ p8 <- ggplot(AUDPS,
        aes(x = WMGT, y = TShB_sev_AUDPS)) +
   geom_boxplot() +
   ylab("Tiller Severity AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -400,7 +400,7 @@ p9 <- ggplot(AUDPS,
   geom_boxplot() +
   xlab("Treatment") +
   ylab("Leaf Severity AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
@@ -418,7 +418,7 @@ p10 <- ggplot(AUDPS,
   geom_boxplot() +
   xlab("Treatment") +
   ylab("Tiller Incidence AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -430,7 +430,7 @@ p11 <- ggplot(AUDPS,
               aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot() +
   ylab("Tiller Severity AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -443,7 +443,7 @@ p12 <- ggplot(AUDPS,
   geom_boxplot() +
   xlab("Treatment") +
   ylab("Leaf Severity AUDPS") +
-  theme_bw() +
+  theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) +
