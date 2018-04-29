@@ -151,19 +151,21 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">set.seed</span>(<span class="dv">27</span>)</a></code></pre></div>
 <p>The <code>AUDPS</code> object is loaded with the <code>rice.awd.pests</code> R package. To see how the AUDPC data were generated from the original raw data, see the <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw" class="uri">https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw</a> file. However, because it is a <code><a href="http://dplyr.tidyverse.org/reference/reexports.html">tibble()</a></code> and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.</p>
 <p>Create individual data frames for the analysis.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, ])</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2015</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N0"</span>))</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>, ])</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2016</span>)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># create 2015 data frame</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, ])</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2015</span>)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N0"</span>))</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">AUDPS_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2015</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co"># create 2016 data frame</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(AUDPS[AUDPS<span class="op">$</span>YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>, ])</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">droplevels</span>(AUDPS_<span class="dv">2016</span>)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw">relevel</span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">within</span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw">relevel</span>(WMGT, <span class="dt">ref =</span> <span class="st">"FLD"</span>))</a></code></pre></div>
 <p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> <code>data.frames()</code> exist, we can start the analysis.</p>
 </div>
 <div id="specify-priors" class="section level2">
@@ -171,7 +173,7 @@
 <a href="#specify-priors" class="anchor"></a>Specify Priors</h2>
 <p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat noninformative priors that have a uniform low degree of belief in all parameters for all six models we will create.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>),</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">alpha.mu =</span> <span class="dv">0</span>, <span class="dt">alpha.V =</span> <span class="dv">25</span><span class="op">^</span><span class="dv">2</span>)))</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>( <span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">alpha.mu =</span> <span class="dv">0</span>, <span class="dt">alpha.V =</span> <span class="dv">25</span><span class="op">^</span><span class="dv">2</span>)))</a></code></pre></div>
 </div>
 <div id="models" class="section level2">
 <h2 class="hasAnchor">
@@ -187,14 +189,137 @@
 <a class="sourceLine" id="cb5-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">m1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m1, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">m1 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m1)</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw">summary</span>(m1)</a></code></pre></div>
+<a class="sourceLine" id="cb5-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">m1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m1, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">m1 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m1)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw">summary</span>(m1)</a></code></pre></div>
+<pre><code>## 
+## Iterations = 5001:54991
+## Thinning interval = 10 
+## Number of chains = 4 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##               Mean     SD Naive SE Time-series SE
+## (Intercept) 1.1426 0.6411 0.004533       0.004245
+## WMGTAWD     0.1237 0.1712 0.001211       0.001225
+## NRTEN100    0.6260 0.2111 0.001492       0.001499
+## NRTEN120    1.0017 0.2101 0.001486       0.001467
+## 
+## 2. Quantiles for each variable:
+## 
+##                2.5%     25%    50%    75%  97.5%
+## (Intercept)  0.1026 0.91113 1.1435 1.3775 2.2052
+## WMGTAWD     -0.2143 0.00888 0.1239 0.2378 0.4628
+## NRTEN100     0.2157 0.48274 0.6264 0.7707 1.0411
+## NRTEN120     0.5912 0.86108 1.0025 1.1399 1.4165</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m1)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##             Point est. Upper C.I.
+## (Intercept)          1          1
+## WMGTAWD              1          1
+## NRTEN100             1          1
+## NRTEN120             1          1
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m1)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
+</div>
+<div id="tiller-sheath-blight-severity-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="kw">summary</span>(m2)</a></code></pre></div>
+<pre><code>## 
+## Iterations = 5001:54991
+## Thinning interval = 10 
+## Number of chains = 4 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##              Mean    SD Naive SE Time-series SE
+## (Intercept) 13.49 6.774  0.04790        0.04809
+## WMGTAWD      4.75 4.443  0.03142        0.03142
+## NRTEN100    26.27 5.555  0.03928        0.03831
+## NRTEN120    41.24 5.510  0.03896        0.03793
+## 
+## 2. Quantiles for each variable:
+## 
+##               2.5%    25%    50%    75% 97.5%
+## (Intercept)  1.007  9.677 13.450 17.260 26.05
+## WMGTAWD     -4.017  1.734  4.771  7.712 13.35
+## NRTEN100    15.284 22.624 26.278 29.942 37.36
+## NRTEN120    30.352 37.605 41.261 44.913 51.99</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##             Point est. Upper C.I.
+## (Intercept)          1          1
+## WMGTAWD              1          1
+## NRTEN100             1          1
+## NRTEN120             1          1
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m2)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
+</div>
+<div id="leaf-sheath-blight-severity-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="kw">summary</span>(m3)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -205,150 +330,39 @@
 ##    plus standard error of the mean:
 ## 
 ##                Mean     SD Naive SE Time-series SE
-## (Intercept)  1.1420 0.7251 0.005127       0.004682
-## WMGTAWD      0.1223 0.1723 0.001219       0.001219
-## NRTEN100     0.6225 0.2104 0.001488       0.001488
-## NRTEN120     1.0006 0.2108 0.001490       0.001481
-## REP.1        0.4325 0.7203 0.005093       0.004551
-## REP.2        0.1550 0.7178 0.005076       0.004591
-## REP.3       -0.2189 0.7182 0.005078       0.004559
-## REP.4       -0.3569 0.7174 0.005073       0.004467
+## (Intercept) 1.79986 4.0658 0.028750       0.028854
+## WMGTAWD     0.04002 0.6074 0.004295       0.004228
+## NRTEN100    4.54091 0.7557 0.005344       0.005344
+## NRTEN120    4.98944 0.7443 0.005263       0.005263
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                 2.5%       25%     50%       75%  97.5%
-## (Intercept)  0.07758  0.912149  1.1408  1.378678 2.2097
-## WMGTAWD     -0.21991  0.007343  0.1209  0.237915 0.4616
-## NRTEN100     0.20655  0.482881  0.6238  0.763298 1.0355
-## NRTEN120     0.58761  0.859290  1.0003  1.138744 1.4208
-## REP.1       -0.57433  0.193294  0.4083  0.652895 1.5369
-## REP.2       -0.88607 -0.063352  0.1409  0.368581 1.2135
-## REP.3       -1.31181 -0.435315 -0.2046  0.003602 0.7936
-## REP.4       -1.46364 -0.574373 -0.3358 -0.125146 0.6470</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m1)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
-</div>
-<div id="tiller-sheath-blight-severity-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb10-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="kw">summary</span>(m2)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
+##               2.5%      25%     50%    75% 97.5%
+## (Intercept) -6.156  0.06537 1.83805 3.6153 9.426
+## WMGTAWD     -1.158 -0.36944 0.04245 0.4513 1.232
+## NRTEN100     3.074  4.02649 4.54250 5.0437 6.033
+## NRTEN120     3.513  4.49645 4.99496 5.4921 6.425</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m3)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
 ## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
+##             Point est. Upper C.I.
+## (Intercept)          1          1
+## WMGTAWD              1          1
+## NRTEN100             1          1
+## NRTEN120             1          1
 ## 
-##               Mean    SD Naive SE Time-series SE
-## (Intercept) 13.468 6.483  0.04584        0.04664
-## WMGTAWD      4.745 4.494  0.03178        0.03178
-## NRTEN100    26.169 5.543  0.03919        0.03915
-## NRTEN120    41.188 5.509  0.03895        0.03957
-## REP.1        2.313 5.578  0.03944        0.03923
-## REP.2       -1.044 5.418  0.03831        0.03746
-## REP.3        2.686 5.629  0.03981        0.03957
-## REP.4       -3.776 5.822  0.04117        0.04100
+## Multivariate psrf
 ## 
-## 2. Quantiles for each variable:
-## 
-##                2.5%     25%     50%     75%  97.5%
-## (Intercept)   1.022  9.7172 13.4786 17.2615 25.839
-## WMGTAWD      -4.063  1.7379  4.7682  7.7230 13.570
-## NRTEN100     15.240 22.4822 26.2836 29.9296 36.896
-## NRTEN120     30.412 37.5161 41.2120 44.8290 51.991
-## REP.1        -7.279 -0.4128  1.4587  4.6893 14.834
-## REP.2       -12.297 -3.3537 -0.5969  1.2526  9.417
-## REP.3        -6.587 -0.2191  1.7351  5.1690 15.303
-## REP.4       -16.921 -6.6027 -2.7405 -0.1763  5.015</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m2)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
-</div>
-<div id="leaf-sheath-blight-severity-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb15-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb15-14" data-line-number="14">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="kw">summary</span>(m3)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##                 Mean     SD Naive SE Time-series SE
-## (Intercept)  1.85487 4.1603 0.029418       0.030694
-## WMGTAWD      0.03498 0.6122 0.004329       0.004329
-## NRTEN100     4.54702 0.7474 0.005285       0.005244
-## NRTEN120     4.98666 0.7454 0.005270       0.005270
-## REP.1       -1.92537 4.1499 0.029344       0.030325
-## REP.2        5.22931 4.1526 0.029363       0.032260
-## REP.3       -0.80926 4.1500 0.029345       0.029846
-## REP.4       -2.67871 4.1506 0.029349       0.030446
-## 
-## 2. Quantiles for each variable:
-## 
-##                2.5%      25%      50%     75%  97.5%
-## (Intercept)  -6.113  0.08384  1.85489  3.5556  9.639
-## WMGTAWD      -1.160 -0.37271  0.03529  0.4430  1.247
-## NRTEN100      3.086  4.04857  4.54256  5.0432  6.010
-## NRTEN120      3.551  4.48336  4.98529  5.4912  6.449
-## REP.1        -9.737 -3.62615 -1.89502 -0.1767  5.970
-## REP.2        -2.565  3.50861  5.18805  6.9725 13.245
-## REP.3        -8.632 -2.51061 -0.79582  0.9263  7.291
-## REP.4       -10.626 -4.38187 -2.63676 -0.9274  5.319</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+## 1</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m3)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m3)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
 <hr>
 </div>
 </div>
@@ -358,22 +372,21 @@
 <div id="tiller-sheath-blight-incidence-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb20-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb20-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb20-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb20-13" data-line-number="13">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb20-14" data-line-number="14">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
-<a class="sourceLine" id="cb20-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="kw">summary</span>(m4)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb23-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb23-13" data-line-number="13">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
+<a class="sourceLine" id="cb23-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="kw">summary</span>(m4)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -383,53 +396,56 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                 Mean     SD Naive SE Time-series SE
-## (Intercept) 10.55075 1.3116 0.009274       0.008957
-## WMGTAWD      0.36830 0.2458 0.001738       0.001753
-## NRTEN180     1.96016 0.2451 0.001733       0.001802
-## REP.1       -0.99429 1.3142 0.009293       0.009220
-## REP.2       -0.01533 1.3135 0.009288       0.009039
-## REP.3       -0.25026 1.3136 0.009289       0.008968
-## REP.4        1.22094 1.3139 0.009291       0.008943
+##                Mean     SD Naive SE Time-series SE
+## (Intercept) 10.5247 1.3491 0.009539       0.010021
+## WMGTAWD      0.3679 0.2463 0.001742       0.001783
+## NRTEN180     1.9588 0.2495 0.001764       0.001771
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                2.5%     25%       50%     75%   97.5%
-## (Intercept)  8.1519 10.0517 10.550502 11.0411 12.9505
-## WMGTAWD     -0.1211  0.2047  0.365517  0.5349  0.8543
-## NRTEN180     1.4752  1.7976  1.961520  2.1232  2.4390
-## REP.1       -3.4313 -1.4712 -0.965370 -0.4817  1.3623
-## REP.2       -2.3354 -0.5099 -0.009065  0.4881  2.3726
-## REP.3       -2.6441 -0.7374 -0.235438  0.2495  2.1138
-## REP.4       -1.1529  0.7211  1.204301  1.7190  3.6630</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+##                2.5%     25%     50%     75%   97.5%
+## (Intercept)  8.1006 10.0470 10.5411 11.0284 12.8523
+## WMGTAWD     -0.1152  0.2024  0.3695  0.5325  0.8524
+## NRTEN180     1.4679  1.7934  1.9574  2.1258  2.4517</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##             Point est. Upper C.I.
+## (Intercept)       1.01       1.01
+## WMGTAWD           1.00       1.00
+## NRTEN180          1.00       1.00
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m4)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m4)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">m5 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb24-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb24-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb24-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb24-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb24-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb24-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb24-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb24-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb24-13" data-line-number="13">m5 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m5, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb24-14" data-line-number="14">m5 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m5)</a>
-<a class="sourceLine" id="cb24-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb24-16" data-line-number="16"><span class="kw">summary</span>(m5)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">m5 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb29-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb29-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">m5 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m5, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb29-13" data-line-number="13">m5 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m5)</a>
+<a class="sourceLine" id="cb29-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb29-15" data-line-number="15"><span class="kw">summary</span>(m5)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -440,52 +456,55 @@
 ##    plus standard error of the mean:
 ## 
 ##               Mean    SD Naive SE Time-series SE
-## (Intercept) 32.031 8.395  0.05936        0.05857
-## WMGTAWD     -8.266 2.203  0.01558        0.01579
-## NRTEN180     4.755 2.187  0.01547        0.01545
-## REP.1       -9.154 8.398  0.05939        0.06002
-## REP.2        9.298 8.409  0.05946        0.05988
-## REP.3       -6.206 8.363  0.05914        0.05756
-## REP.4        6.088 8.408  0.05945        0.05987
+## (Intercept) 32.043 8.347  0.05902        0.05957
+## WMGTAWD     -8.235 2.196  0.01552        0.01554
+## NRTEN180     4.772 2.209  0.01562        0.01548
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                2.5%     25%    50%    75%  97.5%
-## (Intercept)  15.871  27.788 32.010 36.232 48.645
-## WMGTAWD     -12.572  -9.747 -8.235 -6.811 -3.977
-## NRTEN180      0.470   3.285  4.746  6.235  9.011
-## REP.1       -26.170 -13.276 -9.019 -4.882  6.933
-## REP.2        -7.029   5.009  9.177 13.505 26.092
-## REP.3       -23.084 -10.327 -6.137 -1.941  9.814
-## REP.4       -10.424   1.868  6.058 10.265 22.699</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+##                 2.5%    25%    50%    75%  97.5%
+## (Intercept)  15.5470 27.884 32.054 36.189 48.270
+## WMGTAWD     -12.5415 -9.710 -8.216 -6.779 -3.919
+## NRTEN180      0.4865  3.291  4.764  6.250  9.146</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##             Point est. Upper C.I.
+## (Intercept)          1          1
+## WMGTAWD              1          1
+## NRTEN180             1          1
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">plot</span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m5)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">plot</span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m5)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">m6 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb28-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb28-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb28-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb28-10" data-line-number="10">           <span class="dt">pr =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb28-11" data-line-number="11">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb28-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb28-13" data-line-number="13">m6 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m6, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb28-14" data-line-number="14">m6 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m6)</a>
-<a class="sourceLine" id="cb28-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb28-16" data-line-number="16"><span class="kw">summary</span>(m6)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">m6 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12">m6 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m6, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">m6 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m6)</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb35-15" data-line-number="15"><span class="kw">summary</span>(m6)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -495,33 +514,36 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                 Mean     SD  Naive SE Time-series SE
-## (Intercept)  1.24192 0.6679 0.0047229      0.0042899
-## WMGTAWD      0.13256 0.1257 0.0008885      0.0008956
-## NRTEN180     0.15824 0.1249 0.0008828      0.0008829
-## REP.1        0.07735 0.6700 0.0047376      0.0043034
-## REP.2        0.44616 0.6681 0.0047241      0.0042383
-## REP.3       -0.10985 0.6670 0.0047165      0.0042529
-## REP.4       -0.41551 0.6687 0.0047284      0.0041416
+##               Mean     SD  Naive SE Time-series SE
+## (Intercept) 1.2398 0.6160 0.0043557      0.0042124
+## WMGTAWD     0.1312 0.1249 0.0008830      0.0008983
+## NRTEN180    0.1552 0.1264 0.0008935      0.0008695
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                 2.5%      25%      50%      75%  97.5%
-## (Intercept)  0.19920  1.03451  1.23841  1.44521 2.2641
-## WMGTAWD     -0.11559  0.04757  0.13479  0.21614 0.3780
-## NRTEN180    -0.08666  0.07458  0.15947  0.24065 0.4054
-## REP.1       -0.93106 -0.12373  0.07691  0.28370 1.1306
-## REP.2       -0.54154  0.23643  0.43343  0.64747 1.5050
-## REP.3       -1.13393 -0.30490 -0.10616  0.09468 0.9290
-## REP.4       -1.46911 -0.61595 -0.40007 -0.20006 0.5932</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+##                 2.5%     25%    50%    75% 97.5%
+## (Intercept)  0.26881 1.03629 1.2422 1.4474 2.208
+## WMGTAWD     -0.11252 0.04752 0.1300 0.2139 0.379
+## NRTEN180    -0.09303 0.07051 0.1552 0.2389 0.403</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m6)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##             Point est. Upper C.I.
+## (Intercept)       1.07       1.07
+## WMGTAWD           1.00       1.00
+## NRTEN180          1.00       1.00
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">plot</span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m6)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">plot</span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m6)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"></p>
 </div>
 <div id="model-fit" class="section level3">

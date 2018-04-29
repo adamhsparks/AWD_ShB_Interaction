@@ -4,6 +4,11 @@ Clean 2015 Raw Data
 The raw data are located in the `data` folder of the installed
 *rice.awd.pests*
 
+*Note* TRT is created here as a combination of the main plot/split plot
+treatment. This is used in place of plot numbers to keep the data in
+order. However, it is not used in the final analysis as a treatment
+effect.
+
 # 2015 experiment
 
 ``` r
@@ -996,7 +1001,7 @@ sessioninfo::session_info()
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2018-04-26                  
+    ##  date     2018-04-29                  
     ## 
     ## ─ Packages ──────────────────────────────────────────────────────────────
     ##  package     * version date       source        
@@ -1039,7 +1044,7 @@ sessioninfo::session_info()
     ##  mime          0.5     2016-07-07 CRAN (R 3.5.0)
     ##  miniUI        0.1.1   2016-01-15 CRAN (R 3.5.0)
     ##  nlme          3.1-137 2018-04-07 CRAN (R 3.5.0)
-    ##  pillar        1.2.1   2018-02-27 CRAN (R 3.5.0)
+    ##  pillar        1.2.2   2018-04-26 cran (@1.2.2) 
     ##  pkgconfig     2.0.1   2017-03-21 CRAN (R 3.5.0)
     ##  plyr          1.8.4   2016-06-08 CRAN (R 3.5.0)
     ##  promises      1.0.1   2018-04-13 CRAN (R 3.5.0)

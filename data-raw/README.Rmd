@@ -10,6 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 The raw data are located in the `data` folder of the installed
 _rice.awd.pests_ 
 
+*Note* TRT is created here as a combination of the main plot/split plot
+treatment. This is used in place of plot numbers to keep the data in order.
+However, it is not used in the final analysis as a treatment effect.
+
 # 2015 experiment
 
 ```{r}
