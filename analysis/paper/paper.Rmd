@@ -128,11 +128,9 @@ Disease rating was the same in both experiments using the same disease assessmen
 
 ### Statistical Analysis {-}
 
-Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range for severity. Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity.
+Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range.
 
-As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using multivariate generalised linear mixed models implemented in the `MCMCglmm` package [@MCMCglmm2010] in the R programming environment [@R2018].
-
-For each measurement, e.g. 2015 tiller incidence, 2016 tiller incidence, a single MCMC chain was run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample, resulting in 5000 independent draws from the posterior distribution of the parameters of the model. The model 
+As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@R2018; @MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and nitrogen rate and replicate was treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate, 0 kg/ha; irrigation management, FLD and for 2016 were: N rate, 60 kg/ha; irrigation management, FLD. Four MCMC chains were run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
 
 # Results {-}
 
@@ -173,10 +171,6 @@ The changes made for the 2016 experiment appear to have improved the experiment,
 
 # Notes {-}
 
-## Data and Code Availability
-
-All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
-
 ## Acknowledgments {-}
 
 The authors wish to thank Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in September 2016.
@@ -196,14 +190,6 @@ The authors wish to thank Rachel King of the University of Southern Queensland S
 kable(N_rates,
       caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages.")
 
-```
-
-##### pagebreak
-
-```{r MCMC-table}
-MCMC_table <- readRDS("../data/derived_data/MCMC_table.Rds")
-kable(MCMC_table,
-      caption = "MCMC fit")
 ```
 
 ##### pagebreak
