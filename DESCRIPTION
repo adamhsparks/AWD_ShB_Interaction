@@ -9,7 +9,9 @@ Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
     person("Bjoern Ole", "Sander", role = "aut",
     email = "b.sander@irri.org",
     comment = c(ORCID = "0000-0002-7967-6147")),
-    person("Michael", "Noel", role = "aut"))
+    person("Michael", "Noel", role = "aut"),
+    person("Titus", "von der Malsburg", role = "cph",
+    comment = c(ORCID = "0000-0001-5925-5145")))
 Description: Provides a research compendium of analysis associated with
     experiments conducted at the International Rice Research Institute (IRRI),
     Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The
@@ -23,6 +25,7 @@ LazyData: true
 Imports: agricolae,
     car,
     carData,
+    coda,
     dplyr (>= 0.7.0),
     fitdistrplus,
     forcats,
