@@ -81,22 +81,25 @@ The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the
 Create individual data frames for the analysis.
 
 ```{r create_analysis_df, cache=FALSE, message=FALSE}
+# create 2015 data frame
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of  analysis
-AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "0"))
+AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "FLD"))
 
+# create 2016 data frame
 AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of  analysis
-AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "60"))
+AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 ```
 
-Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start the analysis.
+Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start
+the analysis.
 
 ## Specify Priors
 
@@ -106,7 +109,7 @@ parameters for all six models we will create.
 
 ```{r priors}
 eprior <- list(R = list(V = 1, nu = 0.002),
-               G = list(G1 = list(V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)))
+               G = list(G1 = list( V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)))
 ```
 
 ## 2015 Models
