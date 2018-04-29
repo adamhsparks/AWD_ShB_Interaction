@@ -123,8 +123,7 @@ m1 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m1 <- lapply(m1, function(m) m$Sol)
@@ -154,8 +153,7 @@ m2 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m2 <- lapply(m2, function(m) m$Sol)
@@ -184,8 +182,7 @@ m3 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m3 <- lapply(m3, function(m) m$Sol)
@@ -218,8 +215,7 @@ m4 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m4 <- lapply(m4, function(m) m$Sol)
@@ -249,8 +245,7 @@ m5 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m5 <- lapply(m5, function(m) m$Sol)
@@ -279,8 +274,7 @@ m6 <- mclapply(1:4, function(i) {
            prior = eprior,
            nitt = 55000,,
            burnin = 5000,
-           thin = 10,
-           pr = TRUE)
+           thin = 10)
 }, mc.cores = 4)
 
 m6 <- lapply(m6, function(m) m$Sol)
