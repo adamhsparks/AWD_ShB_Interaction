@@ -62,12 +62,14 @@ size of 5000 and much smaller errors for random effects and better models.
 
 Use `set.seed()` for reproducibility.
 
-```{r set_seed}
+```{r set_seed, message=FALSE}
+library(coda)
 library(dplyr)
 library(rice.awd.pests)
 library(reshape2)
 library(magrittr)
 library(MCMCglmm)
+library(parallel)
 library(plotMCMC)
 library(tidyr)
 
@@ -78,7 +80,7 @@ The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the
 
 Create individual data frames for the analysis.
 
-```{r create_analysis_df, cache=FALSE}
+```{r create_analysis_df, cache=FALSE, message=FALSE}
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
@@ -96,168 +98,108 @@ AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 
 Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start the analysis.
 
+## Specify Priors
+
+As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
+flat noninformative priors that have a uniform low degree of belief in all
+parameters for all six models we will create.
+
+```{r priors}
+eprior <- list(R = list(V = 1, nu = 0.002),
+               G = list(G1 = list(V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)))
+```
+
 ## 2015 Models
 
 ### 2015 Tiller Sheath Blight Incidence Model
 
 ```{r 2015_TShB_incidence, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-m1 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+
+m1 <- mclapply(1:4, function(i) {
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m1 <- lapply(m1, function(m) m$Sol)
+m1 <- do.call(mcmc.list, m1)
 
 summary(m1)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m1$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m1, auto.layout = FALSE)
 
-trts <-  data.frame(m1$Sol[, 2:4])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m1, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m1$Sol)
+plot_estimates(m1)
 
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Incidence")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Incidence")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Tiller ShB Incidence")
-
-# check random effects
-plotTrace(m1$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m1$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Tiller ShB Incidence"))
 ```
 
 ### 2015 Tiller Sheath Blight Severity Model
 
 ```{r 2015_TShB_severity, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-m2 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+
+m2 <- mclapply(1:4, function(i) {
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m2 <- lapply(m2, function(m) m$Sol)
+m2 <- do.call(mcmc.list, m2)
 
 summary(m2)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m2$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m2, auto.layout = FALSE)
 
-trts <-  data.frame(m2$Sol[, 2:4])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m2, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m2$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Tiller ShB Severity")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Tiller ShB Severity")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Tiller ShB Severity")
-
-# check random effects
-plotTrace(m2$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m2$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Tiller ShB Severity"))
+plot_estimates(m2)
 ```
 
 ### 2015 Leaf Sheath Blight Severity Model
 
 ```{r 2015_LShB_severity, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-m3 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2015,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+
+m3 <- mclapply(1:4, function(i) {
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m3 <- lapply(m3, function(m) m$Sol)
+m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m3$Sol[, c(1, 5:8)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m3, auto.layout = FALSE)
 
-trts <-  data.frame(m3$Sol[, 2:4])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m3, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m3$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Replicates, Leaf ShB Severity")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2015 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2015 Diagnostic Plots for Treatments, Leaf ShB Severity")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2015 Posteriors for Treatments, Leaf ShB Severity")
-
-# check random effects
-plotTrace(m3$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m3$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2015 Random Error Distribution for Leaf ShB Severity"))
+plot_estimates(m3)
 ```
 
 *******
@@ -267,165 +209,92 @@ plot_joint_random_error_dist(d = rdf,
 ### 2016 Tiller Sheath Blight Incidence Model
 
 ```{r 2016_TShB_incidence, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
 
-m4 <- MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE, 
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+m4 <- mclapply(1:4, function(i) {
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m4 <- lapply(m4, function(m) m$Sol)
+m4 <- do.call(mcmc.list, m4)
 
 summary(m4)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m4$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m1, auto.layout = FALSE)
 
-trts <-  data.frame(m4$Sol[, 2:3])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m4, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m4$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Incidence")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Incidence")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Incidence")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Posteriors for Treatments, Tiller ShB Incidence")
-
-# check random effects
-plotTrace(m4$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m4$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Random Error Distribution for Tiller ShB Incidence"))
+plot_estimates(m4)
 ```
 
 
 ### 2016 Tiller Sheath Blight Severity Model
 
 ```{r 2016_TShB_severity, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-m5 <- MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+
+m5 <- mclapply(1:4, function(i) {
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m5 <- lapply(m5, function(m) m$Sol)
+m5 <- do.call(mcmc.list, m5)
 
 summary(m5)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m5$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m1, auto.layout = FALSE)
 
-trts <-  data.frame(m5$Sol[, 2:3])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m5, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m5$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Replicates, Tiller ShB Severity")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Reps Replicate Posteriors for Replicates, Tiller ShB Severity")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Treatments, Tiller ShB Severity")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Posteriors for Treatments, Tiller ShB Severity")
-
-# check random effects
-plotTrace(m5$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m5$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Random Error Distribution for Tiller ShB Severity"))
+plot_estimates(m5)
 ```
 
 ### 2016 Leaf Sheath Blight Severity Model
 
 ```{r 2016_LShB_severity, cache=FALSE}
-eprior <- list(R = list(V = 1, nu = 0.02),
-               G = list(G1 = list(V = 1, nu = 0.002, alpha.V = 1000)))
-m6 <- MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
-                                    random = ~REP, 
-                          data = AUDPS_2016,
-                          verbose = FALSE,
-                          prior = eprior,
-                          nitt = 55000,,
-                          burnin = 5000,
-                          thin = 10,
-                          pr = TRUE)
+
+m6 <- mclapply(1:4, function(i) {
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,,
+           burnin = 5000,
+           thin = 10,
+           pr = TRUE)
+}, mc.cores = 4)
+
+m6 <- lapply(m6, function(m) m$Sol)
+m6 <- do.call(mcmc.list, m6)
 
 summary(m6)
 
-# create data frames for generating diagnostic plots
-reps <- data.frame(m6$Sol[, c(1, 4:7)])
-reps <- melt(reps)
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m6, auto.layout = FALSE)
 
-trts <-  data.frame(m6$Sol[, 2:3])
-trts <- melt(trts)
+par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+plot(m6, ask = FALSE, auto.layout = FALSE)
 
-# Create a dummy x-axis variable for plotting
-x <- 1:nrow(m6$Sol)
-
-# diagnostic line plots for replicate
-plot_diagnostic_lines(d = reps,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Replicates, Leaf ShB Severity")
-
-# posterior distributions for replicate
-plot_replicate_posteriors(d = reps,
-                          title = "2016 Reps Replicate Posteriors for Replicates, Leaf ShB Severity")
-
-# diagnostic line plots for treatments
-plot_diagnostic_lines(d = trts,
-                      x = x,
-                      title = "2016 Diagnostic Plots for Treatments, Leaf ShB Severity")
-
-# Posterior distributions for treatment
-plot_treatment_posteriors(d = trts,
-                          title = "2016 Posteriors for Treatments, Leaf ShB Severity")
-
-# check random effects
-plotTrace(m6$VCV, log = TRUE)
-
-# plot joint distibution of error
-rdf <- data.frame(m6$VCV)
-plot_joint_random_error_dist(d = rdf,
-                             title = ("2016 Random Error Distribution for Leaf ShB Severity"))
+plot_estimates(m6)
 ```
 
 ### Model Fit
@@ -455,35 +324,3 @@ In 2016 the N180 was significantly different from the N60 rate. The AWD water ma
 In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.
 
 In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
-
-# Create table for paper
-
-The last step is to create a `data.frame` of model information for the paper as an `Rds` object to be loaded when knitting the Word document.
-
-```{r mcmc_table, message=FALSE, warning=FALSE}
-
-tables_list <-
-  list(
-    `Tiller Incidence 2015` = m1,
-    `Tiller Severity 2015` = m2,
-    `Leaf Severity 2015` = m3,
-    `Tiller Incidence 2016` = m4,
-    `Tiller Severity 2016` = m5,
-    `Leaf Severity 2016` = m6
-  )
-
-doc_table <- lapply(tables_list, mcmc_table) %>% 
-  bind_rows(.id = "Dependent Variable") %>%
-  separate(`Dependent Variable`,
-           into = c("Dependent Variable", "Year"), 
-           sep = "(?<=[A-Za-z])(?<=[A-Za-z]) (?=[0-9])"
-           )
-
-# Set blanks to not repeat dependent variables all the way down using DIC
-doc_table[, 1] <- ifelse(doc_table[, 8] == " ", " ", doc_table[, 1])
-
-doc_table
-
-saveRDS(doc_table, file = "../analysis/data/derived_data/MCMC_table.Rds")
-
-```
