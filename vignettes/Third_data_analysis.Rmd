@@ -85,14 +85,14 @@ AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of  analysis
-AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
+AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "FLD"))
 
 AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of  analysis
-AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
+AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 ```
 
@@ -134,7 +134,9 @@ summary(m1)
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m1, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m1)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m1)
@@ -164,7 +166,9 @@ summary(m2)
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m2, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m2)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m2)
@@ -193,7 +197,9 @@ summary(m3)
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m3)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m3)
@@ -224,9 +230,11 @@ m4 <- do.call(mcmc.list, m4)
 summary(m4)
 
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
-gelman.plot(m1, auto.layout = FALSE)
+gelman.plot(m4, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m4)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m4)
@@ -254,9 +262,11 @@ m5 <- do.call(mcmc.list, m5)
 summary(m5)
 
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
-gelman.plot(m1, auto.layout = FALSE)
+gelman.plot(m5, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m5)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m5, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m5)
@@ -285,7 +295,9 @@ summary(m6)
 par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m6, auto.layout = FALSE)
 
-par(mfrow = c(8,2), mar = c(2, 1, 1, 1))
+gelman.diag(m6)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m6, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m6)
