@@ -85,7 +85,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   xlab("Assessment") +
   ylab("Rating") +
   ggtitle("Leaf Sheath Blight Severity at Each Assessment") +
-  facet_grid(. ~ TRT) +
+  facet_grid(. ~ YEAR) +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
@@ -97,7 +97,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
              aes(colour = YEAR), size = 0.75) +
   xlab("Assessment") +
   ylab("Rating") +
-  facet_grid(. ~ TRT) +
+  facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity at Each Assessment") +
   theme(strip.text.x = element_text(angle = 90))
 ```
@@ -111,7 +111,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
              aes(colour = YEAR), size = 0.75) +
   xlab("Assessment") +
   ylab("Incidence") +
-  facet_grid(. ~ TRT) +
+  facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity Rating Over Time") +
   theme(strip.text.x = element_text(angle = 90)) +
   xlab("Assessment") +
@@ -122,7 +122,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
 # Violin/dot plots of tiller sheath blight incidence data
 
 ```{r, , cache=FALSE}
-ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
+ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   geom_point(position = position_jitter(width = 0.2),
              aes(colour = YEAR), size = 0.1) +
   geom_violin(fill = NA) +
@@ -131,6 +131,7 @@ ggplot(RAW_data, aes(x = TRT, y = TShB_incidence)) +
                                    hjust = 1)) +
   xlab("Treatment") +
   ylab("Incidence per Hill") +
+  facet_grid(. ~ NRTE)
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
