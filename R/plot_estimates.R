@@ -2,7 +2,7 @@
 #' @title Plot MCMCglmm estimates
 #'
 #' @description Plot estimates of posterior distributions and credible
-#'  intervales of MCMCglmm outputs
+#'  intervals of MCMCglmm outputs
 #'
 #' @name plot_estimates
 #' @param x An\code{\link[coda]{mcmc.list}} object
