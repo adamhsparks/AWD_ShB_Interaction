@@ -4,10 +4,12 @@
 \alias{plot_estimates_paper}
 \title{Plot MCMCglmm estimates for publication}
 \usage{
-plot_estimates_paper(x)
+plot_estimates_paper(x, main_title = "")
 }
 \arguments{
 \item{x}{An\code{\link[coda]{mcmc.list}} object}
+
+\item{main_title}{Main title for the plot}
 }
 \description{
 Plot estimates of posterior distributions and credible
