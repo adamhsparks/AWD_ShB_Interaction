@@ -104,7 +104,7 @@ the analysis.
 ## Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
-flat noninformative priors that have a uniform low degree of belief in all
+flat non-informative priors that have a uniform low degree of belief in all
 parameters for all six models we will create.
 
 ```{r priors}
@@ -336,7 +336,7 @@ In 2016 the neither of the treatments, nitrogen rate or water management, were s
 
 # Save Model Information
 
-Lastly, save the model information used in the posterior estimate graphs to be useds in the paper.
+Lastly, save the model information used in the posterior estimate graphs to be used in the paper.
 
 ```{r save_models}
 
