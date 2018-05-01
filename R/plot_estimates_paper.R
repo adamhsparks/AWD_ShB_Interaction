@@ -18,7 +18,7 @@
 #' @export
 plot_estimates_paper <- function(x, main_title = "") {
   if (class(x) != "summary.mcmc") {
-    x <- summary(x)
+    x <- coda:::summary.mcmc.list(x)
   }
   n <- dim(x$statistics)[1]
   par(mar = c(2, 8, 3, 1))
@@ -32,7 +32,12 @@ plot_estimates_paper <- function(x, main_title = "") {
     main = main_title,
     bty = "L"
   )
-  axis(side = 2, at = n:1, rownames(x$statistics), las = 2)
+
+  # extract treatment names and clean them up for the graph
+  trt_names <- substr(rownames(x$statistics)[-1], 5, nchar(x$statistics)[-1])
+  axis_names <- c("(Intercept)", trt_names)
+
+  axis(side = 2, at = n:1, axis_names, las = 2)
   arrows(x$quantiles[, 1], n:1, x$quantiles[, 5], n:1, code = 0)
   abline(v = 0, lty = 2)
 }
