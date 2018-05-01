@@ -18,7 +18,7 @@
 plot_estimates <- function(x) {
   par(mfrow = c(1, 1))
   if (class(x) != "summary.mcmc") {
-    x <- summary(x)
+    x <- coda:::summary.mcmc.list(x)
   }
   n <- dim(x$statistics)[1]
   par(mar = c(2, 7, 3, 1))
