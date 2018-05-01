@@ -104,7 +104,7 @@ the analysis.
 ## Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
-flat non-informative priors that have a uniform low degree of belief in all
+flat noninformative priors that have a uniform low degree of belief in all
 parameters for all six models we will create.
 
 ```{r priors}
