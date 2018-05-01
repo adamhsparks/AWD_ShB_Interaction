@@ -60,7 +60,6 @@ knitr::knit_hooks$set(output = function(x, options) {
 })
 
 library(bookdown)
-library(coda)
 library(knitr)
 library(ggplot2)
 library(ggpubr)
@@ -129,9 +128,9 @@ Disease rating was the same in both experiments using the same disease assessmen
 
 ### Statistical Analysis {-}
 
-Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity. Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range.
+Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using the R package `agricolae` [@R2018; @deMendiburu2017]. Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range.
 
-As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@R2018; @MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and nitrogen rate and replicate was treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate, 0 kg/ha; irrigation management, FLD and for 2016 were: N rate, 60 kg/ha; irrigation management, FLD. Four MCMC chains were run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
+As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and nitrogen rate and replicate was treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate, 0 kg/ha; irrigation management, FLD and for 2016 were: N rate, 60 kg/ha; irrigation management, FLD. Four MCMC chains were run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
 
 # Results {-}
 
@@ -139,42 +138,42 @@ As most of the data's residuals did not meet assumptions for normality, the anal
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N120, flooded treatment (Figure \@ref(fig:figure-1)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Figure \@ref(fig:TShB-N-inc)). However, water management was not significantly different (Figure \@ref(fig:TShB-W-inc)).
+In 2015 the incidence of tiller ShB remained low throughout the growing season only reaching 15% in 2015 in the N120 treatment (Figure \@ref(fig:ShB-N-progress)). The nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Figure \@ref(fig:TShB-N-inc; fig:estimates-plot)). However, water management was not significantly different (Figure \@ref(fig:TShB-W-inc; fig:estimates-plot)).
 
 ### Tiller Sheath Blight Severity {-}
 
-Tiller ShB severity remained below 2% (Figure \@ref(fig:figure-2)). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Figure \@ref(fig:TShB-N-sev)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:TShB-w-sev)).
+Tiller ShB severity remained below 2% (Figure \@ref(fig:fig:ShB-N-progress; fig:fig:ShB-W-progress)). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Figure \@ref(fig:N-sev; fig:estimates-plot)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:TShB-w-sev; fig:estimates-plot)).
 
 ### Leaf Sheath Blight Severity {-}
 
-Severity of leaf ShB remained low, less than 0.4% across all treatments (Figure \@ref(fig:figure-3))). Both the N100 and N120 treatments were significantly different than the N0 treatment (Figure \@ref(fig:LShB-N-sev)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:LShB-W-sev)).
+Severity of leaf ShB remained low, less than 0.4% across all treatments (Figure \@ref(fig:ShB-W-progress; fig:ShB-N-progress))). Both the N100 and N120 treatments were significantly different than the N0 treatment (Figure \@ref(fig:ShB-N-box; fig:estimates-plot)). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:ShB-W-box; fig:estimates-plot)).
 
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180, flooded treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:figure-1)). The nitrogen treatment N180, was significantly different than the control N60 treatment (Figure \@ref(fig:TShB-N-inc)). As in the 2015 study, water management did not significantly differ \@ref(fig:TShB-W-inc)).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:ShB-N-progress)). The nitrogen treatment N180, was significantly different than the control N60 treatment (Figure \@ref(fig:ShB-N-box; fig:estimates-plot)). As in the 2015 study, water management did not significantly differ \@ref(fig:ShB-W-box; fig:estimates-plot)).
 
 ### Tiller Sheath Blight Severity {-}
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded
-In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Figure \@ref(fig:TShB-N-sev)). The AWD water management, which was lower than the FLD treatment, was also significantly different (Figure \@ref(fig:TShB-W-sev)).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Figure \@ref(fig:ShB-N-progress). 
+In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Figure \@ref(fig:ShB-N-box; fig:estimates-plot)). The AWD water management, which was lower than the FLD treatment, was also significantly different (Figure \@ref(fig:ShB-W-box; fig:estimates-plot)).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity (Figures \@ref(fig:LShB-W-sev), \@ref(fig:LShB-N-sev)).
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity (Figures \@ref(fig:ShB-W-box; fig:estimates-plot), \@ref(fig:ShB-N-box; fig:estimates-plot)).
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB (Figure \@ref(fig:TShB-sev)). In the 2016 experiment the tiller ShB severity was significantly lower for AWD than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on tiller ShB severity.
+In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB (Figure \@ref(fig:estimates-plot)). In the 2016 experiment the tiller ShB severity was significantly lower for AWD than the traditional FLD treatment, which may indicate a possible adverse effect of using AWD on tiller ShB severity.
 
-The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Figure \@ref(fig:TShB-inc)).
+The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Figure \@ref(fig:ShB-W-progress; fig:ShB-N-progress)).
 
 # Notes {-}
 
 ## Acknowledgments {-}
 
-The authors wish to thank Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in September 2016.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in September 2016.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak
@@ -229,7 +228,8 @@ p1 <- ggplot(RAW_data,
                                          size = 0.5,
                                          linetype = "solid"),
         axis.title.x = element_blank(),
-        strip.background = element_blank())
+        strip.background = element_blank(),
+        strip.text.x = element_text(face = "bold"))
 
 p2 <- ggplot(RAW_data,
              aes(x = DAI,
@@ -241,9 +241,7 @@ p2 <- ggplot(RAW_data,
                geom = "line") +
   stat_summary(fun.y = "mean",
                geom = "point") +
-  scale_y_continuous(labels = function(x) paste0(x*100),
-                     limits = c(0, 1),
-                     name = "Tiller Severity (%)") +
+  scale_y_continuous(name = "Tiller Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -268,9 +266,7 @@ p3 <- ggplot(RAW_data,
                geom = "line") +
   stat_summary(fun.y = "mean",
                geom = "point") +
-  scale_y_continuous(labels = function(x) paste0(x*100),
-                     limits = c(0, 1),
-                     name = "Leaf Severity (%)") +
+  scale_y_continuous(name = "Leaf Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -287,7 +283,7 @@ p3 <- ggplot(RAW_data,
 grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 ```
 
-##### Tiller ShB N progress
+##### ShB N progress
 
 ```{r ShB-N-progress, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
 
@@ -320,7 +316,8 @@ p4 <- ggplot(RAW_data,
                                          size = 0.5,
                                          linetype = "solid"),
         axis.title.x = element_blank(),
-        strip.background = element_blank()) +
+        strip.background = element_blank(),
+        strip.text.x = element_text(face = "bold")) +
   guides(linetype = guide_legend(ncol = 2),
          shape = guide_legend(ncol = 2))
 
@@ -334,9 +331,7 @@ p5 <- ggplot(RAW_data,
                geom = "line") +
   stat_summary(fun.y = "mean",
                geom = "point") +
-  scale_y_continuous(labels = function(x) paste0(x*100),
-                     limits = c(0, 1),
-                     name = "Tiller Severity (%)") +
+  scale_y_continuous(name = "Tiller Severity (%)") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
   labs(linetype = "N Rate",
@@ -360,9 +355,7 @@ p6 <- ggplot(RAW_data,
                geom = "line") +
   stat_summary(fun.y = "mean",
                geom = "point") +
-  scale_y_continuous(labels = function(x) paste0(x*100),
-                     limits = c(0, 1),
-                     name = "Leaf Severity (%)") +
+  scale_y_continuous(name = "Leaf Severity (%)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -381,7 +374,8 @@ grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - WMGT
 
-```{r ShB-W-inc, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+```{r ShB-W-box, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+
 p7 <- ggplot(AUDPS,
              aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
@@ -391,7 +385,8 @@ p7 <- ggplot(AUDPS,
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
         axis.title.x = element_blank(),
-        strip.background = element_blank()) +
+        strip.background = element_blank(),
+        strip.text.x = element_text(face = "bold")) +
   facet_grid(. ~ YEAR,
              scales = "free_x")
 
@@ -428,7 +423,7 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - NRTE
 
-```{r ShB-N-sev, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r ShB-N-box, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
 p10 <- ggplot(AUDPS,
               aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
@@ -439,7 +434,8 @@ p10 <- ggplot(AUDPS,
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
         axis.title.x = element_blank(),
-        strip.background = element_blank()) +
+        strip.background = element_blank(),
+        strip.text.x = element_text(face = "bold")) +
   facet_grid(. ~ YEAR,
              scales = "free_x")
 
@@ -476,7 +472,7 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 ##### Estimates plot
 
-```{r estimates-plot, fig.cap="A forest plot of 95% confidence intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and nitrogen rate (NRTE). Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r estimates-plot, fig.cap="Posterior means and 95% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and nitrogen rate (NRTE) on sheath blight tiller incidence, tiller severity and leaf severity. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
