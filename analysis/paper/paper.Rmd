@@ -70,7 +70,7 @@ library(rice.awd.pests)
 
 # Introduction {-}
 
-Sheath blight (ShB) disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions he disease can cause up to 50\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009, @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
+Sheath blight (ShB) disease (*Rhizoctonia solani* Kühn), anastamosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions he disease can cause up to 50\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009, @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
@@ -86,13 +86,13 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 ### Experimental Design {-}
 
-The plot design was a split-plot design with four replicates where irrigation was the main plot and nitrogen (N) rate was the split-plot. 
+The plot design was a split-plot design with four replicates where irrigation was the main plot and N rate was the split-plot. 
 
 The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (FLD) or farmers' practice as the control treatment. The main plot size was 12m x 12m (144 sq m), with a split-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per split-plot for a whole experiment size of 1,152 sq m.
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of nitrogen were N0 (no nitrogen supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Table \@ref(tab:N-rates)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Table \@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
@@ -110,7 +110,7 @@ The plots were inoculated 20 days after transplanting by spreading 151g of inocu
 
 The experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two nitrogen treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied  (Table \@ref(tab:N-rates)).
+Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied  (Table \@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
@@ -130,7 +130,7 @@ Disease rating was the same in both experiments using the same disease assessmen
 
 Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using the R package `agricolae` [@R2018; @deMendiburu2017]. Because the severity data were collected on an unevenly spaced categorical scale, they were converted to the midpoint value of the percent range.
 
-As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and nitrogen rate and replicate was treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate, 0 kg/ha; irrigation management, FLD and for 2016 were: N rate, 60 kg/ha; irrigation management, FLD. Four MCMC chains were run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
+As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and N rate and replicate was treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate, 0 kg/ha; irrigation management, FLD and for 2016 were: N rate, 60 kg/ha; irrigation management, FLD. Four MCMC chains were run for 55,000 steps, with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
 
 # Results {-}
 
@@ -138,7 +138,7 @@ As most of the data's residuals did not meet assumptions for normality, the anal
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(Fig.:ShB-W-progress)a, \@ref(Fig.:ShB-N-progress)a). Water management was not significantly different (Fig. \@ref(Fig.:ShB-W-box)a, \@ref(Fig.:estimates-plot)a). However, the nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(Fig.:ShB-N-box)a, \@ref(Fig.:estimates-plot)a). 
+In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(Fig.:ShB-W-progress)a, \@ref(Fig.:ShB-N-progress)a). Water management was not significantly different (Fig. \@ref(Fig.:ShB-W-box)a, \@ref(Fig.:estimates-plot)a). However, the N treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(Fig.:ShB-N-box)a, \@ref(Fig.:estimates-plot)a). 
 
 ### Tiller Sheath Blight Severity {-}
 
@@ -152,7 +152,7 @@ Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(Fig.:ShB-N-progress)b). The nitrogen treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(Fig.:ShB-N-box)b, \@ref(Fig.:estimates-plot)b). As in the 2015 study, water management did not significantly differ \@ref(Fig.:ShB-W-box)b, \@ref(Fig.:estimates-plot)b).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(Fig.:ShB-N-progress)b). The N treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(Fig.:ShB-N-box)b, \@ref(Fig.:estimates-plot)b). As in the 2015 study, water management did not significantly differ \@ref(Fig.:ShB-W-box)b, \@ref(Fig.:estimates-plot)b).
 
 ### Tiller Sheath Blight Severity {-}
 
@@ -161,7 +161,7 @@ In 2016 the N180 treatment was significantly different from the N60 treatment, w
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(Fig.:ShB-W-box)f, \@ref(Fig.:estimates-plot)f, \@ref(Fig.:ShB-N-box)f \@ref(Fig.:estimates-plot)f).
+In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(Fig.:ShB-W-box)f, \@ref(Fig.:estimates-plot)f, \@ref(Fig.:ShB-N-box)f \@ref(Fig.:estimates-plot)f).
 
 # Discussion {-}
 
