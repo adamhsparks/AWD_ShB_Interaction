@@ -60,6 +60,7 @@ knitr::knit_hooks$set(output = function(x, options) {
 })
 
 library(bookdown)
+library(captioner)
 library(knitr)
 library(ggplot2)
 library(ggpubr)
@@ -186,11 +187,18 @@ The authors wish to thank the IRRI Biometrics group for their input in the desig
 
 ##### pagebreak
 
-# Tables {-}
+```{r table-caps}
+table_nums <- captioner(prefix = "Tab.")
 
-```{r N-rates}
-kable(N_rates,
-      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages.")
+tab.1_cap <- table_nums(name = "tab_1", 
+                        caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages.")
+```
+
+# Tables {-}\
+
+`r table_nums("tab_1")`
+```{r N-rates, fig.cap=tab.1_cap}
+kable(N_rates)
 
 ```
 
@@ -198,7 +206,29 @@ kable(N_rates,
 
 # Figures {-}
 
-```{r ShB-W-progress, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
+```{r figure-caps}
+figure_nums <- captioner(prefix = "Fig.")
+
+fig.1_cap <- figure_nums(name = "fig_1", 
+                        caption = "Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications.")
+
+
+fig.2_cap <- figure_nums(name = "fig_2", 
+                        caption = "Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications.")
+
+fig.3_cap <- figure_nums(name = "fig_3", 
+                        caption = "Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD).")
+
+fig.4_cap <- figure_nums(name = "fig_4", 
+                        caption = "Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180).")
+
+fig.5_cap <- figure_nums(name = "fig_5", 
+                        caption = "Posterior means and 95% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and nitrogen rate (NRTE) on sheath blight tiller incidence, tiller severity and leaf severity. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180).")
+
+```
+
+`r figure_nums("fig_1")`
+```{r ShB-W-progress, fig.cap="fig.1_cap"}
 
 p1_anot <- data.frame(
   label = c("a", "b"),
@@ -328,8 +358,8 @@ grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 ```
 
 ##### ShB W progress
-
-```{r ShB-N-progress, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean of four replications."}
+`r figure_nums("fig_2")`
+```{r ShB-N-progress, fig.cap="fig.2_cap"}
 
 p4_anot <- data.frame(
   label = c("a", "b"),
@@ -464,7 +494,8 @@ grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - WMGT
 
-```{r ShB-W-box, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD)."}
+`r figure_nums("fig_3")`
+```{r ShB-W-box, fig.cap="fig.3_cap"}
 
 p7_anot <- data.frame(
   label = c("a", "b"),
@@ -549,8 +580,8 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 ```
 
 ##### ShB boxplot - NRTE
-
-```{r ShB-N-box, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+`r figure_nums("fig_4")`
+```{r ShB-N-box, fig.cap="fig.4_cap"}
 
 
 p10_anot <- data.frame(
@@ -636,8 +667,8 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
 ##### Estimates plot
-
-```{r estimates-plot, fig.cap="Posterior means and 95% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and nitrogen rate (NRTE) on sheath blight tiller incidence, tiller severity and leaf severity. Five different nitrogen treatments were applied to split plots depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+`r figure_nums("fig_5")`
+```{r estimates-plot, fig.cap="fig.5_cap"}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
