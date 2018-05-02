@@ -154,16 +154,16 @@ Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(fig:ShB-N-progress)b). The N treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(fig:ShB-N-box)b, \@ref(fig:estimates-plot)b). As in the 2015 study, water management did not significantly differ \@ref(fig:ShB-W-box)b, \@ref(fig:estimates-plot)b).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(fig:ShB-N-progress)b). The N treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(fig:ShB-N-box)b, \@ref(fig:estimates-plot)b). As in the 2015 study, water management did not significantly differ (Fig. \@ref(fig:ShB-W-box)b, \@ref(fig:estimates-plot)b).
 
 ### Tiller Sheath Blight Severity {-}
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig. \@ref(fig:ShB-N-progress)d). 
-In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Fig. \@ref(fig:ShB-N-box)d), \@ref(fig:estimates-plot)d). The AWD water management, which was lower than the FLD treatment, was also significantly different (Fig. \@ref(fig:ShB-W-box)d, \@ref(fig:estimates-plot)d).
+In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Fig. \@ref(fig:ShB-N-box)d, \@ref(fig:estimates-plot)d). The AWD water management, which was lower than the FLD treatment, was also significantly different (Fig. \@ref(fig:ShB-W-box)d, \@ref(fig:estimates-plot)d).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:ShB-W-box)f, \@ref(fig:estimates-plot)f, \@ref(fig:ShB-N-box)f \@ref(fig:estimates-plot)f).
+In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:ShB-W-box)f, \@ref(fig:estimates-plot)f, \@ref(fig:ShB-N-box)f, \@ref(fig:estimates-plot)f).
 
 # Discussion {-}
 
