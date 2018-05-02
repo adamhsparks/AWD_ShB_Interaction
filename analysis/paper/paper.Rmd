@@ -240,11 +240,6 @@ p1 <- ggplot(data = RAW_data,
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black")
-  ) +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
     axis.line = element_line(colour = "black"),
     legend.position = c(x = 0.065, y = 0.76),
     legend.background = element_rect(
@@ -284,8 +279,6 @@ p2 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "Irrigation",
-       shape = "Irrigation") +
   theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -323,8 +316,6 @@ p3 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "Irrigation",
-       shape = "Irrigation") +
   theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -423,8 +414,6 @@ p5 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "Irrigation",
-       shape = "Irrigation") +
   theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -462,8 +451,6 @@ p6 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "Irrigation",
-       shape = "Irrigation") +
   theme_classic() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
