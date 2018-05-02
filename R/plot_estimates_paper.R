@@ -21,7 +21,8 @@ plot_estimates_paper <- function(x, main_title = "") {
     x <- coda:::summary.mcmc.list(x)
   }
   n <- dim(x$statistics)[1]
-  par(mar = c(2, 8, 3, 1))
+  par(mar = c(2, 11, 3, 1),
+      cex = 0.5)
   plot(
     x$statistics[, 1],
     n:1,

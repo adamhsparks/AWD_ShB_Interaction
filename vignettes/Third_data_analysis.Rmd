@@ -109,7 +109,11 @@ parameters for all six models we will create.
 
 ```{r priors}
 eprior <- list(R = list(V = 1, nu = 0.002),
-               G = list(G1 = list( V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)))
+               G = list(
+                 G1 = list(V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2),
+                 G2 = list(V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)
+                 )
+               )
 ```
 
 ## 2015 Models
@@ -119,8 +123,8 @@ eprior <- list(R = list(V = 1, nu = 0.002),
 ```{r 2015_TShB_incidence, cache=FALSE}
 
 m1 <- mclapply(1:4, function(i) {
-  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2015,
            verbose = FALSE,
            prior = eprior,
@@ -151,8 +155,8 @@ plot_estimates(m1)
 ```{r 2015_TShB_severity, cache=FALSE}
 
 m2 <- mclapply(1:4, function(i) {
-  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2015,
            verbose = FALSE,
            prior = eprior,
@@ -182,8 +186,8 @@ plot_estimates(m2)
 ```{r 2015_LShB_severity, cache=FALSE}
 
 m3 <- mclapply(1:4, function(i) {
-  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2015,
            verbose = FALSE,
            prior = eprior,
@@ -217,8 +221,8 @@ plot_estimates(m3)
 ```{r 2016_TShB_incidence, cache=FALSE}
 
 m4 <- mclapply(1:4, function(i) {
-  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2016,
            verbose = FALSE,
            prior = eprior,
@@ -249,8 +253,8 @@ plot_estimates(m4)
 ```{r 2016_TShB_severity, cache=FALSE}
 
 m5 <- mclapply(1:4, function(i) {
-  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2016,
            verbose = FALSE,
            prior = eprior,
@@ -280,8 +284,8 @@ plot_estimates(m5)
 ```{r 2016_LShB_severity, cache=FALSE}
 
 m6 <- mclapply(1:4, function(i) {
-  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
-           random = ~REP, 
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP, 
            data = AUDPS_2016,
            verbose = FALSE,
            prior = eprior,
