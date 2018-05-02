@@ -175,7 +175,7 @@ The changes made for the 2016 experiment appear to have improved the experiment,
 
 ## Acknowledgments {-}
 
-The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, Michael Noel, who helped design and manage the first year of the project but passed away in September 2016.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, we would like to remember Michael Noel, who was a part of the plant disease management team at IRRI and who helped design and manage the first year of the project but passed away in September 2016.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak
