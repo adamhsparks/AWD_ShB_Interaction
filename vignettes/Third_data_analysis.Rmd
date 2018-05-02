@@ -316,31 +316,31 @@ The models all appear to be good fits.
 
 None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.
 
-The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
+The Gelman diagnostics indicate that all of the models successfully converged.
 
 ## Conclusions
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significantly different.
+In 2015 the nitrogen rate N120 was significant when compared with the base N0 rate but N100 was not. The irrigation management was not significantly different nor were the interactions of N rate and irrigation.
 
-In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significantly different.
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, irrigation management was not significantly different and neither was the interaction of N rate and irrigation management.
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base FLD treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the base FLD treatment and neither interaction appeard to be significant.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base FLD treatment.
+In 2016 the N180 was significantly different from the N60 rate. The AWD irrigation management was not significantly different from the base FLD treatment, nor was the interaction of irrigation and N rate.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the control FLD treatment. However, the interaction of N100 and irrigation was significant while the interaction of N120 and irrigation was not.
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
+In 2016 irrigation management was not significantly different from the base treatments for leaf sheath blight severity. However, the N180 and interaction of N treatment and irrigation were significantly different than the base.
 
 # Save Model Information
 
-Lastly, save the model information used in the posterior estimate graphs to be used in the paper.
+This step saves the model information used in the posterior estimate graphs to be used in the paper.
 
 ```{r save_models}
 
