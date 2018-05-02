@@ -120,13 +120,11 @@ Nurseries of NSIC Rc222 were established on 7 January 2016 experiments. Seedling
 
 Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
 
-### Data Collection {-}
+## Data Collection {-}
 
-Two sample areas per plot (1m x 1m) were assessed. For nine hills per sample, the total number of tillers per hill and number of tillers with ShB (incidence) were measured. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using the rating scale. Leaves were rated as green (living) having at least XXX% living tissue or dead, defined as having less than XXX% living tissue. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+In both experiments, two sample areas, sized 1m x 1m, per plot were assessed. the total number of tillers per hill and number of tillers with ShB (incidence) were measured for nine hills per sample area. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions. Leaves were rated as green (living) having at least XXX% living tissue or dead, defined as having less than XXX% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-Disease rating was the same in both experiments using the same disease assessment scale for field evaluation developed at IRRI where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Where severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions.
-
-### Statistical Analysis {-}
+## Statistical Analysis {-}
 
 Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using the R package `agricolae` [@R2018; @deMendiburu2017]. The severity data were converted to the midpoint percent value of the scale range.
 
@@ -200,7 +198,7 @@ kable(N_rates,
 
 # Figures {-}
 
-```{r ShB-W-progress, fig.cap="Sheath blight progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
+```{r ShB-W-progress, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently flooded (FLD) and alternate wetting and drying (AWD). Points represent the mean of four replications."}
 
 p1_anot <- data.frame(
   label = c("a", "b"),
