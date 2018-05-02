@@ -43,7 +43,7 @@ tn <- local({
   i = 0
   function(x) {
     i <<- i + 1
-    paste('\n\nTable ', i, ': ', x, sep = '')
+    paste('\n\nTab. ', i, ': ', x, sep = '')
     # The : before Table tells pandoc to wrap your caption in <caption></caption>
   }
 })
@@ -92,7 +92,7 @@ The main plot treatments were alternate wetting and drying (AWD) and continuousl
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Table \@ref(tab:N-rates)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Tab. \@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
@@ -110,7 +110,7 @@ The plots were inoculated 20 days after transplanting by spreading 151g of inocu
 
 The experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied  (Table \@ref(tab:N-rates)).
+Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied  (Tab. \@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
