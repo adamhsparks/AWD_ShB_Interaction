@@ -138,38 +138,38 @@ As most of the data's residuals did not meet assumptions for normality, the anal
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season (Figure \@ref(fig:ShB-W-progress)a, \@ref(fig:ShB-N-progress)a). Water management was not significantly different (Figure \@ref(fig:ShB-W-box)a, \@ref(fig:estimates-plot)a). However, the nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Figure \@ref(fig:ShB-N-box)a, \@ref(fig:estimates-plot)a). 
+In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(Fig.:ShB-W-progress)a, \@ref(Fig.:ShB-N-progress)a). Water management was not significantly different (Fig. \@ref(Fig.:ShB-W-box)a, \@ref(Fig.:estimates-plot)a). However, the nitrogen treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(Fig.:ShB-N-box)a, \@ref(Fig.:estimates-plot)a). 
 
 ### Tiller Sheath Blight Severity {-}
 
-Tiller ShB severity remained below 2% (Figure \@ref(fig:ShB-N-progress)c, \@ref(fig:ShB-W-progress)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Figure \@ref(fig:ShB-N-box)c, \@ref(fig:estimates-plot)c). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:ShB-W-box)c, \@ref(fig:estimates-plot)c).
+Tiller ShB severity remained below 2% (Fig. \@ref(Fig.:ShB-N-progress)c, \@ref(Fig.:ShB-W-progress)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Fig. \@ref(Fig.:ShB-N-box)c, \@ref(Fig.:estimates-plot)c). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(Fig.:ShB-W-box)c, \@ref(Fig.:estimates-plot)c).
 
 ### Leaf Sheath Blight Severity {-}
 
-Severity of leaf ShB remained low, less than 0.4% across all treatments (Figure \@ref(fig:ShB-W-progress)e, \@ref(fig:ShB-N-progress)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Figure \@ref(fig:ShB-N-box)e, \@ref(fig:estimates-plot)e). However, the AWD water management was not significantly different from the FLD treatment (Figure \@ref(fig:ShB-W-box)e, \@ref(fig:estimates-plot)e).
+Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@ref(Fig.:ShB-W-progress)e, \@ref(Fig.:ShB-N-progress)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(Fig.:ShB-N-box)e, \@ref(Fig.:estimates-plot)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(Fig.:ShB-W-box)e, \@ref(Fig.:estimates-plot)e).
 
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:ShB-N-progress)). The nitrogen treatment N180, was significantly different than the control N60 treatment (Figure \@ref(fig:ShB-N-box), \@ref(fig:estimates-plot)). As in the 2015 study, water management did not significantly differ \@ref(fig:ShB-W-box), \@ref(fig:estimates-plot)).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(Fig.:ShB-N-progress)b). The nitrogen treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(Fig.:ShB-N-box)b, \@ref(Fig.:estimates-plot)b). As in the 2015 study, water management did not significantly differ \@ref(Fig.:ShB-W-box)b, \@ref(Fig.:estimates-plot)b).
 
 ### Tiller Sheath Blight Severity {-}
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Figure \@ref(fig:ShB-N-progress). 
-In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Figure \@ref(fig:ShB-N-box), \@ref(fig:estimates-plot)). The AWD water management, which was lower than the FLD treatment, was also significantly different (Figure \@ref(fig:ShB-W-box), \@ref(fig:estimates-plot)).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig. \@ref(Fig.:ShB-N-progress)d). 
+In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Fig. \@ref(Fig.:ShB-N-box)d), \@ref(Fig.:estimates-plot)d). The AWD water management, which was lower than the FLD treatment, was also significantly different (Fig. \@ref(Fig.:ShB-W-box)d, \@ref(Fig.:estimates-plot)d).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity (Figures \@ref(fig:ShB-W-box), \@ref(fig:estimates-plot), \@ref(fig:ShB-N-box) \@ref(fig:estimates-plot)).
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(Fig.:ShB-W-box)f, \@ref(Fig.:estimates-plot)f, \@ref(Fig.:ShB-N-box)f \@ref(Fig.:estimates-plot)f).
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB (Figure \@ref(fig:estimates-plot)), where in the 2016 experiment the tiller ShB severity was significantly lower for AWD than the traditional FLD treatment. This may may indicate a possible adverse effect of using AWD on tiller ShB severity.
+In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB (Fig. \@ref(Fig.:estimates-plot)d), where in the 2016 experiment the tiller ShB severity was significantly lower for AWD than the traditional FLD treatment. This may may indicate a possible adverse effect of using AWD on tiller ShB severity.
 
 The effects of N rates on sheath blight were to be expected, where higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in 2016 tiller and leaf severity had no detectable differences due to the N rate.
 
-The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Figures \@ref(fig:ShB-W-progress), \@ref(fig:ShB-N-progress), \@ref(fig:ShB-W-box), \@ref(fig:ShB-N-box)). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase ShB spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
+The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(Fig.:ShB-W-progress)a:b, \@ref(Fig.:ShB-N-progress)c:d, \@ref(Fig.:ShB-W-box)a:b, \@ref(Fig.:ShB-N-box)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase ShB spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
 
 # Notes {-}
 
@@ -644,26 +644,26 @@ models <- readRDS("../data/derived_data/models.Rds")
 par(mfcol = c(3, 2))
 
 plot_estimates_paper(models[[1]], main_title = "2015")
-mtext("Tiller Incidence", side = 2, line = 6)
-mtext(side = 3, line = 0, adj = 1, "a", cex = 0.75)
+mtext(text = "Tiller Incidence", side = 2, line = 6)
+mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
 
 plot_estimates_paper(models[[2]])
-mtext("Tiller Severity", side = 2, line = 6)
-mtext(side = 3, line = 0, adj = 1, "c", cex = 0.75)
+mtext(text = "Tiller Severity", side = 2, line = 6)
+mtext(text = "c", side = 3, line = 0, adj = 1, cex = 0.75)
 
 plot_estimates_paper(models[[3]])
-mtext("Leaf Severity", side = 2, line = 6)
-mtext(side = 3, line = 0, adj = 1, "e", cex = 0.75)
+mtext(text = "Leaf Severity", side = 2, line = 6)
+mtext(text = "e", side = 3, line = 0, adj = 1, cex = 0.75)
 
 
 plot_estimates_paper(models[[4]], main_title = "2016")
-mtext(side = 3, line = 0, adj = 1, "b", cex = 0.75)
+mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 
 plot_estimates_paper(models[[5]])
-mtext(side = 3, line = 0, adj = 1, "d", cex = 0.75)
+mtext(text = "d", side = 3, line = 0, adj = 1, cex = 0.75)
 
 plot_estimates_paper(models[[6]])
-mtext(side = 3, line = 0, adj = 1, "f", cex = 0.75)
+mtext(text = "f", side = 3, line = 0, adj = 1, cex = 0.75)
 
 ```
 
