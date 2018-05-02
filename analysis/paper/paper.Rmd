@@ -374,19 +374,15 @@ p4 <- ggplot(data = RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  labs(linetype = "Irrigation",
-       shape = "Irrigation") +
+  labs(linetype = "N Rate",
+       shape = "N Rate") +
   theme_classic() +
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black")
-  ) +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
     axis.line = element_line(colour = "black"),
-    legend.position = c(x = 0.065, y = 0.76),
+    legend.position = c(x = 0.1,
+                        y = 0.7),
     legend.background = element_rect(
       color = "black",
       size = 0.5,
@@ -395,7 +391,9 @@ p4 <- ggplot(data = RAW_data,
     axis.title.x = element_blank(),
     strip.background = element_blank(),
     strip.text.x = element_text(face = "bold")
-  )
+  ) +
+  guides(linetype = guide_legend(ncol = 2),
+         shape = guide_legend(ncol = 2))
 
 
 p5_anot <- data.frame(
