@@ -38,27 +38,6 @@ knitr::opts_chunk$set(
   dpi = 300
 )
 
-# table captions
-tn <- local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste('\n\nTab. ', i, ': ', x, sep = '')
-    # The : before Table tells pandoc to wrap your caption in <caption></caption>
-  }
-})
-knitr::knit_hooks$set(tab.cap = function(before, options, envir) {
-  if (!before)
-    tn(options$tab.cap)
-})
-default_output_hook = knitr::knit_hooks$get("output")
-knitr::knit_hooks$set(output = function(x, options) {
-  if (is.null(options$tab.cap) == F)  
-    x
-  else
-    default_output_hook(x,options)
-})
-
 library(bookdown)
 library(captioner)
 library(knitr)
@@ -93,7 +72,7 @@ The main plot treatments were alternate wetting and drying (AWD) and continuousl
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In FLD plots a standing water layer of 3-5cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Tab. \@ref(tab:N-rates)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) and N120 (120 kg per ha applied as urea in three splits at final harrowing, active tillering and panicle initiation) (Tab. \@ref(tab:tab_1)).
 
 ### Crop Establishment {-}
 
@@ -111,7 +90,7 @@ The plots were inoculated 20 days after transplanting by spreading 151g of inocu
 
 The experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied  (Tab. \@ref(tab:N-rates)).
+Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied (Tab. \@ref(tab:tab_1)).
 
 ### Crop Establishment {-}
 
@@ -139,38 +118,38 @@ Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(fig:ShB-W-progress)a, \@ref(fig:ShB-N-progress)a). Water management was not significantly different (Fig. \@ref(fig:ShB-W-box)a, \@ref(fig:estimates-plot)a). However, the N treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(fig:ShB-N-box)a, \@ref(fig:estimates-plot)a). 
+In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(fig:fig_1)a, \@ref(fig:fig_2)a). Water management was not significantly different (Fig. \@ref(fig:fig_3)a, \@ref(fig:fig_5)a). However, the N treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(fig:fig_4)a, \@ref(fig:fig_5)a). 
 
 ### Tiller Sheath Blight Severity {-}
 
-Tiller ShB severity remained below 2% (Fig. \@ref(fig:ShB-N-progress)c, \@ref(fig:ShB-W-progress)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Fig. \@ref(fig:ShB-N-box)c, \@ref(fig:estimates-plot)c). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:ShB-W-box)c, \@ref(fig:estimates-plot)c).
+Tiller ShB severity remained below 2% (Fig. \@ref(fig:fig_2)c, \@ref(fig:fig_1)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Fig. \@ref(fig:fig_4)c, \@ref(fig:fig_5)c). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig_3)c, \@ref(fig:fig_5)c).
 
 ### Leaf Sheath Blight Severity {-}
 
-Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@ref(fig:ShB-W-progress)e, \@ref(fig:ShB-N-progress)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(fig:ShB-N-box)e, \@ref(fig:estimates-plot)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:ShB-W-box)e, \@ref(fig:estimates-plot)e).
+Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@ref(fig:fig_1)e, \@ref(fig:fig_2)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(fig:fig_4)e, \@ref(fig:fig_5)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig_3)e, \@ref(fig:fig_5)e).
 
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(fig:ShB-N-progress)b). The N treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(fig:ShB-N-box)b, \@ref(fig:estimates-plot)b). As in the 2015 study, water management did not significantly differ (Fig. \@ref(fig:ShB-W-box)b, \@ref(fig:estimates-plot)b).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Fig. \@ref(fig:fig_2)b). The N treatment N180, was significantly different than the control N60 treatment (Fig. \@ref(fig:fig_4)b, \@ref(fig:fig_5)b). As in the 2015 study, water management did not significantly differ (Fig. \@ref(fig:fig_3)b, \@ref(fig:fig_5)b).
 
 ### Tiller Sheath Blight Severity {-}
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig. \@ref(fig:ShB-N-progress)d). 
-In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Fig. \@ref(fig:ShB-N-box)d, \@ref(fig:estimates-plot)d). The AWD water management, which was lower than the FLD treatment, was also significantly different (Fig. \@ref(fig:ShB-W-box)d, \@ref(fig:estimates-plot)d).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig. \@ref(fig:fig_2)d). 
+In 2016 the N180 treatment was significantly different from the N60 treatment, with N180 severity being higher (Fig. \@ref(fig:fig_4)d, \@ref(fig:fig_5)d). The AWD water management, which was lower than the FLD treatment, was also significantly different (Fig. \@ref(fig:fig_3)d, \@ref(fig:fig_5)d).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:ShB-W-box)f, \@ref(fig:estimates-plot)f, \@ref(fig:ShB-N-box)f, \@ref(fig:estimates-plot)f).
+In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:fig_3)f, \@ref(fig:fig_5)f, \@ref(fig:fig_4)f, \@ref(fig:fig_5)f).
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB. In the 2016 experiment the tiller ShB severity was significantly lower for AWD than FLD (Fig. \@ref(fig:ShB-W-box)d, \@ref(fig:estimates-plot)d), indicating a possible adverse effect of using AWD on tiller ShB severity under conditions where there is high sheath blight pressure.
+In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB. In the 2016 experiment the tiller ShB severity was significantly lower for AWD than FLD (Fig. \@ref(fig:fig_3)d, \@ref(fig:fig_5)d), indicating a possible adverse effect of using AWD on tiller ShB severity under conditions where there is high sheath blight pressure.
 
 The findings of the effects of N rates on sheath blight were to be expected, where higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in 2016 tiller and leaf severity had no detectable differences due to the N rate. However, it should be noted that the levels of leaf severity remained low (< 1%) throughout the growing season in all treatments for both years.
 
-The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:ShB-W-progress)a:b, \@ref(fig:ShB-N-progress)c:d, \@ref(fig:ShB-W-box)a:b, \@ref(fig:ShB-N-box)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase ShB spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
+The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:fig_1)a:b, \@ref(fig:fig_2)c:d, \@ref(fig:fig_3)a:b, \@ref(fig:fig_4)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase ShB spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
 
 # Notes {-}
 
@@ -194,7 +173,7 @@ tab.1_cap <- table_nums(name = "tab_1",
                         caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments were applied in splits, basal, tillering and panicle initiation growth stages.")
 ```
 
-# Tables {-}\
+# Tables {-}
 
 `r table_nums("tab_1")`
 ```{r N-rates, fig.cap=tab.1_cap}
@@ -228,7 +207,7 @@ fig.5_cap <- figure_nums(name = "fig_5",
 ```
 
 `r figure_nums("fig_1")`
-```{r ShB-W-progress, fig.cap="fig.1_cap"}
+```{r fig_1, fig.cap="fig.1_cap"}
 
 p1_anot <- data.frame(
   label = c("a", "b"),
@@ -357,9 +336,9 @@ p3 <- ggplot(RAW_data,
 grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 ```
 
-##### ShB W progress
+##### ShB N progress
 `r figure_nums("fig_2")`
-```{r ShB-N-progress, fig.cap="fig.2_cap"}
+```{r fig_2, fig.cap="fig.2_cap"}
 
 p4_anot <- data.frame(
   label = c("a", "b"),
@@ -495,7 +474,7 @@ grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 ##### ShB boxplot - WMGT
 
 `r figure_nums("fig_3")`
-```{r ShB-W-box, fig.cap="fig.3_cap"}
+```{r fig_3, fig.cap="fig.3_cap"}
 
 p7_anot <- data.frame(
   label = c("a", "b"),
@@ -581,7 +560,7 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 
 ##### ShB boxplot - NRTE
 `r figure_nums("fig_4")`
-```{r ShB-N-box, fig.cap="fig.4_cap"}
+```{r fig_4, fig.cap="fig.4_cap"}
 
 
 p10_anot <- data.frame(
@@ -668,7 +647,7 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 ##### Estimates plot
 `r figure_nums("fig_5")`
-```{r estimates-plot, fig.cap="fig.5_cap"}
+```{r fig_5, fig.cap="fig.5_cap"}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
