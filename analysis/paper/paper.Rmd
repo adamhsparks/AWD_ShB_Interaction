@@ -66,7 +66,7 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 ### Experimental Design {-}
 
-The plot design was a split-plot design with four replicates where irrigation was the main plot and N rate was the split-plot. 
+The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot and N rate was the split-plot. 
 
 The main plot treatments were alternate wetting and drying (AWD) and continuously flooded (FLD) or farmers' practice as the control treatment. The main plot size was 12m x 12m (144 sq m), with a split-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per split-plot for a whole experiment size of 1,152 sq m.
 
