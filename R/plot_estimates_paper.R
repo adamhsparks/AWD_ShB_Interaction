@@ -22,7 +22,7 @@ plot_estimates_paper <- function(x, main_title = "") {
   }
   n <- dim(x$statistics)[1]
   par(mar = c(2, 11, 3, 1),
-      cex = 0.5)
+      cex = 0.7)
   plot(
     x$statistics[, 1],
     n:1,
@@ -35,10 +35,10 @@ plot_estimates_paper <- function(x, main_title = "") {
   )
 
   # extract treatment names and clean them up for the graph
-  trt_names <- substr(rownames(x$statistics)[-1], 5, nchar(x$statistics)[-1])
-  axis_names <- c("(Intercept)", trt_names)
+  row.names(x$statistics) <- gsub(pattern = "WMGT", "", row.names(x$statistics))
+  row.names(x$statistics) <- gsub(pattern = "NRTE", "", row.names(x$statistics))
 
-  axis(side = 2, at = n:1, axis_names, las = 2)
+  axis(side = 2, at = n:1, row.names(x$statistics), las = 2)
   arrows(x$quantiles[, 1], n:1, x$quantiles[, 5], n:1, code = 0)
   abline(v = 0, lty = 2)
 }
