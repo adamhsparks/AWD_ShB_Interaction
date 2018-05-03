@@ -110,7 +110,7 @@ Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated f
 
 As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and N rate with replicate treated as a random variable. The base levels (control treatments) for the analyses for 2015 were N rate - N0; irrigation management - FLD and for 2016, N rate - N60; irrigation management - FLD.
 
-Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check convergence using visual inspection of graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
+Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn in. The remaining 50,000 samples were thinned by taking every tenth sample resulting in 5,000 independent draws from the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check MCMC chain convergence using visual inspection of resulting trace graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
 
 # Results {-}
 
@@ -128,6 +128,8 @@ Tiller ShB severity remained below 2% (Fig. \@ref(fig:fig_2)c, \@ref(fig:fig_1)c
 
 Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@ref(fig:fig_1)e, \@ref(fig:fig_2)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(fig:fig_4)e, \@ref(fig:fig_5)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig_3)e, \@ref(fig:fig_5)e).
 
+### The Interaction of Irrigation and N Management
+
 ## 2016 Experiment {-}
 
 ### Tiller Sheath Blight Incidence {-}
@@ -142,6 +144,8 @@ In 2016 the N180 treatment was significantly different from the N60 treatment, w
 ### Leaf Sheath Blight Severity {-}
 
 In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:fig_3)f, \@ref(fig:fig_5)f, \@ref(fig:fig_4)f, \@ref(fig:fig_5)f).
+
+### The Interaction of Irrigation and N Management
 
 # Discussion {-}
 
