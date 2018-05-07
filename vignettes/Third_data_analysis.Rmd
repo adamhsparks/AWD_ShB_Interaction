@@ -8,6 +8,8 @@ output:
     toc_float: true
     toc_depth: 3
     theme: yeti
+    fig_width: 7
+    fig_height: 8
 vignette: >
   %\VignetteIndexEntry{Sheath Blight Analysis}
   %\VignetteEngine{knitr::rmarkdown}
@@ -114,6 +116,10 @@ prior <- list(R = list(V = diag(2), nu = 1.02),
               )
 ```
 
+## A Note About the Models
+
+The models are all multivariate models. This makes the models more complex, but reduces the number of models from six to four and accounts for correlation between the tiller sheath blight incidence and severity on the tiller and severity on leaves.
+
 ## 2015 Models
 
 ### 2015 Tiller Sheath Blight Severity Model
@@ -141,12 +147,12 @@ m1 <- do.call(mcmc.list, m1)
 
 summary(m1)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m1, auto.layout = FALSE)
 
 gelman.diag(m1)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m1)
@@ -177,12 +183,12 @@ m2 <- do.call(mcmc.list, m2)
 
 summary(m2)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(8, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m2, auto.layout = FALSE)
 
 gelman.diag(m2)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m2)
@@ -218,12 +224,15 @@ m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+
+par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
+
 
 gelman.diag(m3)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+
+par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m3)
@@ -249,17 +258,19 @@ m4 <- mclapply(1:4, function(i) {
     thin = 10)
 }, mc.cores = 4)
 
+
 m4 <- lapply(m4, function(m) m$Sol)
 m4 <- do.call(mcmc.list, m4)
 
 summary(m4)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+
+par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m4, auto.layout = FALSE)
 
 gelman.diag(m4)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m4)
