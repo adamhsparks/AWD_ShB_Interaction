@@ -88,7 +88,7 @@
       <h1>Sheath Blight Analysis</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2018-05-02</h4>
+            <h4 class="date">2018-05-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>Third_data_analysis.Rmd</code></div>
@@ -171,103 +171,38 @@
 <div id="specify-priors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specify-priors" class="anchor"></a>Specify Priors</h2>
-<p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat noninformative priors that have a uniform low degree of belief in all parameters for all six models we will create.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>),</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">               <span class="dt">G =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">                 <span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">alpha.mu =</span> <span class="dv">0</span>, <span class="dt">alpha.V =</span> <span class="dv">25</span><span class="op">^</span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">                 <span class="dt">G2 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">alpha.mu =</span> <span class="dv">0</span>, <span class="dt">alpha.V =</span> <span class="dv">25</span><span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">                 )</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">               )</a></code></pre></div>
+<p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat noninformative priors that have a uniform low degree of belief in all parameters for all four of the models we will create.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">prior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="kw">diag</span>(<span class="dv">2</span>), <span class="dt">nu =</span> <span class="fl">1.02</span>),</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">              <span class="dt">G =</span> <span class="kw">list</span>(<span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="kw">diag</span>(<span class="dv">2</span>), <span class="dt">nu =</span> <span class="fl">1.02</span>),</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                       <span class="dt">G2 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="kw">diag</span>(<span class="dv">2</span>), <span class="dt">nu =</span> <span class="fl">1.02</span>))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">              )</a></code></pre></div>
 </div>
 <div id="models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#models" class="anchor"></a>2015 Models</h2>
-<div id="tiller-sheath-blight-incidence-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">m1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">m1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m1, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">m1 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m1)</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw">summary</span>(m1)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.3421 0.6614 0.004676       0.005079
-## WMGTAWD          -0.2603 0.4349 0.003075       0.003099
-## NRTEN100          0.3659 0.2942 0.002080       0.002081
-## NRTEN120          0.6708 0.2940 0.002079       0.002053
-## WMGTAWD:NRTEN100  0.5117 0.4159 0.002941       0.002926
-## WMGTAWD:NRTEN120  0.6593 0.4151 0.002935       0.002916
-## 
-## 2. Quantiles for each variable:
-## 
-##                      2.5%     25%     50%       75%  97.5%
-## (Intercept)       0.21258  1.0692  1.3439  1.611233 2.4443
-## WMGTAWD          -1.10359 -0.5166 -0.2623 -0.005674 0.5755
-## NRTEN100         -0.21235  0.1714  0.3644  0.565050 0.9381
-## NRTEN120          0.08988  0.4776  0.6735  0.869075 1.2472
-## WMGTAWD:NRTEN100 -0.29900  0.2343  0.5116  0.788256 1.3281
-## WMGTAWD:NRTEN120 -0.15034  0.3809  0.6586  0.934978 1.4839</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m1)</a></code></pre></div>
-<pre><code>## Potential scale reduction factors:
-## 
-##                  Point est. Upper C.I.
-## (Intercept)            1.01       1.01
-## WMGTAWD                1.00       1.00
-## NRTEN100               1.00       1.00
-## NRTEN120               1.00       1.00
-## WMGTAWD:NRTEN100       1.00       1.00
-## WMGTAWD:NRTEN120       1.00       1.00
-## 
-## Multivariate psrf
-## 
-## 1</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m1)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
-</div>
 <div id="tiller-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb11-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb11-13" data-line-number="13">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="kw">summary</span>(m2)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">m1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="dt">fixed =</span> <span class="kw">cbind</span>(TShB_inc_AUDPS, TShB_percent_AUDPS) <span class="op">~</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">    </span>trait <span class="op">+</span><span class="st"> </span>trait<span class="op">:</span>WMGT <span class="op">*</span><span class="st"> </span>trait<span class="op">:</span>NRTE <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>REP <span class="op">+</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="dt">rcov =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>units,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="dt">prior =</span> prior,</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    <span class="dt">family =</span> <span class="kw">c</span>(<span class="st">"gaussian"</span>, <span class="st">"gaussian"</span>),</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">    <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">m1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m1, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">m1 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m1)</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="kw">summary</span>(m1)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -277,65 +212,113 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                    Mean     SD Naive SE Time-series SE
-## (Intercept)      16.548 10.461  0.07397        0.07488
-## WMGTAWD          -1.250 12.642  0.08939        0.09138
-## NRTEN100         16.180  7.152  0.05058        0.05113
-## NRTEN120         42.159  7.145  0.05052        0.05124
-## WMGTAWD:NRTEN100 20.005 10.071  0.07121        0.07113
-## WMGTAWD:NRTEN120 -1.949 10.126  0.07160        0.07235
+##                                             Mean      SD Naive SE
+## traitTShB_inc_AUDPS                       1.3341  0.8285 0.005858
+## traitTShB_percent_AUDPS                  16.5472  7.9587 0.056277
+## traitTShB_inc_AUDPS:WMGTAWD              -0.2591  0.6275 0.004437
+## traitTShB_percent_AUDPS:WMGTAWD          -1.3902 10.6483 0.075295
+## traitTShB_inc_AUDPS:NRTEN100              0.3707  0.2999 0.002120
+## traitTShB_percent_AUDPS:NRTEN100         16.2974  7.2048 0.050946
+## traitTShB_inc_AUDPS:NRTEN120              0.6727  0.3008 0.002127
+## traitTShB_percent_AUDPS:NRTEN120         42.2945  7.2182 0.051040
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100      0.5090  0.4225 0.002988
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN100 19.9850 10.1366 0.071677
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120      0.6571  0.4216 0.002981
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN120 -2.0649 10.1498 0.071770
+##                                          Time-series SE
+## traitTShB_inc_AUDPS                            0.005859
+## traitTShB_percent_AUDPS                        0.056943
+## traitTShB_inc_AUDPS:WMGTAWD                    0.004439
+## traitTShB_percent_AUDPS:WMGTAWD                0.076163
+## traitTShB_inc_AUDPS:NRTEN100                   0.002199
+## traitTShB_percent_AUDPS:NRTEN100               0.050511
+## traitTShB_inc_AUDPS:NRTEN120                   0.002127
+## traitTShB_percent_AUDPS:NRTEN120               0.051042
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100           0.003058
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN100       0.072434
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120           0.003030
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN120       0.072141
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                      2.5%    25%    50%    75% 97.5%
-## (Intercept)       -4.0382 10.328 16.518 22.709 37.33
-## WMGTAWD          -25.9452 -9.021 -1.329  6.443 23.93
-## NRTEN100           2.0139 11.403 16.245 21.074 30.03
-## NRTEN120          28.0116 37.370 42.150 47.029 56.04
-## WMGTAWD:NRTEN100   0.3571 13.239 20.055 26.704 39.76
-## WMGTAWD:NRTEN120 -21.8566 -8.765 -1.947  4.832 17.97</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
+##                                               2.5%     25%     50%     75%
+## traitTShB_inc_AUDPS                       -0.20211  0.9069  1.3313  1.7602
+## traitTShB_percent_AUDPS                    1.02878 11.5498 16.5290 21.4467
+## traitTShB_inc_AUDPS:WMGTAWD               -1.52951 -0.6349 -0.2601  0.1192
+## traitTShB_percent_AUDPS:WMGTAWD          -22.51741 -7.9860 -1.4034  5.3524
+## traitTShB_inc_AUDPS:NRTEN100              -0.21606  0.1688  0.3730  0.5706
+## traitTShB_percent_AUDPS:NRTEN100           2.10968 11.4725 16.3086 21.0902
+## traitTShB_inc_AUDPS:NRTEN120               0.07804  0.4708  0.6736  0.8743
+## traitTShB_percent_AUDPS:NRTEN120          28.03995 37.4806 42.3794 47.0777
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100      -0.31387  0.2281  0.5104  0.7899
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN100  -0.08318 13.0898 20.0015 26.7508
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120      -0.16612  0.3773  0.6563  0.9371
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN120 -21.69581 -8.9151 -2.0984  4.7069
+##                                            97.5%
+## traitTShB_inc_AUDPS                       2.8685
+## traitTShB_percent_AUDPS                  32.2780
+## traitTShB_inc_AUDPS:WMGTAWD               0.9815
+## traitTShB_percent_AUDPS:WMGTAWD          19.2377
+## traitTShB_inc_AUDPS:NRTEN100              0.9646
+## traitTShB_percent_AUDPS:NRTEN100         30.3555
+## traitTShB_inc_AUDPS:NRTEN120              1.2641
+## traitTShB_percent_AUDPS:NRTEN120         56.4173
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100      1.3405
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN100 40.0999
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120      1.4851
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN120 17.9620</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m1)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
-##                  Point est. Upper C.I.
-## (Intercept)               1          1
-## WMGTAWD                   1          1
-## NRTEN100                  1          1
-## NRTEN120                  1          1
-## WMGTAWD:NRTEN100          1          1
-## WMGTAWD:NRTEN120          1          1
+##                                          Point est. Upper C.I.
+## traitTShB_inc_AUDPS                               1          1
+## traitTShB_percent_AUDPS                           1          1
+## traitTShB_inc_AUDPS:WMGTAWD                       1          1
+## traitTShB_percent_AUDPS:WMGTAWD                   1          1
+## traitTShB_inc_AUDPS:NRTEN100                      1          1
+## traitTShB_percent_AUDPS:NRTEN100                  1          1
+## traitTShB_inc_AUDPS:NRTEN120                      1          1
+## traitTShB_percent_AUDPS:NRTEN120                  1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100              1          1
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN100          1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120              1          1
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN120          1          1
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m2)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m1)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="700"></p>
 </div>
 <div id="leaf-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb17-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb17-13" data-line-number="13">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="kw">summary</span>(m3)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="dt">fixed =</span> <span class="kw">cbind</span>(TShB_inc_AUDPS, LShB_percent_AUDPS) <span class="op">~</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">      </span>trait <span class="op">+</span><span class="st"> </span>trait<span class="op">:</span>WMGT <span class="op">*</span><span class="st"> </span>trait<span class="op">:</span>NRTE <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>REP <span class="op">+</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">rcov =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>units,</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">    <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">    <span class="dt">prior =</span> prior,</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">    <span class="dt">family =</span> <span class="kw">c</span>(<span class="st">"gaussian"</span>, <span class="st">"gaussian"</span>),</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">    <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">    <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">    <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb13-19" data-line-number="19"><span class="kw">summary</span>(m2)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -345,70 +328,119 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                    Mean    SD Naive SE Time-series SE
-## (Intercept)       2.942 4.466 0.031578       0.030312
-## WMGTAWD          -2.135 1.636 0.011572       0.011718
-## NRTEN100          2.281 1.023 0.007236       0.007076
-## NRTEN120          3.983 1.024 0.007243       0.007197
-## WMGTAWD:NRTEN100  4.544 1.442 0.010199       0.010081
-## WMGTAWD:NRTEN120  2.027 1.441 0.010188       0.010182
+##                                             Mean     SD Naive SE
+## traitTShB_inc_AUDPS                       1.3416 0.8282 0.005856
+## traitLShB_percent_AUDPS                   2.9145 3.1288 0.022124
+## traitTShB_inc_AUDPS:WMGTAWD              -0.2589 0.6518 0.004609
+## traitLShB_percent_AUDPS:WMGTAWD          -2.1504 1.5266 0.010794
+## traitTShB_inc_AUDPS:NRTEN100              0.3718 0.2958 0.002092
+## traitLShB_percent_AUDPS:NRTEN100          2.2863 1.0144 0.007173
+## traitTShB_inc_AUDPS:NRTEN120              0.6737 0.2952 0.002087
+## traitLShB_percent_AUDPS:NRTEN120          3.9861 1.0188 0.007204
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100      0.5052 0.4179 0.002955
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100  4.5268 1.4327 0.010131
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120      0.6513 0.4215 0.002980
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120  2.0131 1.4404 0.010185
+##                                          Time-series SE
+## traitTShB_inc_AUDPS                            0.005857
+## traitLShB_percent_AUDPS                        0.021957
+## traitTShB_inc_AUDPS:WMGTAWD                    0.004578
+## traitLShB_percent_AUDPS:WMGTAWD                0.010629
+## traitTShB_inc_AUDPS:NRTEN100                   0.002104
+## traitLShB_percent_AUDPS:NRTEN100               0.007216
+## traitTShB_inc_AUDPS:NRTEN120                   0.002115
+## traitLShB_percent_AUDPS:NRTEN120               0.007244
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100           0.002955
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100       0.010131
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120           0.002964
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120       0.010233
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                     2.5%    25%    50%    75%   97.5%
-## (Intercept)      -5.3056  1.025  2.881  4.801 11.3095
-## WMGTAWD          -5.2344 -3.005 -2.142 -1.273  0.9551
-## NRTEN100          0.2863  1.589  2.290  2.977  4.2589
-## NRTEN120          1.9420  3.300  3.982  4.671  5.9860
-## WMGTAWD:NRTEN100  1.7488  3.568  4.540  5.506  7.3607
-## WMGTAWD:NRTEN120 -0.8139  1.050  2.043  2.990  4.8439</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m3)</a></code></pre></div>
+##                                              2.5%     25%     50%     75%
+## traitTShB_inc_AUDPS                      -0.23313  0.9092  1.3411  1.7762
+## traitLShB_percent_AUDPS                  -2.78399  1.3845  2.9086  4.3654
+## traitTShB_inc_AUDPS:WMGTAWD              -1.54993 -0.6468 -0.2581  0.1244
+## traitLShB_percent_AUDPS:WMGTAWD          -5.10300 -3.0333 -2.1522 -1.2400
+## traitTShB_inc_AUDPS:NRTEN100             -0.21664  0.1737  0.3733  0.5709
+## traitLShB_percent_AUDPS:NRTEN100          0.29908  1.6052  2.2869  2.9665
+## traitTShB_inc_AUDPS:NRTEN120              0.09286  0.4756  0.6758  0.8737
+## traitLShB_percent_AUDPS:NRTEN120          2.00100  3.2979  3.9779  4.6751
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100     -0.31264  0.2265  0.5016  0.7894
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100  1.72096  3.5618  4.5154  5.4856
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120     -0.17679  0.3697  0.6522  0.9330
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120 -0.77212  1.0380  2.0072  2.9812
+##                                           97.5%
+## traitTShB_inc_AUDPS                      2.8795
+## traitLShB_percent_AUDPS                  8.7868
+## traitTShB_inc_AUDPS:WMGTAWD              1.0252
+## traitLShB_percent_AUDPS:WMGTAWD          0.8121
+## traitTShB_inc_AUDPS:NRTEN100             0.9499
+## traitLShB_percent_AUDPS:NRTEN100         4.2714
+## traitTShB_inc_AUDPS:NRTEN120             1.2486
+## traitLShB_percent_AUDPS:NRTEN120         5.9765
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100     1.3269
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100 7.3846
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120     1.4750
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120 4.8220</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
-##                  Point est. Upper C.I.
-## (Intercept)               1          1
-## WMGTAWD                   1          1
-## NRTEN100                  1          1
-## NRTEN120                  1          1
-## WMGTAWD:NRTEN100          1          1
-## WMGTAWD:NRTEN120          1          1
+##                                          Point est. Upper C.I.
+## traitTShB_inc_AUDPS                               1          1
+## traitLShB_percent_AUDPS                           1          1
+## traitTShB_inc_AUDPS:WMGTAWD                       1          1
+## traitLShB_percent_AUDPS:WMGTAWD                   1          1
+## traitTShB_inc_AUDPS:NRTEN100                      1          1
+## traitLShB_percent_AUDPS:NRTEN100                  1          1
+## traitTShB_inc_AUDPS:NRTEN120                      1          1
+## traitLShB_percent_AUDPS:NRTEN120                  1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100              1          1
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100          1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120              1          1
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120          1          1
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m3)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m2)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="700"></p>
 <hr>
 </div>
 </div>
 <div id="models-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#models-1" class="anchor"></a>2016 Models</h2>
-<div id="tiller-sheath-blight-incidence-model-1" class="section level3">
+<div id="tiller-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb23-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb23-12" data-line-number="12">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb23-13" data-line-number="13">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
-<a class="sourceLine" id="cb23-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="kw">summary</span>(m4)</a></code></pre></div>
+<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">    <span class="dt">fixed =</span> <span class="kw">cbind</span>(TShB_inc_AUDPS, TShB_percent_AUDPS) <span class="op">~</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">      </span>trait <span class="op">+</span><span class="st"> </span>trait<span class="op">:</span>WMGT <span class="op">*</span><span class="st"> </span>trait<span class="op">:</span>NRTE <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">    <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>REP <span class="op">+</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    <span class="dt">rcov =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>units,</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9">    <span class="dt">prior =</span> prior,</a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">    <span class="dt">family =</span> <span class="kw">c</span>(<span class="st">"gaussian"</span>, <span class="st">"gaussian"</span>),</a>
+<a class="sourceLine" id="cb21-11" data-line-number="11">    <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb21-12" data-line-number="12">    <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">    <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb21-17" data-line-number="17">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb21-18" data-line-number="18">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
+<a class="sourceLine" id="cb21-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb21-20" data-line-number="20"><span class="kw">summary</span>(m3)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -418,59 +450,92 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                     Mean     SD Naive SE Time-series SE
-## (Intercept)      10.3293 1.3016 0.009204       0.009791
-## WMGTAWD           0.7550 0.8489 0.006002       0.005846
-## NRTEN180          2.3542 0.3234 0.002287       0.002319
-## WMGTAWD:NRTEN180 -0.7879 0.4581 0.003240       0.003201
+##                                             Mean      SD Naive SE
+## traitTShB_inc_AUDPS                      10.3453  1.1318 0.008003
+## traitTShB_percent_AUDPS                  29.7624  7.9673 0.056337
+## traitTShB_inc_AUDPS:WMGTAWD               0.7578  0.8196 0.005795
+## traitTShB_percent_AUDPS:WMGTAWD          -3.7137 10.1919 0.072068
+## traitTShB_inc_AUDPS:NRTEN180              2.3503  0.3258 0.002304
+## traitTShB_percent_AUDPS:NRTEN180          9.2465  1.5720 0.011115
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN180     -0.7758  0.4635 0.003277
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN180 -9.0120  2.2303 0.015770
+##                                          Time-series SE
+## traitTShB_inc_AUDPS                            0.008003
+## traitTShB_percent_AUDPS                        0.056382
+## traitTShB_inc_AUDPS:WMGTAWD                    0.005854
+## traitTShB_percent_AUDPS:WMGTAWD                0.072934
+## traitTShB_inc_AUDPS:NRTEN180                   0.002289
+## traitTShB_percent_AUDPS:NRTEN180               0.010902
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN180           0.003329
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN180       0.015340
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                     2.5%     25%     50%     75%   97.5%
-## (Intercept)       7.9265  9.7765 10.3335 10.8894 12.7119
-## WMGTAWD          -0.9176  0.3337  0.7556  1.1767  2.4485
-## NRTEN180          1.7157  2.1385  2.3559  2.5700  2.9777
-## WMGTAWD:NRTEN180 -1.6932 -1.0936 -0.7889 -0.4859  0.1113</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
+##                                              2.5%      25%     50%    75%
+## traitTShB_inc_AUDPS                        8.2250   9.7800 10.3457 10.920
+## traitTShB_percent_AUDPS                   14.0670  25.2260 29.7202 34.407
+## traitTShB_inc_AUDPS:WMGTAWD               -0.8854   0.2818  0.7624  1.237
+## traitTShB_percent_AUDPS:WMGTAWD          -24.2310  -9.5839 -3.6928  2.108
+## traitTShB_inc_AUDPS:NRTEN180               1.7095   2.1337  2.3490  2.569
+## traitTShB_percent_AUDPS:NRTEN180           6.1196   8.2085  9.2740 10.302
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN180      -1.6779  -1.0796 -0.7769 -0.466
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN180 -13.4141 -10.5032 -9.0258 -7.535
+##                                            97.5%
+## traitTShB_inc_AUDPS                      12.4983
+## traitTShB_percent_AUDPS                  45.3381
+## traitTShB_inc_AUDPS:WMGTAWD               2.3783
+## traitTShB_percent_AUDPS:WMGTAWD          16.9990
+## traitTShB_inc_AUDPS:NRTEN180              2.9829
+## traitTShB_percent_AUDPS:NRTEN180         12.3067
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN180      0.1344
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN180 -4.5958</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m3)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
-##                  Point est. Upper C.I.
-## (Intercept)               1          1
-## WMGTAWD                   1          1
-## NRTEN180                  1          1
-## WMGTAWD:NRTEN180          1          1
+##                                          Point est. Upper C.I.
+## traitTShB_inc_AUDPS                               1          1
+## traitTShB_percent_AUDPS                           1          1
+## traitTShB_inc_AUDPS:WMGTAWD                       1          1
+## traitTShB_percent_AUDPS:WMGTAWD                   1          1
+## traitTShB_inc_AUDPS:NRTEN180                      1          1
+## traitTShB_percent_AUDPS:NRTEN180                  1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN180              1          1
+## traitTShB_percent_AUDPS:WMGTAWD:NRTEN180          1          1
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m4)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m3)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
 </div>
-<div id="tiller-sheath-blight-severity-model-1" class="section level3">
+<div id="leaf-sheath-blight-severity" class="section level3">
 <h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">m5 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb29-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb29-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb29-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb29-12" data-line-number="12">m5 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m5, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb29-13" data-line-number="13">m5 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m5)</a>
-<a class="sourceLine" id="cb29-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb29-15" data-line-number="15"><span class="kw">summary</span>(m5)</a></code></pre></div>
+<a href="#leaf-sheath-blight-severity" class="anchor"></a>2016 Leaf Sheath Blight Severity</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="dt">fixed =</span> <span class="kw">cbind</span>(TShB_inc_AUDPS, LShB_percent_AUDPS) <span class="op">~</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">      </span>trait <span class="op">+</span><span class="st"> </span>trait<span class="op">:</span>WMGT <span class="op">*</span><span class="st"> </span>trait<span class="op">:</span>NRTE <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>REP <span class="op">+</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">    <span class="dt">rcov =</span> <span class="op">~</span><span class="st"> </span><span class="kw">us</span>(trait)<span class="op">:</span>units,</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">    <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">    <span class="dt">prior =</span> prior,</a>
+<a class="sourceLine" id="cb28-10" data-line-number="10">    <span class="dt">family =</span> <span class="kw">c</span>(<span class="st">"gaussian"</span>, <span class="st">"gaussian"</span>),</a>
+<a class="sourceLine" id="cb28-11" data-line-number="11">    <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb28-12" data-line-number="12">    <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb28-13" data-line-number="13">    <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb28-14" data-line-number="14">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb28-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb28-16" data-line-number="16">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb28-17" data-line-number="17">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
+<a class="sourceLine" id="cb28-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb28-19" data-line-number="19"><span class="kw">summary</span>(m4)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -480,106 +545,94 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                    Mean     SD Naive SE Time-series SE
-## (Intercept)      29.817  9.980  0.07057        0.07021
-## WMGTAWD          -3.835 10.734  0.07590        0.07535
-## NRTEN180          9.248  1.568  0.01109        0.01108
-## WMGTAWD:NRTEN180 -9.009  2.236  0.01581        0.01568
+##                                             Mean     SD Naive SE
+## traitTShB_inc_AUDPS                       1.3368 0.8268 0.005847
+## traitLShB_percent_AUDPS                   2.9135 3.0206 0.021359
+## traitTShB_inc_AUDPS:WMGTAWD              -0.2578 0.6620 0.004681
+## traitLShB_percent_AUDPS:WMGTAWD          -2.1437 1.5315 0.010829
+## traitTShB_inc_AUDPS:NRTEN100              0.3666 0.2934 0.002075
+## traitLShB_percent_AUDPS:NRTEN100          2.2694 1.0206 0.007217
+## traitTShB_inc_AUDPS:NRTEN120              0.6701 0.2961 0.002094
+## traitLShB_percent_AUDPS:NRTEN120          3.9717 1.0216 0.007224
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100      0.5125 0.4140 0.002928
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100  4.5533 1.4358 0.010153
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120      0.6574 0.4162 0.002943
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120  2.0358 1.4308 0.010117
+##                                          Time-series SE
+## traitTShB_inc_AUDPS                            0.005860
+## traitLShB_percent_AUDPS                        0.021359
+## traitTShB_inc_AUDPS:WMGTAWD                    0.004706
+## traitLShB_percent_AUDPS:WMGTAWD                0.010890
+## traitTShB_inc_AUDPS:NRTEN100                   0.002096
+## traitLShB_percent_AUDPS:NRTEN100               0.007309
+## traitTShB_inc_AUDPS:NRTEN120                   0.002094
+## traitLShB_percent_AUDPS:NRTEN120               0.007189
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100           0.002970
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100       0.010365
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120           0.002979
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120       0.010116
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                     2.5%     25%    50%    75%  97.5%
-## (Intercept)        9.893  24.310 29.770 35.261 49.940
-## WMGTAWD          -25.735  -9.830 -3.763  2.241 18.056
-## NRTEN180           6.164   8.203  9.253 10.293 12.353
-## WMGTAWD:NRTEN180 -13.406 -10.487 -9.012 -7.511 -4.599</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</a></code></pre></div>
+##                                              2.5%     25%     50%     75%
+## traitTShB_inc_AUDPS                      -0.23136  0.9026  1.3352  1.7570
+## traitLShB_percent_AUDPS                  -2.85757  1.4217  2.9132  4.4008
+## traitTShB_inc_AUDPS:WMGTAWD              -1.55689 -0.6413 -0.2606  0.1250
+## traitLShB_percent_AUDPS:WMGTAWD          -5.11758 -3.0378 -2.1405 -1.2444
+## traitTShB_inc_AUDPS:NRTEN100             -0.20934  0.1667  0.3645  0.5655
+## traitLShB_percent_AUDPS:NRTEN100          0.25118  1.5811  2.2732  2.9535
+## traitTShB_inc_AUDPS:NRTEN120              0.09488  0.4706  0.6670  0.8693
+## traitLShB_percent_AUDPS:NRTEN120          1.95458  3.2885  3.9675  4.6591
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100     -0.29167  0.2307  0.5115  0.7913
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100  1.71491  3.5932  4.5456  5.5165
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120     -0.14932  0.3754  0.6577  0.9392
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120 -0.78310  1.0768  2.0229  2.9978
+##                                           97.5%
+## traitTShB_inc_AUDPS                      2.8937
+## traitLShB_percent_AUDPS                  8.7748
+## traitTShB_inc_AUDPS:WMGTAWD              1.0563
+## traitLShB_percent_AUDPS:WMGTAWD          0.8357
+## traitTShB_inc_AUDPS:NRTEN100             0.9396
+## traitLShB_percent_AUDPS:NRTEN100         4.2623
+## traitTShB_inc_AUDPS:NRTEN120             1.2490
+## traitLShB_percent_AUDPS:NRTEN120         5.9890
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100     1.3219
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100 7.3776
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120     1.4746
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120 4.8598</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
-##                  Point est. Upper C.I.
-## (Intercept)               1          1
-## WMGTAWD                   1          1
-## NRTEN180                  1          1
-## WMGTAWD:NRTEN180          1          1
+##                                          Point est. Upper C.I.
+## traitTShB_inc_AUDPS                               1          1
+## traitLShB_percent_AUDPS                           1          1
+## traitTShB_inc_AUDPS:WMGTAWD                       1          1
+## traitLShB_percent_AUDPS:WMGTAWD                   1          1
+## traitTShB_inc_AUDPS:NRTEN100                      1          1
+## traitLShB_percent_AUDPS:NRTEN100                  1          1
+## traitTShB_inc_AUDPS:NRTEN120                      1          1
+## traitLShB_percent_AUDPS:NRTEN120                  1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN100              1          1
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN100          1          1
+## traitTShB_inc_AUDPS:WMGTAWD:NRTEN120              1          1
+## traitLShB_percent_AUDPS:WMGTAWD:NRTEN120          1          1
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">plot</span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m5)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m4)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="700"></p>
 </div>
-<div id="leaf-sheath-blight-severity-model-1" class="section level3">
+<div id="model-fit-and-convergence" class="section level3">
 <h3 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">m6 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/mclapply">mclapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) {</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP, </a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6">           <span class="dt">prior =</span> eprior,</a>
-<a class="sourceLine" id="cb35-7" data-line-number="7">           <span class="dt">nitt =</span> <span class="dv">55000</span>,,</a>
-<a class="sourceLine" id="cb35-8" data-line-number="8">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb35-10" data-line-number="10">}, <span class="dt">mc.cores =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb35-12" data-line-number="12">m6 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m6, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb35-13" data-line-number="13">m6 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m6)</a>
-<a class="sourceLine" id="cb35-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb35-15" data-line-number="15"><span class="kw">summary</span>(m6)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##                     Mean     SD  Naive SE Time-series SE
-## (Intercept)       1.0530 0.6879 0.0048645      0.0047185
-## WMGTAWD           0.5061 0.4996 0.0035329      0.0034428
-## NRTEN180          0.5336 0.1319 0.0009327      0.0009267
-## WMGTAWD:NRTEN180 -0.7557 0.1864 0.0013183      0.0012862
-## 
-## 2. Quantiles for each variable:
-## 
-##                     2.5%     25%     50%     75%   97.5%
-## (Intercept)      -0.1365  0.7878  1.0565  1.3256  2.2319
-## WMGTAWD          -0.4776  0.2418  0.5072  0.7688  1.5017
-## NRTEN180          0.2698  0.4471  0.5352  0.6210  0.7899
-## WMGTAWD:NRTEN180 -1.1209 -0.8785 -0.7561 -0.6306 -0.3938</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m6)</a></code></pre></div>
-<pre><code>## Potential scale reduction factors:
-## 
-##                  Point est. Upper C.I.
-## (Intercept)            1.04       1.04
-## WMGTAWD                1.00       1.00
-## NRTEN180               1.00       1.00
-## WMGTAWD:NRTEN180       1.00       1.00
-## 
-## Multivariate psrf
-## 
-## 1</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">plot</span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw"><a href="../reference/plot_estimates.html">plot_estimates</a></span>(m6)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"></p>
-</div>
-<div id="model-fit" class="section level3">
-<h3 class="hasAnchor">
-<a href="#model-fit" class="anchor"></a>Model Fit</h3>
+<a href="#model-fit-and-convergence" class="anchor"></a>Model Fit and Convergence</h3>
 <p>The models all appear to be good fits.</p>
 <p>None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.</p>
 <p>The Gelman diagnostics indicate that all of the models successfully converged.</p>
@@ -600,9 +653,9 @@
 <p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the base FLD treatment and neither interaction appeard to be significant.</p>
 <p>In 2016 the N180 was significantly different from the N60 rate. The AWD irrigation management was not significantly different from the base FLD treatment, nor was the interaction of irrigation and N rate.</p>
 </div>
-<div id="leaf-sheath-blight-severity" class="section level3">
+<div id="leaf-sheath-blight-severity-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity" class="anchor"></a>Leaf Sheath Blight Severity</h3>
+<a href="#leaf-sheath-blight-severity-1" class="anchor"></a>Leaf Sheath Blight Severity</h3>
 <p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the control FLD treatment. However, the interaction of N100 and irrigation was significant while the interaction of N120 and irrigation was not.</p>
 <p>In 2016 irrigation management was not significantly different from the base treatments for leaf sheath blight severity. However, the N180 and interaction of N treatment and irrigation were significantly different than the base.</p>
 </div>
@@ -611,13 +664,11 @@
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>This step saves the model information used in the posterior estimate graphs to be used in the paper.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">               <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">               <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,</a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">               <span class="st">"TInc_16"</span> =<span class="st"> </span>m4,</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">               <span class="st">"TSev_16"</span> =<span class="st"> </span>m5,</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">               <span class="st">"LSev_16"</span> =<span class="st"> </span>m6)</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">saveRDS</span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">               <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">               <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">               <span class="st">"TInc_16"</span> =<span class="st"> </span>m4)</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="kw">saveRDS</span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</a></code></pre></div>
 </div>
   </div>
 
