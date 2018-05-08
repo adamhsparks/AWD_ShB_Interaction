@@ -249,7 +249,7 @@ m4 <- mclapply(1:4, function(i) {
       trait + trait:WMGT * trait:NRTE - 1,
     random = ~ us(trait):REP + us(trait):WMGT:REP,
     rcov = ~ us(trait):units,
-    data = AUDPS_2015,
+    data = AUDPS_2016,
     verbose = FALSE,
     prior = prior,
     family = c("gaussian", "gaussian"),

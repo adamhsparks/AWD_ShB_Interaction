@@ -655,7 +655,7 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 models <- readRDS("../data/derived_data/models.Rds")
 
-par(mfcol = c(3, 2))
+par(mfcol = c(2, 2))
 
 plot_estimates_paper(models[[1]], main_title = "2015")
 mtext(text = "Tiller Incidence", side = 2, line = 6)
@@ -665,19 +665,11 @@ plot_estimates_paper(models[[2]])
 mtext(text = "Tiller Severity", side = 2, line = 6)
 mtext(text = "c", side = 3, line = 0, adj = 1, cex = 0.75)
 
-plot_estimates_paper(models[[3]])
-mtext(text = "Leaf Severity", side = 2, line = 6)
-mtext(text = "e", side = 3, line = 0, adj = 1, cex = 0.75)
-
-
-plot_estimates_paper(models[[4]], main_title = "2016")
+plot_estimates_paper(models[[3]], main_title = "2016")
 mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 
-plot_estimates_paper(models[[5]])
+plot_estimates_paper(models[[4]])
 mtext(text = "d", side = 3, line = 0, adj = 1, cex = 0.75)
-
-plot_estimates_paper(models[[6]])
-mtext(text = "f", side = 3, line = 0, adj = 1, cex = 0.75)
 
 ```
 
