@@ -9,7 +9,7 @@ output:
     toc_depth: 3
     theme: yeti
 vignette: >
-  %\VignetteIndexEntry{02 Check Data Residuals}
+  %\VignetteIndexEntry{02_Check_Data_Residuals}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
