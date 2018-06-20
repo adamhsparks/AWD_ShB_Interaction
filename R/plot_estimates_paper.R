@@ -18,12 +18,12 @@
 #' @export
 plot_estimates_paper <- function(x, main_title = "") {
   if (class(x) != "summary.mcmc") {
-    x <- coda:::summary.mcmc.list(x)
+    x <- summary(x)
   }
   n <- dim(x$statistics)[1]
-  par(mar = c(2, 15, 3, 1),
+  graphics::par(mar = c(2, 15, 3, 1),
       cex = 0.7)
-  plot(
+  graphics::plot(
     x$statistics[, 1],
     n:1,
     yaxt = "n",
@@ -38,7 +38,7 @@ plot_estimates_paper <- function(x, main_title = "") {
   row.names(x$statistics) <- gsub(pattern = "WMGT", "", row.names(x$statistics))
   row.names(x$statistics) <- gsub(pattern = "NRTE", "", row.names(x$statistics))
 
-  axis(side = 2, at = n:1, row.names(x$statistics), las = 2)
-  arrows(x$quantiles[, 1], n:1, x$quantiles[, 5], n:1, code = 0)
-  abline(v = 0, lty = 2)
+  graphics::axis(side = 2, at = n:1, row.names(x$statistics), las = 2)
+  graphics::arrows(x$quantiles[, 1], n:1, x$quantiles[, 5], n:1, code = 0)
+  graphics::abline(v = 0, lty = 2)
 }
