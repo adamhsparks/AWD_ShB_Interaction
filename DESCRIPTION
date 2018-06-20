@@ -18,14 +18,14 @@ Description: Provides a research compendium of analysis associated with
     experiments were designed to test the effects of alternate wetting and
     drying irrigation management on rice sheath blight disease. The plots were
     split plot with an irrigation main plot and nitrogen sub-plot treatments.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.4.0),
+    coda
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: agricolae,
     car,
     carData,
-    coda,
     dplyr (>= 0.7.0),
     fitdistrplus,
     forcats,
