@@ -112,28 +112,28 @@ Check for correlation between the tiller incidence and the severity ratings for 
 cor.test(AUDPS_2015$TShB_inc_AUDPS,
          AUDPS_2015$TShB_sev_AUDPS,
          method = "spearman",
-         alternative = "greater",
+         alternative = "two.sided",
          exact = FALSE)
 
 # 2015 Leaf Severity Correlation
 cor.test(AUDPS_2015$TShB_inc_AUDPS,
          AUDPS_2015$LShB_sev_AUDPS,
          method = "spearman",
-         alternative = "greater",
+         alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Tiller Severity Correlation
 cor.test(AUDPS_2016$TShB_inc_AUDPS,
          AUDPS_2016$TShB_sev_AUDPS,
          method = "spearman",
-         alternative = "greater",
+         alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Leaf Severity Correlation
 cor.test(AUDPS_2016$TShB_inc_AUDPS,
          AUDPS_2016$LShB_sev_AUDPS,
          method = "spearman",
-         alternative = "greater",
+         alternative = "two.sided",
          exact = FALSE)
 ```
 
