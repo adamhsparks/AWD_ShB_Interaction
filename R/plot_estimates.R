@@ -21,8 +21,7 @@ plot_estimates <- function(x) {
     x <- summary(x)
   }
   n <- dim(x$statistics)[1]
-  graphics::par(mar = c(2, 8, 3, 1),
-      cex = 0.5)
+  graphics::par(mar = c(2, 7, 4, 1))
   graphics::plot(
     x$statistics[, 1],
     n:1,
