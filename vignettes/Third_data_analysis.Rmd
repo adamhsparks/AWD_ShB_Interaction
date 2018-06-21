@@ -11,7 +11,7 @@ output:
     fig_width: 7
     fig_height: 8
 vignette: >
-  %\VignetteIndexEntry{Sheath Blight Analysis}
+  %\VignetteIndexEntry{03_Sheath_Blight_Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

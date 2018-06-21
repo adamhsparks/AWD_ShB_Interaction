@@ -8,7 +8,7 @@ output:
     toc_float: true
     theme: yeti
 vignette: >
-  %\VignetteIndexEntry{AWD Sheath Blight Study Notes}
+  %\VignetteIndexEntry{AWD_Sheath_Blight_Study_Notes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
