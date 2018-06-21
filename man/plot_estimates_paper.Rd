@@ -13,7 +13,7 @@ plot_estimates_paper(x, main_title = "")
 }
 \description{
 Plot estimates of posterior distributions and credible
- intervals of MCMCglmm outputs sans intercept for publication figure
+ intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 }
 \examples{
 \dontrun{

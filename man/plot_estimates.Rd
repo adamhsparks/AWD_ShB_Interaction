@@ -11,7 +11,7 @@ plot_estimates(x)
 }
 \description{
 Plot estimates of posterior distributions and credible
- intervals of MCMCglmm outputs
+ intervals of \pkg{MCMCglmm} outputs
 }
 \examples{
 \dontrun{

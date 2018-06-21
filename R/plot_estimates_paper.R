@@ -2,7 +2,7 @@
 #' @title Plot MCMCglmm estimates for publication
 #'
 #' @description Plot estimates of posterior distributions and credible
-#'  intervals of MCMCglmm outputs sans intercept for publication figure
+#'  intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 #'
 #' @name plot_estimates_paper
 #' @param x An\code{\link[coda]{mcmc.list}} object
@@ -21,7 +21,7 @@ plot_estimates_paper <- function(x, main_title = "") {
     x <- summary(x)
   }
   n <- dim(x$statistics)[1]
-  graphics::par(mar = c(2, 15, 3, 1),
+  graphics::par(mar = c(2, 8, 3, 1),
       cex = 0.7)
   graphics::plot(
     x$statistics[, 1],
