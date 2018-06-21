@@ -8,8 +8,6 @@ output:
     toc_float: true
     toc_depth: 3
     theme: yeti
-    fig_width: 7
-    fig_height: 8
 vignette: >
   %\VignetteIndexEntry{03_Sheath_Blight_Analysis}
   %\VignetteEngine{knitr::rmarkdown}
@@ -71,6 +69,8 @@ library(rice.awd.pests)
 library(reshape2)
 library(magrittr)
 library(MCMCglmm)
+library(foreach)
+library(doParallel)
 library(parallel)
 library(plotMCMC)
 library(tidyr)
@@ -107,213 +107,271 @@ the analysis.
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
 flat noninformative priors that have a uniform low degree of belief in all
-parameters for all four of the models we will create.
+parameters for all six models we will create.
 
 ```{r priors}
-prior <- list(R = list(V = diag(2), nu = 1.02),
-              G = list(G1 = list(V = diag(2), nu = 1.02),
-                       G2 = list(V = diag(2), nu = 1.02))
-              )
+eprior <- list(R = list(V = 1, nu = 0.002),
+               G = list(G1 = list( V = 1, n = 1, alpha.mu = 0, alpha.V = 25^2)))
 ```
-
-## A Note About the Models
-
-The models are all multivariate models. This makes the models more complex, but reduces the number of models from six to four and accounts for correlation between the tiller sheath blight incidence and severity on the tiller and severity on leaves.
 
 ## 2015 Models
 
-### 2015 Tiller Sheath Blight Severity Model
+### 2015 Tiller Sheath Blight Incidence Model
 
 ```{r 2015_TShB_incidence, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
 
-m1 <- mclapply(1:4, function(i) {
-  MCMCglmm(
-    fixed = cbind(TShB_inc_AUDPS, TShB_percent_AUDPS) ~
-    trait + trait:WMGT * trait:NRTE - 1,
-    random = ~ us(trait):REP + us(trait):WMGT:REP,
-    rcov = ~ us(trait):units,
-    data = AUDPS_2015,
-    verbose = FALSE,
-    prior = prior,
-    family = c("gaussian", "gaussian"),
-    nitt = 55000,
-    burnin = 5000,
-    thin = 10)
-}, mc.cores = 4)
+m1 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
 
+stopCluster(cl)
 
 m1 <- lapply(m1, function(m) m$Sol)
 m1 <- do.call(mcmc.list, m1)
 
 summary(m1)
 
-par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m1, auto.layout = FALSE)
 
 gelman.diag(m1)
 
-par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m1)
 
 ```
 
-### 2015 Leaf Sheath Blight Severity Model
+### 2015 Tiller Sheath Blight Severity Model
 
 ```{r 2015_TShB_severity, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
 
-m2 <- mclapply(1:4, function(i) {
-  MCMCglmm(
-    fixed = cbind(TShB_inc_AUDPS, LShB_percent_AUDPS) ~
-      trait + trait:WMGT * trait:NRTE - 1,
-    random = ~ us(trait):REP + us(trait):WMGT:REP,
-    rcov = ~ us(trait):units,
-    data = AUDPS_2015,
-    verbose = FALSE,
-    prior = prior,
-    family = c("gaussian", "gaussian"),
-    nitt = 55000,
-    burnin = 5000,
-    thin = 10)
-}, mc.cores = 4)
+m2 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
+
+stopCluster(cl)
 
 m2 <- lapply(m2, function(m) m$Sol)
 m2 <- do.call(mcmc.list, m2)
 
 summary(m2)
 
-par(mfrow = c(8, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m2, auto.layout = FALSE)
 
 gelman.diag(m2)
 
-par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m2)
 ```
 
+### 2015 Leaf Sheath Blight Severity Model
 
-*******
+```{r 2015_LShB_severity, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
 
-## 2016 Models
+m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2015,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
 
-### 2016 Tiller Sheath Blight Severity Model
-
-```{r 2016_TShB_incidence, cache=FALSE}
-
-m3 <- mclapply(1:4, function(i) {
-  MCMCglmm(
-    fixed = cbind(TShB_inc_AUDPS, TShB_percent_AUDPS) ~
-      trait + trait:WMGT * trait:NRTE - 1,
-    random = ~ us(trait):REP + us(trait):WMGT:REP,
-    rcov = ~ us(trait):units,
-    data = AUDPS_2016,
-    verbose = FALSE,
-    prior = prior,
-    family = c("gaussian", "gaussian"),
-    nitt = 55000,
-    burnin = 5000,
-    thin = 10)
-}, mc.cores = 4)
-
+stopCluster(cl)
 
 m3 <- lapply(m3, function(m) m$Sol)
 m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-
-par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
-
 
 gelman.diag(m3)
 
-
-par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m3)
 ```
 
+*******
 
-### 2016 Leaf Sheath Blight Severity
+## 2016 Models
 
-```{r 2016_TShB_severity, cache=FALSE}
+### 2016 Tiller Sheath Blight Incidence Model
 
-m4 <- mclapply(1:4, function(i) {
-  MCMCglmm(
-    fixed = cbind(TShB_inc_AUDPS, LShB_percent_AUDPS) ~
-      trait + trait:WMGT * trait:NRTE - 1,
-    random = ~ us(trait):REP + us(trait):WMGT:REP,
-    rcov = ~ us(trait):units,
-    data = AUDPS_2016,
-    verbose = FALSE,
-    prior = prior,
-    family = c("gaussian", "gaussian"),
-    nitt = 55000,
-    burnin = 5000,
-    thin = 10)
-}, mc.cores = 4)
+```{r 2016_TShB_incidence, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
 
+m4 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
+
+stopCluster(cl)
 
 m4 <- lapply(m4, function(m) m$Sol)
 m4 <- do.call(mcmc.list, m4)
 
 summary(m4)
 
-
-par(mfrow = c(6, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
 gelman.plot(m4, auto.layout = FALSE)
 
 gelman.diag(m4)
 
-par(mfrow = c(12, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m4)
 ```
 
-### Model Fit and Convergence
+
+### 2016 Tiller Sheath Blight Severity Model
+
+```{r 2016_TShB_severity, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
+
+m5 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
+
+stopCluster(cl)
+
+m5 <- lapply(m5, function(m) m$Sol)
+m5 <- do.call(mcmc.list, m5)
+
+summary(m5)
+
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m5, auto.layout = FALSE)
+
+gelman.diag(m5)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+plot(m5, ask = FALSE, auto.layout = FALSE)
+
+plot_estimates(m5)
+```
+
+### 2016 Leaf Sheath Blight Severity Model
+
+```{r 2016_LShB_severity, cache=FALSE}
+cl <- makePSOCKcluster(detectCores() - 1)
+registerDoParallel(cl)
+
+m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
+  MCMCglmm(LShB_percent_AUDPS ~ WMGT + NRTE,
+           random = ~REP, 
+           data = AUDPS_2016,
+           verbose = FALSE,
+           prior = eprior,
+           nitt = 55000,
+           burnin = 5000,
+           thin = 10)
+}
+
+stopCluster(cl)
+
+m6 <- lapply(m6, function(m) m$Sol)
+m6 <- do.call(mcmc.list, m6)
+
+summary(m6)
+
+par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+gelman.plot(m6, auto.layout = FALSE)
+
+gelman.diag(m6)
+
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+plot(m6, ask = FALSE, auto.layout = FALSE)
+
+plot_estimates(m6)
+```
+
+### Model Fit
 
 The models all appear to be good fits.
 
 None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.
 
-The Gelman diagnostics indicate that all of the models successfully converged.
+The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
 
 ## Conclusions
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 the nitrogen rate N120 was significant when compared with the base N0 rate but N100 was not. The irrigation management was not significantly different nor were the interactions of N rate and irrigation.
+In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significantly different.
 
-In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, irrigation management was not significantly different and neither was the interaction of N rate and irrigation management.
+In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significantly different.
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the base FLD treatment and neither interaction appeard to be significant.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base FLD treatment.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD irrigation management was not significantly different from the base FLD treatment, nor was the interaction of irrigation and N rate.
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base FLD treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD irrigation management was not significantly different from the control FLD treatment. However, the interaction of N100 and irrigation was significant while the interaction of N120 and irrigation was not.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.
 
-In 2016 irrigation management was not significantly different from the base treatments for leaf sheath blight severity. However, the N180 and interaction of N treatment and irrigation were significantly different than the base.
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
 
 # Save Model Information
 
-This step saves the model information used in the posterior estimate graphs to be used in the paper.
+Lastly, save the model information used in the posterior estimate graphs to be used in the paper.
 
 ```{r save_models}
 
 models <- list("TInc_15" = m1,
                "TSev_15" = m2,
                "LSev_15" = m3,
-               "TInc_16" = m4)
+               "TInc_16" = m4,
+               "TSev_16" = m5,
+               "LSev_16" = m6)
 saveRDS(models, "../analysis/data/derived_data/models.Rds")
 
 ```
