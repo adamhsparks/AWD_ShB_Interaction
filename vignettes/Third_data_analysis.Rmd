@@ -103,6 +103,42 @@ AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
 Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start
 the analysis.
 
+## Check Correlation
+
+Check for correlation between the tiller incidence and the severity ratings for both leaf and tiller.
+
+```{r correlation}
+# 2015 Tiller Severity Correlation
+cor.test(AUDPS_2015$TShB_inc_AUDPS,
+         AUDPS_2015$TShB_sev_AUDPS,
+         method = "spearman",
+         alternative = "greater",
+         exact = FALSE)
+
+# 2015 Leaf Severity Correlation
+cor.test(AUDPS_2015$TShB_inc_AUDPS,
+         AUDPS_2015$LShB_sev_AUDPS,
+         method = "spearman",
+         alternative = "greater",
+         exact = FALSE)
+
+# 2016 Tiller Severity Correlation
+cor.test(AUDPS_2016$TShB_inc_AUDPS,
+         AUDPS_2016$TShB_sev_AUDPS,
+         method = "spearman",
+         alternative = "greater",
+         exact = FALSE)
+
+# 2016 Leaf Severity Correlation
+cor.test(AUDPS_2016$TShB_inc_AUDPS,
+         AUDPS_2016$LShB_sev_AUDPS,
+         method = "spearman",
+         alternative = "greater",
+         exact = FALSE)
+```
+
+The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves. Based on this, the interactions of the incidence and severity will not be analysed.
+
 ## Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
@@ -140,12 +176,12 @@ m1 <- do.call(mcmc.list, m1)
 
 summary(m1)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m1, auto.layout = FALSE)
 
 gelman.diag(m1)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m1)
@@ -176,12 +212,12 @@ m2 <- do.call(mcmc.list, m2)
 
 summary(m2)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m2, auto.layout = FALSE)
 
 gelman.diag(m2)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m2)
@@ -211,12 +247,12 @@ m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
 
 gelman.diag(m3)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m3)
@@ -250,12 +286,12 @@ m4 <- do.call(mcmc.list, m4)
 
 summary(m4)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m4, auto.layout = FALSE)
 
 gelman.diag(m4)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m4)
@@ -286,12 +322,12 @@ m5 <- do.call(mcmc.list, m5)
 
 summary(m5)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m5, auto.layout = FALSE)
 
 gelman.diag(m5)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
 plot(m5, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m5)
@@ -321,12 +357,12 @@ m6 <- do.call(mcmc.list, m6)
 
 summary(m6)
 
-par(mfrow = c(4, 2), mar = c(2, 2, 1, 2))
+par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m6, auto.layout = FALSE)
 
 gelman.diag(m6)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
 plot(m6, ask = FALSE, auto.layout = FALSE)
 
 plot_estimates(m6)
