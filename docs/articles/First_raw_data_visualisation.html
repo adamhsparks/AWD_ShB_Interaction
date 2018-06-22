@@ -299,9 +299,9 @@
 <a class="sourceLine" id="cb23-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Leaf Sheath Blight"</span>)</a></code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
-<div id="line-graph-of-tiller-sheath-blight-severity-audps-data" class="section level1">
+<div id="line-graph-of-tiller-sheath-blight-severity-data" class="section level1">
 <h1 class="hasAnchor">
-<a href="#line-graph-of-tiller-sheath-blight-severity-audps-data" class="anchor"></a>Line graph of tiller sheath blight severity AUDPS data</h1>
+<a href="#line-graph-of-tiller-sheath-blight-severity-data" class="anchor"></a>Line graph of tiller sheath blight severity data</h1>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">RAW_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(YEAR, WMGT, NRTE, ASMT) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">value =</span> <span class="kw">mean</span>(PERC_TIL_ShB)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> ASMT,</a>
@@ -315,9 +315,9 @@
 <a class="sourceLine" id="cb24-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Tiller Sheath Blight"</span>)</a></code></pre></div>
 <p><img src="First_raw_data_visualisation_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 </div>
-<div id="line-graph-of-tiller-sheath-blight-incidence-audps-data" class="section level1">
+<div id="line-graph-of-tiller-sheath-blight-incidence-data" class="section level1">
 <h1 class="hasAnchor">
-<a href="#line-graph-of-tiller-sheath-blight-incidence-audps-data" class="anchor"></a>Line graph of tiller sheath blight incidence AUDPS data</h1>
+<a href="#line-graph-of-tiller-sheath-blight-incidence-data" class="anchor"></a>Line graph of tiller sheath blight incidence data</h1>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">RAW_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(YEAR, WMGT, NRTE, ASMT) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(<span class="dt">value =</span> <span class="kw">mean</span>(TShB_incidence)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> ASMT,</a>
@@ -352,8 +352,8 @@
       <li><a href="#boxdotplots-of-leaf-sheath-blight-severity-audps">Box/dotplots of leaf sheath blight severity AUDPS</a></li>
       <li><a href="#boxdotplots-of-tiller-sheath-blight-severity-audps-data">Box/dotplots of tiller sheath blight severity AUDPS data</a></li>
       <li><a href="#line-graph-of-leaf-sheath-blight-severity-data">Line graph of leaf sheath blight severity data</a></li>
-      <li><a href="#line-graph-of-tiller-sheath-blight-severity-audps-data">Line graph of tiller sheath blight severity AUDPS data</a></li>
-      <li><a href="#line-graph-of-tiller-sheath-blight-incidence-audps-data">Line graph of tiller sheath blight incidence AUDPS data</a></li>
+      <li><a href="#line-graph-of-tiller-sheath-blight-severity-data">Line graph of tiller sheath blight severity data</a></li>
+      <li><a href="#line-graph-of-tiller-sheath-blight-incidence-data">Line graph of tiller sheath blight incidence data</a></li>
       </ul>
 </div>
       </div>

@@ -216,7 +216,7 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggtitle("Leaf Sheath Blight")
 ```
 
-# Line graph of tiller sheath blight severity AUDPS data
+# Line graph of tiller sheath blight severity data
 
 ```{r, , cache=FALSE}
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
@@ -232,7 +232,7 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggtitle("Tiller Sheath Blight")
 ```
 
-# Line graph of tiller sheath blight incidence AUDPS data
+# Line graph of tiller sheath blight incidence data
 
 ```{r, , cache=FALSE}
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
