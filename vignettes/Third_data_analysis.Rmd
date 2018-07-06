@@ -145,8 +145,9 @@ As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
 flat noninformative priors that have a uniform low degree of belief in all
 parameters for all six models we will create.
 
-The tiller analyses doe not include an interaction prior. The leaf analyses do,
-so there are two different priors set for the analyses below.
+The tiller analyses doe not include an interaction prior while the leaf
+analyses do. Because of this there are two different priors set for the analyses
+following.
 
 ```{r priors}
 tiller_eprior <- list(R = list(V = 1,
@@ -412,9 +413,9 @@ In 2016 the N180 was significantly different from the N60 rate. The AWD water ma
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment. In the leaf phase of the disease neither N by WMGT interaction was significant.
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity. The N180 by AWD interaction was significantly different from the N60 by FLD water management.
 
 # Save Model Information
 

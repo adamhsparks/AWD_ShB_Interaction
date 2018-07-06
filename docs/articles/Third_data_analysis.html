@@ -240,7 +240,7 @@
 <h2 class="hasAnchor">
 <a href="#specify-priors" class="anchor"></a>Specify Priors</h2>
 <p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat noninformative priors that have a uniform low degree of belief in all parameters for all six models we will create.</p>
-<p>The tiller analyses doe not include an interaction prior. The leaf analyses do, so there are two different priors set for the analyses below.</p>
+<p>The tiller analyses doe not include an interaction prior while the leaf analyses do. Because of this there are two different priors set for the analyses following.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">tiller_eprior &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">                               <span class="dt">nu =</span> <span class="fl">0.002</span>),</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">                      <span class="dt">G =</span> <span class="kw">list</span>(</a>
@@ -297,18 +297,18 @@
 ##    plus standard error of the mean:
 ## 
 ##               Mean     SD Naive SE Time-series SE
-## (Intercept) 1.1381 0.7301 0.005163       0.004638
-## WMGTAWD     0.1244 0.1719 0.001216       0.001223
-## NRTEN100    0.6239 0.2121 0.001500       0.001527
-## NRTEN120    0.9993 0.2108 0.001490       0.001490
+## (Intercept) 1.1329 0.7622 0.005390       0.005303
+## WMGTAWD     0.1262 0.1731 0.001224       0.001225
+## NRTEN100    0.6234 0.2098 0.001483       0.001474
+## NRTEN120    1.0002 0.2115 0.001496       0.001488
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                 2.5%     25%    50%    75%  97.5%
-## (Intercept)  0.03745 0.90922 1.1402 1.3704 2.2159
-## WMGTAWD     -0.20822 0.00663 0.1256 0.2398 0.4614
-## NRTEN100     0.20573 0.48425 0.6252 0.7655 1.0385
-## NRTEN120     0.58466 0.85814 1.0015 1.1398 1.4143</code></pre>
+## (Intercept)  0.08043 0.90927 1.1416 1.3650 2.1810
+## WMGTAWD     -0.21433 0.01092 0.1251 0.2421 0.4666
+## NRTEN100     0.21334 0.48168 0.6239 0.7641 1.0345
+## NRTEN120     0.58187 0.86012 1.0016 1.1425 1.4092</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
@@ -316,7 +316,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##             Point est. Upper C.I.
-## (Intercept)       1.01       1.01
+## (Intercept)       1.05       1.06
 ## WMGTAWD           1.00       1.00
 ## NRTEN100          1.00       1.00
 ## NRTEN120          1.00       1.00
@@ -363,18 +363,18 @@
 ##    plus standard error of the mean:
 ## 
 ##               Mean    SD Naive SE Time-series SE
-## (Intercept) 13.474 6.416  0.04537        0.04519
-## WMGTAWD      4.763 4.451  0.03148        0.03192
-## NRTEN100    26.248 5.474  0.03871        0.03833
-## NRTEN120    41.160 5.523  0.03905        0.03958
+## (Intercept) 13.449 6.529  0.04617        0.04672
+## WMGTAWD      4.789 4.493  0.03177        0.03194
+## NRTEN100    26.234 5.459  0.03860        0.03813
+## NRTEN120    41.254 5.431  0.03841        0.03765
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##               2.5%    25%    50%    75% 97.5%
-## (Intercept)  1.175  9.721 13.484 17.224 25.82
-## WMGTAWD     -3.938  1.749  4.786  7.764 13.48
-## NRTEN100    15.494 22.634 26.191 29.905 37.10
-## NRTEN120    30.386 37.464 41.159 44.871 51.99</code></pre>
+##                2.5%    25%    50%    75% 97.5%
+## (Intercept)  0.8634  9.703 13.425 17.235 25.77
+## WMGTAWD     -4.0779  1.766  4.811  7.751 13.67
+## NRTEN100    15.3004 22.598 26.254 29.900 36.94
+## NRTEN120    30.6870 37.595 41.231 44.857 51.98</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
@@ -429,22 +429,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.4068 1.9988 0.014134       0.014543
-## WMGTAWD          -0.8395 0.7064 0.004995       0.004951
-## NRTEN100          1.2268 0.3675 0.002598       0.002611
-## NRTEN120          1.5406 0.3656 0.002585       0.002723
-## WMGTAWD:NRTEN100  0.5704 0.5158 0.003647       0.003736
-## WMGTAWD:NRTEN120  0.5098 0.5149 0.003641       0.003584
+## (Intercept)       1.3930 2.0337 0.014381       0.014313
+## WMGTAWD          -0.8381 0.6429 0.004546       0.004422
+## NRTEN100          1.2261 0.3665 0.002591       0.002488
+## NRTEN120          1.5385 0.3663 0.002590       0.002608
+## WMGTAWD:NRTEN100  0.5713 0.5212 0.003685       0.003688
+## WMGTAWD:NRTEN120  0.5196 0.5221 0.003692       0.003727
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%     50%     75%  97.5%
-## (Intercept)      -2.3453  0.5826  1.4013  2.2300 5.0910
-## WMGTAWD          -2.1064 -1.1602 -0.8374 -0.5149 0.4169
-## NRTEN100          0.5058  0.9832  1.2281  1.4715 1.9462
-## NRTEN120          0.8229  1.2961  1.5418  1.7907 2.2620
-## WMGTAWD:NRTEN100 -0.4427  0.2246  0.5730  0.9160 1.5853
-## WMGTAWD:NRTEN120 -0.4976  0.1648  0.5062  0.8541 1.5345</code></pre>
+## (Intercept)      -2.3475  0.5727  1.3974  2.2376 5.2006
+## WMGTAWD          -2.0462 -1.1692 -0.8363 -0.5106 0.3615
+## NRTEN100          0.5043  0.9817  1.2246  1.4718 1.9479
+## NRTEN120          0.8247  1.2940  1.5392  1.7847 2.2560
+## WMGTAWD:NRTEN100 -0.4514  0.2226  0.5666  0.9232 1.5937
+## WMGTAWD:NRTEN120 -0.4923  0.1691  0.5208  0.8689 1.5439</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
@@ -453,7 +453,7 @@
 ## 
 ##                  Point est. Upper C.I.
 ## (Intercept)            1.01       1.01
-## WMGTAWD                1.01       1.01
+## WMGTAWD                1.00       1.01
 ## NRTEN100               1.00       1.00
 ## NRTEN120               1.00       1.00
 ## WMGTAWD:NRTEN100       1.00       1.00
@@ -506,16 +506,16 @@
 ##    plus standard error of the mean:
 ## 
 ##                Mean     SD Naive SE Time-series SE
-## (Intercept) 10.5355 1.3934 0.009853       0.010514
-## WMGTAWD      0.3724 0.2488 0.001759       0.001750
-## NRTEN180     1.9606 0.2473 0.001749       0.001752
+## (Intercept) 10.5216 1.4088 0.009962       0.009383
+## WMGTAWD      0.3701 0.2479 0.001753       0.001743
+## NRTEN180     1.9603 0.2469 0.001746       0.001730
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                2.5%     25%    50%     75%  97.5%
-## (Intercept)  8.1215 10.0295 10.539 11.0475 12.977
-## WMGTAWD     -0.1153  0.2043  0.375  0.5368  0.864
-## NRTEN180     1.4719  1.7977  1.961  2.1222  2.451</code></pre>
+##                2.5%     25%     50%     75%   97.5%
+## (Intercept)  8.1574 10.0344 10.5304 11.0180 12.8687
+## WMGTAWD     -0.1184  0.2048  0.3702  0.5351  0.8554
+## NRTEN180     1.4766  1.7958  1.9586  2.1246  2.4461</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
@@ -523,7 +523,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##             Point est. Upper C.I.
-## (Intercept)       1.01       1.01
+## (Intercept)       1.03       1.03
 ## WMGTAWD           1.00       1.00
 ## NRTEN180          1.00       1.00
 ## 
@@ -569,16 +569,16 @@
 ##    plus standard error of the mean:
 ## 
 ##               Mean    SD Naive SE Time-series SE
-## (Intercept) 32.078 8.455  0.05979        0.06096
-## WMGTAWD     -8.233 2.215  0.01566        0.01566
-## NRTEN180     4.732 2.182  0.01543        0.01543
+## (Intercept) 32.006 8.598  0.06080        0.05969
+## WMGTAWD     -8.264 2.211  0.01564        0.01564
+## NRTEN180     4.717 2.197  0.01554        0.01590
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                 2.5%    25%    50%    75%  97.5%
-## (Intercept)  15.5956 27.935 32.053 36.166 48.585
-## WMGTAWD     -12.5954 -9.705 -8.220 -6.752 -3.875
-## NRTEN180      0.4159  3.282  4.759  6.175  8.975</code></pre>
+##                 2.5%    25%    50%    75% 97.5%
+## (Intercept)  15.6464 27.843 31.996 36.162 48.82
+## WMGTAWD     -12.5906 -9.758 -8.269 -6.796 -3.90
+## NRTEN180      0.3885  3.250  4.702  6.194  9.04</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
@@ -632,18 +632,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.0022 0.6947 0.004912       0.004415
-## WMGTAWD           0.2347 0.3477 0.002458       0.002422
-## NRTEN180          0.5504 0.1525 0.001078       0.001078
-## WMGTAWD:NRTEN180 -0.4935 0.2169 0.001533       0.001527
+## (Intercept)       0.9928 0.5749 0.004065       0.004135
+## WMGTAWD           0.2371 0.3385 0.002393       0.002417
+## NRTEN180          0.5510 0.1528 0.001080       0.001080
+## WMGTAWD:NRTEN180 -0.4927 0.2166 0.001531       0.001514
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                      2.5%     25%     50%     75%    97.5%
-## (Intercept)       0.07865  0.7899  0.9991  1.2090  1.89582
-## WMGTAWD          -0.44121  0.0527  0.2339  0.4146  0.92514
-## NRTEN180          0.25050  0.4487  0.5495  0.6519  0.84992
-## WMGTAWD:NRTEN180 -0.92426 -0.6382 -0.4943 -0.3475 -0.06241</code></pre>
+##                      2.5%      25%     50%     75%    97.5%
+## (Intercept)       0.05272  0.78383  0.9979  1.2041  1.88363
+## WMGTAWD          -0.43888  0.05807  0.2385  0.4199  0.89351
+## NRTEN180          0.25482  0.44809  0.5495  0.6536  0.85302
+## WMGTAWD:NRTEN180 -0.92289 -0.63401 -0.4941 -0.3476 -0.06721</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
@@ -651,7 +651,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.16       1.16
+## (Intercept)            1.01       1.01
 ## WMGTAWD                1.00       1.00
 ## NRTEN180               1.00       1.00
 ## WMGTAWD:NRTEN180       1.00       1.00
@@ -691,8 +691,8 @@
 <div id="leaf-sheath-blight-severity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity" class="anchor"></a>Leaf Sheath Blight Severity</h3>
-<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment.</p>
-<p>In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.</p>
+<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment. In the leaf phase of the disease neither N by WMGT interaction was significant.</p>
+<p>In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity. The N180 by AWD interaction was significantly different from the N60 by FLD water management.</p>
 </div>
 </div>
 <div id="save-model-information" class="section level1">
