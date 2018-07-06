@@ -204,7 +204,7 @@ gelman.diag(m1)
 par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m1)
+plot_tiller_estimates(m1)
 
 ```
 
@@ -240,7 +240,7 @@ gelman.diag(m2)
 par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m2)
+plot_tiller_estimates(m2)
 ```
 
 ### 2015 Leaf Sheath Blight Severity Model
@@ -250,8 +250,8 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
-           random = ~REP, 
+  MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP,
            data = AUDPS_2015,
            verbose = FALSE,
            prior = leaf_eprior,
@@ -267,15 +267,15 @@ m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
 
 gelman.diag(m3)
 
-par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m3)
+plot_leaf_estimates(m3)
 ```
 
 *******
@@ -314,7 +314,7 @@ gelman.diag(m4)
 par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m4)
+plot_tiller_estimates(m4)
 ```
 
 
@@ -350,7 +350,7 @@ gelman.diag(m5)
 par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
 plot(m5, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m5)
+plot_tiller_estimates(m5)
 ```
 
 ### 2016 Leaf Sheath Blight Severity Model
@@ -360,8 +360,8 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(LShB_percent_AUDPS ~ WMGT * NRTE,
-           random = ~REP, 
+  MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+           random = ~ REP + WMGT:REP,
            data = AUDPS_2016,
            verbose = FALSE,
            prior = leaf_eprior,
@@ -377,15 +377,15 @@ m6 <- do.call(mcmc.list, m6)
 
 summary(m6)
 
-par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m6, auto.layout = FALSE)
 
 gelman.diag(m6)
 
-par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m6, ask = FALSE, auto.layout = FALSE)
 
-plot_estimates(m6)
+plot_leaf_estimates(m6)
 ```
 
 ### Model Fit

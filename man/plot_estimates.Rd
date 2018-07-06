@@ -2,24 +2,41 @@
 % Please edit documentation in R/plot_estimates.R
 \name{plot_estimates}
 \alias{plot_estimates}
+\alias{plot_tiller_estimates}
+\alias{plot_estimates}
+\alias{plot_leaf_estimates}
 \title{Plot MCMCglmm estimates}
 \usage{
-plot_estimates(x)
+plot_tiller_estimates(x)
+
+plot_leaf_estimates(x)
 }
 \arguments{
 \item{x}{An\code{\link[coda]{mcmc.list}} object}
+
+\item{x}{An\code{\link[coda]{mcmc.list}} object}
 }
 \description{
+Plot estimates of posterior distributions and credible
+ intervals of \pkg{MCMCglmm} outputs
+
 Plot estimates of posterior distributions and credible
  intervals of \pkg{MCMCglmm} outputs
 }
 \examples{
 \dontrun{
 # Plot posterior means and credible intervals
-plot_estimates(m1)
+plot_tiller_estimates(m1)
+}
+
+\dontrun{
+# Plot posterior means and credible intervals
+plot_leaf_estimates(m1)
 }
 
 }
 \author{
+Titus von der Malsburg, \email{malsburg@uni-potsdam.de}
+
 Titus von der Malsburg, \email{malsburg@uni-potsdam.de}
 }
