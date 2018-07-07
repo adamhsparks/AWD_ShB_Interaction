@@ -2,12 +2,14 @@
 % Please edit documentation in R/plot_estimates_paper.R
 \name{plot_estimates_paper}
 \alias{plot_estimates_paper}
+\alias{plot_tiller_estimates_paper}
 \alias{plot_estimates_paper}
+\alias{plot_leaf_estimates_paper}
 \title{Plot MCMCglmm estimates for publication}
 \usage{
-plot_estimates_paper(x, main_title = "")
+plot_tiller_estimates_paper(x, main_title = "")
 
-plot_estimates_paper(x, main_title = "")
+plot_leaf_estimates_paper(x, main_title = "")
 }
 \arguments{
 \item{x}{An\code{\link[coda]{mcmc.list}} object}

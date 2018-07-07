@@ -16,7 +16,7 @@
 #' @author Titus von der Malsburg, \email{malsburg@uni-potsdam.de}
 #'
 #' @export
-plot_estimates_paper <- function(x, main_title = "") {
+plot_tiller_estimates_paper <- function(x, main_title = "") {
   if (class(x) != "summary.mcmc") {
     x <- summary(x)
   }
@@ -60,7 +60,7 @@ plot_estimates_paper <- function(x, main_title = "") {
 #' @author Titus von der Malsburg, \email{malsburg@uni-potsdam.de}
 #'
 #' @export
-plot_estimates_paper <- function(x, main_title = "") {
+plot_leaf_estimates_paper <- function(x, main_title = "") {
   if (class(x) != "summary.mcmc") {
     x <- summary(x)
   }
