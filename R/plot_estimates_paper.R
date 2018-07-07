@@ -1,10 +1,10 @@
 
-#' @title Plot MCMCglmm estimates for publication
+#' @title Plot MCMCglmm tiller estimates for publication
 #'
 #' @description Plot estimates of posterior distributions and credible
 #'  intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 #'
-#' @name plot_estimates_paper
+#' @name plot_tiller_estimates_paper
 #' @param x An\code{\link[coda]{mcmc.list}} object
 #' @param main_title Main title for the plot
 #'
@@ -43,12 +43,12 @@ plot_tiller_estimates_paper <- function(x, main_title = "") {
 }
 
 
-#' @title Plot MCMCglmm estimates for publication
+#' @title Plot MCMCglmm leaf estimates for publication
 #'
 #' @description Plot estimates of posterior distributions and credible
 #'  intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 #'
-#' @name plot_estimates_paper
+#' @name plot_leaf_estimates_paper
 #' @param x An\code{\link[coda]{mcmc.list}} object
 #' @param main_title Main title for the plot
 #'

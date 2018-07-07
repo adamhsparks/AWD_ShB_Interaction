@@ -1,10 +1,10 @@
 
-#' @title Plot MCMCglmm estimates
+#' @title Plot MCMCglmm tiller estimates
 #'
 #' @description Plot estimates of posterior distributions and credible
 #'  intervals of \pkg{MCMCglmm} outputs
 #'
-#' @name plot_estimates
+#' @name plot_tiller_estimates
 #' @param x An\code{\link[coda]{mcmc.list}} object
 #'
 #' @examples \dontrun{
@@ -43,12 +43,12 @@ plot_tiller_estimates <- function(x) {
 }
 
 
-#' @title Plot MCMCglmm estimates
+#' @title Plot MCMCglmm leaf estimates
 #'
 #' @description Plot estimates of posterior distributions and credible
 #'  intervals of \pkg{MCMCglmm} outputs
 #'
-#' @name plot_estimates
+#' @name plot_leaf_estimates
 #' @param x An\code{\link[coda]{mcmc.list}} object
 #'
 #' @examples \dontrun{
