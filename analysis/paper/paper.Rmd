@@ -10,7 +10,6 @@ abstract: |
 bibliography: references.bib
 output:
   bookdown::word_document2:
-    #keep_tex: yes
     toc: no
     fig_caption: yes
     reference_docx: "../templates/template.docx"

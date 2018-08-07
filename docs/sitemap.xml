@@ -13,10 +13,16 @@
     <loc>https://phytopathology.github.io/rice_awd_pests//reference/RAW_data.html</loc>
   </url>
   <url>
-    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_estimates.html</loc>
+    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_leaf_estimates.html</loc>
   </url>
   <url>
-    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_estimates_paper.html</loc>
+    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_leaf_estimates_paper.html</loc>
+  </url>
+  <url>
+    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_tiller_estimates.html</loc>
+  </url>
+  <url>
+    <loc>https://phytopathology.github.io/rice_awd_pests//reference/plot_tiller_estimates_paper.html</loc>
   </url>
   <url>
     <loc>https://phytopathology.github.io/rice_awd_pests//reference/rice.awd.pests-package.html</loc>
