@@ -55,7 +55,7 @@ compared.
 
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
-`nitt = 55000,` and `burnin = 5000` and `thin = 10`. This results in a sample
+`nitt = 55000,` and `burnin = 5000`. This results in a sample
 size of 5000 and much smaller errors for random effects and better models.
 
 ## Setup
@@ -186,8 +186,7 @@ m1 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            verbose = FALSE,
            prior = tiller_eprior,
            nitt = 55000,
-           burnin = 5000,
-           thin = 10)
+           burnin = 5000)
 }
 
 stopCluster(cl)
@@ -222,8 +221,7 @@ m2 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            verbose = FALSE,
            prior = tiller_eprior,
            nitt = 55000,
-           burnin = 5000,
-           thin = 10)
+           burnin = 5000)
 }
 
 stopCluster(cl)
@@ -257,8 +255,7 @@ m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            verbose = FALSE,
            prior = leaf_eprior,
            nitt = 55000,
-           burnin = 5000,
-           thin = 10)
+           burnin = 5000)
 }
 
 stopCluster(cl)
@@ -296,8 +293,7 @@ m4 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            verbose = FALSE,
            prior = tiller_eprior,
            nitt = 55000,
-           burnin = 5000,
-           thin = 10)
+           burnin = 5000)
 }
 
 stopCluster(cl)
@@ -367,8 +363,7 @@ m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            verbose = FALSE,
            prior = leaf_eprior,
            nitt = 55000,
-           burnin = 5000,
-           thin = 10)
+           burnin = 5000)
 }
 
 stopCluster(cl)
