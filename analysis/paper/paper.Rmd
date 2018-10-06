@@ -42,13 +42,13 @@ library(rice.awd.pests)
 
 # Introduction {-}
 
-Sheath blight (ShB) disease (*Rhizoctonia solani* Kühn), anastomosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions he disease can cause up to 50\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009; @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
+Sheath blight disease (*Rhizoctonia solani* Kühn), anastomosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions he disease can cause up to 50\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009; @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
 Alternate wetting and drying (AWD) is an irrigation technique for irrigated rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40% of irrigation water [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growth period without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50% [@Yan2005; @Sander2015].
 
 The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, *e.g.*, Bangladesh, Vietnam, Thailand and the Philippines, plan to widely apply AWD to local rice production [@MOEF2015]. However, a change in water regime in rice fields on large scale might encompass different other effects, for example related to plant health.
 
-Because of the well documented effects of irrigation and N on ShB, we established field experiments to study what effects AWD irrigation technologies and N could have upon ShB incidence and severity in tropical rice.
+Because of the well documented effects of irrigation and N on sheath blight, we established field experiments to study what effects AWD irrigation technologies and N could have upon sheath blight incidence and severity in tropical rice.
 
 # Materials and Methods {-}
 
@@ -94,15 +94,15 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 ## Data Collection {-}
 
-In both experiments, two sample areas, sized 1m x 1m, per plot were assessed. the total number of tillers per hill and number of tillers with ShB (incidence) were measured for nine hills per sample area. Tiller ShB severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Severity was considered to be the amount of leaf or sheath tissue covered by ShB lesions. Leaves were rated as green (living) having at least XXX% living tissue or dead, defined as having less than XXX% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+In both experiments, two sample areas, sized 1m x 1m, per plot were assessed. the total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1% severity; 2 - 1 to 5%; 3 - 5 to 15%; 4 - 15 to 50%; 5 - 50 to 100%. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Leaves were rated as green (living) having at least XXX% living tissue or dead, defined as having less than XXX% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
 ## Statistical Analysis {-}
 
 Area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using the R package `agricolae` [@R2018; @deMendiburu2017]. The severity data were converted to the midpoint percent value of the scale range.
 
-The correlations between tiller sheath ShB incidence and tiller and leaf ShB severity were tested using Spearman’s correlation test, `cor.test`, [@R2018]. No correlation was found, so the analysis was completed for each variable independently with no assumed interaction.
+The correlations between tiller sheath sheath blight incidence and tiller and leaf sheath blight severity were tested using Spearman’s correlation test, `cor.test`, [@R2018]. No correlation was found, so the analysis was completed for each variable independently with no assumed interaction.
 
-As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller ShB incidence, 2015 tiller ShB severity, 2015 leaf ShB severity; 2016 tiller ShB incidence, 2016 tiller ShB severity; 2016 leaf ShB severity, respectively. The independent variables were the irrigation management and N rate with replicate treated as a random variable. The base levels (control treatments) for the analyses for 2015 were N rate - N0; irrigation management - FLD and for 2016, N rate - N60; irrigation management - FLD.
+As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm` [@MCMCglmm2010]. Six models were created where the the dependent variables were 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively. The independent variables were the irrigation management and N rate with replicate treated as a random variable. The base levels (control treatments) for the analyses for 2015 were N rate - N0; irrigation management - FLD and for 2016, N rate - N60; irrigation management - FLD.
 
 Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn in. The remaining 50,000 samples were used to determine the posterior distribution of the parameters of the model. The `coda` [@coda2006] package was used to provide utilities to check MCMC chain convergence using visual inspection of resulting trace graphs and the Gelman-Rubin test. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests> [@Sparks2018].
 
@@ -112,15 +112,15 @@ Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller ShB remained low throughout the growing season (Fig. \@ref(fig:fig-1)a, \@ref(fig:fig-2)a). Water management was not significantly different (Fig. \@ref(fig:fig-3)a, \@ref(fig:fig-5)a). However, the N treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(fig:fig-4)a, \@ref(fig:fig-5)a). 
+In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig. \@ref(fig:fig-1)a, \@ref(fig:fig-2)a). Water management was not significantly different (Fig. \@ref(fig:fig-3)a, \@ref(fig:fig-5)a). However, the N treatments, N100 and N120, were both significantly different when compared with the control N0 treatment (Fig. \@ref(fig:fig-4)a, \@ref(fig:fig-5)a). 
 
 ### Tiller Sheath Blight Severity {-}
 
-Tiller ShB severity remained below 2% (Fig. \@ref(fig:fig-2)c, \@ref(fig:fig-1)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Fig. \@ref(fig:fig-4)c, \@ref(fig:fig-5)c). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig-3)c, \@ref(fig:fig-5)c).
+Tiller sheath blight severity remained below 2% (Fig. \@ref(fig:fig-2)c, \@ref(fig:fig-1)c). Both the N100 and N120 treatments were significantly different than the control N0 treatment (Fig. \@ref(fig:fig-4)c, \@ref(fig:fig-5)c). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig-3)c, \@ref(fig:fig-5)c).
 
 ### Leaf Sheath Blight Severity {-}
 
-Severity of leaf ShB remained low, less than 0.4% across all treatments (Fig. \@ref(fig:fig-1)e, \@ref(fig:fig-2)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(fig:fig-4)e, \@ref(fig:fig-5)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig-3)e, \@ref(fig:fig-5)e).
+Severity of leaf sheath blight remained low, less than 0.4% across all treatments (Fig. \@ref(fig:fig-1)e, \@ref(fig:fig-2)e). Both the N100 and N120 treatments were significantly different than the N0 treatment (Fig. \@ref(fig:fig-4)e, \@ref(fig:fig-5)e). However, the AWD water management was not significantly different from the FLD treatment (Fig. \@ref(fig:fig-3)e, \@ref(fig:fig-5)e).
 
 ### The Interaction of Irrigation and N Management
 
@@ -137,17 +137,17 @@ In 2016 the N180 treatment was significantly different from the N60 treatment, w
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf ShB severity (Fig. \@ref(fig:fig-3)f, \@ref(fig:fig-5)f, \@ref(fig:fig-4)f, \@ref(fig:fig-5)f).
+In 2016 the neither of the treatments, N rate or water management, were significantly different from the control treatments for leaf sheath blight severity (Fig. \@ref(fig:fig-3)f, \@ref(fig:fig-5)f, \@ref(fig:fig-4)f, \@ref(fig:fig-5)f).
 
 ### The Interaction of Irrigation and N Management
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on ShB that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on ShB. In the 2016 experiment the tiller ShB severity was significantly lower for AWD than FLD (Fig. \@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller ShB severity under conditions where there is high sheath blight pressure.
+In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on sheath blight. In the 2016 experiment the tiller sheath blight severity was significantly lower for AWD than FLD (Fig. \@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under conditions where there is high sheath blight pressure.
 
 The findings of the effects of N rates on sheath blight were to be expected, where higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in 2016 tiller and leaf severity had no detectable differences due to the N rate. However, it should be noted that the levels of leaf severity remained low (< 1%) throughout the growing season in all treatments for both years.
 
-The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase ShB spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
+The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase sheath blight spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
 
 # Notes {-}
 
