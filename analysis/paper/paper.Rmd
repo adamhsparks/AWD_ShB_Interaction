@@ -143,11 +143,13 @@ In 2016 the neither of the treatments, N rate or water management, were signific
 
 # Discussion {-}
 
-In both experiments we were unable to detect any significant effect of AWD on sheath blight that would cause increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on sheath blight. In the 2016 experiment the tiller sheath blight severity was significantly lower for AWD than FLD (Fig. \@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under conditions where there is high sheath blight pressure.
+In both experiments we were unable to detect any significant effect of AWD on sheath blight that led to increases in the disease, which could hinder adoption of the technology. In only one instance were we able to detect any effect of AWD on sheath blight. In the 2016 experiment the tiller sheath blight severity was significantly lower for the AWD treatment than FLD treatment (Fig. \@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under conditions where there is high sheath blight pressure.
 
-The findings of the effects of N rates on sheath blight were to be expected, where higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in 2016 tiller and leaf severity had no detectable differences due to the N rate. However, it should be noted that the levels of leaf severity remained low (< 1%) throughout the growing season in all treatments for both years.
+The findings of the effects of N rates on sheath blight were as expected. Higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. In 2016 tiller and leaf severity had no detectable differences due to the N rate. However, it should be noted that the levels of leaf severity remained low (< 1%) throughout the growing season in all treatments for both years.
 
-The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. It is possible that the mechanical transplanter could increase sheath blight spread in the canopy as compared with traditional manual transplanting. This however was not investigated as a part of this study but could bear further research.
+The combination of the irrigation and N rates did not appear to increase the disease severity or incidence. In 2015 there were no significant differences in the interaction of irrigation and N. However, in the 2016 experiment the combination of AWD-N180 was significantly different, lower, than the FLD-N60 combination treatment.
+
+The changes made for the 2016 experiment appear to have improved the experiment, increasing the incidence and decreased variability of sheath blight in the plots (Fig. \@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d). The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 
 # Notes {-}
 
