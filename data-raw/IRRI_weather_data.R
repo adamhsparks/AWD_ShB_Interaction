@@ -1,4 +1,5 @@
 library(magrittr)
+library(BayesianFirstAid)
 `%notin%` = function(x,y) !(x %in% y)
 
 l <- list.files(path = "~/Downloads/Fwd__Weather_data",
