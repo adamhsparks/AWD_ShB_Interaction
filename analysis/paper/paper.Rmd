@@ -44,11 +44,11 @@ library(rice.awd.pests)
 
 Sheath blight disease (*Rhizoctonia solani* Kühn), anastomosis group 1 [(teleomorph: *Thanatephorus cucumeris* (A.B. Frank) Donk.] of rice is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991]. Studies by Savary et al. [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5-10 &nbsp;\%. The disease is best managed through an integrated disease management approach which includes resistance [@Kumar2009; @Srinivasachary2011] fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
-Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40&nbsp;\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period to avoid plant stress. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50 &nbsp;\% [@Yan2005; @Sander2015].
+Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15-40&nbsp;\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress. In order to avoid yield decline under AWD “safe” thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15&nbsp;cm below the soil surface [@Richards2014]. Fields are furthermore kept flooded during the flowering period to avoid plant stress. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice producing countries, by around 50 &nbsp;\% [@Yan2005; @Sander2015].
 
 The AWD technology has been identified as promising climate-smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, *e.g.*, Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015]. However, a change like this in the water regime in rice fields on a large scale might trigger different other effects, for example changes in disease intensity or severity.
 
-While the effects of climate change directly on rice disease have been studied [@Duku2016XXXX CITATION XXXX] the effects of mitigation practices have not. And because of the well documented effects of irrigation practices (CITATION XXXX) and N on sheath blight (CITATION XXXX); we established field experiments to study what effects AWD irrigation technologies and N fertilisation in combination could have on sheath blight incidence and severity in tropical rice production.
+While the effects of climate change directly on rice disease have been studied [@Duku2016 CITATION XXXX] the effects of mitigation practices have not. And because of the well documented effects of irrigation practices (CITATION XXXX) and N on sheath blight (CITATION XXXX); we established field experiments to study what effects AWD irrigation technologies and N fertilisation in combination could have on sheath blight incidence and severity in tropical rice production.
 
 # Materials and Methods {-}
 
@@ -60,33 +60,33 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot treatment and N rate was the split-plot treatment. 
 
-The main plot treatments were alternate wetting and drying (AWD) and continuously flooded or farmers' practice as the control treatment. The main plot size was 12m x 12m (144 sq m), with a split-plot size of 5m x 5m (25 sq m). Replication size was 12m x 24m (288 sq m) with a buffer of 1m per split-plot for a whole experiment size of 1,152 sq m.
+The main plot treatments were alternate wetting and drying (AWD) and continuously flooded or farmers' practice as the control treatment. The main plot size was 12&nbsp;m x 12&nbsp;m (144 sq m), with a split-plot size of 5&nbsp;m x 5&nbsp;m (25 sq m). Replication size was 12&nbsp;m x 24&nbsp;m (288 sq m) with a buffer of 1&nbsp;m per split-plot for a whole experiment size of 1,152 sq m.
 
-Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15cm below the soil surface irrigation water was applied to a level of 5cm. In flooded plots a standing water layer of 3-5cm was maintained throughout the growing season. 
+Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm. In flooded plots a standing water layer of 3-5&nbsp;cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits) and N120 (120 kg per ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:tab-1)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg per ha applied as urea in three splits) and N120 (120&nbsp;kg per ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N_rate)).
 
 ### Crop Establishment {-}
 
-Trays of NSIC Rc222 were seeded on 19 December 2014. NSIC Rc222 is an inbred variety released by the Philippine Rice Research Institute (PhilRice), with a 114 day maturity when transplanted. The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20cm within and between rows.
+Trays of NSIC Rc222 were seeded on 19 December 2014. NSIC Rc222 is an inbred variety released by the Philippine Rice Research Institute (PhilRice), with a 114 day maturity when transplanted. The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
 
 ### Inoculum Preparation and Application {-}
 
-An isolate of *Rhizoctonia solani* AG1-1a previously isolated from infected rice was maintained on potato dextrose agar (PDA) medium in tubes. The isolate was transferred to 90mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C). Glass bottles of autoclaved rice grain and hull substrate were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks.
+An isolate of *Rhizoctonia solani* AG1-1a previously isolated from infected rice was maintained on potato dextrose agar (PDA) medium in tubes. The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C). Glass bottles of autoclaved rice grain and hull substrate were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks.
 
-The plots were inoculated 20 days after transplanting by spreading 151g of inoculum over the split-plot area with a 1m buffer on either end (4m x 11m).
+The plots were inoculated 20 days after transplanting by spreading 151&nbsp;g of inoculum over the split-plot area with a 1&nbsp;m buffer on either end (4&nbsp;m x 11&nbsp;m).
 
 ## 2016 Experiment {-}
 
 ### Experimental Design {-}
 
-The 2016 experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21m x 20.5m (412.5 sq m) and Block 2 (B2) 20.25m x 21.6m (437.4 sq m). The split-plot sizes were B1 21m x 10.25m (215.25 sq m), B2 20.25m x 10.8m (218.7 sq m). The replication sizes were B1 - 42m x 20.5m (861 sq m) and B2 - 40.5m x 21.6m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
+The 2016 experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq m) and Block 2 (B2) 20.25&nbsp;m x 21.6&nbsp;m (437.4 sq m). The split-plot sizes were B1 21&nbsp;m x 10.25&nbsp;m (215.25 sq m), B2 20.25&nbsp;m x 10.8&nbsp;m (218.7 sq m). The replication sizes were B1 - 42m x 20.5&nbsp;m (861 sq m) and B2 - 40.5m x 21.6&nbsp;m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
 
-Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg per ha as urea split into two applications) and N180 (180 kg per ha in three splits) being applied (Tab.&nbsp;\@ref(tab:tab-1)).
+Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg per ha as urea split into two applications) and N180 (180&nbsp;kg per ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N_rate)).
 
 ### Crop Establishment {-}
 
-Nurseries of NSIC Rc222 were established on 7 January 2016. Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
+Nurseries of NSIC Rc222 were established on 7 January 2016. Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20&nbsp;cm within and between rows.
 
 ### Inoculum Preparation and Application {-}
 
@@ -178,7 +178,7 @@ The authors wish to thank the IRRI Biometrics group for their input in the desig
 ```{r N-rates}
 
 kable(N_rates,
-      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
+      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
 ```
 
 ##### pagebreak
@@ -318,7 +318,7 @@ grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 
 ##### Sheath blight progress for N treatments
 
-```{r fig-2, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180). Points represent the mean observations of four replications."}
+```{r fig-2, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180). Points represent the mean observations of four replications."}
 
 p4_anot <- data.frame(
   label = c("a", "b"),
@@ -538,7 +538,7 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 ```
 
 ##### Tiller sheath blight incidence boxplot for N rate
-```{r fig-4, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r fig-4, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
  
 p10_anot <- data.frame(
   label = c("a", "b"),
@@ -624,7 +624,7 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 ##### Tiller Estimates Plots
 
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on sheath blight tiller incidence and tiller severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on sheath blight tiller incidence and tiller severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
@@ -647,7 +647,7 @@ mtext(text = "d", side = 3, line = 0, adj = 1, cex = 0.75)
 
 ##### Leaf estimates plots
 
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on sheath blight leaf severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100 kg per ha N (N100) and 180 kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60 kg per ha N (N60) and 180 kg per ha N (N180)."}
+```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on sheath blight leaf severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
 
 par(mfcol = c(1, 2))
 
