@@ -52,7 +52,7 @@ While the effects of climate change directly on rice disease have been studied [
 
 # Materials and Methods {-}
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg; 11' N, longitude 121&deg; 15' E) in 2015 and 2016 dry seasons from December to May. In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment. The differences are detailed in the following sections.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May. In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment. The differences are detailed in the following sections.
 
 ## 2015 Experiment {-}
 
@@ -60,11 +60,11 @@ Two experiments were conducted at the International Rice Research Institute's (I
 
 The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot treatment and N rate was the split-plot treatment. 
 
-The main plot treatments were alternate wetting and drying (AWD) and continuously flooded or farmers' practice as the control treatment. The main plot size was 12&nbsp;m x 12&nbsp;m (144 sq m), with a split-plot size of 5&nbsp;m x 5&nbsp;m (25 sq m). Replication size was 12&nbsp;m x 24&nbsp;m (288 sq m) with a buffer of 1&nbsp;m per split-plot for a whole experiment size of 1,152 sq m.
+The main plot treatments were alternate wetting and drying (AWD) and continuously flooded or farmers' practice as the control treatment. The main plot size was 12&nbsp;m x 12&nbsp;m (144&nbsp;m^2), with a split-plot size of 5&nbsp;m&nbsp;x&nbsp;5&nbsp;m (25&nbsp;m^2). Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2) with a buffer of 1&nbsp;m per split-plot for a whole experiment size of 1,152&nbsp;m^2.
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.*, when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm. In flooded plots a standing water layer of 3-5&nbsp;cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg per ha applied as urea in three splits) and N120 (120&nbsp;kg per ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N_rate)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N_rate)).
 
 ### Crop Establishment {-}
 
@@ -80,9 +80,9 @@ The plots were inoculated 20 days after transplanting by spreading 151&nbsp;g of
 
 ### Experimental Design {-}
 
-The 2016 experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq m) and Block 2 (B2) 20.25&nbsp;m x 21.6&nbsp;m (437.4 sq m). The split-plot sizes were B1 21&nbsp;m x 10.25&nbsp;m (215.25 sq m), B2 20.25&nbsp;m x 10.8&nbsp;m (218.7 sq m). The replication sizes were B1 - 42m x 20.5&nbsp;m (861 sq m) and B2 - 40.5m x 21.6&nbsp;m (874.8 sq m). A buffer 0.5m per split-plot was used and the overall experiment size was 3471.6 sq m.
+The 2016 experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are are not equal as necessitated by the use of a larger area for the experiment. The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq&nbsp;m) and Block 2 (B2) 20.25&nbsp;m x 21.6&nbsp;m (437.4&nbsp;m^2). The split-plot sizes were B1 21&nbsp;m x 10.25&nbsp;m (215.25&nbsp;m^2), B2 20.25&nbsp;m x 10.8&nbsp;m (218.7&nbsp;m^2). The replication sizes were B1 - 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2) and B2 - 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2). A buffer 0.5&nbsp;m per split-plot was used and the overall experiment size was 3471.6&nbsp;m^2.
 
-Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg per ha as urea split into two applications) and N180 (180&nbsp;kg per ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N_rate)).
+Split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg&nbsp;/&nbsp;ha as urea split into two applications) and N180 (180&nbsp;kg&nbsp;/&nbsp;ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N_rate)).
 
 ### Crop Establishment {-}
 
@@ -90,11 +90,11 @@ Nurseries of NSIC Rc222 were established on 7 January 2016. Seedlings were manua
 
 ### Inoculum Preparation and Application {-}
 
-Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1m x 1m) per plot, where one bottle contained 151g inoculum. A total amount of 1,510g of inoculum was applied to a 1m x 1m area.
+Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1&nbsp;m&nbsp;x&nbsp;1&nbsp;m) per plot, where one bottle contained 151&nbsp;g inoculum. A total amount of 1,510&nbsp;g of inoculum was applied to a 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m area.
 
 ## Data Collection {-}
 
-In both experiments, two sample areas, sized 1m x 1m, per plot were assessed. The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1&nbsp;\% severity; 2 - 1 to 5&nbsp;\%; 3 - 5 to 15&nbsp;\%; 4 - 15 to 50&nbsp;\%; 5 - 50 to 100&nbsp;\%. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Leaves were rated as green (living) having at least XXX&nbsp;\% living tissue or dead, defined as having less than XXX&nbsp;\% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed. The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1&nbsp;\% severity; 2 - 1 to 5&nbsp;\%; 3 - 5 to 15&nbsp;\%; 4 - 15 to 50&nbsp;\%; 5 - 50 to 100&nbsp;\%. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Leaves were rated as green (living) having at least XXX&nbsp;\% living tissue or dead, defined as having less than XXX&nbsp;\% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
 ## Statistical Analysis {-}
 
@@ -178,7 +178,7 @@ The authors wish to thank the IRRI Biometrics group for their input in the desig
 ```{r N-rates}
 
 kable(N_rates,
-      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
+      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kgkg&nbsp;/^&nbsp;ha N (N100) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kgkg&nbsp;/^&nbsp;ha N (N60) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
 ```
 
 ##### pagebreak
@@ -318,7 +318,7 @@ grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 
 ##### Sheath blight progress for N treatments
 
-```{r fig-2, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180). Points represent the mean observations of four replications."}
+```{r fig-2, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kgkg&nbsp;/^&nbsp;ha N (N100) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kgkg&nbsp;/^&nbsp;ha N (N60) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N180). Points represent the mean observations of four replications."}
 
 p4_anot <- data.frame(
   label = c("a", "b"),
@@ -538,7 +538,7 @@ grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 ```
 
 ##### Tiller sheath blight incidence boxplot for N rate
-```{r fig-4, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
+```{r fig-4, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kgkg&nbsp;/^&nbsp;ha N (N100) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kgkg&nbsp;/^&nbsp;ha N (N60) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N180)."}
  
 p10_anot <- data.frame(
   label = c("a", "b"),
@@ -624,7 +624,7 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 ##### Tiller Estimates Plots
 
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on sheath blight tiller incidence and tiller severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on sheath blight tiller incidence and tiller severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kgkg&nbsp;/^&nbsp;ha N (N100) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kgkg&nbsp;/^&nbsp;ha N (N60) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N180)."}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
@@ -647,7 +647,7 @@ mtext(text = "d", side = 3, line = 0, adj = 1, cex = 0.75)
 
 ##### Leaf estimates plots
 
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on sheath blight leaf severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg per ha N (N100) and 180&nbsp;kg per ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg per ha N (N60) and 180&nbsp;kg per ha N (N180)."}
+```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on sheath blight leaf severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kgkg&nbsp;/^&nbsp;ha N (N100) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kgkg&nbsp;/^&nbsp;ha N (N60) and 180&nbsp;kgkg&nbsp;/^&nbsp;ha N (N180)."}
 
 par(mfcol = c(1, 2))
 
