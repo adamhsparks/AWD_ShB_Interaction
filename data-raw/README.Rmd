@@ -354,9 +354,6 @@ DS2016 <- rbind(
 
 DS2016[is.na(DS2016)] <- 0
 
-# Replace "Flooded" with "FLD" -------------------------------------------------
-DS2016$WMGT[which(DS2016$WMGT == "Flooded")] = "FLD"
-
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2016$NRTE[which(DS2016$NRTE == "N1")] = 60
 DS2016$NRTE[which(DS2016$NRTE == "N2")] = 180
