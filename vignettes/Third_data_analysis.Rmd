@@ -34,13 +34,13 @@ The base levels for this analysis are:
   
     - `NRTE:0`
 
-    - `WMGT:FLD`
+    - `WMGT:PDL`
 
 - 2016
 
     - `NRTE:60`
 
-    - `WMGT:FLD`
+    - `WMGT:PDL`
 
 #### Changes between 2015 and 2016
 
@@ -89,7 +89,7 @@ AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of  analysis
 AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
-AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "FLD"))
+AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 
 # create 2016 data frame
 AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
@@ -97,7 +97,7 @@ AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of  analysis
 AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
-AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "FLD"))
+AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
 ```
 
 Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start
@@ -402,15 +402,15 @@ In 2016 the nitrogen rate N180, was significantly different than the base N60 ra
 
 ### Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base FLD treatment.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base PDL treatment.
 
-In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base FLD treatment.
+In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base PDL treatment.
 
 ### Leaf Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control FLD treatment. In the leaf phase of the disease neither N by WMGT interaction was significant.
+In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control PDL treatment. In the leaf phase of the disease neither N by WMGT interaction was significant.
 
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity. The N180 by AWD interaction was significantly different from the N60 by FLD water management.
+In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity. The N180 by AWD interaction was significantly different from the N60 by PDL water management.
 
 # Save Model Information
 

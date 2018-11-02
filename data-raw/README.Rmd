@@ -212,12 +212,12 @@ DS2015$NRTE[which(DS2015$NRTE == "N2")] <- 120
 
 # Add treatment numbers --------------------------------------------------------
 DS2015$TRT <- NA
-DS2015$TRT[which(DS2015$WMGT == "FLD" &
-                   DS2015$NRTE == 0)] = "FLD_N0"
-DS2015$TRT[which(DS2015$WMGT == "FLD" &
-                   DS2015$NRTE == 100)] = "FLD_N100"
-DS2015$TRT[which(DS2015$WMGT == "FLD" &
-                   DS2015$NRTE == 120)] = "FLD_N120"
+DS2015$TRT[which(DS2015$WMGT == "PDL" &
+                   DS2015$NRTE == 0)] = "PDL_N0"
+DS2015$TRT[which(DS2015$WMGT == "PDL" &
+                   DS2015$NRTE == 100)] = "PDL_N100"
+DS2015$TRT[which(DS2015$WMGT == "PDL" &
+                   DS2015$NRTE == 120)] = "PDL_N120"
 DS2015$TRT[which(DS2015$WMGT == "AWD" &
                    DS2015$NRTE == 0)] = "AWD_N0"
 DS2015$TRT[which(DS2015$WMGT == "AWD" &
@@ -360,10 +360,10 @@ DS2016$NRTE[which(DS2016$NRTE == "N2")] = 180
 
 # Add treatment numbers --------------------------------------------------------
 DS2016$TRT <- NA
-DS2016$TRT[which(DS2016$WMGT == "FLD" &
-                   DS2016$NRTE == 60)] = "FLD_N60"
-DS2016$TRT[which(DS2016$WMGT == "FLD" &
-                   DS2016$NRTE == 180)] = "FLD_N180"
+DS2016$TRT[which(DS2016$WMGT == "PDL" &
+                   DS2016$NRTE == 60)] = "PDL_N60"
+DS2016$TRT[which(DS2016$WMGT == "PDL" &
+                   DS2016$NRTE == 180)] = "PDL_N180"
 DS2016$TRT[which(DS2016$WMGT == "AWD" &
                    DS2016$NRTE == 60)] = "AWD_N60"
 DS2016$TRT[which(DS2016$WMGT == "AWD" &
@@ -544,11 +544,11 @@ RAW_data$TRT <-
     "AWD_N120",
     "AWD_N60",
     "AWD_N180",
-    "FLD_N0",
-    "FLD_N100",
-    "FLD_N120",
-    "FLD_N60",
-    "FLD_N180"
+    "PDL_N0",
+    "PDL_N100",
+    "PDL_N120",
+    "PDL_N60",
+    "PDL_N180"
   )
 
 # add column with midpoint % tiller ShB severity -------------------------------
