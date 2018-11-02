@@ -49,6 +49,7 @@ Suggests: bookdown,
     devtools,
     ggpubr,
     knitr,
+    pkgdown,
     rmarkdown,
     sessioninfo
 VignetteBuilder: knitr
