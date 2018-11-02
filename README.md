@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--25-brightgreen.svg)](https://github.com/openplantpathology/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--02-brightgreen.svg)](https://github.com/openplantpathology/rice.awd.pests/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.5.0-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/openplantpathology/rice_awd_pests)
@@ -134,7 +134,7 @@ Please cite this compendium as:
 
 > Authors, (2018). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 25 Apr 2018. Online at <https://doi.org/xxx/xxx>
+> Accessed 02 Nov 2018. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
