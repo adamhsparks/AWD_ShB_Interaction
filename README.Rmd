@@ -113,7 +113,7 @@ launch the Docker image for this project, first,
 [install Docker](https://docs.docker.com/installation/) on your computer. At the
 Docker prompt, enter:
 
-    docker run -dp 8787:8787 adamhsparks/rice_awd_pests
+    docker run -dp 8787:8787 adamhsparks/rice-awd-pests
 
 This will start a server instance of RStudio. Then open your web browser at
 localhost:8787 or or run `docker-machine ip default` in the shell to find the
