@@ -94,7 +94,7 @@ Based on the 2015 results, the inoculation methods were modified in 2016 to incr
 
 ## Data Collection {-}
 
-In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed. The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1&nbsp;\% severity; 2 - 1 to 5&nbsp;\%; 3 - 5 to 15&nbsp;\%; 4 - 15 to 50&nbsp;\%; 5 - 50 to 100&nbsp;\%. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Leaves were rated as green (living) having at least XXX&nbsp;\% living tissue or dead, defined as having less than XXX&nbsp;\% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed. The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where 0 - no disease; 1 - trace to 1&nbsp;\% severity; 2 - 1 to 5&nbsp;\% severity; 3 - 5 to 15&nbsp;\% severity; 4 - 15 to 50&nbsp;\% severity; 5 - 50 to 100&nbsp;\% severity. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. Leaves were rated as green (living) having at least XXX&nbsp;\% living tissue or dead, defined as having less than XXX&nbsp;\% living tissue. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
 ## Statistical Analysis {-}
 
@@ -112,15 +112,15 @@ Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn
 
 ### Tiller Sheath Blight Incidence {-}
 
-In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig.&nbsp;\@ref(fig:fig-1)a, \@ref(fig:fig-2)a). Water management was not statistically clearly different (Fig.&nbsp;\@ref(fig:fig-3)a, \@ref(fig:fig-5)a). However, the N treatments, N100 and N120, were both statistically clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)a, \@ref(fig:fig-5)a). 
+In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig.&nbsp;\@ref(fig:fig-1)a, \@ref(fig:fig-2)a). Water management was not clearly statistically different (Fig.&nbsp;\@ref(fig:fig-3)a, \@ref(fig:fig-5)a). However, the N treatments, N100 and N120, were both clearly statistically different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)a, \@ref(fig:fig-5)a). 
 
 ### Tiller Sheath Blight Severity {-}
 
-Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c). Both the N100 and N120 treatments were statistically clearly different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c). However, the AWD water management was not statistically clearly different from the flooded treatment (Fig.&nbsp;\@ref(fig:fig-3)c, \@ref(fig:fig-5)c).
+Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c). Both the N100 and N120 treatments were clearly statistically different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c). However, the AWD water management was not clearly statistically different from the flooded treatment (Fig.&nbsp;\@ref(fig:fig-3)c, \@ref(fig:fig-5)c).
 
 ### Leaf Sheath Blight Severity {-}
 
-Severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Fig.&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e). Both the N100 and N120 treatments were statistically clearly different than the N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)e, \@ref(fig:fig-5)e). However, the AWD water management was not statistically clearly different from the flooded treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-5)e).
+Severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Fig.&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e). Both the N100 and N120 treatments were clearly statistically different than the N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)e, \@ref(fig:fig-5)e). However, the AWD water management was not clearly statistically different from the flooded treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-5)e).
 
 ### The Interaction of Irrigation and N Management
 
@@ -128,15 +128,15 @@ Severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all tre
 
 ### Tiller Sheath Blight Incidence {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Fig.&nbsp;\@ref(fig:fig-2)b). The N treatment N180, was statistically clearly different than the control N60 treatment (Fig.&nbsp;\@ref(fig:fig-4)b, \@ref(fig:fig-5)b). As in the 2015 study, water management did not statistically clearly differ (Fig.&nbsp;\@ref(fig:fig-3)b, \@ref(fig:fig-5)b).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Fig.&nbsp;\@ref(fig:fig-2)b). The N treatment N180, was clearly statistically different than the control N60 treatment (Fig.&nbsp;\@ref(fig:fig-4)b, \@ref(fig:fig-5)b). As in the 2015 study, water management did not clearly statistically differ (Fig.&nbsp;\@ref(fig:fig-3)b, \@ref(fig:fig-5)b).
 
 ### Tiller Sheath Blight Severity {-}
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig.&nbsp;\@ref(fig:fig-2)d). In 2016 the N180 treatment was statistically clearly different from the N60 treatment, with N180 severity being higher (Fig.&nbsp;\@ref(fig:fig-4)d, \@ref(fig:fig-5)d). The AWD water management, which was lower than the flooded treatment, was also statistically clearly different (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the flooded treatment (Fig.&nbsp;\@ref(fig:fig-2)d). In 2016 the N180 treatment was clearly statistically different from the N60 treatment, with N180 severity being higher (Fig.&nbsp;\@ref(fig:fig-4)d, \@ref(fig:fig-5)d). The AWD water management, which was lower than the flooded treatment, was also clearly statistically different (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, N rate or water management, were statistically clearly different from the control treatments for leaf sheath blight severity (Fig.&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-5)f, \@ref(fig:fig-4)f, \@ref(fig:fig-5)f).
+In 2016 the neither of the treatments, N rate or water management, were clearly statistically different from the control treatments for leaf sheath blight severity (Fig.&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-5)f, \@ref(fig:fig-4)f, \@ref(fig:fig-5)f).
 
 ### The Interaction of Irrigation and N Management
 
@@ -162,7 +162,7 @@ While sheath blight remains an important disease in rice production with little 
 
 ## Acknowledgments {-}
 
-The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, we would like to remember our teammate Michael Noel, a part of the plant disease management team at IRRI and who helped design and managed the first year of the project but passed away in September 2016.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, we would like to remember our team mate Michael Noel, a part of the plant disease management team at IRRI and who helped design and managed the first year of the project but passed away in September 2016.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak
