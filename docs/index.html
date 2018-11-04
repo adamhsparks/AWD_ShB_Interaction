@@ -73,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/openplantpathology/rice_awd_pests">
+  <a href="https://github.com/adamhsparks/rice_awd_pests">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -102,7 +102,7 @@
 <h3 class="hasAnchor">
 <a href="#compendium-doi" class="anchor"></a>Compendium DOI:</h3>
 <p><a href="http://dx.doi.org/xxxxxxx" class="uri">http://dx.doi.org/xxxxxxx</a></p>
-<p>The files at the URL above will generate the results as found in the publication. The files hosted at <a href="https://github.com/openplantpathology/rice_awd_pests" class="uri">https://github.com/openplantpathology/rice_awd_pests</a> are the development versions and may have changed since the report was published.</p>
+<p>The files at the URL above will generate the results as found in the publication. The files hosted at <a href="https://github.com/adamhsparks/rice_awd_pests" class="uri">https://github.com/adamhsparks/rice_awd_pests</a> are the development versions and may have changed since the report was published.</p>
 </div>
 <div id="authors-of-this-repository" class="section level3">
 <h3 class="hasAnchor">
@@ -142,7 +142,7 @@
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
 <p>This repository is organized as an R package. There are a few R functions in this package that were used to generate some of the diagnostic plots related to the analysis. However, for the most part I simply used the R package structure to help manage dependencies, to take advantage of continuous integration for automated code testing, and so I didn’t have to think too much about how to organise the files.</p>
 <p>To download the package source as you see it on GitHub, for offline browsing, use this line at the shell prompt (assuming you have Git installed on your computer):</p>
-<pre><code>git clone https://github.com/openplantpathology/rice_awd_pests.git</code></pre>
+<pre><code>git clone https://github.com/adamhsparks/rice_awd_pests.git</code></pre>
 <p>Once the download is complete, open the <code>rice.awd.pests.Rproj</code> in RStudio to begin working with the package and compendium files.</p>
 <p>The package has a number of dependencies on other R packages, and programs outside of R. These are listed at the bottom of this README. Installing these can be time-consuming and complicated, so we’ve used a Docker image. The Docker image includes all the necessary software, code and data to run our analysis. The Docker image may give a quicker entry point to the project, and is more self-contained, so might save some fiddling with installing things.</p>
 </div>
@@ -150,7 +150,7 @@
 <h3 class="hasAnchor">
 <a href="#the-docker-image" class="anchor"></a>The Docker image</h3>
 <p>A Docker image is a lightweight GNU/Linux virtual computer that can be run as a piece of software on Windows and OSX (and other Linux systems). To capture the complete computational environment used for this project we have a Dockerfile that specifies how to make the Docker image that we developed this project in. The Docker image includes all of the software dependencies needed to run the code in this project, as well as the R package and other compendium files. To launch the Docker image for this project, first, <a href="https://docs.docker.com/installation/">install Docker</a> on your computer. At the Docker prompt, enter:</p>
-<pre><code>docker run -dp 8787:8787 adamhsparks/rice_awd_pests</code></pre>
+<pre><code>docker run -dp 8787:8787 adamhsparks/rice-awd-pests</code></pre>
 <p>This will start a server instance of RStudio. Then open your web browser at localhost:8787 or or run <code>docker-machine ip default</code> in the shell to find the correct IP address, and log in with rstudio/rstudio.</p>
 <p>Once logged in, use the Files pane (bottom right) open the folder for this project, and open the <code>.Rproj</code> file for this project. Once that’s open, you’ll see the <code>analysis/paper</code> directory in the Files pane where you can find the R markdown document, and knit them to produce the results in the paper. More information about using RStudio in Docker is avaiable at the <a href="https://github.com/rocker-org">Rocker</a> <a href="https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image">wiki</a> pages.</p>
 <p>We developed and tested the package on this Docker container, so this is the only platform that we’re confident it works on, and so recommend to anyone wanting to use this package to generate the vignettes, etc.</p>
@@ -161,7 +161,7 @@
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>Please cite this compendium as:</p>
 <blockquote>
-<p>Authors, (2018). <em>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight</em>. Accessed 06 Oct 2018. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
+<p>Authors, (2018). <em>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight</em>. Accessed 05 Nov 2018. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
 </blockquote>
 </div>
 <div id="licenses" class="section level2">
@@ -180,8 +180,8 @@
 <h2 class="hasAnchor">
 <a href="#contact" class="anchor"></a>Contact</h2>
 <p>Adam Sparks, Associate Professor, Centre for Crop Health<br>
-University of Southern Queensland, West<br>
-St. Toowoomba, Qld 4350 Australia</p>
+University of Southern Queensland, West St.<br>
+Toowoomba, Qld 4350 Australia</p>
 <p>(+61) 7.4631.1948 <a href="mailto:adam.sparks@usq.edu.au" class="email">adam.sparks@usq.edu.au</a><br><a href="https://staffprofile.usq.edu.au/Profile/Adam-Sparks" class="uri">https://staffprofile.usq.edu.au/Profile/Adam-Sparks</a></p>
 </div>
   </div>
@@ -190,9 +190,9 @@ St. Toowoomba, Qld 4350 Australia</p>
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/openplantpathology/rice_awd_pests">https://​github.com/​openplantpathology/​rice_awd_pests</a>
+<li>Browse source code at <br><a href="https://github.com/adamhsparks/rice_awd_pests">https://​github.com/​adamhsparks/​rice_awd_pests</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/openplantpathology/rice_awd_pests/issues">https://​github.com/​openplantpathology/​rice_awd_pests/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/adamhsparks/rice_awd_pests/issues">https://​github.com/​adamhsparks/​rice_awd_pests/​issues</a>
 </li>
 </ul>
 </div>
@@ -218,11 +218,11 @@ St. Toowoomba, Qld 4350 Australia</p>
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/openplantpathology/rice.awd.pests/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--10--06-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://github.com/adamhsparks/rice.awd.pests/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--11--05-brightgreen.svg" alt="Last-changedate"></a></li>
 <li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg" alt="minimal R version"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
-<li><a href="https://travis-ci.org/openplantpathology/rice_awd_pests"><img src="https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/phytopathology/rice_awd_pests"><img src="https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://travis-ci.org/adamhsparks/rice_awd_pests"><img src="https://travis-ci.org/adamhsparks/rice_awd_pests.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"><img src="https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/master?svg=true" alt="Build status"></a></li>
 </ul>
 </div>
 </div>

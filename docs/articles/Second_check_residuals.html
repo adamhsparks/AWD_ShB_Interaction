@@ -88,7 +88,7 @@
       <h1>Check Data Residuals</h1>
                         <h4 class="author">Adam H Sparks</h4>
             
-            <h4 class="date">2018-10-06</h4>
+            <h4 class="date">2018-11-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Second_check_residuals.Rmd"><code>vignettes/Second_check_residuals.Rmd</code></a></small>
       <div class="hidden name"><code>Second_check_residuals.Rmd</code></div>
@@ -108,102 +108,102 @@
 <div id="tiller-incidence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-incidence" class="anchor"></a>2015 Tiller Incidence</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">"rice.awd.pests"</span>)</a></code></pre></div>
 <pre><code>## Loading required package: coda</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"car"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(<span class="st">"car"</span>)</a></code></pre></div>
 <pre><code>## Loading required package: carData</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">AUDPS_<span class="dv">15</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(AUDPS, YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">AUDPS_<span class="dv">16</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(AUDPS, YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">AUDPS_<span class="dv">15</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(AUDPS, YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">AUDPS_<span class="dv">16</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(AUDPS, YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Inc-1.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Inc-2.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Inc-3.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Inc-4.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
 </div>
 <div id="tiller-severity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-severity" class="anchor"></a>2015 Tiller Severity</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Sev-1.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Sev-2.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Sev-3.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Tiller_Sev-4.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
 </div>
 <div id="leaf-severity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-severity" class="anchor"></a>2015 Leaf Severity</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Leaf_Sev-1.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Leaf_Sev-2.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Leaf_Sev-3.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">15</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2015_Leaf_Sev-4.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
 </div>
 <div id="tiller-incidence-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-incidence-1" class="anchor"></a>2016 Tiller Incidence</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Inc-1.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Inc-2.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Inc-3.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_inc_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Inc-4.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
 </div>
 <div id="tiller-severity-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-severity-1" class="anchor"></a>2016 Tiller Severity</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Sev-1.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Sev-2.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Sev-3.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>TShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Tiller_Sev-4.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
 </div>
 <div id="leaf-severity-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-severity-1" class="anchor"></a>2016 Leaf Severity</h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"norm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Leaf_Sev-1.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"lnorm"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Leaf_Sev-2.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"exp"</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Leaf_Sev-3.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/qqPlot">qqp</a></span>(AUDPS_<span class="dv">16</span><span class="op">$</span>LShB_percent_AUDPS, <span class="st">"chisq"</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Second_check_residuals_files/figure-html/2016_Leaf_Sev-4.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
 <p>Based on these graphs, few of the data are a good fit for a normal distribution. Ideally, we want to see the residuals close to the solid line and between the dotted lines. Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, <em>e.g.</em> a Bayesian analysis method should be used. The <em>MCMCglmm</em> package provides an easy way to implement this type of analysis. The analyses can be found in the <a href="02_MCMCglmm_analysis.html">02_MCMCglmm_analysis.md</a> file.</p>
