@@ -26,7 +26,7 @@ library("rice.awd.pests")
 library("dplyr")
 library("ggplot2")
 library("hrbrthemes")
-theme_set(theme_ipsum_rc())
+theme_set(theme_minimal())
 ```
 
 # Histogram plot of leaf sheath blight severity data
@@ -35,7 +35,6 @@ theme_set(theme_ipsum_rc())
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   facet_grid(WMGT ~ NRTE) +
-  scale_fill_ipsum() +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
@@ -45,8 +44,6 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   facet_grid(WMGT ~ NRTE) +
-  scale_fill_ipsum() +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight Severity Rating")
 ```
 
@@ -58,8 +55,6 @@ ggplot(RAW_data, aes(x = TShB_incidence)) +
   geom_rug() +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
-  scale_fill_ipsum() +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight Incidence") +
 theme(axis.text.x = element_text(size = 8,
                                  angle = 45,
@@ -72,7 +67,6 @@ theme(axis.text.x = element_text(size = 8,
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
-  scale_fill_ipsum() +
   ggtitle("Green Leaves per Tiller")
 ```
 
@@ -82,7 +76,6 @@ ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
-  scale_fill_ipsum() +
   ggtitle("Dry Leaves per Tiller")
 ```
 
@@ -96,7 +89,6 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   ylab("Rating") +
   ggtitle("Leaf Sheath Blight Severity at Each Assessment") +
   facet_grid(. ~ YEAR) +
-  scale_colour_ipsum() +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
@@ -110,7 +102,6 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   ylab("Rating") +
   facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity at Each Assessment") +
-  scale_colour_ipsum() +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
@@ -128,7 +119,6 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   theme(strip.text.x = element_text(angle = 90)) +
   xlab("Assessment") +
   ylab("Incidence") +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight at Each Assessment")
 ```
 
@@ -145,7 +135,6 @@ ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   xlab("Treatment") +
   ylab("Incidence per Hill") +
   facet_grid(. ~ NRTE) +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
@@ -158,7 +147,6 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
-  scale_fill_ipsum() +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
@@ -169,7 +157,6 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
-  scale_fill_ipsum() +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
@@ -182,7 +169,6 @@ ggplot(AUDPS, aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
-  scale_fill_ipsum() +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
@@ -193,7 +179,6 @@ ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
-  scale_fill_ipsum() +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
@@ -206,7 +191,6 @@ ggplot(AUDPS, aes(x = WMGT, y = TShB_percent_AUDPS)) +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
-  scale_fill_ipsum() +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
@@ -216,7 +200,6 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
-  scale_fill_ipsum() +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
@@ -233,7 +216,6 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   xlab("Assessment") +
   ylab("Severity (%)") +
   facet_grid(WMGT ~ YEAR) +
-  scale_colour_ipsum() +
   ggtitle("Leaf Sheath Blight")
 ```
 
@@ -250,7 +232,6 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   xlab("Assessment") +
   ylab("Severity (%)") +
   facet_grid(WMGT ~ YEAR) +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight")
 ```
 
@@ -267,6 +248,5 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   xlab("Assessment") +
   ylab("Incidence (%)") +
   facet_grid(WMGT ~ YEAR) +
-  scale_colour_ipsum() +
   ggtitle("Tiller Sheath Blight")
 ```
