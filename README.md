@@ -6,7 +6,7 @@
 version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
-Status](https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/openplantpathology/rice_awd_pests)
+Status](https://travis-ci.org/adamhsparks/rice_awd_pests.svg?branch=master)](https://travis-ci.org/adamhsparks/rice_awd_pests)
 [![Build
 status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/master?svg=true)](https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master)
 
@@ -18,9 +18,8 @@ status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/mast
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/openplantpathology/rice_awd_pests> are the
-development versions and may have changed since the report was
-published.
+<https://github.com/adamhsparks/rice_awd_pests> are the development
+versions and may have changed since the report was published.
 
 ### Authors of this repository:
 
@@ -84,7 +83,7 @@ To download the package source as you see it on GitHub, for offline
 browsing, use this line at the shell prompt (assuming you have Git
 installed on your computer):
 
-    git clone https://github.com/openplantpathology/rice_awd_pests.git
+    git clone https://github.com/adamhsparks/rice_awd_pests.git
 
 Once the download is complete, open the `rice.awd.pests.Rproj` in
 RStudio to begin working with the package and compendium files.
