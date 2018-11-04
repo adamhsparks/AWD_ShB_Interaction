@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--02-brightgreen.svg)](https://github.com/openplantpathology/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--05-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/openplantpathology/rice_awd_pests.svg?branch=master)](https://travis-ci.org/openplantpathology/rice_awd_pests)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/phytopathology/rice_awd_pests?branch=master&svg=true)](https://ci.appveyor.com/project/phytopathology/rice_awd_pests)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/master?svg=true)](https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master)
 
 ## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
 
@@ -134,7 +134,7 @@ Please cite this compendium as:
 
 > Authors, (2018). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 02 Nov 2018. Online at <https://doi.org/xxx/xxx>
+> Accessed 05 Nov 2018. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
@@ -156,8 +156,8 @@ depends on.
 ## Contact
 
 Adam Sparks, Associate Professor, Centre for Crop Health  
-University of Southern Queensland, West  
-St. Toowoomba, Qld 4350 Australia
+University of Southern Queensland, West St.  
+Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
 <https://staffprofile.usq.edu.au/Profile/Adam-Sparks>
