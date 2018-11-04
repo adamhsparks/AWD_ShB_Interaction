@@ -53,5 +53,5 @@ Suggests: bookdown,
     rmarkdown,
     sessioninfo
 VignetteBuilder: knitr
-URL: https://github.com/openplantpathology/rice_awd_pests
-BugReports: https://github.com/openplantpathology/rice_awd_pests/issues
+URL: https://github.com/adamhsparks/rice_awd_pests
+BugReports: https://github.com/adamhsparks/rice_awd_pests/issues
