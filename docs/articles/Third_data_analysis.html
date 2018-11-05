@@ -68,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/openplantpathology/rice_awd_pests">
+  <a href="https://github.com/adamhsparks/rice_awd_pests">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -90,7 +90,7 @@
             
             <h4 class="date">2018-11-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/openplantpathology/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_awd_pests/blob/master/vignettes/Third_data_analysis.Rmd"><code>vignettes/Third_data_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>Third_data_analysis.Rmd</code></div>
 
     </div>
@@ -271,7 +271,7 @@
 <a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb13-3" title="3"></a>
 <a class="sourceLine" id="cb13-4" title="4">m1 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb13-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
 <a class="sourceLine" id="cb13-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
 <a class="sourceLine" id="cb13-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
 <a class="sourceLine" id="cb13-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
@@ -295,62 +295,69 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##               Mean     SD Naive SE Time-series SE
-## (Intercept) 1.1387 0.6468 0.004574       0.004471
-## WMGTAWD     0.1231 0.1722 0.001217       0.001211
-## NRTEN100    0.6240 0.2106 0.001489       0.001510
-## NRTEN120    1.0009 0.2098 0.001484       0.001484
+##                     Mean     SD Naive SE Time-series SE
+## (Intercept)       1.3418 0.6491 0.004590       0.004155
+## WMGTAWD          -0.2675 0.2956 0.002090       0.002106
+## NRTEN100          0.3676 0.2956 0.002091       0.002105
+## NRTEN120          0.6701 0.2925 0.002068       0.002105
+## WMGTAWD:NRTEN100  0.5130 0.4177 0.002953       0.002953
+## WMGTAWD:NRTEN120  0.6601 0.4173 0.002951       0.002938
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                 2.5%      25%    50%    75%  97.5%
-## (Intercept)  0.09882 0.912557 1.1460 1.3803 2.1749
-## WMGTAWD     -0.21232 0.008579 0.1228 0.2373 0.4621
-## NRTEN100     0.20974 0.483967 0.6239 0.7644 1.0410
-## NRTEN120     0.58841 0.859125 1.0020 1.1403 1.4152</code></pre>
+##                     2.5%     25%     50%      75%  97.5%
+## (Intercept)       0.2741  1.0924  1.3430  1.59401 2.4410
+## WMGTAWD          -0.8439 -0.4668 -0.2657 -0.07008 0.3130
+## NRTEN100         -0.2135  0.1700  0.3670  0.56792 0.9451
+## NRTEN120          0.1006  0.4737  0.6689  0.86571 1.2486
+## WMGTAWD:NRTEN100 -0.3016  0.2330  0.5099  0.79458 1.3358
+## WMGTAWD:NRTEN120 -0.1580  0.3828  0.6597  0.93551 1.4851</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m1)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
-##             Point est. Upper C.I.
-## (Intercept)       1.02       1.02
-## WMGTAWD           1.00       1.00
-## NRTEN100          1.00       1.00
-## NRTEN120          1.00       1.00
+##                  Point est. Upper C.I.
+## (Intercept)            1.01       1.01
+## WMGTAWD                1.00       1.00
+## NRTEN100               1.00       1.00
+## NRTEN120               1.00       1.00
+## WMGTAWD:NRTEN100       1.00       1.00
+## WMGTAWD:NRTEN120       1.00       1.00
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m1)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">plot</span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m1)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="700"></p>
 </div>
 <div id="tiller-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
-<a class="sourceLine" id="cb20-3" title="3"></a>
-<a class="sourceLine" id="cb20-4" title="4">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb20-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb20-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb20-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb20-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb20-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
-<a class="sourceLine" id="cb20-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb20-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
-<a class="sourceLine" id="cb20-12" title="12">}</a>
-<a class="sourceLine" id="cb20-13" title="13"></a>
-<a class="sourceLine" id="cb20-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
-<a class="sourceLine" id="cb20-15" title="15"></a>
-<a class="sourceLine" id="cb20-16" title="16">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb20-17" title="17">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
-<a class="sourceLine" id="cb20-18" title="18"></a>
-<a class="sourceLine" id="cb20-19" title="19"><span class="kw">summary</span>(m2)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
+<a class="sourceLine" id="cb21-3" title="3"></a>
+<a class="sourceLine" id="cb21-4" title="4">m2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb21-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
+<a class="sourceLine" id="cb21-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb21-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb21-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb21-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
+<a class="sourceLine" id="cb21-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb21-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
+<a class="sourceLine" id="cb21-12" title="12">}</a>
+<a class="sourceLine" id="cb21-13" title="13"></a>
+<a class="sourceLine" id="cb21-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
+<a class="sourceLine" id="cb21-15" title="15"></a>
+<a class="sourceLine" id="cb21-16" title="16">m2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m2, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb21-17" title="17">m2 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m2)</a>
+<a class="sourceLine" id="cb21-18" title="18"></a>
+<a class="sourceLine" id="cb21-19" title="19"><span class="kw">summary</span>(m2)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -360,92 +367,27 @@
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##               Mean    SD Naive SE Time-series SE
-## (Intercept) 13.509 6.553  0.04634        0.04528
-## WMGTAWD      4.821 4.506  0.03186        0.03187
-## NRTEN100    26.262 5.461  0.03862        0.03862
-## NRTEN120    41.157 5.474  0.03871        0.03898
+##                    Mean     SD Naive SE Time-series SE
+## (Intercept)      16.478  7.197  0.05089        0.05063
+## WMGTAWD          -1.222  7.655  0.05413        0.05358
+## NRTEN100         16.262  7.741  0.05473        0.05446
+## NRTEN120         42.222  7.694  0.05441        0.05443
+## WMGTAWD:NRTEN100 19.978 10.924  0.07724        0.07654
+## WMGTAWD:NRTEN120 -2.015 10.827  0.07656        0.07657
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##               2.5%    25%    50%    75% 97.5%
-## (Intercept)  1.107  9.702 13.497 17.277 26.24
-## WMGTAWD     -4.161  1.835  4.815  7.834 13.65
-## NRTEN100    15.566 22.616 26.281 29.933 37.12
-## NRTEN120    30.460 37.473 41.167 44.836 51.83</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+##                     2.5%    25%    50%    75% 97.5%
+## (Intercept)        2.759 12.092 16.450 20.862 30.35
+## WMGTAWD          -16.324 -6.373 -1.144  3.979 13.69
+## NRTEN100           1.004 11.133 16.204 21.451 31.36
+## NRTEN120          27.116 37.116 42.250 47.374 57.28
+## WMGTAWD:NRTEN100  -1.618 12.707 20.023 27.261 41.47
+## WMGTAWD:NRTEN120 -23.054 -9.225 -2.112  5.190 19.56</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
-<pre><code>## Potential scale reduction factors:
-## 
-##             Point est. Upper C.I.
-## (Intercept)          1          1
-## WMGTAWD              1          1
-## NRTEN100             1          1
-## NRTEN120             1          1
-## 
-## Multivariate psrf
-## 
-## 1</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m2)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
-</div>
-<div id="leaf-sheath-blight-severity-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
-<a class="sourceLine" id="cb27-3" title="3"></a>
-<a class="sourceLine" id="cb27-4" title="4">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb27-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_sev_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb27-6" title="6">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP,</a>
-<a class="sourceLine" id="cb27-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
-<a class="sourceLine" id="cb27-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb27-9" title="9">           <span class="dt">prior =</span> leaf_eprior,</a>
-<a class="sourceLine" id="cb27-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb27-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
-<a class="sourceLine" id="cb27-12" title="12">}</a>
-<a class="sourceLine" id="cb27-13" title="13"></a>
-<a class="sourceLine" id="cb27-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
-<a class="sourceLine" id="cb27-15" title="15"></a>
-<a class="sourceLine" id="cb27-16" title="16">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb27-17" title="17">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
-<a class="sourceLine" id="cb27-18" title="18"></a>
-<a class="sourceLine" id="cb27-19" title="19"><span class="kw">summary</span>(m3)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.3934 1.9592 0.013853       0.014829
-## WMGTAWD          -0.8372 0.6580 0.004653       0.004524
-## NRTEN100          1.2250 0.3691 0.002610       0.002592
-## NRTEN120          1.5366 0.3674 0.002598       0.002598
-## WMGTAWD:NRTEN100  0.5708 0.5216 0.003688       0.003747
-## WMGTAWD:NRTEN120  0.5181 0.5201 0.003678       0.003649
-## 
-## 2. Quantiles for each variable:
-## 
-##                     2.5%     25%     50%     75% 97.5%
-## (Intercept)      -2.2821  0.5931  1.3906  2.2137 5.112
-## WMGTAWD          -2.0514 -1.1718 -0.8418 -0.5116 0.394
-## NRTEN100          0.5015  0.9748  1.2261  1.4727 1.945
-## NRTEN120          0.8122  1.2946  1.5313  1.7821 2.258
-## WMGTAWD:NRTEN100 -0.4465  0.2194  0.5712  0.9190 1.596
-## WMGTAWD:NRTEN120 -0.5113  0.1739  0.5196  0.8666 1.535</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m3)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
@@ -459,164 +401,35 @@
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m3)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
-<hr>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">plot</span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m2)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="700"></p>
 </div>
-</div>
-<div id="models-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#models-1" class="anchor"></a>2016 Models</h2>
-<div id="tiller-sheath-blight-incidence-model-1" class="section level3">
+<div id="leaf-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
-<a class="sourceLine" id="cb34-3" title="3"></a>
-<a class="sourceLine" id="cb34-4" title="4">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb34-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb34-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb34-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb34-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb34-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
-<a class="sourceLine" id="cb34-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb34-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
-<a class="sourceLine" id="cb34-12" title="12">}</a>
-<a class="sourceLine" id="cb34-13" title="13"></a>
-<a class="sourceLine" id="cb34-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
-<a class="sourceLine" id="cb34-15" title="15"></a>
-<a class="sourceLine" id="cb34-16" title="16">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb34-17" title="17">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
-<a class="sourceLine" id="cb34-18" title="18"></a>
-<a class="sourceLine" id="cb34-19" title="19"><span class="kw">summary</span>(m4)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##                Mean     SD Naive SE Time-series SE
-## (Intercept) 10.5301 1.3537 0.009572       0.009281
-## WMGTAWD      0.3712 0.2503 0.001770       0.001814
-## NRTEN180     1.9565 0.2485 0.001757       0.001733
-## 
-## 2. Quantiles for each variable:
-## 
-##                2.5%     25%     50%     75%   97.5%
-## (Intercept)  8.0073 10.0522 10.5395 11.0320 12.9542
-## WMGTAWD     -0.1168  0.2033  0.3737  0.5394  0.8612
-## NRTEN180     1.4695  1.7883  1.9550  2.1236  2.4439</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
-<pre><code>## Potential scale reduction factors:
-## 
-##             Point est. Upper C.I.
-## (Intercept)          1          1
-## WMGTAWD              1          1
-## NRTEN180             1          1
-## 
-## Multivariate psrf
-## 
-## 1</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m4)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
-</div>
-<div id="tiller-sheath-blight-severity-model-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
-<a class="sourceLine" id="cb41-3" title="3"></a>
-<a class="sourceLine" id="cb41-4" title="4">m5 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb41-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE,</a>
-<a class="sourceLine" id="cb41-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
-<a class="sourceLine" id="cb41-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb41-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb41-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
-<a class="sourceLine" id="cb41-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb41-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb41-12" title="12">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb41-13" title="13">}</a>
-<a class="sourceLine" id="cb41-14" title="14"></a>
-<a class="sourceLine" id="cb41-15" title="15"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
-<a class="sourceLine" id="cb41-16" title="16"></a>
-<a class="sourceLine" id="cb41-17" title="17">m5 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m5, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb41-18" title="18">m5 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m5)</a>
-<a class="sourceLine" id="cb41-19" title="19"></a>
-<a class="sourceLine" id="cb41-20" title="20"><span class="kw">summary</span>(m5)</a></code></pre></div>
-<pre><code>## 
-## Iterations = 5001:54991
-## Thinning interval = 10 
-## Number of chains = 4 
-## Sample size per chain = 5000 
-## 
-## 1. Empirical mean and standard deviation for each variable,
-##    plus standard error of the mean:
-## 
-##               Mean    SD Naive SE Time-series SE
-## (Intercept) 31.995 8.380  0.05925        0.05926
-## WMGTAWD     -8.239 2.198  0.01554        0.01545
-## NRTEN180     4.743 2.210  0.01562        0.01605
-## 
-## 2. Quantiles for each variable:
-## 
-##                 2.5%    25%    50%    75%  97.5%
-## (Intercept)  15.3609 27.880 32.011 36.184 48.464
-## WMGTAWD     -12.5331 -9.703 -8.232 -6.780 -3.910
-## NRTEN180      0.3537  3.275  4.772  6.215  9.059</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</a></code></pre></div>
-<pre><code>## Potential scale reduction factors:
-## 
-##             Point est. Upper C.I.
-## (Intercept)          1          1
-## WMGTAWD              1          1
-## NRTEN180             1          1
-## 
-## Multivariate psrf
-## 
-## 1</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="kw">plot</span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m5)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
-</div>
-<div id="leaf-sheath-blight-severity-model-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
-<a class="sourceLine" id="cb48-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
-<a class="sourceLine" id="cb48-3" title="3"></a>
-<a class="sourceLine" id="cb48-4" title="4">m6 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb48-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_sev_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
-<a class="sourceLine" id="cb48-6" title="6">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP,</a>
-<a class="sourceLine" id="cb48-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
-<a class="sourceLine" id="cb48-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb48-9" title="9">           <span class="dt">prior =</span> leaf_eprior,</a>
-<a class="sourceLine" id="cb48-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
-<a class="sourceLine" id="cb48-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
-<a class="sourceLine" id="cb48-12" title="12">}</a>
-<a class="sourceLine" id="cb48-13" title="13"></a>
-<a class="sourceLine" id="cb48-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
-<a class="sourceLine" id="cb48-15" title="15"></a>
-<a class="sourceLine" id="cb48-16" title="16">m6 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m6, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
-<a class="sourceLine" id="cb48-17" title="17">m6 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m6)</a>
-<a class="sourceLine" id="cb48-18" title="18"></a>
-<a class="sourceLine" id="cb48-19" title="19"><span class="kw">summary</span>(m6)</a></code></pre></div>
+<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
+<a class="sourceLine" id="cb29-3" title="3"></a>
+<a class="sourceLine" id="cb29-4" title="4">m3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb29-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_sev_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
+<a class="sourceLine" id="cb29-6" title="6">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb29-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2015</span>,</a>
+<a class="sourceLine" id="cb29-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb29-9" title="9">           <span class="dt">prior =</span> leaf_eprior,</a>
+<a class="sourceLine" id="cb29-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb29-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
+<a class="sourceLine" id="cb29-12" title="12">}</a>
+<a class="sourceLine" id="cb29-13" title="13"></a>
+<a class="sourceLine" id="cb29-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
+<a class="sourceLine" id="cb29-15" title="15"></a>
+<a class="sourceLine" id="cb29-16" title="16">m3 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m3, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb29-17" title="17">m3 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m3)</a>
+<a class="sourceLine" id="cb29-18" title="18"></a>
+<a class="sourceLine" id="cb29-19" title="19"><span class="kw">summary</span>(m3)</a></code></pre></div>
 <pre><code>## 
 ## Iterations = 5001:54991
 ## Thinning interval = 10 
@@ -627,37 +440,246 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       0.9933 0.5685 0.004020       0.004234
-## WMGTAWD           0.2333 0.3339 0.002361       0.002350
-## NRTEN180          0.5508 0.1539 0.001088       0.001083
-## WMGTAWD:NRTEN180 -0.4935 0.2168 0.001533       0.001525
+## (Intercept)       1.3840 2.1437 0.015158       0.014850
+## WMGTAWD          -0.8344 0.6685 0.004727       0.004540
+## NRTEN100          1.2263 0.3675 0.002599       0.002644
+## NRTEN120          1.5381 0.3655 0.002584       0.002584
+## WMGTAWD:NRTEN100  0.5732 0.5186 0.003667       0.003733
+## WMGTAWD:NRTEN120  0.5121 0.5188 0.003668       0.003657
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                      2.5%      25%     50%     75%   97.5%
-## (Intercept)       0.01732  0.79078  0.9950  1.2044  1.9349
-## WMGTAWD          -0.43378  0.05028  0.2332  0.4146  0.8986
-## NRTEN180          0.25039  0.44661  0.5510  0.6519  0.8552
-## WMGTAWD:NRTEN180 -0.92769 -0.63810 -0.4925 -0.3492 -0.0717</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb50-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m6)</a></code></pre></div>
+##                     2.5%     25%     50%     75% 97.5%
+## (Intercept)      -2.5816  0.5539  1.3894  2.2348 5.238
+## WMGTAWD          -2.0598 -1.1613 -0.8347 -0.5075 0.390
+## NRTEN100          0.5069  0.9770  1.2216  1.4694 1.954
+## NRTEN120          0.8259  1.2925  1.5389  1.7836 2.257
+## WMGTAWD:NRTEN100 -0.4455  0.2234  0.5765  0.9199 1.588
+## WMGTAWD:NRTEN120 -0.5119  0.1700  0.5134  0.8569 1.522</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m3, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m3)</a></code></pre></div>
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)               1       1.01
-## WMGTAWD                   1       1.00
-## NRTEN180                  1       1.00
-## WMGTAWD:NRTEN180          1       1.00
+## (Intercept)            1.02       1.02
+## WMGTAWD                1.01       1.01
+## NRTEN100               1.00       1.00
+## NRTEN120               1.00       1.00
+## WMGTAWD:NRTEN100       1.00       1.00
+## WMGTAWD:NRTEN120       1.00       1.00
 ## 
 ## Multivariate psrf
 ## 
 ## 1</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="kw">plot</span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">plot</span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m3)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"></p>
+<hr>
+</div>
+</div>
+<div id="models-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#models-1" class="anchor"></a>2016 Models</h2>
+<div id="tiller-sheath-blight-incidence-model-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
+<a class="sourceLine" id="cb36-3" title="3"></a>
+<a class="sourceLine" id="cb36-4" title="4">m4 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb36-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_inc_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
+<a class="sourceLine" id="cb36-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb36-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb36-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb36-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
+<a class="sourceLine" id="cb36-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb36-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
+<a class="sourceLine" id="cb36-12" title="12">}</a>
+<a class="sourceLine" id="cb36-13" title="13"></a>
+<a class="sourceLine" id="cb36-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
+<a class="sourceLine" id="cb36-15" title="15"></a>
+<a class="sourceLine" id="cb36-16" title="16">m4 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m4, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb36-17" title="17">m4 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m4)</a>
+<a class="sourceLine" id="cb36-18" title="18"></a>
+<a class="sourceLine" id="cb36-19" title="19"><span class="kw">summary</span>(m4)</a></code></pre></div>
+<pre><code>## 
+## Iterations = 5001:54991
+## Thinning interval = 10 
+## Number of chains = 4 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##                     Mean     SD Naive SE Time-series SE
+## (Intercept)      10.3394 1.3723 0.009704       0.010755
+## WMGTAWD           0.7614 0.3422 0.002420       0.002353
+## NRTEN180          2.3515 0.3425 0.002422       0.002452
+## WMGTAWD:NRTEN180 -0.7802 0.4870 0.003443       0.003407
+## 
+## 2. Quantiles for each variable:
+## 
+##                      2.5%     25%     50%     75%   97.5%
+## (Intercept)       7.91620  9.8362 10.3442 10.8440 12.7449
+## WMGTAWD           0.08687  0.5327  0.7624  0.9881  1.4396
+## NRTEN180          1.67485  2.1252  2.3512  2.5824  3.0216
+## WMGTAWD:NRTEN180 -1.73953 -1.1113 -0.7777 -0.4534  0.1754</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##                  Point est. Upper C.I.
+## (Intercept)            1.02       1.02
+## WMGTAWD                1.00       1.00
+## NRTEN180               1.00       1.00
+## WMGTAWD:NRTEN180       1.00       1.00
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">plot</span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m4)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-5.png" width="700"></p>
+</div>
+<div id="tiller-sheath-blight-severity-model-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
+<a class="sourceLine" id="cb44-3" title="3"></a>
+<a class="sourceLine" id="cb44-4" title="4">m5 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb44-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(TShB_percent_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
+<a class="sourceLine" id="cb44-6" title="6">           <span class="dt">random =</span> <span class="op">~</span>REP, </a>
+<a class="sourceLine" id="cb44-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb44-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb44-9" title="9">           <span class="dt">prior =</span> tiller_eprior,</a>
+<a class="sourceLine" id="cb44-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb44-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>,</a>
+<a class="sourceLine" id="cb44-12" title="12">           <span class="dt">thin =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb44-13" title="13">}</a>
+<a class="sourceLine" id="cb44-14" title="14"></a>
+<a class="sourceLine" id="cb44-15" title="15"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
+<a class="sourceLine" id="cb44-16" title="16"></a>
+<a class="sourceLine" id="cb44-17" title="17">m5 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m5, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb44-18" title="18">m5 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m5)</a>
+<a class="sourceLine" id="cb44-19" title="19"></a>
+<a class="sourceLine" id="cb44-20" title="20"><span class="kw">summary</span>(m5)</a></code></pre></div>
+<pre><code>## 
+## Iterations = 5001:54991
+## Thinning interval = 10 
+## Number of chains = 4 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##                    Mean    SD Naive SE Time-series SE
+## (Intercept)      29.862 8.354  0.05907        0.05929
+## WMGTAWD          -3.758 3.015  0.02132        0.02116
+## NRTEN180          9.240 3.014  0.02131        0.02131
+## WMGTAWD:NRTEN180 -9.012 4.281  0.03027        0.03068
+## 
+## 2. Quantiles for each variable:
+## 
+##                     2.5%     25%    50%    75%   97.5%
+## (Intercept)       13.284  25.560 29.803 34.094 46.8056
+## WMGTAWD           -9.620  -5.783 -3.749 -1.720  2.1218
+## NRTEN180           3.284   7.244  9.250 11.247 15.1630
+## WMGTAWD:NRTEN180 -17.504 -11.846 -8.976 -6.151 -0.5729</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##                  Point est. Upper C.I.
+## (Intercept)               1          1
+## WMGTAWD                   1          1
+## NRTEN180                  1          1
+## WMGTAWD:NRTEN180          1          1
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">plot</span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m5)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="700"><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="700"></p>
+</div>
+<div id="leaf-sheath-blight-severity-model-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
+<a class="sourceLine" id="cb52-3" title="3"></a>
+<a class="sourceLine" id="cb52-4" title="4">m6 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/foreach/topics/foreach">foreach</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">.packages =</span> <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb52-5" title="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/MCMCglmm/topics/MCMCglmm">MCMCglmm</a></span>(LShB_sev_AUDPS <span class="op">~</span><span class="st"> </span>WMGT <span class="op">+</span><span class="st"> </span>NRTE <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>NRTE,</a>
+<a class="sourceLine" id="cb52-6" title="6">           <span class="dt">random =</span> <span class="op">~</span><span class="st"> </span>REP <span class="op">+</span><span class="st"> </span>WMGT<span class="op">:</span>REP,</a>
+<a class="sourceLine" id="cb52-7" title="7">           <span class="dt">data =</span> AUDPS_<span class="dv">2016</span>,</a>
+<a class="sourceLine" id="cb52-8" title="8">           <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb52-9" title="9">           <span class="dt">prior =</span> leaf_eprior,</a>
+<a class="sourceLine" id="cb52-10" title="10">           <span class="dt">nitt =</span> <span class="dv">55000</span>,</a>
+<a class="sourceLine" id="cb52-11" title="11">           <span class="dt">burnin =</span> <span class="dv">5000</span>)</a>
+<a class="sourceLine" id="cb52-12" title="12">}</a>
+<a class="sourceLine" id="cb52-13" title="13"></a>
+<a class="sourceLine" id="cb52-14" title="14"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a>
+<a class="sourceLine" id="cb52-15" title="15"></a>
+<a class="sourceLine" id="cb52-16" title="16">m6 &lt;-<span class="st"> </span><span class="kw">lapply</span>(m6, <span class="cf">function</span>(m) m<span class="op">$</span>Sol)</a>
+<a class="sourceLine" id="cb52-17" title="17">m6 &lt;-<span class="st"> </span><span class="kw">do.call</span>(mcmc.list, m6)</a>
+<a class="sourceLine" id="cb52-18" title="18"></a>
+<a class="sourceLine" id="cb52-19" title="19"><span class="kw">summary</span>(m6)</a></code></pre></div>
+<pre><code>## 
+## Iterations = 5001:54991
+## Thinning interval = 10 
+## Number of chains = 4 
+## Sample size per chain = 5000 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##                     Mean     SD Naive SE Time-series SE
+## (Intercept)       1.0001 0.5419 0.003832       0.004269
+## WMGTAWD           0.2293 0.3440 0.002433       0.002422
+## NRTEN180          0.5500 0.1532 0.001083       0.001087
+## WMGTAWD:NRTEN180 -0.4938 0.2178 0.001540       0.001549
+## 
+## 2. Quantiles for each variable:
+## 
+##                      2.5%      25%     50%     75%    97.5%
+## (Intercept)       0.07733  0.79127  0.9998  1.2120  1.90655
+## WMGTAWD          -0.45361  0.04946  0.2301  0.4088  0.90932
+## NRTEN180          0.24911  0.44848  0.5498  0.6516  0.85687
+## WMGTAWD:NRTEN180 -0.92525 -0.63888 -0.4954 -0.3485 -0.06507</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m6, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m6)</a></code></pre></div>
+<pre><code>## Potential scale reduction factors:
+## 
+##                  Point est. Upper C.I.
+## (Intercept)            1.01       1.01
+## WMGTAWD                1.00       1.00
+## NRTEN180               1.00       1.00
+## WMGTAWD:NRTEN180       1.00       1.00
+## 
+## Multivariate psrf
+## 
+## 1</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">plot</span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m6)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m6)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"></p>
 </div>
 <div id="model-fit" class="section level3">
@@ -694,13 +716,13 @@
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information used in the posterior estimate graphs to be used in the paper.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,</a>
-<a class="sourceLine" id="cb55-2" title="2">               <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,</a>
-<a class="sourceLine" id="cb55-3" title="3">               <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,</a>
-<a class="sourceLine" id="cb55-4" title="4">               <span class="st">"TInc_16"</span> =<span class="st"> </span>m4,</a>
-<a class="sourceLine" id="cb55-5" title="5">               <span class="st">"TSev_16"</span> =<span class="st"> </span>m5,</a>
-<a class="sourceLine" id="cb55-6" title="6">               <span class="st">"LSev_16"</span> =<span class="st"> </span>m6)</a>
-<a class="sourceLine" id="cb55-7" title="7"><span class="kw">saveRDS</span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">models &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,</a>
+<a class="sourceLine" id="cb59-2" title="2">               <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,</a>
+<a class="sourceLine" id="cb59-3" title="3">               <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,</a>
+<a class="sourceLine" id="cb59-4" title="4">               <span class="st">"TInc_16"</span> =<span class="st"> </span>m4,</a>
+<a class="sourceLine" id="cb59-5" title="5">               <span class="st">"TSev_16"</span> =<span class="st"> </span>m5,</a>
+<a class="sourceLine" id="cb59-6" title="6">               <span class="st">"LSev_16"</span> =<span class="st"> </span>m6)</a>
+<a class="sourceLine" id="cb59-7" title="7"><span class="kw">saveRDS</span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</a></code></pre></div>
 </div>
   </div>
 
