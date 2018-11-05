@@ -140,7 +140,7 @@ In 2016 the neither of the treatments, N rate or water management, were clearly 
 
 ### The Interaction of Irrigation and N Management
 
-Add statement here... XXXXX
+The interaction of irrigation treatment AWD with N rate N0 in 2015 or N180 in 2016 was not clearly different from the control puddled irrigation and N60 for tiller incidence or severity in either experiment. For leaf severity in the 2015 experiment the interaction was not clearly different. In 2016 the interaction of N180 and N180 was clearly lower than the control puddled irrigation and N60 rate.
 
 # Discussion {-}
 
