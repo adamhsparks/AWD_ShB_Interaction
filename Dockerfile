@@ -16,6 +16,11 @@ RUN . /etc/environment \
   \
   && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/data-raw/README.Rmd')" \
   \
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/README.Rmd')" \
  # render the manuscript into a docx, you'll need to edit this if you've
  # customised the location and name of your main Rmd file
-  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/analysis/paper/paper.Rmd')"
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/analysis/paper/paper.Rmd')" \
+  \
+ # build static documentation of pkgdown site
+  \
+  && R -e "pkgdown::build_site()"
