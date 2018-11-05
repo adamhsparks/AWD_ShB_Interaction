@@ -23,4 +23,4 @@ RUN . /etc/environment \
   \
  # build static documentation of pkgdown site
   \
-  && R -e "pkgdown::build_site('/home/rstudio/rice_awd_pests'`)"
+  && R -e "pkgdown::build_site('/home/rstudio/rice_awd_pests')"
