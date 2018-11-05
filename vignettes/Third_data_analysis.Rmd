@@ -196,12 +196,12 @@ m1 <- do.call(mcmc.list, m1)
 
 summary(m1)
 
-par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m1, auto.layout = FALSE)
 
 gelman.diag(m1)
 
-par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
 plot(m1, ask = FALSE, auto.layout = FALSE)
 
 plot_tiller_estimates(m1)
@@ -231,12 +231,12 @@ m2 <- do.call(mcmc.list, m2)
 
 summary(m2)
 
-par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m2, auto.layout = FALSE)
 
 gelman.diag(m2)
 
-par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
 plot(m2, ask = FALSE, auto.layout = FALSE)
 
 plot_tiller_estimates(m2)
@@ -265,12 +265,12 @@ m3 <- do.call(mcmc.list, m3)
 
 summary(m3)
 
-par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(8, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m3, auto.layout = FALSE)
 
 gelman.diag(m3)
 
-par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
 plot(m3, ask = FALSE, auto.layout = FALSE)
 
 plot_leaf_estimates(m3)
@@ -303,12 +303,12 @@ m4 <- do.call(mcmc.list, m4)
 
 summary(m4)
 
-par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(5, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m4, auto.layout = FALSE)
 
 gelman.diag(m4)
 
-par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(5, 2), mar = c(2, 1, 1, 1))
 plot(m4, ask = FALSE, auto.layout = FALSE)
 
 plot_tiller_estimates(m4)
@@ -339,12 +339,12 @@ m5 <- do.call(mcmc.list, m5)
 
 summary(m5)
 
-par(mfrow = c(3, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m5, auto.layout = FALSE)
 
 gelman.diag(m5)
 
-par(mfrow = c(3, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
 plot(m5, ask = FALSE, auto.layout = FALSE)
 
 plot_tiller_estimates(m5)
@@ -373,12 +373,12 @@ m6 <- do.call(mcmc.list, m6)
 
 summary(m6)
 
-par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
+par(mfrow = c(5, 1), mar = c(2, 2, 1, 2))
 gelman.plot(m6, auto.layout = FALSE)
 
 gelman.diag(m6)
 
-par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
+par(mfrow = c(5, 2), mar = c(2, 1, 1, 1))
 plot(m6, ask = FALSE, auto.layout = FALSE)
 
 plot_leaf_estimates(m6)
