@@ -26,11 +26,17 @@
       if (links[i].getAttribute("href") === "#")
         continue;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       // Ignore external links
       if (links[i].host !== location.host)
         continue;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       var nav_path = paths(links[i].pathname);
 

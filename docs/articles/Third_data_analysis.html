@@ -90,7 +90,11 @@
                         <h4 class="author">Adam H Sparks</h4>
             
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <h4 class="date">2018-11-22</h4>
+=======
+            <h4 class="date">2018-12-20</h4>
+>>>>>>> Stashed changes
 =======
             <h4 class="date">2018-12-20</h4>
 >>>>>>> Stashed changes
@@ -108,9 +112,15 @@
 <a href="#interpreting-these-analyses" class="anchor"></a>Interpreting These Analyses</h4>
 <p>The <em>MCMCglmm</em> documentation provides an excellent resource for interpreting the outputs for each of the models below.</p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MCMCglmm)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Overview"</span>)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"CourseNotes"</span>)</code></pre></div>
+=======
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MCMCglmm)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Overview"</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"CourseNotes"</span>)</a></code></pre></div>
+>>>>>>> Stashed changes
 =======
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MCMCglmm)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"Overview"</span>)</a>
@@ -150,6 +160,7 @@
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Use <code><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed()</a></code> for reproducibility.</p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(coda)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rice.awd.pests)
@@ -181,6 +192,8 @@ AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw
 AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">within</a></span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/relevel">relevel</a></span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))
 AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">within</a></span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/relevel">relevel</a></span>(WMGT, <span class="dt">ref =</span> <span class="st">"PDL"</span>))</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(coda)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rice.awd.pests)</a>
@@ -211,6 +224,9 @@ AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw
 <a class="sourceLine" id="cb3-13" title="13"><span class="co"># relevel factors for easier interpretation of  analysis</span></a>
 <a class="sourceLine" id="cb3-14" title="14">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">within</a></span>(AUDPS_<span class="dv">2016</span>, NRTE &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/relevel">relevel</a></span>(NRTE, <span class="dt">ref =</span> <span class="st">"N60"</span>))</a>
 <a class="sourceLine" id="cb3-15" title="15">AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">within</a></span>(AUDPS_<span class="dv">2016</span>, WMGT &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/relevel">relevel</a></span>(WMGT, <span class="dt">ref =</span> <span class="st">"PDL"</span>))</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> <code>data.frames()</code> exist, we can start the analysis.</p>
 </div>
@@ -322,6 +338,7 @@ AUDPS_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw
 <p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat non-informative priors that have a uniform low degree of belief in all parameters for all six models we will create.</p>
 <p>The tiller analyses doe not include an interaction prior while the leaf analyses do. Because of this there are two different priors set for the analyses following.</p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tiller_eprior &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">R =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">V =</span> <span class="dv">1</span>,
                                <span class="dt">nu =</span> <span class="fl">0.002</span>),
                       <span class="dt">G =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(
@@ -342,6 +359,8 @@ leaf_eprior &lt;-<span class="st"> </span><span class="kw"><a href="https://www.
                                  <span class="dt">alpha.mu =</span> <span class="dv">0</span>,
                                  <span class="dt">alpha.V =</span> <span class="dv">25</span><span class="op">^</span><span class="dv">2</span>)))</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">tiller_eprior &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">R =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">V =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb12-2" title="2">                               <span class="dt">nu =</span> <span class="fl">0.002</span>),</a>
 <a class="sourceLine" id="cb12-3" title="3">                      <span class="dt">G =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
@@ -370,6 +389,7 @@ leaf_eprior &lt;-<span class="st"> </span><span class="kw"><a href="https://www.
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h3>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
 
@@ -390,6 +410,8 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m1)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb13-3" title="3"></a>
@@ -409,6 +431,9 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb13-17" title="17">m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m1)</a>
 <a class="sourceLine" id="cb13-18" title="18"></a>
 <a class="sourceLine" id="cb13-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m1)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -420,6 +445,7 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)       1.3380 0.6454 0.004563       0.004657
 ## WMGTAWD          -0.2622 0.2964 0.002096       0.002096
@@ -451,6 +477,17 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 2. Quantiles for each variable:
 ## 
+=======
+## (Intercept)       1.3395 0.7266 0.005138       0.005320
+## WMGTAWD          -0.2589 0.2988 0.002113       0.002111
+## NRTEN100          0.3714 0.2968 0.002098       0.002068
+## NRTEN120          0.6762 0.2977 0.002105       0.002117
+## WMGTAWD:NRTEN100  0.5023 0.4219 0.002983       0.002984
+## WMGTAWD:NRTEN120  0.6479 0.4229 0.002990       0.002979
+## 
+## 2. Quantiles for each variable:
+## 
+>>>>>>> Stashed changes
 ##                      2.5%     25%     50%      75%  97.5%
 ## (Intercept)       0.20508  1.0855  1.3422  1.59010 2.4860
 ## WMGTAWD          -0.83830 -0.4630 -0.2581 -0.05802 0.3306
@@ -462,6 +499,9 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb15-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m1, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m1)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## Potential scale reduction factors:
 ## 
@@ -477,8 +517,13 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</code></pre></div>
+=======
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+>>>>>>> Stashed changes
 =======
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb18-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m1, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
@@ -490,6 +535,7 @@ m1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <div id="tiller-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h3>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
@@ -511,6 +557,8 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m2)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb20-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb20-3" title="3"></a>
@@ -530,6 +578,9 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb20-17" title="17">m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m2)</a>
 <a class="sourceLine" id="cb20-18" title="18"></a>
 <a class="sourceLine" id="cb20-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m2)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -542,6 +593,7 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ##                    Mean     SD Naive SE Time-series SE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ## (Intercept)      16.457  6.995  0.04946        0.04918
 ## WMGTAWD          -1.225  7.604  0.05377        0.05423
 ## NRTEN100         16.279  7.586  0.05364        0.05385
@@ -549,17 +601,23 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## WMGTAWD:NRTEN100 19.997 10.724  0.07583        0.07621
 ## WMGTAWD:NRTEN120 -2.084 10.738  0.07593        0.07558
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)      16.464  7.174  0.05073        0.05108
 ## WMGTAWD          -1.188  7.671  0.05424        0.05550
 ## NRTEN100         16.222  7.675  0.05427        0.05427
 ## NRTEN120         42.300  7.649  0.05409        0.05409
 ## WMGTAWD:NRTEN100 20.052 10.823  0.07653        0.07653
 ## WMGTAWD:NRTEN120 -2.201 10.868  0.07685        0.07666
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%    25%    50%    75% 97.5%
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)        2.675 12.196 16.460 20.807 29.92
 ## WMGTAWD          -16.141 -6.343 -1.204  3.875 13.64
@@ -572,6 +630,8 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)        2.565 12.143 16.497 20.760 30.56
 ## WMGTAWD          -16.175 -6.342 -1.257  3.856 14.04
 ## NRTEN100           1.361 11.109 16.180 21.378 31.40
@@ -582,6 +642,9 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m2, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m2)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## Potential scale reduction factors:
 ## 
@@ -597,8 +660,13 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</code></pre></div>
+=======
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+>>>>>>> Stashed changes
 =======
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb25-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m2, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
@@ -610,6 +678,7 @@ m2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <div id="leaf-sheath-blight-severity-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h3>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
@@ -631,6 +700,8 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m3)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb27-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb27-3" title="3"></a>
@@ -650,6 +721,9 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb27-17" title="17">m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m3)</a>
 <a class="sourceLine" id="cb27-18" title="18"></a>
 <a class="sourceLine" id="cb27-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m3)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -662,6 +736,7 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ##                     Mean     SD Naive SE Time-series SE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ## (Intercept)       1.3920 1.9207 0.013581       0.013452
 ## WMGTAWD          -0.8400 0.6730 0.004759       0.004831
 ## NRTEN100          1.2247 0.3627 0.002565       0.002565
@@ -669,17 +744,23 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## WMGTAWD:NRTEN100  0.5709 0.5134 0.003630       0.003636
 ## WMGTAWD:NRTEN120  0.5173 0.5146 0.003639       0.003639
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)       1.3717 2.2467 0.015887       0.018238
 ## WMGTAWD          -0.8347 0.6838 0.004835       0.004906
 ## NRTEN100          1.2283 0.3656 0.002585       0.002570
 ## NRTEN120          1.5365 0.3668 0.002593       0.002598
 ## WMGTAWD:NRTEN100  0.5706 0.5159 0.003648       0.003670
 ## WMGTAWD:NRTEN120  0.5136 0.5170 0.003656       0.003638
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%     50%     75%  97.5%
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)      -2.3057  0.5971  1.3986  2.2037 5.0249
 ## WMGTAWD          -2.0738 -1.1703 -0.8390 -0.5138 0.3907
@@ -701,6 +782,8 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## WMGTAWD:NRTEN100          1          1
 ## WMGTAWD:NRTEN120          1          1
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)      -2.5294  0.5664  1.3934  2.2203 5.3926
 ## WMGTAWD          -2.0888 -1.1614 -0.8323 -0.5084 0.3977
 ## NRTEN100          0.4991  0.9849  1.2279  1.4721 1.9500
@@ -726,6 +809,7 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)
@@ -734,6 +818,10 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 =======
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
+=======
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">8</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"></p>
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m3, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb32-2" title="2"></a>
 <a class="sourceLine" id="cb32-3" title="3"><span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m3)</a></code></pre></div>
@@ -748,6 +836,7 @@ m3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <div id="tiller-sheath-blight-incidence-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h3>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
@@ -769,6 +858,8 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m4)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb33-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb33-3" title="3"></a>
@@ -788,6 +879,9 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb33-17" title="17">m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m4)</a>
 <a class="sourceLine" id="cb33-18" title="18"></a>
 <a class="sourceLine" id="cb33-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m4)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -800,20 +894,27 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ##                     Mean     SD Naive SE Time-series SE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ## (Intercept)      10.3375 1.3968 0.009877       0.009585
 ## WMGTAWD           0.7643 0.3442 0.002434       0.002452
 ## NRTEN180          2.3528 0.3434 0.002428       0.002449
 ## WMGTAWD:NRTEN180 -0.7846 0.4864 0.003440       0.003472
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)      10.3456 1.4096 0.009967       0.008991
 ## WMGTAWD           0.7598 0.3461 0.002448       0.002464
 ## NRTEN180          2.3513 0.3496 0.002472       0.002466
 ## WMGTAWD:NRTEN180 -0.7801 0.4922 0.003480       0.003480
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                      2.5%     25%     50%     75%   97.5%
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)       7.86985  9.8302 10.3374 10.8438 12.8454
 ## WMGTAWD           0.08578  0.5357  0.7620  0.9918  1.4433
@@ -824,6 +925,8 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)       7.92551  9.8362 10.3492 10.8584 12.7706
 ## WMGTAWD           0.08403  0.5305  0.7581  0.9888  1.4418
 ## NRTEN180          1.66453  2.1155  2.3543  2.5809  3.0384
@@ -832,6 +935,9 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb35-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m4, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb35-3" title="3"></a>
 <a class="sourceLine" id="cb35-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m4)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## Potential scale reduction factors:
 ## 
@@ -845,6 +951,7 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)
@@ -853,6 +960,10 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 =======
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
+=======
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"></p>
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m4, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb38-2" title="2"></a>
 <a class="sourceLine" id="cb38-3" title="3"><span class="kw"><a href="../reference/plot_tiller_estimates.html">plot_tiller_estimates</a></span>(m4)</a></code></pre></div>
@@ -862,6 +973,7 @@ m4 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <div id="tiller-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h3>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
@@ -884,6 +996,8 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m5)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb39-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb39-3" title="3"></a>
@@ -904,6 +1018,9 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb39-18" title="18">m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m5)</a>
 <a class="sourceLine" id="cb39-19" title="19"></a>
 <a class="sourceLine" id="cb39-20" title="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m5)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -916,20 +1033,27 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ##                    Mean    SD Naive SE Time-series SE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ## (Intercept)      29.826 8.694  0.06148        0.06321
 ## WMGTAWD          -3.718 3.014  0.02131        0.02127
 ## NRTEN180          9.268 3.014  0.02131        0.02131
 ## WMGTAWD:NRTEN180 -9.040 4.243  0.03000        0.02947
 =======
+=======
+>>>>>>> Stashed changes
 ## (Intercept)      29.668 8.577  0.06065        0.06065
 ## WMGTAWD          -3.772 3.051  0.02158        0.02151
 ## NRTEN180          9.205 3.050  0.02156        0.02187
 ## WMGTAWD:NRTEN180 -8.936 4.295  0.03037        0.03059
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%    50%    75%   97.5%
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)       13.411  25.537 29.789 34.008 46.7454
 ## WMGTAWD           -9.646  -5.723 -3.728 -1.705  2.1681
@@ -939,6 +1063,16 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</code></pre></div>
+=======
+## (Intercept)       12.713  25.465 29.727 33.992 45.8790
+## WMGTAWD           -9.827  -5.798 -3.759 -1.764  2.2252
+## NRTEN180           3.147   7.171  9.192 11.240 15.1858
+## WMGTAWD:NRTEN180 -17.414 -11.776 -8.931 -6.019 -0.5427</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">1</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.plot">gelman.plot</a></span>(m5, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="Third_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/coda/topics/gelman.diag">gelman.diag</a></span>(m5)</a></code></pre></div>
+>>>>>>> Stashed changes
 =======
 ## (Intercept)       12.713  25.465 29.727 33.992 45.8790
 ## WMGTAWD           -9.827  -5.798 -3.759 -1.764  2.2252
@@ -961,8 +1095,13 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</code></pre></div>
+=======
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+>>>>>>> Stashed changes
 =======
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb44-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m5, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
@@ -974,6 +1113,7 @@ m5 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <div id="leaf-sheath-blight-severity-model-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h3>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())
 <span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)
@@ -995,6 +1135,8 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m6)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">cl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">makePSOCKcluster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/detectCores">detectCores</a></span>())</a>
 <a class="sourceLine" id="cb46-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/doParallel/topics/registerDoParallel">registerDoParallel</a></span>(cl)</a>
 <a class="sourceLine" id="cb46-3" title="3"></a>
@@ -1014,6 +1156,9 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb46-17" title="17">m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/do.call">do.call</a></span>(mcmc.list, m6)</a>
 <a class="sourceLine" id="cb46-18" title="18"></a>
 <a class="sourceLine" id="cb46-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(m6)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 <pre><code>## 
 ## Iterations = 5001:54991
@@ -1025,6 +1170,7 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 ## (Intercept)       0.9973 0.5631 0.003982       0.004130
 ## WMGTAWD           0.2352 0.3434 0.002428       0.002405
@@ -1054,6 +1200,15 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 2. Quantiles for each variable:
 ## 
+=======
+## (Intercept)       1.0006 0.5653 0.003997       0.003507
+## WMGTAWD           0.2338 0.3407 0.002409       0.002494
+## NRTEN180          0.5493 0.1522 0.001076       0.001051
+## WMGTAWD:NRTEN180 -0.4939 0.2162 0.001529       0.001502
+## 
+## 2. Quantiles for each variable:
+## 
+>>>>>>> Stashed changes
 ##                     2.5%      25%     50%     75%   97.5%
 ## (Intercept)       0.0991  0.78922  0.9989  1.2080  1.9286
 ## WMGTAWD          -0.4531  0.05461  0.2346  0.4166  0.8964
@@ -1067,6 +1222,9 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ##                  Point est. Upper C.I.
 ## (Intercept)            1.04       1.04
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ## WMGTAWD                1.00       1.00
 ## NRTEN180               1.00       1.00
@@ -1076,12 +1234,15 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 ## 
 ## 1</code></pre>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)
 
 <span class="kw"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(m6)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="Third_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"></p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(m6, <span class="dt">ask =</span> <span class="ot">FALSE</span>, <span class="dt">auto.layout =</span> <span class="ot">FALSE</span>)</a>
@@ -1125,6 +1286,7 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information used in the posterior estimate graphs to be used in the paper.</p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">models &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,
                <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,
                <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,
@@ -1133,6 +1295,8 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
                <span class="st">"LSev_16"</span> =<span class="st"> </span>m6)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</code></pre></div>
 =======
+=======
+>>>>>>> Stashed changes
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">models &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="st">"TInc_15"</span> =<span class="st"> </span>m1,</a>
 <a class="sourceLine" id="cb52-2" title="2">               <span class="st">"TSev_15"</span> =<span class="st"> </span>m2,</a>
 <a class="sourceLine" id="cb52-3" title="3">               <span class="st">"LSev_15"</span> =<span class="st"> </span>m3,</a>
@@ -1140,6 +1304,9 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 <a class="sourceLine" id="cb52-5" title="5">               <span class="st">"TSev_16"</span> =<span class="st"> </span>m5,</a>
 <a class="sourceLine" id="cb52-6" title="6">               <span class="st">"LSev_16"</span> =<span class="st"> </span>m6)</a>
 <a class="sourceLine" id="cb52-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS</a></span>(models, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)</a></code></pre></div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 </div>
   </div>
@@ -1169,7 +1336,11 @@ m6 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocument
 
 <div class="pkgdown">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+=======
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+>>>>>>> Stashed changes
 =======
   <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 >>>>>>> Stashed changes
