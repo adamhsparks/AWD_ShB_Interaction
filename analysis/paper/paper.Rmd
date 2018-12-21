@@ -48,11 +48,21 @@ Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza s
 
 The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production. Various countries, *e.g.*, Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015]. However, a change like this in the water regime in rice fields on a large scale could trigger unintended effects, for example changes in disease intensity or severity.
 
-While the effects of climate change directly on rice disease have been studied [@luo1998effects; @Duku2016] the effects of mitigation practices have not. And because of the well documented effects of irrigation practices [@] and N on sheath blight (CITATION XXXX); we established field experiments to study what effects AWD irrigation technologies and N fertilisation in combination could have on sheath blight incidence and severity in tropical rice production.
+While the effects of climate change directly on rice disease have been studied [@luo1998effects; @Duku2016] the effects of mitigation practices have not. And because of the well documented effects of N [@Slaton2003; @Tang2007] and the effects of alternating wet and dry periods [@Castilla1996] on sheath blight; we established field experiments to study what effects AWD irrigation technologies and N fertilisation in combination could have on sheath blight incidence and severity in tropical rice production.
 
 # Materials and Methods {-}
 
+## Experimental Site {-}
+
 Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May. In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment. The differences are detailed in the following sections.
+
+## Pathogen {-}
+
+An isolate of *Rhizoctonia solani* belonging to anasomosis group AG1--1a previously isolated from infected lowland rice was maintained on potato dextrose agar (PDA) medium slants. The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C) for five days. Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks and used to inoculate the plots [@Castilla1996].
+
+## Host Plant {-}
+
+NSIC Rc222 an inbred semi-dwarf, high-yielding variety released by the Philippine Rice Research Institute (PhilRice), with a 114 day maturity when transplanted was used in both experiments. The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro and no known resistance to sheath blight.
 
 ## 2015 Experiment {-}
 
@@ -68,13 +78,11 @@ The split--plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nb
 
 ### Crop Establishment {-}
 
-Trays of NSIC Rc222 were seeded on 19 December 2014. NSIC Rc222 is an inbred variety released by the Philippine Rice Research Institute (PhilRice), with a 114 day maturity when transplanted. The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
+Trays of NSIC Rc222 were seeded on 19 December 2014. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
 
-### Inoculum Preparation and Application {-}
+### Inoculation Procedure {-}
 
-An isolate of *Rhizoctonia solani* AG1--1a previously isolated from infected rice was maintained on potato dextrose agar (PDA) medium in tubes. The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C). Glass bottles of autoclaved rice grain and hull substrate were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks.
-
-The plots were inoculated 20 days after transplanting by spreading 151&nbsp;g of inoculum over the split--plot area with a 1&nbsp;m buffer on either end (4&nbsp;m x 11&nbsp;m).
+The plots were inoculated 20 days after transplanting by applying 151&nbsp;g of inoculum over the split--plot area with a 1&nbsp;m buffer on either end (4&nbsp;m x 11&nbsp;m).
 
 ## 2016 Experiment {-}
 
@@ -88,9 +96,9 @@ Split--plot N rates differed from the 2015 rates with only two N treatments, N60
 
 Nurseries of NSIC Rc222 were established on 7 January 2016. Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20&nbsp;cm within and between rows.
 
-### Inoculum Preparation and Application {-}
+### Inoculation Procedure {-}
 
-Based on the 2015 results, the inoculation methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1&nbsp;m&nbsp;x&nbsp;1&nbsp;m) per plot, where one bottle contained 151&nbsp;g inoculum. A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m area.
+Based on the 2015 results, the inoculum application methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1&nbsp;m&nbsp;x&nbsp;1&nbsp;m) per plot, where one bottle contained 151&nbsp;g inoculum. A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m area.
 
 ## Data Collection {-}
 
