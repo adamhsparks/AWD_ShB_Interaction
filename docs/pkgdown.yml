@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 pandoc: 1.19.2.4
 pkgdown: 1.2.0
+=======
+pandoc: '2.5'
+pkgdown: 1.3.0
+>>>>>>> Stashed changes
 pkgdown_sha: ~
 articles:
   AWD_Sheath_Blight_Study_Notes: AWD_Sheath_Blight_Study_Notes.html

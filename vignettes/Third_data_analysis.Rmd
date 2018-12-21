@@ -142,7 +142,7 @@ The tiller incidence of the disease appears not to be correlated with the severi
 ## Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
-flat noninformative priors that have a uniform low degree of belief in all
+flat non-informative priors that have a uniform low degree of belief in all
 parameters for all six models we will create.
 
 The tiller analyses doe not include an interaction prior while the leaf
