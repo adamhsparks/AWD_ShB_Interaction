@@ -145,7 +145,7 @@ As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
 flat non-informative priors that have a uniform low degree of belief in all
 parameters for all six models we will create.
 
-The tiller analyses doe not include an interaction prior while the leaf
+The tiller analyses does not include an interaction prior while the leaf
 analyses do. Because of this there are two different priors set for the analyses
 following.
 
