@@ -9,9 +9,10 @@ abstract: |
   Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two management practices may trigger sheath blight of rice, caused by _Rhizoctonia solani_, which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split--plot experiments with a water saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. We were unable to detect any difference in the incidence of tiller sheath blight due to irrigation, tiller and leaf sheath blight did clearly differ statistically by irrigation treatment, but leaf sheath blight severity did not. Our findings indicate that farmers can adopt water saving technologies without risking increased sheath blight incidence. We suggest that further cross--disciplinary research in this area is warranted. All data generated from this project and code used for analysis are available as a reproducible research compendium from <https://github.com/openplantpathology/rice_awd_pests>.
 bibliography: references.bib
 output:
-  bookdown::word_document2:
+  bookdown::pdf_document2:
     toc: no
-    reference_docx: "../templates/template.docx"
+    fig_caption: yes
+    #reference_docx: "../templates/template.docx"
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
@@ -35,6 +36,7 @@ library(ggplot2)
 library(ggpubr)
 library(grid)
 library(gridExtra)
+library(pander)
 library(rice.awd.pests)
 ```
 
@@ -170,32 +172,29 @@ Readers may find a reproducible research compendium that recreates this paper, t
 
 ## Acknowledgments {-}
 
-The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank Dale Amozola, Paul Escandor and P. Lapis for their technical support in the field. Lastly, we would like to remember our team mate Michael Noel, a part of the plant disease management team at IRRI and who helped design and managed the first year of the project but passed away in September 2016.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr Rachel King of the University of Southern Queensland Statistical Consulting Unit for her insightful comments on the analysis of this paper. We would also like to thank D. Amozola, P. Escandor and P. Lapis for their technical support in the field. Lastly, we would like to remember our team mate Michael Noel, a part of the plant disease management team at IRRI and who helped design and managed the first year of the project but passed away in September 2016.
 
-<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
-##### pagebreak
+<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line. 
+##### pagebreak  -->
 
 # References {-}
-<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document:   -->
 <div id="refs"></div>
 
-##### pagebreak
 
 # Tables {-}
 
 ```{r N-rates}
 
-kable(N_rates,
+pander(N_rates,
       caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
 ```
-
-##### pagebreak
 
 # Figures {-}
 
 ##### Sheath blight progress for water management treatments
 
-```{r fig-1, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications."}
+```{r fig-1, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications.", fig.width=3.31}
 
 p1_anot <- data.frame(
   label = c("a", "b"),
