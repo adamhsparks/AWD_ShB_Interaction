@@ -16,7 +16,7 @@ vignette: >
 
 Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use `MCMCglmm()` for a split plot analysis rather than a `lmer()` model. The `MCMCglmm()` model will work for all the data regardless of the residuals.
 
-#### Interpreting These Analyses
+# Interpreting These Analyses
 
 The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
 
@@ -42,7 +42,7 @@ The base levels for this analysis are:
 
     - `WMGT:PDL`
 
-#### Changes between 2015 and 2016
+### Changes between 2015 and 2016
 
 Before the analysis, note that due to changes between the years, the analysis
 must be carried out on each year separately. The 2015 data and 2016 data cannot
@@ -51,14 +51,14 @@ but the main one is this. Therefore, the analyses will be conducted separately
 such that comparisons will only be observational and cannot be statistically
 compared.
 
-#### _MCMCglmm_ Model Fitting Notes
+### _MCMCglmm_ Model Fitting Notes
 
 Fitting the models with the default iterations resulted in some less than
 acceptable models. Because of this, the number of iterations has been increased,
 `nitt = 55000,` and `burnin = 5000`. This results in a sample
 size of 5000 and much smaller errors for random effects and better models.
 
-## Setup
+# Setup
 
 Use `set.seed()` for reproducibility.
 
@@ -103,7 +103,7 @@ AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
 Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start
 the analysis.
 
-## Check Correlation
+# Check Correlation
 
 Check for correlation between the tiller incidence and the severity ratings for both leaf and tiller.
 
@@ -139,7 +139,7 @@ cor.test(AUDPS_2016$TShB_inc_AUDPS,
 
 The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves. Based on this, the interactions of the incidence and severity will not be analysed.
 
-## Specify Priors
+# Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set. Here we set
 flat non-informative priors that have a uniform low degree of belief in all
@@ -150,30 +150,18 @@ analyses do. Because of this there are two different priors set for the analyses
 following.
 
 ```{r priors}
-tiller_eprior <- list(R = list(V = 1,
+eprior <- list(R = list(V = 1,
                                nu = 0.002),
                       G = list(
                         G1 = list(V = 1,
                                   n = 1,
                                   alpha.mu = 0,
                                   alpha.V = 25^2)))
-
-leaf_eprior <- list(R = list(V = 1,
-                             nu = 0.002),
-                    G = list(
-                      G1 = list(V = 1,
-                                n = 1,
-                                alpha.mu = 0,
-                                alpha.V = 25^2),
-                      G2 = list( V = 1,
-                                 n = 1,
-                                 alpha.mu = 0,
-                                 alpha.V = 25^2)))
 ```
 
-## 2015 Models
+# 2015 Models
 
-### 2015 Tiller Sheath Blight Incidence Model
+## 2015 Tiller Sheath Blight Incidence Model
 
 ```{r 2015_TShB_incidence, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -184,7 +172,7 @@ m1 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            random = ~REP, 
            data = AUDPS_2015,
            verbose = FALSE,
-           prior = tiller_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000)
 }
@@ -208,7 +196,7 @@ plot_tiller_estimates(m1)
 
 ```
 
-### 2015 Tiller Sheath Blight Severity Model
+## 2015 Tiller Sheath Blight Severity Model
 
 ```{r 2015_TShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -219,7 +207,7 @@ m2 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            random = ~REP, 
            data = AUDPS_2015,
            verbose = FALSE,
-           prior = tiller_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000)
 }
@@ -242,7 +230,7 @@ plot(m2, ask = FALSE, auto.layout = FALSE)
 plot_tiller_estimates(m2)
 ```
 
-### 2015 Leaf Sheath Blight Severity Model
+## 2015 Leaf Sheath Blight Severity Model
 
 ```{r 2015_LShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -250,10 +238,10 @@ registerDoParallel(cl)
 
 m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
   MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
-           random = ~ REP + WMGT:REP,
+           random = ~ REP,
            data = AUDPS_2015,
            verbose = FALSE,
-           prior = leaf_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000)
 }
@@ -278,9 +266,9 @@ plot_leaf_estimates(m3)
 
 *******
 
-## 2016 Models
+# 2016 Models
 
-### 2016 Tiller Sheath Blight Incidence Model
+## 2016 Tiller Sheath Blight Incidence Model
 
 ```{r 2016_TShB_incidence, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -291,7 +279,7 @@ m4 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            random = ~REP, 
            data = AUDPS_2016,
            verbose = FALSE,
-           prior = tiller_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000)
 }
@@ -315,7 +303,7 @@ plot_tiller_estimates(m4)
 ```
 
 
-### 2016 Tiller Sheath Blight Severity Model
+## 2016 Tiller Sheath Blight Severity Model
 
 ```{r 2016_TShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -326,7 +314,7 @@ m5 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
            random = ~REP, 
            data = AUDPS_2016,
            verbose = FALSE,
-           prior = tiller_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000,
            thin = 10)
@@ -350,7 +338,7 @@ plot(m5, ask = FALSE, auto.layout = FALSE)
 plot_tiller_estimates(m5)
 ```
 
-### 2016 Leaf Sheath Blight Severity Model
+## 2016 Leaf Sheath Blight Severity Model
 
 ```{r 2016_LShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -358,10 +346,10 @@ registerDoParallel(cl)
 
 m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
   MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
-           random = ~ REP + WMGT:REP,
+           random = ~ REP,
            data = AUDPS_2016,
            verbose = FALSE,
-           prior = leaf_eprior,
+           prior = eprior,
            nitt = 55000,
            burnin = 5000)
 }
@@ -384,7 +372,7 @@ plot(m6, ask = FALSE, auto.layout = FALSE)
 plot_leaf_estimates(m6)
 ```
 
-### Model Fit
+## Model Fit
 
 The models all appear to be good fits.
 
@@ -400,13 +388,13 @@ In 2015 both the nitrogen rates, N100 and N120, were significant when compared w
 
 In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significantly different.
 
-### Tiller Sheath Blight Severity
+## Tiller Sheath Blight Severity
 
 In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base PDL treatment.
 
 In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base PDL treatment.
 
-### Leaf Sheath Blight Severity
+## Leaf Sheath Blight Severity
 
 In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the control PDL treatment. In the leaf phase of the disease neither N by WMGT interaction was significant.
 
