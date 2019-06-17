@@ -5,13 +5,14 @@
 #'  intervals of \pkg{MCMCglmm} outputs
 #'
 #' @name plot_tiller_estimates
-#' @param x An\code{\link[coda]{mcmc.list}} object
+#' @param x A \code{\link[coda]{mcmc.list}} object
 #'
 #' @examples \dontrun{
 #' # Plot posterior means and credible intervals
 #' plot_tiller_estimates(m1)
 #'}
 #'
+#' @import coda
 #' @author Titus von der Malsburg, \email{malsburg@uni-potsdam.de}
 #'
 #' @export
@@ -49,7 +50,7 @@ plot_tiller_estimates <- function(x) {
 #'  intervals of \pkg{MCMCglmm} outputs
 #'
 #' @name plot_leaf_estimates
-#' @param x An\code{\link[coda]{mcmc.list}} object
+#' @param x A \code{\link[coda]{mcmc.list}} object
 #'
 #' @examples \dontrun{
 #' # Plot posterior means and credible intervals

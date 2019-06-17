@@ -7,7 +7,7 @@
 plot_tiller_estimates(x)
 }
 \arguments{
-\item{x}{An\code{\link[coda]{mcmc.list}} object}
+\item{x}{A \code{\link[coda]{mcmc.list}} object}
 }
 \description{
 Plot estimates of posterior distributions and credible

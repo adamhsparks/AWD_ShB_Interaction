@@ -5,7 +5,7 @@
 #'  intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 #'
 #' @name plot_tiller_estimates_paper
-#' @param x An\code{\link[coda]{mcmc.list}} object
+#' @param x A \code{\link[coda]{mcmc.list}} object
 #' @param main_title Main title for the plot
 #'
 #' @examples \dontrun{
@@ -49,7 +49,7 @@ plot_tiller_estimates_paper <- function(x, main_title = "") {
 #'  intervals of \pkg{MCMCglmm} outputs sans intercept for publication figure
 #'
 #' @name plot_leaf_estimates_paper
-#' @param x An\code{\link[coda]{mcmc.list}} object
+#' @param x A \code{\link[coda]{mcmc.list}} object
 #' @param main_title Main title for the plot
 #'
 #' @examples \dontrun{

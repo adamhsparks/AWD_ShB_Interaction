@@ -7,7 +7,7 @@
 plot_tiller_estimates_paper(x, main_title = "")
 }
 \arguments{
-\item{x}{An\code{\link[coda]{mcmc.list}} object}
+\item{x}{A \code{\link[coda]{mcmc.list}} object}
 
 \item{main_title}{Main title for the plot}
 }
