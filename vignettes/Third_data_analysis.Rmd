@@ -168,7 +168,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m1 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
            random = ~REP, 
            data = AUDPS_2015,
            verbose = FALSE,
@@ -203,7 +203,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m2 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
            random = ~REP, 
            data = AUDPS_2015,
            verbose = FALSE,
@@ -237,7 +237,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
            random = ~ REP,
            data = AUDPS_2015,
            verbose = FALSE,
@@ -275,7 +275,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m4 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(TShB_inc_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(TShB_inc_AUDPS ~ WMGT * NRTE,
            random = ~REP, 
            data = AUDPS_2016,
            verbose = FALSE,
@@ -310,7 +310,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m5 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(TShB_percent_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(TShB_percent_AUDPS ~ WMGT * NRTE,
            random = ~REP, 
            data = AUDPS_2016,
            verbose = FALSE,
@@ -345,7 +345,7 @@ cl <- makePSOCKcluster(detectCores())
 registerDoParallel(cl)
 
 m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(LShB_sev_AUDPS ~ WMGT + NRTE + WMGT:NRTE,
+  MCMCglmm(LShB_sev_AUDPS ~ WMGT * NRTE,
            random = ~ REP,
            data = AUDPS_2016,
            verbose = FALSE,
@@ -405,7 +405,6 @@ In 2016 the neither of the treatments, nitrogen rate or water management, were s
 Lastly, save the model information used in the posterior estimate graphs to be used in the paper.
 
 ```{r save_models}
-
 models <- list("TInc_15" = m1,
                "TSev_15" = m2,
                "LSev_15" = m3,
@@ -413,5 +412,4 @@ models <- list("TInc_15" = m1,
                "TSev_16" = m5,
                "LSev_16" = m6)
 saveRDS(models, "../analysis/data/derived_data/models.Rds")
-
 ```
