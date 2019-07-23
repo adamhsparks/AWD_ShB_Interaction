@@ -16,6 +16,7 @@ output:
 header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage[utf8]{inputenc}
+  - \DeclareUnicodeCharacter{2500}{\mbox{\vrule height2.2ptdepth-1.8ptwidth.5em}}
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
