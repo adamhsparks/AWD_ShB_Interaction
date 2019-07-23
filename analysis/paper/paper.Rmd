@@ -13,6 +13,9 @@ output:
     toc: no
     fig_caption: yes
     #reference_docx: "../templates/template.docx"
+header-includes:
+  - \usepackage[T1]{fontenc}
+  - \usepackage[utf8]{inputenc}
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
