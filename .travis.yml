@@ -27,7 +27,8 @@ after_success:
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
 
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+before_deploy:
+  Rscript -e 'install.packages("pkgdown", dependencies = TRUE)'
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
