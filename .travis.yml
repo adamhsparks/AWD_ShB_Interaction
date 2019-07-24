@@ -29,7 +29,7 @@ after_success:
   - docker push $REPO
 
 before_deploy:
-  Rscript -e 'install.packages("pkgdown", lib='~/')'
+  Rscript -e 'install.packages("pkgdown", lib="~/")'
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
