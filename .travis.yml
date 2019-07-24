@@ -16,6 +16,7 @@ services:
 before_install:
     # create & run container using our dockerfile, i.e. compile pkg and render Rmd to PDF
   - docker build -t $REPO .
+  - sudo apt-get install r-base-core
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
 after_success:
@@ -27,11 +28,8 @@ after_success:
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
 
+before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: true
-  local-dir: docs
-  on:
-    branch: master
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
