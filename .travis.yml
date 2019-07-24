@@ -3,6 +3,7 @@
 env:
   global:
   - REPO=$DOCKER_USER/rice_awd_pests
+cache: packages
 
 sudo: required
 
@@ -28,7 +29,7 @@ after_success:
   - docker push $REPO
 
 before_deploy:
-  Rscript -e 'install.packages("pkgdown", dependencies = TRUE)'
+  Rscript -e 'install.packages("pkgdown", lib='~/')'
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
