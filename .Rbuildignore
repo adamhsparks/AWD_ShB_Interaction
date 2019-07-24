@@ -12,3 +12,4 @@ analysis
 ^circle\.yml$
 ^docs$
 ^appveyor\.yml$
+^codemeta\.json$
