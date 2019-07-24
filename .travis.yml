@@ -32,6 +32,6 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_PAT
   keep_history: true
-  local_dir: ./docs
+  local_dir: /home/rstudio/rice_awd_pests/docs
   on:
     branch: master
