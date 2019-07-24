@@ -33,4 +33,4 @@ deploy:
   github_token: $GITHUB_PAT
   keep_history: true
   on:
-    branch: master
+    branch: gh-pages
