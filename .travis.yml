@@ -8,15 +8,15 @@ sudo: required
 
 warnings_are_errors: false
 
-language: generic
+language: R
 
 services:
   - docker
 
 before_install:
+  - sudo apt-get install r-base-core
     # create & run container using our dockerfile, i.e. compile pkg and render Rmd to PDF
   - docker build -t $REPO .
-  - sudo apt-get install r-base-core
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
 after_success:
