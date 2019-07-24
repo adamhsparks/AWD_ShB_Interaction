@@ -15,7 +15,6 @@ services:
   - docker
 
 before_install:
-  - sudo apt-get install r-base-core
   - docker build -t $REPO .
 
 # push our custom docker container to docker hub, env vars stored on travis-ci.org
@@ -28,9 +27,10 @@ after_success:
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
 
-before_deploy:
-  Rscript -e 'install.packages("pkgdown", lib="~/", repos = "http://cran.us.r-project.org")'
 deploy:
-  provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
+  provider: pages
   skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
