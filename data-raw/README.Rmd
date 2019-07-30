@@ -1,6 +1,8 @@
 ---
-title: "Clean 2015 Raw Data"
-output: github_document
+title: "Clean and Process Raw Data"
+output:
+  github_document:
+    pandoc_args: --webtex
 ---
 
 ```{r setup, include=FALSE}
@@ -14,15 +16,19 @@ _rice.awd.pests_
 treatment. This is used in place of plot numbers to keep the data in order.
 However, it is not used in the final analysis as a treatment effect.
 
+# Load Libraries
+
+```{r libraries}
+library(tidyverse)
+library(agricolae)
+library(usethis)
+```
+
 # 2015 experiment
 
-```{r}
+Preprocess 2015 data for all assessment dates
 
-library(readr)
-library(dplyr)
-
-# Preprocess 2015 data for all assessment dates
-
+```{r 2015Exp}
 files <-
   list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
@@ -84,7 +90,7 @@ reformat <- function(files) {
   )
   x[is.na(x)] <- 0
   
-  x <- dplyr::arrange(x, REP, TRT)
+  x <- arrange(x, REP, TRT)
   
   # add plot numbers
   x$PLOT <- rep(1:24, each = 18)
@@ -92,10 +98,10 @@ reformat <- function(files) {
   # Calculate tiller sheath blight incidence -----------------------------------
   x <-
     x %>%
-    dplyr::mutate(TShB_incidence = NTShB / NTIL)
+    mutate(TShB_incidence = NTShB / NTIL)
   
   TShB_incidence <-
-    x %>% dplyr::select(REP,
+    x %>% select(REP,
                         TRT,
                         WMGT,
                         NRTE,
@@ -112,7 +118,7 @@ reformat <- function(files) {
   for (i in 1:4) {
     y <-
       x %>%
-      dplyr::select(
+      select(
         TRT,
         REP,
         WMGT,
@@ -130,9 +136,9 @@ reformat <- function(files) {
         paste0("SLE", i),
         paste0("SLF", i)
       ) %>%
-      tidyr::gather(LEAF,
+      gather(LEAF,
                     LEAF_ShB,
-                    dplyr::starts_with("SL"))
+                    starts_with("SL"))
     
     names(y)[7] <- "TIL"
     names(y)[8] <- "GL"
@@ -149,8 +155,8 @@ reformat <- function(files) {
     TIL[[i]] <- y
   }
   
-  z <- dplyr::bind_rows(TIL)
-  x <- dplyr::left_join(TShB_incidence, z)
+  z <- bind_rows(TIL)
+  x <- left_join(TShB_incidence, z)
   
   # Add dates ------------------------------------------------------------------
   
@@ -190,7 +196,7 @@ reformat <- function(files) {
 }
 
 # Run reformat function for all 2015 files -------------------------------------
-DS2015 <- purrr::map_df(files, reformat)
+DS2015 <- map_df(files, reformat)
 
 # Add days after inoculation column
 DS2015 <- 
@@ -225,13 +231,13 @@ DS2015$TRT[which(DS2015$WMGT == "AWD" &
 DS2015$TRT[which(DS2015$WMGT == "AWD" &
                    DS2015$NRTE == 120)] = "AWD_N120"
 
-DS2015$YEAR <- lubridate::year(DS2015$DATE)
+DS2015$YEAR <- year(DS2015$DATE)
 
 DS2015$PLOT <- rep(1:24, each = 432)
 
 # Arrange columns --------------------------------------------------------------
 DS2015 <-
-  DS2015 %>% dplyr::select(
+  DS2015 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -254,7 +260,7 @@ DS2015 <-
 
 DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
 
-DS2015 <- tibble::as_tibble(dplyr::arrange(DS2015, ASMT, PLOT))
+DS2015 <- arrange(DS2015, ASMT, PLOT)
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -277,12 +283,12 @@ rm(files, reformat)
 # 4. Add column with number of days after inoculation (DAI)
 
 # First assessment -------------------------------------------------------------
-DS2016_A1 <- readr::read_csv("data/DS2016_Raw_1.csv")
+DS2016_A1 <- read_csv("data/DS2016_Raw_1.csv")
 # Fill missing values in NTIL and NTShB
 DS2016_A1 <-
-  DS2016_A1 %>% tidyr::fill(NTIL)
+  DS2016_A1 %>% fill(NTIL)
 DS2016_A1 <-
-  DS2016_A1 %>% tidyr::fill(NTShB)
+  DS2016_A1 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A1[, 1] <- as.Date("2016-03-15", origin = "1970-01-01")
@@ -293,11 +299,11 @@ DS2016_A1$PLOT <- rep(1:16, each = 72)
 DS2016_A1$DAI <- rep(14, nrow(DS2016_A1))
 
 # Second assessement -----------------------------------------------------------
-DS2016_A2 <- readr::read_csv("data/DS2016_Raw_2.csv")
+DS2016_A2 <- read_csv("data/DS2016_Raw_2.csv")
 DS2016_A2 <-
-  DS2016_A2 %>% tidyr::fill(NTIL)
+  DS2016_A2 %>% fill(NTIL)
 DS2016_A2 <-
-  DS2016_A2 %>% tidyr::fill(NTShB)
+  DS2016_A2 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A2[, 1] <- as.Date("2016-03-29", origin = "1970-01-01")
@@ -308,11 +314,11 @@ DS2016_A2$PLOT <- rep(1:16, each = 72)
 DS2016_A2$DAI <- rep(28, nrow(DS2016_A2))
 
 # Third assessement ------------------------------------------------------------
-DS2016_A3 <- readr::read_csv("data/DS2016_Raw_3.csv")
+DS2016_A3 <- read_csv("data/DS2016_Raw_3.csv")
 DS2016_A3 <-
-  DS2016_A3 %>% tidyr::fill(NTIL)
+  DS2016_A3 %>% fill(NTIL)
 DS2016_A3 <-
-  DS2016_A3 %>% tidyr::fill(NTShB)
+  DS2016_A3 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A3[, 1] <- as.Date("2016-04-12", origin = "1970-01-01")
@@ -323,11 +329,11 @@ DS2016_A3$PLOT <- rep(1:16, each = 72)
 DS2016_A3$DAI <- rep(43, nrow(DS2016_A3))
 
 # Fourth assessment ------------------------------------------------------------
-DS2016_A4 <- readr::read_csv("data/DS2016_Raw_4.csv")
+DS2016_A4 <- read_csv("data/DS2016_Raw_4.csv")
 DS2016_A4 <-
-  DS2016_A4 %>% tidyr::fill(NTIL)
+  DS2016_A4 %>% fill(NTIL)
 DS2016_A4 <-
-  DS2016_A4 %>% tidyr::fill(NTShB)
+  DS2016_A4 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A4[, 1] <- as.Date("2016-04-26", origin = "1970-01-01")
@@ -371,10 +377,10 @@ DS2016$TRT[which(DS2016$WMGT == "AWD" &
 
 DS2016 <-
   DS2016 %>%
-  tidyr::gather(
+  gather(
     LEAF,
     LEAF_ShB,
-    dplyr::starts_with("ShBL"),
+    starts_with("ShBL"),
     -DATE,
     -ASMT,
     -DAI,
@@ -411,16 +417,16 @@ DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 # calculate tiller sheath blight incidence
 DS2016 <-
   DS2016 %>%
-  dplyr::group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
-  dplyr::mutate(TShB_incidence = NTShB / NTIL)
+  group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
+  mutate(TShB_incidence = NTShB / NTIL)
 
-DS2016 <- dplyr::rename(DS2016, TIL_ShB = NSHShB)
+DS2016 <- rename(DS2016, TIL_ShB = NSHShB)
 
-DS2016$YEAR <- lubridate::year(DS2016$DATE)
+DS2016$YEAR <- year(DS2016$DATE)
 DS2016$LEAF_ShB <- as.numeric(DS2016$LEAF_ShB)
 
 DS2016 <-
-  DS2016 %>% dplyr::select(
+  DS2016 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -441,7 +447,7 @@ DS2016 <-
     NRTE
   )
 
-DS2016 <- tibble::as_tibble(dplyr::arrange(DS2016, ASMT, PLOT))
+DS2016 <- as_tibble(arrange(DS2016, ASMT, PLOT))
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -452,7 +458,7 @@ DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] <- NA
 DATE_1 <- na.omit(DATE_1_2016)
 DATE_2 <- na.omit(DATE_2_2016)
 
-DAYS_2016 <- lubridate::time_length(DATE_1 - DATE_2, unit = "day")
+DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
 DS2016$DAYS <-
   c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
 
@@ -472,7 +478,7 @@ rm(
 
 # Arrange columns --------------------------------------------------------------
 DS2016 <-
-  DS2016 %>% dplyr::select(
+  DS2016 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -495,14 +501,11 @@ DS2016 <-
   )
 ```
 
-# Calculating Area Under the Disease Progress Stairs (AUDPS)
+# Calculating Disease Severity Index and Area Under the Disease Progress Stairs (AUDPS)
 
 Because the data were collected on an ordinal scale, but not evenly spaced,
-the data are converted to the midpoint value of the percent range for severity
-and then the AUDPS is calculated from that. See lines 544 and 559 for this.
-
-After that the AUDPS is calculated using functionality from the _agricolae_
-package.
+the data are converted to the midpoint value of the percent range for disease
+severity index and then the AUDPS is calculated from that.
 
 Last, the data are saved in the package for use analysis, which is detailed
 in the package [vingettes](../vignettes).
@@ -510,7 +513,7 @@ in the package [vingettes](../vignettes).
 ```{r}
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
-RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
+RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
                                     as.data.frame(DS2016)))
 
 # convert columns to factor ----------------------------------------------------
@@ -529,7 +532,7 @@ RAW_data$LEAF <- factor(RAW_data$LEAF)
 
 # reorder the treatments by level/year - low to high, 2015-2016 for graphs -----
 RAW_data$NRTE <-
-  forcats::fct_relevel(RAW_data$NRTE,
+  fct_relevel(RAW_data$NRTE,
                        "0",
                        "100",
                        "120",
@@ -537,7 +540,7 @@ RAW_data$NRTE <-
                        "180")
 
 RAW_data$TRT <-
-  forcats::fct_relevel(
+  fct_relevel(
     RAW_data$TRT,
     "AWD_N0",
     "AWD_N100",
@@ -553,9 +556,9 @@ RAW_data$TRT <-
 
 # add column with midpoint % tiller ShB severity -------------------------------
 RAW_data <-
-  dplyr::mutate(
+  mutate(
     RAW_data,
-    PERC_TIL_ShB = dplyr::case_when(
+    PERC_TIL_ShB = case_when(
       TIL_ShB == 0 ~ 0,
       TIL_ShB == 1 ~ 1,
       TIL_ShB == 2 ~ 2.5,
@@ -567,9 +570,9 @@ RAW_data <-
 
 # add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
-  dplyr::mutate(
+  mutate(
     RAW_data,
-    PERC_LEAF_ShB = dplyr::case_when(
+    PERC_LEAF_ShB = case_when(
       LEAF_ShB == 0 ~ 0,
       LEAF_ShB == 1 ~ 1,
       LEAF_ShB == 2 ~ 2.5,
@@ -579,43 +582,77 @@ RAW_data <-
     )
   )
 
+# add column with midpoint +1  % leaf ShB severity -----------------------------
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_LEAF_ShB = case_when(
+      LEAF_ShB == 0 ~ 1,
+      LEAF_ShB == 1 ~ 2.5,
+      LEAF_ShB == 2 ~ 10,
+      LEAF_ShB == 3 ~ 32.5,
+      LEAF_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
+
 
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
+```
 
+# Calculate disease index values
+See K. S. Chiang et al. 2017
+
+DSI<sub>Modified</sub> = Mid<sub><em>Q</em></sub> + <em>R</em>/Total Number of Observations * (Mid<sub><em>Q+1</em></sub> - Mid<sub><em>Q</em></sub>)
+
+```{r DSI}
+TShB_sev_15 <- 
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
+  arrange(PLOT) %>% 
+  mutate(DSI = PERC_TIL_ShB + ())
+```
+
+
+```{r AUDPS}
 # calculate AUDPS values -------------------------------------------------------
 
 # 2015 AUDPS -------------------------------------------------------------------
 
-# 2015 Tiller incidence setup --------------------------------------------------
-TShB_inc_15 <-
+# 2015 Tiller incidence AUDPS --------------------------------------------------
+TShb_inc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_incidence = TShB_incidence)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(
+    .funs = funs(mean(., na.rm = TRUE)),
+    .vars = vars(PLOT_TShB_incidence = TShB_incidence)
+  ) %>%
+  arrange(PLOT) %>%
+  group_by(YEAR, REP, TRT, PLOT) %>%
+  summarise(AUDPS = audps(PLOT_TShB_incidence, DAYS))
 
-TShB_inc_wide <-
-  reshape2::dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 # 2015 Tiller Severity AUDPS ---------------------------------------------------
 TShB_sev_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_severity = TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_sev_wide <-
   reshape2::dcast(TShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
 
 TShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_perc_wide <-
   reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
@@ -623,20 +660,20 @@ TShB_perc_wide <-
 # 2015 Leaf Severity setup -----------------------------------------------------
 LShB_sev_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_severity = LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_sev_wide <-
   reshape2::dcast(LShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
 LShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_perc_wide <-
   reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
@@ -644,27 +681,27 @@ LShB_perc_wide <-
 # Calculate 2015 AUDPS ---------------------------------------------------------
 
 TShB_inc_AUDPS <-
-  agricolae::audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = dplyr::pull(TShB_inc_15[1:5, 6]))
+  audps(evaluation = TShB_inc_wide[, 2:6],
+                   dates = pull(TShB_inc_15[1:5, 6]))
 
 TShB_sev_AUDPS <-
-  agricolae::audps(evaluation = TShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(TShB_sev_15[1:5, 6]))
+  audps(evaluation = TShB_sev_wide[, 2:6],
+                   dates = pull(TShB_sev_15[1:5, 6]))
 
 LShB_sev_AUDPS <-
-  agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(LShB_sev_15[1:5, 6]))
+  audps(evaluation = LShB_sev_wide[, 2:6],
+                   dates = pull(LShB_sev_15[1:5, 6]))
 
 TShB_percent_AUDPS <-
-  agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
-        dates = dplyr::pull(TShB_perc_15[1:5, 6]))
+  audps(evaluation = TShB_perc_wide[, 2:6],
+        dates = pull(TShB_perc_15[1:5, 6]))
 
 LShB_percent_AUDPS <-
-  agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
-        dates = dplyr::pull(LShB_perc_15[1:5, 6]))
+  audps(evaluation = LShB_perc_wide[, 2:6],
+        dates = pull(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
-  tibble::as_tibble(
+  as_tibble(
     cbind(
       PLOT = 1:24,
       TShB_inc_AUDPS,
@@ -678,27 +715,27 @@ AUDPS_15 <-
 AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
-ShB_15 <- dplyr::left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
+ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
 # 2016 AUDPS -------------------------------------------------------------------
 
 # 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_incidence = TShB_incidence)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
+  arrange(PLOT)
 
 TShB_inc_wide <-
   reshape2::dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 TShB_sev_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_severity = TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_sev_wide <-
   reshape2::dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
@@ -707,10 +744,10 @@ TShB_sev_wide <-
 
 TShB_perc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_perc_wide <-
   reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
@@ -719,20 +756,20 @@ TShB_perc_wide <-
 
 LShB_sev_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_severity = LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_sev_wide <-
   reshape2::dcast(LShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
 LShB_perc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_perc_wide <-
   reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
@@ -740,27 +777,27 @@ LShB_perc_wide <-
 # 2016 AUDPS -------------------------------------------------------------------
 
 TShB_inc_AUDPS <-
-  agricolae::audps(evaluation = TShB_inc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_inc_16[1:4, 6]))
+  audps(evaluation = TShB_inc_wide[, 2:5],
+                   dates = pull(TShB_inc_16[1:4, 6]))
 
 TShB_sev_AUDPS <-
-  agricolae::audps(evaluation = TShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(TShB_sev_16[1:4, 6]))
+  audps(evaluation = TShB_sev_wide[, 2:5],
+                   dates = pull(TShB_sev_16[1:4, 6]))
 
 LShB_sev_AUDPS <-
-  agricolae::audps(evaluation = LShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(LShB_sev_16[1:4, 6]))
+  audps(evaluation = LShB_sev_wide[, 2:5],
+                   dates = pull(LShB_sev_16[1:4, 6]))
 
 TShB_percent_AUDPS <-
-  agricolae::audps(evaluation = TShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_perc_16[1:4, 6]))
+  audps(evaluation = TShB_perc_wide[, 2:5],
+                   dates = pull(TShB_perc_16[1:4, 6]))
 
 LShB_percent_AUDPS <-
-  agricolae::audps(evaluation = LShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(LShB_perc_16[1:4, 6]))
+  audps(evaluation = LShB_perc_wide[, 2:5],
+                   dates = pull(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
-  tibble::as_tibble(
+  as_tibble(
     cbind(
       PLOT = 1:16,
       TShB_inc_AUDPS,
@@ -775,20 +812,20 @@ AUDPS_16 <-
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
-ShB_16 <- dplyr::left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
+ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
-AUDPS <- tibble::as_data_frame(tibble::as_tibble(rbind(ShB_15, ShB_16)))
-AUDPS <- tidyr::separate(data = AUDPS, col = TRT,
+AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- separate(data = AUDPS, col = TRT,
                          sep = "_",
                          into = c("WMGT", "NRTE"))
-AUDPS <- dplyr::mutate_at(.tbl = AUDPS,
+AUDPS <- mutate_at(.tbl = AUDPS,
                               .funs = factor,
                               .vars = c("WMGT", "NRTE"))
 
 # Arrange NRTE values
 AUDPS$NRTE <-
-  forcats::fct_relevel(AUDPS$NRTE,
+  fct_relevel(AUDPS$NRTE,
                        "N0",
                        "N100",
                        "N120",
@@ -801,11 +838,11 @@ if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
 
-usethis::use_data(RAW_data,
+use_data(RAW_data,
                   compress = "bzip2",
                   overwrite = TRUE)
 
-usethis::use_data(AUDPS,
+use_data(AUDPS,
                   compress = "bzip2",
                   overwrite = TRUE)
 ```
@@ -854,7 +891,7 @@ N_rates <- cbind(Year,
 
 row.names(N_rates) <- c("N0", "N100", "N120", "N60", "N180")
 
-usethis::use_data(N_rates,
+use_data(N_rates,
                   compress = "bzip2",
                   overwrite = TRUE)
 ```
