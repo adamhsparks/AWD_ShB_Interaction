@@ -22,6 +22,7 @@ However, it is not used in the final analysis as a treatment effect.
 library(tidyverse)
 library(agricolae)
 library(usethis)
+library(lubridate)
 ```
 
 # 2015 experiment
@@ -29,6 +30,8 @@ library(usethis)
 Preprocess 2015 data for all assessment dates
 
 ```{r 2015Exp}
+# Preprocess 2015 data for all assessment dates
+
 files <-
   list.files("data", pattern = "^DS2015_Raw", full.names = TRUE)
 
@@ -102,15 +105,15 @@ reformat <- function(files) {
   
   TShB_incidence <-
     x %>% select(REP,
-                        TRT,
-                        WMGT,
-                        NRTE,
-                        SMPL,
-                        HILL,
-                        HGHT,
-                        NTIL,
-                        NTShB,
-                        TShB_incidence)
+                 TRT,
+                 WMGT,
+                 NRTE,
+                 SMPL,
+                 HILL,
+                 HGHT,
+                 NTIL,
+                 NTShB,
+                 TShB_incidence)
   
   # Gather tillers--------------------------------------------------------------
   TIL <- vector(mode = "list", length = 4)
@@ -137,8 +140,8 @@ reformat <- function(files) {
         paste0("SLF", i)
       ) %>%
       gather(LEAF,
-                    LEAF_ShB,
-                    starts_with("SL"))
+             LEAF_ShB,
+             starts_with("SL"))
     
     names(y)[7] <- "TIL"
     names(y)[8] <- "GL"
@@ -199,17 +202,13 @@ reformat <- function(files) {
 DS2015 <- map_df(files, reformat)
 
 # Add days after inoculation column
-DS2015 <- 
+DS2015 <-
   DS2015 %>%
-  mutate(
-    DAI = case_when(
-      ASMT == 1 ~ 14,
-      ASMT == 2 ~ 22,
-      ASMT == 3 ~ 35,
-      ASMT == 4 ~ 49,
-      ASMT == 5 ~ 62,
-    )
-  )
+  mutate(DAI = case_when(ASMT == 1 ~ 14,
+                         ASMT == 2 ~ 22,
+                         ASMT == 3 ~ 35,
+                         ASMT == 4 ~ 49,
+                         ASMT == 5 ~ 62))
 
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
@@ -256,7 +255,9 @@ DS2015 <-
     LEAF_ShB,
     WMGT,
     NRTE
-  )
+  ) %>% 
+  mutate(REP = as.integer(REP),
+         HILL = as.integer(HILL))
 
 DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
 
@@ -269,18 +270,22 @@ DAYS <- as.numeric(substr(files, 17, 18))
 DS2015$DAYS <- c(rep(0, 10368), rep(diff(DAYS), each = 10368))
 
 rm(files, reformat)
-
 ```
 
 # 2016 experiment
 
+ Preprocess 2016 data for all assessments
+
+1. Cleanup date format and fill empty dates
+2. Fill empty NTIL (for same hill, not missing values)
+3. Fill empty NTShB (for same hill, not missing values)
+4. Add column with number of days after inoculation (DAI)
+
 ```{r}
-# Preprocess 2016 data for all assessments
-#
-# 1. Cleanup date format and fill empty dates
-# 2. Fill empty NTIL (for same hill, not missing values)
-# 3. Fill empty NTShB (for same hill, not missing values)
-# 4. Add column with number of days after inoculation (DAI)
+library(tidyverse)
+library(agricolae)
+library(usethis)
+library(lubridate)
 
 # First assessment -------------------------------------------------------------
 DS2016_A1 <- read_csv("data/DS2016_Raw_1.csv")
@@ -447,7 +452,7 @@ DS2016 <-
     NRTE
   )
 
-DS2016 <- as_tibble(arrange(DS2016, ASMT, PLOT))
+DS2016 <- arrange(DS2016, ASMT, PLOT)
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -513,31 +518,33 @@ in the package [vingettes](../vignettes).
 ```{r}
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
-RAW_data <- as_tibble(rbind(as.data.frame(DS2015),
-                                    as.data.frame(DS2016)))
+RAW_data <- bind_rows(DS2015, DS2016)
 
 # convert columns to factor ----------------------------------------------------
-RAW_data$YEAR <- factor(RAW_data$YEAR)
-RAW_data$ASMT <- factor(RAW_data$ASMT)
-RAW_data$PLOT <- factor(RAW_data$PLOT)
-RAW_data$REP <- factor(RAW_data$REP)
-RAW_data$TRT <- factor(RAW_data$TRT)
-RAW_data$WMGT <- factor(RAW_data$WMGT)
-RAW_data$NRTE <- factor(RAW_data$NRTE)
-RAW_data$SMPL <- factor(RAW_data$SMPL)
-RAW_data$HILL <- factor(RAW_data$HILL)
-RAW_data$TIL <- factor(RAW_data$TIL)
-RAW_data$LEAF <- factor(RAW_data$LEAF)
-
+RAW_data <-
+  RAW_data %>%
+  mutate(
+    YEAR = as.factor(YEAR),
+    ASMT = as.factor(ASMT),
+    PLOT = as.factor(PLOT),
+    REP = as.factor(REP),
+    TRT = as.factor(TRT),
+    WMGT = as.factor(WMGT),
+    NRTE = as.factor(NRTE),
+    SMPL = as.factor(SMPL),
+    HILL = as.factor(HILL),
+    TIL = as.factor(TIL),
+    LEAF = as.factor(LEAF)
+  )
 
 # reorder the treatments by level/year - low to high, 2015-2016 for graphs -----
 RAW_data$NRTE <-
   fct_relevel(RAW_data$NRTE,
-                       "0",
-                       "100",
-                       "120",
-                       "60",
-                       "180")
+              "0",
+              "100",
+              "120",
+              "60",
+              "180")
 
 RAW_data$TRT <-
   fct_relevel(
@@ -568,6 +575,21 @@ RAW_data <-
     )
   )
 
+# add column with midpoint +1  % tiller ShB severity ---------------------------
+
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_TIL_ShB_1 = case_when(
+      TIL_ShB == 0 ~ 1,
+      TIL_ShB == 1 ~ 2.5,
+      TIL_ShB == 2 ~ 10,
+      TIL_ShB == 3 ~ 32.5,
+      TIL_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
+
 # add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
   mutate(
@@ -586,7 +608,7 @@ RAW_data <-
 RAW_data <-
   mutate(
     RAW_data,
-    PERC_LEAF_ShB = case_when(
+    PERC_LEAF_ShB_1 = case_when(
       LEAF_ShB == 0 ~ 1,
       LEAF_ShB == 1 ~ 2.5,
       LEAF_ShB == 2 ~ 10,
@@ -595,8 +617,6 @@ RAW_data <-
       TRUE ~ 100
     )
   )
-
-
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
@@ -608,35 +628,17 @@ See K. S. Chiang et al. 2017
 DSI<sub>Modified</sub> = Mid<sub><em>Q</em></sub> + <em>R</em>/Total Number of Observations * (Mid<sub><em>Q+1</em></sub> - Mid<sub><em>Q</em></sub>)
 
 ```{r DSI}
-TShB_sev_15 <- 
-  DS2015 %>%
-  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
-                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
-  arrange(PLOT) %>% 
-  mutate(DSI = PERC_TIL_ShB + ())
+#DS2015 <- 
+#  DS2015 %>% 
+#  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>% 
+#  mutate(TShB_DSI = (TIL_ShB + )/
 ```
-
 
 ```{r AUDPS}
 # calculate AUDPS values -------------------------------------------------------
 
 # 2015 AUDPS -------------------------------------------------------------------
 
-# 2015 Tiller incidence AUDPS --------------------------------------------------
-TShb_inc_15 <-
-  DS2015 %>%
-  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise_at(
-    .funs = funs(mean(., na.rm = TRUE)),
-    .vars = vars(PLOT_TShB_incidence = TShB_incidence)
-  ) %>%
-  arrange(PLOT) %>%
-  group_by(YEAR, REP, TRT, PLOT) %>%
-  summarise(AUDPS = audps(PLOT_TShB_incidence, DAYS))
-
-
-# 2015 Tiller Severity AUDPS ---------------------------------------------------
 TShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -678,11 +680,14 @@ LShB_perc_15 <-
 LShB_perc_wide <-
   reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
 
-# Calculate 2015 AUDPS ---------------------------------------------------------
-
-TShB_inc_AUDPS <-
-  audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = pull(TShB_inc_15[1:5, 6]))
+TShb_inc_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+               .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
+  arrange(PLOT) %>%
+  group_by(YEAR, REP, TRT, PLOT) %>%
+  summarise(AUDPS = audps(PLOT_TShB_incidence, DAYS))
 
 TShB_sev_AUDPS <-
   audps(evaluation = TShB_sev_wide[, 2:6],
