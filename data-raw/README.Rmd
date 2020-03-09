@@ -653,11 +653,11 @@ TShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   summarise_at(.funs = funs(mean(., na.rm = TRUE)),
-                      .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
+                      .vars = vars(PLOT_TShB_percent = PERC_TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
-  reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+  reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2015 Leaf Severity setup -----------------------------------------------------
 LShB_sev_15 <-
@@ -674,13 +674,13 @@ LShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   summarise_at(.funs = funs(mean(., na.rm = TRUE)),
-                      .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
+                      .vars = vars(PLOT_LShB_percent = PERC_LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_perc_wide <-
-  reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+  reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
-TShb_inc_15 <-
+TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_at(.funs = funs(mean(., na.rm = TRUE)),
@@ -688,6 +688,8 @@ TShb_inc_15 <-
   arrange(PLOT) %>%
   group_by(YEAR, REP, TRT, PLOT) %>%
   summarise(AUDPS = audps(PLOT_TShB_incidence, DAYS))
+
+TShB_inc_AUDPS <-  pull(TShB_inc_15, AUDPS)
 
 TShB_sev_AUDPS <-
   audps(evaluation = TShB_sev_wide[, 2:6],
@@ -751,11 +753,11 @@ TShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_at(.funs = funs(mean(., na.rm = TRUE)),
-                      .vars = vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
+                      .vars = vars(PLOT_TShB_percent = PERC_TIL_ShB)) %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
-  reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+  reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2016 Leaf Severity setup -----------------------------------------------------
 
@@ -773,11 +775,11 @@ LShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise_at(.funs = funs(mean(., na.rm = TRUE)),
-                      .vars = vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
+                      .vars = vars(PLOT_LShB_percent = PERC_LEAF_ShB)) %>%
   arrange(PLOT)
 
 LShB_perc_wide <-
-  reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+  reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 # 2016 AUDPS -------------------------------------------------------------------
 
