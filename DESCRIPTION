@@ -23,7 +23,8 @@ Depends: R (>= 3.4.0),
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: agricolae,
+Imports:
+    agricolae,
     car,
     carData,
     doParallel,
@@ -44,7 +45,8 @@ Imports: agricolae,
     tibble,
     tidyr (>= 0.7.0)
 RoxygenNote: 7.0.2
-Suggests: bookdown,
+Suggests:
+    bookdown,
     devtools,
     ggpubr,
     knitr,
