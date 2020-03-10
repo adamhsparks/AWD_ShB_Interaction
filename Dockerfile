@@ -7,7 +7,9 @@ MAINTAINER Adam Sparks adamhsparks@gmail.com
 COPY --chown=rstudio . /home/rstudio/rice_awd_pests
 
 # install system-level libs
-RUN apt-get update && apt-get install -y libudunits2-dev && rm -r /var/lib/apt/lists/*
+RUN sudo add-apt-repository ppa:ubuntugis/ppa
+
+RUN apt-get update && apt-get install -y libudunits2-dev libgdal-dev && rm -r /var/lib/apt/lists/*
 
 # go into the repo directory
 RUN . /etc/environment \
