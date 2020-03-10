@@ -1,4 +1,4 @@
-Clean 2015 Raw Data
+Clean and Process Raw Data
 ================
 
 The raw data are located in the `data` folder of the installed
@@ -9,23 +9,39 @@ treatment. This is used in place of plot numbers to keep the data in
 order. However, it is not used in the final analysis as a treatment
 effect.
 
-# 2015 experiment
+# Load Libraries
 
 ``` r
-library(readr)
-library(dplyr)
+library(tidyverse)
+```
+
+    ## ── Attaching packages ──────────────────────────── tidyverse 1.3.0 ──
+
+    ## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
+    ## ✓ tibble  2.1.3     ✓ dplyr   0.8.5
+    ## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+    ## ✓ readr   1.3.1     ✓ forcats 0.5.0
+
+    ## ── Conflicts ─────────────────────────────── tidyverse_conflicts() ──
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+``` r
+library(agricolae)
+library(usethis)
+library(lubridate)
 ```
 
     ## 
-    ## Attaching package: 'dplyr'
+    ## Attaching package: 'lubridate'
 
-    ## The following objects are masked from 'package:stats':
+    ## The following object is masked from 'package:base':
     ## 
-    ##     filter, lag
+    ##     date
 
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
+# 2015 experiment
+
+Preprocess 2015 data for all assessment dates
 
 ``` r
 # Preprocess 2015 data for all assessment dates
@@ -91,7 +107,7 @@ reformat <- function(files) {
   )
   x[is.na(x)] <- 0
   
-  x <- dplyr::arrange(x, REP, TRT)
+  x <- arrange(x, REP, TRT)
   
   # add plot numbers
   x$PLOT <- rep(1:24, each = 18)
@@ -99,19 +115,19 @@ reformat <- function(files) {
   # Calculate tiller sheath blight incidence -----------------------------------
   x <-
     x %>%
-    dplyr::mutate(TShB_incidence = NTShB / NTIL)
+    mutate(TShB_incidence = NTShB / NTIL)
   
   TShB_incidence <-
-    x %>% dplyr::select(REP,
-                        TRT,
-                        WMGT,
-                        NRTE,
-                        SMPL,
-                        HILL,
-                        HGHT,
-                        NTIL,
-                        NTShB,
-                        TShB_incidence)
+    x %>% select(REP,
+                 TRT,
+                 WMGT,
+                 NRTE,
+                 SMPL,
+                 HILL,
+                 HGHT,
+                 NTIL,
+                 NTShB,
+                 TShB_incidence)
   
   # Gather tillers--------------------------------------------------------------
   TIL <- vector(mode = "list", length = 4)
@@ -119,7 +135,7 @@ reformat <- function(files) {
   for (i in 1:4) {
     y <-
       x %>%
-      dplyr::select(
+      select(
         TRT,
         REP,
         WMGT,
@@ -137,9 +153,9 @@ reformat <- function(files) {
         paste0("SLE", i),
         paste0("SLF", i)
       ) %>%
-      tidyr::gather(LEAF,
-                    LEAF_ShB,
-                    dplyr::starts_with("SL"))
+      gather(LEAF,
+             LEAF_ShB,
+             starts_with("SL"))
     
     names(y)[7] <- "TIL"
     names(y)[8] <- "GL"
@@ -156,8 +172,8 @@ reformat <- function(files) {
     TIL[[i]] <- y
   }
   
-  z <- dplyr::bind_rows(TIL)
-  x <- dplyr::left_join(TShB_incidence, z)
+  z <- bind_rows(TIL)
+  x <- left_join(TShB_incidence, z)
   
   # Add dates ------------------------------------------------------------------
   
@@ -197,11 +213,10 @@ reformat <- function(files) {
 }
 
 # Run reformat function for all 2015 files -------------------------------------
-DS2015 <- purrr::map_df(files, reformat)
+DS2015 <- map_df(files, reformat)
 ```
 
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
-
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
     ## Joining, by = c("REP", "TRT", "WMGT", "NRTE", "SMPL", "HILL")
@@ -209,17 +224,13 @@ DS2015 <- purrr::map_df(files, reformat)
 
 ``` r
 # Add days after inoculation column
-DS2015 <- 
+DS2015 <-
   DS2015 %>%
-  mutate(
-    DAI = case_when(
-      ASMT == 1 ~ 14,
-      ASMT == 2 ~ 22,
-      ASMT == 3 ~ 35,
-      ASMT == 4 ~ 49,
-      ASMT == 5 ~ 62,
-    )
-  )
+  mutate(DAI = case_when(ASMT == 1 ~ 14,
+                         ASMT == 2 ~ 22,
+                         ASMT == 3 ~ 35,
+                         ASMT == 4 ~ 49,
+                         ASMT == 5 ~ 62))
 
 # Replace "N*" with a number for NRTE ------------------------------------------
 DS2015$NRTE[which(DS2015$NRTE == "N0")] <- 0
@@ -241,13 +252,13 @@ DS2015$TRT[which(DS2015$WMGT == "AWD" &
 DS2015$TRT[which(DS2015$WMGT == "AWD" &
                    DS2015$NRTE == 120)] = "AWD_N120"
 
-DS2015$YEAR <- lubridate::year(DS2015$DATE)
+DS2015$YEAR <- year(DS2015$DATE)
 
 DS2015$PLOT <- rep(1:24, each = 432)
 
 # Arrange columns --------------------------------------------------------------
 DS2015 <-
-  DS2015 %>% dplyr::select(
+  DS2015 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -266,11 +277,13 @@ DS2015 <-
     LEAF_ShB,
     WMGT,
     NRTE
-  )
+  ) %>% 
+  mutate(REP = as.integer(REP),
+         HILL = as.integer(HILL))
 
 DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
 
-DS2015 <- tibble::as_tibble(dplyr::arrange(DS2015, ASMT, PLOT))
+DS2015 <- arrange(DS2015, ASMT, PLOT)
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -283,16 +296,23 @@ rm(files, reformat)
 
 # 2016 experiment
 
+Preprocess 2016 data for all assessments
+
+1.  Cleanup date format and fill empty dates
+2.  Fill empty NTIL (for same hill, not missing values)
+3.  Fill empty NTShB (for same hill, not missing values)
+4.  Add column with number of days after inoculation (DAI)
+
+<!-- end list -->
+
 ``` r
-# Preprocess 2016 data for all assessments
-#
-# 1. Cleanup date format and fill empty dates
-# 2. Fill empty NTIL (for same hill, not missing values)
-# 3. Fill empty NTShB (for same hill, not missing values)
-# 4. Add column with number of days after inoculation (DAI)
+library(tidyverse)
+library(agricolae)
+library(usethis)
+library(lubridate)
 
 # First assessment -------------------------------------------------------------
-DS2016_A1 <- readr::read_csv("data/DS2016_Raw_1.csv")
+DS2016_A1 <- read_csv("data/DS2016_Raw_1.csv")
 ```
 
     ## Parsed with column specification:
@@ -320,9 +340,9 @@ DS2016_A1 <- readr::read_csv("data/DS2016_Raw_1.csv")
 ``` r
 # Fill missing values in NTIL and NTShB
 DS2016_A1 <-
-  DS2016_A1 %>% tidyr::fill(NTIL)
+  DS2016_A1 %>% fill(NTIL)
 DS2016_A1 <-
-  DS2016_A1 %>% tidyr::fill(NTShB)
+  DS2016_A1 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A1[, 1] <- as.Date("2016-03-15", origin = "1970-01-01")
@@ -333,7 +353,7 @@ DS2016_A1$PLOT <- rep(1:16, each = 72)
 DS2016_A1$DAI <- rep(14, nrow(DS2016_A1))
 
 # Second assessement -----------------------------------------------------------
-DS2016_A2 <- readr::read_csv("data/DS2016_Raw_2.csv")
+DS2016_A2 <- read_csv("data/DS2016_Raw_2.csv")
 ```
 
     ## Parsed with column specification:
@@ -360,9 +380,9 @@ DS2016_A2 <- readr::read_csv("data/DS2016_Raw_2.csv")
 
 ``` r
 DS2016_A2 <-
-  DS2016_A2 %>% tidyr::fill(NTIL)
+  DS2016_A2 %>% fill(NTIL)
 DS2016_A2 <-
-  DS2016_A2 %>% tidyr::fill(NTShB)
+  DS2016_A2 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A2[, 1] <- as.Date("2016-03-29", origin = "1970-01-01")
@@ -373,7 +393,7 @@ DS2016_A2$PLOT <- rep(1:16, each = 72)
 DS2016_A2$DAI <- rep(28, nrow(DS2016_A2))
 
 # Third assessement ------------------------------------------------------------
-DS2016_A3 <- readr::read_csv("data/DS2016_Raw_3.csv")
+DS2016_A3 <- read_csv("data/DS2016_Raw_3.csv")
 ```
 
     ## Parsed with column specification:
@@ -400,9 +420,9 @@ DS2016_A3 <- readr::read_csv("data/DS2016_Raw_3.csv")
 
 ``` r
 DS2016_A3 <-
-  DS2016_A3 %>% tidyr::fill(NTIL)
+  DS2016_A3 %>% fill(NTIL)
 DS2016_A3 <-
-  DS2016_A3 %>% tidyr::fill(NTShB)
+  DS2016_A3 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A3[, 1] <- as.Date("2016-04-12", origin = "1970-01-01")
@@ -413,7 +433,7 @@ DS2016_A3$PLOT <- rep(1:16, each = 72)
 DS2016_A3$DAI <- rep(43, nrow(DS2016_A3))
 
 # Fourth assessment ------------------------------------------------------------
-DS2016_A4 <- readr::read_csv("data/DS2016_Raw_4.csv")
+DS2016_A4 <- read_csv("data/DS2016_Raw_4.csv")
 ```
 
     ## Parsed with column specification:
@@ -440,9 +460,9 @@ DS2016_A4 <- readr::read_csv("data/DS2016_Raw_4.csv")
 
 ``` r
 DS2016_A4 <-
-  DS2016_A4 %>% tidyr::fill(NTIL)
+  DS2016_A4 %>% fill(NTIL)
 DS2016_A4 <-
-  DS2016_A4 %>% tidyr::fill(NTShB)
+  DS2016_A4 %>% fill(NTShB)
 
 # Fill dates
 DS2016_A4[, 1] <- as.Date("2016-04-26", origin = "1970-01-01")
@@ -486,10 +506,10 @@ DS2016$TRT[which(DS2016$WMGT == "AWD" &
 
 DS2016 <-
   DS2016 %>%
-  tidyr::gather(
+  gather(
     LEAF,
     LEAF_ShB,
-    dplyr::starts_with("ShBL"),
+    starts_with("ShBL"),
     -DATE,
     -ASMT,
     -DAI,
@@ -526,16 +546,16 @@ DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 # calculate tiller sheath blight incidence
 DS2016 <-
   DS2016 %>%
-  dplyr::group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
-  dplyr::mutate(TShB_incidence = NTShB / NTIL)
+  group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
+  mutate(TShB_incidence = NTShB / NTIL)
 
-DS2016 <- dplyr::rename(DS2016, TIL_ShB = NSHShB)
+DS2016 <- rename(DS2016, TIL_ShB = NSHShB)
 
-DS2016$YEAR <- lubridate::year(DS2016$DATE)
+DS2016$YEAR <- year(DS2016$DATE)
 DS2016$LEAF_ShB <- as.numeric(DS2016$LEAF_ShB)
 
 DS2016 <-
-  DS2016 %>% dplyr::select(
+  DS2016 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -556,7 +576,7 @@ DS2016 <-
     NRTE
   )
 
-DS2016 <- tibble::as_tibble(dplyr::arrange(DS2016, ASMT, PLOT))
+DS2016 <- arrange(DS2016, ASMT, PLOT)
 
 # Create new columns of days to calcluate AUDPS -------------------------------
 
@@ -567,7 +587,7 @@ DATE_2_2016[which(DATE_2_2016 == max(DATE_2_2016))] <- NA
 DATE_1 <- na.omit(DATE_1_2016)
 DATE_2 <- na.omit(DATE_2_2016)
 
-DAYS_2016 <- lubridate::time_length(DATE_1 - DATE_2, unit = "day")
+DAYS_2016 <- time_length(DATE_1 - DATE_2, unit = "day")
 DS2016$DAYS <-
   c(rep(0, nrow(DS2016) - length(DAYS_2016)), DAYS_2016)
 
@@ -587,7 +607,7 @@ rm(
 
 # Arrange columns --------------------------------------------------------------
 DS2016 <-
-  DS2016 %>% dplyr::select(
+  DS2016 %>% select(
     YEAR,
     DATE,
     ASMT,
@@ -610,15 +630,12 @@ DS2016 <-
   )
 ```
 
-# Calculating Area Under the Disease Progress Stairs (AUDPS)
+# Calculating Disease Severity Index and Area Under the Disease Progress Stairs (AUDPS)
 
 Because the data were collected on an ordinal scale, but not evenly
 spaced, the data are converted to the midpoint value of the percent
-range for severity and then the AUDPS is calculated from that. See lines
-544 and 559 for this.
-
-After that the AUDPS is calculated using functionality from the
-*agricolae* package.
+range for disease severity index and then the AUDPS is calculated from
+that.
 
 Last, the data are saved in the package for use analysis, which is
 detailed in the package [vingettes](../vignettes).
@@ -626,34 +643,36 @@ detailed in the package [vingettes](../vignettes).
 ``` r
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
-RAW_data <- tibble::as_tibble(rbind(as.data.frame(DS2015),
-                                    as.data.frame(DS2016)))
+RAW_data <- bind_rows(DS2015, DS2016)
 
 # convert columns to factor ----------------------------------------------------
-RAW_data$YEAR <- factor(RAW_data$YEAR)
-RAW_data$ASMT <- factor(RAW_data$ASMT)
-RAW_data$PLOT <- factor(RAW_data$PLOT)
-RAW_data$REP <- factor(RAW_data$REP)
-RAW_data$TRT <- factor(RAW_data$TRT)
-RAW_data$WMGT <- factor(RAW_data$WMGT)
-RAW_data$NRTE <- factor(RAW_data$NRTE)
-RAW_data$SMPL <- factor(RAW_data$SMPL)
-RAW_data$HILL <- factor(RAW_data$HILL)
-RAW_data$TIL <- factor(RAW_data$TIL)
-RAW_data$LEAF <- factor(RAW_data$LEAF)
-
+RAW_data <-
+  RAW_data %>%
+  mutate(
+    YEAR = as.factor(YEAR),
+    ASMT = as.factor(ASMT),
+    PLOT = as.factor(PLOT),
+    REP = as.factor(REP),
+    TRT = as.factor(TRT),
+    WMGT = as.factor(WMGT),
+    NRTE = as.factor(NRTE),
+    SMPL = as.factor(SMPL),
+    HILL = as.factor(HILL),
+    TIL = as.factor(TIL),
+    LEAF = as.factor(LEAF)
+  )
 
 # reorder the treatments by level/year - low to high, 2015-2016 for graphs -----
 RAW_data$NRTE <-
-  forcats::fct_relevel(RAW_data$NRTE,
-                       "0",
-                       "100",
-                       "120",
-                       "60",
-                       "180")
+  fct_relevel(RAW_data$NRTE,
+              "0",
+              "100",
+              "120",
+              "60",
+              "180")
 
 RAW_data$TRT <-
-  forcats::fct_relevel(
+  fct_relevel(
     RAW_data$TRT,
     "AWD_N0",
     "AWD_N100",
@@ -669,9 +688,9 @@ RAW_data$TRT <-
 
 # add column with midpoint % tiller ShB severity -------------------------------
 RAW_data <-
-  dplyr::mutate(
+  mutate(
     RAW_data,
-    PERC_TIL_ShB = dplyr::case_when(
+    PERC_TIL_ShB = case_when(
       TIL_ShB == 0 ~ 0,
       TIL_ShB == 1 ~ 1,
       TIL_ShB == 2 ~ 2.5,
@@ -681,11 +700,26 @@ RAW_data <-
     )
   )
 
+# add column with midpoint +1  % tiller ShB severity ---------------------------
+
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_TIL_ShB_1 = case_when(
+      TIL_ShB == 0 ~ 1,
+      TIL_ShB == 1 ~ 2.5,
+      TIL_ShB == 2 ~ 10,
+      TIL_ShB == 3 ~ 32.5,
+      TIL_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
+
 # add column with midpoint % leaf ShB severity ---------------------------------
 RAW_data <-
-  dplyr::mutate(
+  mutate(
     RAW_data,
-    PERC_LEAF_ShB = dplyr::case_when(
+    PERC_LEAF_ShB = case_when(
       LEAF_ShB == 0 ~ 0,
       LEAF_ShB == 1 ~ 1,
       LEAF_ShB == 2 ~ 2.5,
@@ -695,13 +729,25 @@ RAW_data <-
     )
   )
 
-
+# add column with midpoint +1  % leaf ShB severity -----------------------------
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_LEAF_ShB_1 = case_when(
+      LEAF_ShB == 0 ~ 1,
+      LEAF_ShB == 1 ~ 2.5,
+      LEAF_ShB == 2 ~ 10,
+      LEAF_ShB == 3 ~ 32.5,
+      LEAF_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
 
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 ```
 
-## Calculate disease index values
+# Calculate disease index values
 
 See K. S. Chiang et al. 2017
 
@@ -710,17 +756,23 @@ Number of Observations \* (Mid<sub><em>Q+1</em></sub> -
 Mid<sub><em>Q</em></sub>)
 
 ``` r
+#DS2015 <- 
+#  DS2015 %>% 
+#  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>% 
+#  mutate(TShB_DSI = (TIL_ShB + )/
+```
+
+``` r
 # calculate AUDPS values -------------------------------------------------------
 
 # 2015 AUDPS -------------------------------------------------------------------
 
-# 2015 Tiller incidence setup --------------------------------------------------
-TShB_inc_15 <-
+TShB_sev_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_incidence = TShB_incidence)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
+  arrange(PLOT)
 ```
 
     ## Warning: funs() is soft deprecated as of dplyr 0.8.0
@@ -737,75 +789,69 @@ TShB_inc_15 <-
     ## This warning is displayed once per session.
 
 ``` r
-TShB_inc_wide <-
-  reshape2::dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
-
-# 2015 Tiller Severity AUDPS ---------------------------------------------------
-TShB_sev_15 <-
-  DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_severity = TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
-
 TShB_sev_wide <-
   reshape2::dcast(TShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
 
 TShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_percent = PERC_TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_perc_wide <-
-  reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+  reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2015 Leaf Severity setup -----------------------------------------------------
 LShB_sev_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_severity = LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_sev_wide <-
   reshape2::dcast(LShB_sev_15, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
 LShB_perc_15 <-
   DS2015 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_percent = PERC_LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_perc_wide <-
-  reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+  reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
-# Calculate 2015 AUDPS ---------------------------------------------------------
+TShB_inc_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+               .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
+  arrange(PLOT) %>%
+  group_by(YEAR, REP, TRT, PLOT) %>%
+  summarise(AUDPS = audps(PLOT_TShB_incidence, DAYS))
 
-TShB_inc_AUDPS <-
-  agricolae::audps(evaluation = TShB_inc_wide[, 2:6],
-                   dates = dplyr::pull(TShB_inc_15[1:5, 6]))
+TShB_inc_AUDPS <-  pull(TShB_inc_15, AUDPS)
 
 TShB_sev_AUDPS <-
-  agricolae::audps(evaluation = TShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(TShB_sev_15[1:5, 6]))
+  audps(evaluation = TShB_sev_wide[, 2:6],
+                   dates = pull(TShB_sev_15[1:5, 6]))
 
 LShB_sev_AUDPS <-
-  agricolae::audps(evaluation = LShB_sev_wide[, 2:6],
-                   dates = dplyr::pull(LShB_sev_15[1:5, 6]))
+  audps(evaluation = LShB_sev_wide[, 2:6],
+                   dates = pull(LShB_sev_15[1:5, 6]))
 
 TShB_percent_AUDPS <-
-  agricolae::audps(evaluation = TShB_perc_wide[, 2:6],
-        dates = dplyr::pull(TShB_perc_15[1:5, 6]))
+  audps(evaluation = TShB_perc_wide[, 2:6],
+        dates = pull(TShB_perc_15[1:5, 6]))
 
 LShB_percent_AUDPS <-
-  agricolae::audps(evaluation = LShB_perc_wide[, 2:6],
-        dates = dplyr::pull(LShB_perc_15[1:5, 6]))
+  audps(evaluation = LShB_perc_wide[, 2:6],
+        dates = pull(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
-  tibble::as_tibble(
+  as_tibble(
     cbind(
       PLOT = 1:24,
       TShB_inc_AUDPS,
@@ -819,27 +865,27 @@ AUDPS_15 <-
 AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
-ShB_15 <- dplyr::left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
+ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 
 # 2016 AUDPS -------------------------------------------------------------------
 
 # 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_incidence = TShB_incidence)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_incidence = TShB_incidence)) %>%
+  arrange(PLOT)
 
 TShB_inc_wide <-
   reshape2::dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 TShB_sev_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_severity = TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_severity = TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_sev_wide <-
   reshape2::dcast(TShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_TShB_severity")
@@ -848,60 +894,60 @@ TShB_sev_wide <-
 
 TShB_perc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_TShB_PERCENT = PERC_TIL_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_TShB_percent = PERC_TIL_ShB)) %>%
+  arrange(PLOT)
 
 TShB_perc_wide <-
-  reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_PERCENT")
+  reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2016 Leaf Severity setup -----------------------------------------------------
 
 LShB_sev_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_severity = LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_severity = LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_sev_wide <-
   reshape2::dcast(LShB_sev_16, PLOT ~ ASMT, value.var = "PLOT_LShB_severity")
 
 LShB_perc_16 <-
   DS2016 %>%
-  dplyr::group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  dplyr::summarise_at(.funs = dplyr::funs(mean(., na.rm = TRUE)),
-                      .vars = dplyr::vars(PLOT_LShB_PERCENT = PERC_LEAF_ShB)) %>%
-  dplyr::arrange(PLOT)
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise_at(.funs = funs(mean(., na.rm = TRUE)),
+                      .vars = vars(PLOT_LShB_percent = PERC_LEAF_ShB)) %>%
+  arrange(PLOT)
 
 LShB_perc_wide <-
-  reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_PERCENT")
+  reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 # 2016 AUDPS -------------------------------------------------------------------
 
 TShB_inc_AUDPS <-
-  agricolae::audps(evaluation = TShB_inc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_inc_16[1:4, 6]))
+  audps(evaluation = TShB_inc_wide[, 2:5],
+                   dates = pull(TShB_inc_16[1:4, 6]))
 
 TShB_sev_AUDPS <-
-  agricolae::audps(evaluation = TShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(TShB_sev_16[1:4, 6]))
+  audps(evaluation = TShB_sev_wide[, 2:5],
+                   dates = pull(TShB_sev_16[1:4, 6]))
 
 LShB_sev_AUDPS <-
-  agricolae::audps(evaluation = LShB_sev_wide[, 2:5],
-                   dates = dplyr::pull(LShB_sev_16[1:4, 6]))
+  audps(evaluation = LShB_sev_wide[, 2:5],
+                   dates = pull(LShB_sev_16[1:4, 6]))
 
 TShB_percent_AUDPS <-
-  agricolae::audps(evaluation = TShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(TShB_perc_16[1:4, 6]))
+  audps(evaluation = TShB_perc_wide[, 2:5],
+                   dates = pull(TShB_perc_16[1:4, 6]))
 
 LShB_percent_AUDPS <-
-  agricolae::audps(evaluation = LShB_perc_wide[, 2:5],
-                   dates = dplyr::pull(LShB_perc_16[1:4, 6]))
+  audps(evaluation = LShB_perc_wide[, 2:5],
+                   dates = pull(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
-  tibble::as_tibble(
+  as_tibble(
     cbind(
       PLOT = 1:16,
       TShB_inc_AUDPS,
@@ -916,26 +962,26 @@ AUDPS_16 <-
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
-ShB_16 <- dplyr::left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
+ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
-AUDPS <- tibble::as_data_frame(tibble::as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
 ```
 
     ## Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
     ## This warning is displayed once per session.
 
 ``` r
-AUDPS <- tidyr::separate(data = AUDPS, col = TRT,
+AUDPS <- separate(data = AUDPS, col = TRT,
                          sep = "_",
                          into = c("WMGT", "NRTE"))
-AUDPS <- dplyr::mutate_at(.tbl = AUDPS,
+AUDPS <- mutate_at(.tbl = AUDPS,
                               .funs = factor,
                               .vars = c("WMGT", "NRTE"))
 
 # Arrange NRTE values
 AUDPS$NRTE <-
-  forcats::fct_relevel(AUDPS$NRTE,
+  fct_relevel(AUDPS$NRTE,
                        "N0",
                        "N100",
                        "N120",
@@ -948,16 +994,16 @@ if (!dir.exists("../data")) {
   dir.create("../data", recursive = TRUE)
 }
 
-usethis::use_data(RAW_data,
+use_data(RAW_data,
                   compress = "bzip2",
                   overwrite = TRUE)
 ```
 
-    ## ✔ Setting active project to '/Users/adamsparks/Development/rice_awd_pests'
+    ## ✔ Setting active project to '/Users/adamsparks/Sources/GitHub/Analysis/rice_awd_pests'
     ## ✔ Saving 'RAW_data' to 'data/RAW_data.rda'
 
 ``` r
-usethis::use_data(AUDPS,
+use_data(AUDPS,
                   compress = "bzip2",
                   overwrite = TRUE)
 ```
@@ -1007,7 +1053,7 @@ N_rates <- cbind(Year,
 
 row.names(N_rates) <- c("N0", "N100", "N120", "N60", "N180")
 
-usethis::use_data(N_rates,
+use_data(N_rates,
                   compress = "bzip2",
                   overwrite = TRUE)
 ```
@@ -1020,96 +1066,99 @@ usethis::use_data(N_rates,
 sessioninfo::session_info()
 ```
 
-    ## ─ Session info ──────────────────────────────────────────────────────────
+    ## ─ Session info ───────────────────────────────────────────────────────────────
     ##  setting  value                       
-    ##  version  R version 3.6.1 (2019-07-05)
-    ##  os       macOS Mojave 10.14.6        
+    ##  version  R version 3.6.3 (2020-02-29)
+    ##  os       macOS Catalina 10.15.3      
     ##  system   x86_64, darwin15.6.0        
     ##  ui       X11                         
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  ctype    en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2019-07-30                  
+    ##  date     2020-03-09                  
     ## 
-    ## ─ Packages ──────────────────────────────────────────────────────────────
-    ##  package     * version  date       lib source        
-    ##  agricolae     1.3-1    2019-04-04 [1] CRAN (R 3.6.0)
-    ##  AlgDesign     1.1-7.3  2014-10-15 [1] CRAN (R 3.6.0)
-    ##  assertthat    0.2.1    2019-03-21 [1] CRAN (R 3.6.0)
-    ##  backports     1.1.4    2019-04-10 [1] CRAN (R 3.6.0)
-    ##  boot          1.3-22   2019-04-02 [2] CRAN (R 3.6.1)
-    ##  class         7.3-15   2019-01-01 [2] CRAN (R 3.6.1)
-    ##  classInt      0.3-3    2019-04-26 [1] CRAN (R 3.6.0)
-    ##  cli           1.1.0    2019-03-19 [1] CRAN (R 3.6.0)
-    ##  clisymbols    1.2.0    2017-05-21 [1] CRAN (R 3.6.0)
-    ##  cluster       2.1.0    2019-06-19 [2] CRAN (R 3.6.1)
-    ##  coda          0.19-3   2019-07-05 [1] CRAN (R 3.6.0)
-    ##  combinat      0.0-8    2012-10-29 [1] CRAN (R 3.6.0)
-    ##  crayon        1.3.4    2017-09-16 [1] CRAN (R 3.6.0)
-    ##  DBI           1.0.0    2018-05-02 [1] CRAN (R 3.6.0)
-    ##  deldir        0.1-22   2019-07-05 [1] CRAN (R 3.6.0)
-    ##  digest        0.6.20   2019-07-04 [1] CRAN (R 3.6.0)
-    ##  dplyr       * 0.8.3    2019-07-04 [1] CRAN (R 3.6.0)
-    ##  e1071         1.7-2    2019-06-05 [1] CRAN (R 3.6.0)
-    ##  evaluate      0.14     2019-05-28 [1] CRAN (R 3.6.0)
-    ##  expm          0.999-4  2019-03-21 [1] CRAN (R 3.6.0)
-    ##  forcats       0.4.0    2019-02-17 [1] CRAN (R 3.6.0)
-    ##  fs            1.3.1    2019-05-06 [1] CRAN (R 3.6.0)
-    ##  gdata         2.18.0   2017-06-06 [1] CRAN (R 3.6.0)
-    ##  glue          1.3.1    2019-03-12 [1] CRAN (R 3.6.0)
-    ##  gmodels       2.18.1   2018-06-25 [1] CRAN (R 3.6.0)
-    ##  gtools        3.8.1    2018-06-26 [1] CRAN (R 3.6.0)
-    ##  highr         0.8      2019-03-20 [1] CRAN (R 3.6.0)
-    ##  hms           0.5.0    2019-07-09 [1] CRAN (R 3.6.0)
-    ##  htmltools     0.3.6    2017-04-28 [1] CRAN (R 3.6.0)
-    ##  httpuv        1.5.1    2019-04-05 [1] CRAN (R 3.6.0)
-    ##  KernSmooth    2.23-15  2015-06-29 [2] CRAN (R 3.6.1)
-    ##  klaR          0.6-14   2018-03-19 [1] CRAN (R 3.6.0)
-    ##  knitr         1.23     2019-05-18 [1] CRAN (R 3.6.0)
-    ##  later         0.8.0    2019-02-11 [1] CRAN (R 3.6.0)
-    ##  lattice       0.20-38  2018-11-04 [2] CRAN (R 3.6.1)
-    ##  LearnBayes    2.15.1   2018-03-18 [1] CRAN (R 3.6.0)
-    ##  lubridate     1.7.4    2018-04-11 [1] CRAN (R 3.6.0)
-    ##  magrittr      1.5      2014-11-22 [1] CRAN (R 3.6.0)
-    ##  MASS          7.3-51.4 2019-03-31 [2] CRAN (R 3.6.1)
-    ##  Matrix        1.2-17   2019-03-22 [2] CRAN (R 3.6.1)
-    ##  mime          0.7      2019-06-11 [1] CRAN (R 3.6.0)
-    ##  miniUI        0.1.1.1  2018-05-18 [1] CRAN (R 3.6.0)
-    ##  nlme          3.1-140  2019-05-12 [2] CRAN (R 3.6.1)
-    ##  pillar        1.4.2    2019-06-29 [1] CRAN (R 3.6.0)
-    ##  pkgconfig     2.0.2    2018-08-16 [1] CRAN (R 3.6.0)
-    ##  plyr          1.8.4    2016-06-08 [1] CRAN (R 3.6.0)
-    ##  promises      1.0.1    2018-04-13 [1] CRAN (R 3.6.0)
-    ##  purrr         0.3.2    2019-03-15 [1] CRAN (R 3.6.0)
-    ##  questionr     0.7.0    2018-11-26 [1] CRAN (R 3.6.0)
-    ##  R6            2.4.0    2019-02-14 [1] CRAN (R 3.6.0)
-    ##  Rcpp          1.0.2    2019-07-25 [1] CRAN (R 3.6.0)
-    ##  readr       * 1.3.1    2018-12-21 [1] CRAN (R 3.6.0)
-    ##  reshape2      1.4.3    2017-12-11 [1] CRAN (R 3.6.0)
-    ##  rlang         0.4.0    2019-06-25 [1] CRAN (R 3.6.0)
-    ##  rmarkdown     1.14     2019-07-12 [1] CRAN (R 3.6.0)
-    ##  rprojroot     1.3-2    2018-01-03 [1] CRAN (R 3.6.0)
-    ##  rstudioapi    0.10     2019-03-19 [1] CRAN (R 3.6.0)
-    ##  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 3.6.0)
-    ##  sf            0.7-7    2019-07-24 [1] CRAN (R 3.6.0)
-    ##  shiny         1.3.2    2019-04-22 [1] CRAN (R 3.6.0)
-    ##  sp            1.3-1    2018-06-05 [1] CRAN (R 3.6.0)
-    ##  spData        0.3.0    2019-01-07 [1] CRAN (R 3.6.0)
-    ##  spdep         1.1-2    2019-04-05 [1] CRAN (R 3.6.0)
-    ##  stringi       1.4.3    2019-03-12 [1] CRAN (R 3.6.0)
-    ##  stringr       1.4.0    2019-02-10 [1] CRAN (R 3.6.0)
-    ##  tibble        2.1.3    2019-06-06 [1] CRAN (R 3.6.0)
-    ##  tidyr         0.8.3    2019-03-01 [1] CRAN (R 3.6.0)
-    ##  tidyselect    0.2.5    2018-10-11 [1] CRAN (R 3.6.0)
-    ##  units         0.6-3    2019-05-03 [1] CRAN (R 3.6.0)
-    ##  usethis       1.5.1    2019-07-04 [1] CRAN (R 3.6.0)
-    ##  vctrs         0.2.0    2019-07-05 [1] CRAN (R 3.6.0)
-    ##  withr         2.1.2    2018-03-15 [1] CRAN (R 3.6.0)
-    ##  xfun          0.8      2019-06-25 [1] CRAN (R 3.6.0)
-    ##  xtable        1.8-4    2019-04-21 [1] CRAN (R 3.6.0)
-    ##  yaml          2.2.0    2018-07-25 [1] CRAN (R 3.6.0)
-    ##  zeallot       0.1.0    2018-01-28 [1] CRAN (R 3.6.0)
+    ## ─ Packages ───────────────────────────────────────────────────────────────────
+    ##  package     * version    date       lib source                             
+    ##  agricolae   * 1.3-2      2020-01-19 [1] CRAN (R 3.6.0)                     
+    ##  AlgDesign     1.2.0      2019-11-29 [1] CRAN (R 3.6.0)                     
+    ##  assertthat    0.2.1      2019-03-21 [1] CRAN (R 3.6.0)                     
+    ##  backports     1.1.5      2019-10-02 [1] CRAN (R 3.6.0)                     
+    ##  broom         0.5.5      2020-02-29 [1] CRAN (R 3.6.0)                     
+    ##  cellranger    1.1.0      2016-07-27 [1] CRAN (R 3.6.0)                     
+    ##  cli           2.0.2      2020-02-28 [1] CRAN (R 3.6.0)                     
+    ##  clisymbols    1.2.0      2017-05-21 [1] CRAN (R 3.6.0)                     
+    ##  cluster       2.1.0      2019-06-19 [1] CRAN (R 3.6.3)                     
+    ##  colorspace    1.4-1      2019-03-18 [1] CRAN (R 3.6.0)                     
+    ##  combinat      0.0-8      2012-10-29 [1] CRAN (R 3.6.0)                     
+    ##  crayon        1.3.4      2017-09-16 [1] CRAN (R 3.6.0)                     
+    ##  DBI           1.1.0      2019-12-15 [1] CRAN (R 3.6.0)                     
+    ##  dbplyr        1.4.2      2019-06-17 [1] CRAN (R 3.6.0)                     
+    ##  digest        0.6.25     2020-02-23 [1] CRAN (R 3.6.0)                     
+    ##  dplyr       * 0.8.5      2020-03-07 [1] CRAN (R 3.6.3)                     
+    ##  ellipsis      0.3.0      2019-09-20 [1] CRAN (R 3.6.0)                     
+    ##  evaluate      0.14       2019-05-28 [1] CRAN (R 3.6.0)                     
+    ##  fansi         0.4.1      2020-01-08 [1] CRAN (R 3.6.0)                     
+    ##  fastmap       1.0.1      2019-10-08 [1] CRAN (R 3.6.0)                     
+    ##  forcats     * 0.5.0      2020-03-01 [1] CRAN (R 3.6.0)                     
+    ##  fs            1.3.2      2020-03-05 [1] CRAN (R 3.6.0)                     
+    ##  generics      0.0.2      2018-11-29 [1] CRAN (R 3.6.0)                     
+    ##  ggplot2     * 3.3.0      2020-03-05 [1] CRAN (R 3.6.0)                     
+    ##  glue          1.3.2      2020-03-08 [1] Github (tidyverse/glue@5010cc6)    
+    ##  gtable        0.3.0      2019-03-25 [1] CRAN (R 3.6.0)                     
+    ##  haven         2.2.0      2019-11-08 [1] CRAN (R 3.6.0)                     
+    ##  highr         0.8        2019-03-20 [1] CRAN (R 3.6.0)                     
+    ##  hms           0.5.3      2020-01-08 [1] CRAN (R 3.6.0)                     
+    ##  htmltools     0.4.0      2019-10-04 [1] CRAN (R 3.6.0)                     
+    ##  httpuv        1.5.2      2019-09-11 [1] CRAN (R 3.6.0)                     
+    ##  httr          1.4.1.9000 2020-03-08 [1] Github (hadley/httr@844c8c7)       
+    ##  jsonlite      1.6.1      2020-02-02 [1] CRAN (R 3.6.0)                     
+    ##  klaR          0.6-15     2020-02-19 [1] CRAN (R 3.6.0)                     
+    ##  knitr         1.28       2020-02-06 [1] CRAN (R 3.6.0)                     
+    ##  later         1.0.0      2019-10-04 [1] CRAN (R 3.6.0)                     
+    ##  lattice       0.20-38    2018-11-04 [1] CRAN (R 3.6.3)                     
+    ##  lifecycle     0.2.0      2020-03-06 [1] CRAN (R 3.6.0)                     
+    ##  lubridate   * 1.7.4      2018-04-11 [1] CRAN (R 3.6.0)                     
+    ##  magrittr      1.5        2014-11-22 [1] CRAN (R 3.6.0)                     
+    ##  MASS          7.3-51.5   2019-12-20 [1] CRAN (R 3.6.3)                     
+    ##  mime          0.9        2020-02-04 [1] CRAN (R 3.6.0)                     
+    ##  miniUI        0.1.1.1    2018-05-18 [1] CRAN (R 3.6.0)                     
+    ##  modelr        0.1.6      2020-02-22 [1] CRAN (R 3.6.0)                     
+    ##  munsell       0.5.0      2018-06-12 [1] CRAN (R 3.6.0)                     
+    ##  nlme          3.1-144    2020-02-06 [1] CRAN (R 3.6.3)                     
+    ##  pillar        1.4.3      2019-12-20 [1] CRAN (R 3.6.0)                     
+    ##  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 3.6.0)                     
+    ##  plyr          1.8.6      2020-03-03 [1] CRAN (R 3.6.0)                     
+    ##  promises      1.1.0      2019-10-04 [1] CRAN (R 3.6.0)                     
+    ##  prompt        1.0.0      2020-03-08 [1] Github (gaborcsardi/prompt@b332c42)
+    ##  purrr       * 0.3.3      2019-10-18 [1] CRAN (R 3.6.0)                     
+    ##  questionr     0.7.0      2018-11-26 [1] CRAN (R 3.6.0)                     
+    ##  R6            2.4.1      2019-11-12 [1] CRAN (R 3.6.0)                     
+    ##  Rcpp          1.0.3      2019-11-08 [1] CRAN (R 3.6.0)                     
+    ##  readr       * 1.3.1      2018-12-21 [1] CRAN (R 3.6.0)                     
+    ##  readxl        1.3.1      2019-03-13 [1] CRAN (R 3.6.0)                     
+    ##  reprex        0.3.0      2019-05-16 [1] CRAN (R 3.6.0)                     
+    ##  reshape2      1.4.3      2017-12-11 [1] CRAN (R 3.6.0)                     
+    ##  rlang         0.4.5      2020-03-01 [1] CRAN (R 3.6.0)                     
+    ##  rmarkdown     2.1        2020-01-20 [1] CRAN (R 3.6.0)                     
+    ##  rprojroot     1.3-2      2018-01-03 [1] CRAN (R 3.6.0)                     
+    ##  rstudioapi    0.11       2020-02-07 [1] CRAN (R 3.6.0)                     
+    ##  rvest         0.3.5      2019-11-08 [1] CRAN (R 3.6.0)                     
+    ##  scales        1.1.0      2019-11-18 [1] CRAN (R 3.6.0)                     
+    ##  sessioninfo   1.1.1      2018-11-05 [1] CRAN (R 3.6.0)                     
+    ##  shiny         1.4.0      2019-10-10 [1] CRAN (R 3.6.0)                     
+    ##  stringi       1.4.6      2020-02-17 [1] CRAN (R 3.6.0)                     
+    ##  stringr     * 1.4.0      2019-02-10 [1] CRAN (R 3.6.0)                     
+    ##  tibble      * 2.1.3      2019-06-06 [1] CRAN (R 3.6.0)                     
+    ##  tidyr       * 1.0.2      2020-01-24 [1] CRAN (R 3.6.0)                     
+    ##  tidyselect    1.0.0      2020-01-27 [1] CRAN (R 3.6.0)                     
+    ##  tidyverse   * 1.3.0      2019-11-21 [1] CRAN (R 3.6.0)                     
+    ##  usethis     * 1.5.1      2019-07-04 [1] CRAN (R 3.6.0)                     
+    ##  vctrs         0.2.3      2020-02-20 [1] CRAN (R 3.6.0)                     
+    ##  withr         2.1.2      2018-03-15 [1] CRAN (R 3.6.0)                     
+    ##  xfun          0.12       2020-01-13 [1] CRAN (R 3.6.0)                     
+    ##  xml2          1.2.2      2019-08-09 [1] CRAN (R 3.6.0)                     
+    ##  xtable        1.8-4      2019-04-21 [1] CRAN (R 3.6.0)                     
+    ##  yaml          2.2.1      2020-02-01 [1] CRAN (R 3.6.0)                     
     ## 
-    ## [1] /Users/adamsparks/Library/R/3.x/library
-    ## [2] /Library/Frameworks/R.framework/Versions/3.6/Resources/library
+    ## [1] /Library/Frameworks/R.framework/Versions/3.6/Resources/library
