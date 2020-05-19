@@ -83,8 +83,8 @@ installed on your computer):
 
     git clone https://github.com/adamhsparks/rice_awd_pests.git
 
-Once the download is complete, open the `rice.awd.pests.Rproj` in
-RStudio to begin working with the package and compendium files.
+Once the download is complete, open the `rice.awd.shb.Rproj` in RStudio
+to begin working with the package and compendium files.
 
 The package has a number of dependencies on other R packages, and
 programs outside of R. These are listed at the bottom of this README.
