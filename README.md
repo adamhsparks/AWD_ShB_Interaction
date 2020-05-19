@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--05-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--05--19-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-4.0.0-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 [![Travis-CI Build
 Status](https://travis-ci.org/adamhsparks/rice_awd_pests.svg?branch=master)](https://travis-ci.org/adamhsparks/rice_awd_pests)
@@ -18,8 +18,9 @@ status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/mast
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice_awd_pests> are the development
-versions and may have changed since the report was published.
+<https://github.com/adamhsparks/rice_AWD_ShB_analysis> are the
+development versions and may have changed since the report was
+published.
 
 ### Authors of this repository:
 
@@ -131,15 +132,15 @@ anyone wanting to use this package to generate the vignettes, etc.
 
 Please cite this compendium as:
 
-> Authors, (2018). *Reproducible Research Compendium for Analysing
+> Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 05 Nov 2018. Online at <https://doi.org/xxx/xxx>
+> Accessed 19 May 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
-Code: [MIT](http://opensource.org/licenses/MIT) year: 2018, copyright
+Code: [MIT](http://opensource.org/licenses/MIT) year: 2020, copyright
 holder: Adam Sparks
 
 Data: [CC-0](http://creativecommons.org/publicdomain/zero/1.0/)
@@ -155,8 +156,8 @@ depends on.
 ## Contact
 
 Adam Sparks, Associate Professor, Centre for Crop Health  
-University of Southern Queensland, West St.  
-Toowoomba, Qld 4350 Australia
+University of Southern Queensland, West  
+St. Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
 <https://staffprofile.usq.edu.au/Profile/Adam-Sparks>

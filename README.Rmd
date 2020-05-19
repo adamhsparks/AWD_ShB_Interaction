@@ -25,7 +25,7 @@ http://dx.doi.org/xxxxxxx
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice_awd_pests> are the development
+<https://github.com/adamhsparks/rice_AWD_ShB_analysis> are the development
 versions and may have changed since the report was published.
 
 ### Authors of this repository:
