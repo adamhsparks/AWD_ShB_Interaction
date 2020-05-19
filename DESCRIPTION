@@ -56,5 +56,5 @@ Suggests:
     sessioninfo,
     usethis
 VignetteBuilder: knitr
-URL: https://github.com/adamhsparks/rice_awd_pests
-BugReports: https://github.com/adamhsparks/rice_awd_pests/issues
+URL: https://github.com/adamhsparks/rice_AWD_ShB_analysis
+BugReports: https://github.com/adamhsparks/rice_AWD_ShB_analysis/issues
