@@ -81,7 +81,7 @@ To download the package source as you see it on GitHub, for offline
 browsing, use this line at the shell prompt (assuming you have Git
 installed on your computer):
 
-    git clone https://github.com/adamhsparks/rice_awd_pests.git
+    git clone https://github.com/adamhsparks//rice_AWD_ShB_analysis.git
 
 Once the download is complete, open the `rice.awd.shb.Rproj` in RStudio
 to begin working with the package and compendium files.
