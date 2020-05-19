@@ -9,11 +9,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The raw data are located in the `data` folder of the installed
-_rice.awd.pests_ 
+The raw data are located in the `data` folder of the installed _rice.awd.shb_ 
 
-*Note* TRT is created here as a combination of the main plot/split plot
-treatment. This is used in place of plot numbers to keep the data in order.
+*Note* TRT is created here as a combination of the main plot/split plot treatment.
+This is used in place of plot numbers to keep the data in order. 
 However, it is not used in the final analysis as a treatment effect.
 
 # Load Libraries
@@ -822,7 +821,7 @@ TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
-AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- as.data.frame(as_tibble(rbind(ShB_15, ShB_16)))
 AUDPS <- separate(data = AUDPS, col = TRT,
                          sep = "_",
                          into = c("WMGT", "NRTE"))

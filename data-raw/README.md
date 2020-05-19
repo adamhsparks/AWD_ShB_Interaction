@@ -2,7 +2,7 @@ Clean and Process Raw Data
 ================
 
 The raw data are located in the `data` folder of the installed
-*rice.awd.pests*
+*rice.awd.shb*
 
 *Note* TRT is created here as a combination of the main plot/split plot
 treatment. This is used in place of plot numbers to keep the data in
@@ -15,14 +15,14 @@ effect.
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ──────────────────────────── tidyverse 1.3.0 ──
+    ## ── Attaching packages ──────────────────────────────────── tidyverse 1.3.0 ──
 
-    ## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
-    ## ✓ tibble  2.1.3     ✓ dplyr   0.8.5
-    ## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+    ## ✓ ggplot2 3.3.0     ✓ purrr   0.3.4
+    ## ✓ tibble  3.0.1     ✓ dplyr   0.8.5
+    ## ✓ tidyr   1.0.3     ✓ stringr 1.4.0
     ## ✓ readr   1.3.1     ✓ forcats 0.5.0
 
-    ## ── Conflicts ─────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -35,9 +35,13 @@ library(lubridate)
     ## 
     ## Attaching package: 'lubridate'
 
-    ## The following object is masked from 'package:base':
+    ## The following objects are masked from 'package:dplyr':
     ## 
-    ##     date
+    ##     intersect, setdiff, union
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     date, intersect, setdiff, union
 
 # 2015 experiment
 
@@ -638,7 +642,8 @@ range for disease severity index and then the AUDPS is calculated from
 that.
 
 Last, the data are saved in the package for use analysis, which is
-detailed in the package [vingettes](../vignettes).
+detailed in the package
+[vingettes](../vignettes).
 
 ``` r
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
@@ -965,13 +970,7 @@ TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = c("PLOT" = "PLOT"))
 
 # Merge AUDPS data for graphing ------------------------------------------------
-AUDPS <- as_data_frame(as_tibble(rbind(ShB_15, ShB_16)))
-```
-
-    ## Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
-    ## This warning is displayed once per session.
-
-``` r
+AUDPS <- as.data.frame(as_tibble(rbind(ShB_15, ShB_16)))
 AUDPS <- separate(data = AUDPS, col = TRT,
                          sep = "_",
                          into = c("WMGT", "NRTE"))
@@ -999,8 +998,11 @@ use_data(RAW_data,
                   overwrite = TRUE)
 ```
 
-    ## ✔ Setting active project to '/Users/adamsparks/Sources/GitHub/Analysis/rice_awd_pests'
-    ## ✔ Saving 'RAW_data' to 'data/RAW_data.rda'
+    ## ✓ Setting active project to '/Users/adamsparks/Sources/GitHub/Analysis/rice_AWD_ShB_analysis'
+
+    ## ✓ Saving 'RAW_data' to 'data/RAW_data.rda'
+
+    ## ● Document your data (see 'https://r-pkgs.org/data.html')
 
 ``` r
 use_data(AUDPS,
@@ -1008,7 +1010,8 @@ use_data(AUDPS,
                   overwrite = TRUE)
 ```
 
-    ## ✔ Saving 'AUDPS' to 'data/AUDPS.rda'
+    ## ✓ Saving 'AUDPS' to 'data/AUDPS.rda'
+    ## ● Document your data (see 'https://r-pkgs.org/data.html')
 
 # N rates
 
@@ -1058,7 +1061,9 @@ use_data(N_rates,
                   overwrite = TRUE)
 ```
 
-    ## ✔ Saving 'N_rates' to 'data/N_rates.rda'
+    ## ✓ Saving 'N_rates' to 'data/N_rates.rda'
+
+    ## ● Document your data (see 'https://r-pkgs.org/data.html')
 
 # Colophon
 
@@ -1068,97 +1073,96 @@ sessioninfo::session_info()
 
     ## ─ Session info ───────────────────────────────────────────────────────────────
     ##  setting  value                       
-    ##  version  R version 3.6.3 (2020-02-29)
-    ##  os       macOS Catalina 10.15.3      
-    ##  system   x86_64, darwin15.6.0        
+    ##  version  R version 4.0.0 (2020-04-24)
+    ##  os       macOS Catalina 10.15.4      
+    ##  system   x86_64, darwin17.0          
     ##  ui       X11                         
     ##  language (EN)                        
     ##  collate  en_AU.UTF-8                 
     ##  ctype    en_AU.UTF-8                 
     ##  tz       Australia/Brisbane          
-    ##  date     2020-03-09                  
+    ##  date     2020-05-19                  
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
-    ##  package     * version    date       lib source                             
-    ##  agricolae   * 1.3-2      2020-01-19 [1] CRAN (R 3.6.0)                     
-    ##  AlgDesign     1.2.0      2019-11-29 [1] CRAN (R 3.6.0)                     
-    ##  assertthat    0.2.1      2019-03-21 [1] CRAN (R 3.6.0)                     
-    ##  backports     1.1.5      2019-10-02 [1] CRAN (R 3.6.0)                     
-    ##  broom         0.5.5      2020-02-29 [1] CRAN (R 3.6.0)                     
-    ##  cellranger    1.1.0      2016-07-27 [1] CRAN (R 3.6.0)                     
-    ##  cli           2.0.2      2020-02-28 [1] CRAN (R 3.6.0)                     
-    ##  clisymbols    1.2.0      2017-05-21 [1] CRAN (R 3.6.0)                     
-    ##  cluster       2.1.0      2019-06-19 [1] CRAN (R 3.6.3)                     
-    ##  colorspace    1.4-1      2019-03-18 [1] CRAN (R 3.6.0)                     
-    ##  combinat      0.0-8      2012-10-29 [1] CRAN (R 3.6.0)                     
-    ##  crayon        1.3.4      2017-09-16 [1] CRAN (R 3.6.0)                     
-    ##  DBI           1.1.0      2019-12-15 [1] CRAN (R 3.6.0)                     
-    ##  dbplyr        1.4.2      2019-06-17 [1] CRAN (R 3.6.0)                     
-    ##  digest        0.6.25     2020-02-23 [1] CRAN (R 3.6.0)                     
-    ##  dplyr       * 0.8.5      2020-03-07 [1] CRAN (R 3.6.3)                     
-    ##  ellipsis      0.3.0      2019-09-20 [1] CRAN (R 3.6.0)                     
-    ##  evaluate      0.14       2019-05-28 [1] CRAN (R 3.6.0)                     
-    ##  fansi         0.4.1      2020-01-08 [1] CRAN (R 3.6.0)                     
-    ##  fastmap       1.0.1      2019-10-08 [1] CRAN (R 3.6.0)                     
-    ##  forcats     * 0.5.0      2020-03-01 [1] CRAN (R 3.6.0)                     
-    ##  fs            1.3.2      2020-03-05 [1] CRAN (R 3.6.0)                     
-    ##  generics      0.0.2      2018-11-29 [1] CRAN (R 3.6.0)                     
-    ##  ggplot2     * 3.3.0      2020-03-05 [1] CRAN (R 3.6.0)                     
-    ##  glue          1.3.2      2020-03-08 [1] Github (tidyverse/glue@5010cc6)    
-    ##  gtable        0.3.0      2019-03-25 [1] CRAN (R 3.6.0)                     
-    ##  haven         2.2.0      2019-11-08 [1] CRAN (R 3.6.0)                     
-    ##  highr         0.8        2019-03-20 [1] CRAN (R 3.6.0)                     
-    ##  hms           0.5.3      2020-01-08 [1] CRAN (R 3.6.0)                     
-    ##  htmltools     0.4.0      2019-10-04 [1] CRAN (R 3.6.0)                     
-    ##  httpuv        1.5.2      2019-09-11 [1] CRAN (R 3.6.0)                     
-    ##  httr          1.4.1.9000 2020-03-08 [1] Github (hadley/httr@844c8c7)       
-    ##  jsonlite      1.6.1      2020-02-02 [1] CRAN (R 3.6.0)                     
-    ##  klaR          0.6-15     2020-02-19 [1] CRAN (R 3.6.0)                     
-    ##  knitr         1.28       2020-02-06 [1] CRAN (R 3.6.0)                     
-    ##  later         1.0.0      2019-10-04 [1] CRAN (R 3.6.0)                     
-    ##  lattice       0.20-38    2018-11-04 [1] CRAN (R 3.6.3)                     
-    ##  lifecycle     0.2.0      2020-03-06 [1] CRAN (R 3.6.0)                     
-    ##  lubridate   * 1.7.4      2018-04-11 [1] CRAN (R 3.6.0)                     
-    ##  magrittr      1.5        2014-11-22 [1] CRAN (R 3.6.0)                     
-    ##  MASS          7.3-51.5   2019-12-20 [1] CRAN (R 3.6.3)                     
-    ##  mime          0.9        2020-02-04 [1] CRAN (R 3.6.0)                     
-    ##  miniUI        0.1.1.1    2018-05-18 [1] CRAN (R 3.6.0)                     
-    ##  modelr        0.1.6      2020-02-22 [1] CRAN (R 3.6.0)                     
-    ##  munsell       0.5.0      2018-06-12 [1] CRAN (R 3.6.0)                     
-    ##  nlme          3.1-144    2020-02-06 [1] CRAN (R 3.6.3)                     
-    ##  pillar        1.4.3      2019-12-20 [1] CRAN (R 3.6.0)                     
-    ##  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 3.6.0)                     
-    ##  plyr          1.8.6      2020-03-03 [1] CRAN (R 3.6.0)                     
-    ##  promises      1.1.0      2019-10-04 [1] CRAN (R 3.6.0)                     
-    ##  prompt        1.0.0      2020-03-08 [1] Github (gaborcsardi/prompt@b332c42)
-    ##  purrr       * 0.3.3      2019-10-18 [1] CRAN (R 3.6.0)                     
-    ##  questionr     0.7.0      2018-11-26 [1] CRAN (R 3.6.0)                     
-    ##  R6            2.4.1      2019-11-12 [1] CRAN (R 3.6.0)                     
-    ##  Rcpp          1.0.3      2019-11-08 [1] CRAN (R 3.6.0)                     
-    ##  readr       * 1.3.1      2018-12-21 [1] CRAN (R 3.6.0)                     
-    ##  readxl        1.3.1      2019-03-13 [1] CRAN (R 3.6.0)                     
-    ##  reprex        0.3.0      2019-05-16 [1] CRAN (R 3.6.0)                     
-    ##  reshape2      1.4.3      2017-12-11 [1] CRAN (R 3.6.0)                     
-    ##  rlang         0.4.5      2020-03-01 [1] CRAN (R 3.6.0)                     
-    ##  rmarkdown     2.1        2020-01-20 [1] CRAN (R 3.6.0)                     
-    ##  rprojroot     1.3-2      2018-01-03 [1] CRAN (R 3.6.0)                     
-    ##  rstudioapi    0.11       2020-02-07 [1] CRAN (R 3.6.0)                     
-    ##  rvest         0.3.5      2019-11-08 [1] CRAN (R 3.6.0)                     
-    ##  scales        1.1.0      2019-11-18 [1] CRAN (R 3.6.0)                     
-    ##  sessioninfo   1.1.1      2018-11-05 [1] CRAN (R 3.6.0)                     
-    ##  shiny         1.4.0      2019-10-10 [1] CRAN (R 3.6.0)                     
-    ##  stringi       1.4.6      2020-02-17 [1] CRAN (R 3.6.0)                     
-    ##  stringr     * 1.4.0      2019-02-10 [1] CRAN (R 3.6.0)                     
-    ##  tibble      * 2.1.3      2019-06-06 [1] CRAN (R 3.6.0)                     
-    ##  tidyr       * 1.0.2      2020-01-24 [1] CRAN (R 3.6.0)                     
-    ##  tidyselect    1.0.0      2020-01-27 [1] CRAN (R 3.6.0)                     
-    ##  tidyverse   * 1.3.0      2019-11-21 [1] CRAN (R 3.6.0)                     
-    ##  usethis     * 1.5.1      2019-07-04 [1] CRAN (R 3.6.0)                     
-    ##  vctrs         0.2.3      2020-02-20 [1] CRAN (R 3.6.0)                     
-    ##  withr         2.1.2      2018-03-15 [1] CRAN (R 3.6.0)                     
-    ##  xfun          0.12       2020-01-13 [1] CRAN (R 3.6.0)                     
-    ##  xml2          1.2.2      2019-08-09 [1] CRAN (R 3.6.0)                     
-    ##  xtable        1.8-4      2019-04-21 [1] CRAN (R 3.6.0)                     
-    ##  yaml          2.2.1      2020-02-01 [1] CRAN (R 3.6.0)                     
+    ##  package     * version    date       lib source                         
+    ##  agricolae   * 1.3-2      2020-01-19 [1] CRAN (R 4.0.0)                 
+    ##  AlgDesign     1.2.0      2019-11-29 [1] CRAN (R 4.0.0)                 
+    ##  assertthat    0.2.1      2019-03-21 [1] CRAN (R 4.0.0)                 
+    ##  backports     1.1.7      2020-05-13 [1] CRAN (R 4.0.0)                 
+    ##  broom         0.5.6      2020-04-20 [1] CRAN (R 4.0.0)                 
+    ##  cellranger    1.1.0      2016-07-27 [1] CRAN (R 4.0.0)                 
+    ##  cli           2.0.2      2020-02-28 [1] CRAN (R 4.0.0)                 
+    ##  cluster       2.1.0      2019-06-19 [1] CRAN (R 4.0.0)                 
+    ##  colorspace    1.4-1      2019-03-18 [1] CRAN (R 4.0.0)                 
+    ##  combinat      0.0-8      2012-10-29 [1] CRAN (R 4.0.0)                 
+    ##  crayon        1.3.4      2017-09-16 [1] CRAN (R 4.0.0)                 
+    ##  DBI           1.1.0      2019-12-15 [1] CRAN (R 4.0.0)                 
+    ##  dbplyr        1.4.3      2020-04-19 [1] CRAN (R 4.0.0)                 
+    ##  desc          1.2.0      2018-05-01 [1] CRAN (R 4.0.0)                 
+    ##  digest        0.6.25     2020-02-23 [1] CRAN (R 4.0.0)                 
+    ##  dplyr       * 0.8.5      2020-03-07 [1] CRAN (R 4.0.0)                 
+    ##  ellipsis      0.3.1      2020-05-15 [1] CRAN (R 4.0.0)                 
+    ##  evaluate      0.14       2019-05-28 [1] CRAN (R 4.0.0)                 
+    ##  fansi         0.4.1      2020-01-08 [1] CRAN (R 4.0.0)                 
+    ##  fastmap       1.0.1      2019-10-08 [1] CRAN (R 4.0.0)                 
+    ##  forcats     * 0.5.0      2020-03-01 [1] CRAN (R 4.0.0)                 
+    ##  fs            1.4.1      2020-04-04 [1] CRAN (R 4.0.0)                 
+    ##  generics      0.0.2      2018-11-29 [1] CRAN (R 4.0.0)                 
+    ##  ggplot2     * 3.3.0      2020-03-05 [1] CRAN (R 4.0.0)                 
+    ##  glue          1.4.1.9000 2020-05-15 [1] Github (tidyverse/glue@cdd54ed)
+    ##  gtable        0.3.0      2019-03-25 [1] CRAN (R 4.0.0)                 
+    ##  haven         2.2.0      2019-11-08 [1] CRAN (R 4.0.0)                 
+    ##  highr         0.8        2019-03-20 [1] CRAN (R 4.0.0)                 
+    ##  hms           0.5.3      2020-01-08 [1] CRAN (R 4.0.0)                 
+    ##  htmltools     0.4.0      2019-10-04 [1] CRAN (R 4.0.0)                 
+    ##  httpuv        1.5.2      2019-09-11 [1] CRAN (R 4.0.0)                 
+    ##  httr          1.4.1.9000 2020-05-15 [1] Github (hadley/httr@6f931cf)   
+    ##  jsonlite      1.6.1      2020-02-02 [1] CRAN (R 4.0.0)                 
+    ##  klaR          0.6-15     2020-02-19 [1] CRAN (R 4.0.0)                 
+    ##  knitr         1.28       2020-02-06 [1] CRAN (R 4.0.0)                 
+    ##  later         1.0.0      2019-10-04 [1] CRAN (R 4.0.0)                 
+    ##  lattice       0.20-41    2020-04-02 [1] CRAN (R 4.0.0)                 
+    ##  lifecycle     0.2.0      2020-03-06 [1] CRAN (R 4.0.0)                 
+    ##  lubridate   * 1.7.8      2020-04-06 [1] CRAN (R 4.0.0)                 
+    ##  magrittr      1.5        2014-11-22 [1] CRAN (R 4.0.0)                 
+    ##  MASS          7.3-51.5   2019-12-20 [1] CRAN (R 4.0.0)                 
+    ##  mime          0.9        2020-02-04 [1] CRAN (R 4.0.0)                 
+    ##  miniUI        0.1.1.1    2018-05-18 [1] CRAN (R 4.0.0)                 
+    ##  modelr        0.1.7      2020-04-30 [1] CRAN (R 4.0.0)                 
+    ##  munsell       0.5.0      2018-06-12 [1] CRAN (R 4.0.0)                 
+    ##  nlme          3.1-147    2020-04-13 [1] CRAN (R 4.0.0)                 
+    ##  pillar        1.4.4      2020-05-05 [1] CRAN (R 4.0.0)                 
+    ##  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.0.0)                 
+    ##  plyr          1.8.6      2020-03-03 [1] CRAN (R 4.0.0)                 
+    ##  promises      1.1.0      2019-10-04 [1] CRAN (R 4.0.0)                 
+    ##  purrr       * 0.3.4      2020-04-17 [1] CRAN (R 4.0.0)                 
+    ##  questionr     0.7.0      2018-11-26 [1] CRAN (R 4.0.0)                 
+    ##  R6            2.4.1      2019-11-12 [1] CRAN (R 4.0.0)                 
+    ##  Rcpp          1.0.4.6    2020-04-09 [1] CRAN (R 4.0.0)                 
+    ##  readr       * 1.3.1      2018-12-21 [1] CRAN (R 4.0.0)                 
+    ##  readxl        1.3.1      2019-03-13 [1] CRAN (R 4.0.0)                 
+    ##  reprex        0.3.0      2019-05-16 [1] CRAN (R 4.0.0)                 
+    ##  reshape2      1.4.4      2020-04-09 [1] CRAN (R 4.0.0)                 
+    ##  rlang         0.4.6      2020-05-02 [1] CRAN (R 4.0.0)                 
+    ##  rmarkdown     2.1        2020-01-20 [1] CRAN (R 4.0.0)                 
+    ##  rprojroot     1.3-2      2018-01-03 [1] CRAN (R 4.0.0)                 
+    ##  rstudioapi    0.11       2020-02-07 [1] CRAN (R 4.0.0)                 
+    ##  rvest         0.3.5      2019-11-08 [1] CRAN (R 4.0.0)                 
+    ##  scales        1.1.1      2020-05-11 [1] CRAN (R 4.0.0)                 
+    ##  sessioninfo   1.1.1      2018-11-05 [1] CRAN (R 4.0.0)                 
+    ##  shiny         1.4.0.2    2020-03-13 [1] CRAN (R 4.0.0)                 
+    ##  stringi       1.4.6      2020-02-17 [1] CRAN (R 4.0.0)                 
+    ##  stringr     * 1.4.0      2019-02-10 [1] CRAN (R 4.0.0)                 
+    ##  tibble      * 3.0.1      2020-04-20 [1] CRAN (R 4.0.0)                 
+    ##  tidyr       * 1.0.3      2020-05-07 [1] CRAN (R 4.0.0)                 
+    ##  tidyselect    1.1.0      2020-05-11 [1] CRAN (R 4.0.0)                 
+    ##  tidyverse   * 1.3.0      2019-11-21 [1] CRAN (R 4.0.0)                 
+    ##  usethis     * 1.6.1      2020-04-29 [1] CRAN (R 4.0.0)                 
+    ##  vctrs         0.3.0      2020-05-11 [1] CRAN (R 4.0.0)                 
+    ##  withr         2.2.0      2020-04-20 [1] CRAN (R 4.0.0)                 
+    ##  xfun          0.13       2020-04-13 [1] CRAN (R 4.0.0)                 
+    ##  xml2          1.3.2      2020-04-23 [1] CRAN (R 4.0.0)                 
+    ##  xtable        1.8-4      2019-04-21 [1] CRAN (R 4.0.0)                 
+    ##  yaml          2.2.1      2020-02-01 [1] CRAN (R 4.0.0)                 
     ## 
-    ## [1] /Library/Frameworks/R.framework/Versions/3.6/Resources/library
+    ## [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
