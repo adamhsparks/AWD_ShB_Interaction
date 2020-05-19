@@ -424,7 +424,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/README.md",
-  "fileSize": "548.904KB",
+  "fileSize": "548.886KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
