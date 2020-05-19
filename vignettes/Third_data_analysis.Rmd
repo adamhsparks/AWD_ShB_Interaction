@@ -21,7 +21,7 @@ Based on the residual plots where several do not meet assumptions for a normal d
 The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
 
 ```{r MCMCglmm, eval=FALSE}
-library(MCMCglmm)
+library("MCMCglmm")
 vignette("Overview")
 vignette("CourseNotes")
 ```
