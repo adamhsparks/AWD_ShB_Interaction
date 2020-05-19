@@ -7,7 +7,7 @@ output:
     toc: true
     toc_float: true
     toc_depth: 3
-    theme: yeti
+    theme: journal
 vignette: >
   %\VignetteIndexEntry{03_Sheath_Blight_Analysis}
   %\VignetteEngine{knitr::rmarkdown}
@@ -63,22 +63,22 @@ size of 5000 and much smaller errors for random effects and better models.
 Use `set.seed()` for reproducibility.
 
 ```{r set_seed, message=FALSE}
-library(coda)
-library(dplyr)
-library(rice.awd.pests)
-library(reshape2)
-library(magrittr)
-library(MCMCglmm)
-library(foreach)
-library(doParallel)
-library(parallel)
-library(plotMCMC)
-library(tidyr)
+library("coda")
+library("dplyr")
+library("rice.awd.shb")
+library("reshape2")
+library("magrittr")
+library("MCMCglmm")
+library("foreach")
+library("doParallel")
+library("parallel")
+library("plotMCMC")
+library("tidyr")
 
 set.seed(27)
 ```
 
-The `AUDPS` object is loaded with the `rice.awd.pests` R package. To see how the AUDPC data were generated from the original raw data, see the [https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw](https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw) file. However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPC data were generated from the original raw data, see the [https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw](https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw) file. However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 Create individual data frames for the analysis.
 

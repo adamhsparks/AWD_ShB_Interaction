@@ -7,7 +7,7 @@ output:
     toc: true
     toc_float: true
     toc_depth: 3
-    theme: yeti
+    theme: journal
 vignette: >
   %\VignetteIndexEntry{02_Check_Data_Residuals}
   %\VignetteEngine{knitr::rmarkdown}
@@ -29,7 +29,7 @@ Below are several tests for each of the different sets of data using four differ
 ## 2015 Tiller Incidence
 
 ```{r load_libraries}
-library("rice.awd.pests")
+library("rice.awd.shb")
 library("car")
 ```
 
