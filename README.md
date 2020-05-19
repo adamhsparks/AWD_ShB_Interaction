@@ -157,4 +157,4 @@ University of Southern Queensland, West
 St. Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
-<https://staffprofile.usq.edu.au/Profile/Adam-Sparks>
+<https://adamhsparks.com/>
