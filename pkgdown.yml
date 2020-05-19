@@ -1,0 +1,13 @@
+pandoc: 2.7.3
+pkgdown: 1.5.1.9000
+pkgdown_sha: 3b74d8860686ed6d63e536d7ec4971fbbde5faff
+articles:
+  AWD_Sheath_Blight_Study_Notes: AWD_Sheath_Blight_Study_Notes.html
+  First_raw_data_visualisation: First_raw_data_visualisation.html
+  Second_check_residuals: Second_check_residuals.html
+  Third_data_analysis: Third_data_analysis.html
+last_built: 2020-05-19T05:07Z
+urls:
+  reference: https://adamhsparks.github.io/rice_awd_pests//reference
+  article: https://adamhsparks.github.io/rice_awd_pests//articles
+
