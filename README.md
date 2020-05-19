@@ -5,6 +5,7 @@
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-4.0.0-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
+![R-CMD-check](https://github.com/adamhsparks/rice_AWD_ShB_analysis/workflows/R-CMD-check/badge.svg)
 
 ## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
 
