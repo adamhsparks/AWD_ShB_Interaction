@@ -25,7 +25,6 @@ Load packages necessary to conduct this work.
 library("rice.awd.shb")
 library("dplyr")
 library("ggplot2")
-library("hrbrthemes")
 theme_set(theme_minimal())
 ```
 
