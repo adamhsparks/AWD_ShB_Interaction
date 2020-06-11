@@ -6,7 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: true
-    theme: yeti
+    theme: journal
 vignette: >
   %\VignetteIndexEntry{AWD_Sheath_Blight_Study_Notes}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,4 +1,4 @@
-Package: rice.awd.pests
+Package: rice.awd.shb
 Title: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight
 Version: 0.0.0.9000
 Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
@@ -33,7 +33,6 @@ Imports:
     forcats,
     ggplot2,
     graphics,
-    hrbrthemes,
     lattice,
     lubridate,
     MASS,
@@ -44,7 +43,7 @@ Imports:
     purrr (>= 0.2.3),
     tibble,
     tidyr (>= 0.7.0)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests:
     bookdown,
     devtools,
@@ -56,5 +55,5 @@ Suggests:
     sessioninfo,
     usethis
 VignetteBuilder: knitr
-URL: https://github.com/adamhsparks/rice_awd_pests
-BugReports: https://github.com/adamhsparks/rice_awd_pests/issues
+URL: https://github.com/adamhsparks/rice_AWD_ShB_analysis
+BugReports: https://github.com/adamhsparks/rice_AWD_ShB_analysis/issues

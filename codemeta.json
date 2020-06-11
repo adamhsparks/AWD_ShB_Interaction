@@ -1,20 +1,23 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
-  "identifier": "rice.awd.pests",
+  "identifier": "rice.awd.shb",
   "description": "Provides a research compendium of analysis associated with\n    experiments conducted at the International Rice Research Institute (IRRI),\n    Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The\n    experiments were designed to test the effects of alternate wetting and\n    drying irrigation management on rice sheath blight disease. The plots were\n    split plot with an irrigation main plot and nitrogen sub-plot treatments.",
-  "name": "rice.awd.pests: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight",
-  "codeRepository": "https://github.com/adamhsparks/rice_awd_pests",
-  "issueTracker": "https://github.com/adamhsparks/rice_awd_pests/issues",
+  "name": "rice.awd.shb: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight",
+  "codeRepository": "https://github.com/adamhsparks/rice_AWD_ShB_analysis",
+  "issueTracker": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
+    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
   "author": [
     {
       "@type": "Person",
@@ -294,18 +297,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "hrbrthemes",
-      "name": "hrbrthemes",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=hrbrthemes"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "lattice",
       "name": "lattice",
       "provider": {
@@ -420,8 +411,31 @@
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     }
   ],
-  "readme": "https://github.com/adamhsparks/rice_awd_pests/blob/master/README.md",
-  "fileSize": "543.911KB",
-  "contIntegration": ["https://travis-ci.org/adamhsparks/rice_awd_pests", "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"],
-  "keywords": ["nitrogen-managements", "water", "rice", "sheath-blight", "awd", "irrigation", "rhizoctonia-solani", "rhizoctonia", "plant-disease", "botanical-epidemiology", "nitrogen", "fertilisation", "fertilizer", "split-plot", "agriculture", "agriculture-research", "reproducible-research", "r", "rstats"]
+  "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/README.md",
+  "fileSize": "548.876KB",
+  "contIntegration": [
+    "https://travis-ci.org/adamhsparks/rice_awd_pests",
+    "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
+  ],
+  "keywords": [
+    "nitrogen-managements",
+    "water",
+    "rice",
+    "sheath-blight",
+    "awd",
+    "irrigation",
+    "rhizoctonia-solani",
+    "rhizoctonia",
+    "plant-disease",
+    "botanical-epidemiology",
+    "nitrogen",
+    "fertilisation",
+    "fertilizer",
+    "split-plot",
+    "agriculture",
+    "agriculture-research",
+    "reproducible-research",
+    "r",
+    "rstats"
+  ]
 }

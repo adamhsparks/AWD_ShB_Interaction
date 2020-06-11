@@ -1,14 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--11--05-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--05--19-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.5.1-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-4.0.0-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
-[![Travis-CI Build
-Status](https://travis-ci.org/adamhsparks/rice_awd_pests.svg?branch=master)](https://travis-ci.org/adamhsparks/rice_awd_pests)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/master?svg=true)](https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master)
+![R-CMD-check](https://github.com/adamhsparks/rice_AWD_ShB_analysis/workflows/R-CMD-check/badge.svg)
 
 ## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
 
@@ -18,8 +15,9 @@ status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/mast
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice_awd_pests> are the development
-versions and may have changed since the report was published.
+<https://github.com/adamhsparks/rice_AWD_ShB_analysis> are the
+development versions and may have changed since the report was
+published.
 
 ### Authors of this repository:
 
@@ -83,10 +81,10 @@ To download the package source as you see it on GitHub, for offline
 browsing, use this line at the shell prompt (assuming you have Git
 installed on your computer):
 
-    git clone https://github.com/adamhsparks/rice_awd_pests.git
+    git clone https://github.com/adamhsparks/rice_AWD_ShB_analysis.git
 
-Once the download is complete, open the `rice.awd.pests.Rproj` in
-RStudio to begin working with the package and compendium files.
+Once the download is complete, open the `rice.awd.shb.Rproj` in RStudio
+to begin working with the package and compendium files.
 
 The package has a number of dependencies on other R packages, and
 programs outside of R. These are listed at the bottom of this README.
@@ -108,7 +106,7 @@ package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
 on your computer. At the Docker prompt, enter:
 
-    docker run -dp 8787:8787 adamhsparks/rice-awd-pests
+    docker run -dp 8787:8787 adamhsparks/rice_AWD_ShB_analysis
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to
@@ -119,7 +117,7 @@ this project, and open the `.Rproj` file for this project. Once that’s
 open, you’ll see the `analysis/paper` directory in the Files pane where
 you can find the R markdown document, and knit them to produce the
 results in the paper. More information about using RStudio in Docker is
-avaiable at the [Rocker](https://github.com/rocker-org)
+available at the [Rocker](https://github.com/rocker-org)
 [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image)
 pages.
 
@@ -131,15 +129,15 @@ anyone wanting to use this package to generate the vignettes, etc.
 
 Please cite this compendium as:
 
-> Authors, (2018). *Reproducible Research Compendium for Analysing
+> Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 05 Nov 2018. Online at <https://doi.org/xxx/xxx>
+> Accessed 19 May 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
-Code: [MIT](http://opensource.org/licenses/MIT) year: 2018, copyright
+Code: [MIT](http://opensource.org/licenses/MIT) year: 2020, copyright
 holder: Adam Sparks
 
 Data: [CC-0](http://creativecommons.org/publicdomain/zero/1.0/)
@@ -155,8 +153,8 @@ depends on.
 ## Contact
 
 Adam Sparks, Associate Professor, Centre for Crop Health  
-University of Southern Queensland, West St.  
-Toowoomba, Qld 4350 Australia
+University of Southern Queensland, West  
+St. Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
-<https://staffprofile.usq.edu.au/Profile/Adam-Sparks>
+<https://adamhsparks.com/>

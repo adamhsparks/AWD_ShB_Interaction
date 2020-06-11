@@ -11,11 +11,9 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-`r as.character(getRversion())`-brightgreen.svg)](https://cran.r-project.org/)
-[![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) 
-[![Travis-CI Build Status](https://travis-ci.org/adamhsparks/rice_awd_pests.svg?branch=master)](https://travis-ci.org/adamhsparks/rice_awd_pests)
-[![Build status](https://ci.appveyor.com/api/projects/status/mh6s2n35fgry2hjo/branch/master?svg=true)](https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master)
+
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master) [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r as.character(getRversion())`-brightgreen.svg)](https://cran.r-project.org/)
+[![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/) ![R-CMD-check](https://github.com/adamhsparks/rice_AWD_ShB_analysis/workflows/R-CMD-check/badge.svg)
 
 ## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
 
@@ -25,7 +23,7 @@ http://dx.doi.org/xxxxxxx
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice_awd_pests> are the development
+<https://github.com/adamhsparks/rice_AWD_ShB_analysis> are the development
 versions and may have changed since the report was published.
 
 ### Authors of this repository:
@@ -88,10 +86,10 @@ use this line at the shell prompt (assuming you have Git installed on your
 computer):
 
 ```
-git clone https://github.com/adamhsparks/rice_awd_pests.git
+git clone https://github.com/adamhsparks/rice_AWD_ShB_analysis.git
 ```
 
-Once the download is complete, open the `rice.awd.pests.Rproj` in RStudio to
+Once the download is complete, open the `rice.awd.shb.Rproj` in RStudio to
 begin working with the package and compendium files. 
 
 The package has a number of dependencies on other R packages, and programs
@@ -113,7 +111,7 @@ launch the Docker image for this project, first,
 [install Docker](https://docs.docker.com/installation/) on your computer. At the
 Docker prompt, enter:
 
-    docker run -dp 8787:8787 adamhsparks/rice-awd-pests
+    docker run -dp 8787:8787 adamhsparks/rice_AWD_ShB_analysis
 
 This will start a server instance of RStudio. Then open your web browser at
 localhost:8787 or or run `docker-machine ip default` in the shell to find the
@@ -123,7 +121,7 @@ Once logged in, use the Files pane (bottom right) open the folder for this
 project, and open the `.Rproj` file for this project. Once that's open, you'll
 see the `analysis/paper` directory in the Files pane where you can find the R
 markdown document, and knit them to produce the results in the paper. More
-information about using RStudio in Docker is avaiable at the
+information about using RStudio in Docker is available at the
 [Rocker](https://github.com/rocker-org)
 [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image) pages.
  
@@ -160,4 +158,4 @@ University of Southern Queensland, West St.
 Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948   adam.sparks@usq.edu.au  
-https://staffprofile.usq.edu.au/Profile/Adam-Sparks
+https://adamhsparks.com/

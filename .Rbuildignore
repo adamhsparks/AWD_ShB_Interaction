@@ -13,3 +13,4 @@ analysis
 ^docs$
 ^appveyor\.yml$
 ^codemeta\.json$
+^.github$

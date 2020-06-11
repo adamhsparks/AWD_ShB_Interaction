@@ -34,14 +34,14 @@ knitr::opts_chunk$set(
   dpi = 300
 )
 
-library(bookdown)
-library(knitr)
-library(ggplot2)
-library(ggpubr)
-library(grid)
-library(gridExtra)
-library(pander)
-library(rice.awd.pests)
+library("bookdown")
+library("knitr")
+library("ggplot2")
+library("ggpubr")
+library("grid")
+library("gridExtra")
+library("pander")
+library("rice.awd.shb")
 ```
 
 # Introduction {-}
