@@ -1,8 +1,9 @@
-library(magrittr)
-library(BayesianFirstAid)
+library("magrittr")
+library("BayesianFirstAid")
+
 `%notin%` = function(x,y) !(x %in% y)
 
-l <- list.files(path = "~/Downloads/Fwd__Weather_data",
+l <- list.files(path = "data/Fwd__Weather_data",
                 full.names = TRUE)
 f <- purrr::map(l, readxl::read_excel,
                 sheet = 13,
