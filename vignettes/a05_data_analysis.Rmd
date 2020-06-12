@@ -75,14 +75,14 @@ library("tidyr")
 set.seed(27)
 ```
 
-The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPC data were generated from the original raw data, see the [https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw](https://github.com/openplantpathology/rice_awd_pests/blob/master/data-raw) file.
+The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
 However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
 
 Create individual data frames for the analysis.
 
 ```{r create_analysis_df, cache=FALSE, message=FALSE}
 # create 2015 data frame
-AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2015 <- as.data.frame(AUDPC_S[AUDPC_S$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of  analysis
@@ -90,7 +90,7 @@ AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 
 # create 2016 data frame
-AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_2016 <- as.data.frame(AUDPC_S[AUDPC_S$YEAR == 2016, ])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of  analysis

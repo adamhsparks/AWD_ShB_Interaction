@@ -2,7 +2,11 @@
 title: "Data Preprocessing and Area Calculations"
 author: "A. H. Sparks"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: TRUE
+    toc_float: true
+    theme: journal
 vignette: >
   %\VignetteIndexEntry{Data Preprocessing and Area Calculations}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,13 +20,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 # Introduction
 
 ## Data Availability
 
 The data are openly available for download from Zenodo, [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800), with full documentation (Sparks et al. 2020).
-These same data are also distributed with this R package for completeness, available in the `extdata` folder.
+These same data are also distributed with this R package for completeness, available in the `inst/extdata` folder or just `extdata` when installed locally.
 
 ## Notes
 

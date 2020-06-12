@@ -34,8 +34,8 @@ library("car")
 ```
 
 ```{r create data_frames, cache=FALSE}
-AUDPS_15 <- subset(AUDPS, YEAR == 2015)
-AUDPS_16 <- subset(AUDPS, YEAR == 2016)
+AUDPS_15 <- subset(AUDPC_S, YEAR == 2015)
+AUDPS_16 <- subset(AUDPC_S, YEAR == 2016)
 ```
 
 ```{r 2015_Tiller_Inc, cache=FALSE}
