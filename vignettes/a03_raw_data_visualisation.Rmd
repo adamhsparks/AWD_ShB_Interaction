@@ -1,13 +1,13 @@
 ---
 title: "Visualise Data"
-author: "Adam H Sparks"
+author: "A. H. Sparks"
 date: "`r Sys.Date()`"
 output:
   html_document:
     toc: false
     theme: journal
 vignette: >
-  %\VignetteIndexEntry{01_Visualise_Data}
+  %\VignetteIndexEntry{Visualise_Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

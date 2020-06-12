@@ -1,6 +1,6 @@
 ---
 title: "AWD Sheath Blight Study Notes"
-author: "A H Sparks, N P Castilla and M Noel"
+author: "A. H. Sparks, N. P. Castilla and M. Noel"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -8,23 +8,19 @@ output:
     toc_float: true
     theme: journal
 vignette: >
-  %\VignetteIndexEntry{AWD_Sheath_Blight_Study_Notes}
+  %\VignetteIndexEntry{AWD Sheath Blight Study Notes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Although this study examines the same effect of alternate wetting and drying
-(AWD) on rice sheath blight, causal agent _Rhizoctonia solani_, there are
-differences between the 2015 and 2016 seasons that make them two separate
-experiments that cannot be analysed as one. These changes are a result of the
-findings in 2015 and were made in an effort to improve the experiment.
+Although this study examines the same effect of alternate wetting and drying (AWD) on rice sheath blight, causal agent _Thanatephorus cucumeris_, there are differences between the 2015 and 2016 seasons that make them two separate experiments that cannot be analysed as one.
+These changes are a result of the findings in 2015 and were made in an effort to improve the experiment.
 
 The differences are: 
 
  - plot sizes are larger in 2016 than 2015,
  
- - the inoculation amounts and timing differ with 2016 having more applied to
- the sampling area at a later date after transplanting, and
+ - the inoculation amounts and timing differ with 2016 having more applied to  the sampling area at a later date after transplanting, and
  
  - nitrogen rates were changed in 2016.
 
@@ -227,8 +223,7 @@ IRRI Dry Season (2)
 
 ## Disease Rating Scale
 
-Disease was rated using an ordinal scale for field evaluation of sheath blight
-(S Savary & N Castilla).
+Disease was rated using an ordinal scale for field evaluation of sheath blight (S Savary & N Castilla).
 
 -   **Rating Scale - Severity (%)**
 

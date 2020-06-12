@@ -1,6 +1,6 @@
 ---
 title: "Sheath Blight Analysis"
-author: "Adam H Sparks"
+author: "A. H. Sparks"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -9,12 +9,13 @@ output:
     toc_depth: 3
     theme: journal
 vignette: >
-  %\VignetteIndexEntry{03_Sheath_Blight_Analysis}
+  %\VignetteIndexEntry{Sheath Blight Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use `MCMCglmm()` for a split plot analysis rather than a `lmer()` model. The `MCMCglmm()` model will work for all the data regardless of the residuals.
+Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use `MCMCglmm()` for a split plot analysis rather than a `lmer()` model.
+The `MCMCglmm()` model will work for all the data regardless of the residuals.
 
 # Interpreting These Analyses
 
@@ -44,19 +45,15 @@ The base levels for this analysis are:
 
 ### Changes between 2015 and 2016
 
-Before the analysis, note that due to changes between the years, the analysis
-must be carried out on each year separately. The 2015 data and 2016 data cannot
-be combined due to changes in inoculation methods; there are other changes too,
-but the main one is this. Therefore, the analyses will be conducted separately
-such that comparisons will only be observational and cannot be statistically
-compared.
+Before the analysis, note that due to changes between the years, the analysis must be carried out on each year separately.
+The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this.
+Therefore, the analyses will be conducted separately such that comparisons will only be observational and cannot be statistically compared.
 
 ### _MCMCglmm_ Model Fitting Notes
 
-Fitting the models with the default iterations resulted in some less than
-acceptable models. Because of this, the number of iterations has been increased,
-`nitt = 55000,` and `burnin = 5000`. This results in a sample
-size of 5000 and much smaller errors for random effects and better models.
+Fitting the models with the default iterations resulted in some less than acceptable models.
+Because of this, the number of iterations has been increased, `nitt = 55000,` and `burnin = 5000`.
+This results in a sample size of 5000 and much smaller errors for random effects and better models.
 
 # Setup
 
@@ -138,17 +135,16 @@ cor.test(AUDPS_2016$TShB_inc_AUDPS,
          exact = FALSE)
 ```
 
-The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves. Based on this, the interactions of the incidence and severity will not be analysed.
+The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves.
+Based on this, the interactions of the incidence and severity will not be analysed.
 
 # Specify Priors
 
 As `MCMCglmm` is a Bayesian analysis, it requires priors to be set.
-Here we set flat non-informative priors that have a uniform low degree of belief in all
-parameters for all six models we will create.
+Here we set flat non-informative priors that have a uniform low degree of belief in all parameters for all six models we will create.
 
 The tiller analyses does not include an interaction prior while the leaf analyses do.
-Because of this there are two different priors set for the analyses
-following.
+Because of this there are two different priors set for the analyses following.
 
 ```{r priors}
 eprior <- list(R = list(V = 1,

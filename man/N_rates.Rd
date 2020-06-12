@@ -3,7 +3,7 @@
 \docType{data}
 \name{N_rates}
 \alias{N_rates}
-\title{A data.frame of Nitrogen Rates and Split Application Timings}
+\title{A Data Frame of Nitrogen Rates and Split Application Timings}
 \format{
 An object of class \code{matrix} (inherits from \code{array}) with 5 rows and 5 columns.
 }

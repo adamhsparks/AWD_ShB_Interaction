@@ -1,6 +1,6 @@
 ---
 title: "Check Data Residuals"
-author: "Adam H Sparks"
+author: "A. H. Sparks"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -9,7 +9,7 @@ output:
     toc_depth: 3
     theme: journal
 vignette: >
-  %\VignetteIndexEntry{02_Check_Data_Residuals}
+  %\VignetteIndexEntry{Check Data Residuals}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
