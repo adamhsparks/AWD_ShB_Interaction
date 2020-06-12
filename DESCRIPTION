@@ -53,6 +53,7 @@ Suggests:
     pkgdown,
     rmarkdown,
     sessioninfo,
+    tidyverse,
     usethis
 VignetteBuilder: knitr
 URL: https://github.com/adamhsparks/rice_AWD_ShB_analysis
