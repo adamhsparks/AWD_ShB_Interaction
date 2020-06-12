@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--05--19-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--12-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-4.0.0-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-4.0.1-brightgreen.svg)](https://cran.r-project.org/)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 ![R-CMD-check](https://github.com/adamhsparks/rice_AWD_ShB_analysis/workflows/R-CMD-check/badge.svg)
 
@@ -18,6 +18,15 @@ publication. The files hosted at
 <https://github.com/adamhsparks/rice_AWD_ShB_analysis> are the
 development versions and may have changed since the report was
 published.
+
+### Data DOI:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800)
+
+The raw data from this project are released and publicly available from
+Zenodo under a [Creative Commons Attribution 4.0
+International](http://creativecommons.org/licenses/by/4.0/legalcode)
+licence.
 
 ### Authors of this repository:
 
@@ -43,24 +52,20 @@ associated with the publication. The `Rmd` files in the
 reported in the paper were conducted, as well as instructions on how to
 rerun the analysis to reproduce the results. The `data/` directory in
 the `analysis/` directory contains all the raw data. The `data-raw`
-directory contains a README.Rmd, which when knit generates the data used
-in the analysis of the paper and places `.rda` files in `data/` for the
-analysis.
+directory contains extra files to check weather for differences between
+seasons, that are not included in the actual analysis.
 
 ### The supplementary files
 
 The `data-raw` directory contains:
 
-  - a Rmd file and Markdown file detailing how the raw data was handled
-    and Area Under the Disease Progress Stairs (AUDPS) was calculated
-    for analysis and the .Rda files used in the analysis were generated
+  - a IRRI\_weather\_data.R, a file used to check weather data from IRRI
+    weather stations to ensure that there was no significant difference
+    in weather between seasons
 
 The `analysis/` directory contains:
 
-  - the manuscript as submitted (in MS Word format) and it’s Rmd source
-    file
-
-  - all the data files (in CSV file format, in the `data/` directory)
+  - the manuscript as submitted (in PDF format) and it’s Rmd source file
 
   - supplementary information source files (in R markdown format) and
     executed versions
@@ -131,7 +136,7 @@ Please cite this compendium as:
 
 > Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 19 May 2020. Online at <https://doi.org/xxx/xxx>
+> Accessed 12 Jun 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
@@ -140,7 +145,7 @@ Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 Code: [MIT](http://opensource.org/licenses/MIT) year: 2020, copyright
 holder: Adam Sparks
 
-Data: [CC-0](http://creativecommons.org/publicdomain/zero/1.0/)
+Data: [CC-4.0](http://creativecommons.org/licenses/by/4.0/legalcode)
 attribution requested in reuse
 
 ## Dependencies
@@ -153,8 +158,8 @@ depends on.
 ## Contact
 
 Adam Sparks, Associate Professor, Centre for Crop Health  
-University of Southern Queensland, West  
-St. Toowoomba, Qld 4350 Australia
+University of Southern Queensland, West St.  
+Toowoomba, Qld 4350 Australia
 
 (+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
 <https://adamhsparks.com/>
