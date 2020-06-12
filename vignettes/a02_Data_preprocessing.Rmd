@@ -687,6 +687,114 @@ Because the data were collected on an ordinal scale, but not evenly spaced, the 
 ## 2015 Area Calculations
 
 ```{r areas2015}
+
+RAW_data <- rbind(DS2015, DS2016)
+
+# convert columns to factor ----------------------------------------------------
+RAW_data <-
+  RAW_data %>%
+  mutate(
+    YEAR = as.factor(YEAR),
+    ASMT = as.factor(ASMT),
+    PLOT = as.factor(PLOT),
+    REP = as.factor(REP),
+    TRT = as.factor(TRT),
+    WMGT = as.factor(WMGT),
+    NRTE = as.factor(NRTE),
+    SMPL = as.factor(SMPL),
+    HILL = as.factor(HILL),
+    TIL = as.factor(TIL),
+    LEAF = as.factor(LEAF)
+  )
+
+# reorder the treatments by level/year - low to high, 2015-2016 for graphs -----
+RAW_data$NRTE <-
+  fct_relevel(RAW_data$NRTE,
+              "0",
+              "100",
+              "120",
+              "60",
+              "180")
+
+RAW_data$TRT <-
+  fct_relevel(
+    RAW_data$TRT,
+    "AWD_N0",
+    "AWD_N100",
+    "AWD_N120",
+    "AWD_N60",
+    "AWD_N180",
+    "PDL_N0",
+    "PDL_N100",
+    "PDL_N120",
+    "PDL_N60",
+    "PDL_N180"
+  )
+
+# add column with midpoint % tiller ShB severity -------------------------------
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_TIL_ShB = case_when(
+      TIL_ShB == 0 ~ 0,
+      TIL_ShB == 1 ~ 1,
+      TIL_ShB == 2 ~ 2.5,
+      TIL_ShB == 3 ~ 10,
+      TIL_ShB == 4 ~ 32.5,
+      TRUE ~ 75
+    )
+  )
+
+# add column with midpoint +1  % tiller ShB severity ---------------------------
+
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_TIL_ShB_1 = case_when(
+      TIL_ShB == 0 ~ 1,
+      TIL_ShB == 1 ~ 2.5,
+      TIL_ShB == 2 ~ 10,
+      TIL_ShB == 3 ~ 32.5,
+      TIL_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
+
+# add column with midpoint % leaf ShB severity ---------------------------------
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_LEAF_ShB = case_when(
+      LEAF_ShB == 0 ~ 0,
+      LEAF_ShB == 1 ~ 1,
+      LEAF_ShB == 2 ~ 2.5,
+      LEAF_ShB == 3 ~ 10,
+      LEAF_ShB == 4 ~ 32.5,
+      TRUE ~ 75
+    )
+  )
+
+# add column with midpoint +1  % leaf ShB severity -----------------------------
+RAW_data <-
+  mutate(
+    RAW_data,
+    PERC_LEAF_ShB_1 = case_when(
+      LEAF_ShB == 0 ~ 1,
+      LEAF_ShB == 1 ~ 2.5,
+      LEAF_ShB == 2 ~ 10,
+      LEAF_ShB == 3 ~ 32.5,
+      LEAF_ShB == 4 ~ 75,
+      TRUE ~ 100
+    )
+  )
+
+DS2015 <- subset(RAW_data, YEAR == "2015")
+DS2016 <- subset(RAW_data, YEAR == "2016")
+
+
+
+
+
 TShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -704,8 +812,7 @@ TShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   summarise(
-    PLOT_TShB_percent = mean(PERC_TIL_ShB),
-    na.rm = TRUE,
+    PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -718,8 +825,7 @@ LShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   summarise(
-    PLOT_LShB_severity = mean(LEAF_ShB),
-    na.rm = TRUE,
+    PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -731,8 +837,7 @@ LShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
   summarise(
-    PLOT_LShB_percent = mean(PERC_LEAF_ShB),
-    na.rm = TRUE,
+    PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -744,16 +849,10 @@ TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_TShB_incidence = mean(TShB_incidence),
-    na.rm = TRUE,
+    PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
     .groups = "keep"
   ) %>%
-  arrange(PLOT) %>%
-  group_by(YEAR, REP, TRT, PLOT) %>%
-  summarise(
-    AUDPC = audpc(PLOT_TShB_incidence, DAYS),
-    AUDPS = audps(PLOT_TShB_incidence, DAYS)
-  )
+  arrange(PLOT)
 
 # AUDPS data frame for incidence
 
@@ -837,8 +936,7 @@ TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_TShB_incidence = mean(TShB_incidence),
-    na.rm = TRUE,
+    PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -850,8 +948,7 @@ TShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_TShB_severity = mean(TIL_ShB),
-    na.rm = TRUE,
+    PLOT_TShB_severity = mean(TIL_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -865,8 +962,7 @@ TShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_TShB_percent = mean(PERC_TIL_ShB),
-    na.rm = TRUE,
+    PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -880,8 +976,7 @@ LShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_LShB_severity = mean(LEAF_ShB),
-    na.rm = TRUE,
+    PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -893,8 +988,7 @@ LShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
   summarise(
-    PLOT_LShB_percent = mean(PERC_LEAF_ShB),
-    na.rm = TRUE,
+    PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
     .groups = "keep"
   ) %>%
   arrange(PLOT)
@@ -976,7 +1070,9 @@ AUDPC_16$PLOT <- as.character(AUDPC_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = "PLOT")
-ShB_16 <- left_join(ShB_16, AUDPC_16, by = "PLOT")
+ShB_16 <- left_join(ShB_16, AUDPC_16, by = "PLOT") %>% 
+  ungroup() %>% 
+  select(-c("DAYS", "ASMT"))
 ```
 
 # Merge AUDPC and AUDPS Data
