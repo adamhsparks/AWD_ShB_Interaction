@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+knitr::opts_chunk$set(eval = FALSE)
 ```
 
 # Introduction
@@ -1138,7 +1139,7 @@ row.names(N_rates) <- c("N0", "N100", "N120", "N60", "N180")
 
 Save the data in this R package for analysis in the next vignette articles.
 
-```{r save, eval=FALSE}
+```{r save}
 if (!dir.exists("data")) {
   dir.create("data", recursive = TRUE)
 }
