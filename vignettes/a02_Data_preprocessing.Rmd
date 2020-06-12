@@ -1159,4 +1159,4 @@ use_data(N_rates,
 
 # References
 
-Sparks, Adam H, Castilla, Nancy P, & Sander, Bjeorn Ole. (2020). Data for "Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Sheath Blight?" [Data set]. Zenodo. [DOI: 10.5281/zenodo.3889800](http://doi.org/10.5281/zenodo.3889800)
+Sparks, Adam H, Castilla, Nancy P, & Sander, Bjoern Ole. (2020). Data for "Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Sheath Blight?" [Data set]. Zenodo. [DOI: 10.5281/zenodo.3889800](http://doi.org/10.5281/zenodo.3889800)
