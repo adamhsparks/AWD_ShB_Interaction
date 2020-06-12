@@ -106,6 +106,12 @@
 <p><a href="http://dx.doi.org/xxxxxxx" class="uri">http://dx.doi.org/xxxxxxx</a></p>
 <p>The files at the URL above will generate the results as found in the publication. The files hosted at <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis" class="uri">https://github.com/adamhsparks/rice_AWD_ShB_analysis</a> are the development versions and may have changed since the report was published.</p>
 </div>
+<div id="data-doi" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-doi" class="anchor"></a>Data DOI:</h3>
+<p><a href="https://doi.org/10.5281/zenodo.3889800"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg" alt="DOI"></a></p>
+<p>The raw data from this project are released and publicly available from Zenodo under a <a href="http://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International</a> licence.</p>
+</div>
 <div id="authors-of-this-repository" class="section level3">
 <h3 class="hasAnchor">
 <a href="#authors-of-this-repository" class="anchor"></a>Authors of this repository:</h3>
@@ -122,19 +128,18 @@
 <div id="overview-of-contents" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview-of-contents" class="anchor"></a>Overview of contents</h3>
-<p>This repository is our research compendium for our analysis of the effects of alternate wetting and drying irrigation technology on rice sheath blight disease. The compendium contains all data, code, and text associated with the publication. The <code>Rmd</code> files in the <code>analysis/paper/</code> directory contain details of how all the analyses reported in the paper were conducted, as well as instructions on how to rerun the analysis to reproduce the results. The <code>data/</code> directory in the <code>analysis/</code> directory contains all the raw data. The <code>data-raw</code> directory contains a README.Rmd, which when knit generates the data used in the analysis of the paper and places <code>.rda</code> files in <code>data/</code> for the analysis.</p>
+<p>This repository is our research compendium for our analysis of the effects of alternate wetting and drying irrigation technology on rice sheath blight disease. The compendium contains all data, code, and text associated with the publication. The <code>Rmd</code> files in the <code>analysis/paper/</code> directory contain details of how all the analyses reported in the paper were conducted, as well as instructions on how to rerun the analysis to reproduce the results. The <code>data/</code> directory in the <code>analysis/</code> directory contains all the raw data. The <code>data-raw</code> directory contains extra files to check weather for differences between seasons, that are not included in the actual analysis.</p>
 </div>
 <div id="the-supplementary-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-supplementary-files" class="anchor"></a>The supplementary files</h3>
 <p>The <code>data-raw</code> directory contains:</p>
 <ul>
-<li>a Rmd file and Markdown file detailing how the raw data was handled and Area Under the Disease Progress Stairs (AUDPS) was calculated for analysis and the .Rda files used in the analysis were generated</li>
+<li>a IRRI_weather_data.R, a file used to check weather data from IRRI weather stations to ensure that there was no significant difference in weather between seasons</li>
 </ul>
 <p>The <code>analysis/</code> directory contains:</p>
 <ul>
-<li><p>the manuscript as submitted (in MS Word format) and it’s Rmd source file</p></li>
-<li><p>all the data files (in CSV file format, in the <code>data/</code> directory)</p></li>
+<li><p>the manuscript as submitted (in PDF format) and it’s Rmd source file</p></li>
 <li><p>supplementary information source files (in R markdown format) and executed versions</p></li>
 <li><p>all the figures that are included in the paper (in the <code>figures/</code> directory)</p></li>
 </ul>
@@ -163,7 +168,7 @@
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>Please cite this compendium as:</p>
 <blockquote>
-<p>Authors, (2020). <em>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight</em>. Accessed 19 May 2020. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
+<p>Authors, (2020). <em>Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight</em>. Accessed 12 Jun 2020. Online at <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a></p>
 </blockquote>
 </div>
 <div id="licenses" class="section level2">
@@ -171,7 +176,7 @@
 <a href="#licenses" class="anchor"></a>Licenses</h2>
 <p>Manuscript: <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
 <p>Code: <a href="http://opensource.org/licenses/MIT">MIT</a> year: 2020, copyright holder: Adam Sparks</p>
-<p>Data: <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC-0</a> attribution requested in reuse</p>
+<p>Data: <a href="http://creativecommons.org/licenses/by/4.0/legalcode">CC-4.0</a> attribution requested in reuse</p>
 </div>
 <div id="dependencies" class="section level2">
 <h2 class="hasAnchor">
@@ -182,8 +187,8 @@
 <h2 class="hasAnchor">
 <a href="#contact" class="anchor"></a>Contact</h2>
 <p>Adam Sparks, Associate Professor, Centre for Crop Health<br>
-University of Southern Queensland, West<br>
-St. Toowoomba, Qld 4350 Australia</p>
+University of Southern Queensland, West St.<br>
+Toowoomba, Qld 4350 Australia</p>
 <p>(+61) 7.4631.1948 <a href="mailto:adam.sparks@usq.edu.au" class="email">adam.sparks@usq.edu.au</a><br><a href="https://adamhsparks.com/" class="uri">https://adamhsparks.com/</a></p>
 </div>
 
@@ -227,8 +232,8 @@ St. Toowoomba, Qld 4350 Australia</p>
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/adamhsparks/rice.awd.pests/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--05--19-brightgreen.svg" alt="Last-changedate"></a></li>
-<li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-4.0.0-brightgreen.svg" alt="minimal R version"></a></li>
+<li><a href="https://github.com/adamhsparks/rice.awd.pests/commits/master"><img src="https://img.shields.io/badge/last%20change-2020--06--12-brightgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="https://cran.r-project.org/"><img src="https://img.shields.io/badge/R%3E%3D-4.0.1-brightgreen.svg" alt="minimal R version"></a></li>
 <li><a href="http://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="Licence"></a></li>
 </ul>
 </div>
