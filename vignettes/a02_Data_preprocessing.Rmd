@@ -52,36 +52,36 @@ DS2015_Raw_22DAI <-
   download.file(
     url = "https://zenodo.org/record/3889800/files/DS2015_Raw_22DAI.csv?download=1",
     mode = "wb",
-    destfile = file.path(tempdir(), "DS2015_Raw_22DAI.csv"
-    ))
+    destfile = file.path(tempdir(), "DS2015_Raw_22DAI.csv")
+  )
 
 DS2015_Raw_35DAI <-
   download.file(
     url = "https://zenodo.org/record/3889800/files/DS2015_Raw_35DAI.csv?download=1",
     mode = "wb",
-    destfile = file.path(tempdir(), "DS2015_Raw_35DAI.csv"
-    ))
+    destfile = file.path(tempdir(), "DS2015_Raw_35DAI.csv")
+  )
 
 DS2015_Raw_49DAI <-
   download.file(
     url = "https://zenodo.org/record/3889800/files/DS2015_Raw_49DAI.csv?download=1",
     mode = "wb",
-    destfile = file.path(tempdir(), "DS2015_Raw_49DAI.csv"
-    ))
+    destfile = file.path(tempdir(), "DS2015_Raw_49DAI.csv")
+  )
 
 DS2015_Raw_62DAI <-
   download.file(
     url = "https://zenodo.org/record/3889800/files/DS2015_Raw_62DAI.csv?download=1",
     mode = "wb",
-    destfile = file.path(tempdir(), "DS2015_Raw_62DAI.csv"
-    ))
+    destfile = file.path(tempdir(), "DS2015_Raw_62DAI.csv")
+  )
 
 DS2015_Raw_83DAI <-
   download.file(
     url = "https://zenodo.org/record/3889800/files/DS2015_Raw_83DAI.csv?download=1",
     mode = "wb",
-    destfile = file.path(tempdir(), "DS2015_Raw_83DAI.csv"
-    ))
+    destfile = file.path(tempdir(), "DS2015_Raw_83DAI.csv")
+  )
 
 files <-
   list.files(tempdir(), pattern = "^DS2015_Raw", full.names = TRUE)
@@ -217,44 +217,34 @@ reformat <- function(files) {
 DS2015 <- map_df(files, reformat)
 
 # Add dates --------------------------------------------------------------------
-DS2015_22DAI <- data.frame(
-  DATE = rep(as.Date("2015-02-12", origin = "1970-01-01"),
-             times = nrow(DS2015) / 5),
-  # number of rows / 5 observations
-  ASMT = rep(1, times =  nrow(DS2015) / 5)
-)
+DS2015_22DAI <- data.frame(DATE = rep(as.Date("2015-02-12", origin = "1970-01-01"),
+                                      times = nrow(DS2015) / 5),
+                           # number of rows / 5 observations
+                           ASMT = rep(1, times =  nrow(DS2015) / 5))
 
-DS2015_35DAI <- data.frame(
-  DATE =
-    rep(as.Date("2015-02-20", origin = "1970-01-01"),
-        times = nrow(DS2015) / 5),
-  # number of rows / 5 observations
-  ASMT = rep(2, times =  nrow(DS2015) / 5)
-)
+DS2015_35DAI <- data.frame(DATE =
+                             rep(as.Date("2015-02-20", origin = "1970-01-01"),
+                                 times = nrow(DS2015) / 5),
+                           # number of rows / 5 observations
+                           ASMT = rep(2, times =  nrow(DS2015) / 5))
 
-DS2015_49DAI <- data.frame(
-  DATE =
-    rep(as.Date("2015-03-05", origin = "1970-01-01"),
-        times = nrow(DS2015) / 5),
-  # number of rows / 5 observations
-  ASMT = rep(3, times =  nrow(DS2015) / 5)
-)
+DS2015_49DAI <- data.frame(DATE =
+                             rep(as.Date("2015-03-05", origin = "1970-01-01"),
+                                 times = nrow(DS2015) / 5),
+                           # number of rows / 5 observations
+                           ASMT = rep(3, times =  nrow(DS2015) / 5))
 
-DS2015_62DAI <- data.frame(
-  DATE =
-    rep(as.Date("2015-03-19", origin = "1970-01-01"),
-        times = nrow(DS2015) / 5),
-  # number of rows / 5 observations
-  ASMT = rep(4, times =  nrow(DS2015) / 5)
-)
+DS2015_62DAI <- data.frame(DATE =
+                             rep(as.Date("2015-03-19", origin = "1970-01-01"),
+                                 times = nrow(DS2015) / 5),
+                           # number of rows / 5 observations
+                           ASMT = rep(4, times =  nrow(DS2015) / 5))
 
-DS2015_83DAI <- data.frame(
-  DATE =
-    rep(as.Date("2015-04-01", origin = "1970-01-01"),
-        times = nrow(DS2015) / 5),
-  # number of rows / 5 observations
-  ASMT = rep(5, times =  nrow(DS2015) / 5)
-)
+DS2015_83DAI <- data.frame(DATE =
+                             rep(as.Date("2015-04-01", origin = "1970-01-01"),
+                                 times = nrow(DS2015) / 5),
+                           # number of rows / 5 observations
+                           ASMT = rep(5, times =  nrow(DS2015) / 5))
 
 DS2015_DATES <-
   rbind(DS2015_22DAI,
@@ -319,7 +309,7 @@ DS2015 <-
     LEAF_ShB,
     WMGT,
     NRTE
-  ) %>% 
+  ) %>%
   mutate(REP = as.integer(REP),
          HILL = as.integer(HILL))
 
@@ -350,7 +340,8 @@ rm(files, reformat)
 
 ```{r 2016exp}
 # First assessment -------------------------------------------------------------
-DS2016_A1 <- read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_1.csv?download=1")
+DS2016_A1 <-
+  read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_1.csv?download=1")
 # Fill missing values in NTIL and NTShB
 DS2016_A1 <-
   DS2016_A1 %>% fill(NTIL)
@@ -366,7 +357,8 @@ DS2016_A1$PLOT <- rep(1:16, each = 72)
 DS2016_A1$DAI <- rep(14, nrow(DS2016_A1))
 
 # Second assessment -----------------------------------------------------------
-DS2016_A2 <- read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_2.csv?download=1")
+DS2016_A2 <-
+  read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_2.csv?download=1")
 DS2016_A2 <-
   DS2016_A2 %>% fill(NTIL)
 DS2016_A2 <-
@@ -381,7 +373,8 @@ DS2016_A2$PLOT <- rep(1:16, each = 72)
 DS2016_A2$DAI <- rep(28, nrow(DS2016_A2))
 
 # Third assessment ------------------------------------------------------------
-DS2016_A3 <- read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_3.csv?download=1")
+DS2016_A3 <-
+  read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_3.csv?download=1")
 DS2016_A3 <-
   DS2016_A3 %>% fill(NTIL)
 DS2016_A3 <-
@@ -396,7 +389,8 @@ DS2016_A3$PLOT <- rep(1:16, each = 72)
 DS2016_A3$DAI <- rep(43, nrow(DS2016_A3))
 
 # Fourth assessment ------------------------------------------------------------
-DS2016_A4 <- read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_4.csv?download=1")
+DS2016_A4 <-
+  read_csv("https://zenodo.org/record/3889800/files/DS2016_Raw_4.csv?download=1")
 DS2016_A4 <-
   DS2016_A4 %>% fill(NTIL)
 DS2016_A4 <-
@@ -576,7 +570,8 @@ Then create new data frames with the reformatted data.
 ```{r join_experiments}
 # Join the 2015 and 2016 Data into one Tibble ----------------------------------
 
-RAW_data <- bind_rows(DS2015, DS2016)
+
+RAW_data <- rbind(DS2015, DS2016)
 
 # convert columns to factor ----------------------------------------------------
 RAW_data <-
@@ -687,7 +682,6 @@ Because the data were collected on an ordinal scale, but not evenly spaced, the 
 ## 2015 Area Calculations
 
 ```{r areas2015}
-
 RAW_data <- rbind(DS2015, DS2016)
 
 # convert columns to factor ----------------------------------------------------
@@ -746,7 +740,6 @@ RAW_data <-
   )
 
 # add column with midpoint +1  % tiller ShB severity ---------------------------
-
 RAW_data <-
   mutate(
     RAW_data,
@@ -791,9 +784,18 @@ RAW_data <-
 DS2015 <- subset(RAW_data, YEAR == "2015")
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
+TShB_inc_15 <-
+  DS2015 %>%
+  group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
+  summarise(
+    PLOT_TShB_inc = mean(TShB_incidence),
+    na.rm = TRUE,
+    .groups = "keep"
+  ) %>%
+  arrange(PLOT)
 
-
-
+TShB_inc_wide <-
+  reshape2::dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_inc")
 
 TShB_sev_15 <-
   DS2015 %>%
@@ -811,10 +813,8 @@ TShB_sev_wide <-
 TShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  summarise(
-    PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
@@ -824,10 +824,8 @@ TShB_perc_wide <-
 LShB_sev_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  summarise(
-    PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 LShB_sev_wide <-
@@ -836,10 +834,8 @@ LShB_sev_wide <-
 LShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  summarise(
-    PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 LShB_perc_wide <-
@@ -848,15 +844,14 @@ LShB_perc_wide <-
 TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 # AUDPS data frame for incidence
-
-TShB_inc_AUDPS <-  pull(TShB_inc_15, AUDPS)
+TShB_inc_AUDPS <-
+  audps(evaluation = TShB_inc_wide[, 2:6],
+        dates = pull(TShB_inc_15[1:5, 6]))
 
 TShB_sev_AUDPS <-
   audps(evaluation = TShB_sev_wide[, 2:6],
@@ -890,7 +885,9 @@ AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 # AUDPC data frame for incidence
-TShB_inc_AUDPC <-  pull(TShB_inc_15, AUDPC)
+TShB_inc_AUDPC <-
+  audpc(evaluation = TShB_inc_wide[, 2:6],
+        dates = pull(TShB_inc_15[1:5, 6]))
 
 TShB_sev_AUDPC <-
   audpc(evaluation = TShB_sev_wide[, 2:6],
@@ -924,7 +921,6 @@ AUDPC_15$PLOT <- as.character(AUDPC_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
 # create final data frame of AUDPC_S
-
 ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 ShB_15 <- left_join(ShB_15, AUDPC_15, by = "PLOT")
 ```
@@ -935,10 +931,8 @@ ShB_15 <- left_join(ShB_15, AUDPC_15, by = "PLOT")
 TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_TShB_incidence = mean(TShB_incidence, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 TShB_inc_wide <-
@@ -947,10 +941,8 @@ TShB_inc_wide <-
 TShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_TShB_severity = mean(TIL_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_TShB_severity = mean(TIL_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 TShB_sev_wide <-
@@ -961,10 +953,8 @@ TShB_sev_wide <-
 TShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_TShB_percent = mean(PERC_TIL_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 TShB_perc_wide <-
@@ -975,10 +965,8 @@ TShB_perc_wide <-
 LShB_sev_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_LShB_severity = mean(LEAF_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 LShB_sev_wide <-
@@ -987,10 +975,8 @@ LShB_sev_wide <-
 LShB_perc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(
-    PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
-    .groups = "keep"
-  ) %>%
+  summarise(PLOT_LShB_percent = mean(PERC_LEAF_ShB, na.rm = TRUE),
+            .groups = "keep") %>%
   arrange(PLOT)
 
 LShB_perc_wide <-
@@ -1070,9 +1056,8 @@ AUDPC_16$PLOT <- as.character(AUDPC_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = "PLOT")
-ShB_16 <- left_join(ShB_16, AUDPC_16, by = "PLOT") %>% 
-  ungroup() %>% 
-  select(-c("DAYS", "ASMT"))
+ShB_16 <- left_join(ShB_16, AUDPC_16, by = "PLOT") %>%
+  ungroup()
 ```
 
 # Merge AUDPC and AUDPS Data
