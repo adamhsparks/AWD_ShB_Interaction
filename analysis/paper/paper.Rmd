@@ -47,6 +47,8 @@ library("pander")
 library("rice.awd.shb")
 ```
 
+\twocolumn
+
 # Introduction {-}
 
 Climate change will bring changes to the environments in which our food crops are produced in [@Reyer2013].
@@ -60,7 +62,7 @@ As well as
 In-field studies have focused on the effects of temperature on bacterial blight [@Webb2010] and the effects of drought [@Dossa2017].
 The effects of climate change on sheath blight have been examined by Kim et al. [-@Kim2015], where  
 
-Sheath blight disease, caused by (*Thanatephorus cucumeris*  (A.B. Frank) Donk.), anastomosis group 1, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
+Sheath blight disease, caused by (*Thanatephorus cucumeris* (A.B. Frank) Donk.), anastomosis group 1, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
 Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
 Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5--10 &nbsp;\% annually.
 The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
@@ -83,13 +85,13 @@ And because of the well documented effects of N [@Slaton2003; @Tang2007] and the
 
 ## Experimental Site {-}
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Ba\~nos, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May.
 In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment.
 The differences are detailed in the following sections.
 
 ## Pathogen {-}
 
-An isolate of *Rhizoctonia solani* belonging to anasomosis group AG1--1a previously isolated from infected lowland rice was maintained on potato dextrose agar (PDA) medium slants.
+An isolate of *Thanatephorus cucumeris* infected lowland rice was maintained on potato dextrose agar (PDA) medium slants.
 The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C) for five days.
 Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks and used to inoculate the plots [@Castilla1996].
 
@@ -170,7 +172,7 @@ The base levels (control treatments) for the analyses for 2015 were: N rate -- N
 
 Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn in.
 The remaining 50,000 samples were used to determine the posterior distribution of the parameters of the model.
-The `coda` [@coda2006] package was used to provide utilities to check MCMC chain convergence using visual inspection of resulting trace graphs and the Gelman--Rubin test.
+The `coda` version 0.19-3 [@coda2006] package was used to provide utilities to check MCMC chain convergence using visual inspection of resulting trace graphs and the Gelman--Rubin test.
 
 # Results {-}
 
@@ -241,7 +243,7 @@ However, sheath blight remains an issue in both seasons and the use of AWD would
 
 As the rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 Manually transplanted rice had higher apparent infection rates than direct seeded rice. As manual transplanting becomes less common due to labor constraints, sheath blight risk may be decreased (CITATION XXXX) due changes in establishment practices.
-A combination of AWD and directd seeded rice could be beneficial for both saving water and reducing the risk of sheath blight.
+A combination of AWD and direct seeded rice could be beneficial for both saving water and reducing the risk of sheath blight.
 
 Climate change is predicted to decrease sheath blight risk in the Korean peninsula over the longer term.
 However, over the next 10 -- 20 years the risk is predicted to remain the same as from 2000 -- 2010 [@Kim2015].
@@ -263,8 +265,9 @@ Lastly, we would like to remember our team mate Michael Noel, an integral part o
 
 # References {-}
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document:   -->
-<div id="refs"></div>
 
+<div id="refs"></div>
+\onecolumn
 
 # Tables {-}
 
