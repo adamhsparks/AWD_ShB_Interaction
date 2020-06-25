@@ -12,10 +12,10 @@ abstract: |
   Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by _Thanatephorus cucumeris_ (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split--plot experiments with a water saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. We were unable to detect any difference in the incidence of tiller sheath blight due to irrigation, tiller and leaf sheath blight did clearly differ statistically by irrigation treatment, but leaf sheath blight severity did not. Our findings indicate that farmers can adopt water saving technologies without risking increased sheath blight incidence. We suggest that further cross--disciplinary research in this area is warranted.
 bibliography: references.bib
 output:
-  bookdown::word_document2:
+  bookdown::pdf_document2:
     toc: no
     fig_caption: yes
-    reference_docx: "../templates/template.docx"
+    #reference_docx: "../templates/template.docx"
 header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage[utf8]{inputenc}
@@ -48,6 +48,18 @@ library("rice.awd.shb")
 ```
 
 **Keywords** Rice $\cdot$ Water Management $\cdot$ Nitrogen Management $\cdot$ Sheath Blight $\cdot$ *Thanatephorus cucumeris*
+
+\twocolumn
+
+# Key Message {-}
+
+* The effects of AWD on sheath blight disease incidence and severity were investigated.
+
+* AWD had no detectable effect on either sheath blight incidence or sheath blight severity.
+
+* The interaction of AWD and nitrogen management had no detectable effect on either sheath blight incidence or sheath blight severity.
+
+* The adoption of AWD technologies will not lead to increased sheath blight incidence or sheath blight severity.
 
 # Introduction {-}
 
@@ -251,8 +263,8 @@ Lastly, we would like to remember our team mate Michael Noel, an integral part o
 
 AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC conducted the field work in 2016. AHS conducted the data analysis. All the authors contributed to the writing of the manuscript.
 
-<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line. -->
-##### pagebreak
+<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line. 
+##### pagebreak  -->
 
 # Literature Cited {-}
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document: -->
@@ -264,7 +276,7 @@ AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC conduct
 Readers may find a reproducible research compendium that recreates this paper, which includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2020].
 The data are freely and openly available from <https://doi.org/10.5281/zenodo.3889800> [@Sparks2020a].
 
-##### pagebreak
+\onecolumn
 
 # Table {-}
 
@@ -280,7 +292,7 @@ pander(N_rates,
        caption = "(#tab:N-rates) Nitrogen application rates for 2015 and 2016 in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
 ```
 
-##### pagebreak
+\newpage
 
 # Figures {-}
 
