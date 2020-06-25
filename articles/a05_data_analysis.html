@@ -308,22 +308,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.3367 0.7230 0.005112       0.005065
-## WMGTAWD          -0.2627 0.2934 0.002075       0.002039
-## NRTEN100          0.3675 0.2968 0.002098       0.002098
-## NRTEN120          0.6709 0.2970 0.002100       0.002067
-## WMGTAWD:NRTEN100  0.5085 0.4198 0.002968       0.002969
-## WMGTAWD:NRTEN120  0.6556 0.4196 0.002967       0.002973
+## (Intercept)       1.3450 0.7376 0.005216       0.005165
+## WMGTAWD          -0.2640 0.2971 0.002101       0.002085
+## NRTEN100          0.3679 0.2943 0.002081       0.002093
+## NRTEN120          0.6712 0.2951 0.002087       0.002107
+## WMGTAWD:NRTEN100  0.5090 0.4188 0.002961       0.002982
+## WMGTAWD:NRTEN120  0.6569 0.4183 0.002958       0.002941
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                      2.5%     25%     50%      75%  97.5%
-## (Intercept)       0.23172  1.0853  1.3379  1.59114 2.3997
-## WMGTAWD          -0.84638 -0.4586 -0.2626 -0.06466 0.3103
-## NRTEN100         -0.21346  0.1687  0.3681  0.56748 0.9568
-## NRTEN120          0.08667  0.4720  0.6711  0.87070 1.2590
-## WMGTAWD:NRTEN100 -0.31541  0.2259  0.5084  0.79118 1.3236
-## WMGTAWD:NRTEN120 -0.17153  0.3721  0.6617  0.93626 1.4772</code></pre>
+## (Intercept)       0.23851  1.0928  1.3408  1.59212 2.4313
+## WMGTAWD          -0.85056 -0.4625 -0.2649 -0.06066 0.3163
+## NRTEN100         -0.20757  0.1700  0.3693  0.56496 0.9478
+## NRTEN120          0.08805  0.4731  0.6721  0.86920 1.2498
+## WMGTAWD:NRTEN100 -0.31980  0.2303  0.5074  0.79178 1.3310
+## WMGTAWD:NRTEN120 -0.16650  0.3771  0.6571  0.93715 1.4850</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m1</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -335,7 +335,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.02       1.02
+## (Intercept)            1.01       1.01
 ## WMGTAWD                1.00       1.00
 ## NRTEN100               1.00       1.00
 ## NRTEN120               1.00       1.00
@@ -389,22 +389,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                    Mean     SD Naive SE Time-series SE
-## (Intercept)      16.608  7.433  0.05256        0.05241
-## WMGTAWD          -1.241  7.650  0.05409        0.05456
-## NRTEN100         16.240  7.649  0.05409        0.05382
-## NRTEN120         42.185  7.546  0.05336        0.05390
-## WMGTAWD:NRTEN100 19.989 10.909  0.07714        0.07666
-## WMGTAWD:NRTEN120 -2.105 10.733  0.07589        0.07657
+## (Intercept)      16.450  7.187  0.05082        0.05162
+## WMGTAWD          -1.171  7.631  0.05396        0.05280
+## NRTEN100         16.356  7.619  0.05388        0.05397
+## NRTEN120         42.260  7.686  0.05435        0.05435
+## WMGTAWD:NRTEN100 19.879 10.827  0.07656        0.07624
+## WMGTAWD:NRTEN120 -2.151 10.906  0.07711        0.07607
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%    25%    50%    75% 97.5%
-## (Intercept)        2.652 12.264 16.556 20.913 30.47
-## WMGTAWD          -16.222 -6.419 -1.304  3.956 13.84
-## NRTEN100           1.173 11.115 16.217 21.391 31.34
-## NRTEN120          27.185 37.149 42.230 47.221 57.15
-## WMGTAWD:NRTEN100  -1.397 12.666 20.005 27.332 41.44
-## WMGTAWD:NRTEN120 -23.304 -9.369 -2.102  5.120 19.07</code></pre>
+## (Intercept)        2.612 12.135 16.404 20.766 30.23
+## WMGTAWD          -16.185 -6.212 -1.155  3.888 14.02
+## NRTEN100           1.263 11.284 16.342 21.389 31.47
+## NRTEN120          27.053 37.151 42.304 47.443 57.30
+## WMGTAWD:NRTEN100  -1.523 12.664 20.000 27.183 41.01
+## WMGTAWD:NRTEN120 -23.763 -9.484 -2.158  5.086 19.38</code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m2</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -470,22 +470,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.4013 2.0866 0.014755       0.013903
-## WMGTAWD          -0.8360 0.3682 0.002604       0.002773
-## NRTEN100          1.2306 0.3726 0.002635       0.002775
-## NRTEN120          1.5398 0.3670 0.002595       0.002580
-## WMGTAWD:NRTEN100  0.5726 0.5237 0.003703       0.003881
-## WMGTAWD:NRTEN120  0.5122 0.5182 0.003665       0.003630
+## (Intercept)       1.3909 2.0293 0.014349       0.013661
+## WMGTAWD          -0.8391 0.3677 0.002600       0.002596
+## NRTEN100          1.2252 0.3703 0.002618       0.002688
+## NRTEN120          1.5371 0.3727 0.002635       0.002635
+## WMGTAWD:NRTEN100  0.5733 0.5190 0.003670       0.003629
+## WMGTAWD:NRTEN120  0.5170 0.5259 0.003719       0.003668
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%     50%     75%   97.5%
-## (Intercept)      -2.2786  0.5957  1.4059  2.2124  5.1318
-## WMGTAWD          -1.5605 -1.0820 -0.8354 -0.5933 -0.1065
-## NRTEN100          0.5061  0.9783  1.2288  1.4792  1.9686
-## NRTEN120          0.8051  1.2951  1.5376  1.7867  2.2555
-## WMGTAWD:NRTEN100 -0.4547  0.2235  0.5712  0.9202  1.6145
-## WMGTAWD:NRTEN120 -0.4979  0.1636  0.5132  0.8547  1.5331</code></pre>
+## (Intercept)      -2.4253  0.5690  1.3965  2.2133  5.2060
+## WMGTAWD          -1.5560 -1.0877 -0.8401 -0.5887 -0.1208
+## NRTEN100          0.4950  0.9776  1.2251  1.4764  1.9451
+## NRTEN120          0.8042  1.2915  1.5335  1.7849  2.2771
+## WMGTAWD:NRTEN100 -0.4375  0.2207  0.5697  0.9270  1.5857
+## WMGTAWD:NRTEN120 -0.5191  0.1695  0.5175  0.8700  1.5516</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">8</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m3</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -495,12 +495,12 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.01       1.02
-## WMGTAWD                1.00       1.00
-## NRTEN100               1.00       1.00
-## NRTEN120               1.00       1.00
-## WMGTAWD:NRTEN100       1.00       1.00
-## WMGTAWD:NRTEN120       1.00       1.00
+## (Intercept)               1          1
+## WMGTAWD                   1          1
+## NRTEN100                  1          1
+## NRTEN120                  1          1
+## WMGTAWD:NRTEN100          1          1
+## WMGTAWD:NRTEN120          1          1
 ## 
 ## Multivariate psrf
 ## 
@@ -555,18 +555,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)      10.3508 1.3903 0.009831       0.008991
-## WMGTAWD           0.7595 0.3431 0.002426       0.002408
-## NRTEN180          2.3477 0.3472 0.002455       0.002462
-## WMGTAWD:NRTEN180 -0.7770 0.4922 0.003481       0.003502
+## (Intercept)      10.3491 1.3523 0.009563       0.009697
+## WMGTAWD           0.7595 0.3454 0.002442       0.002442
+## NRTEN180          2.3547 0.3461 0.002447       0.002459
+## WMGTAWD:NRTEN180 -0.7831 0.4900 0.003465       0.003445
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                      2.5%     25%     50%     75%   97.5%
-## (Intercept)       7.91715  9.8410 10.3464 10.8491 12.7421
-## WMGTAWD           0.09154  0.5295  0.7581  0.9920  1.4276
-## NRTEN180          1.66695  2.1138  2.3474  2.5763  3.0409
-## WMGTAWD:NRTEN180 -1.74187 -1.1081 -0.7786 -0.4432  0.1771</code></pre>
+## (Intercept)       7.94221  9.8297 10.3488 10.8642 12.7933
+## WMGTAWD           0.07871  0.5309  0.7577  0.9884  1.4460
+## NRTEN180          1.66797  2.1225  2.3533  2.5886  3.0266
+## WMGTAWD:NRTEN180 -1.73152 -1.1114 -0.7850 -0.4505  0.1817</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m4</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -630,18 +630,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                    Mean    SD Naive SE Time-series SE
-## (Intercept)      29.702 8.779  0.06208        0.06208
-## WMGTAWD          -3.717 3.008  0.02127        0.02125
-## NRTEN180          9.253 3.028  0.02141        0.02141
-## WMGTAWD:NRTEN180 -9.062 4.278  0.03025        0.03025
+## (Intercept)      29.884 8.706  0.06156        0.06226
+## WMGTAWD          -3.743 3.013  0.02131        0.02119
+## NRTEN180          9.244 3.013  0.02130        0.02162
+## WMGTAWD:NRTEN180 -8.997 4.286  0.03030        0.03011
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                     2.5%     25%    50%    75%  97.5%
-## (Intercept)       12.813  25.427 29.718 33.943 46.636
-## WMGTAWD           -9.602  -5.717 -3.738 -1.753  2.281
-## NRTEN180           3.296   7.234  9.240 11.267 15.306
-## WMGTAWD:NRTEN180 -17.563 -11.894 -9.034 -6.204 -0.637</code></pre>
+##                     2.5%     25%    50%    75%   97.5%
+## (Intercept)       13.132  25.564 29.830 34.153 47.0731
+## WMGTAWD           -9.644  -5.735 -3.754 -1.757  2.2307
+## NRTEN180           3.318   7.239  9.228 11.260 15.1693
+## WMGTAWD:NRTEN180 -17.459 -11.872 -8.960 -6.157 -0.6553</code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m5</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -705,18 +705,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.0017 0.8321 0.005884       0.006097
-## WMGTAWD           0.2331 0.1617 0.001143       0.001125
-## NRTEN180          0.5501 0.1608 0.001137       0.001141
-## WMGTAWD:NRTEN180 -0.4927 0.2290 0.001619       0.001628
+## (Intercept)       0.9924 0.4825 0.003412       0.003231
+## WMGTAWD           0.2359 0.1620 0.001145       0.001165
+## NRTEN180          0.5504 0.1600 0.001131       0.001113
+## WMGTAWD:NRTEN180 -0.4948 0.2264 0.001601       0.001606
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                      2.5%     25%     50%     75%    97.5%
-## (Intercept)       0.08240  0.8149  0.9988  1.1835  1.93168
-## WMGTAWD          -0.08264  0.1261  0.2325  0.3412  0.55419
-## NRTEN180          0.23238  0.4427  0.5492  0.6579  0.86777
-## WMGTAWD:NRTEN180 -0.94828 -0.6446 -0.4926 -0.3394 -0.04092</code></pre>
+## (Intercept)       0.12150  0.8129  0.9956  1.1777  1.82282
+## WMGTAWD          -0.07772  0.1261  0.2338  0.3437  0.55832
+## NRTEN180          0.24060  0.4422  0.5504  0.6575  0.86752
+## WMGTAWD:NRTEN180 -0.94332 -0.6457 -0.4935 -0.3428 -0.05554</code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m6</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -726,10 +726,10 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.01       1.01
-## WMGTAWD                1.00       1.00
-## NRTEN180               1.00       1.00
-## WMGTAWD:NRTEN180       1.00       1.00
+## (Intercept)               1          1
+## WMGTAWD                   1          1
+## NRTEN180                  1          1
+## WMGTAWD:NRTEN180          1          1
 ## 
 ## Multivariate psrf
 ## 
