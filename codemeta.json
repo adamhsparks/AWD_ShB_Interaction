@@ -21,14 +21,14 @@
   "author": [
     {
       "@type": "Person",
-      "givenName": "Adam",
+      "givenName": "Adam H.",
       "familyName": "Sparks",
       "email": "adamhsparks@gmail.com",
       "@id": "https://orcid.org/0000-0002-0061-8359"
     },
     {
       "@type": "Person",
-      "givenName": "Nancy",
+      "givenName": "Nancy P.",
       "familyName": "Castilla",
       "email": "n.castilla@irri.org"
     },
@@ -58,7 +58,7 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Adam",
+      "givenName": "Adam H.",
       "familyName": "Sparks",
       "email": "adamhsparks@gmail.com",
       "@id": "https://orcid.org/0000-0002-0061-8359"
@@ -423,8 +423,8 @@
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     }
   ],
-  "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/README.md",
-  "fileSize": "560.021KB",
+  "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
+  "fileSize": "559.923KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"

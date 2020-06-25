@@ -22,11 +22,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Adam Sparks \email{adamhsparks@gmail.com} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
+\strong{Maintainer}: Adam H. Sparks \email{adamhsparks@gmail.com} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
 
 Authors:
 \itemize{
-  \item Nancy Castilla \email{n.castilla@irri.org}
+  \item Nancy P. Castilla \email{n.castilla@irri.org}
   \item Bjoern Ole Sander \email{b.sander@irri.org} (\href{https://orcid.org/0000-0002-7967-6147}{ORCID})
   \item Michael Noel
 }

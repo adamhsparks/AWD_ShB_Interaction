@@ -1,10 +1,10 @@
 Package: rice.awd.shb
 Title: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight
 Version: 0.0.0.9000
-Authors@R: c(person("Adam", "Sparks", role = c("aut", "cre"),
+Authors@R: c(person("Adam H.", "Sparks", role = c("aut", "cre"),
     email = "adamhsparks@gmail.com",
     comment = c(ORCID = "0000-0002-0061-8359")),
-    person("Nancy", "Castilla", role = "aut",
+    person("Nancy P.", "Castilla", role = "aut",
     email = "n.castilla@irri.org"),
     person("Bjoern Ole", "Sander", role = "aut",
     email = "b.sander@irri.org",
