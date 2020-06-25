@@ -47,20 +47,28 @@ library("pander")
 library("rice.awd.shb")
 ```
 
+**Keywords** Disease $\cdot$ Sheath blight $\cdot$ *Thanatephorus cucumeris*
+
 \twocolumn
 
+# Key Message {-}
+
+* The effects of AWD on sheath blight disease incidence and severity were investigated.
+
+* AWD had no detectable effect on either sheath blight incidence or sheath blight severity.
+
+* The interaction of AWD and nitrogen management had no detectable effect on either sheath blight incidence or sheath blight severity.
+
+* The adoption of AWD technologies will not lead to increased sheath blight incidence or sheath blight severity.
+
 # Introduction {-}
+
+Rice is mainly produced in Asia with over 90&nbsp;% of production in Asia [@GRiSP2013] and uses the largest amount of any agricultural commodity [@Dawe2005; @GRiSP2013].
 
 Climate change will bring changes to the environments in which our food crops are produced in [@Reyer2013].
 Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of environments globally and will will have to adapt to changing environments where it is grown as a result.
 
-Climate change will affect the diseases that occur in rice as well as the crop itself.
-Many studies have been conducted *in silico* that examine how diseases may change with the climate.
-Rice blast is one of the most frequently studied [@Luo1998; @Duku2016].
-As well as 
-
-In-field studies have focused on the effects of temperature on bacterial blight [@Webb2010] and the effects of drought [@Dossa2017].
-The effects of climate change on sheath blight have been examined by Kim et al. [-@Kim2015], where  
+Rice's reliance on freely available water water, coupled with the effects of climate change mean that rice production practices will have to adapt to use new practices to produce more units of food with less water inputs.
 
 Sheath blight disease, caused by (*Thanatephorus cucumeris* (A.B. Frank) Donk.), anastomosis group 1, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
 Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
@@ -76,10 +84,20 @@ As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emiss
 
 The AWD technology has been identified as promising climate smart practice for different rice growing regions that can stabilize rice production in water scarce areas as well as help reduce the carbon footprint of rice production.
 Various countries, *e.g.* Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015].
-However, a change like this in the water regime in rice fields on a large scale could trigger unintended effects, for example changes in disease intensity or severity.
+However, a change like this in the water regime in rice fields on a large scale could trigger unintended effects, for example changes in disease incidence or severity.
+
+Many studies have been conducted *in silico* that examine how diseases may change with a changing climate.
+Rice blast is perhaps the the most frequently studied rice disease in regards to the effects of climate change [@Luo1995; @Luo1998; @Kim2015; @Duku2016; @Viswanath2017].
+However, Kim *et al.* [-@Kim2015] have modelled the effects of climate change on sheath blight with epidemics predicted to decrease by 2100 in their study, which focused on the Korean peninsula.
+
+Some *in-situ* studies of the effects of climate change on rice diseases have focused on the effects of temperature on bacterial blight [@Webb2010] and the effects of drought [@Dossa2017].
 
 While the effects of climate change directly on rice disease have been studied, the effects of mitigation practices have not.
-And because of the well documented effects of N [@Slaton2003; @Tang2007] and the effects of alternating wet and dry periods [@Castilla1996] on sheath blight; we established field experiments to study what effects AWD irrigation technologies and N fertilisation in combination could have on sheath blight incidence and severity in tropical rice production.
+Rice farmers may be hesitant to adopt water saving technologies because changing rice production practices could have unintended effects on the diseases that occur in the rice crop.
+This is a reasonable concern because of the well documented effects of N [@Slaton2003; @Tang2007] and the effects of alternating wet and dry periods [@Castilla1996] on sheath blight.
+In order to gain a better understanding of what the effects of adopting AWD on rice sheath blight may be, we established field experiments that incorporated irrigation technology and N fertilisation.
+
+We hypothesized that AWD would not have a positive effect on sheath blight incidence and severity in tropical rice production that would deter farmers from adopting it.
 
 # Materials and Methods {-}
 
@@ -247,12 +265,16 @@ A combination of AWD and direct seeded rice could be beneficial for both saving 
 
 Climate change is predicted to decrease sheath blight risk in the Korean peninsula over the longer term.
 However, over the next 10 -- 20 years the risk is predicted to remain the same as from 2000 -- 2010 [@Kim2015].
-Therefore, it is likely to remain an important diease in the near future with little resistance available in current varieties.
+Therefore, it is likely to remain an important disease in the near future with little resistance available in current varieties.
 However, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease.
 
 Readers may find a reproducible research compendium that recreates this paper, that includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2019].
 
 # Notes {-}
+
+## Author Contributions {-}
+
+AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC conducted the field work in 2016. AHS conducted the data analysis. All the authors contributed to the writing of the manuscript.
 
 ## Acknowledgments {-}
 
