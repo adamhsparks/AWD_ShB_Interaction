@@ -264,9 +264,9 @@ Therefore, the sheath blight disease levels in these studies may be lower than t
 However, it should be noted that normally it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy in the wet season.
 However, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
 
-As the rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
-Manually transplanted rice had higher apparent infection rates than direct seeded rice.
-As manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due changes in establishment practices.
+The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
+Manually transplanted rice has been found to have higher apparent infection rates than direct seeded rice.
+Therefore, as manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due changes in establishment practices.
 A combination of AWD and direct seeded rice could be beneficial for both saving water and reducing the risk of sheath blight.
 
 Diseases are the only issue that farmers face when growing rice.
@@ -283,7 +283,8 @@ However, based on these studies the use of AWD technologies would not appear to 
 
 ## Reproducibility Statement {-}
 
-Readers may find a reproducible research compendium that recreates this paper, which includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2019].
+Readers may find a reproducible research compendium that recreates this paper, which includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2020].
+The data are freely and openly available from <https://doi.org/10.5281/zenodo.3889800> [@Sparks2020a].
 
 ## Author Contributions {-}
 
