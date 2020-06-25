@@ -60,7 +60,7 @@
       <a href="../articles/a02_Data_preprocessing.html">Data Preprocessing and Area Calculations</a>
     </li>
     <li>
-      <a href="../articles/a03_raw_data_visualisation.html">Visualise Data</a>
+      <a href="../articles/a03_raw_data_visualisation.html">Data Visualisation</a>
     </li>
     <li>
       <a href="../articles/a04_check_residuals.html">Check Data Residuals</a>
@@ -259,16 +259,16 @@
 <div id="specify-priors" class="section level1">
 <h1 class="hasAnchor">
 <a href="#specify-priors" class="anchor"></a>Specify Priors</h1>
-<p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat non-informative priors that have a uniform low degree of belief in all parameters for all six models we will create.</p>
-<p>The tiller analyses does not include an interaction prior while the leaf analyses do. Because of this there are two different priors set for the analyses following.</p>
+<p>As <code>MCMCglmm</code> is a Bayesian analysis, it requires priors to be set. Here we set flat weakly-informative priors that have a uniform low degree of belief in all parameters for all six models we will create since we don’t have good prior knowledge of what the curves should look like.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="kw">eprior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(R = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(V = <span class="fl">1</span>,
-                               nu = <span class="fl">0.002</span>),
-                      G = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-                        G1 = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(V = <span class="fl">1</span>,
-                                  n = <span class="fl">1</span>,
-                                  alpha.mu = <span class="fl">0</span>,
-                                  alpha.V = <span class="fl">25</span><span class="op">^</span><span class="fl">2</span>)))
+                        nu = <span class="fl">0.002</span>),
+               G = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(G1 = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+                 V = <span class="fl">1</span>,
+                 n = <span class="fl">1</span>,
+                 alpha.mu = <span class="fl">0</span>,
+                 alpha.V = <span class="fl">25</span> <span class="op">^</span> <span class="fl">2</span>
+               )))
 </pre></div>
 </div>
 <div id="models" class="section level1">
@@ -277,23 +277,30 @@
 <div id="tiller-sheath-blight-incidence-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h2>
+<div id="model-structure" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure" class="anchor"></a>Model Structure</h3>
+<p>Tiller sheath blight incidence AUDPS, <code>TShB_inc_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">TShB_inc_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span><span class="kw">REP</span>, 
-           data = <span class="kw">AUDPS_2015</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">TShB_inc_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2015</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m1</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m1</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m1</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m1</span>)
@@ -308,22 +315,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.3403 0.6418 0.004538       0.004412
-## WMGTAWD          -0.2635 0.2980 0.002107       0.002107
-## NRTEN100          0.3706 0.2945 0.002082       0.002072
-## NRTEN120          0.6706 0.2971 0.002101       0.002119
-## WMGTAWD:NRTEN100  0.5062 0.4195 0.002966       0.002966
-## WMGTAWD:NRTEN120  0.6589 0.4227 0.002989       0.003023
+## (Intercept)       1.3268 0.6612 0.004676       0.004532
+## WMGTAWD          -0.2614 0.2979 0.002107       0.002106
+## NRTEN100          0.3731 0.2980 0.002107       0.002089
+## NRTEN120          0.6732 0.2962 0.002094       0.002067
+## WMGTAWD:NRTEN100  0.5052 0.4220 0.002984       0.002984
+## WMGTAWD:NRTEN120  0.6511 0.4190 0.002963       0.002943
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                      2.5%     25%     50%     75%  97.5%
-## (Intercept)       0.25929  1.0870  1.3381  1.5923 2.4276
-## WMGTAWD          -0.85125 -0.4648 -0.2643 -0.0643 0.3206
-## NRTEN100         -0.21221  0.1740  0.3689  0.5687 0.9461
-## NRTEN120          0.08414  0.4730  0.6700  0.8699 1.2519
-## WMGTAWD:NRTEN100 -0.30876  0.2251  0.5042  0.7899 1.3325
-## WMGTAWD:NRTEN120 -0.17787  0.3747  0.6562  0.9476 1.4713</code></pre>
+##                      2.5%     25%     50%      75%  97.5%
+## (Intercept)       0.18371  1.0835  1.3346  1.58506 2.3660
+## WMGTAWD          -0.84564 -0.4611 -0.2626 -0.06365 0.3306
+## NRTEN100         -0.21249  0.1713  0.3731  0.57022 0.9595
+## NRTEN120          0.09164  0.4761  0.6727  0.86973 1.2531
+## WMGTAWD:NRTEN100 -0.32133  0.2294  0.5058  0.78886 1.3468
+## WMGTAWD:NRTEN120 -0.17474  0.3724  0.6553  0.92953 1.4774</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m1</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -355,26 +362,34 @@
 </pre></div>
 <p><img src="a05_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"></p>
 </div>
+</div>
 <div id="tiller-sheath-blight-severity-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h2>
+<div id="model-structure-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure-1" class="anchor"></a>Model Structure</h3>
+<p>Tiller sheath blight severity AUDPS, <code>TShB_sev_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a rando</p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span><span class="kw">REP</span>, 
-           data = <span class="kw">AUDPS_2015</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2015</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m2</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m2</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m2</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m2</span>)
@@ -389,22 +404,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                    Mean     SD Naive SE Time-series SE
-## (Intercept)      16.388  7.222  0.05107        0.05041
-## WMGTAWD          -1.173  7.670  0.05423        0.05392
-## NRTEN100         16.297  7.655  0.05413        0.05394
-## NRTEN120         42.265  7.606  0.05379        0.05276
-## WMGTAWD:NRTEN100 19.923 10.727  0.07585        0.07543
-## WMGTAWD:NRTEN120 -2.065 10.767  0.07614        0.07569
+## (Intercept)      16.439  7.357  0.05203        0.05203
+## WMGTAWD          -1.152  7.575  0.05356        0.05320
+## NRTEN100         16.232  7.713  0.05454        0.05419
+## NRTEN120         42.295  7.656  0.05413        0.05414
+## WMGTAWD:NRTEN100 19.892 10.749  0.07601        0.07439
+## WMGTAWD:NRTEN120 -2.193 10.718  0.07579        0.07464
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%    25%    50%    75% 97.5%
-## (Intercept)        2.705 12.075 16.404 20.777 30.10
-## WMGTAWD          -16.105 -6.385 -1.153  3.934 14.03
-## NRTEN100           1.229 11.146 16.260 21.487 31.23
-## NRTEN120          27.172 37.181 42.235 47.350 57.32
-## WMGTAWD:NRTEN100  -1.420 12.697 19.941 27.188 41.11
-## WMGTAWD:NRTEN120 -23.384 -9.214 -2.062  5.120 19.08</code></pre>
+## (Intercept)        2.389 12.029 16.368 20.832 30.40
+## WMGTAWD          -15.912 -6.301 -1.131  3.986 13.68
+## NRTEN100           1.108 11.044 16.265 21.362 31.37
+## NRTEN120          27.043 37.207 42.369 47.423 57.30
+## WMGTAWD:NRTEN100  -1.123 12.563 19.968 27.170 40.60
+## WMGTAWD:NRTEN120 -23.250 -9.367 -2.091  4.941 18.99</code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m2</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -436,26 +451,34 @@
 </pre></div>
 <p><img src="a05_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"></p>
 </div>
+</div>
 <div id="leaf-sheath-blight-severity-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h2>
+<div id="model-structure-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure-2" class="anchor"></a>Model Structure</h3>
+<p>Leaf sheath blight severity AUDPS, <code>LShB_sev_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a rando</p>
 <div class="sourceCode" id="cb27"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">LShB_sev_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span> <span class="kw">REP</span>,
-           data = <span class="kw">AUDPS_2015</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">LShB_sev_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2015</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m3</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m3</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m3</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m3</span>)
@@ -470,22 +493,22 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       1.3856 2.2082 0.015615       0.015608
-## WMGTAWD          -0.8353 0.3668 0.002593       0.002638
-## NRTEN100          1.2280 0.3697 0.002614       0.002571
-## NRTEN120          1.5329 0.3681 0.002603       0.002613
-## WMGTAWD:NRTEN100  0.5660 0.5188 0.003669       0.003666
-## WMGTAWD:NRTEN120  0.5190 0.5190 0.003670       0.003693
+## (Intercept)       1.3951 2.0718 0.014650       0.014637
+## WMGTAWD          -0.8357 0.3687 0.002607       0.002608
+## NRTEN100          1.2267 0.3669 0.002594       0.002594
+## NRTEN120          1.5373 0.3700 0.002617       0.002616
+## WMGTAWD:NRTEN100  0.5700 0.5184 0.003665       0.003645
+## WMGTAWD:NRTEN120  0.5174 0.5192 0.003671       0.003650
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%     50%     75%   97.5%
-## (Intercept)      -2.4922  0.5507  1.3882  2.2310  5.2955
-## WMGTAWD          -1.5584 -1.0795 -0.8321 -0.5857 -0.1187
-## NRTEN100          0.4991  0.9816  1.2268  1.4741  1.9591
-## NRTEN120          0.8048  1.2890  1.5355  1.7812  2.2486
-## WMGTAWD:NRTEN100 -0.4342  0.2104  0.5635  0.9135  1.5858
-## WMGTAWD:NRTEN120 -0.4948  0.1743  0.5171  0.8613  1.5590</code></pre>
+## (Intercept)      -2.4503  0.5925  1.3941  2.1838  5.1837
+## WMGTAWD          -1.5603 -1.0826 -0.8349 -0.5895 -0.1142
+## NRTEN100          0.5115  0.9795  1.2226  1.4748  1.9463
+## NRTEN120          0.8029  1.2876  1.5373  1.7854  2.2592
+## WMGTAWD:NRTEN100 -0.4521  0.2235  0.5672  0.9214  1.5862
+## WMGTAWD:NRTEN120 -0.5004  0.1741  0.5152  0.8672  1.5571</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">8</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m3</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -495,7 +518,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.02       1.02
+## (Intercept)            1.01       1.01
 ## WMGTAWD                1.00       1.00
 ## NRTEN100               1.00       1.00
 ## NRTEN120               1.00       1.00
@@ -518,29 +541,37 @@
 <hr>
 </div>
 </div>
+</div>
 <div id="models-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#models-1" class="anchor"></a>2016 Models</h1>
 <div id="tiller-sheath-blight-incidence-model-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h2>
+<div id="model-structure-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure-3" class="anchor"></a>Model Structure</h3>
+<p>Tiller sheath blight incidence AUDPS, <code>TShB_inc_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a rando</p>
 <div class="sourceCode" id="cb33"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">TShB_inc_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span><span class="kw">REP</span>, 
-           data = <span class="kw">AUDPS_2016</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">TShB_inc_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2016</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m4</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m4</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m4</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m4</span>)
@@ -555,18 +586,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)      10.3359 1.3258 0.009375       0.010339
-## WMGTAWD           0.7585 0.3421 0.002419       0.002386
-## NRTEN180          2.3503 0.3438 0.002431       0.002445
-## WMGTAWD:NRTEN180 -0.7829 0.4834 0.003418       0.003428
+## (Intercept)      10.3735 1.3558 0.009587       0.009602
+## WMGTAWD           0.7622 0.3432 0.002427       0.002427
+## NRTEN180          2.3551 0.3446 0.002437       0.002413
+## WMGTAWD:NRTEN180 -0.7871 0.4911 0.003473       0.003473
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                      2.5%     25%     50%     75%   97.5%
-## (Intercept)       7.93837  9.8394 10.3399 10.8407 12.7146
-## WMGTAWD           0.08424  0.5278  0.7594  0.9881  1.4223
-## NRTEN180          1.67546  2.1201  2.3493  2.5796  3.0269
-## WMGTAWD:NRTEN180 -1.73372 -1.1061 -0.7855 -0.4602  0.1683</code></pre>
+## (Intercept)       8.02876  9.8611 10.3622 10.8600 12.8115
+## WMGTAWD           0.08979  0.5297  0.7630  0.9907  1.4345
+## NRTEN180          1.67468  2.1279  2.3553  2.5807  3.0364
+## WMGTAWD:NRTEN180 -1.75528 -1.1156 -0.7823 -0.4557  0.1727</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m4</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -595,27 +626,35 @@
 </pre></div>
 <p><img src="a05_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"><img src="a05_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"></p>
 </div>
+</div>
 <div id="tiller-sheath-blight-severity-model-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h2>
+<div id="model-structure-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure-4" class="anchor"></a>Model Structure</h3>
+<p>Tiller sheath blight severity AUDPS, <code>TShB_sev_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span><span class="kw">REP</span>, 
-           data = <span class="kw">AUDPS_2016</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>,
-           thin = <span class="fl">10</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2016</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>,
+    thin = <span class="fl">10</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m5</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m5</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m5</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m5</span>)
@@ -630,18 +669,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                    Mean    SD Naive SE Time-series SE
-## (Intercept)      29.893 8.469  0.05989        0.06037
-## WMGTAWD          -3.789 3.030  0.02143        0.02144
-## NRTEN180          9.224 3.008  0.02127        0.02092
-## WMGTAWD:NRTEN180 -8.962 4.271  0.03020        0.02999
+## (Intercept)      29.851 8.754  0.06190        0.06356
+## WMGTAWD          -3.738 3.015  0.02132        0.02132
+## NRTEN180          9.228 3.049  0.02156        0.02141
+## WMGTAWD:NRTEN180 -8.976 4.296  0.03038        0.02996
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                     2.5%     25%    50%    75%   97.5%
-## (Intercept)       13.329  25.520 29.879 34.045 46.5559
-## WMGTAWD           -9.776  -5.801 -3.813 -1.771  2.2255
-## NRTEN180           3.256   7.240  9.216 11.219 15.1238
-## WMGTAWD:NRTEN180 -17.254 -11.818 -8.980 -6.133 -0.5785</code></pre>
+## (Intercept)       13.070  25.542 29.776 34.149 46.8999
+## WMGTAWD           -9.660  -5.737 -3.752 -1.730  2.2199
+## NRTEN180           3.189   7.157  9.242 11.263 15.2542
+## WMGTAWD:NRTEN180 -17.485 -11.816 -8.989 -6.157 -0.5057</code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m5</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -671,26 +710,34 @@
 </pre></div>
 <p><img src="a05_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"></p>
 </div>
+</div>
 <div id="leaf-sheath-blight-severity-model-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h2>
+<div id="model-structure-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#model-structure-5" class="anchor"></a>Model Structure</h3>
+<p>Leaf sheath blight severity AUDPS, <code>LShB_sev_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit">
 <span class="kw">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makePSOCKcluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span>(<span class="kw">cl</span>)
 
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, .packages = <span class="st">"MCMCglmm"</span>) <span class="op">%dopar%</span> {
-  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(<span class="kw">LShB_sev_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-           random = <span class="op">~</span> <span class="kw">REP</span>,
-           data = <span class="kw">AUDPS_2016</span>,
-           verbose = <span class="fl">FALSE</span>,
-           prior = <span class="kw">eprior</span>,
-           nitt = <span class="fl">55000</span>,
-           burnin = <span class="fl">5000</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
+    <span class="kw">LShB_sev_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
+    random = <span class="op">~</span> <span class="kw">REP</span>,
+    data = <span class="kw">AUDPS_2016</span>,
+    verbose = <span class="fl">FALSE</span>,
+    prior = <span class="kw">eprior</span>,
+    nitt = <span class="fl">55000</span>,
+    burnin = <span class="fl">5000</span>
+  )
 }
 
 <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="kw">cl</span>)
 
-<span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m6</span>, <span class="fu">function</span>(<span class="kw">m</span>) <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
+<span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">m6</span>, <span class="fu">function</span>(<span class="kw">m</span>)
+  <span class="kw">m</span><span class="op">$</span><span class="kw">Sol</span>)
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="kw">mcmc.list</span>, <span class="kw">m6</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m6</span>)
@@ -705,18 +752,18 @@
 ##    plus standard error of the mean:
 ## 
 ##                     Mean     SD Naive SE Time-series SE
-## (Intercept)       0.9962 0.5286 0.003737       0.003520
-## WMGTAWD           0.2358 0.1626 0.001150       0.001150
-## NRTEN180          0.5521 0.1617 0.001143       0.001120
-## WMGTAWD:NRTEN180 -0.4955 0.2282 0.001614       0.001601
+## (Intercept)       0.9932 0.5088 0.003598       0.003424
+## WMGTAWD           0.2337 0.1627 0.001151       0.001143
+## NRTEN180          0.5499 0.1624 0.001149       0.001141
+## WMGTAWD:NRTEN180 -0.4926 0.2293 0.001621       0.001606
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                      2.5%     25%     50%     75%   97.5%
-## (Intercept)       0.09584  0.8131  0.9950  1.1792  1.8971
-## WMGTAWD          -0.08755  0.1275  0.2364  0.3445  0.5551
-## NRTEN180          0.23364  0.4457  0.5522  0.6598  0.8674
-## WMGTAWD:NRTEN180 -0.94112 -0.6479 -0.4964 -0.3428 -0.0408</code></pre>
+##                      2.5%     25%     50%     75%    97.5%
+## (Intercept)       0.13434  0.8092  0.9932  1.1755  1.81217
+## WMGTAWD          -0.08723  0.1257  0.2351  0.3428  0.55057
+## NRTEN180          0.22878  0.4420  0.5494  0.6582  0.87136
+## WMGTAWD:NRTEN180 -0.94570 -0.6462 -0.4934 -0.3398 -0.04447</code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mfrow = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">1</span>), mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>))
 <span class="fu"><a href="https://rdrr.io/pkg/coda/man/gelman.plot.html">gelman.plot</a></span>(<span class="kw">m6</span>, auto.layout = <span class="fl">FALSE</span>)
@@ -726,7 +773,7 @@
 <pre><code>## Potential scale reduction factors:
 ## 
 ##                  Point est. Upper C.I.
-## (Intercept)            1.02       1.02
+## (Intercept)            1.03       1.03
 ## WMGTAWD                1.00       1.00
 ## NRTEN180               1.00       1.00
 ## WMGTAWD:NRTEN180       1.00       1.00
@@ -744,6 +791,7 @@
 <span class="fu"><a href="../reference/plot_leaf_estimates.html">plot_leaf_estimates</a></span>(<span class="kw">m6</span>)
 </pre></div>
 <p><img src="a05_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"><img src="a05_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"></p>
+</div>
 </div>
 <div id="model-fit" class="section level2">
 <h2 class="hasAnchor">
@@ -765,7 +813,7 @@
 <div id="tiller-sheath-blight-severity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-sheath-blight-severity" class="anchor"></a>Tiller Sheath Blight Severity</h2>
-<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment. The AWD water management was not significantly different from the base PDL treatment.</p>
+<p>In 2015 both the N100 and N120 rates were significantly different than the N0 treatment . The AWD water management was not significantly different from the base PDL treatment.</p>
 <p>In 2016 the N180 was significantly different from the N60 rate. The AWD water management was also significantly different from the base PDL treatment.</p>
 </div>
 <div id="leaf-sheath-blight-severity" class="section level2">
@@ -780,12 +828,14 @@
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information used in the posterior estimate graphs to be used in the paper.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit">
-<span class="kw">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"TInc_15"</span> = <span class="kw">m1</span>,
-               <span class="st">"TSev_15"</span> = <span class="kw">m2</span>,
-               <span class="st">"LSev_15"</span> = <span class="kw">m3</span>,
-               <span class="st">"TInc_16"</span> = <span class="kw">m4</span>,
-               <span class="st">"TSev_16"</span> = <span class="kw">m5</span>,
-               <span class="st">"LSev_16"</span> = <span class="kw">m6</span>)
+<span class="kw">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  <span class="st">"TInc_15"</span> = <span class="kw">m1</span>,
+  <span class="st">"TSev_15"</span> = <span class="kw">m2</span>,
+  <span class="st">"LSev_15"</span> = <span class="kw">m3</span>,
+  <span class="st">"TInc_16"</span> = <span class="kw">m4</span>,
+  <span class="st">"TSev_16"</span> = <span class="kw">m5</span>,
+  <span class="st">"LSev_16"</span> = <span class="kw">m6</span>
+)
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">models</span>, <span class="st">"../analysis/data/derived_data/models.Rds"</span>)
 </pre></div>
 </div>
