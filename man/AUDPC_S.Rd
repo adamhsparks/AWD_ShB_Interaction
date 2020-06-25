@@ -5,7 +5,7 @@
 \alias{AUDPC_S}
 \title{A Data Frame of Area Under the Disease Progress Curve and Stairs for Sheath Blight Observations}
 \format{
-An object of class \code{data.frame} with 88 rows and 21 columns.
+An object of class \code{data.frame} with 184 rows and 18 columns.
 }
 \usage{
 AUDPC_S

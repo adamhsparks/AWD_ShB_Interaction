@@ -5,7 +5,7 @@
 \alias{N_rates}
 \title{A Data Frame of Nitrogen Rates and Split Application Timings}
 \format{
-An object of class \code{matrix} (inherits from \code{array}) with 5 rows and 5 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 5 rows and 4 columns.
 }
 \usage{
 N_rates
