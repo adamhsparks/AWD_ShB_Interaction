@@ -1,5 +1,5 @@
 ---
-title: "Visualise Data"
+title: "Data Visualisation"
 author: "A. H. Sparks"
 date: "`r Sys.Date()`"
 output:
@@ -7,14 +7,13 @@ output:
     toc: false
     theme: journal
 vignette: >
-  %\VignetteIndexEntry{Visualise_Data}
+  %\VignetteIndexEntry{Data Visualisation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 ```
 
 # Libraries
