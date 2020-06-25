@@ -88,13 +88,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="a04_check_residuals_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Check Data Residuals</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-06-12</h4>
+            <h4 class="date">2020-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/vignettes/a04_check_residuals.Rmd"><code>vignettes/a04_check_residuals.Rmd</code></a></small>
       <div class="hidden name"><code>a04_check_residuals.Rmd</code></div>
@@ -114,102 +114,156 @@
 <div id="tiller-incidence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-incidence" class="anchor"></a>2015 Tiller Incidence</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"rice.awd.shb"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis">"rice.awd.shb"</a></span>)
+</pre></div>
 <pre><code>## Loading required package: coda</code></pre>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"car"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-forge.r-project.org/projects/car">"car"</a></span>)
+</pre></div>
 <pre><code>## Loading required package: carData</code></pre>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">AUDPS_15</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">AUDPC_S</span>, <span class="no">YEAR</span> <span class="kw">==</span> <span class="fl">2015</span>)
-<span class="no">AUDPS_16</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">AUDPC_S</span>, <span class="no">YEAR</span> <span class="kw">==</span> <span class="fl">2016</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">AUDPS_15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">AUDPC_S</span>, <span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2015</span>)
+<span class="kw">AUDPS_16</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">AUDPC_S</span>, <span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2016</span>)
+</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Inc-1.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Inc-2.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Inc-3.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Inc-4.png" width="700"></p>
 <pre><code>## [1] 26 27</code></pre>
 </div>
 <div id="tiller-severity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-severity" class="anchor"></a>2015 Tiller Severity</h2>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Sev-1.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Sev-2.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Sev-3.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Tiller_Sev-4.png" width="700"></p>
 <pre><code>## [1] 71 72</code></pre>
 </div>
 <div id="leaf-severity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-severity" class="anchor"></a>2015 Leaf Severity</h2>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Leaf_Sev-1.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Leaf_Sev-2.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Leaf_Sev-3.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_15</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb28"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_15</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2015_Leaf_Sev-4.png" width="700"></p>
 <pre><code>## [1] 36 37</code></pre>
 </div>
 <div id="tiller-incidence-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-incidence-1" class="anchor"></a>2016 Tiller Incidence</h2>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb30"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Inc-1.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb32"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Inc-2.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb34"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Inc-3.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_inc_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb36"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_inc_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Inc-4.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
 </div>
 <div id="tiller-severity-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tiller-severity-1" class="anchor"></a>2016 Tiller Severity</h2>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb38"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Sev-1.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb40"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Sev-2.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb42"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Sev-3.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">TShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb44"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Tiller_Sev-4.png" width="700"></p>
 <pre><code>## [1] 61 62</code></pre>
 </div>
 <div id="leaf-severity-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#leaf-severity-1" class="anchor"></a>2016 Leaf Severity</h2>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"norm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb46"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"norm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Leaf_Sev-1.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb48"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"lnorm"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Leaf_Sev-2.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"exp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb50"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"exp"</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Leaf_Sev-3.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
-<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="no">AUDPS_16</span>$<span class="no">LShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, <span class="kw">df</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb52"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqp</a></span>(<span class="kw">AUDPS_16</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>, <span class="st">"chisq"</span>, df = <span class="fl">2</span>)
+</pre></div>
 <p><img src="a04_check_residuals_files/figure-html/2016_Leaf_Sev-4.png" width="700"></p>
 <pre><code>## [1]  9 10</code></pre>
 <p>Based on these graphs, few of the data are a good fit for a normal distribution. Ideally, we want to see the residuals close to the solid line and between the dotted lines. Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, <em>e.g.</em> a Bayesian analysis method could be used. The <em>MCMCglmm</em> package provides an easy way to implement this type of analysis.</p>
@@ -227,7 +281,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam Sparks, Nancy Castilla, Bjoern Ole Sander, Michael Noel.</p>
+  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel.</p>
 </div>
 
 <div class="pkgdown">
