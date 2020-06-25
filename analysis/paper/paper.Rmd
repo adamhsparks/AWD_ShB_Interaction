@@ -131,7 +131,7 @@ Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2^) with a buff
 Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm.
 In puddled plots a standing water layer of 3--5&nbsp;cm was maintained throughout the growing season. 
 
-The split--plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N_rate)).
+The split--plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
@@ -151,7 +151,7 @@ The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq&nbsp;m)
 The replication sizes were B1 --- 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2^) and B2 --- 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2^).
 A buffer 0.5&nbsp;m per split--plot was used and the overall experiment size was 3471.6&nbsp;m^2^.
 
-Split--plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg&nbsp;/&nbsp;ha as urea split into two applications) and N180 (180&nbsp;kg&nbsp;/&nbsp;ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N_rate)).
+Split--plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg&nbsp;/&nbsp;ha as urea split into two applications) and N180 (180&nbsp;kg&nbsp;/&nbsp;ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N-rates)).
 
 ### Crop Establishment {-}
 
@@ -206,15 +206,18 @@ However, the effects of N treatments N100 and N120 on tiller incidence caused bo
 
 Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c).
 Both the N100 and N120 treatment effects caused the tiller severity to be higher and clearly statistically different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c).
-However, the AWD water management was not clearly statistically different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)c, \@ref(fig:fig-5)c).
+However, the AWD water management was not clearly statistically different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)c, \@ref(fig:fig-6)a).
 
 ### Leaf Sheath Blight Severity {-}
 
 Severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Fig.&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
 As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly statistically different than the N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)e, \@ref(fig:fig-5)e).
-However, the AWD water management was not clearly statistically different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-5)e).
+However, the AWD water management was not clearly statistically different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-7)a).
 
-### The Interaction of Irrigation and N Management {-}
+## The Interaction of Irrigation and N Management {-}
+
+The interaction of irrigation treatment AWD with N rate N0 in 2015 was not clearly different from the control puddled irrigation and N60 for tiller incidence or severity.
+For leaf severity the interaction of irrigation and N management was not clearly different from the control puddled irrigation and N60 nitrogen rate.
 
 ## 2016 Experiment {-}
 
@@ -227,23 +230,23 @@ The N treatment N180 value was higher and clearly statistically different than t
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Fig.&nbsp;\@ref(fig:fig-2)d).
 In 2016 the N180 treatment was again higher and clearly statistically different from the N60 treatment, with N180 severity being higher (Fig.&nbsp;\@ref(fig:fig-4)d, \@ref(fig:fig-5)d).
-The AWD water management, which was lower than the puddled treatment, was also clearly statistically different (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d).
+The AWD water management, which was lower than the puddled treatment, was also clearly statistically different (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-6)b).
 
 ### Leaf Sheath Blight Severity {-}
 
-In 2016 the neither of the treatments, N rate or water management, were clearly statistically different from the control treatments, N60 and puddling water management, for leaf sheath blight severity (Fig.&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-5)f, \@ref(fig:fig-4)f, \@ref(fig:fig-5)f).
+In 2016 the neither of the treatments, N rate or water management, were clearly statistically different from the control treatments, N60 and puddling water management, for leaf sheath blight severity (Fig.&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-5)b, \@ref(fig:fig-4)b, \@ref(fig:fig-7)b).
 
-### The Interaction of Irrigation and N Management {-}
+## The Interaction of Irrigation and N Management {-}
 
-The interaction of irrigation treatment AWD with N rate N0 in 2015 or N180 in 2016 was not clearly different from the control puddled irrigation and N60 for tiller incidence or severity in either experiment.
-For leaf severity in the 2015 experiment the interaction was not clearly different.
-In 2016 the interaction of N180 and N180 was clearly lower than the control puddled irrigation and N60 rate.
+The interaction of irrigation treatment AWD with N rate of N180 in 2016 was not clearly different from the control puddled irrigation and N60 for tiller incidence or severity in either experiment.
+In the 2016 experiment the interactions were not clearly different for leaf severity from the control puddled irrigation and N60.
+In 2016 the interaction of N180 and AWD was clearly lower than the control puddled irrigation and N60 rate.
 
 # Discussion {-}
 
 In both experiments we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology.
-In only one instance were we able to detect any statistically clear effect of AWD on sheath blight.
-In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight pressure.
+In only one instance were we able to detect any statistically clear effect of AWD alone on sheath blight.
+In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
 
 The findings of the effects of N rates on sheath blight were as expected in both experiments.
 Higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in the 2016 experiment there were no clear differences due to the N rate tiller and leaf severity.
@@ -256,7 +259,7 @@ By increasing the plot size and increasing inoculum amount applied to a smaller 
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Fig.&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 Based on these results, it is suggested that the methods used in the 2016 experiment should be adopted in any further studies of this kind.
 
-It should be noted that the levels of leaf severity remained low (< 1 \%) throughout the growing season in all treatments for both years.
+It should be noted that the levels of leaf severity remained low (< 1&nbsp;\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
 However, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases.
 
@@ -299,18 +302,23 @@ Lastly, we would like to remember our team mate Michael Noel, an integral part o
 
 \onecolumn
 
-# Tables {-}
+# Table {-}
 
 ```{r N-rates}
-
+colnames(N_rates) <-
+  c(
+    "Total",
+    "Basal",
+    "Tillering",
+    "Panicle Initiation"
+  )
 pander(N_rates,
-      caption = "Nitrogen application rates for 2015 and 2016. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
+       caption = "(#tab:N-rates) Nitrogen application rates for 2015 and 2016 in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
 ```
 
-# Figures {-}
+\newpage
 
-##### Sheath blight progress for water management treatments {-}
-\\
+# Figures {-}
 
 ```{r fig-1, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications.", fig.width=3.31}
 
@@ -441,9 +449,6 @@ p3 <- ggplot(RAW_data,
 
 grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
 ```
-
-##### Sheath blight progress for N treatments {-}
-\\
 
 ```{r fig-2, fig.cap="Sheath blight incidence progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180). Points represent the mean observations of four replications."}
 
@@ -579,9 +584,6 @@ p6 <- ggplot(RAW_data,
 grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 ```
 
-##### Sheath Blight Incidence Boxplot for water management {-}
-\\
-
 ```{r fig-3, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid--point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD)."}
 
 p7_anot <- data.frame(
@@ -665,9 +667,6 @@ p9 <- ggplot(AUDPC_S,
 
 grid.arrange(p7, p8, p9, ncol = 1, nrow = 3)
 ```
-
-##### Tiller sheath blight incidence boxplot for N rate {-}
-\\
 
 ```{r fig-4, fig.cap="Sheath blight severity progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid--point percentage value to calculate the AUDPS. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
  
@@ -753,48 +752,46 @@ p12 <- ggplot(AUDPC_S,
 grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
-##### Tiller Estimates Plots {-}
-\\
-
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on sheath blight tiller incidence and tiller severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence and tiller severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
-par(mfcol = c(2, 2))
+par(mfcol = c(2, 1))
 
-plot_tiller_estimates_paper(models[[1]], main_title = "2015")
-mtext(text = "Tiller Incidence", side = 2, line = 6)
+plot_tiller_estimates_paper(models[[1]])
 mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
 
-plot_tiller_estimates_paper(models[[2]])
-mtext(text = "Tiller Severity", side = 2, line = 6)
-mtext(text = "c", side = 3, line = 0, adj = 1, cex = 0.75)
-
-plot_tiller_estimates_paper(models[[4]], main_title = "2016")
+plot_tiller_estimates_paper(models[[4]])
 mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 
-plot_tiller_estimates_paper(models[[5]])
-mtext(text = "d", side = 3, line = 0, adj = 1, cex = 0.75)
 par(mfcol = c(1, 1))
 ```
 
-##### Leaf estimates plots {-}
-\\
-
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on sheath blight leaf severity. Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
+```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
 
 par(mfcol = c(2, 1))
-plot_tiller_estimates_paper(models[[3]], main_title = "2015")
-mtext(text = "Leaf Severity", side = 2, line = 6)
+
+plot_tiller_estimates_paper(models[[2]])
 mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
 
-plot_tiller_estimates_paper(models[[6]], main_title = "2016")
+plot_tiller_estimates_paper(models[[5]])
+mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
+par(mfcol = c(1, 1))
+```
+
+```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on leaf sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg&nbsp;/&nbsp;ha N (N100) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg&nbsp;/&nbsp;ha N (N60) and 180&nbsp;kg&nbsp;/&nbsp;ha N (N180)."}
+
+par(mfcol = c(2, 1))
+plot_tiller_estimates_paper(models[[3]])
+mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
+
+plot_tiller_estimates_paper(models[[6]])
 mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 ```
 
-<!-- ##### pagebreak -->
-
 \newpage
+
+<!-- Use for MS Word ##### pagebreak -->
 
 # Colophon {-}
 
