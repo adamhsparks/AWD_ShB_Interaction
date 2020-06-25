@@ -72,10 +72,10 @@ Rice's reliance on freely available water water, coupled with the effects of cli
 
 Sheath blight disease, caused by (*Thanatephorus cucumeris* (A.B. Frank) Donk.), anastomosis group 1, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
 Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
-Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5--10 &nbsp;\% annually.
+Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 -- 10&nbsp;\% annually.
 The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
-Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15--40&nbsp;\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007].
+Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15 -- 40&nbsp;\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007].
 In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress.
 In order to avoid yield decline under AWD, "safe" thresholds have been developed.
 Under safe AWD irrigation water is applied when the field water level reaches 15&nbsp;cm below the soil surface [@Richards2014].
@@ -103,7 +103,7 @@ We hypothesized that AWD would not have a positive effect on sheath blight incid
 
 ## Experimental Site {-}
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Ba\~nos, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E) in 2015 and 2016 dry seasons from December to May.
 In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment.
 The differences are detailed in the following sections.
 
@@ -129,7 +129,7 @@ The main plot size was 12&nbsp;m x 12&nbsp;m (144&nbsp;m^2^), with a split--plot
 Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2^) with a buffer of 1&nbsp;m per split--plot for a whole experiment size of 1,152&nbsp;m^2^.
 
 Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm.
-In puddled plots a standing water layer of 3--5&nbsp;cm was maintained throughout the growing season. 
+In puddled plots a standing water layer of 3 -- 5&nbsp;cm was maintained throughout the growing season. 
 
 The split--plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N-rates)).
 
@@ -259,19 +259,22 @@ By increasing the plot size and increasing inoculum amount applied to a smaller 
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Fig.&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 Based on these results, it is suggested that the methods used in the 2016 experiment should be adopted in any further studies of this kind.
 
-It should be noted that the levels of leaf severity remained low (< 1&nbsp;\%) throughout the growing season in all treatments for both years.
+It should be noted that the levels of leaf severity remained low (<&nbsp;1&nbsp;\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
-However, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases.
+However, it should be noted that normally it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy in the wet season.
+However, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
 
 As the rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
-Manually transplanted rice had higher apparent infection rates than direct seeded rice. As manual transplanting becomes less common due to labor constraints, sheath blight risk may be decreased (CITATION XXXX) due changes in establishment practices.
+Manually transplanted rice had higher apparent infection rates than direct seeded rice.
+As manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due changes in establishment practices.
 A combination of AWD and direct seeded rice could be beneficial for both saving water and reducing the risk of sheath blight.
 
 Diseases are the only issue that farmers face when growing rice.
-Recently, Lorica *et al.* [@Lorica2020] have also found that AWD did not affect rodent damage in crops.
-Findings such as these are useful as IRRI promotes water-saving technologies like AWD because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
+Recently, Lorica *et al.* [-@Lorica2020] have also found that AWD did not affect rodent damage in crops.
+The findings our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice.
+Ultimately these findings are useful as IRRI promotes AWD as water-saving technologies because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
 
-Climate change is predicted to decrease sheath blight risk in the Korean peninsula over the longer term [@Kim2015].
+Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
 However, over the next 10 -- 20 years the risk is predicted to remain the same as from 2000 -- 2010 [@Kim2015].
 Therefore, it is likely to remain an important disease in the near future with little resistance available in current varieties.
 However, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease.
