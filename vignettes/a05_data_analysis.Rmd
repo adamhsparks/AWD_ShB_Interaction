@@ -205,7 +205,7 @@ plot_tiller_estimates(m1)
 
 Tiller sheath blight severity AUDPS, `TShB_sev_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a rando
+Replicate, `REP` is treated as a random effect.
 
 ```{r 2015_TShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -248,7 +248,7 @@ plot_tiller_estimates(m2)
 
 Leaf sheath blight severity AUDPS, `LShB_sev_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a rando
+Replicate, `REP` is treated as a random effect.
 
 ```{r 2015_LShB_severity, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
@@ -295,7 +295,7 @@ plot_leaf_estimates(m3)
 
 Tiller sheath blight incidence AUDPS, `TShB_inc_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a rando
+Replicate, `REP` is treated as a random effect.
 
 ```{r 2016_TShB_incidence, cache=FALSE}
 cl <- makePSOCKcluster(detectCores())
