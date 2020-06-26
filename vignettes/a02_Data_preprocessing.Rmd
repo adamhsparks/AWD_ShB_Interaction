@@ -456,8 +456,10 @@ DS2016 <-
     -SMPL,
     -NRTE,
     -HILL,
+    -NTIL,
     -GL,
     -DL,
+    -NTShB,
     -NSHShB,
     -TIL
   )
@@ -480,8 +482,7 @@ DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 DS2016 <-
   DS2016 %>%
   group_by(DATE, ASMT, DAI, REP, PLOT, TRT, WMGT, NRTE, SMPL, HILL) %>%
-  mutate(TShB_incidence = NTShB / NTIL) %>% 
-  select(-c(NTShB, NTIL))
+  mutate(TShB_incidence = NTShB / NTIL)
 
 # rename column to match 2015 names
 DS2016 <- rename(DS2016, TIL_ShB = NSHShB)
@@ -690,7 +691,7 @@ TShB_inc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_inc_wide <-
+TShB_inc_15_wide <-
   reshape2::dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_inc")
 
 TShB_perc_15 <-
@@ -700,7 +701,7 @@ TShB_perc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_perc_wide <-
+TShB_perc_15_wide <-
   reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2015 Leaf Severity setup -----------------------------------------------------
@@ -711,7 +712,7 @@ LShB_perc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-LShB_perc_wide <-
+LShB_perc_15_wide <-
   reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 TShB_inc_15 <-
@@ -722,25 +723,25 @@ TShB_inc_15 <-
   arrange(PLOT)
 
 # AUDPS data frame for incidence------------------------------------------------
-TShB_inc_AUDPS <-
-  audps(evaluation = TShB_inc_wide[, 2:6],
+TShB_inc_15_AUDPS <-
+  audps(evaluation = TShB_inc_15_wide[, 2:6],
         dates = pull(TShB_inc_15[1:5, 6]))
 
-TShB_percent_AUDPS <-
-  audps(evaluation = TShB_perc_wide[, 2:6],
+TShB_percent_15_AUDPS <-
+  audps(evaluation = TShB_perc_15_wide[, 2:6],
         dates = pull(TShB_perc_15[1:5, 6]))
 
-LShB_percent_AUDPS <-
-  audps(evaluation = LShB_perc_wide[, 2:6],
+LShB_percent_15_AUDPS <-
+  audps(evaluation = LShB_perc_15_wide[, 2:6],
         dates = pull(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
   as_tibble(
     cbind(
       PLOT = 1:24,
-      TShB_inc_AUDPS,
-      TShB_percent_AUDPS,
-      LShB_percent_AUDPS
+      TShB_inc_15_AUDPS,
+      TShB_percent_15_AUDPS,
+      LShB_percent_15_AUDPS
     )
   )
 
@@ -751,7 +752,7 @@ TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
 ```
 
-## 2016
+## 2016 Area Under Curve Calculations
 
 ```{r area_2016, message=FALSE}
 DS2016 <- subset(RAW_data, YEAR == "2016")
@@ -763,7 +764,7 @@ TShB_inc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_inc_wide <-
+TShB_inc_16_wide <-
   reshape2::dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 # 2016 Tiller Severity setup ---------------------------------------------------
@@ -774,7 +775,7 @@ TShB_perc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_perc_wide <-
+TShB_perc_16_wide <-
   reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2016 Leaf Severity setup -----------------------------------------------------
@@ -785,29 +786,29 @@ LShB_perc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-LShB_perc_wide <-
+LShB_perc_16_wide <-
   reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 # 2016 audpS -------------------------------------------------------------------
 TShB_inc_16_AUDPS <-
-  audps(evaluation = TShB_inc_wide[, 2:5],
+  audps(evaluation = TShB_inc_16_wide[, 2:5],
         dates = pull(TShB_inc_16[1:4, 6]))
 
 TShB_percent_16_AUDPS <-
-  audps(evaluation = TShB_perc_wide[, 2:5],
+  audps(evaluation = TShB_perc_16_wide[, 2:5],
         dates = pull(TShB_perc_16[1:4, 6]))
 
 LShB_percent_16_AUDPS <-
-  audps(evaluation = LShB_perc_wide[, 2:5],
+  audps(evaluation = LShB_perc_16_wide[, 2:5],
         dates = pull(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
   as_tibble(
     cbind(
       PLOT = 1:16,
-      TShB_inc_AUDPS,
-      TShB_percent_AUDPS,
-      LShB_percent_AUDPS
+      TShB_inc_16_AUDPS,
+      TShB_percent_16_AUDPS,
+      LShB_percent_16_AUDPS
     )
   )
 
@@ -818,7 +819,7 @@ TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = "PLOT")
 ```
 
-# Merge Years' Data
+# Merge AUDPC and AUDPS Data
 
 ```{r merge_areas}
 AUDPS <- as.data.frame(as_tibble(rbind(ShB_15, ShB_16)))
