@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A Tidy Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations — AUDPS • rice.awd.pests</title>
+<title>A Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations — AUDPS • rice.awd.pests</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="A Tidy Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations — AUDPS" />
+<meta property="og:title" content="A Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations — AUDPS" />
 <meta property="og:description" content="A dataset containing the alternate wetting and drying study data observations
 and calculated Area Under the Disease Progress Stairs (AUDPS)" />
 
@@ -99,13 +99,16 @@ and calculated Area Under the Disease Progress Stairs (AUDPS)" />
       <a href="../articles/a01_AWD_Sheath_Blight_Study_Notes.html">AWD Sheath Blight Study Notes</a>
     </li>
     <li>
-      <a href="../articles/a02_raw_data_visualisation.html">Visualise Data</a>
+      <a href="../articles/a02_Data_preprocessing.html">Data Preprocessing and Area Calculations</a>
     </li>
     <li>
-      <a href="../articles/a03_check_residuals.html">Check Data Residuals</a>
+      <a href="../articles/a03_raw_data_visualisation.html">Data Visualisation</a>
     </li>
     <li>
-      <a href="../articles/a04_data_analysis.html">Sheath Blight Analysis</a>
+      <a href="../articles/a04_check_residuals.html">Check Data Residuals</a>
+    </li>
+    <li>
+      <a href="../articles/a05_data_analysis.html">Sheath Blight Analysis</a>
     </li>
   </ul>
 </li>
@@ -130,7 +133,7 @@ and calculated Area Under the Disease Progress Stairs (AUDPS)" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A Tidy Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations</h1>
+    <h1>A Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations</h1>
     <small class="dont-index">Source: <a href='https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>AUDPS.Rd</code></div>
     </div>
@@ -140,12 +143,12 @@ and calculated Area Under the Disease Progress Stairs (AUDPS)" />
 and calculated Area Under the Disease Progress Stairs (AUDPS)</p>
     </div>
 
-    <pre class="usage"><span class='no'>AUDPS</span></pre>
+    <pre class="usage"><span class='kw'>AUDPS</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 88 rows and 14 columns.</p>
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 184 rows and 11 columns.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -158,7 +161,7 @@ and calculated Area Under the Disease Progress Stairs (AUDPS)</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Adam Sparks, Nancy Castilla, Bjoern Ole Sander, Michael Noel.</p>
+  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel.</p>
 </div>
 
 <div class="pkgdown">
