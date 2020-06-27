@@ -287,6 +287,7 @@ The data are freely and openly available from <https://doi.org/10.5281/zenodo.38
 # Table {-}
 
 ```{r N-rates}
+N_rates <- N_rates[, -1]
 colnames(N_rates) <-
   c(
     "Total",
@@ -575,7 +576,7 @@ p7_anot <- data.frame(
   y = c(15, 15)
 )
 
-p7 <- ggplot(AUDPC_S,
+p7 <- ggplot(AUDPS,
              aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
   geom_text(
@@ -601,8 +602,8 @@ p8_anot <- data.frame(
   y = c(32, 32)
 )
 
-p8 <- ggplot(AUDPC_S,
-             aes(x = WMGT, y = TShB_sev_AUDPS)) +
+p8 <- ggplot(AUDPS,
+             aes(x = WMGT, y = TShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p8_anot,
@@ -628,8 +629,8 @@ p9_anot <- data.frame(
   y = c(10, 10)
 )
 
-p9 <- ggplot(AUDPC_S,
-             aes(x = WMGT, y = LShB_sev_AUDPS)) +
+p9 <- ggplot(AUDPS,
+             aes(x = WMGT, y = LShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p9_anot,
@@ -659,7 +660,7 @@ p10_anot <- data.frame(
   y = c(14, 14)
 )
 
-p10 <- ggplot(AUDPC_S,
+p10 <- ggplot(AUDPS,
              aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot() +
   geom_text(
@@ -685,8 +686,8 @@ p11_anot <- data.frame(
   y = c(32, 32)
 )
 
-p11 <- ggplot(AUDPC_S,
-             aes(x = NRTE, y = TShB_sev_AUDPS)) +
+p11 <- ggplot(AUDPS,
+             aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p11_anot,
@@ -712,8 +713,8 @@ p12_anot <- data.frame(
   y = c(7, 7)
 )
 
-p12 <- ggplot(AUDPC_S,
-             aes(x = NRTE, y = LShB_sev_AUDPS)) +
+p12 <- ggplot(AUDPS,
+             aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p12_anot,
@@ -734,7 +735,7 @@ p12 <- ggplot(AUDPC_S,
 grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence and tiller severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180)."}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence and tiller severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
@@ -749,7 +750,7 @@ mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 par(mfcol = c(1, 1))
 ```
 
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180)."}
+```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
 par(mfcol = c(2, 1))
 
@@ -761,7 +762,7 @@ mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
 par(mfcol = c(1, 1))
 ```
 
-```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on leaf sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180)."}
+```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on leaf sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
 par(mfcol = c(2, 1))
 plot_tiller_estimates_paper(models[[3]])
