@@ -128,7 +128,8 @@ m1 <- brm(
   formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
   data    = AUDPS_2015,
   seed    = 27,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m1)
@@ -153,7 +154,8 @@ m2 <- brm(
   formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
   data    = AUDPS_2015,
   seed    = 27,
-  control = list(adapt_delta = 0.999)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m2)
@@ -178,7 +180,8 @@ m3 <- brm(
   formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
   data = AUDPS_2015,
   seed = 27,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m3)
@@ -207,7 +210,8 @@ m4 <- brm(
   formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
   data = AUDPS_2016,
   seed = 27,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m4)
@@ -233,7 +237,8 @@ m5 <- brm(
   formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
   data = AUDPS_2016,
   seed = 27,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m5)
@@ -258,7 +263,8 @@ m6 <- brm(
   formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
   data = AUDPS_2016,
   seed = 27,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.999),
+  iter = 5000
 )
 
 summary(m6)
@@ -276,32 +282,13 @@ The models all appear to be good fits.
 
 None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.
 
-The random effects all appear to be acceptable, the dotted line stays near to the solid line with no discernible patterns.
-
 ## Conclusions
 
 ### Tiller Sheath Blight Incidence
 
-In 2015 both the nitrogen rates, N100 and N120, were significant when compared with the base N0 rate, water management was not significantly different.
-
-In 2016 the nitrogen rate N180, was significantly different than the base N60 rate, water management was not significantly different.
-
 ## Tiller Sheath Blight Severity
 
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment
-. The AWD water management was not significantly different from the base PDL treatment.
-
-In 2016 the N180 was significantly different from the N60 rate.
-The AWD water management was also significantly different from the base PDL treatment.
-
 ## Leaf Sheath Blight Severity
-
-In 2015 both the N100 and N120 rates were significantly different than the N0 treatment.
-The AWD water management was not significantly different from the control PDL treatment.
-In the leaf phase of the disease neither N by WMGT interaction was significant.
-
-In 2016 the neither of the treatments, nitrogen rate or water management, were significantly different from the base treatments for leaf sheath blight severity.
-The N180 by AWD interaction was significantly different from the N60 by PDL water management.
 
 # Save Model Information
 
