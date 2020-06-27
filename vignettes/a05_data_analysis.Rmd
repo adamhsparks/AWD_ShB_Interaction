@@ -14,18 +14,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use `MCMCglmm()` for a split plot analysis rather than a `lmer()` model.
-The `MCMCglmm()` model will work for all the data regardless of the residuals.
+Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use a naive Bayesian approach using the _brms_ package's `brm()` for a split plot analysis rather than a `lmer()` model.
 
 # Interpreting These Analyses
-
-The _MCMCglmm_ documentation provides an excellent resource for interpreting the outputs for each of the models below.
-
-```{r MCMCglmm, eval=FALSE}
-library("MCMCglmm")
-vignette("Overview")
-vignette("CourseNotes")
-```
 
 When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
 
@@ -49,30 +40,14 @@ Before the analysis, note that due to changes between the years, the analysis mu
 The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this.
 Therefore, the analyses will be conducted separately such that comparisons will only be observational and cannot be statistically compared.
 
-### _MCMCglmm_ Model Fitting Notes
-
-Fitting the models with the default iterations resulted in some less than acceptable models.
-Because of this, the number of iterations has been increased, `nitt = 55000,` and `burnin = 5000`.
-This results in a sample size of 5000 and much smaller errors for random effects and better models.
-
 # Setup
 
-Use `set.seed()` for reproducibility.
-
 ```{r set_seed, message=FALSE}
-library("coda")
+library("brms")
 library("dplyr")
 library("rice.awd.shb")
-library("reshape2")
-library("magrittr")
-library("MCMCglmm")
-library("foreach")
-library("doParallel")
-library("parallel")
-library("plotMCMC")
-library("tidyr")
-
-set.seed(27)
+library("ggplot2")
+theme_set(theme_minimal())
 ```
 
 The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
@@ -82,7 +57,7 @@ Create individual data frames for the analysis.
 
 ```{r create_analysis_df, cache=FALSE, message=FALSE}
 # create 2015 data frame
-AUDPS_2015 <- as.data.frame(AUDPC_S[AUDPC_S$YEAR == 2015, ])
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of  analysis
@@ -90,7 +65,7 @@ AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 
 # create 2016 data frame
-AUDPS_2016 <- as.data.frame(AUDPC_S[AUDPC_S$YEAR == 2016, ])
+AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of  analysis
@@ -108,28 +83,28 @@ Check for correlation between the tiller incidence and the severity ratings for 
 ```{r correlation}
 # 2015 Tiller Severity Correlation
 cor.test(AUDPS_2015$TShB_inc_AUDPS,
-         AUDPS_2015$TShB_sev_AUDPS,
+         AUDPS_2015$TShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2015 Leaf Severity Correlation
 cor.test(AUDPS_2015$TShB_inc_AUDPS,
-         AUDPS_2015$LShB_sev_AUDPS,
+         AUDPS_2015$LShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Tiller Severity Correlation
 cor.test(AUDPS_2016$TShB_inc_AUDPS,
-         AUDPS_2016$TShB_sev_AUDPS,
+         AUDPS_2016$TShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Leaf Severity Correlation
 cor.test(AUDPS_2016$TShB_inc_AUDPS,
-         AUDPS_2016$LShB_sev_AUDPS,
+         AUDPS_2016$LShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
@@ -137,22 +112,6 @@ cor.test(AUDPS_2016$TShB_inc_AUDPS,
 
 The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves.
 Based on this, the interactions of the incidence and severity will not be analysed.
-
-# Specify Priors
-
-As `MCMCglmm` is a Bayesian analysis, it requires priors to be set.
-Here we set flat weakly-informative priors that have a uniform low degree of belief in all parameters for all six models we will create since we don't have good prior knowledge of what the curves should look like.
-
-```{r priors}
-eprior <- list(R = list(V = 1,
-                        nu = 0.002),
-               G = list(G1 = list(
-                 V = 1,
-                 n = 1,
-                 alpha.mu = 0,
-                 alpha.V = 25 ^ 2
-               )))
-```
 
 # 2015 Models
 
@@ -165,124 +124,70 @@ The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixe
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2015_TShB_incidence, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m1 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    TShB_inc_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2015,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000
-  )
-}
-
-stopCluster(cl)
-
-m1 <- lapply(m1, function(m)
-  m$Sol)
-m1 <- do.call(mcmc.list, m1)
+m1 <- brm(
+  formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data    = AUDPS_2015,
+  seed    = 27,
+  control = list(adapt_delta = 0.99)
+)
 
 summary(m1)
 
-par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m1, auto.layout = FALSE)
+prior_summary(m1)
 
-gelman.diag(m1)
+plot(m1)
 
-par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
-plot(m1, ask = FALSE, auto.layout = FALSE)
-
-plot_tiller_estimates(m1)
+conditional_effects(m1)
 ```
 
 ## 2015 Tiller Sheath Blight Severity Model
 
 ### Model Structure
 
-Tiller sheath blight severity AUDPS, `TShB_sev_AUDPS` is the response variable.
+Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2015_TShB_severity, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m2 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    TShB_percent_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2015,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000
-  )
-}
-
-stopCluster(cl)
-
-m2 <- lapply(m2, function(m)
-  m$Sol)
-m2 <- do.call(mcmc.list, m2)
+m2 <- brm(
+  formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data    = AUDPS_2015,
+  seed    = 27,
+  control = list(adapt_delta = 0.999)
+)
 
 summary(m2)
 
-par(mfrow = c(6, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m2, auto.layout = FALSE)
+prior_summary(m2)
 
-gelman.diag(m2)
+plot(m2)
 
-par(mfrow = c(6, 2), mar = c(2, 1, 1, 1))
-plot(m2, ask = FALSE, auto.layout = FALSE)
-
-plot_tiller_estimates(m2)
+conditional_effects(m2)
 ```
 
 ## 2015 Leaf Sheath Blight Severity Model
 
 ### Model Structure
 
-Leaf sheath blight severity AUDPS, `LShB_sev_AUDPS` is the response variable.
+Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2015_LShB_severity, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m3 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    LShB_sev_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2015,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000
-  )
-}
-
-stopCluster(cl)
-
-m3 <- lapply(m3, function(m)
-  m$Sol)
-m3 <- do.call(mcmc.list, m3)
+m3 <- brm(
+  formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data = AUDPS_2015,
+  seed = 27,
+  control = list(adapt_delta = 0.99)
+)
 
 summary(m3)
 
-par(mfrow = c(8, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m3, auto.layout = FALSE)
+prior_summary(m3)
 
-gelman.diag(m3)
+plot(m3)
 
-par(mfrow = c(8, 2), mar = c(2, 1, 1, 1))
-plot(m3, ask = FALSE, auto.layout = FALSE)
-
-plot_leaf_estimates(m3)
+conditional_effects(m3)
 ```
 
 *******
@@ -298,38 +203,20 @@ The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixe
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2016_TShB_incidence, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m4 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    TShB_inc_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2016,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000
-  )
-}
-
-stopCluster(cl)
-
-m4 <- lapply(m4, function(m)
-  m$Sol)
-m4 <- do.call(mcmc.list, m4)
+m4 <- brm(
+  formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data = AUDPS_2016,
+  seed = 27,
+  control = list(adapt_delta = 0.99)
+)
 
 summary(m4)
 
-par(mfrow = c(5, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m4, auto.layout = FALSE)
+prior_summary(m4)
 
-gelman.diag(m4)
+plot(m4)
 
-par(mfrow = c(5, 2), mar = c(2, 1, 1, 1))
-plot(m4, ask = FALSE, auto.layout = FALSE)
-
-plot_tiller_estimates(m4)
+conditional_effects(m4)
 ```
 
 
@@ -337,87 +224,50 @@ plot_tiller_estimates(m4)
 
 ### Model Structure
 
-Tiller sheath blight severity AUDPS, `TShB_sev_AUDPS` is the response variable.
+Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2016_TShB_severity, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m5 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    TShB_percent_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2016,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000,
-    thin = 10
-  )
-}
-
-stopCluster(cl)
-
-m5 <- lapply(m5, function(m)
-  m$Sol)
-m5 <- do.call(mcmc.list, m5)
+m5 <- brm(
+  formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data = AUDPS_2016,
+  seed = 27,
+  control = list(adapt_delta = 0.99)
+)
 
 summary(m5)
 
-par(mfrow = c(4, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m5, auto.layout = FALSE)
+prior_summary(m5)
 
-gelman.diag(m5)
+plot(m5)
 
-par(mfrow = c(4, 2), mar = c(2, 1, 1, 1))
-plot(m5, ask = FALSE, auto.layout = FALSE)
-
-plot_tiller_estimates(m5)
+conditional_effects(m5)
 ```
 
 ## 2016 Leaf Sheath Blight Severity Model
 
 ### Model Structure
 
-Leaf sheath blight severity AUDPS, `LShB_sev_AUDPS` is the response variable.
+Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2016_LShB_severity, cache=FALSE}
-cl <- makePSOCKcluster(detectCores())
-registerDoParallel(cl)
-
-m6 <- foreach(1:4, .packages = "MCMCglmm") %dopar% {
-  MCMCglmm(
-    LShB_sev_AUDPS ~ WMGT * NRTE,
-    random = ~ REP,
-    data = AUDPS_2016,
-    verbose = FALSE,
-    prior = eprior,
-    nitt = 55000,
-    burnin = 5000
-  )
-}
-
-stopCluster(cl)
-
-m6 <- lapply(m6, function(m)
-  m$Sol)
-m6 <- do.call(mcmc.list, m6)
+m6 <- brm(
+  formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
+  data = AUDPS_2016,
+  seed = 27,
+  control = list(adapt_delta = 0.99)
+)
 
 summary(m6)
 
-par(mfrow = c(5, 1), mar = c(2, 2, 1, 2))
-gelman.plot(m6, auto.layout = FALSE)
+prior_summary(m6)
 
-gelman.diag(m6)
+plot(m6)
 
-par(mfrow = c(5, 2), mar = c(2, 1, 1, 1))
-plot(m6, ask = FALSE, auto.layout = FALSE)
-
-plot_leaf_estimates(m6)
+conditional_effects(m6)
 ```
 
 ## Model Fit
