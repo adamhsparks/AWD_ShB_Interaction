@@ -26,7 +26,9 @@ Below are several tests for each of the different sets of data using four differ
 
 - Chi-squared.
 
-## 2015 Tiller Incidence
+# 2015
+
+## Tiller Incidence
 
 ```{r load_libraries}
 library("rice.awd.shb")
@@ -34,8 +36,8 @@ library("car")
 ```
 
 ```{r create data_frames, cache=FALSE}
-AUDPS_15 <- subset(AUDPC_S, YEAR == 2015)
-AUDPS_16 <- subset(AUDPC_S, YEAR == 2016)
+AUDPS_15 <- subset(AUDPS, YEAR == 2015)
+AUDPS_16 <- subset(AUDPS, YEAR == 2016)
 ```
 
 ```{r 2015_Tiller_Inc, cache=FALSE}
@@ -45,7 +47,7 @@ qqp(AUDPS_15$TShB_inc_AUDPS, "exp")
 qqp(AUDPS_15$TShB_inc_AUDPS, "chisq", df = 2)
 ```
 
-## 2015 Tiller Severity
+## Tiller Severity
 
 ```{r 2015_Tiller_Sev, cache=FALSE}
 qqp(AUDPS_15$TShB_percent_AUDPS, "norm")
@@ -54,7 +56,7 @@ qqp(AUDPS_15$TShB_percent_AUDPS, "exp")
 qqp(AUDPS_15$TShB_percent_AUDPS, "chisq", df = 2)
 ```
 
-## 2015 Leaf Severity
+## Leaf Severity
 
 ```{r 2015_Leaf_Sev, cache=FALSE}
 qqp(AUDPS_15$LShB_percent_AUDPS, "norm")
@@ -63,7 +65,9 @@ qqp(AUDPS_15$LShB_percent_AUDPS, "exp")
 qqp(AUDPS_15$LShB_percent_AUDPS, "chisq", df = 2)
 ```
 
-## 2016 Tiller Incidence
+# 2016
+
+## Tiller Incidence
 
 ```{r 2016_Tiller_Inc, cache=FALSE}
 qqp(AUDPS_16$TShB_inc_AUDPS, "norm")
@@ -72,7 +76,7 @@ qqp(AUDPS_16$TShB_inc_AUDPS, "exp")
 qqp(AUDPS_16$TShB_inc_AUDPS, "chisq", df = 2)
 ```
 
-## 2016 Tiller Severity
+## Tiller Severity
 
 ```{r 2016_Tiller_Sev, cache=FALSE}
 qqp(AUDPS_16$TShB_percent_AUDPS, "norm")
@@ -81,7 +85,7 @@ qqp(AUDPS_16$TShB_percent_AUDPS, "exp")
 qqp(AUDPS_16$TShB_percent_AUDPS, "chisq", df = 2)
 ```
 
-## 2016 Leaf Severity
+## Leaf Severity
 
 ```{r 2016_Leaf_Sev, cache=FALSE}
 qqp(AUDPS_16$LShB_percent_AUDPS, "norm")
@@ -90,7 +94,8 @@ qqp(AUDPS_16$LShB_percent_AUDPS, "exp")
 qqp(AUDPS_16$LShB_percent_AUDPS, "chisq", df = 2)
 ```
 
+# Conclusions
+
 Based on these graphs, few of the data are a good fit for a normal distribution.
 Ideally, we want to see the residuals close to the solid line and between the dotted lines.
 Several of the data do not exhibit this behaviour, which suggests that using an analysis that does need these assumptions to be met, _e.g._ a Bayesian analysis method could be used.
-The _MCMCglmm_ package provides an easy way to implement this type of analysis.
