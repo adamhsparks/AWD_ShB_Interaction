@@ -31,10 +31,5 @@ Authors:
   \item Michael Noel
 }
 
-Other contributors:
-\itemize{
-  \item Titus von der Malsburg (\href{https://orcid.org/0000-0001-5925-5145}{ORCID}) [copyright holder]
-}
-
 }
 \keyword{internal}

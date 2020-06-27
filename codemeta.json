@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.1 (2020-06-06)",
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
   "author": [
     {
       "@type": "Person",
@@ -46,14 +46,7 @@
     }
   ],
   "contributor": {},
-  "copyrightHolder": [
-    {
-      "@type": "Person",
-      "givenName": "Titus",
-      "familyName": "von der Malsburg",
-      "@id": "https://orcid.org/0000-0001-5925-5145"
-    }
-  ],
+  "copyrightHolder": {},
   "funder": {},
   "maintainer": [
     {
@@ -195,18 +188,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "coda",
-      "name": "coda",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=coda"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "agricolae",
       "name": "agricolae",
       "provider": {
@@ -216,6 +197,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=agricolae"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "brms",
+      "name": "brms",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=brms"
     },
     {
       "@type": "SoftwareApplication",
@@ -240,18 +233,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=carData"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "doParallel",
-      "name": "doParallel",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=doParallel"
     },
     {
       "@type": "SoftwareApplication",
@@ -304,23 +285,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "graphics",
-      "name": "graphics"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "lattice",
-      "name": "lattice",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=lattice"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
       "provider": {
@@ -345,23 +309,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "MCMCglmm",
-      "name": "MCMCglmm",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=MCMCglmm"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "parallel",
-      "name": "parallel"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "reshape2",
       "name": "reshape2",
       "provider": {
@@ -371,18 +318,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=reshape2"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "plotMCMC",
-      "name": "plotMCMC",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=plotMCMC"
     },
     {
       "@type": "SoftwareApplication",
@@ -424,7 +359,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "559.923KB",
+  "fileSize": "554.375KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"

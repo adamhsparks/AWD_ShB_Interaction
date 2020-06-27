@@ -9,37 +9,29 @@ Authors@R: c(person("Adam H.", "Sparks", role = c("aut", "cre"),
     person("Bjoern Ole", "Sander", role = "aut",
     email = "b.sander@irri.org",
     comment = c(ORCID = "0000-0002-7967-6147")),
-    person("Michael", "Noel", role = "aut"),
-    person("Titus", "von der Malsburg", role = "cph",
-    comment = c(ORCID = "0000-0001-5925-5145")))
+    person("Michael", "Noel", role = "aut"))
 Description: Provides a research compendium of analysis associated with
     experiments conducted at the International Rice Research Institute (IRRI),
     Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The
     experiments were designed to test the effects of alternate wetting and
     drying irrigation management on rice sheath blight disease. The plots were
     split plot with an irrigation main plot and nitrogen sub-plot treatments.
-Depends: R (>= 3.4.0),
-    coda
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
     agricolae,
+    brms,
     car,
     carData,
-    doParallel,
     dplyr (>= 0.7.0),
     fitdistrplus,
     forcats,
     ggplot2,
-    graphics,
-    lattice,
     lubridate,
     MASS,
-    MCMCglmm,
-    parallel,
     reshape2,
-    plotMCMC,
     purrr (>= 0.2.3),
     tibble,
     tidyr (>= 0.7.0)
