@@ -315,7 +315,8 @@ DS2015 <-
     NRTE
   ) %>%
   mutate(REP = as.integer(REP),
-         HILL = as.integer(HILL))
+         HILL = as.integer(HILL)) %>% 
+  ungroup()
 
 DS2015$LEAF_ShB <- as.numeric(DS2015$LEAF_ShB)
 
@@ -561,7 +562,8 @@ DS2016 <-
     WMGT,
     NRTE,
     DAYS
-  )
+  ) %>% 
+  ungroup()
 ```
 
 # Combine 2015 and 2016 Data
@@ -684,6 +686,7 @@ RAW_data <-
 ```{r areas2015}
 DS2015 <- subset(RAW_data, YEAR == "2015")
 
+# 2015 Tiller Incidence setup --------------------------------------------------
 TShB_inc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -691,9 +694,10 @@ TShB_inc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_inc_15_wide <-
+TShB_inc_wide <-
   reshape2::dcast(TShB_inc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_inc")
 
+# 2015 Tiller Severity setup ---------------------------------------------------
 TShB_perc_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
@@ -701,8 +705,9 @@ TShB_perc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_perc_15_wide <-
+TShB_perc_wide <-
   reshape2::dcast(TShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
+
 
 # 2015 Leaf Severity setup -----------------------------------------------------
 LShB_perc_15 <-
@@ -712,7 +717,7 @@ LShB_perc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-LShB_perc_15_wide <-
+LShB_perc_wide <-
   reshape2::dcast(LShB_perc_15, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 TShB_inc_15 <-
@@ -722,17 +727,17 @@ TShB_inc_15 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-# AUDPS data frame for incidence------------------------------------------------
+# 2015 AUDPS data frames -------------------------------------------------------
 TShB_inc_15_AUDPS <-
-  audps(evaluation = TShB_inc_15_wide[, 2:6],
+  audps(evaluation = TShB_inc_wide[, 2:6],
         dates = pull(TShB_inc_15[1:5, 6]))
 
 TShB_percent_15_AUDPS <-
-  audps(evaluation = TShB_perc_15_wide[, 2:6],
+  audps(evaluation = TShB_perc_wide[, 2:6],
         dates = pull(TShB_perc_15[1:5, 6]))
 
 LShB_percent_15_AUDPS <-
-  audps(evaluation = LShB_perc_15_wide[, 2:6],
+  audps(evaluation = LShB_perc_wide[, 2:6],
         dates = pull(LShB_perc_15[1:5, 6]))
 
 AUDPS_15 <-
@@ -748,15 +753,20 @@ AUDPS_15 <-
 AUDPS_15$PLOT <- as.character(AUDPS_15$PLOT)
 TShB_inc_15$PLOT <- as.character(TShB_inc_15$PLOT)
 
-# Add year/rep/trt/asmt cols to AUDPS values
-ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT")
+# Add YEAR/REP/TRT/ASMT cols to AUDPS values via TShB_inc_15 df
+ShB_15 <- left_join(TShB_inc_15, AUDPS_15, by = "PLOT") %>% 
+  ungroup() %>% 
+  rename(TShB_inc_AUDPS = TShB_inc_15_AUDPS,
+         TShB_percent_AUDPS = TShB_percent_15_AUDPS,
+         LShB_percent_AUDPS = LShB_percent_15_AUDPS)
 ```
 
-## 2016 Area Under Curve Calculations
+## 2016
 
 ```{r area_2016, message=FALSE}
 DS2016 <- subset(RAW_data, YEAR == "2016")
 
+# 2016 Tiller Incidence setup --------------------------------------------------
 TShB_inc_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
@@ -764,7 +774,7 @@ TShB_inc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_inc_16_wide <-
+TShB_inc_wide <-
   reshape2::dcast(TShB_inc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_incidence")
 
 # 2016 Tiller Severity setup ---------------------------------------------------
@@ -775,7 +785,7 @@ TShB_perc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-TShB_perc_16_wide <-
+TShB_perc_wide <-
   reshape2::dcast(TShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_TShB_percent")
 
 # 2016 Leaf Severity setup -----------------------------------------------------
@@ -786,20 +796,20 @@ LShB_perc_16 <-
             .groups = "keep") %>%
   arrange(PLOT)
 
-LShB_perc_16_wide <-
+LShB_perc_wide <-
   reshape2::dcast(LShB_perc_16, PLOT ~ ASMT, value.var = "PLOT_LShB_percent")
 
 # 2016 audpS -------------------------------------------------------------------
 TShB_inc_16_AUDPS <-
-  audps(evaluation = TShB_inc_16_wide[, 2:5],
+  audps(evaluation = TShB_inc_wide[, 2:5],
         dates = pull(TShB_inc_16[1:4, 6]))
 
 TShB_percent_16_AUDPS <-
-  audps(evaluation = TShB_perc_16_wide[, 2:5],
+  audps(evaluation = TShB_perc_wide[, 2:5],
         dates = pull(TShB_perc_16[1:4, 6]))
 
 LShB_percent_16_AUDPS <-
-  audps(evaluation = LShB_perc_16_wide[, 2:5],
+  audps(evaluation = LShB_perc_wide[, 2:5],
         dates = pull(LShB_perc_16[1:4, 6]))
 
 AUDPS_16 <-
@@ -815,14 +825,18 @@ AUDPS_16 <-
 AUDPS_16$PLOT <- as.character(AUDPS_16$PLOT)
 TShB_inc_16$PLOT <- as.character(TShB_inc_16$PLOT)
 
-# Add year/rep/trt/asmt cols to AUDPS values
-ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = "PLOT")
+# Add YEAR/REP/TRT/ASMT cols to AUDPS values via TShB_inc_16 df
+ShB_16 <- left_join(TShB_inc_16, AUDPS_16, by = "PLOT") %>% 
+  ungroup() %>% 
+  rename(TShB_inc_AUDPS = TShB_inc_16_AUDPS,
+         TShB_percent_AUDPS = TShB_percent_16_AUDPS,
+         LShB_percent_AUDPS = LShB_percent_16_AUDPS)
 ```
 
-# Merge AUDPC and AUDPS Data
+# Merge AUDPS Year Data
 
 ```{r merge_areas}
-AUDPS <- as.data.frame(as_tibble(rbind(ShB_15, ShB_16)))
+AUDPS <- bind_rows(ShB_15, ShB_16)
 
 AUDPS <- separate(
   data = AUDPS,
@@ -831,8 +845,21 @@ AUDPS <- separate(
   into = c("WMGT", "NRTE")
 )
 AUDPS <- mutate_at(.tbl = AUDPS,
-                     .funs = factor,
-                     .vars = c("WMGT", "NRTE"))
+                   .funs = factor,
+                   .vars = c("WMGT", "NRTE"))
+
+AUDPS$NRTE <-
+  fct_relevel(AUDPS$NRTE,
+              "0",
+              "100",
+              "120",
+              "60",
+              "180")
+
+AUDPS$WMGT <-
+  fct_relevel(AUDPS$WMGT,
+              "PDL",
+              "AWD")
 ```
 
 # N rates
