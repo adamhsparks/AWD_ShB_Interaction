@@ -4,7 +4,9 @@ author: "A. H. Sparks"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    toc: false
+    toc: true
+    toc_float: true
+    toc_depth: 3
     theme: journal
 vignette: >
   %\VignetteIndexEntry{Data Visualisation}
@@ -15,8 +17,6 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-# Libraries
 
 Load packages necessary to conduct this work.
 
@@ -33,6 +33,7 @@ theme_set(theme_minimal())
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   facet_grid(WMGT ~ NRTE) +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
@@ -42,6 +43,7 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
 ggplot(RAW_data, aes(x = TIL_ShB)) +
   geom_histogram(aes(fill = YEAR), stat = "count") +
   facet_grid(WMGT ~ NRTE) +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Severity Rating")
 ```
 
@@ -53,9 +55,11 @@ ggplot(RAW_data, aes(x = TShB_incidence)) +
   geom_rug() +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
+  scale_fill_brewer(palette = "Dark2") +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Incidence") +
-theme(axis.text.x = element_text(size = 8,
-                                 angle = 45,
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45,
                                  hjust = 1))
 ```
 
@@ -65,6 +69,7 @@ theme(axis.text.x = element_text(size = 8,
 ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Green Leaves per Tiller")
 ```
 
@@ -74,6 +79,7 @@ ggplot(RAW_data, aes(x = GL, linetype = YEAR)) +
 ggplot(RAW_data, aes(x = DL, linetype = YEAR)) +
   geom_histogram(aes(fill = YEAR), position = "dodge") +
   xlab("Count") +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Dry Leaves per Tiller")
 ```
 
@@ -87,6 +93,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   ylab("Rating") +
   ggtitle("Leaf Sheath Blight Severity at Each Assessment") +
   facet_grid(. ~ YEAR) +
+  scale_colour_brewer(palette = "Dark2") +
   theme(strip.text.x = element_text(angle = 90))
 ```
 
@@ -99,6 +106,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   xlab("Assessment") +
   ylab("Rating") +
   facet_grid(. ~ YEAR) +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Severity at Each Assessment") +
   theme(strip.text.x = element_text(angle = 90))
 ```
@@ -117,6 +125,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   theme(strip.text.x = element_text(angle = 90)) +
   xlab("Assessment") +
   ylab("Incidence") +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight at Each Assessment")
 ```
 
@@ -133,71 +142,76 @@ ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
   xlab("Treatment") +
   ylab("Incidence per Hill") +
   facet_grid(. ~ NRTE) +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
 # Box/dotplots of tiller sheath blight incidence AUDPS data
 
 ```{r, cache=FALSE}
-
-ggplot(AUDPC_S, aes(x = NRTE, y = TShB_inc_AUDPS)) +
+ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
 
 ```{r, cache=FALSE}
-ggplot(AUDPC_S, aes(x = WMGT, y = TShB_inc_AUDPS)) +
+ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Incidence")
 ```
-
 
 # Box/dotplots of leaf sheath blight severity AUDPS
 
 ```{r, cache=FALSE}
-ggplot(AUDPC_S, aes(x = NRTE, y = LShB_percent_AUDPS)) +
+ggplot(AUDPS, aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
 ```{r, cache=FALSE}
-ggplot(AUDPC_S, aes(WMGT, y = LShB_percent_AUDPS)) +
+ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Leaf Sheath Blight Severity")
 ```
 
 # Box/dotplots of tiller sheath blight severity AUDPS data
 
 ```{r, cache=FALSE}
-ggplot(AUDPC_S, aes(x = WMGT, y = TShB_percent_AUDPS)) +
+ggplot(AUDPS, aes(x = WMGT, y = TShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = WMGT)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
   facet_grid(. ~ YEAR) +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
 ```{r, cache=FALSE}
-ggplot(AUDPC_S, aes(x = NRTE, y = TShB_percent_AUDPS)) +
+ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
+  scale_fill_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight Severity")
 ```
 
@@ -209,11 +223,13 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = NRTE,
-             group = NRTE)) +
-  geom_line() +
+             group = NRTE,
+             linetype = NRTE)) +
+  geom_line(size = 0.75) +
   xlab("Assessment") +
   ylab("Severity (%)") +
   facet_grid(WMGT ~ YEAR) +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Leaf Sheath Blight")
 ```
 
@@ -225,11 +241,13 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = NRTE,
-             group = NRTE)) +
-  geom_line() +
+             group = NRTE,
+             linetype = NRTE)) +
+  geom_line(size = 0.75) +
   xlab("Assessment") +
   ylab("Severity (%)") +
   facet_grid(WMGT ~ YEAR) +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight")
 ```
 
@@ -241,10 +259,12 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = NRTE,
-             group = NRTE)) +
-  geom_line() +
+             group = NRTE,
+             linetype = NRTE)) +
+  geom_line(size = 0.75) +
   xlab("Assessment") +
   ylab("Incidence (%)") +
-  facet_grid(WMGT ~ YEAR) +
+  facet_grid(WMGT ~ YEAR, scales = "free_x") +
+  scale_colour_brewer(palette = "Dark2") +
   ggtitle("Tiller Sheath Blight")
 ```
