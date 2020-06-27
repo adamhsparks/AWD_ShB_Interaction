@@ -42,8 +42,6 @@ Suggests:
     ggpubr,
     knitr,
     pander,
-    pkgdown,
-    rmarkdown,
     sessioninfo,
     tidyverse,
     usethis

@@ -120,30 +120,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "pkgdown",
-      "name": "pkgdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=pkgdown"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "sessioninfo",
       "name": "sessioninfo",
       "provider": {
@@ -359,7 +335,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "554.375KB",
+  "fileSize": "554.365KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
