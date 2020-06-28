@@ -60,7 +60,7 @@ Create individual data frames for the analysis.
 AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
-# relevel factors for easier interpretation of  analysis
+# relevel factors for easier interpretation of analysis
 AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 
@@ -68,7 +68,7 @@ AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
-# relevel factors for easier interpretation of  analysis
+# relevel factors for easier interpretation of analysis
 AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
 ```
@@ -82,28 +82,28 @@ Check for correlation between the tiller incidence and the severity ratings for 
 
 ```{r correlation}
 # 2015 Tiller Severity Correlation
-cor.test(AUDPS_2015$TShB_inc_AUDPS,
+cor.test(AUDPS_2015$TShB_incidence_AUDPS,
          AUDPS_2015$TShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2015 Leaf Severity Correlation
-cor.test(AUDPS_2015$TShB_inc_AUDPS,
+cor.test(AUDPS_2015$TShB_incidence_AUDPS,
          AUDPS_2015$LShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Tiller Severity Correlation
-cor.test(AUDPS_2016$TShB_inc_AUDPS,
+cor.test(AUDPS_2016$TShB_incidence_AUDPS,
          AUDPS_2016$TShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
          exact = FALSE)
 
 # 2016 Leaf Severity Correlation
-cor.test(AUDPS_2016$TShB_inc_AUDPS,
+cor.test(AUDPS_2016$TShB_incidence_AUDPS,
          AUDPS_2016$LShB_percent_AUDPS,
          method = "spearman",
          alternative = "two.sided",
@@ -119,13 +119,13 @@ Based on this, the interactions of the incidence and severity will not be analys
 
 ### Model Structure
 
-Tiller sheath blight incidence AUDPS, `TShB_inc_AUDPS` is the response variable.
+Tiller sheath blight incidence AUDPS, `TShB_incidence_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
 ```{r 2015_TShB_incidence, cache=FALSE}
 m1 <- brm(
-  formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
+  formula = TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP),
   data    = AUDPS_2015,
   seed    = 27,
   control = list(adapt_delta = 0.999),
@@ -155,6 +155,7 @@ m2 <- brm(
   data    = AUDPS_2015,
   seed    = 27,
   control = list(adapt_delta = 0.999),
+  prior = set_prior("normal(0, 3)"),
   iter = 5000
 )
 
@@ -181,6 +182,7 @@ m3 <- brm(
   data = AUDPS_2015,
   seed = 27,
   control = list(adapt_delta = 0.999),
+  prior = set_prior("normal(0, 3)"),
   iter = 5000
 )
 
@@ -201,16 +203,17 @@ conditional_effects(m3)
 
 ### Model Structure
 
-Tiller sheath blight incidence AUDPS, `TShB_inc_AUDPS` is the response variable.
+Tiller sheath blight incidence AUDPS, `TShB_incidence_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP` is treated as a random effect.
 
 ```{r 2016_TShB_incidence, cache=FALSE}
 m4 <- brm(
-  formula = TShB_inc_AUDPS ~ WMGT * NRTE + (1 | REP),
+  formula = TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP),
   data = AUDPS_2016,
   seed = 27,
   control = list(adapt_delta = 0.999),
+  prior = set_prior("normal(0, 3)"),
   iter = 5000
 )
 
@@ -238,6 +241,7 @@ m5 <- brm(
   data = AUDPS_2016,
   seed = 27,
   control = list(adapt_delta = 0.999),
+  prior = set_prior("normal(0, 3)"),
   iter = 5000
 )
 
@@ -264,6 +268,7 @@ m6 <- brm(
   data = AUDPS_2016,
   seed = 27,
   control = list(adapt_delta = 0.999),
+  prior = set_prior("normal(0, 3)"),
   iter = 5000
 )
 
