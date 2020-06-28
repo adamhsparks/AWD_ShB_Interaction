@@ -149,7 +149,7 @@ ggplot(RAW_data, aes(x = WMGT, y = TShB_incidence)) +
 # Box/dotplots of tiller sheath blight incidence AUDPS data
 
 ```{r, cache=FALSE}
-ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
+ggplot(AUDPS, aes(x = NRTE, y = TShB_incidence_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
@@ -159,7 +159,7 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_inc_AUDPS)) +
 ```
 
 ```{r, cache=FALSE}
-ggplot(AUDPS, aes(x = WMGT, y = TShB_inc_AUDPS)) +
+ggplot(AUDPS, aes(x = WMGT, y = TShB_incidence_AUDPS)) +
   geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
@@ -219,7 +219,7 @@ ggplot(AUDPS, aes(x = NRTE, y = TShB_percent_AUDPS)) +
 
 ```{r, cache=FALSE}
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
-  summarise(value = mean(PERC_LEAF_ShB)) %>%
+  summarise(value = mean(PERCENT_LEAF_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = NRTE,
@@ -237,7 +237,7 @@ RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
 
 ```{r, cache=FALSE}
 RAW_data %>% group_by(YEAR, WMGT, NRTE, ASMT) %>%
-  summarise(value = mean(PERC_TIL_ShB)) %>%
+  summarise(value = mean(PERCENT_TIL_ShB)) %>%
   ggplot(aes(x = ASMT,
              y = value,
              color = NRTE,
