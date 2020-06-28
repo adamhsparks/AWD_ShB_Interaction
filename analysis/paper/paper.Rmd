@@ -367,7 +367,7 @@ p2_anot <- data.frame(
 
 p2 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERC_TIL_ShB)) +
+                 y = PERCENT_TIL_ShB)) +
   geom_text(
     data = p2_anot,
     mapping = aes(x = x,
@@ -404,7 +404,7 @@ p3_anot <- data.frame(
 
 p3 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERC_LEAF_ShB)) +
+                 y = PERCENT_LEAF_ShB)) +
   geom_text(
     data = p3_anot,
     mapping = aes(x = x,
@@ -501,7 +501,7 @@ p5_anot <- data.frame(
 
 p5 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERC_TIL_ShB)) +
+                 y = PERCENT_TIL_ShB)) +
   geom_text(
     data = p5_anot,
     mapping = aes(x = x,
@@ -538,7 +538,7 @@ p6_anot <- data.frame(
 
 p6 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERC_LEAF_ShB)) +
+                 y = PERCENT_LEAF_ShB)) +
   geom_text(
     data = p6_anot,
     mapping = aes(x = x,
@@ -577,7 +577,7 @@ p7_anot <- data.frame(
 )
 
 p7 <- ggplot(AUDPS,
-             aes(x = WMGT, y = TShB_inc_AUDPS)) +
+             aes(x = WMGT, y = TShB_incidence_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p7_anot,
@@ -661,7 +661,7 @@ p10_anot <- data.frame(
 )
 
 p10 <- ggplot(AUDPS,
-             aes(x = NRTE, y = TShB_inc_AUDPS)) +
+             aes(x = NRTE, y = TShB_incidence_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p10_anot,
