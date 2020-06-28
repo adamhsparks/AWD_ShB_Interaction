@@ -63,10 +63,7 @@
       <a href="../articles/a03_raw_data_visualisation.html">Data Visualisation</a>
     </li>
     <li>
-      <a href="../articles/a04_check_residuals.html">Check Data Residuals</a>
-    </li>
-    <li>
-      <a href="../articles/a05_data_analysis.html">Sheath Blight Analysis</a>
+      <a href="../articles/a04_data_analysis.html">Sheath Blight Analysis</a>
     </li>
   </ul>
 </li>
@@ -94,7 +91,7 @@
       <h1 data-toc-skip>Data Visualisation</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-06-27</h4>
+            <h4 class="date">2020-06-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/vignettes/a03_raw_data_visualisation.Rmd"><code>vignettes/a03_raw_data_visualisation.Rmd</code></a></small>
       <div class="hidden name"><code>a03_raw_data_visualisation.Rmd</code></div>
@@ -255,7 +252,7 @@
 <h1 class="hasAnchor">
 <a href="#boxdotplots-of-tiller-sheath-blight-incidence-audps-data" class="anchor"></a>Box/dotplots of tiller sheath blight incidence AUDPS data</h1>
 <div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">AUDPS</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">NRTE</span>, y = <span class="kw">TShB_inc_AUDPS</span>)) <span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">AUDPS</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">NRTE</span>, y = <span class="kw">TShB_incidence_AUDPS</span>)) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(fill = <span class="kw">YEAR</span>)) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
@@ -265,7 +262,7 @@
 </pre></div>
 <p><img src="a03_raw_data_visualisation_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">AUDPS</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">WMGT</span>, y = <span class="kw">TShB_inc_AUDPS</span>)) <span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">AUDPS</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">WMGT</span>, y = <span class="kw">TShB_incidence_AUDPS</span>)) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(fill = <span class="kw">YEAR</span>)) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Treatment"</span>) <span class="op">+</span>
@@ -331,7 +328,7 @@
 <a href="#line-graph-of-leaf-sheath-blight-severity-data" class="anchor"></a>Line graph of leaf sheath blight severity data</h1>
 <div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw">RAW_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="kw">YEAR</span>, <span class="kw">WMGT</span>, <span class="kw">NRTE</span>, <span class="kw">ASMT</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(value = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">PERC_LEAF_ShB</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(value = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">PERCENT_LEAF_ShB</span>)) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">ASMT</span>,
              y = <span class="kw">value</span>,
              color = <span class="kw">NRTE</span>,
@@ -352,7 +349,7 @@
 <a href="#line-graph-of-tiller-sheath-blight-severity-data" class="anchor"></a>Line graph of tiller sheath blight severity data</h1>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="kw">RAW_data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="kw">YEAR</span>, <span class="kw">WMGT</span>, <span class="kw">NRTE</span>, <span class="kw">ASMT</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(value = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">PERC_TIL_ShB</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(value = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">PERCENT_TIL_ShB</span>)) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">ASMT</span>,
              y = <span class="kw">value</span>,
              color = <span class="kw">NRTE</span>,
