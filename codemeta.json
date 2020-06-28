@@ -188,30 +188,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "car",
-      "name": "car",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=car"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "carData",
-      "name": "carData",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=carData"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "version": ">= 0.7.0",
@@ -222,18 +198,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "fitdistrplus",
-      "name": "fitdistrplus",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=fitdistrplus"
     },
     {
       "@type": "SoftwareApplication",
@@ -270,18 +234,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "MASS",
-      "name": "MASS",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=MASS"
     },
     {
       "@type": "SoftwareApplication",
@@ -335,7 +287,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "554.365KB",
+  "fileSize": "553.474KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
