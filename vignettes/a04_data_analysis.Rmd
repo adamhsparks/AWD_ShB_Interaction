@@ -48,6 +48,7 @@ library("dplyr")
 library("ggplot2")
 library("bayestestR")
 library("bayesplot")
+library("pander")
 
 theme_set(theme_minimal())
 
@@ -131,8 +132,7 @@ prior_summary(m1)
 
 # posteriors
 conditional_effects(m1)
-
-describe_posterior(m1)
+pander(describe_posterior(m1))
 ```
 
 ## Tiller Sheath Blight Severity Model
@@ -182,7 +182,7 @@ prior_summary(m2)
 # posteriors
 conditional_effects(m2)
 
-describe_posterior(m2)
+pander(describe_posterior(m2))
 ```
 
 ## Leaf Sheath Blight Severity Model
@@ -286,7 +286,7 @@ prior_summary(m4)
 # posteriors
 conditional_effects(m4)
 
-describe_posterior(m4)
+pander(describe_posterior(m4))
 ```
 
 ## Tiller Sheath Blight Severity Model
@@ -336,7 +336,7 @@ prior_summary(m5)
 # posteriors
 conditional_effects(m5)
 
-describe_posterior(m5)
+pander(describe_posterior(m5))
 ```
 
 ## Leaf Sheath Blight Severity Model
@@ -386,7 +386,7 @@ prior_summary(m6)
 # posteriors
 conditional_effects(m6)
 
-describe_posterior(m6)
+pander(describe_posterior(m6))
 ```
 
 # Save Model Information
