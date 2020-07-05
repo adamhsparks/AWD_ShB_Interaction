@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Sheath Blight Analysis</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-06-28</h4>
+            <h4 class="date">2020-07-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/vignettes/a04_data_analysis.Rmd"><code>vignettes/a04_data_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>a04_data_analysis.Rmd</code></div>
@@ -100,11 +100,7 @@
 
     
     
-<p>Based on the residual plots where several do not meet assumptions for a normal distribution, I’ve elected to use a naive Bayesian approach using the <em>brms</em> package’s <code><a href="https://rdrr.io/pkg/brms/man/brm.html">brm()</a></code> for a split plot analysis rather than a <code>lmer()</code> model.</p>
-<div id="interpreting-these-analyses" class="section level1">
-<h1 class="hasAnchor">
-<a href="#interpreting-these-analyses" class="anchor"></a>Interpreting These Analyses</h1>
-<p>When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
+<p>For this analysis, I’ve elected to use <a href="https://cran.r-project.org/package=brms"><code>brms</code></a> for a Bayesian analysis. When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
 <p>The base levels for this analysis are:</p>
 <ul>
 <li>
@@ -122,27 +118,37 @@
 </ul>
 </li>
 </ul>
-<div id="changes-between-2015-and-2016" class="section level3">
-<h3 class="hasAnchor">
-<a href="#changes-between-2015-and-2016" class="anchor"></a>Changes between 2015 and 2016</h3>
+<div id="changes-between-2015-and-2016" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-between-2015-and-2016" class="anchor"></a>Changes between 2015 and 2016</h2>
 <p>Before the analysis, note that due to changes between the years, the analysis must be carried out on each year separately. The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this. Therefore, the analyses will be conducted separately such that comparisons will only be observational and cannot be statistically compared.</p>
 </div>
-</div>
-<div id="setup" class="section level1">
-<h1 class="hasAnchor">
-<a href="#setup" class="anchor"></a>Setup</h1>
+<div id="setup" class="section level2">
+<h2 class="hasAnchor">
+<a href="#setup" class="anchor"></a>Setup</h2>
+<p>Load libraries, set <code>ggplot2</code> theme for document and detect the number of cores available for <code>brms</code> to use.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis">"rice.awd.shb"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/paul-buerkner/brms">"brms"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://dplyr.tidyverse.org">"dplyr"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis">"rice.awd.shb"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/bayestestR">"bayestestR"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://mc-stan.org/bayesplot">"bayesplot"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://rapporter.github.io/pander">"pander"</a></span>)
+
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())
+
+<span class="co"># deals with some issues with parallel clusters</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(PROCESSX_NOTIFY_OLD_SIGCHLD = <span class="fl">TRUE</span>)
+
+<span class="co"># detect the number of cores to run in parallel</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(mc.cores = <span class="kw">parallel</span>::<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 </pre></div>
 <p>The <code>AUDPS</code> object is loaded with the <code>rice.awd.shb</code> R package. To see how the AUDPS data were generated from the original raw data, see the <a href="a02_Data_preprocessing.html">vignette detailing the data processing</a> file. However, because it is a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.</p>
 <p>Create individual data frames for the analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># create 2015 data frame</span>
-<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">AUDPS</span>[<span class="kw">AUDPS</span><span class="op">$</span><span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2015</span>, ])
+<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">AUDPS</span>[<span class="kw">AUDPS</span><span class="op">$</span><span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2015</span>,])
 <span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span>(<span class="kw">AUDPS_2015</span>)
 
 <span class="co"># relevel factors for easier interpretation of analysis</span>
@@ -150,246 +156,70 @@
 <span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2015</span>, <span class="kw">WMGT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">WMGT</span>, ref = <span class="st">"PDL"</span>))
 
 <span class="co"># create 2016 data frame</span>
-<span class="kw">AUDPS_2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">AUDPS</span>[<span class="kw">AUDPS</span><span class="op">$</span><span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2016</span>, ])
+<span class="kw">AUDPS_2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">AUDPS</span>[<span class="kw">AUDPS</span><span class="op">$</span><span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2016</span>,])
 <span class="kw">AUDPS_2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span>(<span class="kw">AUDPS_2016</span>)
 
 <span class="co"># relevel factors for easier interpretation of analysis</span>
 <span class="kw">AUDPS_2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2016</span>, <span class="kw">NRTE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">NRTE</span>, ref = <span class="st">"N60"</span>))
 <span class="kw">AUDPS_2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2016</span>, <span class="kw">WMGT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">WMGT</span>, ref = <span class="st">"PDL"</span>))
 </pre></div>
-<p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> <code>data.frames()</code> exist, we can start the analysis.</p>
-</div>
-<div id="check-correlation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#check-correlation" class="anchor"></a>Check Correlation</h1>
-<p>Check for correlation between the tiller incidence and the severity ratings for both leaf and tiller.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># 2015 Tiller Severity Correlation</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">TShB_incidence_AUDPS</span>,
-         <span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>,
-         method = <span class="st">"spearman"</span>,
-         alternative = <span class="st">"two.sided"</span>,
-         exact = <span class="fl">FALSE</span>)
-</pre></div>
-<pre><code>## 
-##  Spearman's rank correlation rho
-## 
-## data:  AUDPS_2015$TShB_incidence_AUDPS and AUDPS_2015$TShB_percent_AUDPS
-## S = 31803, p-value &lt; 2.2e-16
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##       rho 
-## 0.8895652</code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># 2015 Leaf Severity Correlation</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">TShB_incidence_AUDPS</span>,
-         <span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>,
-         method = <span class="st">"spearman"</span>,
-         alternative = <span class="st">"two.sided"</span>,
-         exact = <span class="fl">FALSE</span>)
-</pre></div>
-<pre><code>## 
-##  Spearman's rank correlation rho
-## 
-## data:  AUDPS_2015$TShB_incidence_AUDPS and AUDPS_2015$LShB_percent_AUDPS
-## S = 52337, p-value &lt; 2.2e-16
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##       rho 
-## 0.8182609</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># 2016 Tiller Severity Correlation</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">AUDPS_2016</span><span class="op">$</span><span class="kw">TShB_incidence_AUDPS</span>,
-         <span class="kw">AUDPS_2016</span><span class="op">$</span><span class="kw">TShB_percent_AUDPS</span>,
-         method = <span class="st">"spearman"</span>,
-         alternative = <span class="st">"two.sided"</span>,
-         exact = <span class="fl">FALSE</span>)
-</pre></div>
-<pre><code>## 
-##  Spearman's rank correlation rho
-## 
-## data:  AUDPS_2016$TShB_incidence_AUDPS and AUDPS_2016$TShB_percent_AUDPS
-## S = 40134, p-value = 0.5237
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##        rho 
-## 0.08118101</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># 2016 Leaf Severity Correlation</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">AUDPS_2016</span><span class="op">$</span><span class="kw">TShB_incidence_AUDPS</span>,
-         <span class="kw">AUDPS_2016</span><span class="op">$</span><span class="kw">LShB_percent_AUDPS</span>,
-         method = <span class="st">"spearman"</span>,
-         alternative = <span class="st">"two.sided"</span>,
-         exact = <span class="fl">FALSE</span>)
-</pre></div>
-<pre><code>## 
-##  Spearman's rank correlation rho
-## 
-## data:  AUDPS_2016$TShB_incidence_AUDPS and AUDPS_2016$LShB_percent_AUDPS
-## S = 45742, p-value = 0.7111
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##         rho 
-## -0.04719785</code></pre>
-<p>The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves. Based on this, the interactions of the incidence and severity will not be analysed.</p>
+<p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> data frames exist, we can start the analysis.</p>
 </div>
 <div id="models" class="section level1">
 <h1 class="hasAnchor">
 <a href="#models" class="anchor"></a>2015 Models</h1>
 <div id="tiller-sheath-blight-incidence-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>2015 Tiller Sheath Blight Incidence Model</h2>
+<a href="#tiller-sheath-blight-incidence-model" class="anchor"></a>Tiller Sheath Blight Incidence Model</h2>
 <div id="model-structure" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure" class="anchor"></a>Model Structure</h3>
 <p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">m1_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  iter = <span class="fl">5000</span>
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m1_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
 <pre><code>## Compiling the C++ model</code></pre>
 <pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL '7da878ac35ffb9d3ac3ce45d991afbbe' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 7e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.7 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 4.83571 seconds (Warm-up)
-## Chain 1:                8.75988 seconds (Sampling)
-## Chain 1:                13.5956 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL '7da878ac35ffb9d3ac3ce45d991afbbe' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 2.4e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 4.06925 seconds (Warm-up)
-## Chain 2:                2.9604 seconds (Sampling)
-## Chain 2:                7.02965 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL '7da878ac35ffb9d3ac3ce45d991afbbe' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 2.3e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.23 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 4.61246 seconds (Warm-up)
-## Chain 3:                4.37048 seconds (Sampling)
-## Chain 3:                8.98294 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL '7da878ac35ffb9d3ac3ce45d991afbbe' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2.2e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.22 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 4.27884 seconds (Warm-up)
-## Chain 4:                5.25631 seconds (Sampling)
-## Chain 4:                9.53515 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m1</span>)
+</div>
+<div id="diagnostics" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># asses convergence</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m1</span>)
 </pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2015 (Number of observations: 120) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.67      0.52     0.17     2.09 1.00     2186     2958
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept            1.35      0.46     0.45     2.25 1.00     3195     2985
-## WMGTAWD             -0.28      0.30    -0.87     0.31 1.00     4261     4932
-## NRTEN100             0.36      0.30    -0.22     0.95 1.00     4519     6142
-## NRTEN120             0.66      0.30     0.08     1.25 1.00     4771     5994
-## WMGTAWD:NRTEN100     0.52      0.42    -0.31     1.34 1.00     4353     5855
-## WMGTAWD:NRTEN120     0.67      0.42    -0.15     1.50 1.00     4367     5000
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.94      0.06     0.83     1.08 1.00     7440     6570
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m1-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m1</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m1</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m1</span>)
 </pre></div>
 <pre><code>##                     prior     class             coef group resp dpar nlpar
-## 1                                 b                                       
+## 1            normal(0, 1)         b                                       
 ## 2                                 b         NRTEN100                      
 ## 3                                 b         NRTEN120                      
 ## 4                                 b          WMGTAWD                      
@@ -412,171 +242,221 @@
 ## 9       
 ## 10      
 ## 11</code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m1</span>)
-</pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_TShB_incidence-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_incidence-2.png" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m1</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_TShB_incidence-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_incidence-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_incidence-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m1-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m1-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m1</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="11%">
+<col width="27%">
+<col width="13%">
+<col width="6%">
+<col width="14%">
+<col width="13%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">Parameter</th>
+<th align="center">Median</th>
+<th align="center">CI</th>
+<th align="center">CI_low</th>
+<th align="center">CI_high</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">b_Intercept</td>
+<td align="center">1.337</td>
+<td align="center">89</td>
+<td align="center">0.7031</td>
+<td align="center">1.957</td>
+<td align="center">0.9908</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">b_WMGTAWD</td>
+<td align="center">-0.2074</td>
+<td align="center">89</td>
+<td align="center">-0.6284</td>
+<td align="center">0.2133</td>
+<td align="center">0.784</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">b_NRTEN100</td>
+<td align="center">0.3742</td>
+<td align="center">89</td>
+<td align="center">-0.05695</td>
+<td align="center">0.7919</td>
+<td align="center">0.9214</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">b_NRTEN120</td>
+<td align="center">0.6713</td>
+<td align="center">89</td>
+<td align="center">0.2524</td>
+<td align="center">1.109</td>
+<td align="center">0.9935</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>5</strong></td>
+<td align="center">b_WMGTAWD.NRTEN100</td>
+<td align="center">0.4291</td>
+<td align="center">89</td>
+<td align="center">-0.1082</td>
+<td align="center">1.057</td>
+<td align="center">0.8852</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>6</strong></td>
+<td align="center">b_WMGTAWD.NRTEN120</td>
+<td align="center">0.5747</td>
+<td align="center">89</td>
+<td align="center">-0.01587</td>
+<td align="center">1.167</td>
+<td align="center">0.9391</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="13%">
+<col width="14%">
+<col width="15%">
+<col width="23%">
+<col width="10%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">ROPE_CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">Rhat</th>
+<th align="center">ESS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">4284</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0.2621</td>
+<td align="center">1.001</td>
+<td align="center">8763</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0.1158</td>
+<td align="center">1</td>
+<td align="center">10159</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">10292</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>5</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0.1341</td>
+<td align="center">1</td>
+<td align="center">9175</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>6</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1062</td>
+<td align="center">0.1062</td>
+<td align="center">0.05129</td>
+<td align="center">1</td>
+<td align="center">9280</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="tiller-sheath-blight-severity-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity-model" class="anchor"></a>2015 Tiller Sheath Blight Severity Model</h2>
+<a href="#tiller-sheath-blight-severity-model" class="anchor"></a>Tiller Sheath Blight Severity Model</h2>
 <div id="model-structure-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-1" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
+<p>Tiller sheath blight severity AUDPS converted to the midpoint percentage value, <code>TShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">m2_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  prior = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">set_prior</a></span>(<span class="st">"normal(0, 3)"</span>),
-  iter = <span class="fl">5000</span>
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.99999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m2_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
 <pre><code>## Compiling the C++ model</code></pre>
 <pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL 'd5124582e40fd3471dc2e299a315e277' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 5.9e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.59 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 3.50089 seconds (Warm-up)
-## Chain 1:                2.99054 seconds (Sampling)
-## Chain 1:                6.49143 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL 'd5124582e40fd3471dc2e299a315e277' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 2.4e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 3.44328 seconds (Warm-up)
-## Chain 2:                2.74936 seconds (Sampling)
-## Chain 2:                6.19263 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL 'd5124582e40fd3471dc2e299a315e277' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 2.5e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.25 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 3.25837 seconds (Warm-up)
-## Chain 3:                2.3691 seconds (Sampling)
-## Chain 3:                5.62746 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL 'd5124582e40fd3471dc2e299a315e277' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2.2e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.22 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 3.7744 seconds (Warm-up)
-## Chain 4:                2.19456 seconds (Sampling)
-## Chain 4:                5.96895 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m2</span>)
+</div>
+<div id="diagnostics-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics-1" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="co"># asses convergence</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m2</span>)
 </pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2015 (Number of observations: 120) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     7.11      7.00     0.23    25.93 1.00     2650     4034
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept           34.21      5.60    23.06    45.10 1.00     4378     3429
-## WMGTAWD              0.75      2.61    -4.33     5.84 1.00    10644     7646
-## NRTEN100             1.94      2.67    -3.26     7.24 1.00    10037     7067
-## NRTEN120             6.70      2.73     1.23    12.04 1.00     9729     6786
-## WMGTAWD:NRTEN100     2.68      2.80    -2.74     8.09 1.00    10427     7441
-## WMGTAWD:NRTEN120     2.55      2.84    -3.03     8.14 1.00     9520     7149
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma    28.17      1.96    24.68    32.33 1.00     8741     6577
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m2-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m2</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m2</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m2</span>)
 </pre></div>
 <pre><code>##                       prior     class             coef group resp dpar nlpar
-## 1              normal(0, 3)         b                                       
+## 1              normal(0, 1)         b                                       
 ## 2                                   b         NRTEN100                      
 ## 3                                   b         NRTEN120                      
 ## 4                                   b          WMGTAWD                      
@@ -599,171 +479,219 @@
 ## 9       
 ## 10      
 ## 11</code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m2</span>)
-</pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_TShB_severity-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb30"><pre class="downlit">
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m2</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_TShB_severity-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_severity-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_TShB_severity-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m2-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m2-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m2</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="12%">
+<col width="28%">
+<col width="12%">
+<col width="6%">
+<col width="12%">
+<col width="13%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">Parameter</th>
+<th align="center">Median</th>
+<th align="center">CI</th>
+<th align="center">CI_low</th>
+<th align="center">CI_high</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">b_Intercept</td>
+<td align="center">37.9</td>
+<td align="center">89</td>
+<td align="center">30.24</td>
+<td align="center">45.47</td>
+<td align="center">0.9999</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">b_WMGTAWD</td>
+<td align="center">0.1551</td>
+<td align="center">89</td>
+<td align="center">-1.449</td>
+<td align="center">1.7</td>
+<td align="center">0.562</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">b_NRTEN100</td>
+<td align="center">0.1798</td>
+<td align="center">89</td>
+<td align="center">-1.342</td>
+<td align="center">1.757</td>
+<td align="center">0.5724</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">b_NRTEN120</td>
+<td align="center">0.8432</td>
+<td align="center">89</td>
+<td align="center">-0.762</td>
+<td align="center">2.372</td>
+<td align="center">0.804</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>5</strong></td>
+<td align="center">b_WMGTAWD.NRTEN100</td>
+<td align="center">0.2898</td>
+<td align="center">89</td>
+<td align="center">-1.312</td>
+<td align="center">1.848</td>
+<td align="center">0.618</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>6</strong></td>
+<td align="center">b_WMGTAWD.NRTEN120</td>
+<td align="center">0.3796</td>
+<td align="center">89</td>
+<td align="center">-1.29</td>
+<td align="center">1.894</td>
+<td align="center">0.6475</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="12%">
+<col width="14%">
+<col width="15%">
+<col width="23%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">ROPE_CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">Rhat</th>
+<th align="center">ESS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">5585</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">1</td>
+<td align="center">0.9998</td>
+<td align="center">24264</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">23015</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">1</td>
+<td align="center">0.9999</td>
+<td align="center">21991</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>5</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">1</td>
+<td align="center">0.9999</td>
+<td align="center">21271</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>6</strong></td>
+<td align="center">89</td>
+<td align="center">-2.973</td>
+<td align="center">2.973</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">22425</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="leaf-sheath-blight-severity-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>2015 Leaf Sheath Blight Severity Model</h2>
+<a href="#leaf-sheath-blight-severity-model" class="anchor"></a>Leaf Sheath Blight Severity Model</h2>
 <div id="model-structure-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-2" class="anchor"></a>Model Structure</h3>
-<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit">
+<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="kw">m3_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
-  data = <span class="kw">AUDPS_2015</span>,
-  seed = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  prior = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">set_prior</a></span>(<span class="st">"normal(0, 3)"</span>),
-  iter = <span class="fl">5000</span>
+  family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
+  data    = <span class="kw">AUDPS_2015</span>,
+  seed    = <span class="fl">27</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m3_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
-<pre><code>## Compiling the C++ model</code></pre>
-<pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL 'a09a9e36f3e1724df793c5472539cfd8' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 5.9e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.59 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 6.49284 seconds (Warm-up)
-## Chain 1:                5.08873 seconds (Sampling)
-## Chain 1:                11.5816 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL 'a09a9e36f3e1724df793c5472539cfd8' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 2.7e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 6.76906 seconds (Warm-up)
-## Chain 2:                3.99716 seconds (Sampling)
-## Chain 2:                10.7662 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL 'a09a9e36f3e1724df793c5472539cfd8' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 2.2e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.22 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 5.54276 seconds (Warm-up)
-## Chain 3:                4.51767 seconds (Sampling)
-## Chain 3:                10.0604 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL 'a09a9e36f3e1724df793c5472539cfd8' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2.3e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.23 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 5.90942 seconds (Warm-up)
-## Chain 4:                7.60465 seconds (Sampling)
-## Chain 4:                13.5141 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m3</span>)
+</div>
+<div id="diagnostics-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics-2" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="co"># asses convergence</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m3</span>)
 </pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2015 (Number of observations: 120) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     4.09      1.72     1.97     8.45 1.00     3650     4803
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept            2.43      1.93    -1.59     6.03 1.00     3724     4431
-## WMGTAWD             -1.71      0.87    -3.42    -0.01 1.00     5401     6766
-## NRTEN100             2.40      0.90     0.62     4.13 1.00     6431     7196
-## NRTEN120             3.90      0.90     2.16     5.66 1.00     6279     6623
-## WMGTAWD:NRTEN100     3.79      1.23     1.42     6.22 1.00     5686     6553
-## WMGTAWD:NRTEN120     1.63      1.23    -0.76     4.08 1.00     5491     6259
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     3.21      0.22     2.82     3.66 1.00     8319     6652
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m3-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m3</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m3</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m3</span>)
 </pre></div>
 <pre><code>##                     prior     class             coef group resp dpar nlpar
-## 1            normal(0, 3)         b                                       
+## 1            normal(0, 1)         b                                       
 ## 2                                 b         NRTEN100                      
 ## 3                                 b         NRTEN120                      
 ## 4                                 b          WMGTAWD                      
@@ -786,14 +714,24 @@
 ## 9       
 ## 10      
 ## 11</code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m3</span>)
-</pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_LShB_severity-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_LShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb40"><pre class="downlit">
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m3</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2015_LShB_severity-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_LShB_severity-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2015_LShB_severity-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m3-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m3-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m3</span>)
+</pre></div>
+<pre><code>## # Description of Posterior Distributions
+## 
+## Parameter        | Median |          89% CI |    pd |        89% ROPE | % in ROPE |  Rhat |       ESS
+## -----------------------------------------------------------------------------------------------------
+## Intercept        |  2.978 | [ 0.040, 5.827] | 0.946 | [-0.507, 0.507] |     3.668 | 1.000 |  7234.146
+## WMGTAWD          | -0.664 | [-1.655, 0.244] | 0.866 | [-0.507, 0.507] |    37.239 | 1.000 | 15885.509
+## NRTEN100         |  1.830 | [ 0.777, 2.817] | 0.997 | [-0.507, 0.507] |     0.000 | 1.000 | 16202.688
+## NRTEN120         |  2.578 | [ 1.545, 3.582] | 1.000 | [-0.507, 0.507] |     0.000 | 1.000 | 15440.793
+## WMGTAWD.NRTEN100 |  1.921 | [ 0.683, 3.070] | 0.994 | [-0.507, 0.507] |     0.000 | 1.000 | 15173.531
+## WMGTAWD.NRTEN120 |  0.932 | [-0.182, 2.166] | 0.898 | [-0.507, 0.507] |    24.538 | 1.000 | 14193.700</code></pre>
 <hr>
 </div>
 </div>
@@ -803,157 +741,54 @@
 <a href="#models-1" class="anchor"></a>2016 Models</h1>
 <div id="tiller-sheath-blight-incidence-model-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>2016 Tiller Sheath Blight Incidence Model</h2>
+<a href="#tiller-sheath-blight-incidence-model-1" class="anchor"></a>Tiller Sheath Blight Incidence Model</h2>
 <div id="model-structure-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-3" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit">
+<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit">
+<span class="kw">m4_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 0.5)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
-  data = <span class="kw">AUDPS_2016</span>,
-  seed = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  prior = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">set_prior</a></span>(<span class="st">"normal(0, 3)"</span>),
-  iter = <span class="fl">5000</span>
+  family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
+  data    = <span class="kw">AUDPS_2016</span>,
+  seed    = <span class="fl">27</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m4_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
-<pre><code>## Compiling the C++ model</code></pre>
-<pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL '76333dd452e6a336f75dd4065670e3a1' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 5.2e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.52 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 3.59481 seconds (Warm-up)
-## Chain 1:                3.14971 seconds (Sampling)
-## Chain 1:                6.74451 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL '76333dd452e6a336f75dd4065670e3a1' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 2e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 3.66552 seconds (Warm-up)
-## Chain 2:                6.78752 seconds (Sampling)
-## Chain 2:                10.453 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL '76333dd452e6a336f75dd4065670e3a1' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 2.2e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.22 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 4.11874 seconds (Warm-up)
-## Chain 3:                2.7697 seconds (Sampling)
-## Chain 3:                6.88843 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL '76333dd452e6a336f75dd4065670e3a1' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2.1e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 3.77103 seconds (Warm-up)
-## Chain 4:                4.99155 seconds (Sampling)
-## Chain 4:                8.76258 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m4</span>)
+</div>
+<div id="diagnostics-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics-3" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb30"><pre class="downlit">
+<span class="co"># asses convergence</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m4</span>)
 </pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2016 (Number of observations: 64) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     1.36      0.76     0.52     3.27 1.00     2715     4857
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept           10.38      0.73     8.98    11.87 1.00     3012     4296
-## WMGTAWD              0.73      0.34     0.03     1.39 1.00     4983     5484
-## NRTEN180             2.31      0.34     1.63     2.97 1.00     5075     5837
-## WMGTAWD:NRTEN180    -0.73      0.49    -1.67     0.24 1.00     4539     5154
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.98      0.09     0.81     1.18 1.00     5953     5632
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m4-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb31"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m4</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m4</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb32"><pre class="downlit">
+<span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m4</span>)
 </pre></div>
 <pre><code>##                     prior     class             coef group resp dpar nlpar
-## 1            normal(0, 3)         b                                       
+## 1          normal(0, 0.5)         b                                       
 ## 2                                 b         NRTEN180                      
 ## 3                                 b          WMGTAWD                      
 ## 4                                 b WMGTAWD:NRTEN180                      
@@ -972,340 +807,380 @@
 ## 7      
 ## 8      
 ## 9</code></pre>
-<div class="sourceCode" id="cb49"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m4</span>)
-</pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_TShB_incidence-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_incidence-2.png" width="700"></p>
-<div class="sourceCode" id="cb50"><pre class="downlit">
+<div class="sourceCode" id="cb34"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m4</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_TShB_incidence-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_incidence-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_incidence-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m4-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m4-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb35"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m4</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="12%">
+<col width="28%">
+<col width="13%">
+<col width="6%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">Parameter</th>
+<th align="center">Median</th>
+<th align="center">CI</th>
+<th align="center">CI_low</th>
+<th align="center">CI_high</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">b_Intercept</td>
+<td align="center">10.8</td>
+<td align="center">89</td>
+<td align="center">9.727</td>
+<td align="center">11.93</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">b_WMGTAWD</td>
+<td align="center">0.2634</td>
+<td align="center">89</td>
+<td align="center">-0.1581</td>
+<td align="center">0.689</td>
+<td align="center">0.8418</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">b_NRTEN180</td>
+<td align="center">1.533</td>
+<td align="center">89</td>
+<td align="center">1.094</td>
+<td align="center">1.966</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">b_WMGTAWD.NRTEN180</td>
+<td align="center">0.07241</td>
+<td align="center">89</td>
+<td align="center">-0.4603</td>
+<td align="center">0.5936</td>
+<td align="center">0.5839</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="12%">
+<col width="14%">
+<col width="15%">
+<col width="23%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">ROPE_CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">Rhat</th>
+<th align="center">ESS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1609</td>
+<td align="center">0.1609</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">5400</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1609</td>
+<td align="center">0.1609</td>
+<td align="center">0.326</td>
+<td align="center">1</td>
+<td align="center">11933</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1609</td>
+<td align="center">0.1609</td>
+<td align="center">0</td>
+<td align="center">0.9999</td>
+<td align="center">11712</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">89</td>
+<td align="center">-0.1609</td>
+<td align="center">0.1609</td>
+<td align="center">0.4136</td>
+<td align="center">1</td>
+<td align="center">10981</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="tiller-sheath-blight-severity-model-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>2016 Tiller Sheath Blight Severity Model</h2>
+<a href="#tiller-sheath-blight-severity-model-1" class="anchor"></a>Tiller Sheath Blight Severity Model</h2>
 <div id="model-structure-4" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-4" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit">
+<p>Tiller sheath blight severity AUDPS converted to the midpoint percentage value, <code>TShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit">
+<span class="kw">m5_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
-  data = <span class="kw">AUDPS_2016</span>,
-  seed = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  prior = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">set_prior</a></span>(<span class="st">"normal(0, 3)"</span>),
-  iter = <span class="fl">5000</span>
+  family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">skew_normal</a></span>(),
+  data    = <span class="kw">AUDPS_2016</span>,
+  seed    = <span class="fl">27</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m5_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
-<pre><code>## Compiling the C++ model</code></pre>
-<pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL '85e6cf52b7b26cdce4bb5458d4cfb515' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 0.000898 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 8.98 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 3.28722 seconds (Warm-up)
-## Chain 1:                7.21114 seconds (Sampling)
-## Chain 1:                10.4984 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL '85e6cf52b7b26cdce4bb5458d4cfb515' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 2.1e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 3.4297 seconds (Warm-up)
-## Chain 2:                4.54626 seconds (Sampling)
-## Chain 2:                7.97596 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL '85e6cf52b7b26cdce4bb5458d4cfb515' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 2e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 3.49422 seconds (Warm-up)
-## Chain 3:                4.75088 seconds (Sampling)
-## Chain 3:                8.2451 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL '85e6cf52b7b26cdce4bb5458d4cfb515' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2.7e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 4.99665 seconds (Warm-up)
-## Chain 4:                7.97594 seconds (Sampling)
-## Chain 4:                12.9726 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m5</span>)
-</pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2016 (Number of observations: 64) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)    10.88      4.72     4.93    23.03 1.00     3486     4611
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept           30.17      5.15    19.60    40.17 1.00     3280     4366
-## WMGTAWD             -4.36      1.95    -8.14    -0.60 1.00     7455     6743
-## NRTEN180             4.09      1.95     0.23     7.83 1.00     7323     6249
-## WMGTAWD:NRTEN180    -3.04      2.28    -7.48     1.49 1.00     6974     6388
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     8.75      0.86     7.27    10.63 1.00     7139     5955
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m5</span>)
-</pre></div>
-<pre><code>##                    prior     class             coef group resp dpar nlpar bound
-## 1           normal(0, 3)         b                                             
-## 2                                b         NRTEN180                            
-## 3                                b          WMGTAWD                            
-## 4                                b WMGTAWD:NRTEN180                            
-## 5 student_t(3, 26, 11.3) Intercept                                             
-## 6  student_t(3, 0, 11.3)        sd                                             
-## 7                               sd                    REP                      
-## 8                               sd        Intercept   REP                      
-## 9  student_t(3, 0, 11.3)     sigma</code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit">
+</div>
+<div id="diagnostics-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics-4" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb37"><pre class="downlit">
+<span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m5</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_TShB_severity-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb60"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m5-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb38"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m5</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m5</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb39"><pre class="downlit">
+<span class="co"># priors</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m5</span>)
+</pre></div>
+<pre><code>##                     prior     class             coef group resp dpar nlpar
+## 1            normal(0, 4)     alpha                                       
+## 2            normal(0, 1)         b                                       
+## 3                                 b         NRTEN180                      
+## 4                                 b          WMGTAWD                      
+## 5                                 b WMGTAWD:NRTEN180                      
+## 6  student_t(3, 26, 11.3) Intercept                                       
+## 7   student_t(3, 0, 11.3)        sd                                       
+## 8                                sd                    REP                
+## 9                                sd        Intercept   REP                
+## 10  student_t(3, 0, 11.3)     sigma                                       
+##    bound
+## 1       
+## 2       
+## 3       
+## 4       
+## 5       
+## 6       
+## 7       
+## 8       
+## 9       
+## 10</code></pre>
+<div class="sourceCode" id="cb41"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m5</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_TShB_severity-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_severity-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_TShB_severity-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m5-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m5-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb42"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m5</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="12%">
+<col width="28%">
+<col width="13%">
+<col width="6%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">Parameter</th>
+<th align="center">Median</th>
+<th align="center">CI</th>
+<th align="center">CI_low</th>
+<th align="center">CI_high</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">b_Intercept</td>
+<td align="center">30.5</td>
+<td align="center">89</td>
+<td align="center">22.79</td>
+<td align="center">38.16</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">b_WMGTAWD</td>
+<td align="center">-1.105</td>
+<td align="center">89</td>
+<td align="center">-2.533</td>
+<td align="center">0.3021</td>
+<td align="center">0.8899</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">b_NRTEN180</td>
+<td align="center">1.114</td>
+<td align="center">89</td>
+<td align="center">-0.2399</td>
+<td align="center">2.611</td>
+<td align="center">0.8952</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">b_WMGTAWD.NRTEN180</td>
+<td align="center">-0.2003</td>
+<td align="center">89</td>
+<td align="center">-1.619</td>
+<td align="center">1.216</td>
+<td align="center">0.5913</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="13%">
+<col width="14%">
+<col width="16%">
+<col width="24%">
+<col width="9%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">ROPE_CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">Rhat</th>
+<th align="center">ESS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">89</td>
+<td align="center">-1.267</td>
+<td align="center">1.267</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">6478</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">89</td>
+<td align="center">-1.267</td>
+<td align="center">1.267</td>
+<td align="center">0.5785</td>
+<td align="center">1</td>
+<td align="center">21097</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">89</td>
+<td align="center">-1.267</td>
+<td align="center">1.267</td>
+<td align="center">0.5663</td>
+<td align="center">1</td>
+<td align="center">18186</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">89</td>
+<td align="center">-1.267</td>
+<td align="center">1.267</td>
+<td align="center">0.9322</td>
+<td align="center">1</td>
+<td align="center">20871</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="leaf-sheath-blight-severity-model-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>2016 Leaf Sheath Blight Severity Model</h2>
+<a href="#leaf-sheath-blight-severity-model-1" class="anchor"></a>Leaf Sheath Blight Severity Model</h2>
 <div id="model-structure-5" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-5" class="anchor"></a>Model Structure</h3>
-<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code> is treated as a random effect.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit">
+<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit">
+<span class="kw">m6_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 0.5)"</span>, class = <span class="st">"b"</span>)
+
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
   formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
-  data = <span class="kw">AUDPS_2016</span>,
-  seed = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  prior = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">set_prior</a></span>(<span class="st">"normal(0, 3)"</span>),
-  iter = <span class="fl">5000</span>
+  family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
+  data    = <span class="kw">AUDPS_2016</span>,
+  seed    = <span class="fl">27</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">10000</span>,
+  prior = <span class="kw">m6_priors</span>,
+  sample_prior = <span class="fl">TRUE</span>
 )
 </pre></div>
-<pre><code>## Compiling the C++ model</code></pre>
-<pre><code>## Start sampling</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL '1909d1b21fd1b545139c781eaaec0cc2' NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 9.5e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.95 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 1: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 1: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 1: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 1: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 4.34714 seconds (Warm-up)
-## Chain 1:                9.59721 seconds (Sampling)
-## Chain 1:                13.9443 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL '1909d1b21fd1b545139c781eaaec0cc2' NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 1.9e-05 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.19 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 2: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 2: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 2: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 2: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 4.16023 seconds (Warm-up)
-## Chain 2:                5.28938 seconds (Sampling)
-## Chain 2:                9.44962 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL '1909d1b21fd1b545139c781eaaec0cc2' NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 1.9e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.19 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 3: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 3: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 3: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 3: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 4.29926 seconds (Warm-up)
-## Chain 3:                10.1263 seconds (Sampling)
-## Chain 3:                14.4256 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL '1909d1b21fd1b545139c781eaaec0cc2' NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 2e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 5000 [  0%]  (Warmup)
-## Chain 4: Iteration:  500 / 5000 [ 10%]  (Warmup)
-## Chain 4: Iteration: 1000 / 5000 [ 20%]  (Warmup)
-## Chain 4: Iteration: 1500 / 5000 [ 30%]  (Warmup)
-## Chain 4: Iteration: 2000 / 5000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 2500 / 5000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 2501 / 5000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 3000 / 5000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 3500 / 5000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 4000 / 5000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 4500 / 5000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 5000 / 5000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 4.17709 seconds (Warm-up)
-## Chain 4:                2.98357 seconds (Sampling)
-## Chain 4:                7.16066 seconds (Total)
-## Chain 4:</code></pre>
-<div class="sourceCode" id="cb65"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m6</span>)
+</div>
+<div id="diagnostics-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#diagnostics-5" class="anchor"></a>Diagnostics</h3>
+<div class="sourceCode" id="cb44"><pre class="downlit">
+<span class="co"># asses convergence</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m6</span>)
 </pre></div>
-<pre><code>##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
-## Formula: LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP) 
-##    Data: AUDPS_2016 (Number of observations: 64) 
-## Samples: 4 chains, each with iter = 5000; warmup = 2500; thin = 1;
-##          total post-warmup samples = 10000
-## 
-## Group-Level Effects: 
-## ~REP (Number of levels: 4) 
-##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.64      0.46     0.21     1.80 1.00     2006     3899
-## 
-## Population-Level Effects: 
-##                  Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept            1.04      0.37     0.29     1.77 1.00     3222     3805
-## WMGTAWD              0.50      0.16     0.19     0.82 1.00     4527     5892
-## NRTEN180             0.53      0.16     0.20     0.85 1.00     4974     5941
-## WMGTAWD:NRTEN180    -0.74      0.23    -1.20    -0.30 1.00     4271     5354
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.46      0.04     0.39     0.56 1.00     5937     5500
-## 
-## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
-## and Tail_ESS are effective sample size measures, and Rhat is the potential
-## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb67"><pre class="downlit">
+<p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m6-diagnostics-2.png" width="700"></p>
+<div class="sourceCode" id="cb45"><pre class="downlit">
+<span class="kw">post_ranef</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span>(<span class="kw">m6</span>, add_chain = <span class="fl">TRUE</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">lp__</span>,
+         <span class="op">-</span><span class="kw">iter</span>,
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"b_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"sd_"</span>),
+         <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span>(<span class="st">"Intercept_"</span>))
+
+<span class="co"># assess fit</span>
+<span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m6</span>, nsamples = <span class="fl">500</span>)
+</pre></div>
+<p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-3.png" width="700"></p>
+<div class="sourceCode" id="cb46"><pre class="downlit">
+<span class="co"># check influence of priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m6</span>)
 </pre></div>
 <pre><code>##                    prior     class             coef group resp dpar nlpar bound
-## 1           normal(0, 3)         b                                             
+## 1         normal(0, 0.5)         b                                             
 ## 2                                b         NRTEN180                            
 ## 3                                b          WMGTAWD                            
 ## 4                                b WMGTAWD:NRTEN180                            
@@ -1314,44 +1189,139 @@
 ## 7                               sd                    REP                      
 ## 8                               sd        Intercept   REP                      
 ## 9   student_t(3, 0, 2.5)     sigma</code></pre>
-<div class="sourceCode" id="cb69"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m6</span>)
-</pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_LShB_severity-1.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_LShB_severity-2.png" width="700"></p>
-<div class="sourceCode" id="cb70"><pre class="downlit">
+<div class="sourceCode" id="cb48"><pre class="downlit">
+<span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/conditional_effects.brmsfit.html">conditional_effects</a></span>(<span class="kw">m6</span>)
 </pre></div>
-<p><img src="a04_data_analysis_files/figure-html/2016_LShB_severity-3.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_LShB_severity-4.png" width="700"><img src="a04_data_analysis_files/figure-html/2016_LShB_severity-5.png" width="700"></p>
+<p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-4.png" width="700"><img src="a04_data_analysis_files/figure-html/m6-diagnostics-5.png" width="700"><img src="a04_data_analysis_files/figure-html/m6-diagnostics-6.png" width="700"></p>
+<div class="sourceCode" id="cb49"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m6</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="12%">
+<col width="28%">
+<col width="13%">
+<col width="6%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">Parameter</th>
+<th align="center">Median</th>
+<th align="center">CI</th>
+<th align="center">CI_low</th>
+<th align="center">CI_high</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">b_Intercept</td>
+<td align="center">1.123</td>
+<td align="center">89</td>
+<td align="center">0.5689</td>
+<td align="center">1.694</td>
+<td align="center">0.9901</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">b_WMGTAWD</td>
+<td align="center">0.3894</td>
+<td align="center">89</td>
+<td align="center">0.1491</td>
+<td align="center">0.6248</td>
+<td align="center">0.9933</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">b_NRTEN180</td>
+<td align="center">0.4127</td>
+<td align="center">89</td>
+<td align="center">0.1809</td>
+<td align="center">0.655</td>
+<td align="center">0.9959</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">b_WMGTAWD.NRTEN180</td>
+<td align="center">-0.5563</td>
+<td align="center">89</td>
+<td align="center">-0.8824</td>
+<td align="center">-0.2315</td>
+<td align="center">0.996</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="13%">
+<col width="14%">
+<col width="16%">
+<col width="24%">
+<col width="9%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"> </th>
+<th align="center">ROPE_CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">Rhat</th>
+<th align="center">ESS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>1</strong></td>
+<td align="center">89</td>
+<td align="center">-0.05912</td>
+<td align="center">0.05912</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">5154</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">89</td>
+<td align="center">-0.05912</td>
+<td align="center">0.05912</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">10246</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">89</td>
+<td align="center">-0.05912</td>
+<td align="center">0.05912</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">10253</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">89</td>
+<td align="center">-0.05912</td>
+<td align="center">0.05912</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">8596</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-<div id="model-fit" class="section level2">
-<h2 class="hasAnchor">
-<a href="#model-fit" class="anchor"></a>Model Fit</h2>
-<p>The models all appear to be good fits.</p>
-<p>None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.</p>
-</div>
-<div id="conclusions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conclusions" class="anchor"></a>Conclusions</h2>
-<div id="tiller-sheath-blight-incidence" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tiller-sheath-blight-incidence" class="anchor"></a>Tiller Sheath Blight Incidence</h3>
-</div>
-</div>
-<div id="tiller-sheath-blight-severity" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tiller-sheath-blight-severity" class="anchor"></a>Tiller Sheath Blight Severity</h2>
-</div>
-<div id="leaf-sheath-blight-severity" class="section level2">
-<h2 class="hasAnchor">
-<a href="#leaf-sheath-blight-severity" class="anchor"></a>Leaf Sheath Blight Severity</h2>
 </div>
 </div>
 <div id="save-model-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
-<p>Lastly, save the model information used in the posterior estimate graphs to be used in the paper.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit">
+<p>Lastly, save the model information used in the posterior estimate graphs to be used in discussing the results in the next vignette and in the paper.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit">
 <span class="kw">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="st">"TInc_15"</span> = <span class="kw">m1</span>,
   <span class="st">"TSev_15"</span> = <span class="kw">m2</span>,
@@ -1376,7 +1346,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel.</p>
+  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel, Global Rice Science Partnership (GRiSP).</p>
 </div>
 
 <div class="pkgdown">

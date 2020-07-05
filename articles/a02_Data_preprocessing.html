@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Data Preprocessing and Area Calculations</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-06-28</h4>
+            <h4 class="date">2020-07-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/vignettes/a02_Data_preprocessing.Rmd"><code>vignettes/a02_Data_preprocessing.Rmd</code></a></small>
       <div class="hidden name"><code>a02_Data_preprocessing.Rmd</code></div>
@@ -919,7 +919,8 @@
 <h1 class="hasAnchor">
 <a href="#merge-audps-year-data" class="anchor"></a>Merge AUDPS Year Data</h1>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">AUDPS</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span>(<span class="kw">ShB_15</span>, <span class="kw">ShB_16</span>)
+<span class="kw">AUDPS</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span>(<span class="kw">ShB_15</span>, <span class="kw">ShB_16</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">select</span>(<span class="op">-</span><span class="kw">PLOT_TShB_incidence</span>)
 
 <span class="kw">AUDPS</span> <span class="op">&lt;-</span> <span class="fu">separate</span>(
   data = <span class="kw">AUDPS</span>,
@@ -1032,7 +1033,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel.</p>
+  <p>Developed by Adam H. Sparks, Nancy P. Castilla, Bjoern Ole Sander, Michael Noel, Global Rice Science Partnership (GRiSP).</p>
 </div>
 
 <div class="pkgdown">
