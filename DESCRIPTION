@@ -24,9 +24,10 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Suggests:
-    bookdown,
     agricolae,
     bayesplot,
+    bayestestR,
+    bookdown,
     brms,
     devtools,
     dplyr (>= 0.7.0),
