@@ -65,110 +65,6 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "bookdown",
-      "name": "bookdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=bookdown"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "devtools",
-      "name": "devtools",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=devtools"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "ggpubr",
-      "name": "ggpubr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggpubr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "pander",
-      "name": "pander",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=pander"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "sessioninfo",
-      "name": "sessioninfo",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=sessioninfo"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "tidyverse",
-      "name": "tidyverse",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tidyverse"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "usethis",
-      "name": "usethis",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=usethis"
-    }
-  ],
-  "softwareRequirements": [
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "R",
-      "name": "R",
-      "version": ">= 3.4.0"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "agricolae",
       "name": "agricolae",
       "provider": {
@@ -181,6 +77,42 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "bayesplot",
+      "name": "bayesplot",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=bayesplot"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "bayestestR",
+      "name": "bayestestR",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=bayestestR"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "bookdown",
+      "name": "bookdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=bookdown"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "brms",
       "name": "brms",
       "provider": {
@@ -190,6 +122,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=brms"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "devtools",
+      "name": "devtools",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=devtools"
     },
     {
       "@type": "SoftwareApplication",
@@ -230,6 +174,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "ggpubr",
+      "name": "ggpubr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggpubr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
       "provider": {
@@ -239,6 +207,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "pander",
+      "name": "pander",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=pander"
     },
     {
       "@type": "SoftwareApplication",
@@ -267,6 +247,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "sessioninfo",
+      "name": "sessioninfo",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sessioninfo"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyverse",
+      "name": "tidyverse",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
       "provider": {
@@ -289,10 +293,30 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "usethis",
+      "name": "usethis",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=usethis"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.4.0"
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "553.593KB",
+  "fileSize": "551.41KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
