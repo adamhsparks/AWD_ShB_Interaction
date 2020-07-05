@@ -9,7 +9,9 @@ Authors@R: c(person("Adam H.", "Sparks", role = c("aut", "cre"),
     person("Bjoern Ole", "Sander", role = "aut",
     email = "b.sander@irri.org",
     comment = c(ORCID = "0000-0002-7967-6147")),
-    person("Michael", "Noel", role = "aut"))
+    person("Michael", "Noel", role = "aut"),
+    person("Global Rice Science Partnership (GRiSP)",
+    role = "fnd"))
 Description: Provides a research compendium of analysis associated with
     experiments conducted at the International Rice Research Institute (IRRI),
     Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The
@@ -20,26 +22,26 @@ Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports:
-    agricolae,
-    brms,
-    dplyr (>= 0.7.0),
-    forcats,
-    ggplot2,
-    lubridate,
-    reshape2,
-    purrr (>= 0.2.3),
-    tibble,
-    tidyr (>= 0.7.0)
 RoxygenNote: 7.1.1
 Suggests:
     bookdown,
+    agricolae,
+    bayesplot,
+    brms,
     devtools,
+    dplyr (>= 0.7.0),
+    forcats,
+    ggplot2,
     ggpubr,
     knitr,
+    lubridate,
     pander,
+    reshape2,
+    purrr (>= 0.2.3),
     sessioninfo,
     tidyverse,
+    tibble,
+    tidyr (>= 0.7.0),
     usethis
 VignetteBuilder: knitr
 URL: https://github.com/adamhsparks/rice_AWD_ShB_analysis

@@ -14,10 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Based on the residual plots where several do not meet assumptions for a normal distribution, I've elected to use a naive Bayesian approach using the _brms_ package's `brm()` for a split plot analysis rather than a `lmer()` model.
-
-# Interpreting These Analyses
-
+For this analysis, I've elected to use [`brms`](https://cran.r-project.org/package=brms) for a Bayesian analysis.
 When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
 
 The base levels for this analysis are:
@@ -34,20 +31,31 @@ The base levels for this analysis are:
 
     - `WMGT:PDL`
 
-### Changes between 2015 and 2016
+## Changes between 2015 and 2016
 
 Before the analysis, note that due to changes between the years, the analysis must be carried out on each year separately.
 The 2015 data and 2016 data cannot be combined due to changes in inoculation methods; there are other changes too, but the main one is this.
 Therefore, the analyses will be conducted separately such that comparisons will only be observational and cannot be statistically compared.
 
-# Setup
+## Setup
+
+Load libraries, set `ggplot2` theme for document and detect the number of cores available for `brms` to use.
 
 ```{r set_seed, message=FALSE}
+library("rice.awd.shb")
 library("brms")
 library("dplyr")
-library("rice.awd.shb")
 library("ggplot2")
+library("bayestestR")
+library("bayesplot")
+
 theme_set(theme_minimal())
+
+# deals with some issues with parallel clusters
+Sys.setenv(PROCESSX_NOTIFY_OLD_SIGCHLD = TRUE)
+
+# detect the number of cores to run in parallel
+options(mc.cores = parallel::detectCores())
 ```
 
 The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
@@ -55,9 +63,9 @@ However, because it is a `tibble()` and the treatments exist in a single column 
 
 Create individual data frames for the analysis.
 
-```{r create_analysis_df, cache=FALSE, message=FALSE}
+```{r create_analysis_df, cache=FALSE, message=FALSE, warning=FALSE}
 # create 2015 data frame
-AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015, ])
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015,])
 AUDPS_2015 <- droplevels(AUDPS_2015)
 
 # relevel factors for easier interpretation of analysis
@@ -65,7 +73,7 @@ AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
 
 # create 2016 data frame
-AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016, ])
+AUDPS_2016 <- as.data.frame(AUDPS[AUDPS$YEAR == 2016,])
 AUDPS_2016 <- droplevels(AUDPS_2016)
 
 # relevel factors for easier interpretation of analysis
@@ -73,49 +81,11 @@ AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
 ```
 
-Now that the `AUDPS_2015` and `AUDPS_2016` `data.frames()` exist, we can start
-the analysis.
-
-# Check Correlation
-
-Check for correlation between the tiller incidence and the severity ratings for both leaf and tiller.
-
-```{r correlation}
-# 2015 Tiller Severity Correlation
-cor.test(AUDPS_2015$TShB_incidence_AUDPS,
-         AUDPS_2015$TShB_percent_AUDPS,
-         method = "spearman",
-         alternative = "two.sided",
-         exact = FALSE)
-
-# 2015 Leaf Severity Correlation
-cor.test(AUDPS_2015$TShB_incidence_AUDPS,
-         AUDPS_2015$LShB_percent_AUDPS,
-         method = "spearman",
-         alternative = "two.sided",
-         exact = FALSE)
-
-# 2016 Tiller Severity Correlation
-cor.test(AUDPS_2016$TShB_incidence_AUDPS,
-         AUDPS_2016$TShB_percent_AUDPS,
-         method = "spearman",
-         alternative = "two.sided",
-         exact = FALSE)
-
-# 2016 Leaf Severity Correlation
-cor.test(AUDPS_2016$TShB_incidence_AUDPS,
-         AUDPS_2016$LShB_percent_AUDPS,
-         method = "spearman",
-         alternative = "two.sided",
-         exact = FALSE)
-```
-
-The tiller incidence of the disease appears not to be correlated with the severity on the tiller or the leaves.
-Based on this, the interactions of the incidence and severity will not be analysed.
+Now that the `AUDPS_2015` and `AUDPS_2016` data frames exist, we can start the analysis.
 
 # 2015 Models
 
-## 2015 Tiller Sheath Blight Incidence Model
+## Tiller Sheath Blight Incidence Model
 
 ### Model Structure
 
@@ -124,180 +94,304 @@ The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixe
 Replicate, `REP`, is treated as a random effect.
 
 ```{r 2015_TShB_incidence, cache=FALSE}
+m1_priors <- prior_string("normal(0, 1)", class = "b")
+
 m1 <- brm(
   formula = TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP),
+  family = gaussian(),
   data    = AUDPS_2015,
   seed    = 27,
-  control = list(adapt_delta = 0.999),
-  iter = 5000
+  control = list(adapt_delta = 0.9999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m1_priors,
+  sample_prior = TRUE
 )
-
-summary(m1)
-
-prior_summary(m1)
-
-plot(m1)
-
-conditional_effects(m1)
 ```
 
-## 2015 Tiller Sheath Blight Severity Model
+### Diagnostics
+
+```{r m1-diagnostics}
+# asses convergence
+plot(m1)
+
+post_ranef <-
+  posterior_samples(m1, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
+
+# assess fit
+pp_check(m1, nsamples = 500)
+
+# priors
+prior_summary(m1)
+
+# posteriors
+conditional_effects(m1)
+
+describe_posterior(m1)
+```
+
+## Tiller Sheath Blight Severity Model
 
 ### Model Structure
 
-Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS` is the response variable.
+Tiller sheath blight severity AUDPS converted to the midpoint percentage value, `TShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
-```{r 2015_TShB_severity, cache=FALSE}
+```{r 2015_TShB_severity, cache=FALSE, message=TRUE, warning=TRUE}
+m2_priors <- prior_string("normal(0, 1)", class = "b")
+
 m2 <- brm(
   formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
+  family = gaussian(),
   data    = AUDPS_2015,
   seed    = 27,
-  control = list(adapt_delta = 0.999),
-  prior = set_prior("normal(0, 3)"),
-  iter = 5000
+  control = list(adapt_delta = 0.99999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m2_priors,
+  sample_prior = TRUE
 )
-
-summary(m2)
-
-prior_summary(m2)
-
-plot(m2)
-
-conditional_effects(m2)
 ```
 
-## 2015 Leaf Sheath Blight Severity Model
+### Diagnostics
+
+```{r m2-diagnostics, message=FALSE, warning=FALSE}
+# asses convergence
+plot(m2)
+
+post_ranef <-
+  posterior_samples(m2, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
+
+# assess fit
+pp_check(m2, nsamples = 500)
+
+# priors
+prior_summary(m2)
+
+# posteriors
+conditional_effects(m2)
+
+describe_posterior(m2)
+```
+
+## Leaf Sheath Blight Severity Model
 
 ### Model Structure
 
 Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
-```{r 2015_LShB_severity, cache=FALSE}
+```{r 2015_LShB_severity, cache=FALSE, message=FALSE, warning=FALSE}
+m3_priors <- prior_string("normal(0, 1)", class = "b")
+
 m3 <- brm(
   formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
-  data = AUDPS_2015,
-  seed = 27,
-  control = list(adapt_delta = 0.999),
-  prior = set_prior("normal(0, 3)"),
-  iter = 5000
+  family = gaussian(),
+  data    = AUDPS_2015,
+  seed    = 27,
+  control = list(adapt_delta = 0.9999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m3_priors,
+  sample_prior = TRUE
 )
+```
 
-summary(m3)
+### Diagnostics
 
-prior_summary(m3)
-
+```{r m3-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+# asses convergence
 plot(m3)
 
+post_ranef <-
+  posterior_samples(m3, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
+
+# assess fit
+pp_check(m3, nsamples = 500)
+
+# priors
+prior_summary(m3)
+
+# posteriors
 conditional_effects(m3)
+
+describe_posterior(m3)
 ```
 
 *******
 
 # 2016 Models
 
-## 2016 Tiller Sheath Blight Incidence Model
+## Tiller Sheath Blight Incidence Model
 
 ### Model Structure
 
 Tiller sheath blight incidence AUDPS, `TShB_incidence_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
-```{r 2016_TShB_incidence, cache=FALSE}
+```{r 2016_TShB_incidence, cache=FALSE, message=FALSE, warning=FALSE}
+m4_priors <- prior_string("normal(0, 0.5)", class = "b")
+
 m4 <- brm(
   formula = TShB_incidence_AUDPS ~ WMGT * NRTE + (1 | REP),
-  data = AUDPS_2016,
-  seed = 27,
-  control = list(adapt_delta = 0.999),
-  prior = set_prior("normal(0, 3)"),
-  iter = 5000
+  family = gaussian(),
+  data    = AUDPS_2016,
+  seed    = 27,
+  control = list(adapt_delta = 0.9999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m4_priors,
+  sample_prior = TRUE
 )
-
-summary(m4)
-
-prior_summary(m4)
-
-plot(m4)
-
-conditional_effects(m4)
 ```
 
+### Diagnostics
 
-## 2016 Tiller Sheath Blight Severity Model
+```{r m4-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+# asses convergence
+plot(m4)
+
+post_ranef <-
+  posterior_samples(m4, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
+
+# assess fit
+pp_check(m4, nsamples = 500)
+
+# priors
+prior_summary(m4)
+
+# posteriors
+conditional_effects(m4)
+
+describe_posterior(m4)
+```
+
+## Tiller Sheath Blight Severity Model
 
 ### Model Structure
 
-Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS` is the response variable.
+Tiller sheath blight severity AUDPS converted to the midpoint percentage value, `TShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
-```{r 2016_TShB_severity, cache=FALSE}
+```{r 2016_TShB_severity, cache=FALSE, message=FALSE, warning=FALSE}
+m5_priors <- prior_string("normal(0, 1)", class = "b")
+
 m5 <- brm(
   formula = TShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
-  data = AUDPS_2016,
-  seed = 27,
-  control = list(adapt_delta = 0.999),
-  prior = set_prior("normal(0, 3)"),
-  iter = 5000
+  family = skew_normal(),
+  data    = AUDPS_2016,
+  seed    = 27,
+  control = list(adapt_delta = 0.9999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m5_priors,
+  sample_prior = TRUE
 )
-
-summary(m5)
-
-prior_summary(m5)
-
-plot(m5)
-
-conditional_effects(m5)
 ```
 
-## 2016 Leaf Sheath Blight Severity Model
+### Diagnostics
+
+```{r m5-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+# asses convergence
+plot(m5)
+
+post_ranef <-
+  posterior_samples(m5, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
+
+# assess fit
+pp_check(m5, nsamples = 500)
+
+# priors
+prior_summary(m5)
+
+# posteriors
+conditional_effects(m5)
+
+describe_posterior(m5)
+```
+
+## Leaf Sheath Blight Severity Model
 
 ### Model Structure
 
 Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable.
 The interaction of water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP` is treated as a random effect.
+Replicate, `REP`, is treated as a random effect.
 
-```{r 2016_LShB_severity, cache=FALSE}
+```{r 2016_LShB_severity, cache=FALSE, message=FALSE, warning=FALSE}
+m6_priors <- prior_string("normal(0, 0.5)", class = "b")
+
 m6 <- brm(
   formula = LShB_percent_AUDPS ~ WMGT * NRTE + (1 | REP),
-  data = AUDPS_2016,
-  seed = 27,
-  control = list(adapt_delta = 0.999),
-  prior = set_prior("normal(0, 3)"),
-  iter = 5000
+  family = gaussian(),
+  data    = AUDPS_2016,
+  seed    = 27,
+  control = list(adapt_delta = 0.9999),
+  warmup = 5000,
+  iter = 10000,
+  prior = m6_priors,
+  sample_prior = TRUE
 )
-
-summary(m6)
-
-prior_summary(m6)
-
-plot(m6)
-
-conditional_effects(m6)
 ```
 
-## Model Fit
+### Diagnostics
 
-The models all appear to be good fits.
+```{r m6-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+# asses convergence
+plot(m6)
 
-None of the diagnostic plots show any signs of auto-correlation or any other obvious patterns that would indicate issues with the models.
+post_ranef <-
+  posterior_samples(m6, add_chain = TRUE) %>%
+  select(-lp__,
+         -iter,
+         -contains("b_"),
+         -contains("sd_"),
+         -contains("Intercept_"))
 
-## Conclusions
+# assess fit
+pp_check(m6, nsamples = 500)
 
-### Tiller Sheath Blight Incidence
+# check influence of priors
+prior_summary(m6)
 
-## Tiller Sheath Blight Severity
+# posteriors
+conditional_effects(m6)
 
-## Leaf Sheath Blight Severity
+describe_posterior(m6)
+```
 
 # Save Model Information
 
-Lastly, save the model information used in the posterior estimate graphs to be used in the paper.
+Lastly, save the model information used in the posterior estimate graphs to be used in discussing the results in the next vignette and in the paper.
 
 ```{r save_models}
 models <- list(

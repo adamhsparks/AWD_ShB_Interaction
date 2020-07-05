@@ -31,5 +31,10 @@ Authors:
   \item Michael Noel
 }
 
+Other contributors:
+\itemize{
+  \item Global Rice Science Partnership (GRiSP) [funder]
+}
+
 }
 \keyword{internal}

@@ -834,7 +834,8 @@ ShB_16 <- left_join(TShB_incidence_16, AUDPS_16, by = "PLOT") %>%
 # Merge AUDPS Year Data
 
 ```{r merge_areas}
-AUDPS <- bind_rows(ShB_15, ShB_16)
+AUDPS <- bind_rows(ShB_15, ShB_16) %>% 
+  select(-PLOT_TShB_incidence)
 
 AUDPS <- separate(
   data = AUDPS,

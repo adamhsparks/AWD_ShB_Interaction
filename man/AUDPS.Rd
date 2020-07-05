@@ -5,7 +5,7 @@
 \alias{AUDPS}
 \title{A Data Frame of Area Under the Disease Progress Stairs for Sheath Blight Observations}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 184 rows and 11 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 184 rows and 10 columns.
 }
 \usage{
 AUDPS

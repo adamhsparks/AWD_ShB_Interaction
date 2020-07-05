@@ -47,7 +47,12 @@
   ],
   "contributor": {},
   "copyrightHolder": {},
-  "funder": {},
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "Global Rice Science Partnership (GRiSP)"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -287,7 +292,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "553.474KB",
+  "fileSize": "553.593KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/rice_awd_pests",
     "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
