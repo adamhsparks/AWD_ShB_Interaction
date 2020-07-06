@@ -205,7 +205,7 @@ ggplot(AUDPS, aes(WMGT, y = LShB_percent_AUDPS)) +
 
 ```{r, cache=FALSE}
 ggplot(AUDPS, aes(x = WMGT, y = TShB_percent_AUDPS)) +
-  geom_boxplot(aes(fill = WMGT)) +
+  geom_boxplot(aes(fill = YEAR)) +
   geom_point() +
   xlab("Treatment") +
   ylab("AUDPS") +
