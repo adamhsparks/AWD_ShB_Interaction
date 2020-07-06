@@ -102,7 +102,7 @@ m1 <- brm(
   family = gaussian(),
   data    = AUDPS_2015,
   seed    = 27,
-  control = list(adapt_delta = 0.99,
+  control = list(adapt_delta = 0.999,
                  max_treedepth = 15),
   warmup = 1000,
   iter = 5000,
