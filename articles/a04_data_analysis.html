@@ -183,7 +183,7 @@
   family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.99</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>,
                  max_treedepth = <span class="fl">15</span>),
   warmup = <span class="fl">1000</span>,
   iter = <span class="fl">5000</span>,
@@ -193,25 +193,22 @@
 </pre></div>
 <pre><code>## Compiling the C++ model</code></pre>
 <pre><code>## Start sampling</code></pre>
-<pre><code>## Warning: There were 3 divergent transitions after warmup. Increasing adapt_delta above 0.99 may help. See
-## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
-<pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
 </div>
 <div id="diagnostics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m1</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m1-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m1</span>)
 </pre></div>
 <pre><code>## Using 10 posterior samples for ppc type 'dens_overlay' by default.</code></pre>
 <p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m1</span>)
 </pre></div>
@@ -239,12 +236,12 @@
 ## 9       
 ## 10      
 ## 11</code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m1</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m1-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m1</span>))
 </pre></div>
 <table class="table">
@@ -271,68 +268,68 @@
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">1.324</td>
+<td align="center">1.326</td>
 <td align="center">89</td>
-<td align="center">0.716</td>
-<td align="center">1.936</td>
-<td align="center">0.9932</td>
+<td align="center">0.7342</td>
+<td align="center">1.946</td>
+<td align="center">0.9942</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">-0.1979</td>
+<td align="center">-0.2061</td>
 <td align="center">89</td>
-<td align="center">-0.6224</td>
-<td align="center">0.214</td>
-<td align="center">0.7725</td>
+<td align="center">-0.633</td>
+<td align="center">0.2095</td>
+<td align="center">0.7824</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN100</td>
-<td align="center">0.3759</td>
+<td align="center">0.3788</td>
 <td align="center">89</td>
-<td align="center">-0.05475</td>
-<td align="center">0.801</td>
-<td align="center">0.9237</td>
+<td align="center">-0.05025</td>
+<td align="center">0.8077</td>
+<td align="center">0.9197</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_NRTEN120</td>
-<td align="center">0.6773</td>
+<td align="center">0.6721</td>
 <td align="center">89</td>
-<td align="center">0.2517</td>
-<td align="center">1.116</td>
-<td align="center">0.9944</td>
+<td align="center">0.2466</td>
+<td align="center">1.099</td>
+<td align="center">0.9934</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>5</strong></td>
 <td align="center">b_WMGTAWD.NRTEN100</td>
-<td align="center">0.4262</td>
+<td align="center">0.4267</td>
 <td align="center">89</td>
-<td align="center">-0.1751</td>
-<td align="center">1.005</td>
-<td align="center">0.8761</td>
+<td align="center">-0.1672</td>
+<td align="center">1.019</td>
+<td align="center">0.8796</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>6</strong></td>
 <td align="center">b_WMGTAWD.NRTEN120</td>
-<td align="center">0.5697</td>
+<td align="center">0.5793</td>
 <td align="center">89</td>
-<td align="center">-0.01821</td>
-<td align="center">1.175</td>
-<td align="center">0.9373</td>
+<td align="center">-0.00787</td>
+<td align="center">1.167</td>
+<td align="center">0.9414</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
-<col width="11%">
 <col width="12%">
+<col width="13%">
 <col width="14%">
-<col width="15%">
-<col width="23%">
-<col width="11%">
-<col width="11%">
+<col width="16%">
+<col width="24%">
+<col width="9%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
@@ -350,26 +347,26 @@
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
 <td align="center">0</td>
-<td align="center">1.001</td>
-<td align="center">3807</td>
+<td align="center">1</td>
+<td align="center">4396</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
 <td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.2688</td>
+<td align="center">0.26</td>
 <td align="center">1</td>
-<td align="center">7432</td>
+<td align="center">6924</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.1163</td>
+<td align="center">0.1144</td>
 <td align="center">1</td>
-<td align="center">8641</td>
+<td align="center">7865</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
@@ -378,25 +375,25 @@
 <td align="center">0.1062</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">8003</td>
+<td align="center">8236</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>5</strong></td>
 <td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.1345</td>
+<td align="center">0.1316</td>
 <td align="center">1</td>
-<td align="center">7990</td>
+<td align="center">7259</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>6</strong></td>
 <td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.05512</td>
-<td align="center">0.9999</td>
-<td align="center">7759</td>
+<td align="center">0.05077</td>
+<td align="center">1</td>
+<td align="center">7175</td>
 </tr>
 </tbody>
 </table>
@@ -409,7 +406,7 @@
 <h3 class="hasAnchor">
 <a href="#model-structure-1" class="anchor"></a>Model Structure</h3>
 <p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
+<div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="kw">m2_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
@@ -430,17 +427,17 @@
 <div id="diagnostics-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics-1" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb18"><pre class="downlit">
+<div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m2</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m2-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
+<div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m2</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
+<div class="sourceCode" id="cb18"><pre class="downlit">
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m2</span>)
 </pre></div>
@@ -470,12 +467,12 @@
 ## 10      
 ## 11      
 ## 12</code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit">
+<div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m2</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m2-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
+<div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m2</span>))
 </pre></div>
 <table class="table">
@@ -640,7 +637,7 @@
 <h3 class="hasAnchor">
 <a href="#model-structure-2" class="anchor"></a>Model Structure</h3>
 <p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit">
+<div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="kw">m3_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(1, 3)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
@@ -661,17 +658,17 @@
 <div id="diagnostics-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics-2" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb27"><pre class="downlit">
+<div class="sourceCode" id="cb25"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m3</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m3-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb28"><pre class="downlit">
+<div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m3</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit">
+<div class="sourceCode" id="cb27"><pre class="downlit">
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m3</span>)
 </pre></div>
@@ -701,12 +698,12 @@
 ## 10      
 ## 11      
 ## 12</code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit">
+<div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m3</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m3-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb32"><pre class="downlit">
+<div class="sourceCode" id="cb30"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m3</span>))
 </pre></div>
 <p>Possible multicollinearity between b_WMGTAWD.NRTEN120 and b_WMGTAWD (r = 0.71), b_WMGTAWD.NRTEN100 and b_NRTEN100 (r = 0.73), b_WMGTAWD.NRTEN120 and b_NRTEN120 (r = 0.72). This might lead to inappropriate results. See ‘Details’ in ‘?rope’.</p>
@@ -877,7 +874,7 @@
 <h3 class="hasAnchor">
 <a href="#model-structure-3" class="anchor"></a>Model Structure</h3>
 <p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit">
+<div class="sourceCode" id="cb31"><pre class="downlit">
 <span class="kw">m4_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 2)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
@@ -898,22 +895,22 @@
 <div id="diagnostics-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics-3" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb36"><pre class="downlit">
+<div class="sourceCode" id="cb34"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m4</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m4-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb37"><pre class="downlit">
+<div class="sourceCode" id="cb35"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m4</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb38"><pre class="downlit">
+<div class="sourceCode" id="cb36"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m4</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m4-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb39"><pre class="downlit">
+<div class="sourceCode" id="cb37"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m4</span>))
 </pre></div>
 <table class="table">
@@ -1042,7 +1039,7 @@
 <h3 class="hasAnchor">
 <a href="#model-structure-4" class="anchor"></a>Model Structure</h3>
 <p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit">
+<div class="sourceCode" id="cb38"><pre class="downlit">
 <span class="kw">m5_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
@@ -1064,17 +1061,17 @@
 <div id="diagnostics-4" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics-4" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb43"><pre class="downlit">
+<div class="sourceCode" id="cb41"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m5</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m5-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb44"><pre class="downlit">
+<div class="sourceCode" id="cb42"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m5</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb45"><pre class="downlit">
+<div class="sourceCode" id="cb43"><pre class="downlit">
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m5</span>)
 </pre></div>
@@ -1100,12 +1097,12 @@
 ## 8       
 ## 9       
 ## 10</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit">
+<div class="sourceCode" id="cb45"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m5</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m5-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb48"><pre class="downlit">
+<div class="sourceCode" id="cb46"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m5</span>))
 </pre></div>
 <table class="table">
@@ -1234,7 +1231,7 @@
 <h3 class="hasAnchor">
 <a href="#model-structure-5" class="anchor"></a>Model Structure</h3>
 <p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit">
+<div class="sourceCode" id="cb47"><pre class="downlit">
 <span class="kw">m6_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 2)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
@@ -1255,17 +1252,17 @@
 <div id="diagnostics-5" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics-5" class="anchor"></a>Diagnostics</h3>
-<div class="sourceCode" id="cb52"><pre class="downlit">
+<div class="sourceCode" id="cb50"><pre class="downlit">
 <span class="co"># asses convergence</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m6</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-1.png" width="700"><img src="a04_data_analysis_files/figure-html/m6-diagnostics-2.png" width="700"></p>
-<div class="sourceCode" id="cb53"><pre class="downlit">
+<div class="sourceCode" id="cb51"><pre class="downlit">
 <span class="co"># assess fit</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/pp_check.brmsfit.html">pp_check</a></span>(<span class="kw">m6</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-3.png" width="700"></p>
-<div class="sourceCode" id="cb54"><pre class="downlit">
+<div class="sourceCode" id="cb52"><pre class="downlit">
 <span class="co"># check influence of priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m6</span>)
 </pre></div>
@@ -1291,12 +1288,12 @@
 ## 8       
 ## 9       
 ## 10</code></pre>
-<div class="sourceCode" id="cb56"><pre class="downlit">
+<div class="sourceCode" id="cb54"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m6</span>)
 </pre></div>
 <p><img src="a04_data_analysis_files/figure-html/m6-diagnostics-4.png" width="700"></p>
-<div class="sourceCode" id="cb57"><pre class="downlit">
+<div class="sourceCode" id="cb55"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m6</span>))
 </pre></div>
 <p>Possible multicollinearity between b_WMGTAWD.NRTEN180 and b_WMGTAWD (r = 0.71). This might lead to inappropriate results. See ‘Details’ in ‘?rope’.</p>
@@ -1424,7 +1421,7 @@
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information to be used in discussing the results.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit">
+<div class="sourceCode" id="cb56"><pre class="downlit">
 <span class="kw">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="st">"TInc_15"</span> = <span class="kw">m1</span>,
   <span class="st">"TSev_15"</span> = <span class="kw">m2</span>,
