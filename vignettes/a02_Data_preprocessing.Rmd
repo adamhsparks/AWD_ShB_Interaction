@@ -617,68 +617,6 @@ RAW_data$TRT <-
   )
 ```
 
-# Midpoint Scale Conversion
-
-Because the severity data were rated on an unevenly spaced ordinal scale the data are converted to the midpoint value of the percent range for disease severity index and then the AUDPS is calculated from those values.
-
-```{r midpoint-conversion}
-# add column with midpoint % tiller ShB severity -------------------------------
-RAW_data <-
-  mutate(
-    RAW_data,
-    PERCENT_TIL_ShB = case_when(
-      TIL_ShB == 0 ~ 0,
-      TIL_ShB == 1 ~ 1,
-      TIL_ShB == 2 ~ 2.5,
-      TIL_ShB == 3 ~ 10,
-      TIL_ShB == 4 ~ 32.5,
-      TRUE ~ 75
-    )
-  )
-
-# add column with midpoint +1  % tiller ShB severity ---------------------------
-RAW_data <-
-  mutate(
-    RAW_data,
-    PERCENT_TIL_ShB_1 = case_when(
-      TIL_ShB == 0 ~ 1,
-      TIL_ShB == 1 ~ 2.5,
-      TIL_ShB == 2 ~ 10,
-      TIL_ShB == 3 ~ 32.5,
-      TIL_ShB == 4 ~ 75,
-      TRUE ~ 100
-    )
-  )
-
-# add column with midpoint % leaf ShB severity ---------------------------------
-RAW_data <-
-  mutate(
-    RAW_data,
-    PERCENT_LEAF_ShB = case_when(
-      LEAF_ShB == 0 ~ 0,
-      LEAF_ShB == 1 ~ 1,
-      LEAF_ShB == 2 ~ 2.5,
-      LEAF_ShB == 3 ~ 10,
-      LEAF_ShB == 4 ~ 32.5,
-      TRUE ~ 75
-    )
-  )
-
-# add column with midpoint +1  % leaf ShB severity -----------------------------
-RAW_data <-
-  mutate(
-    RAW_data,
-    PERCENT_LEAF_ShB_1 = case_when(
-      LEAF_ShB == 0 ~ 1,
-      LEAF_ShB == 1 ~ 2.5,
-      LEAF_ShB == 2 ~ 10,
-      LEAF_ShB == 3 ~ 32.5,
-      LEAF_ShB == 4 ~ 75,
-      TRUE ~ 100
-    )
-  )
-```
-
 # Calculate Area Under the Disease Progress Stairs (AUDPS)
 
 ## 2015
@@ -701,7 +639,7 @@ TShB_incidence_wide <-
 TShB_percent_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  summarise(PLOT_TShB_percent = mean(PERCENT_TIL_ShB, na.rm = TRUE),
+  summarise(PLOT_TShB_percent = mean(TIL_ShB, na.rm = TRUE),
             .groups = "keep") %>%
   arrange(PLOT)
 
@@ -712,7 +650,7 @@ TShB_percent_wide <-
 LShB_percent_15 <-
   DS2015 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAI, DAYS) %>%
-  summarise(PLOT_LShB_percent = mean(PERCENT_LEAF_ShB, na.rm = TRUE),
+  summarise(PLOT_LShB_percent = mean(LEAF_ShB, na.rm = TRUE),
             .groups = "keep") %>%
   arrange(PLOT)
 
@@ -775,7 +713,7 @@ TShB_incidence_wide <-
 TShB_percent_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(PLOT_TShB_percent = mean(PERCENT_TIL_ShB, na.rm = TRUE),
+  summarise(PLOT_TShB_percent = mean(TIL_ShB, na.rm = TRUE),
             .groups = "keep") %>%
   arrange(PLOT)
 
@@ -786,7 +724,7 @@ TShB_percent_wide <-
 LShB_percent_16 <-
   DS2016 %>%
   group_by(YEAR, REP, TRT, PLOT, ASMT, DAYS) %>%
-  summarise(PLOT_LShB_percent = mean(PERCENT_LEAF_ShB, na.rm = TRUE),
+  summarise(PLOT_LShB_percent = mean(LEAF_ShB, na.rm = TRUE),
             .groups = "keep") %>%
   arrange(PLOT)
 
