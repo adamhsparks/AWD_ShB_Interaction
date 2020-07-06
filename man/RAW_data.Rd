@@ -5,7 +5,7 @@
 \alias{RAW_data}
 \title{A Data frame of Raw Data for Sheath Blight Observations}
 \format{
-An object of class \code{data.frame} with 79488 rows and 23 columns.
+An object of class \code{data.frame} with 79488 rows and 19 columns.
 }
 \usage{
 RAW_data
