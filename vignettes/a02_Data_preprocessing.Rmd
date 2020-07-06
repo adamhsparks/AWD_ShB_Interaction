@@ -772,7 +772,7 @@ ShB_16 <- left_join(TShB_incidence_16, AUDPS_16, by = "PLOT") %>%
 # Merge AUDPS Year Data
 
 ```{r merge_areas}
-AUDPS <- bind_rows(ShB_15, ShB_16) %>% 
+AUDPS <- bind_rows(ShB_15, ShB_16) %>%
   select(-PLOT_TShB_incidence)
 
 AUDPS <- separate(
@@ -781,17 +781,17 @@ AUDPS <- separate(
   sep = "_",
   into = c("WMGT", "NRTE")
 )
+
 AUDPS <- mutate_at(.tbl = AUDPS,
                    .funs = factor,
                    .vars = c("WMGT", "NRTE"))
 
-AUDPS$NRTE <-
-  fct_relevel(AUDPS$NRTE,
-              "0",
-              "100",
-              "120",
-              "60",
-              "180")
+AUDPS$NRTE <- fct_relevel(AUDPS$NRTE,
+                          "N0",
+                          "N100",
+                          "N120",
+                          "N60",
+                          "N180")
 
 AUDPS$WMGT <-
   fct_relevel(AUDPS$WMGT,
