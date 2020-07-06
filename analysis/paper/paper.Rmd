@@ -367,7 +367,7 @@ p2_anot <- data.frame(
 
 p2 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERCENT_TIL_ShB)) +
+                 y = TIL_ShB)) +
   geom_text(
     data = p2_anot,
     mapping = aes(x = x,
@@ -381,7 +381,7 @@ p2 <- ggplot(RAW_data,
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
-  scale_y_continuous(name = "Tiller Severity (%)") +
+  scale_y_continuous(name = "Tiller Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -404,7 +404,7 @@ p3_anot <- data.frame(
 
 p3 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERCENT_LEAF_ShB)) +
+                 y = LEAF_ShB)) +
   geom_text(
     data = p3_anot,
     mapping = aes(x = x,
@@ -418,7 +418,7 @@ p3 <- ggplot(RAW_data,
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
-  scale_y_continuous(name = "Leaf Severity (%)") +
+  scale_y_continuous(name = "Leaf Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -501,7 +501,7 @@ p5_anot <- data.frame(
 
 p5 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERCENT_TIL_ShB)) +
+                 y = TIL_ShB)) +
   geom_text(
     data = p5_anot,
     mapping = aes(x = x,
@@ -515,7 +515,7 @@ p5 <- ggplot(RAW_data,
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
-  scale_y_continuous(name = "Tiller Severity (%)") +
+  scale_y_continuous(name = "Tiller Severity 0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -538,7 +538,7 @@ p6_anot <- data.frame(
 
 p6 <- ggplot(RAW_data,
              aes(x = DAI,
-                 y = PERCENT_LEAF_ShB)) +
+                 y = LEAF_ShB)) +
   geom_text(
     data = p6_anot,
     mapping = aes(x = x,
@@ -552,7 +552,7 @@ p6 <- ggplot(RAW_data,
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
-  scale_y_continuous(name = "Leaf Severity (%)") +
+  scale_y_continuous(name = "Leaf Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
