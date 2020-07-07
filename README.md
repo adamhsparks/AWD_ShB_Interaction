@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--07-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--08-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-4.0.2-brightgreen.svg)](https://cran.r-project.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800)
@@ -35,7 +35,7 @@ Nancy P. Castilla (<n.castilla@irri.org>)
 
 B. Ole Sander (<b.sander@irri.org>)
 
-M. Noel
+Michael Noel
 
 ### Published in:
 
@@ -74,12 +74,10 @@ The `analysis/` directory contains:
 
 ### The R package
 
-This repository is organized as an R package. There are a few R
-functions in this package that were used to generate some of the
-diagnostic plots related to the analysis. However, for the most part I
-simply used the R package structure to help manage dependencies, to take
-advantage of continuous integration for automated code testing, and so I
-didn’t have to think too much about how to organise the files.
+This repository is organized as an R package. Mostly I used the R
+package structure to help manage dependencies, to take advantage of
+continuous integration for automated code testing, and so I didn’t have
+to think too much about how to organise the files.
 
 To download the package source as you see it on GitHub, for offline
 browsing, use this line at the shell prompt (assuming you have Git
@@ -110,7 +108,7 @@ package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
 on your computer. At the Docker prompt, enter:
 
-    docker run -dp 8787:8787 adamhsparks/rice_AWD_ShB_analysis
+    docker run -dp 8787:8787 adamhsparks/rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to
@@ -118,8 +116,8 @@ find the correct IP address, and log in with rstudio/rstudio.
 
 Once logged in, use the Files pane (bottom right) open the folder for
 this project, and open the `.Rproj` file for this project. Once that’s
-open, you’ll see the `analysis/paper` directory in the Files pane where
-you can find the R markdown document, and knit them to produce the
+open, you’ll see the `analysis/paper` directory in the “Files” pane
+where you can find the Rmarkdown document, and knit it to produce the
 results in the paper. More information about using RStudio in Docker is
 available at the [Rocker](https://github.com/rocker-org)
 [wiki](https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image)
@@ -135,7 +133,7 @@ Please cite this compendium as:
 
 > Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 07 Jul 2020. Online at <https://doi.org/xxx/xxx>
+> Accessed 08 Jul 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
@@ -149,10 +147,9 @@ attribution requested in reuse
 
 ## Dependencies
 
-I used [RStudio](http://www.rstudio.com/products/rstudio/) on MacOS and
-Ubuntu 17.10. See the colophon section of the docx file in
-`analysis/paper` for a full list of the packages that this project
-depends on.
+I used [RStudio](http://www.rstudio.com/products/rstudio/) on MacOS. See
+the colophon section of the docx file in `analysis/paper` for a full
+list of the packages that this project depends on.
 
 ## Contact
 
