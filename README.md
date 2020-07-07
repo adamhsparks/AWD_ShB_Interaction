@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--06--12-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--07-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-4.0.1-brightgreen.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-4.0.2-brightgreen.svg)](https://cran.r-project.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800)
 
 ## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
@@ -135,7 +135,7 @@ Please cite this compendium as:
 
 > Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 12 Jun 2020. Online at <https://doi.org/xxx/xxx>
+> Accessed 07 Jul 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
