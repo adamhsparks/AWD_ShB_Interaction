@@ -189,7 +189,7 @@ Further fitness was evaluated using the `describe_posterior()` function from bay
 
 In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig.&nbsp;\@ref(fig:fig-1)a, \@ref(fig:fig-2)a).
 Water management was not clearly different (Fig.&nbsp;\@ref(fig:fig-3)a, \@ref(fig:fig-5)a).
-However, the effects of N treatments N100 and N120 on tiller incidence caused both to be higher and clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)a, \@ref(fig:fig-5)a).
+However, the effects of N treatments N100 and N120 on tiller incidence caused both to be higher and clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-5)a, \@ref(fig:fig-5)a).
 
 Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c).
 Both the N100 and N120 treatment effects caused the tiller severity to be higher and clearly statistically different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c).
@@ -334,7 +334,7 @@ priors
 
 # Figures {-}
 
-```{r fig-1, fig.cap="Sheath blight progress for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications.", fig.width=3.31}
+```{r fig-1, fig.cap="Sheath blight disease progress curves for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season of both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications.", fig.width=3.31}
 
 p1_anot <- data.frame(
   label = c("a", "b"),
@@ -350,17 +350,17 @@ p1 <- ggplot(data = RAW_data,
              )) +
   geom_text(
     data = p1_anot,
-     mapping = aes(x = x,
-                   y = y,
-                   label = label)) +
+    mapping = aes(x = x,
+                  y = y,
+                  label = label)) +
   stat_summary(fun.y = "mean",
                geom = "line",
                aes(group = WMGT,
-               linetype = WMGT)) +
+                   linetype = WMGT)) +
   stat_summary(fun.y = "mean",
                geom = "point",
                aes(group = WMGT,
-               shape = WMGT)) +
+                   shape = WMGT)) +
   scale_y_continuous(
     labels = function(x)
       paste0(x * 100),
@@ -393,7 +393,7 @@ p2_anot <- data.frame(
   label = c("c", "d"),
   YEAR   = c(2015, 2016),
   x = c(60, 60),
-  y = c(10, 10)
+  y = c(5, 5)
 )
 
 p2 <- ggplot(RAW_data,
@@ -412,7 +412,8 @@ p2 <- ggplot(RAW_data,
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
-  scale_y_continuous(name = "Tiller Severity (0 - 5 scale)") +
+  scale_y_continuous(limits = c(0, 5),
+                     name = "Tiller Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -430,7 +431,7 @@ p3_anot <- data.frame(
   label = c("e", "f"),
   YEAR   = c(2015, 2016),
   x = c(60, 60),
-  y = c(10, 10)
+  y = c(5, 5)
 )
 
 p3 <- ggplot(RAW_data,
@@ -449,7 +450,8 @@ p3 <- ggplot(RAW_data,
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
-  scale_y_continuous(name = "Leaf Severity (0 - 5 scale)") +
+  scale_y_continuous(limits = c(0, 5),
+                     name = "Leaf Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -527,7 +529,7 @@ p5_anot <- data.frame(
   label = c("c", "d"),
   YEAR   = c(2015, 2016),
   x = c(60, 60),
-  y = c(10, 10)
+  y = c(5, 5)
 )
 
 p5 <- ggplot(RAW_data,
@@ -546,7 +548,8 @@ p5 <- ggplot(RAW_data,
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
-  scale_y_continuous(name = "Tiller Severity 0 - 5 scale)") +
+  scale_y_continuous(limits = c(0, 5),
+                     name = "Tiller Severity 0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -564,7 +567,7 @@ p6_anot <- data.frame(
   label = c("e", "f"),
   YEAR   = c(2015, 2016),
   x = c(60, 60),
-  y = c(10, 10)
+  y = c(5, 5)
 )
 
 p6 <- ggplot(RAW_data,
@@ -583,7 +586,8 @@ p6 <- ggplot(RAW_data,
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
-  scale_y_continuous(name = "Leaf Severity (0 - 5 scale)") +
+  scale_y_continuous(limits = c(0, 5),
+                     name = "Leaf Severity (0 - 5 scale)") +
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
@@ -598,13 +602,12 @@ p6 <- ggplot(RAW_data,
 grid.arrange(p4, p5, p6, ncol = 1, nrow = 3)
 ```
 
-```{r fig-3, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced categorical scale and converted to the mid-point percentage value to calculate the AUDPS. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD)."}
-
+```{r fig-3, fig.cap="Sheath blight progress was measured in the 2015 at five assessment points and 2016 experiment at four points. Sheath blight incidence was rated as the number of infected tillers divided by the total number of tillers per hill and used to calculate the area under the disease progress stairs (AUDPS). Sheath blight severity was rated on an unevenly spaced ordinal scale from zero to five. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD)."}
 p7_anot <- data.frame(
   label = c("a", "b"),
   YEAR   = c(2015, 2016),
   x = c(2.5, 2.5),
-  y = c(15, 15)
+  y = c(5, 5)
 )
 
 p7 <- ggplot(AUDPS,
@@ -630,7 +633,7 @@ p8_anot <- data.frame(
   label = c("c", "d"),
   YEAR   = c(2015, 2016),
   x = c(2.5, 2.5),
-  y = c(32, 32)
+  y = c(55, 55)
 )
 
 p8 <- ggplot(AUDPS,
@@ -657,7 +660,7 @@ p9_anot <- data.frame(
   label = c("e", "f"),
   YEAR   = c(2015, 2016),
   x = c(2.5, 2.5),
-  y = c(10, 10)
+  y = c(8, 8)
 )
 
 p9 <- ggplot(AUDPS,
@@ -688,11 +691,11 @@ p10_anot <- data.frame(
   label = c("a", "b"),
   YEAR   = c(2015, 2016),
   x = c(3.5, 2.5),
-  y = c(14, 14)
+  y = c(5, 5)
 )
 
 p10 <- ggplot(AUDPS,
-             aes(x = NRTE, y = TShB_incidence_AUDPS)) +
+              aes(x = NRTE, y = TShB_incidence_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p10_anot,
@@ -714,11 +717,11 @@ p11_anot <- data.frame(
   label = c("c", "d"),
   YEAR   = c(2015, 2016),
   x = c(3.5, 2.5),
-  y = c(32, 32)
+  y = c(55, 55)
 )
 
 p11 <- ggplot(AUDPS,
-             aes(x = NRTE, y = TShB_percent_AUDPS)) +
+              aes(x = NRTE, y = TShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p11_anot,
@@ -741,11 +744,11 @@ p12_anot <- data.frame(
   label = c("e", "f"),
   YEAR   = c(2015, 2016),
   x = c(3.5, 2.5),
-  y = c(7, 7)
+  y = c(8, 8)
 )
 
 p12 <- ggplot(AUDPS,
-             aes(x = NRTE, y = LShB_percent_AUDPS)) +
+              aes(x = NRTE, y = LShB_percent_AUDPS)) +
   geom_boxplot() +
   geom_text(
     data = p12_anot,
@@ -766,41 +769,66 @@ p12 <- ggplot(AUDPS,
 grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence and tiller severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
-par(mfcol = c(2, 1))
+p_13 <- mcmc_plot(models[[1]], pars = c("WMGT", "NRTE"))
+p_13 <- p_13 +
+  annotate(geom = "text",
+           x = 1.35,
+           y = 3.5,
+           label = "a")
+  
 
-plot_tiller_estimates_paper(models[[1]])
-mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
+p_14 <- mcmc_plot(models[[4]], pars = c("WMGT", "NRTE"))
+p_14 <- p_14 +
+  annotate(geom = "text",
+           x = 0.8,
+           y = 2.5,
+           label = "b")
 
-plot_tiller_estimates_paper(models[[4]])
-mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
-
-par(mfcol = c(1, 1))
+grid.arrange(p_13, p_14, ncol = 1, nrow = 2)
 ```
 
 ```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
-par(mfcol = c(2, 1))
+p_15 <- mcmc_plot(models[[2]], pars = c("WMGT", "NRTE"))
+p_15 <- p_15 +
+  annotate(geom = "text",
+           x = 4.25,
+           y = 3.5,
+           label = "a")
+  
 
-plot_tiller_estimates_paper(models[[2]])
-mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
+p_16 <- mcmc_plot(models[[5]], pars = c("WMGT", "NRTE"))
+p_16 <- p_16 +
+  annotate(geom = "text",
+           x = 0.6,
+           y = 2.5,
+           label = "b")
 
-plot_tiller_estimates_paper(models[[5]])
-mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
-par(mfcol = c(1, 1))
+grid.arrange(p_15, p_16, ncol = 1, nrow = 2)
 ```
 
-```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) and the interaction of the two treatments on leaf sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
+```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
 
-par(mfcol = c(2, 1))
-plot_tiller_estimates_paper(models[[3]])
-mtext(text = "a", side = 3, line = 0, adj = 1, cex = 0.75)
+p_17 <- mcmc_plot(models[[3]], pars = c("WMGT", "NRTE"))
+p_17 <- p_17 +
+  annotate(geom = "text",
+           x = 1.3,
+           y = 3.5,
+           label = "a")
+  
 
-plot_tiller_estimates_paper(models[[6]])
-mtext(text = "b", side = 3, line = 0, adj = 1, cex = 0.75)
+p_18 <- mcmc_plot(models[[6]], pars = c("WMGT", "NRTE"))
+p_18 <- p_18 +
+  annotate(geom = "text",
+           x = 1,
+           y = 2.5,
+           label = "b")
+
+grid.arrange(p_17, p_18, ncol = 1, nrow = 2)
 ```
 
 \newpage
