@@ -194,9 +194,9 @@ reformat <- function(files) {
         paste0("SLE", i),
         paste0("SLF", i)
       ) %>%
-      gather(LEAF,
-             LEAF_ShB,
-             starts_with("SL"))
+      pivot_longer(cols = starts_with("SL"),
+                   names_to = "LEAF",
+                   values_to = "LEAF_ShB",)
     
     names(y)[7] <- "TIL"
     names(y)[8] <- "GL"
