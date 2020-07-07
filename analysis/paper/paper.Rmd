@@ -28,7 +28,7 @@ output:
 csl: "../templates/plant_disease.csl" # Insert path for the bib-style
 bibliography: references.bib
 abstract: |
-  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by _Thanatephorus cucumeris_ (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers were counted per hill. We were unable to detect any difference in the incidence of tiller sheath blight due to irrigation, tiller and leaf sheath blight did clearly differ statistically by irrigation treatment, but leaf sheath blight severity did not. Our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
+  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by _Thanatephorus cucumeris_ (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower in the 2015 trial but higher in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. Our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
 keywords: |
   Rice; Water Management; Nitrogen Management; Sheath Blight; *Thanatephorus cucumeris*
 highlights: |
@@ -59,7 +59,7 @@ library("ggplot2")
 library("ggpubr")
 library("grid")
 library("gridExtra")
-library("pander")
+library("flextable")
 library("rice.awd.shb")
 ```
 
@@ -74,8 +74,8 @@ Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of e
 
 Rice's reliance on freely available water, coupled with the effects of climate change mean that rice production practices will have to adapt to use new practices to produce more units of food with fewer water inputs.
 
-Sheath blight disease, caused by (*Thanatephorus cucumeris* (A.B. Frank) Donk.), anastomosis group 1, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
-Under conducive conditions, the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
+Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
+Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
 Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10&nbsp;\% annually.
 The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
@@ -99,7 +99,7 @@ Some *in-situ* studies of the effects of climate change on rice diseases have fo
 While the effects of climate change directly on rice disease have been studied, the effects of mitigation practices have not.
 Rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices could have unintended effects on the pests and diseases that occur in the rice crop.
 This is a reasonable concern because of the well-documented effects of N [@Slaton2003; @Tang2007] and the effects of alternating wet and dry periods [@Castilla1996] on sheath blight.
-To gain a better understanding of what the effects of adopting AWD on rice sheath blight could have, we established field experiments that incorporated irrigation technology and N fertilisation.
+To gain a better understanding of what the effects of adopting AWD on rice sheath blight could have, we established field experiments that incorporated irrigation technology and N fertilisation to create a conducive environment for the disease to develop.
 
 We hypothesized that AWD would not have a positive effect on sheath blight incidence and severity in tropical rice production that would deter farmers from adopting it.
 
@@ -110,12 +110,12 @@ We hypothesized that AWD would not have a positive effect on sheath blight incid
 Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E).
 The climate is classified as humid-tropical with wet season starting in early June to December and dry season between December and late May.
 The experiments were both established in the dry seasons of 2015 and 2016.
-In the 2016 experiment changes were made to optimize the experiment based on findings from the 2015 experiment.
+In the 2016 experiment changes were made in inoculation techniques, fertilisation rates and plot sizes to optimize the experiment based on findings from the 2015 experiment.
 The differences are detailed in the following sections.
 
 ## Pathogen {-}
 
-An isolate of *Thanatephorus cucumeris* infected lowland rice was maintained on potato dextrose agar (PDA) medium slants.
+An isolate of _Thanatephorus cucumeris_ (strain AG1-IA) infected lowland rice was maintained on potato dextrose agar (PDA) medium slants.
 The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C) for five days.
 Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks and used to inoculate the plots [@Castilla1996].
 
@@ -126,7 +126,7 @@ The variety is commonly grown by farmers in the area, having good yields and mod
 
 ## 2015 Experimental Design {-}
 
-The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot treatment and N rate was the split-plot treatment. 
+The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot treatment and N rate was the split-plot treatment.
 
 The main plot treatments were alternate wetting and drying (AWD) and continuously puddled or farmers' practice as the control treatment.
 The main plot size was 12&nbsp;m x 12&nbsp;m (144&nbsp;m^2^), with a split-plot size of 5&nbsp;m&nbsp;x&nbsp;5&nbsp;m (25&nbsp;m^2^).
@@ -135,7 +135,7 @@ Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2^) with a buff
 Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm.
 In puddled plots, a standing water layer of 3 to 5&nbsp;cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:N-rates)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:Table-1)).
 
 Trays of NSIC Rc222 were seeded on 19 December 2014. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
 
@@ -146,10 +146,10 @@ The plots were inoculated 20 days after transplanting by applying 151&nbsp;g of 
 The 2016 experiment followed the same split-plot design as described for the 2015 experiment.
 However, the plot size was increased and due to these changes, the replicate sizes are not equal as necessitated by the use of a larger area for the experiment due to differences in the blocks.
 The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq&nbsp;m) and Block 2 (B2) 20.25&nbsp;m x 21.6&nbsp;m (437.4&nbsp;m^2^). The split-plot sizes were B1 21&nbsp;m x 10.25&nbsp;m (215.25&nbsp;m^2^), B2 20.25&nbsp;m x 10.8&nbsp;m (218.7&nbsp;m^2^).
-The replication sizes were B1 --- 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2^) and B2 --- 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2^).
+The replication sizes were B1 -- 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2^) and B2 -- 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2^).
 A buffer 0.5&nbsp;m per split-plot was used and the overall experiment size was 3471.6&nbsp;m^2^.
 
-split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg/ha as urea split into two applications) and N180 (180&nbsp;kg/ha in three splits) being applied (Tab.&nbsp;\@ref(tab:N-rates)).
+split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg/ha as urea split into two applications) and N180 (180&nbsp;kg/ha in three splits) being applied (Tab.&nbsp;\@ref(tab:Table-1)).
 
 Nurseries of NSIC Rc222 were established on 7 January 2016.
 Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20&nbsp;cm within and between rows.
@@ -162,7 +162,7 @@ A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&n
 
 In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed.
 The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI.
-The scale is an unequally spaced categorical scale where (i) 0 --- no disease; (ii) 1 --- trace to 1&nbsp;\% severity; (iii) 2 --- 1 to 5&nbsp;\% severity; (iv) 3 --- 5 to 15&nbsp;\% severity; (v) 4 --- 15 to 50&nbsp;\% severity; and (vi) 5 --- 50 to 100&nbsp;\% severity.
+The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1&nbsp;\% severity; (iii) 2 -- 1 to 5&nbsp;\% severity; (iv) 3 -- 5 to 15&nbsp;\% severity; (v) 4 -- 15 to 50&nbsp;\% severity; and (vi) 5 -- 50 to 100&nbsp;\% severity.
 Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions.
 A leaf was considered living if at least 50&nbsp;% of its area was not brown or dark brown due to natural senescence.
 A leaf that was yellow-green or light green due to a disease, such as tungro or nitrogen deficiency was still considered a living leaf.
@@ -172,19 +172,16 @@ Five disease assessments were made in the 2015 experiment and four disease asses
 ## Statistical Analysis {-}
 
 The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R, version 4.0.0 [@R2020], package `agricolae`, version 1.3-3, [@agricolae2020].
-Due to the use of a severity scale for data collection, the severity data were converted to the midpoint percent value of the scale range for each value.
 
-The correlations between tiller sheath blight incidence and tiller and leaf sheath blight severity were tested using Spearman’s correlation test, `cor.test`, [@R2020].
-No correlation was found, so the analysis was completed for each variable independently with no assumed interaction.
-
-As most of the data's residuals did not meet assumptions for normality, the analysis was carried out using Bayesian multivariate generalised linear mixed models implemented in the R package `MCMCglmm`, version 2.29, [@MCMCglmm2010].
+Bayesian multivariate mixed models were fitted using the contributed R package `brms`, version 0.70, [@Buerkner2018; @Buerkner2017].
 Six models were created where the dependent variables were 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
 The independent variables were the irrigation management and N rate with replicate treated as a random variable.
-The base levels (control treatments) for the analyses for 2015 were: N rate --- N0, irrigation management --- puddled and for 2016 they were: N rate --- N60, irrigation management --- puddled
+The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled and for 2016 they were: N rate -- N60, irrigation management -- puddled.
 
-Four MCMC chains were run for 55,000 steps with the first 5000 discarded as burn-in.
-The remaining 50,000 samples were used to determine the posterior distribution of the parameters of the model.
-The `coda` version 0.19-3 [@coda2006] package was used to provide utilities to check MCMC chain convergence using visual inspection of resulting trace graphs and the Gelman-Rubin test.
+Weakly informative priors and families were set for the fixed effects in each model while the random effects and intercept were selected automatically (Tab.&nbsp;\@ref(tab:Table-2)).
+Four chains were run with a warmup of 5000 and 8000 iterations.
+Model fit was evaluated visually using `pp_check()` and `describe_posterior()`.
+Further fitness was evaluated using the `describe_posterior()` function from bayestestR, version 0.70, [@Makowski2019].
 
 # Results {-}
 
@@ -284,19 +281,53 @@ The data are freely and openly available from <https://doi.org/10.5281/zenodo.38
 
 ##### pagebreak
 
-# Table {-}
+# Tables {-}
 
-```{r N-rates}
+```{r Table-1}
 N_rates <- N_rates[, -1]
 colnames(N_rates) <-
-  c(
-    "Total",
+  c("Total",
     "Basal",
     "Tillering",
-    "Panicle Initiation"
-  )
-pander(N_rates,
-       caption = "(#tab:N-rates) Nitrogen application rates for 2015 and 2016 in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications.")
+    "Panicle Initiation")
+N_rates <- flextable(as.data.frame(N_rates))
+
+N_rates <-
+  set_caption (N_rates,
+               caption = 
+    "(\\#tab:Table-1) Nitrogen application rates for 2015 and 2016 in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications."
+    )
+
+N_rates
+```
+
+```{r Table-2}
+priors <- "
+Year | Fixed Effect     | distribution | mean | sd | brmsfamily  | adapt_delta | max_treedepth
+2015 | Tiller Incidence | normal       | 0    | 1  | gaussian    | 0.9999      | 15
+2015 | Tiller Severity  | normal       | 0    | 1  | skew_normal | 0.9999      | 10
+2015 | Leaf Severity    | normal       | 1    | 3  | hurdle_gamma| 0.99        | 10
+2016 | Tiller Incidence | normal       | 0    | 2  | hurdle_gamma| 0.9999      | 10
+2016 | Tiller Severity  | normal       | 0    | 1  | hurdle_gamma| 0.99        | 15
+2016 | Leaf Severity    | normal       | 0    | 2  | hurdle_gamma| 0.999       | 10
+"
+
+priors <- read.delim(
+  textConnection(priors),
+  header = FALSE,
+  sep = "|",
+  strip.white = TRUE,
+  stringsAsFactors = FALSE
+)
+names(priors) <- unname(as.list(priors[1, ])) # put headers on
+priors <- priors[-1, ] # remove first row
+row.names(priors) <- NULL
+priors <- flextable(as.data.frame(priors))
+priors <- set_caption(priors,
+                      caption =
+    "(\\#tab:Table-2) Details of models used to detect differences between irrigation methods, alternate wetting and drying (AWD) and traditional puddling, and nitrogen fertilisation rates. Values are for the fixed effect prior values, family, adapt_delta and max_treedepth as used in the contributed R package, brms, function brm() to fit Bayesian models."
+    )
+priors
 ```
 
 ##### pagebreak
