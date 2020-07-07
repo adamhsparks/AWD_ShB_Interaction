@@ -39,7 +39,6 @@ highlights: |
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
-
 knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
@@ -54,6 +53,7 @@ knitr::opts_chunk$set(
 )
 
 library("bookdown")
+library("brms")
 library("knitr")
 library("ggplot2")
 library("ggpubr")
@@ -61,6 +61,8 @@ library("grid")
 library("gridExtra")
 library("flextable")
 library("rice.awd.shb")
+
+theme_set(theme_classic(base_size = 14))
 ```
 
 ##### pagebreak
@@ -353,11 +355,11 @@ p1 <- ggplot(data = RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = WMGT,
                    linetype = WMGT)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
@@ -372,7 +374,6 @@ p1 <- ggplot(data = RAW_data,
              scales = "free_x") +
   labs(linetype = "Irrigation",
        shape = "Irrigation") +
-  theme_classic(base_size = 8) +
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
@@ -404,11 +405,11 @@ p2 <- ggplot(RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = WMGT,
                    linetype = WMGT)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
@@ -417,7 +418,6 @@ p2 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -442,11 +442,11 @@ p3 <- ggplot(RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = WMGT,
                    linetype = WMGT)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = WMGT,
                    shape = WMGT)) +
@@ -455,7 +455,6 @@ p3 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -485,11 +484,11 @@ p4 <- ggplot(data = RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = NRTE,
                    linetype = NRTE)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
@@ -504,7 +503,6 @@ p4 <- ggplot(data = RAW_data,
              scales = "free_x") +
   labs(linetype = "N Rate",
        shape = "N Rate") +
-  theme_classic(base_size = 8) +
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
@@ -540,11 +538,11 @@ p5 <- ggplot(RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = NRTE,
                    linetype = NRTE)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
@@ -553,7 +551,6 @@ p5 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -578,11 +575,11 @@ p6 <- ggplot(RAW_data,
     mapping = aes(x = x,
                   y = y,
                   label = label)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "line",
                aes(group = NRTE,
                    linetype = NRTE)) +
-  stat_summary(fun.y = "mean",
+  stat_summary(fun = "mean",
                geom = "point",
                aes(group = NRTE,
                    shape = NRTE)) +
@@ -591,7 +588,6 @@ p6 <- ggplot(RAW_data,
   xlab("Days After Inoculation") +
   facet_grid(. ~ YEAR,
              scales = "free_x") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -607,7 +603,7 @@ p7_anot <- data.frame(
   label = c("a", "b"),
   YEAR   = c(2015, 2016),
   x = c(2.5, 2.5),
-  y = c(5, 5)
+  y = c(15, 15)
 )
 
 p7 <- ggplot(AUDPS,
@@ -619,7 +615,6 @@ p7 <- ggplot(AUDPS,
                   y = y,
                   label = label)) +
   ylab("Tiller Incidence AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -645,7 +640,6 @@ p8 <- ggplot(AUDPS,
                   y = y,
                   label = label)) +
   ylab("Tiller Severity AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -673,7 +667,6 @@ p9 <- ggplot(AUDPS,
                   label = label)) +
   xlab("Treatment") +
   ylab("Leaf Severity AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -691,7 +684,7 @@ p10_anot <- data.frame(
   label = c("a", "b"),
   YEAR   = c(2015, 2016),
   x = c(3.5, 2.5),
-  y = c(5, 5)
+  y = c(15, 15)
 )
 
 p10 <- ggplot(AUDPS,
@@ -703,7 +696,6 @@ p10 <- ggplot(AUDPS,
                   y = y,
                   label = label)) +
   ylab("Tiller Incidence AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -729,7 +721,6 @@ p11 <- ggplot(AUDPS,
                   y = y,
                   label = label)) +
   ylab("Tiller Severity AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -757,7 +748,6 @@ p12 <- ggplot(AUDPS,
                   label = label)) +
   xlab("Treatment") +
   ylab("Leaf Severity AUDPS") +
-  theme_classic(base_size = 8) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"),
@@ -769,7 +759,7 @@ p12 <- ggplot(AUDPS,
 grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 ```
 
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
+```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
 
 models <- readRDS("../data/derived_data/models.Rds")
 
@@ -778,40 +768,99 @@ p_13 <- p_13 +
   annotate(geom = "text",
            x = 1.35,
            y = 3.5,
-           label = "a")
-  
+           label = "a") +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "black"),
+    legend.position = c(x = 0.101, y = 0.74),
+    legend.key.size = unit(0, 'lines'),
+    legend.background = element_rect(
+      color = "black",
+      size = 0.5,
+      linetype = "solid"
+    ),
+    axis.title.x = element_blank(),
+    strip.background = element_blank(),
+    strip.text.x = element_text(face = "bold")
+  )
 
 p_14 <- mcmc_plot(models[[4]], pars = c("WMGT", "NRTE"))
 p_14 <- p_14 +
   annotate(geom = "text",
-           x = 0.8,
+           x = 0.215,
            y = 2.5,
-           label = "b")
+           label = "b") +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "black"),
+    legend.position = c(x = 0.101, y = 0.74),
+    legend.key.size = unit(0, 'lines'),
+    legend.background = element_rect(
+      color = "black",
+      size = 0.5,
+      linetype = "solid"
+    ),
+    axis.title.x = element_blank(),
+    strip.background = element_blank(),
+    strip.text.x = element_text(face = "bold")
+  )
 
 grid.arrange(p_13, p_14, ncol = 1, nrow = 2)
 ```
 
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
+```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
 
 p_15 <- mcmc_plot(models[[2]], pars = c("WMGT", "NRTE"))
 p_15 <- p_15 +
   annotate(geom = "text",
            x = 4.25,
            y = 3.5,
-           label = "a")
+           label = "a") +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "black"),
+    legend.position = c(x = 0.101, y = 0.74),
+    legend.key.size = unit(0, 'lines'),
+    legend.background = element_rect(
+      color = "black",
+      size = 0.5,
+      linetype = "solid"
+    ),
+    axis.title.x = element_blank(),
+    strip.background = element_blank(),
+    strip.text.x = element_text(face = "bold")
+  )
   
 
 p_16 <- mcmc_plot(models[[5]], pars = c("WMGT", "NRTE"))
 p_16 <- p_16 +
   annotate(geom = "text",
-           x = 0.6,
+           x = 0.15,
            y = 2.5,
-           label = "b")
+           label = "b") +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "black"),
+    legend.position = c(x = 0.101, y = 0.74),
+    legend.key.size = unit(0, 'lines'),
+    legend.background = element_rect(
+      color = "black",
+      size = 0.5,
+      linetype = "solid"
+    ),
+    axis.title.x = element_blank(),
+    strip.background = element_blank(),
+    strip.text.x = element_text(face = "bold")
+  )
 
 grid.arrange(p_15, p_16, ncol = 1, nrow = 2)
 ```
 
-```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=FALSE}
+```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
 
 p_17 <- mcmc_plot(models[[3]], pars = c("WMGT", "NRTE"))
 p_17 <- p_17 +
@@ -824,7 +873,7 @@ p_17 <- p_17 +
 p_18 <- mcmc_plot(models[[6]], pars = c("WMGT", "NRTE"))
 p_18 <- p_18 +
   annotate(geom = "text",
-           x = 1,
+           x = 0.4,
            y = 2.5,
            label = "b")
 
