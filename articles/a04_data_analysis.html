@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Sheath Blight Analysis</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-07-06</h4>
+            <h4 class="date">2020-07-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/master/vignettes/a04_data_analysis.Rmd"><code>vignettes/a04_data_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>a04_data_analysis.Rmd</code></div>
@@ -174,19 +174,19 @@
 <div id="model-structure" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">m1_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>,
                  max_treedepth = <span class="fl">15</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m1_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -212,30 +212,16 @@
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m1</span>)
 </pre></div>
-<pre><code>##                     prior     class             coef group resp dpar nlpar
-## 1            normal(0, 1)         b                                       
-## 2                                 b         NRTEN100                      
-## 3                                 b         NRTEN120                      
-## 4                                 b          WMGTAWD                      
-## 5                                 b WMGTAWD:NRTEN100                      
-## 6                                 b WMGTAWD:NRTEN120                      
-## 7  student_t(3, 1.6, 2.5) Intercept                                       
-## 8    student_t(3, 0, 2.5)        sd                                       
-## 9                                sd                    REP                
-## 10                               sd        Intercept   REP                
-## 11   student_t(3, 0, 2.5)     sigma                                       
-##    bound
-## 1       
-## 2       
-## 3       
-## 4       
-## 5       
-## 6       
-## 7       
-## 8       
-## 9       
-## 10      
-## 11</code></pre>
+<pre><code>##                    prior     class      coef group resp dpar nlpar bound
+## 1           normal(0, 1)         b                                      
+## 2                                b  NRTEN100                            
+## 3                                b  NRTEN120                            
+## 4                                b   WMGTAWD                            
+## 5 student_t(3, 1.6, 2.5) Intercept                                      
+## 6   student_t(3, 0, 2.5)        sd                                      
+## 7                               sd             REP                      
+## 8                               sd Intercept   REP                      
+## 9   student_t(3, 0, 2.5)     sigma</code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m1</span>)
@@ -248,11 +234,12 @@
 <caption>Table continues below</caption>
 <colgroup>
 <col width="11%">
-<col width="27%">
-<col width="13%">
+<col width="18%">
+<col width="11%">
 <col width="6%">
-<col width="14%">
 <col width="13%">
+<col width="13%">
+<col width="11%">
 <col width="13%">
 </colgroup>
 <thead><tr class="header">
@@ -263,77 +250,62 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">1.326</td>
+<td align="center">1.186</td>
 <td align="center">89</td>
-<td align="center">0.7342</td>
-<td align="center">1.946</td>
-<td align="center">0.9942</td>
+<td align="center">0.59</td>
+<td align="center">1.77</td>
+<td align="center">0.9917</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">-0.2061</td>
+<td align="center">0.1189</td>
 <td align="center">89</td>
-<td align="center">-0.633</td>
-<td align="center">0.2095</td>
-<td align="center">0.7824</td>
+<td align="center">-0.1566</td>
+<td align="center">0.3916</td>
+<td align="center">0.7572</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN100</td>
-<td align="center">0.3788</td>
+<td align="center">0.5794</td>
 <td align="center">89</td>
-<td align="center">-0.05025</td>
-<td align="center">0.8077</td>
-<td align="center">0.9197</td>
+<td align="center">0.2567</td>
+<td align="center">0.9029</td>
+<td align="center">0.9976</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_NRTEN120</td>
-<td align="center">0.6721</td>
+<td align="center">0.9455</td>
 <td align="center">89</td>
-<td align="center">0.2466</td>
-<td align="center">1.099</td>
-<td align="center">0.9934</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">b_WMGTAWD.NRTEN100</td>
-<td align="center">0.4267</td>
+<td align="center">0.6259</td>
+<td align="center">1.279</td>
+<td align="center">1</td>
 <td align="center">89</td>
-<td align="center">-0.1672</td>
-<td align="center">1.019</td>
-<td align="center">0.8796</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">b_WMGTAWD.NRTEN120</td>
-<td align="center">0.5793</td>
-<td align="center">89</td>
-<td align="center">-0.00787</td>
-<td align="center">1.167</td>
-<td align="center">0.9414</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
 <col width="12%">
-<col width="13%">
-<col width="14%">
+<col width="15%">
 <col width="16%">
-<col width="24%">
-<col width="9%">
-<col width="9%">
+<col width="25%">
+<col width="11%">
+<col width="11%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -343,57 +315,35 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
 <td align="center">0</td>
-<td align="center">1</td>
-<td align="center">4396</td>
+<td align="center">1.001</td>
+<td align="center">3571</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
-<td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.26</td>
-<td align="center">1</td>
-<td align="center">6924</td>
+<td align="center">0.4249</td>
+<td align="center">1.001</td>
+<td align="center">9579</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
-<td align="center">-0.1062</td>
-<td align="center">0.1062</td>
-<td align="center">0.1144</td>
-<td align="center">1</td>
-<td align="center">7865</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>3</strong></td>
-<td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">8236</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">89</td>
-<td align="center">-0.1062</td>
-<td align="center">0.1062</td>
-<td align="center">0.1316</td>
-<td align="center">1</td>
-<td align="center">7259</td>
+<td align="center">7790</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">89</td>
+<td align="center"><strong>3</strong></td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.05077</td>
-<td align="center">1</td>
-<td align="center">7175</td>
+<td align="center">0</td>
+<td align="center">1.001</td>
+<td align="center">7948</td>
 </tr>
 </tbody>
 </table>
@@ -405,18 +355,18 @@
 <div id="model-structure-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-1" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="kw">m2_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">skew_normal</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
-  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.99</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m2_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -441,32 +391,17 @@
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m2</span>)
 </pre></div>
-<pre><code>##                       prior     class             coef group resp dpar nlpar
-## 1              normal(0, 4)     alpha                                       
-## 2              normal(0, 1)         b                                       
-## 3                                   b         NRTEN100                      
-## 4                                   b         NRTEN120                      
-## 5                                   b          WMGTAWD                      
-## 6                                   b WMGTAWD:NRTEN100                      
-## 7                                   b WMGTAWD:NRTEN120                      
-## 8  student_t(3, 17.8, 13.6) Intercept                                       
-## 9     student_t(3, 0, 13.6)        sd                                       
-## 10                                 sd                    REP                
-## 11                                 sd        Intercept   REP                
-## 12    student_t(3, 0, 13.6)     sigma                                       
-##    bound
-## 1       
-## 2       
-## 3       
-## 4       
-## 5       
-## 6       
-## 7       
-## 8       
-## 9       
-## 10      
-## 11      
-## 12</code></pre>
+<pre><code>##                       prior     class      coef group resp dpar nlpar bound
+## 1              normal(0, 4)     alpha                                      
+## 2              normal(0, 1)         b                                      
+## 3                                   b  NRTEN100                            
+## 4                                   b  NRTEN120                            
+## 5                                   b   WMGTAWD                            
+## 6  student_t(3, 17.8, 13.6) Intercept                                      
+## 7     student_t(3, 0, 13.6)        sd                                      
+## 8                                  sd             REP                      
+## 9                                  sd Intercept   REP                      
+## 10    student_t(3, 0, 13.6)     sigma</code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m2</span>)
@@ -478,12 +413,13 @@
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
-<col width="12%">
-<col width="28%">
+<col width="11%">
+<col width="18%">
 <col width="13%">
 <col width="6%">
+<col width="11%">
 <col width="13%">
-<col width="13%">
+<col width="11%">
 <col width="13%">
 </colgroup>
 <thead><tr class="header">
@@ -494,77 +430,62 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">17.15</td>
+<td align="center">17.36</td>
 <td align="center">89</td>
-<td align="center">13.57</td>
-<td align="center">20.95</td>
-<td align="center">0.9998</td>
+<td align="center">13.87</td>
+<td align="center">21.09</td>
+<td align="center">0.9999</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">0.1561</td>
+<td align="center">0.1747</td>
 <td align="center">89</td>
-<td align="center">-1.267</td>
-<td align="center">1.541</td>
-<td align="center">0.5709</td>
+<td align="center">-1.242</td>
+<td align="center">1.557</td>
+<td align="center">0.5792</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN100</td>
-<td align="center">-0.7245</td>
+<td align="center">-0.7215</td>
 <td align="center">89</td>
-<td align="center">-2.009</td>
-<td align="center">0.6051</td>
-<td align="center">0.8143</td>
+<td align="center">-2.033</td>
+<td align="center">0.5642</td>
+<td align="center">0.8088</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_NRTEN120</td>
-<td align="center">2.417</td>
+<td align="center">2.436</td>
 <td align="center">89</td>
-<td align="center">0.8254</td>
-<td align="center">3.967</td>
-<td align="center">0.9939</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">b_WMGTAWD.NRTEN100</td>
-<td align="center">0.2358</td>
+<td align="center">0.8795</td>
+<td align="center">4.088</td>
+<td align="center">0.9927</td>
 <td align="center">89</td>
-<td align="center">-1.267</td>
-<td align="center">1.771</td>
-<td align="center">0.5984</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">b_WMGTAWD.NRTEN120</td>
-<td align="center">1.054</td>
-<td align="center">89</td>
-<td align="center">-0.5628</td>
-<td align="center">2.566</td>
-<td align="center">0.8551</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
-<col width="11%">
 <col width="12%">
-<col width="14%">
 <col width="15%">
-<col width="23%">
-<col width="11%">
-<col width="11%">
+<col width="16%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -574,57 +495,35 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-1.246</td>
 <td align="center">1.246</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">5394</td>
+<td align="center">3925</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
-<td align="center">89</td>
 <td align="center">-1.246</td>
 <td align="center">1.246</td>
-<td align="center">0.9381</td>
+<td align="center">0.9406</td>
 <td align="center">0.9999</td>
-<td align="center">13626</td>
+<td align="center">8826</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
 <td align="center">-1.246</td>
 <td align="center">1.246</td>
-<td align="center">0.7682</td>
+<td align="center">0.7622</td>
 <td align="center">1</td>
-<td align="center">15622</td>
+<td align="center">9865</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
-<td align="center">89</td>
 <td align="center">-1.246</td>
 <td align="center">1.246</td>
-<td align="center">0.07226</td>
+<td align="center">0.06629</td>
 <td align="center">1</td>
-<td align="center">15351</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">89</td>
-<td align="center">-1.246</td>
-<td align="center">1.246</td>
-<td align="center">0.8936</td>
-<td align="center">1</td>
-<td align="center">14215</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">89</td>
-<td align="center">-1.246</td>
-<td align="center">1.246</td>
-<td align="center">0.5935</td>
-<td align="center">1</td>
-<td align="center">16723</td>
+<td align="center">10052</td>
 </tr>
 </tbody>
 </table>
@@ -636,18 +535,18 @@
 <div id="model-structure-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-2" class="anchor"></a>Model Structure</h3>
-<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="kw">m3_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(1, 3)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">hurdle_gamma</a></span>(),
   data    = <span class="kw">AUDPS_2015</span>,
   seed    = <span class="fl">27</span>,
   control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.99</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m3_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -672,32 +571,17 @@
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m3</span>)
 </pre></div>
-<pre><code>##                     prior     class             coef group resp dpar nlpar
-## 1            normal(1, 3)         b                                       
-## 2                                 b         NRTEN100                      
-## 3                                 b         NRTEN120                      
-## 4                                 b          WMGTAWD                      
-## 5                                 b WMGTAWD:NRTEN100                      
-## 6                                 b WMGTAWD:NRTEN120                      
-## 7              beta(1, 1)        hu                                       
-## 8  student_t(3, 0.4, 2.5) Intercept                                       
-## 9    student_t(3, 0, 2.5)        sd                                       
-## 10                               sd                    REP                
-## 11                               sd        Intercept   REP                
-## 12      gamma(0.01, 0.01)     shape                                       
-##    bound
-## 1       
-## 2       
-## 3       
-## 4       
-## 5       
-## 6       
-## 7       
-## 8       
-## 9       
-## 10      
-## 11      
-## 12</code></pre>
+<pre><code>##                     prior     class      coef group resp dpar nlpar bound
+## 1            normal(1, 3)         b                                      
+## 2                                 b  NRTEN100                            
+## 3                                 b  NRTEN120                            
+## 4                                 b   WMGTAWD                            
+## 5              beta(1, 1)        hu                                      
+## 6  student_t(3, 0.4, 2.5) Intercept                                      
+## 7    student_t(3, 0, 2.5)        sd                                      
+## 8                                sd             REP                      
+## 9                                sd Intercept   REP                      
+## 10      gamma(0.01, 0.01)     shape</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m3</span>)
@@ -706,16 +590,16 @@
 <div class="sourceCode" id="cb30"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m3</span>))
 </pre></div>
-<p>Possible multicollinearity between b_WMGTAWD.NRTEN120 and b_WMGTAWD (r = 0.71), b_WMGTAWD.NRTEN100 and b_NRTEN100 (r = 0.73), b_WMGTAWD.NRTEN120 and b_NRTEN120 (r = 0.72). This might lead to inappropriate results. See ‘Details’ in ‘?rope’.</p>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
 <col width="11%">
-<col width="27%">
+<col width="18%">
 <col width="13%">
 <col width="6%">
-<col width="14%">
 <col width="13%">
+<col width="13%">
+<col width="10%">
 <col width="13%">
 </colgroup>
 <thead><tr class="header">
@@ -726,77 +610,62 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">0.2694</td>
+<td align="center">0.09748</td>
 <td align="center">89</td>
-<td align="center">-0.5386</td>
-<td align="center">1.093</td>
-<td align="center">0.7402</td>
+<td align="center">-0.6851</td>
+<td align="center">0.8651</td>
+<td align="center">0.598</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">-0.8756</td>
+<td align="center">-0.4934</td>
 <td align="center">89</td>
-<td align="center">-1.201</td>
-<td align="center">-0.5509</td>
+<td align="center">-0.6904</td>
+<td align="center">-0.2934</td>
 <td align="center">1</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN100</td>
-<td align="center">0.5617</td>
+<td align="center">0.9459</td>
 <td align="center">89</td>
-<td align="center">0.2337</td>
-<td align="center">0.9291</td>
-<td align="center">0.9947</td>
+<td align="center">0.7003</td>
+<td align="center">1.202</td>
+<td align="center">1</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_NRTEN120</td>
-<td align="center">0.8252</td>
+<td align="center">1.035</td>
 <td align="center">89</td>
-<td align="center">0.4957</td>
-<td align="center">1.149</td>
+<td align="center">0.8123</td>
+<td align="center">1.271</td>
 <td align="center">1</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">b_WMGTAWD.NRTEN100</td>
-<td align="center">0.7258</td>
 <td align="center">89</td>
-<td align="center">0.2612</td>
-<td align="center">1.209</td>
-<td align="center">0.9919</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">b_WMGTAWD.NRTEN120</td>
-<td align="center">0.4528</td>
-<td align="center">89</td>
-<td align="center">-0.01091</td>
-<td align="center">0.906</td>
-<td align="center">0.9422</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
-<col width="11%">
 <col width="12%">
-<col width="14%">
 <col width="15%">
-<col width="23%">
-<col width="11%">
-<col width="11%">
+<col width="16%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -806,57 +675,35 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-0.198</td>
 <td align="center">0.198</td>
-<td align="center">0.3113</td>
+<td align="center">0.4078</td>
 <td align="center">1.001</td>
-<td align="center">4734</td>
+<td align="center">3243</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>4</strong></td>
-<td align="center">89</td>
 <td align="center">-0.198</td>
 <td align="center">0.198</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">7663</td>
+<td align="center">11983</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
+<td align="center">-0.198</td>
+<td align="center">0.198</td>
+<td align="center">0</td>
+<td align="center">0.9997</td>
+<td align="center">9573</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
 <td align="center">-0.198</td>
 <td align="center">0.198</td>
 <td align="center">0</td>
 <td align="center">0.9999</td>
-<td align="center">9294</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>3</strong></td>
-<td align="center">89</td>
-<td align="center">-0.198</td>
-<td align="center">0.198</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">9086</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>5</strong></td>
-<td align="center">89</td>
-<td align="center">-0.198</td>
-<td align="center">0.198</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">8531</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>6</strong></td>
-<td align="center">89</td>
-<td align="center">-0.198</td>
-<td align="center">0.198</td>
-<td align="center">0.1467</td>
-<td align="center">1</td>
-<td align="center">8244</td>
+<td align="center">10057</td>
 </tr>
 </tbody>
 </table>
@@ -873,18 +720,18 @@
 <div id="model-structure-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-3" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Tiller sheath blight incidence AUDPS, <code>TShB_incidence_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit">
 <span class="kw">m4_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 2)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">hurdle_gamma</a></span>(),
   data    = <span class="kw">AUDPS_2016</span>,
   seed    = <span class="fl">27</span>,
   control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.9999</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m4_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -917,11 +764,12 @@
 <caption>Table continues below</caption>
 <colgroup>
 <col width="11%">
-<col width="27%">
-<col width="14%">
+<col width="17%">
+<col width="12%">
 <col width="6%">
 <col width="14%">
 <col width="12%">
+<col width="11%">
 <col width="12%">
 </colgroup>
 <thead><tr class="header">
@@ -932,59 +780,52 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">-0.7416</td>
+<td align="center">-0.8704</td>
 <td align="center">89</td>
-<td align="center">-1.624</td>
-<td align="center">0.1002</td>
-<td align="center">0.9344</td>
+<td align="center">-1.691</td>
+<td align="center">-0.1036</td>
+<td align="center">0.9634</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">-0.03326</td>
+<td align="center">0.3073</td>
 <td align="center">89</td>
-<td align="center">-0.5335</td>
-<td align="center">0.5531</td>
-<td align="center">0.5381</td>
+<td align="center">-0.1166</td>
+<td align="center">0.712</td>
+<td align="center">0.8809</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN180</td>
-<td align="center">0.04907</td>
+<td align="center">0.3671</td>
 <td align="center">89</td>
-<td align="center">-0.4346</td>
-<td align="center">0.5617</td>
-<td align="center">0.5651</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">b_WMGTAWD.NRTEN180</td>
-<td align="center">0.684</td>
+<td align="center">-0.02232</td>
+<td align="center">0.7586</td>
+<td align="center">0.9323</td>
 <td align="center">89</td>
-<td align="center">-0.03193</td>
-<td align="center">1.376</td>
-<td align="center">0.9352</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
-<col width="11%">
-<col width="13%">
-<col width="14%">
+<col width="12%">
 <col width="15%">
-<col width="23%">
-<col width="10%">
-<col width="10%">
+<col width="16%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -994,39 +835,27 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-0.07195</td>
 <td align="center">0.07195</td>
-<td align="center">0.03286</td>
-<td align="center">1.001</td>
-<td align="center">5015</td>
+<td align="center">0</td>
+<td align="center">1.002</td>
+<td align="center">3579</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
-<td align="center">89</td>
 <td align="center">-0.07195</td>
 <td align="center">0.07195</td>
-<td align="center">0.1855</td>
-<td align="center">1</td>
-<td align="center">8356</td>
+<td align="center">0.1251</td>
+<td align="center">0.9998</td>
+<td align="center">8817</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
 <td align="center">-0.07195</td>
 <td align="center">0.07195</td>
-<td align="center">0.2047</td>
+<td align="center">0.06666</td>
 <td align="center">1</td>
-<td align="center">9376</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">89</td>
-<td align="center">-0.07195</td>
-<td align="center">0.07195</td>
-<td align="center">0.03595</td>
-<td align="center">1</td>
-<td align="center">7779</td>
+<td align="center">9739</td>
 </tr>
 </tbody>
 </table>
@@ -1038,19 +867,19 @@
 <div id="model-structure-4" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-4" class="anchor"></a>Model Structure</h3>
-<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit">
 <span class="kw">m5_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 1)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">hurdle_gamma</a></span>(),
   data    = <span class="kw">AUDPS_2016</span>,
   seed    = <span class="fl">27</span>,
   control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.99</span>,
                  max_treedepth = <span class="fl">15</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m5_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -1075,28 +904,16 @@
 <span class="co"># priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m5</span>)
 </pre></div>
-<pre><code>##                      prior     class             coef group resp dpar nlpar
-## 1             normal(0, 1)         b                                       
-## 2                                  b         NRTEN180                      
-## 3                                  b          WMGTAWD                      
-## 4                                  b WMGTAWD:NRTEN180                      
-## 5               beta(1, 1)        hu                                       
-## 6  student_t(3, -0.1, 2.5) Intercept                                       
-## 7     student_t(3, 0, 2.5)        sd                                       
-## 8                                 sd                    REP                
-## 9                                 sd        Intercept   REP                
-## 10       gamma(0.01, 0.01)     shape                                       
-##    bound
-## 1       
-## 2       
-## 3       
-## 4       
-## 5       
-## 6       
-## 7       
-## 8       
-## 9       
-## 10</code></pre>
+<pre><code>##                     prior     class      coef group resp dpar nlpar bound
+## 1            normal(0, 1)         b                                      
+## 2                                 b  NRTEN180                            
+## 3                                 b   WMGTAWD                            
+## 4              beta(1, 1)        hu                                      
+## 5 student_t(3, -0.1, 2.5) Intercept                                      
+## 6    student_t(3, 0, 2.5)        sd                                      
+## 7                                sd             REP                      
+## 8                                sd Intercept   REP                      
+## 9       gamma(0.01, 0.01)     shape</code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m5</span>)
@@ -1109,12 +926,13 @@
 <caption>Table continues below</caption>
 <colgroup>
 <col width="11%">
-<col width="27%">
-<col width="13%">
-<col width="6%">
+<col width="17%">
 <col width="14%">
-<col width="13%">
-<col width="13%">
+<col width="6%">
+<col width="12%">
+<col width="12%">
+<col width="11%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
@@ -1124,59 +942,52 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">0.6877</td>
+<td align="center">0.822</td>
 <td align="center">89</td>
-<td align="center">-0.4672</td>
-<td align="center">1.859</td>
-<td align="center">0.8414</td>
+<td align="center">-0.3976</td>
+<td align="center">1.926</td>
+<td align="center">0.8698</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">0.4146</td>
+<td align="center">0.1581</td>
 <td align="center">89</td>
-<td align="center">-0.08009</td>
-<td align="center">0.914</td>
-<td align="center">0.9044</td>
+<td align="center">-0.2601</td>
+<td align="center">0.5598</td>
+<td align="center">0.7238</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN180</td>
-<td align="center">0.1521</td>
+<td align="center">-0.07969</td>
 <td align="center">89</td>
-<td align="center">-0.2558</td>
-<td align="center">0.6125</td>
-<td align="center">0.7186</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">b_WMGTAWD.NRTEN180</td>
-<td align="center">-0.4989</td>
+<td align="center">-0.4147</td>
+<td align="center">0.2622</td>
+<td align="center">0.644</td>
 <td align="center">89</td>
-<td align="center">-1.065</td>
-<td align="center">0.09456</td>
-<td align="center">0.9149</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
 <col width="12%">
-<col width="13%">
-<col width="14%">
+<col width="15%">
 <col width="16%">
-<col width="24%">
-<col width="9%">
-<col width="10%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -1186,39 +997,27 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-0.3356</td>
 <td align="center">0.3356</td>
-<td align="center">0.2291</td>
-<td align="center">1</td>
-<td align="center">5177</td>
+<td align="center">0.1951</td>
+<td align="center">1.001</td>
+<td align="center">3563</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
-<td align="center">89</td>
 <td align="center">-0.3356</td>
 <td align="center">0.3356</td>
-<td align="center">0.3839</td>
-<td align="center">1</td>
-<td align="center">9308</td>
+<td align="center">0.7941</td>
+<td align="center">0.9999</td>
+<td align="center">11093</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
 <td align="center">-0.3356</td>
 <td align="center">0.3356</td>
-<td align="center">0.7664</td>
-<td align="center">1</td>
-<td align="center">10363</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">89</td>
-<td align="center">-0.3356</td>
-<td align="center">0.3356</td>
-<td align="center">0.3121</td>
-<td align="center">1</td>
-<td align="center">8829</td>
+<td align="center">0.9377</td>
+<td align="center">0.9999</td>
+<td align="center">11528</td>
 </tr>
 </tbody>
 </table>
@@ -1230,18 +1029,18 @@
 <div id="model-structure-5" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure-5" class="anchor"></a>Model Structure</h3>
-<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. The interaction of water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit">
 <span class="kw">m6_priors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior_string</a></span>(<span class="st">"normal(0, 2)"</span>, class = <span class="st">"b"</span>)
 
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span>(
-  formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+  formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
   family = <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brmsfamily.html">hurdle_gamma</a></span>(),
   data    = <span class="kw">AUDPS_2016</span>,
   seed    = <span class="fl">27</span>,
   control = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(adapt_delta = <span class="fl">0.999</span>),
-  warmup = <span class="fl">1000</span>,
-  iter = <span class="fl">5000</span>,
+  warmup = <span class="fl">5000</span>,
+  iter = <span class="fl">8000</span>,
   prior = <span class="kw">m6_priors</span>,
   sample_prior = <span class="fl">TRUE</span>
 )
@@ -1266,28 +1065,16 @@
 <span class="co"># check influence of priors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/prior_summary.brmsfit.html">prior_summary</a></span>(<span class="kw">m6</span>)
 </pre></div>
-<pre><code>##                      prior     class             coef group resp dpar nlpar
-## 1             normal(0, 2)         b                                       
-## 2                                  b         NRTEN180                      
-## 3                                  b          WMGTAWD                      
-## 4                                  b WMGTAWD:NRTEN180                      
-## 5               beta(1, 1)        hu                                       
-## 6  student_t(3, -1.8, 2.5) Intercept                                       
-## 7     student_t(3, 0, 2.5)        sd                                       
-## 8                                 sd                    REP                
-## 9                                 sd        Intercept   REP                
-## 10       gamma(0.01, 0.01)     shape                                       
-##    bound
-## 1       
-## 2       
-## 3       
-## 4       
-## 5       
-## 6       
-## 7       
-## 8       
-## 9       
-## 10</code></pre>
+<pre><code>##                     prior     class      coef group resp dpar nlpar bound
+## 1            normal(0, 2)         b                                      
+## 2                                 b  NRTEN180                            
+## 3                                 b   WMGTAWD                            
+## 4              beta(1, 1)        hu                                      
+## 5 student_t(3, -1.8, 2.5) Intercept                                      
+## 6    student_t(3, 0, 2.5)        sd                                      
+## 7                                sd             REP                      
+## 8                                sd Intercept   REP                      
+## 9       gamma(0.01, 0.01)     shape</code></pre>
 <div class="sourceCode" id="cb54"><pre class="downlit">
 <span class="co"># posteriors</span>
 <span class="fu"><a href="https://rdrr.io/pkg/brms/man/mcmc_plot.brmsfit.html">mcmc_plot</a></span>(<span class="kw">m6</span>)
@@ -1296,17 +1083,17 @@
 <div class="sourceCode" id="cb55"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/describe_posterior.html">describe_posterior</a></span>(<span class="kw">m6</span>))
 </pre></div>
-<p>Possible multicollinearity between b_WMGTAWD.NRTEN180 and b_WMGTAWD (r = 0.71). This might lead to inappropriate results. See ‘Details’ in ‘?rope’.</p>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
 <col width="11%">
-<col width="27%">
+<col width="17%">
 <col width="12%">
 <col width="6%">
 <col width="12%">
 <col width="14%">
-<col width="14%">
+<col width="11%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
@@ -1316,59 +1103,52 @@
 <th align="center">CI_low</th>
 <th align="center">CI_high</th>
 <th align="center">pd</th>
+<th align="center">ROPE_CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
 <td align="center">b_Intercept</td>
-<td align="center">-0.7532</td>
+<td align="center">-0.8094</td>
 <td align="center">89</td>
-<td align="center">-1.759</td>
-<td align="center">0.2493</td>
-<td align="center">0.9097</td>
+<td align="center">-1.799</td>
+<td align="center">0.1691</td>
+<td align="center">0.926</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
 <td align="center">b_WMGTAWD</td>
-<td align="center">0.3653</td>
+<td align="center">0.5224</td>
 <td align="center">89</td>
-<td align="center">-0.2414</td>
-<td align="center">0.9976</td>
-<td align="center">0.8257</td>
+<td align="center">0.08769</td>
+<td align="center">0.9453</td>
+<td align="center">0.9754</td>
+<td align="center">89</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
 <td align="center">b_NRTEN180</td>
-<td align="center">-0.5338</td>
+<td align="center">-0.4375</td>
 <td align="center">89</td>
-<td align="center">-0.9854</td>
-<td align="center">-0.08329</td>
-<td align="center">0.9711</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">b_WMGTAWD.NRTEN180</td>
-<td align="center">0.2407</td>
+<td align="center">-0.7684</td>
+<td align="center">-0.09236</td>
+<td align="center">0.9787</td>
 <td align="center">89</td>
-<td align="center">-0.4366</td>
-<td align="center">0.9346</td>
-<td align="center">0.7138</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <colgroup>
 <col width="12%">
-<col width="13%">
-<col width="14%">
+<col width="15%">
 <col width="16%">
-<col width="24%">
-<col width="9%">
-<col width="10%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
-<th align="center">ROPE_CI</th>
 <th align="center">ROPE_low</th>
 <th align="center">ROPE_high</th>
 <th align="center">ROPE_Percentage</th>
@@ -1378,39 +1158,27 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>1</strong></td>
-<td align="center">89</td>
 <td align="center">-0.05509</td>
 <td align="center">0.05509</td>
-<td align="center">0.03019</td>
-<td align="center">1</td>
-<td align="center">4616</td>
+<td align="center">0.02275</td>
+<td align="center">1.001</td>
+<td align="center">3760</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>3</strong></td>
-<td align="center">89</td>
 <td align="center">-0.05509</td>
 <td align="center">0.05509</td>
-<td align="center">0.08483</td>
-<td align="center">1</td>
-<td align="center">9764</td>
+<td align="center">0</td>
+<td align="center">0.9999</td>
+<td align="center">9371</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>2</strong></td>
-<td align="center">89</td>
 <td align="center">-0.05509</td>
 <td align="center">0.05509</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">10244</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>4</strong></td>
-<td align="center">89</td>
-<td align="center">-0.05509</td>
-<td align="center">0.05509</td>
-<td align="center">0.09683</td>
-<td align="center">1</td>
-<td align="center">8978</td>
+<td align="center">9808</td>
 </tr>
 </tbody>
 </table>
