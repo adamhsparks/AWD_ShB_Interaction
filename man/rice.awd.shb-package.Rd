@@ -16,8 +16,8 @@ Provides a research compendium of analysis associated with
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/adamhsparks/rice_AWD_ShB_analysis}
-  \item Report bugs at \url{https://github.com/adamhsparks/rice_AWD_ShB_analysis/issues}
+  \item \url{https://github.com/adamhsparks/rice_awd_shb}
+  \item Report bugs at \url{https://github.com/adamhsparks/rice_awd_shb/issues}
 }
 
 }
