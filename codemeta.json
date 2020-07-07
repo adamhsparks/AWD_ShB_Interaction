@@ -14,7 +14,6 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.2",
     "url": "https://r-project.org"
   },
   "runtimePlatform": "R version 4.0.2 (2020-06-22)",
@@ -316,11 +315,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
-  "fileSize": "551.41KB",
-  "contIntegration": [
-    "https://travis-ci.org/adamhsparks/rice_awd_pests",
-    "https://ci.appveyor.com/project/adamhsparks/rice-awd-pests-9lo9u/branch/master"
-  ],
+  "fileSize": "0KB",
   "keywords": [
     "nitrogen-managements",
     "water",
