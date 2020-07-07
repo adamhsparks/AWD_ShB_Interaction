@@ -58,7 +58,7 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
-# Histogram plot of tiller sheath blight severity data
+# Density plot of tiller sheath blight severity data
 
 ```{r, cache=FALSE}
 ggplot(RAW_data, aes(x = TIL_ShB)) +
