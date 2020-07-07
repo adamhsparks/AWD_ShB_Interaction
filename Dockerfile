@@ -8,7 +8,7 @@ COPY --chown=rstudio . /home/rstudio/rice_awd_pests
 
 # install system-level libs
 RUN apt-get update && \
-    apt-get install -y libudunits2-dev libgdal-dev && \
+    apt-get install -y libudunits2-dev libgdal-dev libglpk-dev && \
     rm -r /var/lib/apt/lists/*
 
 # go into the repo directory

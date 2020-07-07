@@ -31,6 +31,7 @@ Suggests:
     brms,
     devtools,
     dplyr (>= 0.7.0),
+    flextable,
     forcats,
     ggplot2,
     ggpubr,
