@@ -45,12 +45,11 @@ ggplot(RAW_data, aes(x = TShB_incidence)) +
   ))
 ```
 
-# Density plot of leaf sheath blight severity data
+# Bar plot of leaf sheath blight severity data
 
 ```{r, cache=FALSE}
 ggplot(RAW_data, aes(x = LEAF_ShB)) +
-  geom_density(aes(fill = YEAR)) +
-  geom_rug() +
+  geom_bar(aes(fill = YEAR)) +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   scale_fill_brewer(palette = "Dark2") +
@@ -58,12 +57,11 @@ ggplot(RAW_data, aes(x = LEAF_ShB)) +
   ggtitle("Leaf Sheath Blight Severity Rating")
 ```
 
-# Density plot of tiller sheath blight severity data
+# Bar plot of tiller sheath blight severity data
 
 ```{r, cache=FALSE}
 ggplot(RAW_data, aes(x = TIL_ShB)) +
-  geom_density(aes(fill = YEAR)) +
-  geom_rug() +
+  geom_bar(aes(fill = YEAR)) +
   scale_linetype(name = "Year") +
   facet_grid(WMGT ~ NRTE) +
   scale_fill_brewer(palette = "Dark2") +
@@ -102,8 +100,7 @@ ggplot(RAW_data, aes(x = ASMT, y = LEAF_ShB)) +
   ylab("Rating") +
   ggtitle("Leaf Sheath Blight Severity at Each Assessment") +
   facet_grid(. ~ YEAR) +
-  scale_colour_brewer(palette = "Dark2") +
-  theme(strip.text.x = element_text(angle = 90))
+  scale_colour_brewer(palette = "Dark2")
 ```
 
 # Dot plot of tiller sheath blight severity data
@@ -116,8 +113,7 @@ ggplot(RAW_data, aes(x = ASMT, y = TIL_ShB)) +
   ylab("Rating") +
   facet_grid(. ~ YEAR) +
   scale_colour_brewer(palette = "Dark2") +
-  ggtitle("Tiller Sheath Blight Severity at Each Assessment") +
-  theme(strip.text.x = element_text(angle = 90))
+  ggtitle("Tiller Sheath Blight Severity at Each Assessment")
 ```
 
 # Dot plot of tiller sheath blight incidence data
@@ -131,7 +127,6 @@ ggplot(RAW_data, aes(x = ASMT, y = TShB_incidence,
   ylab("Incidence") +
   facet_grid(. ~ YEAR) +
   ggtitle("Tiller Sheath Blight Severity Rating Over Time") +
-  theme(strip.text.x = element_text(angle = 90)) +
   xlab("Assessment") +
   ylab("Incidence") +
   scale_colour_brewer(palette = "Dark2") +
