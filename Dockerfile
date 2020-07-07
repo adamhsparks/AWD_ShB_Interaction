@@ -15,9 +15,9 @@ RUN apt-get update && \
 RUN . /etc/environment \
   \
  # build this compendium package
-  && R -e "devtools::install('home/rstudio/rice_awd_pests', dep=TRUE)" \
+  && R -e "devtools::install('home/rstudio/rice_awd_shb', dep=TRUE)" \
   \
-  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/README.Rmd')" \
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_shb/README.Rmd')" \
  # render the manuscript into a docx, you'll need to edit this if you've
  # customised the location and name of your main Rmd file
-  && R -e "rmarkdown::render('/home/rstudio/rice_awd_pests/analysis/paper/paper.Rmd')"
+  && R -e "rmarkdown::render('/home/rstudio/rice_awd_shb/analysis/paper/paper.Rmd')"
