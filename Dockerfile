@@ -4,7 +4,7 @@ FROM rocker/verse:4.0.0
 # required
 MAINTAINER Adam Sparks adamhsparks@gmail.com
 
-COPY --chown=rstudio . /home/rstudio/rice_awd_pests
+COPY --chown=rstudio . /home/rstudio/rice_awd_shb
 
 # install system-level libs
 RUN apt-get update && \
