@@ -441,43 +441,20 @@ DS2016$TRT[which(DS2016$WMGT == "AWD" &
 DS2016$TRT[which(DS2016$WMGT == "AWD" &
                    DS2016$NRTE == 180)] = "AWD_N180"
 
+# gather leaf severity values in one col
 DS2016 <-
   DS2016 %>%
-  gather(
-    LEAF,
-    LEAF_ShB,
-    starts_with("ShBL"),
-    -DATE,
-    -ASMT,
-    -DAI,
-    -PLOT,
-    -TRT,
-    -REP,
-    -WMGT,
-    -SMPL,
-    -NRTE,
-    -HILL,
-    -NTIL,
-    -GL,
-    -DL,
-    -NTShB,
-    -NSHShB,
-    -TIL
-  )
+  pivot_longer(starts_with("ShBL"),
+               names_to = "LEAF",
+               values_to = "LEAF_ShB")
 
 # reclassify LEAF column to leaf numbers 1...6----------------------------------
-
 DS2016$LEAF[DS2016$LEAF == "ShBL1"] <- 1
 DS2016$LEAF[DS2016$LEAF == "ShBL2"] <- 2
 DS2016$LEAF[DS2016$LEAF == "ShBL3"] <- 3
 DS2016$LEAF[DS2016$LEAF == "ShBL4"] <- 4
 DS2016$LEAF[DS2016$LEAF == "ShBL5"] <- 5
 DS2016$LEAF[DS2016$LEAF == "ShBL6"] <- 6
-
-# before classifying incidence, set any values where there are more infected
-# tillers in the hill than there are tillers to NA for both columns
-DS2016$NTIL[DS2016$NTIL < DS2016$NTShB] <- NA
-DS2016$NTShB[is.na(DS2016$NTIL)] <- NA
 
 # calculate tiller sheath blight percent incidence -----------------------------
 DS2016 <-
