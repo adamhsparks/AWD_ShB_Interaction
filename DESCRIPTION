@@ -25,10 +25,8 @@ LazyData: true
 RoxygenNote: 7.1.0
 Suggests:
     agricolae,
-    bayesplot,
     bayestestR,
     bookdown,
-    brms,
     devtools,
     dplyr (>= 0.7.0),
     flextable,
@@ -37,6 +35,7 @@ Suggests:
     ggpubr,
     knitr,
     lubridate,
+    MCMCglmm,
     pander,
     reshape2,
     purrr (>= 0.2.3),

@@ -1,0 +1,102 @@
+---
+title: "2015 Tiller Sheath Blight Severity Analysis"
+author: "A. H. Sparks"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: journal
+vignette: >
+  %\VignetteIndexEntry{2015 Tiller Sheath Blight Severity Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+For this analysis, I've elected to use [`MCMCglmm`](https://cran.r-project.org/package=MCMCglmm) for a Bayesian analysis.
+When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
+
+
+The base levels for this analysis are:
+
+  - `NRTE:0`
+
+  - `WMGT:PDL`
+
+## Setup
+
+Load libraries and set seed for reproducibility.
+
+```{r set_seed, message=FALSE}
+library("rice.awd.shb")
+library("MCMCglmm")
+library("pander")
+library("bayestestR")
+library("ggplot2")
+
+set.seed(27)
+```
+
+The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
+However, because it is a `tibble()` and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.
+
+Create individual data frames for the analysis.
+
+```{r create_analysis_df, cache=FALSE, message=FALSE, warning=FALSE}
+# create 2015 data frame
+AUDPS_2015 <- as.data.frame(AUDPS[AUDPS$YEAR == 2015,])
+AUDPS_2015 <- droplevels(AUDPS_2015)
+
+# relevel factors for easier interpretation of analysis
+AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
+AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
+```
+
+## Tiller Sheath Blight Severity Model
+
+### Model Structure
+
+Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS`, is the response variable.
+Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
+Replicate, `REP`, is treated as a random effect.
+
+```{r 2015_TShB_severity, cache=FALSE, message=TRUE, warning=TRUE, results="hide"}
+m2_prior <- list(R = list(V = 1, nu = 0.02),
+                 G = list(G1 = list(
+                   V = 1, nu = 0.02, alpha.V = 1000
+                 )))
+
+m2 <- MCMCglmm(
+  TShB_percent_AUDPS ~ WMGT + NRTE,
+  ~ REP,
+  data    = AUDPS_2015,
+  prior = m2_prior,
+  nitt = 60000,
+  thin = 10
+)
+```
+
+### Diagnostics and Summary
+
+```{r m2-diagnostics, cache=FALSE, message=FALSE, warning=FALSE, fig.height = 9, fig.width = 6}
+plot(m2)
+
+pander(summary(m2))
+
+pd <- p_direction(m2)
+
+plot(pd) +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal()
+```
+
+## Save Model Information
+
+Lastly, save the model information to be used in discussing the results.
+
+```{r save_model}
+saveRDS(m2, "../analysis/data/derived_data/TSev15.Rds",
+        compress = "bzip2")
+```

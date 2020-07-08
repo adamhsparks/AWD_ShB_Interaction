@@ -1,15 +1,10 @@
 # get the base image, the rocker/verse has R, RStudio and pandoc
-FROM asachet/rocker-stan
+FROM rocker/verse:4.0.0
 
 # required
 MAINTAINER Adam Sparks adamhsparks@gmail.com
 
 COPY --chown=rstudio . /home/rstudio/rice-awd-shb
-
-# install system-level libs
-RUN apt-get update && \
-    apt-get install -y libudunits2-dev libgdal-dev libglpk-dev && \
-    rm -r /var/lib/apt/lists/*
 
 # go into the repo directory
 RUN . /etc/environment \
