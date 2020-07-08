@@ -1,5 +1,5 @@
 # get the base image, the rocker/verse has R, RStudio and pandoc
-FROM rocker/verse:4.0.0
+FROM asachet/rocker-stan
 
 # required
 MAINTAINER Adam Sparks adamhsparks@gmail.com
