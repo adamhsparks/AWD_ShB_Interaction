@@ -7,7 +7,7 @@ jobs:
     runs_on: ubuntu-latest
     steps:
       ‐ name: build-push
-        uses: docker/build-push-action@v1
+      - uses: docker/build-push-action@v1
         with:
           username: ${{ DOCKER_USERNAME }}
           password: ${{ DOCKER_PASSWORD }}
