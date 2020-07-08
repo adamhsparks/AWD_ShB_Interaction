@@ -60,9 +60,19 @@ library("ggpubr")
 library("grid")
 library("gridExtra")
 library("flextable")
+library("pander")
 library("rice.awd.shb")
+library("bayestestR")
+library("here")
 
 theme_set(theme_classic(base_size = 14))
+
+LSev15 <- readRDS(here("analysis/data/derived_data/LSev15.Rds"))
+LSev16 <- readRDS(here("analysis/data/derived_data/LSev16.Rds"))
+TInc15 <- readRDS(here("analysis/data/derived_data/TInc15.Rds"))
+TInc16 <- readRDS(here("analysis/data/derived_data/TInc16.Rds"))
+TSev15 <- readRDS(here("analysis/data/derived_data/TSev15.Rds"))
+TSev16 <- readRDS(here("analysis/data/derived_data/TSev16.Rds"))
 ```
 
 ##### pagebreak
@@ -175,7 +185,7 @@ Five disease assessments were made in the 2015 experiment and four disease asses
 
 The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R, version 4.0.0 [@R2020], package `agricolae`, version 1.3-3, [@agricolae2020].
 
-Bayesian multivariate mixed models were fitted using the contributed R package `brms`, version 0.70, [@Buerkner2018; @Buerkner2017].
+Bayesian multivariate mixed models were fitted using the contributed R package `MCMCglmm`, version 2.29, [@Hadfield2010].
 Six models were created where the dependent variables were 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
 The independent variables were the irrigation management and N rate with replicate treated as a random variable.
 The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled and for 2016 they were: N rate -- N60, irrigation management -- puddled.
@@ -303,33 +313,20 @@ N_rates <-
 N_rates
 ```
 
-```{r Table-2}
-priors <- "
-Year | Fixed Effect     | distribution | mean | sd | brmsfamily  | adapt_delta | max_treedepth
-2015 | Tiller Incidence | normal       | 0    | 1  | gaussian    | 0.9999      | 15
-2015 | Tiller Severity  | normal       | 0    | 1  | skew_normal | 0.9999      | 10
-2015 | Leaf Severity    | normal       | 1    | 3  | hurdle_gamma| 0.99        | 10
-2016 | Tiller Incidence | normal       | 0    | 2  | hurdle_gamma| 0.9999      | 10
-2016 | Tiller Severity  | normal       | 0    | 1  | hurdle_gamma| 0.99        | 15
-2016 | Leaf Severity    | normal       | 0    | 2  | hurdle_gamma| 0.999       | 10
-"
+##### pagebreak
 
-priors <- read.delim(
-  textConnection(priors),
-  header = FALSE,
-  sep = "|",
-  strip.white = TRUE,
-  stringsAsFactors = FALSE
-)
-names(priors) <- unname(as.list(priors[1, ])) # put headers on
-priors <- priors[-1, ] # remove first row
-row.names(priors) <- NULL
-priors <- flextable(as.data.frame(priors))
-priors <- set_caption(priors,
-                      caption =
-    "(\\#tab:Table-2) Details of models used to detect differences between irrigation methods, alternate wetting and drying (AWD) and traditional puddling, and nitrogen fertilisation rates. Values are for the fixed effect prior values, family, adapt_delta and max_treedepth as used in the contributed R package, brms, function brm() to fit Bayesian models."
-    )
-priors
+```{r Table-2}
+flextable(rbind(rope(TInc15),
+                rope(TSev15),
+                rope(LSev15)))
+```
+
+##### pagebreak
+
+```{r Table-3}
+flextable(rbind(rope(TInc16),
+                rope(TSev16),
+                rope(LSev16)))
 ```
 
 ##### pagebreak
@@ -757,127 +754,6 @@ p12 <- ggplot(AUDPS,
              scales = "free_x")
 
 grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
-```
-
-```{r fig-5, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight incidence for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
-
-models <- readRDS("../data/derived_data/models.Rds")
-
-p_13 <- mcmc_plot(models[[1]], pars = c("WMGT", "NRTE"))
-p_13 <- p_13 +
-  annotate(geom = "text",
-           x = 1.35,
-           y = 3.5,
-           label = "a") +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black"),
-    legend.position = c(x = 0.101, y = 0.74),
-    legend.key.size = unit(0, 'lines'),
-    legend.background = element_rect(
-      color = "black",
-      size = 0.5,
-      linetype = "solid"
-    ),
-    axis.title.x = element_blank(),
-    strip.background = element_blank(),
-    strip.text.x = element_text(face = "bold")
-  )
-
-p_14 <- mcmc_plot(models[[4]], pars = c("WMGT", "NRTE"))
-p_14 <- p_14 +
-  annotate(geom = "text",
-           x = 0.215,
-           y = 2.5,
-           label = "b") +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black"),
-    legend.position = c(x = 0.101, y = 0.74),
-    legend.key.size = unit(0, 'lines'),
-    legend.background = element_rect(
-      color = "black",
-      size = 0.5,
-      linetype = "solid"
-    ),
-    axis.title.x = element_blank(),
-    strip.background = element_blank(),
-    strip.text.x = element_text(face = "bold")
-  )
-
-grid.arrange(p_13, p_14, ncol = 1, nrow = 2)
-```
-
-```{r fig-6, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
-
-p_15 <- mcmc_plot(models[[2]], pars = c("WMGT", "NRTE"))
-p_15 <- p_15 +
-  annotate(geom = "text",
-           x = 4.25,
-           y = 3.5,
-           label = "a") +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black"),
-    legend.position = c(x = 0.101, y = 0.74),
-    legend.key.size = unit(0, 'lines'),
-    legend.background = element_rect(
-      color = "black",
-      size = 0.5,
-      linetype = "solid"
-    ),
-    axis.title.x = element_blank(),
-    strip.background = element_blank(),
-    strip.text.x = element_text(face = "bold")
-  )
-  
-
-p_16 <- mcmc_plot(models[[5]], pars = c("WMGT", "NRTE"))
-p_16 <- p_16 +
-  annotate(geom = "text",
-           x = 0.15,
-           y = 2.5,
-           label = "b") +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(colour = "black"),
-    legend.position = c(x = 0.101, y = 0.74),
-    legend.key.size = unit(0, 'lines'),
-    legend.background = element_rect(
-      color = "black",
-      size = 0.5,
-      linetype = "solid"
-    ),
-    axis.title.x = element_blank(),
-    strip.background = element_blank(),
-    strip.text.x = element_text(face = "bold")
-  )
-
-grid.arrange(p_15, p_16, ncol = 1, nrow = 2)
-```
-
-```{r fig-7, fig.cap="Posterior means and 95&nbsp;% credible intervals for the explanatory variables used in models of alternate wetting and drying irrigations (AWD) and N rate (NRTE) on tiller sheath blight severity for 2015 (a) and 2016 (b). Five different N treatments were applied to split-plots depending on the experiment. In the 2015 experiment three N rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two N rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180).", eval=TRUE}
-
-p_17 <- mcmc_plot(models[[3]], pars = c("WMGT", "NRTE"))
-p_17 <- p_17 +
-  annotate(geom = "text",
-           x = 1.3,
-           y = 3.5,
-           label = "a")
-  
-
-p_18 <- mcmc_plot(models[[6]], pars = c("WMGT", "NRTE"))
-p_18 <- p_18 +
-  annotate(geom = "text",
-           x = 0.4,
-           y = 2.5,
-           label = "b")
-
-grid.arrange(p_17, p_18, ncol = 1, nrow = 2)
 ```
 
 \newpage
