@@ -42,6 +42,7 @@ Suggests:
     see,
     sessioninfo,
     tidyverse,
+    tidybayes,
     tibble,
     tidyr (>= 0.7.0),
     usethis
