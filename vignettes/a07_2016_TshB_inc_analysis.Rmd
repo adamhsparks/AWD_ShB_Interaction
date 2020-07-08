@@ -32,8 +32,6 @@ Load libraries and set seed for reproducibility.
 ```{r set_seed, message=FALSE}
 library("rice.awd.shb")
 library("MCMCglmm")
-library("bayestestR")
-library("ggplot2")
 
 set.seed(27)
 ```
@@ -83,14 +81,6 @@ m4 <- MCMCglmm(
 plot(m4)
 
 summary(m4)
-
-pd <- p_direction(m4)
-
-pander(pd)
-
-plot(pd) +
-  scale_fill_brewer(palette = "Dark2") +
-  theme_minimal()
 ```
 
 # Save Model Information
