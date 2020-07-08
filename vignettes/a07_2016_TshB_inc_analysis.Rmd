@@ -69,7 +69,7 @@ m4_prior <- list(R = list(V = 1, nu = 0.02),
                  )))
 
 m4 <- MCMCglmm(
-  TShB_incidence_AUDPS ~ WMGT + NRTE,
+  TShB_incidence_AUDPS ~ WMGT * NRTE,
   ~ REP,
   data    = AUDPS_2016,
   prior = m4_prior,
@@ -86,6 +86,8 @@ plot(m4)
 pander(summary(m4))
 
 pd <- p_direction(m4)
+
+pander(pd)
 
 plot(pd) +
   scale_fill_brewer(palette = "Dark2") +

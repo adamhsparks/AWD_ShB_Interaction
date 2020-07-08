@@ -68,7 +68,7 @@ m3_prior <-
        )))
 
 m3 <- MCMCglmm(
-  LShB_percent_AUDPS ~ WMGT + NRTE,
+  LShB_percent_AUDPS ~ WMGT * NRTE,
   ~ REP,
   data    = AUDPS_2015,
   prior = m3_prior,
@@ -85,6 +85,8 @@ plot(m3)
 pander(summary(m3))
 
 pd <- p_direction(m3)
+
+pander(pd)
 
 plot(pd) +
   scale_fill_brewer(palette = "Dark2") +

@@ -67,7 +67,7 @@ m5_prior <- list(R = list(V = 1, nu = 0.02),
                  )))
 
 m5 <- MCMCglmm(
-  TShB_percent_AUDPS ~ WMGT + NRTE,
+  TShB_percent_AUDPS ~ WMGT * NRTE,
   ~ REP,
   data    = AUDPS_2016,
   prior = m5_prior,
@@ -78,12 +78,14 @@ m5 <- MCMCglmm(
 
 ### Diagnostics
 
-```{r m5-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+```{r m5-diagnostics, cache=FALSE, message=FALSE, warning=FALSE, fig.height = 9, fig.width = 6}
 plot(m5)
 
 pander(summary(m5))
 
 pd <- p_direction(m5)
+
+pander(pd)
 
 plot(pd) +
   scale_fill_brewer(palette = "Dark2") +

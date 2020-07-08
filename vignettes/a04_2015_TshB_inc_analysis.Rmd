@@ -18,7 +18,6 @@ vignette: >
 For this analysis, I've elected to use [`MCMCglmm`](https://cran.r-project.org/package=MCMCglmm) for a Bayesian analysis.
 When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
 
-
 The base levels for this analysis are:
 
 - `NRTE:0`
@@ -71,7 +70,7 @@ m1_prior <- list(R = list(V = 1, nu = 0.02),
                  )))
 
 m1 <- MCMCglmm(
-  TShB_incidence_AUDPS ~ WMGT + NRTE,
+  TShB_incidence_AUDPS ~ WMGT * NRTE,
   ~ REP,
   data    = AUDPS_2015,
   prior = m1_prior,
@@ -88,6 +87,8 @@ plot(m1)
 pander(summary(m1))
 
 pd <- p_direction(m1)
+
+pander(pd)
 
 plot(pd) +
   scale_fill_brewer(palette = "Dark2") +
