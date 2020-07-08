@@ -39,6 +39,7 @@ Suggests:
     pander,
     reshape2,
     purrr (>= 0.2.3),
+    see,
     sessioninfo,
     tidyverse,
     tibble,
