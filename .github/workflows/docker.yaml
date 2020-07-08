@@ -2,10 +2,10 @@ name: Docker registry
 
 on: [push]
 
-action "build-and-push-to-docker-hub" {
-  uses = "pangzineng/Github-Action-One-Click-Docker@master"
-  secrets = [
-    "DOCKER_USERNAME",
-    "DOCKER_PASSWORD"
-  ]
-}
+‐ name: build-push
+  uses: docker/build-push-action@v1
+  with:
+    username: ${{ DOCKER_USERNAME }}
+    password: ${{ DOCKER_PASSWORD }}
+    repository: adamhsparks/rice-awd-shb
+    tags: latest
