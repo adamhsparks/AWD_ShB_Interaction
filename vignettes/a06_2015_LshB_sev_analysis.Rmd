@@ -30,7 +30,6 @@ Load libraries and set seed for reproducibility.
 ```{r set_seed, message=FALSE}
 library("rice.awd.shb")
 library("MCMCglmm")
-library("pander")
 library("bayestestR")
 library("ggplot2")
 
@@ -82,7 +81,7 @@ m3 <- MCMCglmm(
 ```{r m3-diagnostics, cache=FALSE, message=FALSE, warning=FALSE, fig.height = 9, fig.width = 6}
 plot(m3)
 
-pander(summary(m3))
+summary(m3)
 
 pd <- p_direction(m3)
 
