@@ -76,18 +76,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "bayesplot",
-      "name": "bayesplot",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=bayesplot"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "bayestestR",
       "name": "bayestestR",
       "provider": {
@@ -109,18 +97,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=bookdown"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "brms",
-      "name": "brms",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=brms"
     },
     {
       "@type": "SoftwareApplication",
@@ -197,6 +173,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "here",
+      "name": "here",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=here"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "provider": {
@@ -218,6 +206,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "MCMCglmm",
+      "name": "MCMCglmm",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=MCMCglmm"
     },
     {
       "@type": "SoftwareApplication",
@@ -258,6 +258,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "see",
+      "name": "see",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=see"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "sessioninfo",
       "name": "sessioninfo",
       "provider": {
@@ -279,6 +291,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidybayes",
+      "name": "tidybayes",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidybayes"
     },
     {
       "@type": "SoftwareApplication",
