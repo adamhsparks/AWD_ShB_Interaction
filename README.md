@@ -14,7 +14,7 @@ version](https://img.shields.io/badge/R%3E%3D-4.0.2-brightgreen.svg)](https://cr
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice_awd_shb> are the development
+<https://github.com/adamhsparks/rice-awd-shb> are the development
 versions and may have changed since the report was published.
 
 ### Data DOI:
@@ -82,7 +82,7 @@ To download the package source as you see it on GitHub, for offline
 browsing, use this line at the shell prompt (assuming you have Git
 installed on your computer):
 
-    git clone https://github.com/adamhsparks/rice_awd_shb.git
+    git clone https://github.com/adamhsparks/rice-awd-shb.git
 
 Once the download is complete, open the `rice.awd.shb.Rproj` in RStudio
 to begin working with the package and compendium files.

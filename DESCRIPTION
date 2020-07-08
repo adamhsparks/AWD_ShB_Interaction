@@ -46,5 +46,5 @@ Suggests:
     tidyr (>= 0.7.0),
     usethis
 VignetteBuilder: knitr
-URL: https://github.com/adamhsparks/rice_awd_shb
-BugReports: https://github.com/adamhsparks/rice_awd_shb/issues
+URL: https://github.com/adamhsparks/rice-awd-shb
+BugReports: https://github.com/adamhsparks/rice-awd-shb/issues

@@ -7,8 +7,8 @@
   "identifier": "rice.awd.shb",
   "description": "Provides a research compendium of analysis associated with\n    experiments conducted at the International Rice Research Institute (IRRI),\n    Los Baños, Calabarzon, Philippines in the dry seasons of 2015 and 2016. The\n    experiments were designed to test the effects of alternate wetting and\n    drying irrigation management on rice sheath blight disease. The plots were\n    split plot with an irrigation main plot and nitrogen sub-plot treatments.",
   "name": "rice.awd.shb: Reproducible Research Compendium for Analysing Effects of Water Management and Nitrogen on Rice Sheath Blight",
-  "codeRepository": "https://github.com/adamhsparks/rice_AWD_ShB_analysis",
-  "issueTracker": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/issues",
+  "codeRepository": "https://github.com/adamhsparks/rice-awd-shb",
+  "issueTracker": "https://github.com/adamhsparks/rice-awd-shb/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -146,6 +146,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "flextable",
+      "name": "flextable",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=flextable"
     },
     {
       "@type": "SoftwareApplication",
@@ -314,7 +326,7 @@
       "version": ">= 3.4.0"
     }
   ],
-  "readme": "https://github.com/adamhsparks/rice_AWD_ShB_analysis/blob/main/README.md",
+  "readme": "https://github.com/adamhsparks/rice-awd-shb/blob/main/README.md",
   "fileSize": "0KB",
   "keywords": [
     "nitrogen-managements",
