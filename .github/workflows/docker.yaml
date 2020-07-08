@@ -1,15 +1,14 @@
 name: Docker registry
-
 on: [push]
-
 jobs:
   build:
     runs_on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       ‐ name: build-push
       - uses: docker/build-push-action@v1
         with:
-          username: ${{ DOCKER_USERNAME }}
-          password: ${{ DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           repository: adamhsparks/rice-awd-shb
           tags: latest
