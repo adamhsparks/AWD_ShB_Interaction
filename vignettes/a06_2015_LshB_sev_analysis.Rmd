@@ -30,6 +30,8 @@ Load libraries and set seed for reproducibility.
 ```{r set_seed, message=FALSE}
 library("rice.awd.shb")
 library("MCMCglmm")
+library("bayestestR")
+library("ggplot2")
 
 set.seed(27)
 ```
@@ -80,6 +82,14 @@ m3 <- MCMCglmm(
 plot(m3)
 
 summary(m3)
+
+pd <- p_direction(m3)
+
+pander(pd)
+
+plot(pd) +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal()
 ```
 
 ## Save Model Information
