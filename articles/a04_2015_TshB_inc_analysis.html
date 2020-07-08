@@ -128,9 +128,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice-awd-shb">"rice.awd.shb"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"MCMCglmm"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://rapporter.github.io/pander">"pander"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/bayestestR">"bayestestR"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">27</span>)
 </pre></div>
@@ -178,195 +175,43 @@
 </pre></div>
 <p><img src="a04_2015_TshB_inc_analysis_files/figure-html/m1-diagnostics-1.png" width="576"><img src="a04_2015_TshB_inc_analysis_files/figure-html/m1-diagnostics-2.png" width="576"><img src="a04_2015_TshB_inc_analysis_files/figure-html/m1-diagnostics-3.png" width="576"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m1</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m1</span>)
 </pre></div>
-<ul>
-<li><p><strong>DIC</strong>: <em>334.1</em></p></li>
-<li><p><strong>fixed.formula</strong>: TShB_incidence_AUDPS ~ WMGT * NRTE</p></li>
-<li><p><strong>random.formula</strong>: ~REP</p></li>
-<li><p><strong>residual.formula</strong>: ~units</p></li>
-<li>
-<p><strong>solutions</strong>:</p>
-<table class="table">
-<colgroup>
-<col width="29%">
-<col width="15%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-</colgroup>
-<thead><tr class="header">
-<th align="center"> </th>
-<th align="center">post.mean</th>
-<th align="center">l-95% CI</th>
-<th align="center">u-95% CI</th>
-<th align="center">eff.samp</th>
-<th align="center">pMCMC</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>(Intercept)</strong></td>
-<td align="center">1.337</td>
-<td align="center">0.427</td>
-<td align="center">2.388</td>
-<td align="center">5700</td>
-<td align="center">0.02596</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>WMGTAWD</strong></td>
-<td align="center">-0.2586</td>
-<td align="center">-0.8536</td>
-<td align="center">0.3251</td>
-<td align="center">5700</td>
-<td align="center">0.3709</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>NRTEN100</strong></td>
-<td align="center">0.3705</td>
-<td align="center">-0.1858</td>
-<td align="center">0.9617</td>
-<td align="center">5508</td>
-<td align="center">0.2172</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>NRTEN120</strong></td>
-<td align="center">0.6733</td>
-<td align="center">0.1069</td>
-<td align="center">1.252</td>
-<td align="center">5378</td>
-<td align="center">0.02246</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>WMGTAWD:NRTEN100</strong></td>
-<td align="center">0.5035</td>
-<td align="center">-0.3138</td>
-<td align="center">1.33</td>
-<td align="center">5700</td>
-<td align="center">0.2298</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>WMGTAWD:NRTEN120</strong></td>
-<td align="center">0.6502</td>
-<td align="center">-0.2276</td>
-<td align="center">1.395</td>
-<td align="center">5700</td>
-<td align="center">0.1242</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><strong>Gcovariances</strong>:</p>
-<table class="table">
-<colgroup>
-<col width="13%">
-<col width="16%">
-<col width="16%">
-<col width="15%">
-<col width="15%">
-</colgroup>
-<thead><tr class="header">
-<th align="center"> </th>
-<th align="center">post.mean</th>
-<th align="center">l-95% CI</th>
-<th align="center">u-95% CI</th>
-<th align="center">eff.samp</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="center"><strong>REP</strong></td>
-<td align="center">1.123</td>
-<td align="center">7.563e-05</td>
-<td align="center">3.637</td>
-<td align="center">4286</td>
-</tr></tbody>
-</table>
-</li>
-<li><p><strong>Gterms</strong>: <em>1</em></p></li>
-<li>
-<p><strong>Rcovariances</strong>:</p>
-<table class="table">
-<colgroup>
-<col width="16%">
-<col width="16%">
-<col width="15%">
-<col width="15%">
-<col width="15%">
-</colgroup>
-<thead><tr class="header">
-<th align="center"> </th>
-<th align="center">post.mean</th>
-<th align="center">l-95% CI</th>
-<th align="center">u-95% CI</th>
-<th align="center">eff.samp</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="center"><strong>units</strong></td>
-<td align="center">0.8809</td>
-<td align="center">0.6648</td>
-<td align="center">1.125</td>
-<td align="center">5700</td>
-</tr></tbody>
-</table>
-</li>
-<li><p><strong>Rterms</strong>: <em>1</em></p></li>
-<li><p><strong>cstats</strong>: <em>3001</em>, <em>59991</em>, <em>10</em> and <em>5700</em></p></li>
-<li><p><strong>cutpoints</strong>:</p></li>
-</ul>
-<!-- end of list --><div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/p_direction.html">p_direction</a></span>(<span class="kw">m1</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="kw">pd</span>)
-</pre></div>
-<table class="table">
-<colgroup>
-<col width="26%">
-<col width="12%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Parameter</th>
-<th align="center">pd</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">(Intercept)</td>
-<td align="center">0.987</td>
-</tr>
-<tr class="even">
-<td align="center">WMGTAWD</td>
-<td align="center">0.8146</td>
-</tr>
-<tr class="odd">
-<td align="center">NRTEN100</td>
-<td align="center">0.8914</td>
-</tr>
-<tr class="even">
-<td align="center">NRTEN120</td>
-<td align="center">0.9888</td>
-</tr>
-<tr class="odd">
-<td align="center">WMGTAWD:NRTEN100</td>
-<td align="center">0.8851</td>
-</tr>
-<tr class="even">
-<td align="center">WMGTAWD:NRTEN120</td>
-<td align="center">0.9379</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">pd</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
-</pre></div>
-<p><img src="a04_2015_TshB_inc_analysis_files/figure-html/m1-diagnostics-4.png" width="576"></p>
+<pre><code>## 
+##  Iterations = 3001:59991
+##  Thinning interval  = 10
+##  Sample size  = 5700 
+## 
+##  DIC: 334.0524 
+## 
+##  G-structure:  ~REP
+## 
+##     post.mean  l-95% CI u-95% CI eff.samp
+## REP     1.123 7.563e-05    3.637     4286
+## 
+##  R-structure:  ~units
+## 
+##       post.mean l-95% CI u-95% CI eff.samp
+## units    0.8809   0.6648    1.125     5700
+## 
+##  Location effects: TShB_incidence_AUDPS ~ WMGT * NRTE 
+## 
+##                  post.mean l-95% CI u-95% CI eff.samp  pMCMC  
+## (Intercept)         1.3371   0.4270   2.3877     5700 0.0260 *
+## WMGTAWD            -0.2586  -0.8536   0.3251     5700 0.3709  
+## NRTEN100            0.3705  -0.1858   0.9617     5508 0.2172  
+## NRTEN120            0.6733   0.1069   1.2523     5378 0.0225 *
+## WMGTAWD:NRTEN100    0.5035  -0.3138   1.3302     5700 0.2298  
+## WMGTAWD:NRTEN120    0.6502  -0.2276   1.3953     5700 0.1242  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div id="save-model-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information to be used in discussing the results.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">m1</span>, <span class="st">"../analysis/data/derived_data/TInc15.Rds"</span>,
         compress = <span class="st">"bzip2"</span>)
 </pre></div>
