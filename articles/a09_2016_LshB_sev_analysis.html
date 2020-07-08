@@ -160,7 +160,7 @@
                  )))
 
 <span class="kw">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
-  <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span>,
+  <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
   <span class="op">~</span> <span class="kw">REP</span>,
   data    = <span class="kw">AUDPS_2016</span>,
   prior = <span class="kw">m6_prior</span>,
@@ -175,25 +175,25 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m6</span>)
 </pre></div>
-<p><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-1.png" width="700"><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-2.png" width="700"></p>
+<p><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-1.png" width="576"><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-2.png" width="576"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m6</span>))
 </pre></div>
 <ul>
-<li><p><strong>DIC</strong>: <em>91.07</em></p></li>
-<li><p><strong>fixed.formula</strong>: LShB_percent_AUDPS ~ WMGT + NRTE</p></li>
+<li><p><strong>DIC</strong>: <em>87.92</em></p></li>
+<li><p><strong>fixed.formula</strong>: LShB_percent_AUDPS ~ WMGT * NRTE</p></li>
 <li><p><strong>random.formula</strong>: ~REP</p></li>
 <li><p><strong>residual.formula</strong>: ~units</p></li>
 <li>
 <p><strong>solutions</strong>:</p>
 <table class="table">
 <colgroup>
-<col width="24%">
-<col width="16%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
+<col width="29%">
+<col width="15%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
 </colgroup>
 <thead><tr class="header">
 <th align="center"> </th>
@@ -206,27 +206,35 @@
 <tbody>
 <tr class="odd">
 <td align="center"><strong>(Intercept)</strong></td>
-<td align="center">1.119</td>
-<td align="center">0.2223</td>
-<td align="center">1.898</td>
+<td align="center">1.008</td>
+<td align="center">0.1704</td>
+<td align="center">1.869</td>
 <td align="center">5700</td>
-<td align="center">0.02561</td>
+<td align="center">0.03193</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>WMGTAWD</strong></td>
-<td align="center">-0.01034</td>
-<td align="center">-0.2391</td>
-<td align="center">0.2246</td>
-<td align="center">5700</td>
-<td align="center">0.9312</td>
+<td align="center">0.2323</td>
+<td align="center">-0.07851</td>
+<td align="center">0.5377</td>
+<td align="center">5992</td>
+<td align="center">0.1358</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>NRTEN180</strong></td>
-<td align="center">0.305</td>
-<td align="center">0.07148</td>
-<td align="center">0.5273</td>
+<td align="center">0.5467</td>
+<td align="center">0.2328</td>
+<td align="center">0.8723</td>
 <td align="center">5700</td>
-<td align="center">0.009474</td>
+<td align="center">0.001754</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>WMGTAWD:NRTEN180</strong></td>
+<td align="center">-0.4885</td>
+<td align="center">-0.9207</td>
+<td align="center">-0.04105</td>
+<td align="center">5700</td>
+<td align="center">0.02947</td>
 </tr>
 </tbody>
 </table>
@@ -237,7 +245,7 @@
 <colgroup>
 <col width="13%">
 <col width="16%">
-<col width="16%">
+<col width="15%">
 <col width="15%">
 <col width="15%">
 </colgroup>
@@ -250,10 +258,10 @@
 </tr></thead>
 <tbody><tr class="odd">
 <td align="center"><strong>REP</strong></td>
-<td align="center">0.9084</td>
-<td align="center">0.0005324</td>
-<td align="center">2.551</td>
-<td align="center">4911</td>
+<td align="center">1.169</td>
+<td align="center">0.003543</td>
+<td align="center">2.91</td>
+<td align="center">3614</td>
 </tr></tbody>
 </table>
 </li>
@@ -277,10 +285,10 @@
 </tr></thead>
 <tbody><tr class="odd">
 <td align="center"><strong>units</strong></td>
-<td align="center">0.2215</td>
-<td align="center">0.1441</td>
-<td align="center">0.3051</td>
-<td align="center">5700</td>
+<td align="center">0.2087</td>
+<td align="center">0.1384</td>
+<td align="center">0.2936</td>
+<td align="center">6195</td>
 </tr></tbody>
 </table>
 </li>
@@ -291,18 +299,49 @@
 <!-- end of list --><div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/p_direction.html">p_direction</a></span>(<span class="kw">m6</span>)
 
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="kw">pd</span>)
+</pre></div>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Parameter</th>
+<th align="center">pd</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">0.984</td>
+</tr>
+<tr class="even">
+<td align="center">WMGTAWD</td>
+<td align="center">0.9321</td>
+</tr>
+<tr class="odd">
+<td align="center">NRTEN180</td>
+<td align="center">0.9991</td>
+</tr>
+<tr class="even">
+<td align="center">WMGTAWD:NRTEN180</td>
+<td align="center">0.9853</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">pd</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
 </pre></div>
-<p><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-3.png" width="700"></p>
+<p><img src="a09_2016_LshB_sev_analysis_files/figure-html/m6-diagnostics-3.png" width="576"></p>
 </div>
 </div>
 <div id="save-model-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h2>
 <p>Lastly, save the model information to be used in discussing the results.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">m6</span>, <span class="st">"../analysis/data/derived_data/LSev16.Rds"</span>,
         compress = <span class="st">"bzip2"</span>)
 </pre></div>
