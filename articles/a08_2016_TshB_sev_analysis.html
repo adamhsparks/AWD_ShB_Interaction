@@ -115,7 +115,7 @@
 
     
     
-<p>For this analysis, I’ve elected to use <a href="https://cran.r-project.org/package=MCMCglmm"><code>MCMCglmm</code></a> for a Bayesian analysis. When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
+<p>For this analysis, I’ve elected to use <a href="https://cran.r-project.org/package=rstanarm"><code>rstanarm</code></a> for a Bayesian analysis. When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.</p>
 <p>The base levels for this analysis are:</p>
 <ul>
 <li><p><code>NRTE:60</code></p></li>
@@ -124,14 +124,15 @@
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<p>Load libraries and set seed for reproducibility.</p>
+<p>Load libraries and detect cores.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice-awd-shb">"rice.awd.shb"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"MCMCglmm"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://mc-stan.org/rstanarm">"rstanarm"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/bayestestR">"bayestestR"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://rapporter.github.io/pander">"pander"</a></span>)
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">27</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(mc.cores = <span class="kw">parallel</span>::<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
 </pre></div>
 <p>The <code>AUDPS</code> object is loaded with the <code>rice.awd.shb</code> R package. To see how the AUDPS data were generated from the original raw data, see the <a href="a02_Data_preprocessing.html">vignette detailing the data processing</a> file. However, because it is a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.</p>
 <p>Create individual data frames for the analysis.</p>
@@ -153,19 +154,17 @@
 <a href="#model-structure" class="anchor"></a>Model Structure</h3>
 <p>Tiller sheath blight severity AUDPS, <code>TShB_percent_AUDPS</code>, is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">m5_prior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(R = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(V = <span class="fl">1</span>, nu = <span class="fl">0.02</span>),
-                 G = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(G1 = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-                   V = <span class="fl">1</span>, nu = <span class="fl">0.02</span>, alpha.V = <span class="fl">1000</span>
-                 )))
+<span class="kw">m5_prior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html">normal</a></span>(location = <span class="fl">0</span>,
+                   scale = <span class="fl">10</span>)
 
-<span class="kw">m5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
-  <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
-  <span class="op">~</span> <span class="kw">REP</span>,
-  data = <span class="kw">AUDPS_2016</span>,
-  prior = <span class="kw">m5_prior</span>,
-  nitt = <span class="fl">60000</span>,
-  thin = <span class="fl">10</span>
-)
+<span class="kw">m5</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glmer.html">stan_lmer</a></span>(
+    formula = <span class="kw">TShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+    data = <span class="kw">AUDPS_2016</span>,
+    seed = <span class="fl">27</span>,
+    adapt_delta = <span class="fl">0.99</span>,
+    prior = <span class="kw">m5_prior</span>
+  )
 </pre></div>
 </div>
 <div id="diagnostics" class="section level3">
@@ -174,51 +173,163 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">m5</span>)
 </pre></div>
-<p><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-diagnostics-1.png" width="576"><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-diagnostics-2.png" width="576"></p>
+<p><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-diagnostics-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://mc-stan.org/rstanarm/reference/pp_check.stanreg.html">pp_check</a></span>(<span class="kw">m5</span>, plotfun = <span class="st">"stat_2d"</span>, stat = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>))
+</pre></div>
+<p><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-diagnostics-2.png" width="700"></p>
+</div>
+<div id="summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#summary" class="anchor"></a>Summary</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m5</span>)
 </pre></div>
 <pre><code>## 
-##  Iterations = 3001:59991
-##  Thinning interval  = 10
-##  Sample size  = 5700 
+## Model Info:
+##  function:     stan_lmer
+##  family:       gaussian [identity]
+##  formula:      TShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP)
+##  algorithm:    sampling
+##  sample:       4000 (posterior sample size)
+##  priors:       see help('prior_summary')
+##  observations: 64
+##  groups:       REP (4)
 ## 
-##  DIC: 330.1892 
+## Estimates:
+##                                      mean   sd   10%   50%   90%
+## (Intercept)                        21.3    2.5 18.4  21.4  24.3 
+## WMGTAWD                            -2.5    0.8 -3.6  -2.6  -1.5 
+## NRTEN180                            1.9    0.8  0.9   1.9   2.9 
+## b[(Intercept) REP:1]               -4.9    2.5 -8.1  -4.9  -2.0 
+## b[(Intercept) REP:2]                4.0    2.5  1.1   3.9   7.0 
+## b[(Intercept) REP:3]               -1.0    2.5 -4.1  -1.0   2.1 
+## b[(Intercept) REP:4]                2.4    2.5 -0.7   2.3   5.4 
+## sigma                               3.2    0.3  2.8   3.2   3.6 
+## Sigma[REP:(Intercept),(Intercept)] 24.7   27.4  6.9  17.1  48.9 
 ## 
-##  G-structure:  ~REP
+## Fit Diagnostics:
+##            mean   sd   10%   50%   90%
+## mean_PPD 21.1    0.6 20.4  21.1  21.9 
 ## 
-##     post.mean l-95% CI u-95% CI eff.samp
-## REP     62.02     2.71    184.8     5256
+## The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
 ## 
-##  R-structure:  ~units
+## MCMC diagnostics
+##                                    mcse Rhat n_eff
+## (Intercept)                        0.1  1.0  1101 
+## WMGTAWD                            0.0  1.0  4160 
+## NRTEN180                           0.0  1.0  3736 
+## b[(Intercept) REP:1]               0.1  1.0  1140 
+## b[(Intercept) REP:2]               0.1  1.0  1148 
+## b[(Intercept) REP:3]               0.1  1.0  1116 
+## b[(Intercept) REP:4]               0.1  1.0  1143 
+## sigma                              0.0  1.0  2784 
+## Sigma[REP:(Intercept),(Intercept)] 0.7  1.0  1486 
+## mean_PPD                           0.0  1.0  4096 
+## log-posterior                      0.1  1.0  1215 
 ## 
-##       post.mean l-95% CI u-95% CI eff.samp
-## units     9.172    5.898     12.7     6215
-## 
-##  Location effects: TShB_percent_AUDPS ~ WMGT * NRTE 
-## 
-##                  post.mean l-95% CI u-95% CI eff.samp   pMCMC   
-## (Intercept)        20.6125  13.1529  27.7398     5700 0.00316 **
-## WMGTAWD            -0.6977  -2.7680   1.3065     5995 0.50912   
-## NRTEN180            3.7153   1.5415   5.7888     5700 0.00175 **
-## WMGTAWD:NRTEN180   -3.6566  -6.5014  -0.6784     5700 0.01474 * 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/p_direction.html">p_direction</a></span>(<span class="kw">m5</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">pd</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
 </pre></div>
-<p><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-diagnostics-3.png" width="576"></p>
+<p><img src="a08_2016_TshB_sev_analysis_files/figure-html/m5-summary-1.png" width="700"></p>
+</div>
+<div id="test-of-equivalence" class="section level3">
+<h3 class="hasAnchor">
+<a href="#test-of-equivalence" class="anchor"></a>Test of Equivalence</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/equivalence_test.html">equivalence_test</a></span>(<span class="kw">m5</span>))
+</pre></div>
+<table class="table">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="17%">
+<col width="6%">
+<col width="13%">
+<col width="15%">
+<col width="22%">
+<col width="24%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Parameter</th>
+<th align="center">CI</th>
+<th align="center">ROPE_low</th>
+<th align="center">ROPE_high</th>
+<th align="center">ROPE_Percentage</th>
+<th align="center">ROPE_Equivalence</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">89</td>
+<td align="center">-0.494</td>
+<td align="center">0.494</td>
+<td align="center">0</td>
+<td align="center">Rejected</td>
+</tr>
+<tr class="even">
+<td align="center">WMGTAWD</td>
+<td align="center">89</td>
+<td align="center">-0.494</td>
+<td align="center">0.494</td>
+<td align="center">0</td>
+<td align="center">Rejected</td>
+</tr>
+<tr class="odd">
+<td align="center">NRTEN180</td>
+<td align="center">89</td>
+<td align="center">-0.494</td>
+<td align="center">0.494</td>
+<td align="center">0</td>
+<td align="center">Rejected</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="15%">
+<col width="13%">
+<col width="27%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">HDI_low</th>
+<th align="center">HDI_high</th>
+<th align="center">Effects</th>
+<th align="center">Cleaned_Parameter</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">17.67</td>
+<td align="center">25.28</td>
+<td align="center">fixed</td>
+<td align="center">(Intercept)</td>
+</tr>
+<tr class="even">
+<td align="center">-3.795</td>
+<td align="center">-1.208</td>
+<td align="center">fixed</td>
+<td align="center">WMGTAWD</td>
+</tr>
+<tr class="odd">
+<td align="center">0.5655</td>
+<td align="center">3.115</td>
+<td align="center">fixed</td>
+<td align="center">NRTEN180</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="save-model-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h2>
 <p>Lastly, save the model information to be used in discussing the results.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">m5</span>, <span class="st">"../analysis/data/derived_data/TSev16.Rds"</span>,
         compress = <span class="st">"bzip2"</span>)
 </pre></div>
