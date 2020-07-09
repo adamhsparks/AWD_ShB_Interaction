@@ -60,7 +60,7 @@ The `data-raw` directory contains:
 
 The `analysis/` directory contains:
 
-- the manuscript as submitted (in PDF format) and it's Rmd source file
+- the manuscript as submitted (in MS Word format) and it's Rmd source file
 
 - supplementary information source files (in R markdown format) and executed versions
 

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--08-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--09-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-4.0.2-brightgreen.svg)](https://cran.r-project.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800)
@@ -63,7 +63,8 @@ The `data-raw` directory contains:
 
 The `analysis/` directory contains:
 
-  - the manuscript as submitted (in PDF format) and it’s Rmd source file
+  - the manuscript as submitted (in MS Word format) and it’s Rmd source
+    file
 
   - supplementary information source files (in R markdown format) and
     executed versions
@@ -105,9 +106,8 @@ developed this project in. The Docker image includes all of the software
 dependencies needed to run the code in this project, as well as the R
 package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
-on your computer. At the Docker prompt, enter:
-
-    docker run -dp 8787:8787 adamhsparks/rice-awd-shb
+on your computer. At the Docker prompt, enter: docker pull
+adamhsparks/rice-awd-shb docker run -dp 8787:8787 rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to
@@ -132,7 +132,7 @@ Please cite this compendium as:
 
 > Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 08 Jul 2020. Online at <https://doi.org/xxx/xxx>
+> Accessed 09 Jul 2020. Online at <https://doi.org/xxx/xxx>
 
 ## Licenses
 
