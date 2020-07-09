@@ -6,6 +6,11 @@ MAINTAINER Adam Sparks adamhsparks@gmail.com
 
 COPY --chown=rstudio . /home/rstudio/rice-awd-shb
 
+# install system level libs
+RUN apt-get update && \
+    apt-get install -y libglpk-dev && \
+    rm -r /var/lib/apt/lists/*
+
 # go into the repo directory
 RUN . /etc/environment \
   \
