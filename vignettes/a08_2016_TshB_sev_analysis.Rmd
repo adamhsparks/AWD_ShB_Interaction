@@ -68,7 +68,7 @@ m5_prior <- list(R = list(V = 1, nu = 0.02),
 m5 <- MCMCglmm(
   TShB_percent_AUDPS ~ WMGT * NRTE,
   ~ REP,
-  data    = AUDPS_2016,
+  data = AUDPS_2016,
   prior = m5_prior,
   nitt = 60000,
   thin = 10

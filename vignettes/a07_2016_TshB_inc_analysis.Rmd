@@ -70,7 +70,7 @@ m4_prior <- list(R = list(V = 1, nu = 0.02),
 m4 <- MCMCglmm(
   TShB_incidence_AUDPS ~ WMGT * NRTE,
   ~ REP,
-  data    = AUDPS_2016,
+  data = AUDPS_2016,
   prior = m4_prior,
   nitt = 60000,
   thin = 10

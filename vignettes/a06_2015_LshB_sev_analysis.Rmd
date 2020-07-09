@@ -69,7 +69,7 @@ m3_prior <-
 m3 <- MCMCglmm(
   LShB_percent_AUDPS ~ WMGT * NRTE,
   ~ REP,
-  data    = AUDPS_2015,
+  data = AUDPS_2015,
   prior = m3_prior,
   nitt = 60000,
   thin = 10
