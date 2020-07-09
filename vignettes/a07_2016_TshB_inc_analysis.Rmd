@@ -89,8 +89,6 @@ pp_check(m4, plotfun = "stat_2d", stat = c("mean", "sd"))
 ### Summary
 
 ```{r m4-summary, message=FALSE, warning=FALSE}
-plot(m4)
-
 summary(m4)
 
 et <- equivalence_test(m4)
