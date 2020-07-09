@@ -62,6 +62,7 @@ library("flextable")
 library("pander")
 library("rice.awd.shb")
 library("bayestestR")
+library("rstanarm")
 library("here")
 
 theme_set(theme_classic(base_size = 14))
@@ -185,14 +186,13 @@ Five disease assessments were made in the 2015 experiment and four disease asses
 The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R, version 4.0.0 [@R2020], package `agricolae`, version 1.3-3, [@agricolae2020].
 
 Bayesian multivariate mixed models were fitted using the contributed R package `MCMCglmm`, version 2.29, [@Hadfield2010].
-Six models were created where the dependent variables were 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
-The independent variables were the irrigation management and N rate with replicate treated as a random variable.
-The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled and for 2016 they were: N rate -- N60, irrigation management -- puddled.
+Six models were created where the dependent variables were: 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
+The independent variables were the irrigation management (WMGT) and N rate (NRTE) and the interaction of WMGT and NRTE with replicate treated as a random variable.
+The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled. For for 2016 the base level values were: N rate -- N60, irrigation management -- puddled.
 
-Weakly informative priors and families were set for the fixed effects in each model while the random effects and intercept were selected automatically (Tab.&nbsp;\@ref(tab:Table-2)).
-Four chains were run with a warmup of 5000 and 8000 iterations.
-Model fit was evaluated visually using `pp_check()` and `describe_posterior()`.
-Further fitness was evaluated using the `describe_posterior()` function from bayestestR, version 0.70, [@Makowski2019].
+The same weakly informative priors were set for the fixed and random effects in all models, $V = 1$, $nu = 0.02$.
+Models were run for 60,000 iterations with every ten being selected.
+Model fit was evaluated using `plot.MCMCglmm()` and `summary.MCMCglmm()`.
 
 # Results {-}
 
@@ -200,7 +200,7 @@ Further fitness was evaluated using the `describe_posterior()` function from bay
 
 In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig.&nbsp;\@ref(fig:fig-1)a, \@ref(fig:fig-2)a).
 Water management was not clearly different (Fig.&nbsp;\@ref(fig:fig-3)a, \@ref(fig:fig-5)a).
-However, the effects of N treatments N100 and N120 on tiller incidence caused both to be higher and clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-5)a, \@ref(fig:fig-5)a).
+However, the effect of the N treatments N120 on tiller incidence was higher and clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-5)a, \@ref(fig:fig-5)a).
 
 Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c).
 Both the N100 and N120 treatment effects caused the tiller severity to be higher and clearly statistically different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c).
@@ -208,10 +208,9 @@ However, the AWD water management was not clearly statistically different from t
 
 The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Fig.&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
 As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly statistically different than the N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)e, \@ref(fig:fig-5)e).
-However, the AWD water management was not clearly statistically different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-7)a).
+The AWD water management was clearly lower than the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-7)a).
 
-The interaction of irrigation treatment AWD with N rate N0 in 2015 was not clearly different from the control puddled irrigation and N60 for tiller incidence or severity.
-For leaf severity the interaction of irrigation and N management was not clearly different from the control puddled irrigation and N60 nitrogen rate.
+The interaction of irrigation treatment and nitrogen fertilisation was not clearly different for any of the three response variables analysed.
 
 ## 2016 Experiment {-}
 
