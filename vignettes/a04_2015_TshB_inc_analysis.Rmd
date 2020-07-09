@@ -14,8 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-For this analysis, I've elected to use [`MCMCglmm`](https://cran.r-project.org/package=MCMCglmm) for a Bayesian analysis.
+For this analysis, I've elected to use [`rstanarm`](https://cran.r-project.org/package=rstanarm) for a Bayesian analysis.
 When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
 
 The base levels for this analysis are:
@@ -26,15 +25,17 @@ The base levels for this analysis are:
 
 ## Setup
 
-Load libraries and set seed for reproducibility.
+Load libraries and detect cores.
 
-```{r set_seed, message=FALSE}
+```{r setup, message=FALSE}
 library("rice.awd.shb")
-library("MCMCglmm")
+library("rstanarm")
 library("bayestestR")
+library("bayesplot")
 library("ggplot2")
+library("pander")
 
-set.seed(27)
+options(mc.cores = parallel::detectCores())
 ```
 
 The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
@@ -63,24 +64,30 @@ Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP`, is treated as a random effect.
 
 ```{r 2015_TShB_incidence, cache=FALSE, message=TRUE, warning=TRUE, results="hide"}
-m1_prior <- list(R = list(V = 1, nu = 0.02),
-                 G = list(G1 = list(
-                   V = 1, nu = 0.02, alpha.V = 1000
-                 )))
+m1_prior <- normal(location = 0,
+                   scale = 10)
 
-m1 <- MCMCglmm(
-  TShB_incidence_AUDPS ~ WMGT * NRTE,
-  ~ REP,
-  data = AUDPS_2015,
-  prior = m1_prior,
-  nitt = 60000,
-  thin = 10
-)
+m1 <-
+  stan_lmer(
+    formula = TShB_incidence_AUDPS ~ WMGT + NRTE + (1 | REP),
+    data = AUDPS_2015,
+    seed = 27,
+    adapt_delta = 0.99,
+    prior = m1_prior
+  )
 ```
 
-### Diagnostics and Summary
+### Diagnostics
 
-```{r m1-diagnostics, cache=FALSE, message=FALSE, warning=FALSE, fig.height = 9, fig.width = 6}
+```{r m1-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
+mcmc_trace(m1)
+
+pp_check(m1, plotfun = "stat_2d", stat = c("mean", "sd"))
+```
+
+### Summary
+
+```{r m1-summary}
 plot(m1)
 
 summary(m1)
@@ -92,7 +99,13 @@ plot(pd) +
   theme_minimal()
 ```
 
-# Save Model Information
+### Test of Equivalence
+
+```{r m1-equivalence}
+pander(equivalence_test(m1))
+```
+
+## Save Model Information
 
 Lastly, save the model information to be used in discussing the results.
 

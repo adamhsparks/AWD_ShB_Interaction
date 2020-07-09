@@ -14,9 +14,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-For this analysis, I've elected to use [`MCMCglmm`](https://cran.r-project.org/package=MCMCglmm) for a Bayesian analysis.
+For this analysis, I've elected to use [`rstanarm`](https://cran.r-project.org/package=rstanarm) for a Bayesian analysis.
 When comparing the treatments in the analysis, the model compares each treatment to the base (control) treatment.
-
 
 The base levels for this analysis are:
 
@@ -26,15 +25,16 @@ The base levels for this analysis are:
 
 ## Setup
 
-Load libraries and set seed for reproducibility.
+Load libraries and detect cores.
 
-```{r set_seed, message=FALSE}
+```{r setup, message=FALSE}
 library("rice.awd.shb")
-library("MCMCglmm")
-library("ggplot2")
+library("rstanarm")
 library("bayestestR")
+library("ggplot2")
+library("pander")
 
-set.seed(27)
+options(mc.cores = parallel::detectCores())
 ```
 
 The `AUDPS` object is loaded with the `rice.awd.shb` R package. To see how the AUDPS data were generated from the original raw data, see the [vignette detailing the data processing](a02_Data_preprocessing.html) file.
@@ -60,27 +60,31 @@ Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable
 Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
 Replicate, `REP`, is treated as a random effect.
 
-```{r 2016_LShB_severity, cache=FALSE, message=TRUE, warning=TRUE, results="hide"}
-m6_prior <- list(R = list(V = 1, nu = 0.02),
-                 G = list(G1 = list(
-                   V = 1, nu = 0.02, alpha.V = 1000
-                 )))
+```{r 2016_LShB_severity, cache=FALSE, message=FALSE, warning=TRUE, results="hide"}
+m6_prior <- normal(location = 0,
+                   scale = 10)
 
-m6 <- MCMCglmm(
-  LShB_percent_AUDPS ~ WMGT * NRTE,
-  ~ REP,
-  data = AUDPS_2016,
-  prior = m6_prior,
-  nitt = 60000,
-  thin = 10
-)
+m6 <-
+  stan_lmer(
+    formula = LShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP),
+    data = AUDPS_2016,
+    seed = 27,
+    adapt_delta = 0.99,
+    prior = m6_prior
+  )
 ```
 
-### Diagnostics and Summary Information
+### Diagnostics
 
-```{r m6-diagnostics, cache=FALSE, message=FALSE, warning=FALSE, fig.height = 9, fig.width = 6}
+```{r m6-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
 plot(m6)
 
+pp_check(m6, plotfun = "stat_2d", stat = c("mean", "sd"))
+```
+
+### Summary
+
+```{r m6-summary}
 summary(m6)
 
 pd <- p_direction(m6)
@@ -90,11 +94,17 @@ plot(pd) +
   theme_minimal()
 ```
 
+### Test of Equivalence
+
+```{r m6-equivalence}
+pander(equivalence_test(m6))
+```
+
 ## Save Model Information
 
 Lastly, save the model information to be used in discussing the results.
 
-```{r save_models}
+```{r save_model}
 saveRDS(m6, "../analysis/data/derived_data/LSev16.Rds",
         compress = "bzip2")
 ```

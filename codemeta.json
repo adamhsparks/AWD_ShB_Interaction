@@ -209,18 +209,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "MCMCglmm",
-      "name": "MCMCglmm",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=MCMCglmm"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "pander",
       "name": "pander",
       "provider": {
@@ -233,15 +221,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "reshape2",
-      "name": "reshape2",
+      "identifier": "rstanarm",
+      "name": "rstanarm",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=reshape2"
+      "sameAs": "https://CRAN.R-project.org/package=rstanarm"
     },
     {
       "@type": "SoftwareApplication",
