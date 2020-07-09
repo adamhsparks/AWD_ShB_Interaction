@@ -77,7 +77,7 @@ m3 <-
 ### Diagnostics
 
 ```{r m3-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
-plot(m3)
+mcmc_trace(m3)
 
 pp_check(m3, plotfun = "stat_2d", stat = c("mean", "sd"))
 ```

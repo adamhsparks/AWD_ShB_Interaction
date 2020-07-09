@@ -78,7 +78,7 @@ m5 <-
 ### Diagnostics
 
 ```{r m5-diagnostics, cache=FALSE, message=FALSE, warning=FALSE}
-plot(m5)
+mcmc_trace(m5)
 
 pp_check(m5, plotfun = "stat_2d", stat = c("mean", "sd"))
 ```
