@@ -108,9 +108,9 @@ package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
 on your computer. At the Docker prompt, enter:
 
-    `docker pull adamhsparks/rice-awd-shb`
+    docker pull adamhsparks/rice-awd-shb
     
-    `docker run -dp 8787:8787 rice-awd-shb`
+    docker run -dp 8787:8787 rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to
