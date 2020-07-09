@@ -106,7 +106,7 @@
       <h1 data-toc-skip>2015 Tiller Sheath Blight Incidence Analysis</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-07-08</h4>
+            <h4 class="date">2020-07-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice-awd-shb/blob/master/vignettes/a04_2015_TshB_inc_analysis.Rmd"><code>vignettes/a04_2015_TshB_inc_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>a04_2015_TshB_inc_analysis.Rmd</code></div>
@@ -128,6 +128,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice-awd-shb">"rice.awd.shb"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"MCMCglmm"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/bayestestR">"bayestestR"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">27</span>)
 </pre></div>
@@ -160,7 +162,7 @@
 <span class="kw">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MCMCglmm/man/MCMCglmm.html">MCMCglmm</a></span>(
   <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">*</span> <span class="kw">NRTE</span>,
   <span class="op">~</span> <span class="kw">REP</span>,
-  data    = <span class="kw">AUDPS_2015</span>,
+  data = <span class="kw">AUDPS_2015</span>,
   prior = <span class="kw">m1_prior</span>,
   nitt = <span class="fl">60000</span>,
   thin = <span class="fl">10</span>
@@ -205,13 +207,21 @@
 ## WMGTAWD:NRTEN120    0.6502  -0.2276   1.3953     5700 0.1242  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/p_direction.html">p_direction</a></span>(<span class="kw">m1</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">pd</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
+</pre></div>
+<p><img src="a04_2015_TshB_inc_analysis_files/figure-html/m1-diagnostics-4.png" width="576"></p>
 </div>
 </div>
 <div id="save-model-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h1>
 <p>Lastly, save the model information to be used in discussing the results.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">m1</span>, <span class="st">"../analysis/data/derived_data/TInc15.Rds"</span>,
         compress = <span class="st">"bzip2"</span>)
 </pre></div>
