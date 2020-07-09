@@ -32,6 +32,7 @@ Load libraries and detect cores.
 library("rice.awd.shb")
 library("rstanarm")
 library("bayestestR")
+library("bayesplot")
 library("ggplot2")
 library("pander")
 
