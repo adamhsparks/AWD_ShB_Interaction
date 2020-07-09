@@ -28,7 +28,7 @@ output:
 csl: "../templates/plant_disease.csl" # Insert path for the bib-style
 bibliography: references.bib
 abstract: |
-  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by _Thanatephorus cucumeris_ (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower in the 2015 trial but higher in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. Our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
+  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by *Thanatephorus cucumeris* (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower in the 2015 trial but higher in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. Our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
 keywords: |
   Rice; Water Management; Nitrogen Management; Sheath Blight; *Thanatephorus cucumeris*
 highlights: |
@@ -59,10 +59,8 @@ library("ggpubr")
 library("grid")
 library("gridExtra")
 library("flextable")
-library("pander")
 library("rice.awd.shb")
 library("bayestestR")
-library("rstanarm")
 library("here")
 
 theme_set(theme_classic(base_size = 14))
@@ -300,31 +298,75 @@ colnames(N_rates) <-
     "Basal",
     "Tillering",
     "Panicle Initiation")
-N_rates <- flextable(as.data.frame(N_rates))
-
-N_rates <-
-  set_caption (N_rates,
+x <- flextable(as.data.frame(N_rates))
+x <- fontsize(x, part = "header", size = 10)
+x <- font(x, part = "header", fontname = "Times")
+x <- font(x, fontname = "Times")
+x <- fontsize(x, size = 10)
+x <-
+  set_caption (x,
                caption = 
-    "(\\#tab:Table-1) Nitrogen application rates for 2015 and 2016 in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100&nbsp;kg/ha N (N100) and 180&nbsp;kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60&nbsp;kg/ha N (N60) and 180&nbsp;kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications."
+    "(\\#tab:Table-1) Nitrogen application rates for 2015 and 2016 experiments in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg/ha N (N100) and 180 kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg/ha N (N60) and 180 kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications."
     )
-
-N_rates
+x
 ```
 
 ##### pagebreak
 
 ```{r Table-2}
-flextable(rbind(rope(TInc15),
-                rope(TSev15),
-                rope(LSev15)))
+x <- rbind(
+  equivalence_test(TInc15, range = c(-0.1, 0.1)),
+  equivalence_test(TSev15, range = c(-0.1, 0.1)),
+  equivalence_test(LSev15, range = c(-0.1, 0.1))
+)
+
+x$ROPE_Percentage <- round(x$ROPE_Percentage * 100, 2)
+
+x <-
+  cbind(
+    "Response" = rep(c("T. Inc.", "T. Sev.", "L. Sev."),
+                     each = 4),
+    subset(x, select = -c(CI, Effects, Cleaned_Parameter)))
+
+names(x) <- gsub("_", " ", names(x))
+
+x <- flextable(x)
+x <- fontsize(x, part = "header", size = 10)
+x <- font(x, part = "header", fontname = "Times")
+x <- font(x, fontname = "Times")
+x <- fontsize(x, size = 10)
+x <- set_caption(x, 
+  "(\\#tab:Table 2) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; NRTEN100, nitrogen rate of 100 k/ha; NRTEN120 kg/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters."
+  )
+x
 ```
 
 ##### pagebreak
 
 ```{r Table-3}
-flextable(rbind(rope(TInc16),
-                rope(TSev16),
-                rope(LSev16)))
+x <- rbind(equivalence_test(TInc16),
+           equivalence_test(TSev16),
+           equivalence_test(LSev16))
+
+x$ROPE_Percentage <- round(x$ROPE_Percentage * 100, 2)
+
+x <-
+  cbind(
+    "Response" = rep(
+      c("T. Inc.", "T. Sev.", "L. Sev."),
+                     each = 3),
+    subset(x, select = -c(CI, Effects, Cleaned_Parameter)))
+
+names(x) <- gsub("_", " ", names(x))
+
+x <- flextable(x)
+x <- fontsize(x, part = "header", size = 10)
+x <- font(x, part = "header", fontname = "Times")
+x <- font(x, fontname = "Times")
+x <- fontsize(x, size = 10)
+x <- set_caption(x, 
+  "(\\#tab:Table 2) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; and NRTEN180, nitrogen rate of 180 k/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters.")
+x
 ```
 
 ##### pagebreak
