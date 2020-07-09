@@ -86,8 +86,6 @@ summary(m2)
 
 pd <- p_direction(m2)
 
-pander(pd)
-
 plot(pd) +
   scale_fill_brewer(palette = "Dark2") +
   theme_minimal()
