@@ -84,20 +84,16 @@ pp_check(m6, plotfun = "stat_2d", stat = c("mean", "sd"))
 
 ### Summary
 
-```{r m6-summary}
+```{r m6-summary, message=FALSE, warning=FALSE}
 summary(m6)
 
-pd <- p_direction(m6)
+et <- equivalence_test(m6)
 
-plot(pd) +
+plot(et) +
   scale_fill_brewer(palette = "Dark2") +
   theme_minimal()
-```
 
-### Test of Equivalence
-
-```{r m6-equivalence}
-pander(equivalence_test(m6))
+pander(et)
 ```
 
 ## Save Model Information
