@@ -232,19 +232,15 @@
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/p_direction.html">p_direction</a></span>(<span class="kw">m3</span>)
+<span class="kw">et</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/equivalence_test.html">equivalence_test</a></span>(<span class="kw">m3</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">pd</span>) <span class="op">+</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">et</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
 </pre></div>
 <p><img src="a06_2015_LshB_sev_analysis_files/figure-html/m3-summary-1.png" width="700"></p>
-</div>
-<div id="test-of-equivalence" class="section level3">
-<h3 class="hasAnchor">
-<a href="#test-of-equivalence" class="anchor"></a>Test of Equivalence</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/equivalence_test.html">equivalence_test</a></span>(<span class="kw">m3</span>))
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="kw">et</span>)
 </pre></div>
 <table class="table">
 <caption>Table continues below</caption>
