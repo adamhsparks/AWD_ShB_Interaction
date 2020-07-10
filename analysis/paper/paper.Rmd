@@ -84,8 +84,8 @@ Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of e
 
 Rice's reliance on freely available water, coupled with the effects of climate change mean that rice production practices will have to adapt to use new practices to produce more units of food with fewer water inputs.
 
-Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice is an economically important disease worldwide throughout tropical and temperate production areas.
-Under conducive conditions the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
+Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice, is an economically important disease worldwide throughout tropical and temperate production areas.
+Under conducive conditions, the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
 Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10&nbsp;\% annually.
 The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
@@ -118,7 +118,7 @@ We hypothesized that AWD would not have a positive effect on sheath blight incid
 ## Experimental Site {-}
 
 Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E).
-The climate is classified as humid-tropical with wet season starting in early June to December and dry season between December and late May.
+The climate is classified as humid-tropical with the wet season starting in early June to December and dry season between December and late May.
 The experiments were both established in the dry seasons of 2015 and 2016.
 In the 2016 experiment changes were made in inoculation techniques, fertilisation rates and plot sizes to optimize the experiment based on findings from the 2015 experiment.
 The differences are detailed in the following sections.
@@ -131,7 +131,7 @@ Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepar
 
 ## Host Plant {-}
 
-NSIC Rc222 an inbred semi-dwarf, high-yielding variety released by the Philippine Rice Research Institute (PhilRice), with a 114 day maturity when transplanted was used in both experiments.
+NSIC Rc222, an inbred semi-dwarf high-yielding variety, released by the Philippine Rice Research Institute (PhilRice), with a 114-day maturity when transplanted was used in both experiments.
 The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro and no known resistance to sheath blight.
 
 ## 2015 Experimental Design {-}
@@ -171,7 +171,7 @@ A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&n
 ## Data Collection {-}
 
 In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed.
-The total number of tillers per hill and number of tillers with sheath blight (incidence) were measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI.
+The total number of tillers per hill and number of tillers with sheath blight (incidence) was measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI.
 The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1&nbsp;\% severity; (iii) 2 -- 1 to 5&nbsp;\% severity; (iv) 3 -- 5 to 15&nbsp;\% severity; (v) 4 -- 15 to 50&nbsp;\% severity; and (vi) 5 -- 50 to 100&nbsp;\% severity.
 Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions.
 A leaf was considered living if at least 50&nbsp;% of its area was not brown or dark brown due to natural senescence.
@@ -226,24 +226,20 @@ In 2016 the higher N rate, N180, were clearly different, higher, than the contro
 # Discussion {-}
 
 In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology, or decreases that would favour it except in one case.
-In only one instance were we able to detect any statistically clear effect of AWD alone on sheath blight.
-In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure. In all other cases the difference was unclear.
+In the 2016, experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
+In all other cases, the difference was unclear.
 
 The findings of the effects of N rates on sheath blight were as expected in both experiments.
-Higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in the 2016 experiment, there were no clear differences due to the N rate tiller and leaf severity.
+Higher rates of N caused an increase in disease incidence and severity in all of the cases examined.
 
-The combination of the irrigation and N rates did not appear to increase the disease severity or incidence in either experiment.
-In 2015 there were no clear differences in the interaction of irrigation and N rate between any of the three treatments.
-However, in the 2016 experiment, the combination of AWD--N180 was clearly different, being lower, than the PDL--N60 combination treatment.
-
-By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment appear to have improved the experiment.
+By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment.
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 Based on these results, it is suggested that the methods used in the 2016 experiment should be adopted in any further studies of this kind.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1&nbsp;\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
 However, it should be noted that normally it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy in the wet season.
-However, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
+Still, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
 
 The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice.
@@ -256,14 +252,14 @@ The findings our research along with those of Lorica *et al.* [-@Lorica2020] hig
 Ultimately these findings are useful as IRRI promotes AWD as water-saving technologies because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
 
 Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
-However, over the next 10 to 20 years the risk is predicted to remain the same as from 2000 to 2010 [@Kim2015].
-Therefore, it is likely to remain an important disease in the near future with little resistance available in current varieties.
-Given the results of the N treatments showing clear effects, in most cases increasing the amount and severity of disease, we would argue that this suggests that there is no reason AWD could not be adopted.
+However, over the next 10 to 20 years the risk is predicted to remain the same as from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
+Therefore, it is likely to remain an important disease into the near future with little resistance available in currently available varieties.
+Given the results of the N treatments showing clear effects, in most cases increasing the amount and severity of the disease, we would argue that this suggests that there is no reason AWD could not be adopted as we were unable to detect any clear differences due to irrigation management in most of the cases.
 Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
 
 # Acknowledgments {-}
 
-The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr. R. King and Mr. D. Burrell of the University of Southern Queensland Statistical Consulting Unit for their insightful comments on the analysis of this paper. Also thanks to Dr. N. Tierney for the discussion and ideas on the analysis.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr. R. King and Mr. D. Burrell of the University of Southern Queensland Statistical Consulting Unit for their insightful comments on the analysis of this paper. Also thanks to Dr. N. Tierney of Monash University for the discussion and ideas on the analysis.
 
 We would also like to thank Dr. J. Villa, Mr. B. Macasero, Mr. D. Amozola, Mr. P. Escandor and Mr. P. Lapis for their technical support in the field.
 
@@ -271,7 +267,7 @@ Funding for this research was provided through the CGIAR Research Program on ric
 
 Lastly, we would like to remember our teammate Michael Noel, an integral part of our plant disease management team at IRRI and who helped design and managed the first season of the project but passed away in September 2016.
 
-AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC conducted the fieldwork in 2016. AHS conducted the data analysis. All the authors contributed to the writing of the manuscript.
+AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC assisted in the field work in 2015 and conducted the field work in 2016. AHS conducted the data analysis. All the authors contributed to the writing of the manuscript.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line. -->
 ##### pagebreak
