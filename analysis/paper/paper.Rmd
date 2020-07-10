@@ -263,7 +263,7 @@ Therefore, based on these studies the use of AWD technologies would not appear t
 
 # Acknowledgments {-}
 
-The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr. R. King and Mr. D. Burrell of the University of Southern Queensland Statistical Consulting Unit for their insightful comments on the analysis of this paper.
+The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr. R. King and Mr. D. Burrell of the University of Southern Queensland Statistical Consulting Unit for their insightful comments on the analysis of this paper. Also thanks to Dr. N. Tierney for the discussion and ideas on the analysis.
 
 We would also like to thank Dr. J. Villa, Mr. B. Macasero, Mr. D. Amozola, Mr. P. Escandor and Mr. P. Lapis for their technical support in the field.
 
