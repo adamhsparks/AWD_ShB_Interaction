@@ -145,7 +145,7 @@ Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2^) with a buff
 Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm.
 In puddled plots, a standing water layer of 3 to 5&nbsp;cm was maintained throughout the growing season. 
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Tab.&nbsp;\@ref(tab:Table-1)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Table&nbsp;\@ref(tab:Table-1)).
 
 Trays of NSIC Rc222 were seeded on 19 December 2014. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
 
@@ -159,7 +159,7 @@ The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq&nbsp;m)
 The replication sizes were B1 -- 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2^) and B2 -- 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2^).
 A buffer 0.5&nbsp;m per split-plot was used and the overall experiment size was 3471.6&nbsp;m^2^.
 
-split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg/ha as urea split into two applications) and N180 (180&nbsp;kg/ha in three splits) being applied (Tab.&nbsp;\@ref(tab:Table-1)).
+split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg/ha as urea split into two applications) and N180 (180&nbsp;kg/ha in three splits) being applied (Table&nbsp;\@ref(tab:Table-1)).
 
 Nurseries of NSIC Rc222 were established on 7 January 2016.
 Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20&nbsp;cm within and between rows.
@@ -175,22 +175,22 @@ The total number of tillers per hill and number of tillers with sheath blight (i
 The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1&nbsp;\% severity; (iii) 2 -- 1 to 5&nbsp;\% severity; (iv) 3 -- 5 to 15&nbsp;\% severity; (v) 4 -- 15 to 50&nbsp;\% severity; and (vi) 5 -- 50 to 100&nbsp;\% severity.
 Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions.
 A leaf was considered living if at least 50&nbsp;% of its area was not brown or dark brown due to natural senescence.
-A leaf that was yellow-green or light green due to a disease, such as tungro or nitrogen deficiency was still considered a living leaf.
+A leaf that was yellow-green or light green due to a disease, such as tungro or N deficiency was still considered a living leaf.
 The same rating methodology was used in both experiments.
 Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
 ## Statistical Analysis {-}
 
-The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R, version 4.0.0 [@R2020], package `agricolae`, version 1.3-3, [@agricolae2020].
+The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R (version 4.0.0), [@R2020], package `agricolae`, (version 1.3-3), [@agricolae2020].
 
-The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and nitrogen fertilisation as fixed effects and replicate as a random effect.
+The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and N fertilisation as fixed effects and replicate as a random effect.
 Six models were created where the dependent variables were: 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
 The independent variables were the irrigation management (WMGT) and N rate (NRTE) and the interaction of WMGT and NRTE with replicate treated as a random variable.
 The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled. For for 2016 the base level values were: N rate -- N60, irrigation management -- puddled.
 The same weakly informative priors were set for the fixed and random effects in all models, location = 0, scale = 10.
-Model fitness was evaluated using `mcmc_trace()` and `pp_check()` from bayesplot, version 1.7.2, [@Gabry2019] as well as summary information.
+Model fitness was evaluated using `mcmc_trace()` and `pp_check()` from the contributed package, bayesplot (version 1.7.2), [@Gabry2019] as well as summary information.
 
-The resulting models were tested using a test for equivalency using `equivalence_test()` from bayestestR, version 0.7.0, [@Makowski2019] to evaluate whether differences between the sheath blight responses varied between the water and nitrogen management treatments (Tab.&nbsp;\@ref(tab:Table-2), Tab.&nbsp;(tab:Table-3)). The Test for Practical Equivalence is based on the Highest Density Interval (HDI) plus the Region of Practical Equivalence (ROPE) decision rule, *HDI+ROPE decision rule* and checks whether parameter values should be accepted or rejected against the null hypothesis, the ROPE [@Kruschke2018]. To do this, it checks the percentage of the 89&nbsp;% HDI that is in the null region ROPE. If this amount is sufficiently low, the null hypothesis is rejected. If the amount is large enough, the null hypothesis is accepted.
+The resulting models were tested using a test for equivalency using `equivalence_test()` from the contributed package, bayestestR (version 0.7.0), [@Makowski2019] to evaluate whether differences between the sheath blight responses varied between the water and N management treatments. The "Test for Practical Equivalence" is based on the Highest Density Interval (HDI) plus the Region of Practical Equivalence (ROPE) decision rule [@Kruschke2014; @Kruschke2018], *HDI+ROPE decision rule* and checks whether parameter values should be accepted or rejected against the null hypothesis, the ROPE. To do this, it checks the percentage of the 89&nbsp;% HDI that is in the null region ROPE. If this amount is sufficiently low, the null hypothesis is rejected. If the amount is large enough, the null hypothesis is accepted.
 
 ## Hypothesis {-}
 
@@ -200,34 +200,34 @@ We hypothesised that higher amounts of nitrogen would increase the incidence and
 
 ## 2015 Experiment {-}
 
-In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Fig.&nbsp;\@ref(fig:fig-1)a, \@ref(fig:fig-2)a).
-Water management was undecided in the test for equivalency (Fig.&nbsp;\@ref(fig:fig-3)a, \@ref(fig:fig-5)a) between the AWD and puddled treatments.
-However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-5)a, \@ref(fig:fig-5)a).
+In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Figure&nbsp;\@ref(fig:fig-1)a; Table&nbsp;\@ref(tab:Table-2)).
+Water management was undecided in the test for equivalency (Figure&nbsp;\@ref(fig:fig-3)a; Table&nbsp;\@ref(tab:Table-2)) between the AWD and puddled treatments.
+However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)a, \@ref(tab:Table-2)).
 
-Tiller sheath blight severity remained below 2&nbsp;\% (Fig.&nbsp;\@ref(fig:fig-2)c, \@ref(fig:fig-1)c).
-Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)c, \@ref(fig:fig-5)c).
-However, the AWD water management was not clearly the same or different from the puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)c, \@ref(fig:fig-6)a).
+Tiller sheath blight severity remained below 2&nbsp;\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
+Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)c; Table&nbsp;\@ref(tab:Table-2)).
+However, the AWD water management was not clearly the same or different from the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
 
-The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Fig.&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
-As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly different than the N0 treatment (Fig.&nbsp;\@ref(fig:fig-4)e, \@ref(fig:fig-5)e).
-The AWD water management treatment was again undecided (Fig.&nbsp;\@ref(fig:fig-3)e, \@ref(fig:fig-7)a).
+The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
+As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
+The AWD water management treatment was again undecided (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
 
 ## 2016 Experiment {-}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Fig.&nbsp;\@ref(fig:fig-2)b).
-The N treatment N180 value was higher and clearly different than the control N60 treatment (Fig.&nbsp;\@ref(fig:fig-4)b, \@ref(fig:fig-5)b). As in the 2015 study, water management treatment was undecided (Fig.&nbsp;\@ref(fig:fig-3)b, \@ref(fig:fig-5)b).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Figure&nbsp;\@ref(fig:fig-2)b).
+The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Fig.&nbsp;\@ref(fig:fig-2)d).
-In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Fig.&nbsp;\@ref(fig:fig-4)d, \@ref(fig:fig-5)d).
-The AWD water management, which was lower than the puddled treatment, was also clearly different (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-6)b).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
+In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
+The AWD water management, which was lower than the puddled treatment, was also clearly different (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
 
-In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Fig.&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-5)b, \@ref(fig:fig-4)b, \@ref(fig:fig-7)b).
+In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)).
 
 # Discussion {-}
 
-In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology.
+In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology, or decreases that would favour it except in one case.
 In only one instance were we able to detect any statistically clear effect of AWD alone on sheath blight.
-In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Fig.&nbsp;\@ref(fig:fig-3)d, \@ref(fig:fig-5)d), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
+In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure. In all other cases the difference was unclear.
 
 The findings of the effects of N rates on sheath blight were as expected in both experiments.
 Higher rates of N caused an increase in disease incidence and severity in 2015 and in tiller incidence in 2016. However, in the 2016 experiment, there were no clear differences due to the N rate tiller and leaf severity.
@@ -237,7 +237,7 @@ In 2015 there were no clear differences in the interaction of irrigation and N r
 However, in the 2016 experiment, the combination of AWD--N180 was clearly different, being lower, than the PDL--N60 combination treatment.
 
 By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment appear to have improved the experiment.
-The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Fig.&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
+The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 Based on these results, it is suggested that the methods used in the 2016 experiment should be adopted in any further studies of this kind.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1&nbsp;\%) throughout the growing season in all treatments for both years.
@@ -258,7 +258,8 @@ Ultimately these findings are useful as IRRI promotes AWD as water-saving techno
 Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
 However, over the next 10 to 20 years the risk is predicted to remain the same as from 2000 to 2010 [@Kim2015].
 Therefore, it is likely to remain an important disease in the near future with little resistance available in current varieties.
-However, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease.
+Given the results of the N treatments showing clear effects, in most cases increasing the amount and severity of disease, we would argue that this suggests that there is no reason AWD could not be adopted.
+Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
 
 # Acknowledgments {-}
 
@@ -332,7 +333,8 @@ x <- flextable(x)
 x <- fontsize(x, part = "header", size = 10)
 x <- font(x, part = "header", fontname = "Times")
 x <- font(x, fontname = "Times")
-x <- fontsize(x, size = 10)
+x <- fontsize(x, size = 12)
+x <- autofit(x)
 x <- set_caption(x, 
   "(\\#tab:Table-2) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; NRTEN100, nitrogen rate of 100 k/ha; NRTEN120 kg/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters."
   )
@@ -361,7 +363,8 @@ x <- flextable(x)
 x <- fontsize(x, part = "header", size = 10)
 x <- font(x, part = "header", fontname = "Times")
 x <- font(x, fontname = "Times")
-x <- fontsize(x, size = 10)
+x <- fontsize(x, size = 12)
+x <- autofit(x)
 x <- set_caption(x, 
   "(\\#tab:Table-3) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; and NRTEN180, nitrogen rate of 180 k/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters.")
 x
