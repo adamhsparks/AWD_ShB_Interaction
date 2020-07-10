@@ -1,5 +1,5 @@
 ---
-title: "Do Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates Affect Rice Sheath Blight?"
+title: "Effects of Alternate Wetting and Drying Irrigation Technology and Nitrogen Rates on Sheath Blight of Rice"
 author:
   - Adam H. Sparks:
       email: Adam.Sparks@usq.edu.au
