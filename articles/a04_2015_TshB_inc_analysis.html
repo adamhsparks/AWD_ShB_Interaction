@@ -106,7 +106,7 @@
       <h1 data-toc-skip>2015 Tiller Sheath Blight Incidence Analysis</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-07-10</h4>
+            <h4 class="date">2020-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice-awd-shb/blob/master/vignettes/a04_2015_TshB_inc_analysis.Rmd"><code>vignettes/a04_2015_TshB_inc_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>a04_2015_TshB_inc_analysis.Rmd</code></div>
@@ -145,6 +145,9 @@
 <span class="co"># relevel factors for easier interpretation of analysis</span>
 <span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2015</span>, <span class="kw">NRTE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">NRTE</span>, ref = <span class="st">"N0"</span>))
 <span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2015</span>, <span class="kw">WMGT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">WMGT</span>, ref = <span class="st">"PDL"</span>))
+
+<span class="co"># add main plot effect</span>
+<span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">main_plot</span> <span class="op">&lt;-</span> <span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">WMGT</span>
 </pre></div>
 <p>Now that the <code>AUDPS_2015</code> and <code>AUDPS_2016</code> data frames exist, we can start the analysis.</p>
 </div>
@@ -161,7 +164,7 @@
 
 <span class="kw">m1</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glmer.html">stan_lmer</a></span>(
-    formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span>),
+    formula = <span class="kw">TShB_incidence_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span><span class="op">/</span><span class="kw">main_plot</span>),
     data = <span class="kw">AUDPS_2015</span>,
     seed = <span class="fl">27</span>,
     adapt_delta = <span class="fl">0.99</span>,
@@ -191,46 +194,64 @@
 ## Model Info:
 ##  function:     stan_lmer
 ##  family:       gaussian [identity]
-##  formula:      TShB_incidence_AUDPS ~ WMGT + NRTE + (1 | REP)
+##  formula:      TShB_incidence_AUDPS ~ WMGT + NRTE + (1 | REP/main_plot)
 ##  algorithm:    sampling
 ##  sample:       4000 (posterior sample size)
 ##  priors:       see help('prior_summary')
 ##  observations: 120
-##  groups:       REP (4)
+##  groups:       main_plot:REP (8), REP (4)
 ## 
 ## Estimates:
-##                                      mean   sd   10%   50%   90%
-## (Intercept)                         1.1    0.4  0.8   1.1   1.5 
-## WMGTAWD                             0.1    0.2 -0.1   0.1   0.3 
-## NRTEN100                            0.6    0.2  0.4   0.6   0.9 
-## NRTEN120                            1.0    0.2  0.7   1.0   1.3 
-## b[(Intercept) REP:1]                0.4    0.4  0.0   0.4   0.8 
-## b[(Intercept) REP:2]                0.1    0.4 -0.2   0.1   0.5 
-## b[(Intercept) REP:3]               -0.2    0.4 -0.6  -0.2   0.1 
-## b[(Intercept) REP:4]               -0.3    0.4 -0.7  -0.3   0.0 
-## sigma                               0.9    0.1  0.9   0.9   1.0 
-## Sigma[REP:(Intercept),(Intercept)]  0.4    0.8  0.1   0.2   0.9 
+##                                                mean   sd   10%   50%   90%
+## (Intercept)                                   1.1    0.4  0.7   1.1   1.6 
+## WMGTAWD                                       0.1    0.3 -0.2   0.1   0.5 
+## NRTEN100                                      0.6    0.2  0.4   0.6   0.9 
+## NRTEN120                                      1.0    0.2  0.7   1.0   1.3 
+## b[(Intercept) main_plot:REP:PDL:1]            0.2    0.3 -0.1   0.1   0.5 
+## b[(Intercept) main_plot:REP:PDL:2]            0.1    0.3 -0.1   0.1   0.5 
+## b[(Intercept) main_plot:REP:PDL:3]           -0.2    0.3 -0.6  -0.1   0.1 
+## b[(Intercept) main_plot:REP:PDL:4]           -0.1    0.3 -0.4  -0.1   0.2 
+## b[(Intercept) main_plot:REP:AWD:1]            0.1    0.3 -0.2   0.0   0.4 
+## b[(Intercept) main_plot:REP:AWD:2]           -0.1    0.3 -0.3   0.0   0.2 
+## b[(Intercept) main_plot:REP:AWD:3]            0.1    0.3 -0.2   0.0   0.4 
+## b[(Intercept) main_plot:REP:AWD:4]           -0.1    0.3 -0.4   0.0   0.2 
+## b[(Intercept) REP:1]                          0.3    0.3  0.0   0.3   0.7 
+## b[(Intercept) REP:2]                          0.1    0.3 -0.2   0.1   0.5 
+## b[(Intercept) REP:3]                         -0.2    0.3 -0.5  -0.1   0.2 
+## b[(Intercept) REP:4]                         -0.3    0.3 -0.7  -0.2   0.1 
+## sigma                                         0.9    0.1  0.9   0.9   1.0 
+## Sigma[main_plot:REP:(Intercept),(Intercept)]  0.1    0.2  0.0   0.1   0.3 
+## Sigma[REP:(Intercept),(Intercept)]            0.3    0.6  0.0   0.1   0.7 
 ## 
 ## Fit Diagnostics:
 ##            mean   sd   10%   50%   90%
-## mean_PPD 1.7    0.1  1.6   1.7   1.9  
+## mean_PPD 1.8    0.1  1.6   1.8   1.9  
 ## 
 ## The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
 ## 
 ## MCMC diagnostics
-##                                    mcse Rhat n_eff
-## (Intercept)                        0.0  1.0  1234 
-## WMGTAWD                            0.0  1.0  3712 
-## NRTEN100                           0.0  1.0  3094 
-## NRTEN120                           0.0  1.0  3183 
-## b[(Intercept) REP:1]               0.0  1.0  1223 
-## b[(Intercept) REP:2]               0.0  1.0  1225 
-## b[(Intercept) REP:3]               0.0  1.0  1171 
-## b[(Intercept) REP:4]               0.0  1.0  1186 
-## sigma                              0.0  1.0  3390 
-## Sigma[REP:(Intercept),(Intercept)] 0.0  1.0  1396 
-## mean_PPD                           0.0  1.0  3993 
-## log-posterior                      0.1  1.0  1125 
+##                                              mcse Rhat n_eff
+## (Intercept)                                  0.0  1.0  1875 
+## WMGTAWD                                      0.0  1.0  2257 
+## NRTEN100                                     0.0  1.0  4051 
+## NRTEN120                                     0.0  1.0  3913 
+## b[(Intercept) main_plot:REP:PDL:1]           0.0  1.0  1979 
+## b[(Intercept) main_plot:REP:PDL:2]           0.0  1.0  2047 
+## b[(Intercept) main_plot:REP:PDL:3]           0.0  1.0  1936 
+## b[(Intercept) main_plot:REP:PDL:4]           0.0  1.0  1775 
+## b[(Intercept) main_plot:REP:AWD:1]           0.0  1.0  2362 
+## b[(Intercept) main_plot:REP:AWD:2]           0.0  1.0  3201 
+## b[(Intercept) main_plot:REP:AWD:3]           0.0  1.0  2813 
+## b[(Intercept) main_plot:REP:AWD:4]           0.0  1.0  2558 
+## b[(Intercept) REP:1]                         0.0  1.0  1738 
+## b[(Intercept) REP:2]                         0.0  1.0  2025 
+## b[(Intercept) REP:3]                         0.0  1.0  1938 
+## b[(Intercept) REP:4]                         0.0  1.0  2075 
+## sigma                                        0.0  1.0  4427 
+## Sigma[main_plot:REP:(Intercept),(Intercept)] 0.0  1.0  1328 
+## Sigma[REP:(Intercept),(Intercept)]           0.0  1.0  2026 
+## mean_PPD                                     0.0  1.0  4098 
+## log-posterior                                0.1  1.0  1219 
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit">
@@ -276,7 +297,7 @@
 <td align="center">89</td>
 <td align="center">-0.1062</td>
 <td align="center">0.1062</td>
-<td align="center">0.4117</td>
+<td align="center">0.3145</td>
 <td align="center">Undecided</td>
 </tr>
 <tr class="odd">
@@ -312,26 +333,26 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">0.6393</td>
-<td align="center">1.649</td>
+<td align="center">0.5972</td>
+<td align="center">1.662</td>
 <td align="center">fixed</td>
 <td align="center">(Intercept)</td>
 </tr>
 <tr class="even">
-<td align="center">-0.1648</td>
-<td align="center">0.3823</td>
+<td align="center">-0.3371</td>
+<td align="center">0.5691</td>
 <td align="center">fixed</td>
 <td align="center">WMGTAWD</td>
 </tr>
 <tr class="odd">
-<td align="center">0.3</td>
-<td align="center">0.9781</td>
+<td align="center">0.3051</td>
+<td align="center">0.9415</td>
 <td align="center">fixed</td>
 <td align="center">NRTEN100</td>
 </tr>
 <tr class="even">
-<td align="center">0.6588</td>
-<td align="center">1.337</td>
+<td align="center">0.701</td>
+<td align="center">1.334</td>
 <td align="center">fixed</td>
 <td align="center">NRTEN120</td>
 </tr>
