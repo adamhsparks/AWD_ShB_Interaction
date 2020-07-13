@@ -156,7 +156,7 @@
 <div id="model-structure" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-structure" class="anchor"></a>Model Structure</h3>
-<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect.</p>
+<p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect with the main plot effect, <code>WMGT</code> nested within it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">m6_prior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html">normal</a></span>(location = <span class="fl">0</span>,
                    scale = <span class="fl">10</span>)
