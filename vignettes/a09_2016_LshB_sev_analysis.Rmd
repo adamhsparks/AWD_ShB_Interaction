@@ -53,7 +53,7 @@ AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
 
 # add main plot effect
-AUDPS_2015$main_plot <- AUDPS_2015$WMGT
+AUDPS_2016$main_plot <- AUDPS_2016$WMGT
 ```
 
 ## Leaf Sheath Blight Severity Model
