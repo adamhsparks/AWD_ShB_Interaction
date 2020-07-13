@@ -51,6 +51,9 @@ AUDPS_2015 <- droplevels(AUDPS_2015)
 # relevel factors for easier interpretation of analysis
 AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
+
+# add main plot effect
+AUDPS_2015$main_plot <- AUDPS_2015$WMGT
 ```
 
 Now that the `AUDPS_2015` and `AUDPS_2016` data frames exist, we can start the analysis.
@@ -69,7 +72,7 @@ m1_prior <- normal(location = 0,
 
 m1 <-
   stan_lmer(
-    formula = TShB_incidence_AUDPS ~ WMGT + NRTE + (1 | REP),
+    formula = TShB_incidence_AUDPS ~ WMGT + NRTE + (1 | REP/main_plot),
     data = AUDPS_2015,
     seed = 27,
     adapt_delta = 0.99,

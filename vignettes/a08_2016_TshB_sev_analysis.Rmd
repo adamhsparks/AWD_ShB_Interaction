@@ -52,6 +52,9 @@ AUDPS_2016 <- droplevels(AUDPS_2016)
 # relevel factors for easier interpretation of analysis
 AUDPS_2016 <- within(AUDPS_2016, NRTE <- relevel(NRTE, ref = "N60"))
 AUDPS_2016 <- within(AUDPS_2016, WMGT <- relevel(WMGT, ref = "PDL"))
+
+# add main plot effect
+AUDPS_2016$main_plot <- AUDPS_2016$WMGT
 ```
 
 ## Tiller Sheath Blight Severity Model
@@ -68,7 +71,7 @@ m5_prior <- normal(location = 0,
 
 m5 <-
   stan_lmer(
-    formula = TShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP),
+    formula = TShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP/main_plot),
     data = AUDPS_2016,
     seed = 27,
     adapt_delta = 0.99,

@@ -51,6 +51,9 @@ AUDPS_2015 <- droplevels(AUDPS_2015)
 # relevel factors for easier interpretation of analysis
 AUDPS_2015 <- within(AUDPS_2015, NRTE <- relevel(NRTE, ref = "N0"))
 AUDPS_2015 <- within(AUDPS_2015, WMGT <- relevel(WMGT, ref = "PDL"))
+
+# add main plot effect
+AUDPS_2015$main_plot <- AUDPS_2015$WMGT
 ```
 
 ## Leaf Sheath Blight Severity Model
@@ -67,7 +70,7 @@ m3_prior <- normal(location = 0,
 
 m3 <-
   stan_lmer(
-    formula = LShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP),
+    formula = LShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP/main_plot),
     data = AUDPS_2015,
     seed = 27,
     adapt_delta = 0.99,
