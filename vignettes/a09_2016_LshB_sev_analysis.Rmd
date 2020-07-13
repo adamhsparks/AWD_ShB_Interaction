@@ -73,7 +73,7 @@ m6 <-
     formula = LShB_percent_AUDPS ~ WMGT + NRTE + (1 | REP/main_plot),
     data = AUDPS_2016,
     seed = 27,
-    adapt_delta = 0.99,
+    adapt_delta = 0.999,
     prior = m6_prior
   )
 ```
