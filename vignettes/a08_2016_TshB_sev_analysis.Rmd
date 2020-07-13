@@ -63,7 +63,7 @@ AUDPS_2016$main_plot <- AUDPS_2016$WMGT
 
 Tiller sheath blight severity AUDPS, `TShB_percent_AUDPS`, is the response variable.
 Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP`, is treated as a random effect.
+Replicate, `REP`, is treated as a random effect with the main plot effect, `WMGT` nested within it.
 
 ```{r 2016_TShB_severity, cache=FALSE, message=TRUE, warning=TRUE, results="hide"}
 m5_prior <- normal(location = 0,

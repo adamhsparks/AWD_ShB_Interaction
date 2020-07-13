@@ -62,7 +62,7 @@ AUDPS_2016$main_plot <- AUDPS_2016$WMGT
 
 Leaf sheath blight severity AUDPS, `LShB_percent_AUDPS` is the response variable.
 Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP`, is treated as a random effect.
+Replicate, `REP`, is treated as a random effect with the main plot effect, `WMGT` nested within it.
 
 ```{r 2016_LShB_severity, cache=FALSE, message=FALSE, warning=TRUE, results="hide"}
 m6_prior <- normal(location = 0,

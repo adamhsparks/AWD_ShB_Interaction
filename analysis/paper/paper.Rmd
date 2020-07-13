@@ -183,7 +183,7 @@ Five disease assessments were made in the 2015 experiment and four disease asses
 
 The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R (version 4.0.0), [@R2020], package `agricolae`, (version 1.3-3), [@agricolae2020].
 
-The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and N fertilisation as fixed effects and replicate as a random effect.
+The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and N fertilisation as fixed effects and replicate with main plot nested within replicate as random effects.
 Six models were created where the dependent variables were: 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
 The independent variables were the irrigation management (WMGT) and N rate (NRTE) and the interaction of WMGT and NRTE with replicate treated as a random variable.
 The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled. For for 2016 the base level values were: N rate -- N60, irrigation management -- puddled.
@@ -206,7 +206,7 @@ However, the effect of the N treatments of both N100 and N120 on tiller incidenc
 
 Tiller sheath blight severity remained below 2&nbsp;\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
 Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)c; Table&nbsp;\@ref(tab:Table-2)).
-However, the AWD water management was not clearly the same or different from the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
+However, the AWD water management was undecided whether it was different than the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
 
 The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
 As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
@@ -219,7 +219,7 @@ The N treatment N180 value was higher and clearly different than the control N60
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
 In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
-The AWD water management, which was lower than the puddled treatment, was also clearly different (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
+The AWD water management, which was lower than the puddled treatment, was undecided (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
 
 In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)).
 
@@ -234,7 +234,9 @@ Higher rates of N caused an increase in disease incidence and severity in all of
 
 By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment.
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
-Based on these results, it is suggested that the methods used in the 2016 experiment should be adopted in any further studies of this kind.
+The use of differing levels of N did provide information about the effects of N on the disease, but it reduced the power to find the effects of the irrigation.
+Using a high rate of N, _e.g._ 180&nbsp;k/ha, for the entire study would help ensure that enough disease occurs to be able to detect differences in the irrigation treatments.
+We would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the data.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1&nbsp;\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.

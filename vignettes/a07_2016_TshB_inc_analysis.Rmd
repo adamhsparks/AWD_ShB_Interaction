@@ -64,7 +64,7 @@ Now that the `AUDPS_2016` and `AUDPS_2016` data frames exist, we can start the a
 
 Tiller sheath blight incidence AUDPS, `TShB_incidence_AUDPS` is the response variable.
 Water management, `WMGT`, and nitrogen rate, `NRTE`, are fixed effects.
-Replicate, `REP`, is treated as a random effect.
+Replicate, `REP`, is treated as a random effect with the main plot effect, `WMGT` nested within it.
 
 ```{r 2016_TShB_incidence, cache=FALSE, message=TRUE, warning=TRUE, results="hide"}
 m4_prior <- normal(location = 0,
