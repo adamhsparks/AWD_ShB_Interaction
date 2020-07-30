@@ -114,7 +114,7 @@ project, first, [install Docker](https://docs.docker.com/installation/)
 on your computer. Then at a command line prompt, use the following
 commands to start the instance.
 
-    docker pull adamhsparks/rice-awd-shb:main
+    docker pull adamhsparks/rice-awd-shb
     docker run -dp 8787:8787 rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser

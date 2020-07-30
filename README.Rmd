@@ -94,7 +94,7 @@ To launch the Docker image for this project, first, [install Docker](https://doc
 Then at a command line prompt, use the following commands to start the instance.
 
 ```bash
-docker pull adamhsparks/rice-awd-shb:main
+docker pull adamhsparks/rice-awd-shb
 docker run -dp 8787:8787 rice-awd-shb
 ```
 
