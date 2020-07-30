@@ -115,7 +115,7 @@ on your computer. Then at a command line prompt, use the following
 commands to start the instance.
 
     docker pull adamhsparks/rice-awd-shb
-    docker run -dp 8787:8787 rice-awd-shb
+    docker run -dp 8787:8787 adamhsparks/rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser
 at localhost:8787 or or run `docker-machine ip default` in the shell to
