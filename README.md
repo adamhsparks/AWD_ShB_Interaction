@@ -1,21 +1,23 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--09-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2020--07--30-brightgreen.svg)](https://github.com/adamhsparks/rice.awd.pests/commits/master)
 [![minimal R
 version](https://img.shields.io/badge/R%3E%3D-4.0.2-brightgreen.svg)](https://cran.r-project.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3889800.svg)](https://doi.org/10.5281/zenodo.3889800)
 
-## Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
+Research compendium for a report on the effects of using alternate wetting and drying irrigation techniques and nitrogen rates on sheath blight disease in rice paddies.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Compendium DOI:
 
-<http://dx.doi.org/xxxxxxx>
+<a href="http://dx.doi.org/xxxxxxx" class="uri">http://dx.doi.org/xxxxxxx</a>
 
 The files at the URL above will generate the results as found in the
 publication. The files hosted at
-<https://github.com/adamhsparks/rice-awd-shb> are the development
-versions and may have changed since the report was published.
+<a href="https://github.com/adamhsparks/rice-awd-shb" class="uri">https://github.com/adamhsparks/rice-awd-shb</a>
+are the development versions and may have changed since the report was
+published.
 
 ### Data DOI:
 
@@ -28,11 +30,14 @@ licence.
 
 ### Authors of this repository:
 
-Adam H. Sparks (<adam.sparks@usq.edu.au>)
+Adam H. Sparks
+(<a href="mailto:adam.sparks@usq.edu.au" class="email">adam.sparks@usq.edu.au</a>)
 
-Nancy P. Castilla (<n.castilla@irri.org>)
+Nancy P. Castilla
+(<a href="mailto:n.castilla@irri.org" class="email">n.castilla@irri.org</a>)
 
-B. Ole Sander (<b.sander@irri.org>)
+B. Ole Sander
+(<a href="mailto:b.sander@irri.org" class="email">b.sander@irri.org</a>)
 
 Michael Noel
 
@@ -57,19 +62,19 @@ seasons, that are not included in the actual analysis.
 
 The `data-raw` directory contains:
 
-  - a IRRI\_weather\_data.R, a file used to check weather data from IRRI
+-   a IRRI\_weather\_data.R, a file used to check weather data from IRRI
     weather stations to ensure that there was no significant difference
     in weather between seasons
 
 The `analysis/` directory contains:
 
-  - the manuscript as submitted (in MS Word format) and it’s Rmd source
+-   the manuscript as submitted (in MS Word format) and it’s Rmd source
     file
 
-  - supplementary information source files (in R markdown format) and
+-   supplementary information source files (in R markdown format) and
     executed versions
 
-  - all the figures that are included in the paper (in the `figures/`
+-   all the figures that are included in the paper (in the `figures/`
     directory)
 
 ### The R package
@@ -106,10 +111,10 @@ developed this project in. The Docker image includes all of the software
 dependencies needed to run the code in this project, as well as the R
 package and other compendium files. To launch the Docker image for this
 project, first, [install Docker](https://docs.docker.com/installation/)
-on your computer. At the Docker prompt, enter:
+on your computer. Then at a command line prompt, use the following
+commands to start the instance.
 
-    docker pull adamhsparks/rice-awd-shb
-    
+    docker pull adamhsparks/rice-awd-shb:main
     docker run -dp 8787:8787 rice-awd-shb
 
 This will start a server instance of RStudio. Then open your web browser
@@ -129,15 +134,18 @@ We developed and tested the package on this Docker container, so this is
 the only platform that we’re confident it works on, and so recommend to
 anyone wanting to use this package to generate the vignettes, etc.
 
-## Citation
+Citation
+--------
 
 Please cite this compendium as:
 
 > Authors, (2020). *Reproducible Research Compendium for Analysing
 > Effects of Water Management and Nitrogen on Rice Sheath Blight*.
-> Accessed 09 Jul 2020. Online at <https://doi.org/xxx/xxx>
+> Accessed 30 Jul 2020. Online at
+> <a href="https://doi.org/xxx/xxx" class="uri">https://doi.org/xxx/xxx</a>
 
-## Licenses
+Licenses
+--------
 
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
@@ -147,17 +155,20 @@ holder: Adam Sparks
 Data: [CC-4.0](http://creativecommons.org/licenses/by/4.0/legalcode)
 attribution requested in reuse
 
-## Dependencies
+Dependencies
+------------
 
 I used [RStudio](http://www.rstudio.com/products/rstudio/) on MacOS. See
 the colophon section of the docx file in `analysis/paper` for a full
 list of the packages that this project depends on.
 
-## Contact
+Contact
+-------
 
 Adam Sparks, Associate Professor, Centre for Crop Health  
 University of Southern Queensland, West St.  
 Toowoomba, Qld 4350 Australia
 
-(+61) 7.4631.1948 <adam.sparks@usq.edu.au>  
-<https://adamhsparks.com/>
+(+61) 7.4631.1948
+<a href="mailto:adam.sparks@usq.edu.au" class="email">adam.sparks@usq.edu.au</a>  
+<a href="https://adamhsparks.com/" class="uri">https://adamhsparks.com/</a>
