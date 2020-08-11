@@ -251,7 +251,7 @@ A combination of AWD and direct-seeded rice could be beneficial in multiple ways
 Diseases are the only issue that farmers face when growing rice.
 Recently, Lorica *et al.* [-@Lorica2020] have also found that AWD did not affect rodent damage in crops.
 The findings of our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice.
-Ultimately these findings are useful as many countries promote AWD as water-saving technologies because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
+Ultimately these findings are useful as many countries promote AWD as water-saving technology because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
 
 Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
 However, over the next 10 to 20 years the risk is predicted to remain the same as during the period from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
