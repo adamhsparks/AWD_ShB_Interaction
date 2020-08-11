@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.5.1.9000
 pkgdown_sha: eae56f08694abebf93cdfc0dd8e9ede06d8c815f
 articles: []
-last_built: 2020-08-11T11:15Z
+last_built: 2020-08-11T11:19Z
 urls:
   reference: https://adamhsparks.github.io/rice-awd-shb//reference
   article: https://adamhsparks.github.io/rice-awd-shb//articles
