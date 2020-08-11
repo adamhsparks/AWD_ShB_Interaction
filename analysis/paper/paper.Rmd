@@ -212,20 +212,16 @@ The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all
 As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values that were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
 The AWD water management treatment was again undecided (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
 
-The interaction of N100 and N120 with the water management treatment were undecided.
-
 ## 2016 Experiment {-}
 
 The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Figure&nbsp;\@ref(fig:fig-2)b).
-The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment and the interaction of N rate and water management were undecided with no clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
+The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided with no clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
 In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
 The AWD water management did not show statistically clear differences from the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
 
 In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)).
-
-However, the interaction of the water management and N rate, AWD and N180 were clearly different and lower than traditional puddling and N60.
 
 # Discussion {-}
 
