@@ -209,53 +209,53 @@ Both the N100 and N120 treatment effects caused the tiller severity to be higher
 However, the AWD water management was undecided whether it was different than the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
 
 The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
-As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
+As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values that were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
 The AWD water management treatment was again undecided (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
 
 ## 2016 Experiment {-}
 
 The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Figure&nbsp;\@ref(fig:fig-2)b).
-The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
+The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided with no clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
 In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
-The AWD water management, which was lower than the puddled treatment, was undecided (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
+The AWD water management did not show statistically clear differences from the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
 
 In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)).
 
 # Discussion {-}
 
 In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology, or decreases that would favour it except in one case.
-In the 2016, experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
-In all other cases, the difference was unclear.
+In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
+In all other cases, no significant differences were observed.
 
 The findings of the effects of N rates on sheath blight were as expected in both experiments.
 Higher rates of N caused an increase in disease incidence and severity in all of the cases examined.
 
-By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment.
+By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment by decreasing the variability in the results leading to more clear differences in the observations.
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
-The use of differing levels of N did provide information about the effects of N on the disease, but it reduced the power to find the effects of the irrigation.
+The use of different levels of N did provide information about the effects of N on the disease, but it reduced the statistical power to find the effects of the irrigation.
 Using a high rate of N, _e.g._ 180&nbsp;k/ha, for the entire study would help ensure that enough disease occurs to be able to detect differences in the irrigation treatments.
 We would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the data.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
-However, it should be noted that it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy in the wet season.
-Still, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
+However, it should be noted that often it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy fields in the wet season.
+Still, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy field reducing the moisture for the fungus to infect and disperse the infective propagules.
 
 The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice.
 Therefore, as manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due to changes in establishment practices.
-A combination of AWD and direct-seeded rice could be beneficial for both saving water and reducing the risk of sheath blight.
+A combination of AWD and direct-seeded rice could be beneficial in multiple ways, for saving water, reducing GHG emissions and reducing the risk of sheath blight.
 
 Diseases are the only issue that farmers face when growing rice.
 Recently, Lorica *et al.* [-@Lorica2020] have also found that AWD did not affect rodent damage in crops.
-The findings our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice.
-Ultimately these findings are useful as IRRI promotes AWD as water-saving technologies because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
+The findings of our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice.
+Ultimately these findings are useful as many countries promote AWD as water-saving technologies because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
 
 Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
-However, over the next 10 to 20 years the risk is predicted to remain the same as from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
-Therefore, it is likely to remain an important disease into the near future with little resistance available in currently available varieties.
+However, over the next 10 to 20 years the risk is predicted to remain the same as during the period from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
+Therefore, it is likely to remain an important disease for the near future with little resistance available in currently available varieties.
 Given the results of the N treatments showing clear effects, in most cases increasing the amount and severity of the disease, we would argue that this suggests that there is no reason AWD could not be adopted as we were unable to detect any clear differences due to irrigation management in most of the cases.
 Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
 
