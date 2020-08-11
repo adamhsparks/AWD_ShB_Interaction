@@ -85,16 +85,16 @@ Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of e
 Rice's reliance on freely available water, coupled with the effects of climate change mean that rice production practices will have to adapt to use new practices to produce more units of food with fewer water inputs.
 
 Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice, is an economically important disease worldwide throughout tropical and temperate production areas.
-Under conducive conditions, the disease can cause up to 50&nbsp;\% yield losses [@Marchetti1991].
-Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10&nbsp;\% annually.
+Under conducive conditions, the disease can cause up to 50\% yield losses [@Marchetti1991].
+Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10\% annually.
 The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
-Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15 to 40&nbsp;\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007].
+Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15 to 40\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007].
 In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress.
 To avoid yield decline under AWD, "safe" thresholds have been developed.
 Under safe AWD irrigation water is applied when the field water level reaches 15&nbsp;cm below the soil surface [@Richards2014].
 Fields are furthermore kept puddled with water standing during the flowering period to avoid plant stress.
-As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50 &nbsp;\% [@Yan2005; @Sander2015].
+As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50 \% [@Yan2005; @Sander2015].
 
 The AWD technology has been identified as promising climate-smart practice for different rice-growing regions that can stabilize rice production in water-scarce areas, as well as help, reduce the carbon footprint of rice production.
 Various countries, *e.g.* Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015].
@@ -172,7 +172,7 @@ A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&n
 
 In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed.
 The total number of tillers per hill and number of tillers with sheath blight (incidence) was measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI.
-The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1&nbsp;\% severity; (iii) 2 -- 1 to 5&nbsp;\% severity; (iv) 3 -- 5 to 15&nbsp;\% severity; (v) 4 -- 15 to 50&nbsp;\% severity; and (vi) 5 -- 50 to 100&nbsp;\% severity.
+The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1\% severity; (iii) 2 -- 1 to 5\% severity; (iv) 3 -- 5 to 15\% severity; (v) 4 -- 15 to 50\% severity; and (vi) 5 -- 50 to 100\% severity.
 Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions.
 A leaf was considered living if at least 50&nbsp;% of its area was not brown or dark brown due to natural senescence.
 A leaf that was yellow-green or light green due to a disease, such as tungro or N deficiency was still considered a living leaf.
@@ -204,7 +204,7 @@ In 2015 the incidence of tiller sheath blight remained low throughout the growin
 Water management was undecided in the test for equivalency (Figure&nbsp;\@ref(fig:fig-3)a; Table&nbsp;\@ref(tab:Table-2)) between the AWD and puddled treatments.
 However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)a, \@ref(tab:Table-2)).
 
-Tiller sheath blight severity remained below 2&nbsp;\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
+Tiller sheath blight severity remained below 2\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
 Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)c; Table&nbsp;\@ref(tab:Table-2)).
 However, the AWD water management was undecided whether it was different than the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
 
@@ -238,7 +238,7 @@ The use of differing levels of N did provide information about the effects of N 
 Using a high rate of N, _e.g._ 180&nbsp;k/ha, for the entire study would help ensure that enough disease occurs to be able to detect differences in the irrigation treatments.
 We would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the data.
 
-It should be noted that the levels of leaf severity remained low (<&nbsp;1&nbsp;\%) throughout the growing season in all treatments for both years.
+It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
 However, it should be noted that normally it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy in the wet season.
 Still, sheath blight remains an issue in both seasons and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of reduced water in the paddy reducing the moisture for the fungus to infect and disperse the infective propagules.
