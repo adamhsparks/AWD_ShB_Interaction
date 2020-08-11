@@ -209,7 +209,7 @@ Both the N100 and N120 treatment effects caused the tiller severity to be higher
 However, the AWD water management was undecided whether it was different than the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
 
 The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
-As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were and clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
+As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values and were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
 The AWD water management treatment was again undecided (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
 
 ## 2016 Experiment {-}
