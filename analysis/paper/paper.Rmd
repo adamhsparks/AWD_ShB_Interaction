@@ -235,10 +235,9 @@ Higher rates of N caused an increase in disease incidence and severity in all of
 By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment by decreasing the variability in the data collected.
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 
-While the use of different levels of N did provide information about the effects of N on the disease, it reduced the statistical power to find the effects of the irrigation [@Bradley1998].
-Using a high rate of N, _e.g._ 180&nbsp;k/ha, for the entire study would help ensure that enough disease occurs to be able to detect differences in the irrigation treatments with a more simple trial statistical design.
-
-We would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the data.
+While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation.
+Designing a future experiment as a randomised complete block with two treatments, puddled or AWD and using a single high rate of N, _e.g._ 180&nbsp;k/ha would help ensure that disease occurs and increase the precision of measurements for the irrigation treatments.
+Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
