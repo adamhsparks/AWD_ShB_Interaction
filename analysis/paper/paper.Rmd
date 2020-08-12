@@ -34,8 +34,8 @@ keywords: |
 highlights: |
   * The effects of alternate wetting and drying and nitrogen fertilisation rates on sheath blight disease incidence and severity were investigated.
   * Increasing rates of nitrogen led to increased levels of sheath blight incidence and sheath blight severity.
-  * AWD had no detectable effect on either sheath blight incidence or sheath blight severity.
-  * The adoption of AWD technologies does not appear to lead to increased sheath blight incidence or sheath blight severity.
+  * Alternate wetting and drying had no detectable effect on either sheath blight incidence or sheath blight severity.
+  * The adoption of alternate wetting and drying technology does not appear to lead to increased sheath blight incidence or sheath blight severity.
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
