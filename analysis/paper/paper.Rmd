@@ -28,7 +28,7 @@ output:
 csl: "../templates/plant_disease.csl" # Insert path for the bib-style
 bibliography: references.bib
 abstract: |
-  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by *Thanatephorus cucumeris* (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. Disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower than traditional puddling in the 2015 trial but we were unable to detect any clear differences in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. Our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
+  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by *Thanatephorus cucumeris* (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. The disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower than traditional puddled treatment in the 2015 trial but we were unable to detect any clear differences in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. In these studies, our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
 keywords: |
   Rice; Water Management; Nitrogen Management; Sheath Blight; *Thanatephorus cucumeris*
 highlights: |
@@ -103,17 +103,14 @@ Studies have been conducted *in silico* that examine how diseases may change wit
 Rice blast is perhaps the most frequently studied rice disease in regards to the effects of climate change [@Luo1995; @Luo1998; @Kim2015; @Duku2016; @Viswanath2017].
 However, Kim *et al.* [-@Kim2015] have modelled the effects of climate change on sheath blight with epidemics predicted to decrease by 2100 in their study, which focused on the Korean peninsula.
 
-Some *in-situ* studies of the effects of climate change on rice diseases have focused on the effects of temperature on bacterial blight [@Webb2010] and the effects of drought [@Dossa2017].
-
-*In-situ* studies of the effects of changing crop management practices also exist.
-Chapagain *et al.* [-@Chapagain] reported slightly higher grain yields and reduces pests and diseases.
-Van Buyten *et al.* [-@VanBuyten2012] studied *Pythium* species found in aerobic rice production that were found to negatively affect rice yields in the Philippines.
-They found that unlike the traditional paddy system where the pathogen is inhibited due to puddling, aerobic conditions promote pathogen growth and it can inhibit rice seedlings.
+*In-situ* studies of the direct effects that climate change and adaptation or mitigation strategies have on rice diseases have also been conducted.
+Looking into the disease bacterial blight (*Xanthomonas oryzae* pv. *oryzae*), Webb *et al.* [-@Webb2010] examined the effects of increasing temperature while Dossa *et al.* [-@Dossa2017] studied the effects of drought on the disease.
+While Van Buyten *et al.* [-@VanBuyten2012] found that unlike the traditional paddy system where *Pythium* is inhibited due to puddling, aerobic conditions promote pathogen growth and it can inhibit rice seedlings.
+Conversely, Chapagain *et al.* [-@Chapagain2011] reported slightly higher grain yields and reduced incidence of insect pests and diseases through the use of AWD.
 Furthermore, nitrogen rates [@Slaton2003; @Tang2007] and alternating wet and dry periods (not to be confused with AWD irrigation technology) also have both been shown to affect rice sheath blight [@Castilla1996].
 
-While the effects of climate change directly on rice diseases have been conducted, studies on on the effects of mitigation strategies are less common, other than .
-A change like this in the water management in rice fields on a large scale could trigger unintended effects, for example, increasing disease incidence or severity.
-Because of this, rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices could have unintended effects on the pests and diseases that occur in the rice crop.
+These studies suggest that a change like this in the water management in rice fields on a large scale could trigger unintended negative effects but also positive effects may result.
+Because of this, rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices without good information about what the changes in the management will mean for other parts of the cropping system.
 
 To gain a better understanding of what the effects of adopting AWD on rice sheath blight could have, we established field experiments that incorporated irrigation technology and N fertilisation to create a conducive environment for the disease to develop.
 
@@ -207,7 +204,7 @@ We hypothesised that higher amounts of nitrogen would increase the incidence and
 ## 2015 Experiment {-}
 
 In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Figure&nbsp;\@ref(fig:fig-1)a; Table&nbsp;\@ref(tab:Table-2)).
-Water management was undecided in the test for equivalency (Figure&nbsp;\@ref(fig:fig-3)a; Table&nbsp;\@ref(tab:Table-2)) between the AWD and puddled treatments.
+Water management was undecided not showing any clear difference in the test for equivalency (Figure&nbsp;\@ref(fig:fig-3)a; Table&nbsp;\@ref(tab:Table-2)) between the AWD and puddled treatments.
 However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)a, \@ref(tab:Table-2)).
 
 Tiller sheath blight severity remained below 2\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
@@ -216,18 +213,18 @@ However, the AWD water management was undecided whether it was different than th
 
 The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
 As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values that were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
-The AWD water management treatment was again undecided (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
+The AWD water management treatment was again undecided with no clear difference between the control puddled and AWD treatments (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
 
 ## 2016 Experiment {-}
 
 The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Figure&nbsp;\@ref(fig:fig-2)b).
-The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided with no clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
+The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided not showing a clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
 
 As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
 In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
-The AWD water management did not show statistically clear differences from the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
+The AWD water management result was undecided and did not show statistically clear differences from the control puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
 
-In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)).
+In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)) with no clear differences from the puddled treatment.
 
 # Discussion {-}
 
@@ -243,12 +240,12 @@ The sheath blight incidence increased and the variability of sheath blight in th
 
 While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Slaton2003; @Tang2007; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation.
 Designing a future experiment as a randomised complete block with two treatments, puddled or AWD and using a single high rate of N, _e.g._ 180&nbsp;k/ha would help ensure that disease occurs and increase the precision of measurements for the irrigation treatments.
-Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
+Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
 However, it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy fields in the wet season [@Sriphirom2019; @Sander2017; @Sander2020].
-Sheath blight still remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but might be effective in reducing it in some cases because of less water in the paddy field than in traditional systems by reducing the moisture for the fungus to disperse the infective propagules and infect.
+Sheath blight remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but might be effective in reducing it in some cases because of less water in the paddy field than in traditional systems by reducing the moisture for the fungus to disperse the infective propagules and infect.
 
 The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice.
