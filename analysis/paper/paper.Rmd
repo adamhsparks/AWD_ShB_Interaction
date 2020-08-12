@@ -243,7 +243,7 @@ We would recommend that further future studies should focus only on the effects 
 It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
 Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
 However, it should be noted that often it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy fields in the wet season [@Sriphirom2019; @Sander2017; @Sander2020].
-Still, sheath blight remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but may be effective in reducing it in some cases because of less water in the paddy field than in traditional systems, reducing the moisture for the fungus to disperse the infective propagules and infect.
+Sheath blight still remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but might be effective in reducing it in some cases because of less water in the paddy field than in traditional systems by reducing the moisture for the fungus to disperse the infective propagules and infect.
 
 The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
 Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice.
