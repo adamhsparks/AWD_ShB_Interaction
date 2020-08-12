@@ -94,21 +94,27 @@ In AWD rice, fields are exposed to several dry phases during the growing season 
 To avoid yield decline under AWD, "safe" thresholds have been developed.
 Under safe AWD irrigation water is applied when the field water level reaches 15&nbsp;cm below the soil surface [@Richards2014].
 Fields are furthermore kept puddled with water standing during the flowering period to avoid plant stress.
-As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50 \% [@Yan2005; @Sander2015].
+As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50\% [@Yan2005; @Sander2015].
 
 The AWD technology has been identified as promising climate-smart practice for different rice-growing regions that can stabilize rice production in water-scarce areas, as well as help, reduce the carbon footprint of rice production.
 Various countries, *e.g.* Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015].
-However, a change like this in the water regime in rice fields on a large scale could trigger unintended effects, for example, changes in disease incidence or severity.
 
-Many studies have been conducted *in silico* that examine how diseases may change with a changing climate.
+Studies have been conducted *in silico* that examine how diseases may change with a changing climate.
 Rice blast is perhaps the most frequently studied rice disease in regards to the effects of climate change [@Luo1995; @Luo1998; @Kim2015; @Duku2016; @Viswanath2017].
 However, Kim *et al.* [-@Kim2015] have modelled the effects of climate change on sheath blight with epidemics predicted to decrease by 2100 in their study, which focused on the Korean peninsula.
 
 Some *in-situ* studies of the effects of climate change on rice diseases have focused on the effects of temperature on bacterial blight [@Webb2010] and the effects of drought [@Dossa2017].
 
-While the effects of climate change directly on rice disease have been studied, the effects of mitigation practices have not.
-Rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices could have unintended effects on the pests and diseases that occur in the rice crop.
-This is a reasonable concern because of the well-documented effects of N [@Slaton2003; @Tang2007] and the effects of alternating wet and dry periods [@Castilla1996] on sheath blight.
+*In-situ* studies of the effects of changing crop management practices also exist.
+Chapagain *et al.* [-@Chapagain] reported slightly higher grain yields and reduces pests and diseases.
+Van Buyten *et al.* [-@VanBuyten2012] studied *Pythium* species found in aerobic rice production that were found to negatively affect rice yields in the Philippines.
+They found that unlike the traditional paddy system where the pathogen is inhibited due to puddling, aerobic conditions promote pathogen growth and it can inhibit rice seedlings.
+Furthermore, nitrogen rates [@Slaton2003; @Tang2007] and alternating wet and dry periods (not to be confused with AWD irrigation technology) also have both been shown to affect rice sheath blight [@Castilla1996].
+
+While the effects of climate change directly on rice diseases have been conducted, studies on on the effects of mitigation strategies are less common, other than .
+A change like this in the water management in rice fields on a large scale could trigger unintended effects, for example, increasing disease incidence or severity.
+Because of this, rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices could have unintended effects on the pests and diseases that occur in the rice crop.
+
 To gain a better understanding of what the effects of adopting AWD on rice sheath blight could have, we established field experiments that incorporated irrigation technology and N fertilisation to create a conducive environment for the disease to develop.
 
 We hypothesized that AWD would not have a positive effect on sheath blight incidence and severity in tropical rice production that would deter farmers from adopting it.
@@ -235,7 +241,7 @@ Higher rates of N caused an increase in disease incidence and severity in all of
 By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment by decreasing the variability in the data collected.
 The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 
-While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation.
+While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Slaton2003; @Tang2007; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation.
 Designing a future experiment as a randomised complete block with two treatments, puddled or AWD and using a single high rate of N, _e.g._ 180&nbsp;k/ha would help ensure that disease occurs and increase the precision of measurements for the irrigation treatments.
 Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer, while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
 
@@ -258,9 +264,7 @@ Climate change is predicted to decrease sheath blight risk over the longer term 
 However, over the next 10 to 20 years the risk is predicted to remain the same as during the period from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
 Therefore, it is likely to remain an important disease for the near future with little resistance available in currently available varieties [@Srinivasachary2011].
 
-# Conclusion {-}
-
-We argue that that there is no reason AWD could not be adopted as we were unable to detect any statistically clear differences due to irrigation management in any of the sheath blight measurements made.
+Our findings here indicate that there is no reason AWD could not be adopted as we were unable to detect any statistically clear differences due to irrigation management in any of the sheath blight measurements made.
 Whereas, in the presence of excess N the treatments showed clear effects, increasing the amount and severity of the disease, suggesting that the studies were capable of demonstrating differences in the selected treatments as applied.
 Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
 
