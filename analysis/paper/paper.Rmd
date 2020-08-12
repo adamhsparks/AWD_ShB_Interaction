@@ -32,10 +32,10 @@ abstract: |
 keywords: |
   Rice; Water Management; Nitrogen Management; Sheath Blight; *Thanatephorus cucumeris*
 highlights: |
-  * The effects of AWD on sheath blight disease incidence and severity were investigated.
+  * The effects of alternate wetting and drying and nitrogen fertilisation rates on sheath blight disease incidence and severity were investigated.
+  * Increasing rates of nitrogen led to increased levels of sheath blight incidence and sheath blight severity.
   * AWD had no detectable effect on either sheath blight incidence or sheath blight severity.
-  * The interaction of AWD and nitrogen management had no detectable effect on either sheath blight incidence or sheath blight severity.
-  * The adoption of AWD technologies will not lead to increased sheath blight incidence or sheath blight severity.
+  * The adoption of AWD technologies does not appear to lead to increased sheath blight incidence or sheath blight severity.
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
