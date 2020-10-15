@@ -38,12 +38,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,7 +100,7 @@
       <h1 data-toc-skip>2015 Leaf Sheath Blight Severity Analysis</h1>
                         <h4 class="author">A. H. Sparks</h4>
             
-            <h4 class="date">2020-08-12</h4>
+            <h4 class="date">2020-10-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/adamhsparks/rice-awd-shb/blob/master/vignettes/a06_2015_LshB_sev_analysis.Rmd"><code>vignettes/a06_2015_LshB_sev_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>a06_2015_LshB_sev_analysis.Rmd</code></div>
@@ -126,29 +120,27 @@
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Load libraries and detect cores.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/adamhsparks/rice-awd-shb">"rice.awd.shb"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://mc-stan.org/rstanarm">"rstanarm"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/bayestestR">"bayestestR"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://mc-stan.org/bayesplot">"bayesplot"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="http://rapporter.github.io/pander">"pander"</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/adamhsparks/rice-awd-shb">"rice.awd.shb"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/rstanarm/">"rstanarm"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/bayestestR/">"bayestestR"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/bayesplot">"bayesplot"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://ggplot2.tidyverse.org">"ggplot2"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://rapporter.github.io/pander">"pander"</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(mc.cores = <span class="kw">parallel</span>::<span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span>())
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>The <code>AUDPS</code> object is loaded with the <code>rice.awd.shb</code> R package. To see how the AUDPS data were generated from the original raw data, see the <a href="a02_Data_preprocessing.html">vignette detailing the data processing</a> file. However, because it is a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> and the treatments exist in a single column for graphing the raw data, this object needs a few minor changes to be usable for the analysis.</p>
 <p>Create individual data frames for the analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># create 2015 data frame</span>
-<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">AUDPS</span>[<span class="kw">AUDPS</span><span class="op">$</span><span class="kw">YEAR</span> <span class="op">==</span> <span class="fl">2015</span>,])
-<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span>(<span class="kw">AUDPS_2015</span>)
+<span class="va">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">AUDPS</span><span class="op">[</span><span class="va">AUDPS</span><span class="op">$</span><span class="va">YEAR</span> <span class="op">==</span> <span class="fl">2015</span>,<span class="op">]</span><span class="op">)</span>
+<span class="va">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span><span class="op">(</span><span class="va">AUDPS_2015</span><span class="op">)</span>
 
 <span class="co"># relevel factors for easier interpretation of analysis</span>
-<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2015</span>, <span class="kw">NRTE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">NRTE</span>, ref = <span class="st">"N0"</span>))
-<span class="kw">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">AUDPS_2015</span>, <span class="kw">WMGT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span>(<span class="kw">WMGT</span>, ref = <span class="st">"PDL"</span>))
+<span class="va">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">AUDPS_2015</span>, <span class="va">NRTE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span><span class="va">NRTE</span>, ref <span class="op">=</span> <span class="st">"N0"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">AUDPS_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span><span class="op">(</span><span class="va">AUDPS_2015</span>, <span class="va">WMGT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span><span class="va">WMGT</span>, ref <span class="op">=</span> <span class="st">"PDL"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># add main plot effect</span>
-<span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">main_plot</span> <span class="op">&lt;-</span> <span class="kw">AUDPS_2015</span><span class="op">$</span><span class="kw">WMGT</span>
-</pre></div>
+<span class="va">AUDPS_2015</span><span class="op">$</span><span class="va">main_plot</span> <span class="op">&lt;-</span> <span class="va">AUDPS_2015</span><span class="op">$</span><span class="va">WMGT</span></pre></div>
 </div>
 <div id="leaf-sheath-blight-severity-model" class="section level2">
 <h2 class="hasAnchor">
@@ -158,37 +150,33 @@
 <a href="#model-structure" class="anchor"></a>Model Structure</h3>
 <p>Leaf sheath blight severity AUDPS, <code>LShB_percent_AUDPS</code> is the response variable. Water management, <code>WMGT</code>, and nitrogen rate, <code>NRTE</code>, are fixed effects. Replicate, <code>REP</code>, is treated as a random effect with the main plot effect, <code>WMGT</code> nested within it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">m3_prior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html">normal</a></span>(location = <span class="fl">0</span>,
-                   scale = <span class="fl">10</span>)
+<span class="va">m3_prior</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/priors.html">normal</a></span><span class="op">(</span>location <span class="op">=</span> <span class="fl">0</span>,
+                   scale <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
-<span class="kw">m3</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glmer.html">stan_lmer</a></span>(
-    formula = <span class="kw">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="kw">WMGT</span> <span class="op">+</span> <span class="kw">NRTE</span> <span class="op">+</span> (<span class="fl">1</span> <span class="op">|</span> <span class="kw">REP</span><span class="op">/</span><span class="kw">main_plot</span>),
-    data = <span class="kw">AUDPS_2015</span>,
-    seed = <span class="fl">27</span>,
-    adapt_delta = <span class="fl">0.99</span>,
-    prior = <span class="kw">m3_prior</span>
-  )
-</pre></div>
+<span class="va">m3</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glmer.html">stan_lmer</a></span><span class="op">(</span>
+    formula <span class="op">=</span> <span class="va">LShB_percent_AUDPS</span> <span class="op">~</span> <span class="va">WMGT</span> <span class="op">+</span> <span class="va">NRTE</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">REP</span><span class="op">/</span><span class="va">main_plot</span><span class="op">)</span>,
+    data <span class="op">=</span> <span class="va">AUDPS_2015</span>,
+    seed <span class="op">=</span> <span class="fl">27</span>,
+    adapt_delta <span class="op">=</span> <span class="fl">0.99</span>,
+    prior <span class="op">=</span> <span class="va">m3_prior</span>
+  <span class="op">)</span></pre></div>
 </div>
 <div id="diagnostics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#diagnostics" class="anchor"></a>Diagnostics</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace</a></span>(<span class="kw">m3</span>)
-</pre></div>
+<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace</a></span><span class="op">(</span><span class="va">m3</span><span class="op">)</span></pre></div>
 <p><img src="a06_2015_LshB_sev_analysis_files/figure-html/m3-diagnostics-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://mc-stan.org/rstanarm/reference/pp_check.stanreg.html">pp_check</a></span>(<span class="kw">m3</span>, plotfun = <span class="st">"stat_2d"</span>, stat = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>))
-</pre></div>
+<span class="fu"><a href="https://mc-stan.org/rstanarm/reference/pp_check.stanreg.html">pp_check</a></span><span class="op">(</span><span class="va">m3</span>, plotfun <span class="op">=</span> <span class="st">"stat_2d"</span>, stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"sd"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p><img src="a06_2015_LshB_sev_analysis_files/figure-html/m3-diagnostics-2.png" width="700"></p>
 </div>
 <div id="summary" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">m3</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m3</span><span class="op">)</span></pre></div>
 <pre><code>## 
 ## Model Info:
 ##  function:     stan_lmer
@@ -254,16 +242,14 @@
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">et</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bayestestR/man/equivalence_test.html">equivalence_test</a></span>(<span class="kw">m3</span>)
+<span class="va">et</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/equivalence_test.html">equivalence_test</a></span><span class="op">(</span><span class="va">m3</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">et</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(palette = <span class="st">"Dark2"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">et</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p><img src="a06_2015_LshB_sev_analysis_files/figure-html/m3-summary-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span>(<span class="kw">et</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span><span class="op">(</span><span class="va">et</span><span class="op">)</span></pre></div>
 <table class="table">
 <caption>Table continues below</caption>
 <colgroup>
@@ -364,9 +350,8 @@
 <a href="#save-model-information" class="anchor"></a>Save Model Information</h2>
 <p>Lastly, save the model information to be used in discussing the results.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span>(<span class="kw">m3</span>, <span class="st">"../analysis/data/derived_data/LSev15.Rds"</span>,
-        compress = <span class="st">"bzip2"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">m3</span>, <span class="st">"../analysis/data/derived_data/LSev15.Rds"</span>,
+        compress <span class="op">=</span> <span class="st">"bzip2"</span><span class="op">)</span></pre></div>
 </div>
   </div>
 
@@ -385,7 +370,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
