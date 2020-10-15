@@ -36,6 +36,7 @@ Suggests:
     here,
     knitr,
     lubridate,
+    officedown,
     pander,
     rstanarm,
     purrr (>= 0.2.3),

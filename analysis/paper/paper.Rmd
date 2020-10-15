@@ -18,24 +18,39 @@ institute:
   - USQ: CURRENT ADDRESS -- University of Southern Queensland, Centre for Crop Health, Toowoomba, Qld 4350, Australia
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  bookdown::word_document2:
+  officedown::rdocx_document:
+    reference_docx: "../templates/template.docx"
     toc: no
     fig_caption: yes
-    reference_docx: "../templates/template.docx"
+    tables:
+      layout: autofit
+      width: 1.0
+      caption:
+        style: Table Caption
+        pre: 'Table '
+        sep: ': '
+      conditional:
+        first_row: true
+        first_column: false
+        last_row: false
+        last_column: false
+        no_hband: false
+        no_vband: true
     pandoc_args:
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
+      - '--lua-filter=pagebreak.lua'
 csl: "../templates/plant_disease.csl" # Insert path for the bib-style
 bibliography: references.bib
 abstract: |
-  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by *Thanatephorus cucumeris* (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. The disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower than traditional puddled treatment in the 2015 trial but we were unable to detect any clear differences in 2016. However, the level of disease severity remained low in both years, < 1&nbsp;%. In these studies, our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
+  Water and nitrogen management play vital roles in rice production. However, the mismanagement of these two crop inputs may trigger the development of sheath blight of rice, caused by *Thanatephorus cucumeris* (strain AG1-IA), which is favored by wet conditions, high relative humidity, and high nitrogen fertilizer levels. To understand how different combinations of water and nitrogen management affect sheath blight epidemics, we conducted two separate split-plot experiments with a water-saving (alternate wetting and drying) regime and a traditional puddled regime combined with differing nitrogen treatments in the dry seasons of 2015 and 2016. The disease was scored using the same methodology in both experiments using a sheath blight assessment scale for field evaluation developed at the International Rice Research Institute to assess the severity on infected sheaths and leaves while sheath blight incidence on tillers was counted per hill. We were unable to detect any clear differences in the incidence or severity of tiller sheath blight due to irrigation treatment. Leaf severity for the AWD treatment was clearly lower than traditional puddled treatment in the 2015 trial but we were unable to detect any clear differences in 2016. However, the level of disease severity remained low in both years, < 1%. In these studies, our findings indicate that farmers can adopt water-saving technologies without risking increased sheath blight incidence. We suggest that further cross-disciplinary research in this area is warranted.
 keywords: |
   Rice; Water Management; Nitrogen Management; Sheath Blight; *Thanatephorus cucumeris*
 highlights: |
   * The effects of alternate wetting and drying and nitrogen fertilisation rates on sheath blight disease incidence and severity were investigated.
   * Increasing rates of nitrogen led to increased levels of sheath blight incidence and sheath blight severity.
   * Alternate wetting and drying had no detectable effect on either sheath blight incidence or sheath blight severity.
-  * The adoption of alternate wetting and drying technology does not appear to lead to increased sheath blight incidence or sheath blight severity.
+  * The adoption of alternate wetting and drying technology does not appear to lead to increased sheath blight incidence or sheath blight severity
 ---
 
 ```{r Setup..., message=FALSE, warning=FALSE, include=FALSE}
@@ -73,199 +88,125 @@ TSev15 <- readRDS(here("analysis/data/derived_data/TSev15.Rds"))
 TSev16 <- readRDS(here("analysis/data/derived_data/TSev16.Rds"))
 ```
 
-##### pagebreak
+\newpage
 
-# Introduction {-}
+# Introduction {.unnumbered}
 
-Rice is mainly produced in Asia with over 90&nbsp;% of production occurring there [@GRiSP2013] and uses the largest amount of any agricultural commodity [@Dawe2005; @GRiSP2013].
+Rice is mainly produced in Asia with over 90% of production occurring there [@GRiSP2013] and uses the largest amount of any agricultural commodity [@Dawe2005; @GRiSP2013].
 
-Climate change will bring changes to the environments in which our food crops are produced in [@Reyer2013].
-Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of environments globally and will have to adapt to changing environments where it is grown as a result.
+Climate change will bring changes to the environments in which our food crops are produced in [@Reyer2013]. Rice (*Oryza sativa*) is the most widely grown cereal crop in a diverse set of environments globally and will have to adapt to changing environments where it is grown as a result.
 
 Rice's reliance on freely available water, coupled with the effects of climate change mean that rice production practices will have to adapt to use new practices to produce more units of food with fewer water inputs.
 
-Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice, is an economically important disease worldwide throughout tropical and temperate production areas.
-Under conducive conditions, the disease can cause up to 50\% yield losses [@Marchetti1991].
-Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10\% annually.
-The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
+Sheath blight disease, caused by *Thanatephorus cucumeris* (A.B. Frank) Donk. anastomosis group 1 IA, of rice, is an economically important disease worldwide throughout tropical and temperate production areas. Under conducive conditions, the disease can cause up to 50% yield losses [@Marchetti1991]. Studies by Savary *et al.* [-@Savary2000] estimated normal yield losses in tropical irrigated lowland rice in Asia at 5 to 10% annually. The disease is best managed through an integrated disease management approach, which includes resistance [@Kumar2009; @Srinivasachary2011], fungicide applications where affordable [@Rush1983; @Groth2008], nitrogen (N) management [@Slaton2003; @Castilla1996; @Tang2007] and water management [@Castilla1996].
 
-Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15 to 40\% of irrigation water while not affecting yield [@Bouman2001; @Feng2007].
-In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress.
-To avoid yield decline under AWD, "safe" thresholds have been developed.
-Under safe AWD irrigation water is applied when the field water level reaches 15&nbsp;cm below the soil surface [@Richards2014].
-Fields are furthermore kept puddled with water standing during the flowering period to avoid plant stress.
-As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50\% [@Yan2005; @Sander2015].
+Alternate wetting and drying (AWD) is an irrigation technique for rice (*Oryza sativa* L.) developed by the International Rice Research Institute (IRRI) and its partners that saves about 15 to 40% of irrigation water while not affecting yield [@Bouman2001; @Feng2007]. In AWD rice, fields are exposed to several dry phases during the growing season without exposing the plants to water stress. To avoid yield decline under AWD, "safe" thresholds have been developed. Under safe AWD irrigation water is applied when the field water level reaches 15 cm below the soil surface [@Richards2014]. Fields are furthermore kept puddled with water standing during the flowering period to avoid plant stress. As an added benefit to saving water, AWD also reduces greenhouse gas (GHG) emissions of rice fields, which are a substantial factor in the GHG budget of rice-producing countries, by around 50% [@Yan2005; @Sander2015].
 
-The AWD technology has been identified as promising climate-smart practice for different rice-growing regions that can stabilize rice production in water-scarce areas, as well as help, reduce the carbon footprint of rice production.
-Various countries, *e.g.* Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015].
+The AWD technology has been identified as promising climate-smart practice for different rice-growing regions that can stabilize rice production in water-scarce areas, as well as help, reduce the carbon footprint of rice production. Various countries, *e.g.* Bangladesh, Vietnam, Thailand and Philippines, plan to widely apply AWD to rice production [@MOEF2015].
 
-Studies have been conducted *in silico* that examine how diseases may change with a changing climate.
-Rice blast is perhaps the most frequently studied rice disease in regards to the effects of climate change [@Luo1995; @Luo1998; @Kim2015; @Duku2016; @Viswanath2017].
-However, Kim *et al.* [-@Kim2015] have modelled the effects of climate change on sheath blight with epidemics predicted to decrease by 2100 in their study, which focused on the Korean peninsula.
+Studies have been conducted *in silico* that examine how diseases may change with a changing climate. Rice blast is perhaps the most frequently studied rice disease in regards to the effects of climate change [@Luo1995; @Luo1998; @Kim2015; @Duku2016; @Viswanath2017]. However, Kim *et al.* [-@Kim2015] have modelled the effects of climate change on sheath blight with epidemics predicted to decrease by 2100 in their study, which focused on the Korean peninsula.
 
-*In-situ* studies of the direct effects that climate change and adaptation or mitigation strategies have on rice diseases have also been conducted.
-Looking into the disease bacterial blight (*Xanthomonas oryzae* pv. *oryzae*), Webb *et al.* [-@Webb2010] examined the effects of increasing temperature while Dossa *et al.* [-@Dossa2017] studied the effects of drought on the disease.
-While Van Buyten *et al.* [-@VanBuyten2012] found that unlike the traditional paddy system where *Pythium* is inhibited due to puddling, aerobic conditions promote pathogen growth and it can inhibit rice seedlings.
-Conversely, Chapagain *et al.* [-@Chapagain2011] reported slightly higher grain yields and reduced incidence of insect pests and diseases through the use of AWD.
-Furthermore, nitrogen rates [@Slaton2003; @Tang2007] and alternating wet and dry periods (not to be confused with AWD irrigation technology) also have both been shown to affect rice sheath blight [@Castilla1996].
+*In-situ* studies of the direct effects that climate change and adaptation or mitigation strategies have on rice diseases have also been conducted. Looking into the disease bacterial blight (*Xanthomonas oryzae* pv. *oryzae*), Webb *et al.* [-@Webb2010] examined the effects of increasing temperature while Dossa *et al.* [-@Dossa2017] studied the effects of drought on the disease. While Van Buyten *et al.* [-@VanBuyten2012] found that unlike the traditional paddy system where *Pythium* is inhibited due to puddling, aerobic conditions promote pathogen growth and it can inhibit rice seedlings. Conversely, Chapagain *et al.* [-@Chapagain2011] reported slightly higher grain yields and reduced incidence of insect pests and diseases through the use of AWD. Furthermore, nitrogen rates [@Slaton2003; @Tang2007] and alternating wet and dry periods (not to be confused with AWD irrigation technology) also have both been shown to affect rice sheath blight [@Castilla1996].
 
-These studies suggest that a change like this in the water management in rice fields on a large scale could trigger unintended negative effects but also positive effects may result.
-Because of this, rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices without good information about what the changes in the management will mean for other parts of the cropping system.
+These studies suggest that a change like this in the water management in rice fields on a large scale could trigger unintended negative effects but also positive effects may result. Because of this, rice farmers may be hesitant to adopt water-saving technologies because changing rice production practices without good information about what the changes in the management will mean for other parts of the cropping system.
 
 To gain a better understanding of what the effects of adopting AWD on rice sheath blight could have, we established field experiments that incorporated irrigation technology and N fertilisation to create a conducive environment for the disease to develop.
 
 We hypothesized that AWD would not have a positive effect on sheath blight incidence and severity in tropical rice production that would deter farmers from adopting it.
 
-# Materials and Methods {-}
+# Materials and Methods {.unnumbered}
 
-## Experimental Site {-}
+## Experimental Site {.unnumbered}
 
-Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14&deg;&nbsp;11'&nbsp;N, longitude 121&deg;&nbsp;15'&nbsp;E).
-The climate is classified as humid-tropical with the wet season starting in early June to December and dry season between December and late May.
-The experiments were both established in the dry seasons of 2015 and 2016.
-In the 2016 experiment changes were made in inoculation techniques, fertilisation rates and plot sizes to optimize the experiment based on findings from the 2015 experiment.
-The differences are detailed in the following sections.
+Two experiments were conducted at the International Rice Research Institute's (IRRI) Ziegler Experiment Station in Los Baños, Calabarzon, Philippines (latitude 14° 11' N, longitude 121° 15' E). The climate is classified as humid-tropical with the wet season starting in early June to December and dry season between December and late May. The experiments were both established in the dry seasons of 2015 and 2016. In the 2016 experiment changes were made in inoculation techniques, fertilisation rates and plot sizes to optimize the experiment based on findings from the 2015 experiment. The differences are detailed in the following sections.
 
-## Pathogen {-}
+## Pathogen {.unnumbered}
 
-An isolate of _Thanatephorus cucumeris_ (strain AG1-IA) infected lowland rice was maintained on potato dextrose agar (PDA) medium slants.
-The isolate was transferred to 90&nbsp;mm Petri dishes containing PDA and incubated a room temperature (20 to 27&deg;C) for five days.
-Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks and used to inoculate the plots [@Castilla1996].
+An isolate of *Thanatephorus cucumeris* (strain AG1-IA) infected lowland rice was maintained on potato dextrose agar (PDA) medium slants. The isolate was transferred to 90 mm Petri dishes containing PDA and incubated a room temperature (20 to 27°C) for five days. Glass bottles of autoclaved rice grain and hull substrate (1/5, w/w) were prepared and plugs of the culture were transferred from Petri dishes to the autoclaved substrate and incubated at room temperature for two weeks and used to inoculate the plots [@Castilla1996].
 
-## Host Plant {-}
+## Host Plant {.unnumbered}
 
-NSIC Rc222, an inbred semi-dwarf high-yielding variety, released by the Philippine Rice Research Institute (PhilRice), with a 114-day maturity when transplanted was used in both experiments.
-The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro and no known resistance to sheath blight.
+NSIC Rc222, an inbred semi-dwarf high-yielding variety, released by the Philippine Rice Research Institute (PhilRice), with a 114-day maturity when transplanted was used in both experiments. The variety is commonly grown by farmers in the area, having good yields and moderate resistance to brown plant hopper, green leaf hopper and yellow stem borer, but susceptibility to tungro and no known resistance to sheath blight.
 
-## 2015 Experimental Design {-}
+## 2015 Experimental Design {.unnumbered}
 
 The plot design was a split-plot randomised complete block design with four replicates where irrigation was the main plot treatment and N rate was the split-plot treatment.
 
-The main plot treatments were alternate wetting and drying (AWD) and continuously puddled or farmers' practice as the control treatment.
-The main plot size was 12&nbsp;m x 12&nbsp;m (144&nbsp;m^2^), with a split-plot size of 5&nbsp;m&nbsp;x&nbsp;5&nbsp;m (25&nbsp;m^2^).
-Replication size was 12&nbsp;m&nbsp;x&nbsp;24&nbsp;m (288&nbsp;m^2^) with a buffer of 1&nbsp;m per split-plot for a whole experiment size of 1,152&nbsp;m^2^.
+The main plot treatments were alternate wetting and drying (AWD) and continuously puddled or farmers' practice as the control treatment. The main plot size was 12 m x 12 m (144 m^2^), with a split-plot size of 5 m x 5 m (25 m^2^). Replication size was 12 m x 24 m (288 m^2^) with a buffer of 1 m per split-plot for a whole experiment size of 1,152 m^2^.
 
-Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15&nbsp;cm below the soil surface irrigation water was applied to a level of 5&nbsp;cm.
-In puddled plots, a standing water layer of 3 to 5&nbsp;cm was maintained throughout the growing season. 
+Irrigation in AWD plots was determined by the water level in plots, *i.e.* when the water level reached 15 cm below the soil surface irrigation water was applied to a level of 5 cm. In puddled plots, a standing water layer of 3 to 5 cm was maintained throughout the growing season.
 
-The split-plot treatment rates of N were N0 (no N supply), N100 (100&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) and N120 (120&nbsp;kg&nbsp;per&nbsp;ha applied as urea in three splits) (Table&nbsp;\@ref(tab:Table-1)).
+The split-plot treatment rates of N were N0 (no N supply), N100 (100 kg per ha applied as urea in three splits) and N120 (120 kg per ha applied as urea in three splits) (Table \@ref(tab:Tab1)).
 
-Trays of NSIC Rc222 were seeded on 19 December 2014. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20&nbsp;cm within and between rows.
+Trays of NSIC Rc222 were seeded on 19 December 2014. Plots were established by manually transplanting seedlings on 9 January 2015 in hills with six to eight seedlings per hill and a distance of 20 cm within and between rows.
 
-The plots were inoculated 20 days after transplanting by applying 151&nbsp;g of inoculum over the split-plot area with a 1&nbsp;m buffer on either end (4&nbsp;m x 11&nbsp;m).
+The plots were inoculated 20 days after transplanting by applying 151 g of inoculum over the split-plot area with a 1 m buffer on either end (4 m x 11 m).
 
-## 2016 Experimental Design {-}
+## 2016 Experimental Design {.unnumbered}
 
-The 2016 experiment followed the same split-plot design as described for the 2015 experiment.
-However, the plot size was increased and due to these changes, the replicate sizes are not equal as necessitated by the use of a larger area for the experiment due to differences in the blocks.
-The main plot sizes were: Block 1 (B1) 21&nbsp;m x 20.5&nbsp;m (412.5 sq&nbsp;m) and Block 2 (B2) 20.25&nbsp;m x 21.6&nbsp;m (437.4&nbsp;m^2^). The split-plot sizes were B1 21&nbsp;m x 10.25&nbsp;m (215.25&nbsp;m^2^), B2 20.25&nbsp;m x 10.8&nbsp;m (218.7&nbsp;m^2^).
-The replication sizes were B1 -- 42&nbsp;m&nbsp;x&nbsp;20.5&nbsp;m (861&nbsp;m^2^) and B2 -- 40.5&nbsp;m&nbsp;x&nbsp;21.6&nbsp;m (874.8&nbsp;m^2^).
-A buffer 0.5&nbsp;m per split-plot was used and the overall experiment size was 3471.6&nbsp;m^2^.
+The 2016 experiment followed the same split-plot design as described for the 2015 experiment. However, the plot size was increased and due to these changes, the replicate sizes are not equal as necessitated by the use of a larger area for the experiment due to differences in the blocks. The main plot sizes were: Block 1 (B1) 21 m x 20.5 m (412.5 sq m) and Block 2 (B2) 20.25 m x 21.6 m (437.4 m^2^). The split-plot sizes were B1 21 m x 10.25 m (215.25 m^2^), B2 20.25 m x 10.8 m (218.7 m^2^). The replication sizes were B1 -- 42 m x 20.5 m (861 m^2^) and B2 -- 40.5 m x 21.6 m (874.8 m^2^). A buffer 0.5 m per split-plot was used and the overall experiment size was 3471.6 m^2^.
 
-split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60&nbsp;kg/ha as urea split into two applications) and N180 (180&nbsp;kg/ha in three splits) being applied (Table&nbsp;\@ref(tab:Table-1)).
+split-plot N rates differed from the 2015 rates with only two N treatments, N60 (60 kg/ha as urea split into two applications) and N180 (180 kg/ha in three splits) being applied (Table \@ref(tab:Tab1)).
 
-Nurseries of NSIC Rc222 were established on 7 January 2016.
-Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20&nbsp;cm within and between rows.
+Nurseries of NSIC Rc222 were established on 7 January 2016. Seedlings were manually transplanted from 20 to 22 January 2016 in hills with six to eight seedlings per hill with a distance of 20 cm within and between rows.
 
-Based on the 2015 results, the inoculum application methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area.
-Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1&nbsp;m&nbsp;x&nbsp;1&nbsp;m) per plot, where one bottle contained 151&nbsp;g inoculum.
-A total amount of 1,510&nbsp;g of inoculum was applied to each 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m area.
+Based on the 2015 results, the inoculum application methods were modified in 2016 to increase the amount of inoculum and applied to a smaller area. Plots were inoculated 41 days after transplanting using ten bottles per one sampling area (1 m x 1 m) per plot, where one bottle contained 151 g inoculum. A total amount of 1,510 g of inoculum was applied to each 1 m x 1 m area.
 
-## Data Collection {-}
+## Data Collection {.unnumbered}
 
-In both experiments, two sample areas, sized 1&nbsp;m&nbsp;x&nbsp;1&nbsp;m, per plot were assessed.
-The total number of tillers per hill and number of tillers with sheath blight (incidence) was measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI.
-The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1\% severity; (iii) 2 -- 1 to 5\% severity; (iv) 3 -- 5 to 15\% severity; (v) 4 -- 15 to 50\% severity; and (vi) 5 -- 50 to 100\% severity.
-Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions.
-A leaf was considered living if at least 50&nbsp;% of its area was not brown or dark brown due to natural senescence.
-A leaf that was yellow-green or light green due to a disease, such as tungro or N deficiency was still considered a living leaf.
-The same rating methodology was used in both experiments.
-Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
+In both experiments, two sample areas, sized 1 m x 1 m, per plot were assessed. The total number of tillers per hill and number of tillers with sheath blight (incidence) was measured for nine hills per sample area. Tiller sheath severity was measured for four tillers per hill and six leaves tiller using a disease assessment rating scale for field evaluation developed at IRRI. The scale is an unequally spaced categorical scale where (i) 0 -- no disease; (ii) 1 -- trace to 1% severity; (iii) 2 -- 1 to 5% severity; (iv) 3 -- 5 to 15% severity; (v) 4 -- 15 to 50% severity; and (vi) 5 -- 50 to 100% severity. Severity was considered to be the amount of leaf or sheath tissue covered by sheath blight lesions. A leaf was considered living if at least 50% of its area was not brown or dark brown due to natural senescence. A leaf that was yellow-green or light green due to a disease, such as tungro or N deficiency was still considered a living leaf. The same rating methodology was used in both experiments. Five disease assessments were made in the 2015 experiment and four disease assessments were made in the 2016 experiment, respectively.
 
-## Statistical Analysis {-}
+## Statistical Analysis {.unnumbered}
 
 The area under the disease progress stairs (AUDPS) [@simko2012area] was calculated for both disease incidence and severity using R (version 4.0.0), [@R2020], package `agricolae`, (version 1.3-3), [@agricolae2020].
 
-The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and N fertilisation as fixed effects and replicate with main plot nested within replicate as random effects.
-Six models were created where the dependent variables were: 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively.
-The independent variables were the irrigation management (WMGT) and N rate (NRTE) and the interaction of WMGT and NRTE with replicate treated as a random variable.
-The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled. For for 2016 the base level values were: N rate -- N60, irrigation management -- puddled.
-The same weakly informative priors were set for the fixed and random effects in all models, location = 0, scale = 10.
-Model fitness was evaluated using `mcmc_trace()` and `pp_check()` from the contributed package, bayesplot (version 1.7.2), [@Gabry2019] as well as summary information.
+The contributed R package, rstanarm (version 2.19.3), [@Brilleman2018; @Goodrich2020], was used to fit Bayesian generalized linear models with water management and N fertilisation as fixed effects and replicate with main plot nested within replicate as random effects. Six models were created where the dependent variables were: 2015 tiller sheath blight incidence, 2015 tiller sheath blight severity, 2015 leaf sheath blight severity; 2016 tiller sheath blight incidence, 2016 tiller sheath blight severity; 2016 leaf sheath blight severity, respectively. The independent variables were the irrigation management (WMGT) and N rate (NRTE) and the interaction of WMGT and NRTE with replicate treated as a random variable. The base levels (control treatments) for the analyses for 2015 were: N rate -- N0, irrigation management -- puddled. For for 2016 the base level values were: N rate -- N60, irrigation management -- puddled. The same weakly informative priors were set for the fixed and random effects in all models, location = 0, scale = 10. Model fitness was evaluated using `mcmc_trace()` and `pp_check()` from the contributed package, bayesplot (version 1.7.2), [@Gabry2019] as well as summary information.
 
-The resulting models were tested using a test for equivalency using `equivalence_test()` from the contributed package, bayestestR (version 0.7.0), [@Makowski2019] to evaluate whether differences between the sheath blight responses varied between the water and N management treatments. The "Test for Practical Equivalence" is based on the Highest Density Interval (HDI) plus the Region of Practical Equivalence (ROPE) decision rule [@Kruschke2014; @Kruschke2018], *HDI+ROPE decision rule* and checks whether parameter values should be accepted or rejected against the null hypothesis, the ROPE. To do this, it checks the percentage of the 89&nbsp;% HDI that is in the null region ROPE. If this amount is sufficiently low, the null hypothesis is rejected. If the amount is large enough, the null hypothesis is accepted.
+The resulting models were tested using a test for equivalency using `equivalence_test()` from the contributed package, bayestestR (version 0.7.0), [@Makowski2019] to evaluate whether differences between the sheath blight responses varied between the water and N management treatments. The "Test for Practical Equivalence" is based on the Highest Density Interval (HDI) plus the Region of Practical Equivalence (ROPE) decision rule [@Kruschke2014; @Kruschke2018], *HDI+ROPE decision rule* and checks whether parameter values should be accepted or rejected against the null hypothesis, the ROPE. To do this, it checks the percentage of the 89% HDI that is in the null region ROPE. If this amount is sufficiently low, the null hypothesis is rejected. If the amount is large enough, the null hypothesis is accepted.
 
-## Hypothesis {-}
+## Hypothesis {.unnumbered}
 
 We hypothesised that higher amounts of nitrogen would increase the incidence and severity of sheath blight, while alternate wetting and drying would decrease the disease incidence and severity.
 
-# Results {-}
+# Results {.unnumbered}
 
-## 2015 Experiment {-}
+## 2015 Experiment {.unnumbered}
 
-In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Figure&nbsp;\@ref(fig:fig-1)a; Table&nbsp;\@ref(tab:Table-2)).
-Water management was undecided not showing any clear difference in the test for equivalency (Figure&nbsp;\@ref(fig:fig-3)a; Table&nbsp;\@ref(tab:Table-2)) between the AWD and puddled treatments.
-However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)a, \@ref(tab:Table-2)).
+In 2015 the incidence of tiller sheath blight remained low throughout the growing season (Figure \@ref(fig:fig-1)a; Table \@ref(tab:Tab2)). Water management was undecided not showing any clear difference in the test for equivalency (Figure \@ref(fig:fig-3)a; Table \@ref(tab:Tab2)) between the AWD and puddled treatments. However, the effect of the N treatments of both N100 and N120 on tiller incidence were higher and clearly different when compared with the control N0 treatment (Figure \@ref(fig:fig-4)a, \@ref(tab:Tab2)).
 
-Tiller sheath blight severity remained below 2\% (Figure&nbsp;\@ref(fig:fig-1)c, \@ref(fig:fig-2)c).
-Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Figure&nbsp;\@ref(fig:fig-4)c; Table&nbsp;\@ref(tab:Table-2)).
-However, the AWD water management was undecided whether it was different than the puddled treatment (Figure&nbsp;\@ref(fig:fig-3)c; Table&nbsp;\@ref(tab:Table-2)).
+Tiller sheath blight severity remained below 2% (Figure \@ref(fig:fig-1)c, \@ref(fig:fig-2)c). Both the N100 and N120 treatment effects caused the tiller severity to be higher and were clearly different than the control N0 treatment (Figure \@ref(fig:fig-4)c; Table \@ref(tab:Tab2)). However, the AWD water management was undecided whether it was different than the puddled treatment (Figure \@ref(fig:fig-3)c; Table \@ref(tab:Tab2)).
 
-The severity of leaf sheath blight remained low, less than 0.4&nbsp;% across all treatments (Figure&nbsp;\@ref(fig:fig-1)e, \@ref(fig:fig-2)e).
-As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values that were clearly different than the N0 treatment (Figure&nbsp;\@ref(fig:fig-4)e; Table&nbsp;\@ref(tab:Table-2)).
-The AWD water management treatment was again undecided with no clear difference between the control puddled and AWD treatments (Figure&nbsp;\@ref(fig:fig-3)e; Table&nbsp;\@ref(tab:Table-2)).
+The severity of leaf sheath blight remained low, less than 0.4% across all treatments (Figure \@ref(fig:fig-1)e, \@ref(fig:fig-2)e). As with the tiller incidence and severity, the effects of both the N100 and N120 treatments on leaf severity resulted in higher values that were clearly different than the N0 treatment (Figure \@ref(fig:fig-4)e; Table \@ref(tab:Tab2)). The AWD water management treatment was again undecided with no clear difference between the control puddled and AWD treatments (Figure \@ref(fig:fig-3)e; Table \@ref(tab:Tab2)).
 
-## 2016 Experiment {-}
+## 2016 Experiment {.unnumbered}
 
-The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98&nbsp;% incidence at the third observation (Figure&nbsp;\@ref(fig:fig-2)b).
-The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure&nbsp;\@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-3). As in the 2015 study, water management treatment was undecided not showing a clear difference between the treatments (Figure&nbsp;\@ref(fig:fig-3)b; Table&nbsp;\@ref(tab:Table-3)).
+The changes to the inoculation methodology resulted in a higher rate of infection in 2016, with the N180 treatment reaching a maximum value of 98% incidence at the third observation (Figure \@ref(fig:fig-2)b). The N treatment N180 value was higher and clearly different than the control N60 treatment (Figure \@ref(fig:fig-4)b; Table \@ref(tab:Tab3). As in the 2015 study, water management treatment was undecided not showing a clear difference between the treatments (Figure \@ref(fig:fig-3)b; Table \@ref(tab:Tab3)).
 
-As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure&nbsp;\@ref(fig:fig-2)d).
-In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure&nbsp;\@ref(fig:fig-4)d; Table&nbsp;\@ref(tab:Table-3)).
-The AWD water management result was undecided and did not show statistically clear differences from the control puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-3)).
+As with the tiller incidence, the tiller severity increased with the changed inoculation methods with a maximum of 7.6% for the puddled treatment (Figure \@ref(fig:fig-2)d). In 2016 the N180 treatment was again higher and clearly different from the N60 treatment, with N180 severity being higher (Figure \@ref(fig:fig-4)d; Table \@ref(tab:Tab3)). The AWD water management result was undecided and did not show statistically clear differences from the control puddled treatment (Figure \@ref(fig:fig-3)d; Table \@ref(tab:Tab3)).
 
-In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure&nbsp;\@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table&nbsp;\@ref(tab:Table-2)) with no clear differences from the puddled treatment.
+In 2016 the higher N rate, N180, were clearly different, higher, than the control treatments, N60. However the water management treatment was undecided (Figure \@ref(fig:fig-3)f, \@ref(fig:fig-4)b; Table \@ref(tab:Tab2)) with no clear differences from the puddled treatment.
 
-# Discussion {-}
+# Discussion {.unnumbered}
 
-In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology, or decreases that would favour it except in one case.
-In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure&nbsp;\@ref(fig:fig-3)d; Table&nbsp;\@ref(tab:Table-2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure.
-In all other cases, no significant differences were observed.
+In both experiments, we were unable to detect any statistically clear effect of AWD on sheath blight that led to increases in the disease that could hinder adoption of the technology, or decreases that would favour it except in one case. In the 2016 experiment the tiller sheath blight severity was clearly lower for the AWD treatment than puddled treatment (Figure \@ref(fig:fig-3)d; Table \@ref(tab:Tab2)), indicating a possible adverse effect of using AWD on tiller sheath blight severity under high sheath blight disease pressure. In all other cases, no significant differences were observed.
 
-The findings of the effects of N rates on sheath blight were as expected in both experiments.
-Higher rates of N caused an increase in disease incidence and severity in all of the cases examined.
+The findings of the effects of N rates on sheath blight were as expected in both experiments. Higher rates of N caused an increase in disease incidence and severity in all of the cases examined.
 
-By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment by decreasing the variability in the data collected.
-The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure&nbsp;\@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
+By increasing the plot size and increasing inoculum amount applied to a smaller area, the changes made for the 2016 experiment improved the experiment by decreasing the variability in the data collected. The sheath blight incidence increased and the variability of sheath blight in the plots decreased (Figure \@ref(fig:fig-1)a:b, \@ref(fig:fig-2)c:d, \@ref(fig:fig-3)a:b, \@ref(fig:fig-4)c:d).
 
-While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Slaton2003; @Tang2007; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation.
-Designing a future experiment as a randomised complete block with two treatments, puddled or AWD and using a single high rate of N, _e.g._ 180&nbsp;k/ha would help ensure that disease occurs and increase the precision of measurements for the irrigation treatments.
-Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
+While the use of different levels of N did provide information about the effects of N on the disease, this effect was already known [@Castilla1996; @Slaton2003; @Tang2007; @Tang2007], and it reduced the statistical power to find the effects in the main plot of the irrigation. Designing a future experiment as a randomised complete block with two treatments, puddled or AWD and using a single high rate of N, *e.g.* 180 k/ha would help ensure that disease occurs and increase the precision of measurements for the irrigation treatments. Therefore, we would recommend that further future studies should focus only on the effects of AWD on sheath blight to gather data that provide a clear answer while using the larger plot size and inoculation methods used in 2016 that improved the quality of data.
 
-It should be noted that the levels of leaf severity remained low (<&nbsp;1\%) throughout the growing season in all treatments for both years.
-Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season.
-However, it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy fields in the wet season [@Sriphirom2019; @Sander2017; @Sander2020].
-Sheath blight remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but might be effective in reducing it in some cases because of less water in the paddy field than in traditional systems by reducing the moisture for the fungus to disperse the infective propagules and infect.
+It should be noted that the levels of leaf severity remained low (\< 1%) throughout the growing season in all treatments for both years. Therefore, the sheath blight disease levels in these studies may be lower than they would be if conducted in the wet season. However, it is only practical to implement AWD in the dry season due to the inability to completely drain the paddy fields in the wet season [@Sriphirom2019; @Sander2017; @Sander2020]. Sheath blight remains an issue in both seasons [@Savary2001] and the use of AWD would not appear to increase the disease but might be effective in reducing it in some cases because of less water in the paddy field than in traditional systems by reducing the moisture for the fungus to disperse the infective propagules and infect.
 
-The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000].
-Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice.
-Therefore, as manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due to changes in establishment practices.
-A combination of AWD and direct-seeded rice could be beneficial in multiple ways, for saving water, reducing GHG emissions and reducing the risk of sheath blight.
+The rice establishment method is known to affect the spread of sheath blight [@Willocquet2000]. Manually transplanted rice has been found to have higher apparent infection rates than direct-seeded rice. Therefore, as manual transplanting becomes less common due to labor and water availability constraints [@Toriyama2005], sheath blight risk may be decreased due to changes in establishment practices. A combination of AWD and direct-seeded rice could be beneficial in multiple ways, for saving water, reducing GHG emissions and reducing the risk of sheath blight.
 
-Diseases are the only issue that farmers face when growing rice.
-Recently, Lorica *et al.* [-@Lorica2020] have also found that AWD did not affect rodent damage in crops.
-The findings of our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice.
-Ultimately these findings are useful as many countries promote AWD as water-saving technology because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
+Diseases are the only issue that farmers face when growing rice. Recently, Lorica *et al.* [-@Lorica2020] have also found that AWD did not affect rodent damage in crops. The findings of our research along with those of Lorica *et al.* [-@Lorica2020] highlight the need for cross-disciplinary research that examines what the effects of new technologies that are being developed to adapt to and mitigate climate change on the pests and diseases that occur in rice. Ultimately these findings are useful as many countries promote AWD as water-saving technology because farmers can be assured that the changes will not increase the risks from these pests and pathogens.
 
-Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015].
-However, over the next 10 to 20 years the risk is predicted to remain the same as during the period from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015].
-Therefore, it is likely to remain an important disease for the near future with little resistance available in currently available varieties [@Srinivasachary2011].
+Climate change is predicted to decrease sheath blight risk over the longer term [@Kim2015]. However, over the next 10 to 20 years the risk is predicted to remain the same as during the period from 2000 to 2010 in research that has been conducted on the matter to date [@Kim2015]. Therefore, it is likely to remain an important disease for the near future with little resistance available in currently available varieties [@Srinivasachary2011].
 
-Our findings here indicate that there is no reason AWD could not be adopted as we were unable to detect any statistically clear differences due to irrigation management in any of the sheath blight measurements made.
-Whereas, in the presence of excess N the treatments showed clear effects, increasing the amount and severity of the disease, suggesting that the studies were capable of demonstrating differences in the selected treatments as applied.
-Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
+Our findings here indicate that there is no reason AWD could not be adopted as we were unable to detect any statistically clear differences due to irrigation management in any of the sheath blight measurements made. Whereas, in the presence of excess N the treatments showed clear effects, increasing the amount and severity of the disease, suggesting that the studies were capable of demonstrating differences in the selected treatments as applied. Therefore, based on these studies the use of AWD technologies would not appear to be a factor that increases the incidence or severity of rice sheath blight disease and should be adopted given the other benefits that it provides.
 
-# Acknowledgments {-}
+# Acknowledgments {.unnumbered}
 
 The authors wish to thank the IRRI Biometrics group for their input in the design of the experiments and Dr. R. King and Mr. D. Burrell of the University of Southern Queensland Statistical Consulting Unit for their insightful comments on the analysis of this paper. Also thanks to Dr. N. Tierney of Monash University for the discussion and ideas on the analysis.
 
@@ -278,23 +219,25 @@ Lastly, we would like to remember our teammate Michael Noel, an integral part of
 AHS and BOS conceived the topic. AHS and NPC conceived the research. NPC assisted in the field work in 2015 and conducted the field work in 2016. AHS conducted the data analysis. All the authors contributed to the writing of the manuscript.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line. -->
-##### pagebreak
 
-# Literature Cited {-}
+\newpage
+
+# Literature Cited {.unnumbered}
+
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document: -->
 
-<div id="refs"></div>
+::: {#refs}
+:::
 
-# Author-Recommended Internet Resources {-}
+# Author-Recommended Internet Resources {.unnumbered}
 
-Readers may find a reproducible research compendium that recreates this paper, which includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2020].
-The data are freely and openly available from <https://doi.org/10.5281/zenodo.3889800> [@Sparks2020a].
+Readers may find a reproducible research compendium that recreates this paper, which includes all data generated from this project and code used for analysis as a reproducible research compendium from <https://doi.org/...> [@Sparks2020]. The data are freely and openly available from <https://doi.org/10.5281/zenodo.3889800> [@Sparks2020a].
 
-##### pagebreak
+\newpage
 
-# Tables {-}
+# Tables {.unnumbered}
 
-```{r Table-1}
+```{r Tab1, tab.id="Tab1", tab.cap = "Nitrogen application rates for 2015 and 2016 experiments in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg/ha N (N100) and 180 kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg/ha N (N60) and 180 kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications."}
 N_rates <- N_rates[, -1]
 colnames(N_rates) <-
   c("Total",
@@ -306,17 +249,12 @@ x <- fontsize(x, part = "header", size = 10)
 x <- font(x, part = "header", fontname = "Times")
 x <- font(x, fontname = "Times")
 x <- fontsize(x, size = 10)
-x <-
-  set_caption (x,
-               caption = 
-    "(\\#tab:Table-1) Nitrogen application rates for 2015 and 2016 experiments in kilograms per hectare. Five different nitrogen treatments were applied depending on the experiment. In the 2015 experiment three nitrogen rate treatments were applied: no N (N0), 100 kg/ha N (N100) and 180 kg/ha N (N120). In the 2016 experiment, two nitrogen rate treatments were applied: 60 kg/ha N (N60) and 180 kg/ha N (N180). Treatments in both years were applied in splits at: basal, tillering growth stages for all treatments and panicle initiation growth stage for treatments with three applications."
-    )
 x
 ```
 
-##### pagebreak
+\newpage
 
-```{r Table-2}
+```{r Tab2, tab.id="Tab2", tab.cap="An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; NRTEN100, nitrogen rate of 100 k/ha; NRTEN120 kg/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters."}
 x <- rbind(
   equivalence_test(TInc15, range = c(-0.1, 0.1)),
   equivalence_test(TSev15, range = c(-0.1, 0.1)),
@@ -339,15 +277,12 @@ x <- font(x, part = "header", fontname = "Times")
 x <- font(x, fontname = "Times")
 x <- fontsize(x, size = 12)
 x <- autofit(x)
-x <- set_caption(x, 
-  "(\\#tab:Table-2) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; NRTEN100, nitrogen rate of 100 k/ha; NRTEN120 kg/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters."
-  )
 x
 ```
 
-##### pagebreak
+\newpage
 
-```{r Table-3}
+```{r Tab3, tab.id="Tab3", tab.cap="An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; and NRTEN180, nitrogen rate of 180 k/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters."}
 x <- rbind(equivalence_test(TInc16),
            equivalence_test(TSev16),
            equivalence_test(LSev16))
@@ -369,14 +304,12 @@ x <- font(x, part = "header", fontname = "Times")
 x <- font(x, fontname = "Times")
 x <- fontsize(x, size = 12)
 x <- autofit(x)
-x <- set_caption(x, 
-  "(\\#tab:Table-3) An 89 % test for practical equivalence for 2015 experiment. Response variables are shown as T. Inc., Tiller Incidence; T. Sev., Tiller Severity; L. Sev., Leaf Severity. The parameters are WMGTAWD, irrigation treatment AWD; and NRTEN180, nitrogen rate of 180 k/ha. ROPE low and ROPE high provide the limits of the Region of Practical Equivalence (ROPE). ROPE Percentage is the proportion of the Highest Density Interval (HDI) that lies inside the ROPE. All points within this interval have a higher probability of density than points outside the interval. ROPE Equivalence is the test result, either \"rejected\", \"accepted\" or \"undecided\". \"HDI Low\" and \"HDI High\" are the lower and upper HDI limits for the parameters.")
 x
 ```
 
-##### pagebreak
+\newpage
 
-# Figures {-}
+# Figures {.unnumbered}
 
 ```{r fig-1, fig.cap="Sheath blight disease progress curves for 2015 and 2016 experiments. Disease progress was measured in the 2015 experiment at five assessment points and 2016 experiment at four assessment points during the dry season of both years. Main plot irrigation treatments were permanently puddled (PDL) and alternate wetting and drying (AWD). Points represent the mean observations of four replications.", fig.width=3.31}
 
@@ -803,11 +736,9 @@ grid.arrange(p10, p11, p12, ncol = 1, nrow = 3)
 
 \newpage
 
-<!-- Use for MS Word ##### pagebreak -->
+# Colophon {.unnumbered}
 
-# Colophon {-}
-
-This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+This report was generated on `r Sys.time()` using the following computational environment and dependencies:
 
 ```{r colophon, cache = FALSE}
 # which R packages and versions?
